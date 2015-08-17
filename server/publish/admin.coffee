@@ -2,7 +2,7 @@ Meteor.publish 'userCount', ->
   Counts.publish this, 'userCount', Meteor.users.find()
 
 Meteor.publish 'orderCount', ->
-  Counts.publish this, 'ordersCount', Meteor.users.find({
+  Counts.publish this, 'ordersCount', Subscriptions.find({
     'profile.subscriptions': $exists
     'profile.subscriptions':
       $elemMatch:

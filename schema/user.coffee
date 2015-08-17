@@ -33,37 +33,6 @@ cart = new SimpleSchema
     type: Boolean
     optional: true
 
-subscriptions = new SimpleSchema
-  _id:
-    type: String
-    regEx: SimpleSchema.RegEx.Id
-    autoValue: -> Random.id()
-  last_modified:
-    type: Date
-  status:
-    type: String
-    allowedValues: ['active', 'paused', 'cancelled', 'expiring', 'expired']
-  productId:
-    type: String
-    regEx: SimpleSchema.RegEx.Id
-  productDetails:
-    type: Object
-    blackbox: true
-  qty:
-    type: Number
-    min: 1
-  start_date:
-    type: Date
-  end_date:
-    type: Date
-    optional: true
-  pause_date:
-    type: Date
-    optional: true
-  indefinate:
-    type: Boolean
-    optional: true
-
 profile = new SimpleSchema
   name:
     type: String
@@ -86,19 +55,6 @@ profile = new SimpleSchema
   cart:
     type: cart
     optional: true
-  subscriptions:
-    type: [subscriptions]
-    optional: true
-
-### USEFUL METHODS FROM BRAINTREE FOR PAYMENT METHODS
-
-    METHODS VARY FROM ONE PAYMENT TYPE TO ANOTHER BUT SOME ARE UNIVERSAL
-
-    #token: can be used to create a subscription or transaction
-    imageUrl: load an image representing the payment method
-    default: one of the array types will return true for the default payment method
-    use paymentMethod.update "token", {makeDefault:true} -> to change a default payment method
-###
 
 Schema = new SimpleSchema
   emails:
