@@ -1,0 +1,15 @@
+Here you will see and change the details of the product:
+
+<img ng-if="product.img" ng-src="{{product.img}}">
+
+<input ng-model="product.name">
+<input ng-model="product.price">
+<textarea ng-model="product.description" col="6"></textarea>
+
+<input type="checkbox" value="true" ng-model="product.wholeSaleOnly"> For Whole Sale Customers Only
+
+<meteor-include src="imageUpload"></meteor-include>
+
+<button ng-click="publish()"><span ng-show="product.published">un</span>publish</button>
+<button ng-click="reset()">Reset form</button>
+<button ui-sref="store">Done</button>

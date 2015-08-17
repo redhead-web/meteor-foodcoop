@@ -1,0 +1,33 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+autopublish
+urigo:angular
+angularui:angular-ui-router
+sanjo:jasmine
+velocity:html-reporter
+meteorhacks:kadira
+coffeescript
+aldeed:collection2
+aldeed:autoform
+tomi:upload-server
+tomi:upload-jquery
+angularui:angular-google-maps
+aldeed:geocoder
+accounts-password
+accounts-ui
+accounts-facebook
+alanning:roles
+ewall:foundation
+momentjs:moment
+insecure
+patrickml:braintree
+stevezhu:lodash
+angular:angular-material
+tmeasday:publish-counts
+angularjs:angular-animate
+dburles:collection-helpers

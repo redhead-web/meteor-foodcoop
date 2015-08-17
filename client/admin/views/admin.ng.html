@@ -1,0 +1,24 @@
+<h2>Fresh Food Collective Admin Panel</h2>
+
+<ul>
+  <li><a ui-sref="admin.users">Users</a></li>
+  <li><a ui-sref="admin.orders">Orders</a></li>
+</ul>
+
+<ui-view>
+  <div class="well well-lg">
+    <a ui-sref="admin.users">
+      <h1>Users</h1>
+      <i class="fa fa-users fa-5x"></i>
+      {{userCount}}
+    </a>
+  </div>
+  <div class="well well-lg">
+    <a ui-sref="admin.orders">
+      <h1>Orders</h1>
+      <i class="fa fa-shopping-cart fa-5x"></i>
+      {{ordersCount}}
+    </a>
+  </div>
+
+</ui-view>

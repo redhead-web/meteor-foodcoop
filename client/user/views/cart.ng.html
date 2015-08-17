@@ -1,0 +1,61 @@
+<div ng-if="currentUser.profile.cart">
+Last Modified: {{currentUser.profile.cart.last_modified | date:long}}
+<table>
+  <thead>
+    <tr>
+      <td>
+        Product
+      </td>
+      <td>
+        Duration
+      </td>
+      <td>
+        Unit price
+      </td>
+      <td>
+        Quantity
+      </td>
+      <td>
+        Price
+      </td>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="5">
+        Total: {{total | currency}}
+      </td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
+      <td>
+        <button ng-click="removeFromCart(item._id)" class="small rounded secondary">X</button>
+        <img ng-src="item.details.thumb" ng-if="item.details.thumb">
+        {{item.details.name}}
+      </td>
+      <td>
+        {{timeRemaining(item.end_date)}}
+      </td>
+      <td>
+        {{item.details.price | currency}}
+      </td>
+      <td>
+        <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="changeQuantity(item.qty, item._id)" min="1">
+      </td>
+      <td>
+        <span ng-if="item.indefinate">
+          {{item.details.price * item.qty * 50/12 | currency}}
+        </span>
+        <span ng-if="!item.indefinate">
+          {{item.details.price * item.qty * weeksRemaining(item.end_date) | currency}}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ui-view>
+  <a class="button" ui-sref="profile.cart.checkout">Checkout</a>
+</ui-view>
+</div>

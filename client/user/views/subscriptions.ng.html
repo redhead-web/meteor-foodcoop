@@ -1,0 +1,65 @@
+<h2 ng-if="currentUser.profile.hasOwnProperty('hub')"> Your Deliveries will be on: {{currentUser.profile.hub.dayOfTheWeek}} {{currentUser.profile.hub.openHours}}</h2>
+
+<table>
+  <thead>
+    <tr>
+      <td>
+        Last Modified
+      </td>
+      <td>
+        Product
+      </td>
+      <td>
+        Duration
+      </td>
+      <td>
+        Total price
+      </td>
+      <td>
+        Status
+      </td>
+      <td>
+        Expiry Date
+      </td>
+      <td>
+        Options
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in currentUser.profile.subscriptions | orderBy:'status' track by item._id">
+      <td>
+        {{item.last_modified | date:'short'}}
+      </td>
+      <td>
+        <img ng-src="item.details.thumb" ng-if="item.details.thumb">
+        x{{item.qty}} {{item.productDetails.name}}
+      </td>
+      <td>
+        {{duration(item.end_date, item.start_date)}}
+      </td>
+      <td>
+        <span ng-if="item.indefinate">
+          {{item.productDetails.price * item.qty * 50/12 | currency}}
+        </span>
+        <span ng-if="!item.indefinate">
+          {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
+        </span>
+      </td>
+      <td>
+        {{item.status}}
+      </td>
+      <td>
+        {{item.end_date | date:'d MMM, y'}}
+      </td>
+      <td>
+        <button ng-click="cancel(item)">Cancel</button>
+        <!-- <button ng-click="pause(item)">Pause</button> -->
+        <!-- <button>Extend</button> -->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ui-view>
+</ui-view>

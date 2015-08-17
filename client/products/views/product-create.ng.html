@@ -1,0 +1,16 @@
+Create a new product here. Hit the publish button when you are ready for the product to go live.
+
+<img ng-if="product.img" ng-src="{{product.img}}">
+
+<input ng-model="product.name" placeholder="Name">
+<input ng-model="product.price" type="number" placeholder="Price">
+<input type="checkbox" value="true" ng-model="product.wholeSaleOnly"> For Whole Sale Customers Only
+
+<meteor-include src="imageUpload"></meteor-include>
+
+<textarea ng-model="product.description" col="6" placeholder="Details"></textarea>
+
+
+
+<button ng-click="products.save(product)">Publish</button>
+<button ui-sref="store">Cancel</button>

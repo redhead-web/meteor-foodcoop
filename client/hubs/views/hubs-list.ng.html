@@ -1,0 +1,30 @@
+<meteor-include src="insertHubForm" ng-if="currentUser && hasRole(currentUser, 'admin')"></meteor-include>
+
+<style>.angular-google-map-container { height: 400px; }</style>
+
+
+<h1>Find your nearest Hub</h1>
+
+<ui-gmap-google-map center='{"latitude":-35.7251117,"longitude":174.323708}' zoom='10' draggable="true">
+  <ui-gmap-markers idKey="'_id'" models="hubs" coords="'coords'" fit="true" click="markerClick">
+    <ui-gmap-windows show="show">
+      <div ng-non-bindable>
+        <p>{{location}}</p>
+        Open {{dayOfTheWeek}} from {{openHours}}
+      </div>
+    </ui-gmap-windows>
+  </ui-gmap-markers>
+</ui-gmap-google-map>
+
+<h1>Hub Directory</h1>
+<ul>
+  <li ng-repeat="hub in hubs">
+    <h4>{{hub.location}} <small><a ui-sref="hubDetails({hubId: hub._id})">edit</a></small></h4>
+    <ul>
+      <li>{{hub.dayOfTheWeek}} from {{hub.openHours}}</li>
+      <li>{{hub.description}}</li>
+      <li>{{hub.coords}}</li>
+      <button ng-click="remove(hub)">X</button>
+    </ul>
+  </li>
+</ul>

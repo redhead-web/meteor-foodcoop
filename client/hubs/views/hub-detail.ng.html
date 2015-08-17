@@ -1,0 +1,34 @@
+<form id="updateHubForm" novalidate="novalidate" class="ng-pristine ng-valid ng-scope">
+  <div class="form-group" data-required="true">
+    <label for="T8CH9aXvgSKF245dQ" class="control-label">Location</label>
+    <input type="text" name="location" required="" data-schema-key="location" ng-model="hub.location" maxlength="200" class="form-control">
+    <span class="help-block"></span>
+  </div>
+
+  <div class="form-group" data-required="true">
+    <label for="TTHxGEJHDtPcnkcmo" class="control-label">Day of the week</label>
+    <input type="text" name="dayOfTheWeek" id="TTHxGEJHDtPcnkcmo" ng-model="hub.dayOfTheWeek" required="" data-schema-key="dayOfTheWeek" maxlength="20" class="form-control">
+    <span class="help-block"></span>
+  </div>
+
+  <div class="form-group" data-required="true">
+
+    <label for="iumF6AcyxssYxSZW6" class="control-label">Hours of Operation</label>
+    <input type="text" name="openHours" id="iumF6AcyxssYxSZW6" required="" ng-model="hub.openHours" data-schema-key="openHours" class="form-control">
+    <span class="help-block"></span>
+  </div>
+
+  <div class="form-group">
+
+    <label for="5kuGEFhTfpKoEm38o" class="control-label">Hub Description</label>
+    <input type="text" name="description" id="5kuGEFhTfpKoEm38o" ng-model="hub.description" data-schema-key="description" maxlength="2000" class="form-control">
+    <span class="help-block"></span>
+  </div>
+
+  <div class="form-group">
+    <button type="button" class="btn btn-primary" ui-sref="hubs">Done</button>
+  </div>
+
+</form>
+
+{{hub.coords}}
