@@ -7,14 +7,12 @@ angular.module('food-collective').config(function($stateProvider) {
       "admin": function($meteor) {
         return $meteor.requireValidUser(isAdmin);
       },
-      'subscribe': [
-        '$meteor', function($meteor) {
+      'userCount': function($meteor) {
           return $meteor.subscribe('userCount');
-        },
-        '$meteor', function($meteor) {
+      },
+      'orderCount': function($meteor) {
           return $meteor.subscribe('orderCount');
-        },
-      ]
+      }
     }
   }).state('admin.members', {
     url: '/users',

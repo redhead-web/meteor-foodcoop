@@ -1,14 +1,18 @@
 Meteor.methods
-  addToSubscriptions: (cart, transactionId) ->
-
+  addToSubscriptions: (cart, transactionId, subscriptionId) ->
+    userId = this.userId
     check transactionId, String
 
-    cartProducts = _.map cart.products, (product) ->
+    orders = _.map cart.products, (product) ->
       product.status = cart.status
       product.last_modified = cart.last_modified
       product.productDetails = product.details
-      product.user = this.userId
-      product.transactionId = transactionId
+      product.user = userId
+
+      if transactionId
+        product.transactionId = transactionId
+      else
+        product.subscriptionId = subscriptionId
 
       delete product._id
       delete product.details
@@ -16,14 +20,13 @@ Meteor.methods
       product
 
 
-    Subscriptions.insert order for order in cartProducts
+    Subscriptions.insert order for order in orders
 
-    Meteor.user.update {
-      _id: this.userId
+    Meteor.users.update {
+      _id: userId
     }, {
       $set:
         'profile.cart.status': 'active'
-        'profile.cart.last_modified': new Date
       $unset:
         'profile.cart.products': ""
     }, (error) ->

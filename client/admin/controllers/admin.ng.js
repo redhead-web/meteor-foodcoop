@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("AdminCtrl", function($scope, $rootScope, subscribe){
+angular.module("food-collective").controller("AdminCtrl", function($scope, $rootScope, admin, userCount, orderCount){
   $scope.userCount = Counts.get('userCount');
-  $scope.orderCount = Counts.get('orderCount');
+  $scope.ordersCount = Counts.get('upcoming-ordersCount');
 });

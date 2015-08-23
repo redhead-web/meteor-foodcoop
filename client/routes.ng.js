@@ -38,7 +38,12 @@ angular.module('food-collective').config( function($urlRouterProvider, $statePro
     .state('hubs', {
       url: '/pickup',
       templateUrl: 'client/hubs/views/hubs-list.ng.html',
-      controller: 'HubsListCtrl'
+      controller: 'HubsListCtrl',
+      resolve: {
+        'subscription': function($meteor) {
+          return $meteor.subscribe('hubs')
+        }
+      }
     })
     .state('hubDetails', {
       url: '/pickup/:hubId',

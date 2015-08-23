@@ -1,32 +1,13 @@
 Meteor.publish 'userCount', ->
   Counts.publish this, 'userCount', Meteor.users.find()
+  undefined
 
 Meteor.publish 'orderCount', ->
-  Counts.publish this, 'ordersCount', Subscriptions.find({
-    'profile.subscriptions': $exists
-    'profile.subscriptions':
-      $elemMatch:
-        status: 'active'
-        $or: [
-          end_date:
-            $gte: new Date
-          indefinate: true
-        ]
-
-  }, {
-    'profile.subscriptions.qty': 1
-    'profile.subscriptions.status': 1
-    'profile.subscriptions.end_date': 1
-    _id: 1
-  })
-  , {
-    countFromField: (doc) -> _.reduce(doc.profile.subscriptions, (s, total) ->
-      if s.status == 'active' and moment(s.end_date).isAfter(moment())
-        total + s.qty
-      else
-        total
-    , 0)
-  }
+  Counts.publish this, 'upcoming-ordersCount', Subscriptions.find
+    status: 'active'
+  ,
+    countFromField: 'qty'
+  undefined
 
 Meteor.publish 'orders', ->
   unless date

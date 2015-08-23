@@ -1,17 +1,17 @@
-angular.module("food-collective").controller("checkoutCtrl", function($scope, $rootScope, $meteor, currentUser, token){
-
+angular.module("food-collective").controller("checkoutCtrl", function($scope, $rootScope, $meteor, $state, currentUser, token){
+  var nonce = ""
   //Meteor.users.update({_id: Meteor.user()._id}, {$set: {'profile.cart.status':'pending'}}, {validate: false})
   $scope.total = 0;
+  $scope.hasSubscriptionAndItems = hasSubscriptionAndItems;
 
   braintree.setup(token, "dropin", {
     container: "payment-form",
     onPaymentMethodReceived: checkout
   });
 
-
   function checkout (obj) {
     var subscriptions, items, data = {}, confirm;
-    data.payment_method_nonce = obj.nonce
+    data.payment_method_nonce = nonce = obj.nonce
     //determine whether to create a subscription or just a regular transaction
     if (_.any($rootScope.currentUser.profile.cart.products, function(p) { return p.indefinate === true})) {
       subscriptions = _.where($rootScope.currentUser.profile.cart.products, {indefinate: true})
@@ -26,34 +26,35 @@ angular.module("food-collective").controller("checkoutCtrl", function($scope, $r
       data.total = _.reduce(items, function(total, item) {
         return total + (item.details.price * item.qty * weeksRemaining(item.end_date));
       }, 0);
-      confirm = window.confirm('you will be charged $' + data.total.toFixed(2) + ". Is this okay?");
-      if (confirm) {
-        // start spinning wheel animation
-        $meteor.call('braintreeTransaction', data).then(function(result) {
-          if (result.success) {
-            // Alert transaction SUCCESSFUL
-          } else {
-            console.log(result);
-            // display error details to the user and get them to try again
-          }
-          // end spinning wheel animation
-        })
-      }
+      // start spinning wheel animation
+      $meteor.call('braintreeTransaction', data).then(function(result) {
+        if (result.success) {
+          $state.go('profile.cart.checkout.success')
+        } else {
+          console.log(result);
+          // display error details to the user and get them to try again
+        }
+        // end spinning wheel animation
+      })
     }
   }
 
-  function subscribe(subsciption) {
+  function subscribe(subscription) {
     // start spinning wheel animation
     // confirm you will pay subscription.details.price * subscription.qty * 50/12
-    for (var i = 1; i <= subscription.qty; i++) {
-      $meteor.call('braintreeSubscription', {price: subscription.details.price * subscription.qty * 50/12}).then(function(result) {
+    $meteor.call('braintreeSubscription',
+      {
+        price: subscription.details.price * 50/12,
+        qty: subscription.qty,
+        payment_method_nonce: nonce
+    })
+    .then(function(result) {
         console.log(result)
         // Alert: everything went well!
       }, function(err) {
         console.log(err)
         // Alert: everything did not go so well
       });
-    }
     //end spinning wheel animation
   }
 

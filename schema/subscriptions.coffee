@@ -29,5 +29,9 @@ subscriptions = new SimpleSchema
     regEx: SimpleSchema.RegEx.Id
   transactionId:
     type: String
+    optional:true
+  subscriptionId:
+    type:String
+    optional:true
 
 Subscriptions.attachSchema subscriptions

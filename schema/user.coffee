@@ -1,10 +1,9 @@
 cart = new SimpleSchema
-  _id:
-    type: String
-    regEx: SimpleSchema.RegEx.Id
-    autoValue: -> Random.id()
   last_modified:
     type: Date
+    autoValue: ->
+      if @isUpdate
+        new Date()
   status:
     type: String
     allowedValues: ['active', 'pending', 'upcoming', 'complete', 'expiring', 'expired']
@@ -14,7 +13,9 @@ cart = new SimpleSchema
   "products.$._id":
     type: String
     regEx: SimpleSchema.RegEx.Id
-    autoValue: -> Random.id()
+    autoValue: ->
+      unless @isSet
+        Random.id()
   "products.$.productId":
     type: String
     regEx: SimpleSchema.RegEx.Id
@@ -54,6 +55,10 @@ profile = new SimpleSchema
     type: String
   cart:
     type: cart
+    optional: true
+  # Braintree id to get stored braintree info
+  customerId:
+    type: String
     optional: true
 
 Schema = new SimpleSchema

@@ -6,7 +6,6 @@ Meteor.methods
       _id: this.userId
     }, {
       $set:
-        'profile.cart.last_modified' : new Date
         'profile.cart.status' : 'active'
       $push:
         'profile.cart.products' :

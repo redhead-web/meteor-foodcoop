@@ -35,8 +35,8 @@ angular.module('food-collective').config( function($stateProvider) {
       },
       "token" : function($meteor, $rootScope) {
         var customerId;
-        if ($rootScope.currentUser.customerId !== undefined) {
-          customerId = $meteor.currentUser.customerId;
+        if ($rootScope.currentUser.profile.customerId !== undefined) {
+          customerId = $rootScope.currentUser.profile.customerId;
         }
         //customerId = '60980163';
 

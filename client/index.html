@@ -2,38 +2,90 @@
   <base href="/">
 </head>
 <body ng-app="food-collective">
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+      <h3>
+        <span>Fresh Food Collective</span>
+      </h3>
+      <span flex></span>
+      <meteor-include src="loginButtons"></meteor-include>
+      <md-button class="md-icon-button" aria-label="Favorite">
+        <md-icon md-svg-icon="action:favorite" style="color: greenyellow;"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-theme-indigo">
+      <h1 class="md-toolbar-tools">Menu</h1>
+    </md-toolbar>
+    <md-content layout-padding ng-controller="navCtrl">
+      <md-button ng-click="close()" class="md-primary" hide-gt-md>
+        Close Menu
+      </md-button>
+      <md-list>
+        <md-list-item ng-click="go('store')">
+          <md-icon md-svg-icon="action:cart"></md-icon>
+          <p> Store </p>
+      </md-list>
+      <md-divider></md-divider>
+      <md-list>
+        <md-list-item ng-click="go('hubs')">
+          <md-icon md-svg-icon="action:store"></md-icon>
+          <p> Hubs </p>
+      </md-list>
+      <md-divider></md-divider>
+      <md-list>
+        <md-list-item ng-click="go('hubs')">
+          <md-icon md-svg-icon="action:store"></md-icon>
+          <p> Hubs </p>
+      </md-list>
+      <md-divider></md-divider>
+      <md-list ng-if="!!currentUser">
+        <md-list-item ng-click="go('profile')">
+          <md-icon md-svg-icon="action:account_box"></md-icon>
+          <p> Profile </p>
+      </md-list>
+
+    </md-content>
+  </md-sidenav>
+
+  <md-content>
+    <ui-view><md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular></ui-view>
+  </md-content>
+
   <nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="#">Fresh Food Collective</a></h1>
-    </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
-
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li><a ui-sref="store">Store</a></li>
-      <li><a ui-sref="hubs">Hubs</a></li>
-      <li class="has-dropdown" ng-show="currentUser && hasRole(currentUser, 'admin')">
-        <a href="">Admin Links</a>
-        <ul class="dropdown">
-          <li><a ui-sref="productCreate">Add a new Product</a></li>
-          <li><a ui-sref="productCreate">Add a new Product</a></li>
-        </ul>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Fresh Food Collective</a></h1>
       </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
 
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li>  <meteor-include src="loginButtons"></meteor-include></li>
-      <li><a ui-sref="profile" ng-if="currentUser">Profile
-        <!-- <meteor-include src="avatarImage"></meteor-include> -->
-      </a></li>
-    </ul>
-  </section>
-</nav>
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li><a ui-sref="store">Store</a></li>
+        <li><a ui-sref="hubs">Hubs</a></li>
+        <li class="has-dropdown" ng-show="currentUser && hasRole(currentUser, 'admin')">
+          <a href="">Admin Links</a>
+          <ul class="dropdown">
+            <li><a ui-sref="admin">Dashboard</a></li>
+            <li><a ui-sref="productCreate">Add a new Product</a></li>
+          </ul>
+        </li>
+      </ul>
 
-  <div ui-view></div>
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li>  <meteor-include src="loginButtons"></meteor-include></li>
+        <li><a ui-sref="profile" ng-if="!!currentUser">Profile
+          <!-- <meteor-include src="avatarImage"></meteor-include> -->
+        </a></li>
+      </ul>
+    </section>
+  </nav>
+
+  <ui-view></ui-view>
 </body>

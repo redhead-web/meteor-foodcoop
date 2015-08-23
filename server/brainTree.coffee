@@ -9,22 +9,48 @@ gateway = BrainTreeConnect {
 
 Meteor.methods
   generateClientToken: (customerId) ->
-    this.unblock()
     config = {}
     if customerId
       config.customerId = customerId
+    else
+      config.customerId = Meteor.call 'registerCustomer'
+
     getToken = gateway.clientToken.generate config
 
     getToken.clientToken
 
-  findPlanId: (price) ->
-    price = validCurrency price
-    result = gateway.plan.all
+  registerCustomer: ->
+    user = Meteor.user()
+    config =
+      {
+        #paymentMethodNonce: data.paymentMethodNonce
+        email: user.emails[0].address
+        firstName: user.profile.name.split(" ").slice(0,-1).join(" ")
+        lastName: user.profile.name.split(" ").slice(-1).join(" ")
+        phone: if /^[0-9\.\(\)\-]{10, 14}$/.test(user.profile.phone) then user.profile.phone else undefined
+      }
 
-    id = _.find result, (plan) ->
+    result = gateway.customer.create config
+    console.log result.customer
+    update =
+      $set:
+        'profile.customerId': result.customer.id
+
+    Meteor.users.update this.userId, update, ->
+      console.log "braintree customer created"
+
+    result.customer.id
+
+  findPlanId: (price) ->
+    # Needs tests as currently not working
+
+    price = validCurrency price
+    result = gateway.plan.all()
+    check price, String
+    plan = _.find result.plans, (plan) ->
       plan.price == price
 
-    id
+    unless plan == undefined then return plan.id
 
   findUserPaymentMethods: ->
     if Meteor.user().customerId?
@@ -55,90 +81,60 @@ Meteor.methods
     config = {
       amount: data.total
       paymentMethodNonce: data.payment_method_nonce
+      customerId: user.profile.customerId
       options:
         submitForSettlement: true
+        storeInVaultOnSuccess: true
     }
-
-    unless user.customerId?
-
-      config.options.storeInVaultOnSuccess = true
-      config.customer =
-        email: user.emails[0].address
-        firstName: user.profile.name.split(" ").slice(0,-1).join(" ")
-        lastName: user.profile.name.split(" ").slice(-1).join(" ")
-        phone: if /^[0-9\.\(\)\-]{10, 14}$/.test(user.profile.phone) then user.profile.phone else undefined
 
     result = gateway.transaction.sale config
 
     new Meteor.Error('Transaction failed', result.errors) if not result.success
 
-    if result.success and not user.customerId
-      update = storeBraintreeData user, result.transaction
-      if update
-        Meteor.users.update user._id, update, (err) ->
-          new Meteor.Error('update failed', err) if err
-
-
     if result.success
-      resultUpdate = Meteor.call('addToSubscriptions', user.profile.cart)
+      resultUpdate = Meteor.call('addToSubscriptions', user.profile.cart, result.transaction.id)
       console.log resultUpdate
     result
 
   braintreeSubscription: (data) ->
     #does user have a braintree id? if not get them one. then update their id
-    this.unblock()
     id = Meteor.call 'findPlanId', data.price
+    user = Meteor.user()
 
-    user = Meteor.user
-    unless user.customerId?
-      #create them
-      config =
-        {
-          paymentMethodNonce: data.paymentMethodNonce
-          email: user.emails[0].address
-          firstName: user.profile.name.split(" ").slice(0,-1).join(" ")
-          lastName: user.profile.name.split(" ").slice(-1).join(" ")
-          phone: if /^[0-9\.\(\)\-]{10, 14}$/.test(user.profile.phone) then user.profile.phone else undefined
-        }
-
-      customer = gateway.customer.create config
-      update =
-        $set:
-          'customerId': result.id
-
-      Meteor.users.update this.userId, update, ->
-        console.log "braintree customer created"
-    subscription = gateway.subscription.create {
+    subscriptionData =
       planId: id
-      id: customer.id or Meteor.user.customerId
       paymentMethodNonce: data.payment_method_nonce
       neverExpires: true
-    }
+      options: startImmediately: true
 
-    Meteor.call('addToSubscriptions')
+    if data.qty > 1
+      addOnId = if data.price == '41.66' then 'extra10' else 'extra20'
+      subscriptionData.addOns =
+        add: [
+          inheritedFromId: addOnId
+          qty: data.qty-1
+        ]
 
-    {
-      status: subscriptions.status
-      price: subscription.price
-      planId: subscription.planId
-    }
+    subscription = gateway.subscription.create subscriptionData
+    console.log subscription
+    if subscription.success
+      Meteor.call('addToSubscriptions',
+      user.profile.cart,
+      subscription.subscription.transactions[0].id,
+      subscription.subscription.id)
 
-
-
-storeBraintreeData = (user, transaction) ->
-  unless user.customerId?
-  # must be the first time so save everything without checking
-    update =
-      $set:
-        'customerId' : transaction.customer.id
-
-    console.log update
-  update
+      {
+        status: subscriptions.success
+        price: subscription.subscription.price
+        planId: subscription.subscription.planId
+      }
+    else
+      # throw new Meteor.Error('subscription failed', subscription.errors)
 
 
 validCurrency = (amount) ->
   if typeof amount == "number"
-    amount.toFixed 2
+    amount = Number(amount).toFixed 2
   if typeof amount != "number" and not /^\d+(\.)?(\d{0,2})?/.test(amount)
     throw new Meteor.Error('invalid amount format', 'invalid amount to be transacted', 'validCurrency function')
   amount

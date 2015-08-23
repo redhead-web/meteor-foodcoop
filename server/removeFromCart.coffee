@@ -4,11 +4,11 @@ Meteor.methods
       _id: this.userId
     }, {
       $set:
-        'profile.cart.last_modified' : new Date
         'profile.cart.status' : 'active'
       $pull:
         'profile.cart.products' :
           _id: id
-      }, (error) ->
-        return error if error
-        return 'SUCCESSFULLY ADDED TO CART'
+      }, (error, num) ->
+        error if error
+        console.log num
+        'SUCCESSFULLY ADDED TO CART'

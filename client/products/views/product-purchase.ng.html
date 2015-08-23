@@ -1,0 +1,36 @@
+<md-dialog role="dialog" ng-init="qty = 1">
+  <h2>Ordering {{product.name}}</h2>
+  <form name="orderForm">
+    <fieldset>
+      <!-- Qty -->
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="qty" class="right inline">Quantity</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="number" name="qty" ng-model="qty" required>
+              <div ng-if="orderForm.qty.$invalid && orderForm.qty.$dirty">
+                <span ng-if="orderForm.name.$error.required">Please tell us how many you want.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- duration -->
+      <div class="row">
+        <div class="small-12 columns">
+          <label>Select How long you'd like to subscribe to this product</label>
+          <input type="radio" name="duration" ng-model="duration" ng-value="{weeks: 1}" id="oneWeek"><label for="oneWeek">One Week</label>
+          <input type="radio" name="duration" ng-model="duration" ng-value="{weeks: 2}" id="twoWeeks"><label for="twoWeeks">Two Weeks</label>
+          <input type="radio" name="duration" ng-model="duration" ng-value="{weeks: 4}" id="oneMonth"><label for="oneMonth">Four Weeks</label>
+          <input type="radio" name="duration" ng-model="duration" ng-value="{weeks: 8}" id="twoMonths"><label for="twoMonths">Eight Weeks</label>
+          <input type="radio" name="duration" ng-model="duration" value="INDEFINATE" id="indefinate" checked><label for="indefinate">Repeat Indefinitely</label>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+  <md-button class="md-raised md-primary" ng-click="addToCart(product, qty, duration)" ng-disabled="orderForm.$invalid">Add To Cart</md-button>
+</md-dialog>
