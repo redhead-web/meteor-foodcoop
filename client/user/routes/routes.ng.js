@@ -34,13 +34,7 @@ angular.module('food-collective').config( function($stateProvider) {
         return $meteor.requireUser();
       },
       "token" : function($meteor, $rootScope) {
-        var customerId;
-        if ($rootScope.currentUser.profile.customerId !== undefined) {
-          customerId = $rootScope.currentUser.profile.customerId;
-        }
-        //customerId = '60980163';
-
-        return $meteor.call('generateClientToken', customerId);
+        return $meteor.call('generateClientToken');
       }
     }
   });

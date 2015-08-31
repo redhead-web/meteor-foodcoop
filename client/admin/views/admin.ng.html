@@ -6,19 +6,27 @@
 </ul>
 
 <ui-view>
-  <div class="well well-lg">
-    <a ui-sref="admin.users">
-      <h1>Users</h1>
-      <i class="fa fa-users fa-5x"></i>
-      {{userCount}}
-    </a>
+  <div layout="row" layout-margin>
+    <md-whiteframe class="md-whiteframe-z5" flex flex-order="3">
+      <a ui-sref="admin.users">
+        <h1>Users</h1>
+        <md-icon md-font-set="material-icons">users</md-icon>
+        {{userCount}}
+      </a>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-z5" flex flex-order="2">
+      <a ui-sref="admin.orders">
+        <h1>Orders</h1>
+        <md-icon md-font-set="material-icons">shopping_basket</md-icon>
+        {{ordersCount}}
+      </a>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-z5" flex flex-order="1">
+      <a ui-sref="productCreate">
+        <h1>+ Product</h1>
+        <md-icon md-font-set="material-icons">add_shopping_cart</md-icon>
+        {{productCount}}
+      </a>
+    </md-whiteframe>
   </div>
-  <div class="well well-lg">
-    <a ui-sref="admin.orders">
-      <h1>Orders</h1>
-      <i class="fa fa-shopping-cart fa-5x"></i>
-      {{ordersCount}}
-    </a>
-  </div>
-
 </ui-view>

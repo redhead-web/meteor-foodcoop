@@ -1,1 +1,63 @@
-{{subscriptions}}
+
+<section layout="row" layout-align="center center" layout-wrap>
+  <md-switch ng-model="vm.isPresent" aria-label="show upcoming">Show This Week's Subscriptions</md-switch>
+</section>
+<section layout="row" layout-align="center center" layout-wrap>
+  <md-button class="md-success" ng-repeat="hub in vm.hubs" ng-click="vm.hubFilter = hub.location">{{hub.title || hub.location}}</md-button>
+</section>
+<section layout="row" layout-align="center center" layout-wrap>
+  <figure ng-repeat="(product, count) in vm.occurences(filteredOrders)" class="text-center">
+    <h1 class="md-display-1">{{count}}</h1>
+    <figcaption>
+      <h3>{{product}}</h3>
+    </figcaption>
+  </figure>
+</section>
+
+<md-input-container class="md-icon-float">
+  <label>search</label>
+  <md-icon md-font-set="material-icons">search</md-icon>
+  <input ng-model="vm.query" type="search">
+</md-input-container>
+
+<table class="material-table">
+  <thead>
+    <tr>
+      <td>
+        <md-button md-no-ink ng-click="reverse = !reverse">Hub</md-button>
+      </td>
+      <td>
+        <md-button md-no-ink ng-click="predicate='user'; reverse = !reverse">Customer</md-button>
+      </td>
+      <td>
+        <md-button md-no-ink ng-click="predicate='productDetails.name'; reverse = !reverse">Product</md-button>
+      </td>
+      <td>
+        <md-button md-no-ink ng-click="predicate='status'; reverse = !reverse">Status</md-button>
+      </td>
+      <td>
+        <md-button md-no-ink ng-click="predicate='end_date'; reverse = !reverse">End Date</md-button>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="order in vm.orders | filter:vm.search | filter:vm.filterByPresent | filter:vm.filterByHub |  orderBy:predicate:reverse as filteredOrders track by order._id">
+      <td>
+        {{vm.user(order).profile.hub.location}}
+      </td>
+      <td>
+        {{vm.user(order).profile.name}}
+      </td>
+      <td>
+        {{order.productDetails.name}} x{{order.qty}}
+      </td>
+      <td>
+        {{order.status}}
+      </td>
+      <td>
+        <span ng-show="order.end_date">{{order.end_date | date:'dd/MM/yyyy'}}</span>
+        <span ng-show="order.indefinate">Indefinite</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

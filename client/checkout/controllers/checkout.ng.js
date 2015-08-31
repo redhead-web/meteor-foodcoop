@@ -2,7 +2,6 @@ angular.module("food-collective").controller("checkoutCtrl", function($scope, $r
   var nonce = ""
   //Meteor.users.update({_id: Meteor.user()._id}, {$set: {'profile.cart.status':'pending'}}, {validate: false})
   $scope.total = 0;
-  $scope.hasSubscriptionAndItems = hasSubscriptionAndItems;
 
   braintree.setup(token, "dropin", {
     container: "payment-form",
@@ -13,10 +12,6 @@ angular.module("food-collective").controller("checkoutCtrl", function($scope, $r
     var subscriptions, items, data = {}, confirm;
     data.payment_method_nonce = nonce = obj.nonce
     //determine whether to create a subscription or just a regular transaction
-    if (_.any($rootScope.currentUser.profile.cart.products, function(p) { return p.indefinate === true})) {
-      subscriptions = _.where($rootScope.currentUser.profile.cart.products, {indefinate: true})
-      angular.forEach(subscriptions, subscribe);
-    }
 
     items = _.filter($rootScope.currentUser.profile.cart.products, function(product) {
       return moment().isBefore(moment(product.end_date).startOf('day')) && !product.indefinate;
@@ -29,7 +24,7 @@ angular.module("food-collective").controller("checkoutCtrl", function($scope, $r
       // start spinning wheel animation
       $meteor.call('braintreeTransaction', data).then(function(result) {
         if (result.success) {
-          $state.go('profile.cart.checkout.success')
+          $state.go('.success')
         } else {
           console.log(result);
           // display error details to the user and get them to try again
@@ -37,25 +32,6 @@ angular.module("food-collective").controller("checkoutCtrl", function($scope, $r
         // end spinning wheel animation
       })
     }
-  }
-
-  function subscribe(subscription) {
-    // start spinning wheel animation
-    // confirm you will pay subscription.details.price * subscription.qty * 50/12
-    $meteor.call('braintreeSubscription',
-      {
-        price: subscription.details.price * 50/12,
-        qty: subscription.qty,
-        payment_method_nonce: nonce
-    })
-    .then(function(result) {
-        console.log(result)
-        // Alert: everything went well!
-      }, function(err) {
-        console.log(err)
-        // Alert: everything did not go so well
-      });
-    //end spinning wheel animation
   }
 
   function weeksRemaining (end_date) {

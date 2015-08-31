@@ -27,6 +27,7 @@ angular.module('food-collective').config(function($stateProvider) {
     url: '/orders',
     templateUrl: 'client/admin/views/orders.ng.html',
     controller: 'OrderAdminCtrl',
+    controllerAs: 'vm',
     resolve: {
       "admin": function($meteor) {
         return $meteor.requireValidUser(isAdmin);

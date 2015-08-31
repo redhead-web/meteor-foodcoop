@@ -1,15 +1,35 @@
 Here you will see and change the details of the product:
+<img ng-if="product.img" ng-src="{{product.img}}" flex>
+<form>
+  <div layout layout-sm="column">
+    <md-input-container flex>
+      <label>Product Name</label>
+      <input ng-model="product.name">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Price</label>
+      <input ng-model="product.price" type="number">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Description</label>
+      <textarea ng-model="product.description" columns="2" md-maxlength="400"></textarea>
+    </md-input-container>
+  </div>
+  <div flex="50">
+    <md-checkbox ng-model="product.wholeSaleOnly">
+      Whole Sale Only: {{product.wholeSaleOnly}}
+    </md-checkbox>
+  </div>
+  <div flex="50">
+    <md-checkbox ng-model="product.published">
+      List in the Store: {{product.published}}
+    </md-checkbox>
+  </div>
 
-<img ng-if="product.img" ng-src="{{product.img}}">
+  <meteor-include src="imageUpload"></meteor-include>
 
-<input ng-model="product.name">
-<input ng-model="product.price">
-<textarea ng-model="product.description" col="6"></textarea>
+</form>
 
-<input type="checkbox" value="true" ng-model="product.wholeSaleOnly"> For Whole Sale Customers Only
-
-<meteor-include src="imageUpload"></meteor-include>
-
-<button ng-click="publish()"><span ng-show="product.published">un</span>publish</button>
-<button ng-click="reset()">Reset form</button>
-<button ui-sref="store">Done</button>
+<md-button ng-click="save()">Save</md-button>
+<md-button ng-click="reset()">Reset form</md-button>
+<md-button ui-sref="store">Done</md-button>

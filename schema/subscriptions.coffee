@@ -1,6 +1,8 @@
 subscriptions = new SimpleSchema
   last_modified:
     type: Date
+    autoValue: ->
+      new Date()
   status:
     type: String
     allowedValues: ['active', 'paused', 'cancelled', 'expiring', 'expired']

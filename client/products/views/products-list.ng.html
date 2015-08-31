@@ -8,18 +8,37 @@
 <!-- <meteor-include src="imageUpload"></meteor-include> -->
 
 <!-- <meteor-include src="insertProductForm"></meteor-include> -->
-<div layout="row">
-  <div ng-repeat="product in products" flex>
-    <img ng-src="{{product.thumb}}" ng-show="product.thumb">
-    <h2><a href="/product/{{product._id}}">{{product.name}}</a></h2>
-    <p>{{product.price | currency}}</p>
-    <p>{{product.description}}</p>
-    <hr>
-    <p><strong>Admin stuff</strong><br>
-      published: {{product.published}}
-    </p>
-    <md-button ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">X</md-button>
-    <md-button ng-click="showDialog($event, product)" class="md-raised md-primary">Add To Cart</md-button>
-
-  </div>
-</div>
+  <md-content layout="row" layout-align="center center">
+    <md-card ng-repeat="product in products" flex='40'>
+      <img ng-src="{{product.img}}">
+      <md-card-content>
+        <md-list>
+          <md-list-item class="md-3-line">
+            <div class="md-list-item-text">
+              <h2>{{product.name}}
+                <md-button href="/product/{{product._id}}" class="md-fab md-info"
+                ng-if="currentUser && hasRole(currentUser, 'admin')"
+                aria-label="Edit Product">
+                  <md-icon md-font-set="material-icons">create</md-icon>
+                </md-button>
+              </h2>
+              <p>{{product.price | currency}}</p>
+              <p>{{product.description}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+        <div layout="column">
+          <md-button flex ng-click="showDialog($event, product)" class="md-raised md-primary">
+            <md-icon md-font-set="material-icons">add_shopping_cart</md-icon>
+            Add To Cart
+          </md-button>
+          <md-button flex ng-click="showConfirm($event, product)" class="md-raised md-primary">
+            Continuous Order
+          </md-button>
+          <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
+            <md-icon md-font-set="material-icons">delete</md-icon>
+          </md-button>
+        </div>
+      </md-card-content>
+    </md-card>
+  </md-content>

@@ -1,0 +1,12 @@
+<p>Thank you for setting up a subscription with us. please review the information below and when you are satisfied enter your payment details and start your subscription.</p>
+
+{{subscription}}
+
+
+<ui-view>
+  <p>Powered by Braintree</p>
+  <form id="checkout" method="post" action="/checkout" autocomplete="off">
+    <div id="payment-form"></div>
+    <md-button type="submit">Process Payment of {{total | currency}}</md-button>
+  </form>
+</ui-view>

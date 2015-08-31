@@ -8,10 +8,12 @@ gateway = BrainTreeConnect {
 }
 
 Meteor.methods
-  generateClientToken: (customerId) ->
+  generateClientToken: () ->
     config = {}
-    if customerId
-      config.customerId = customerId
+
+    if Meteor.user().customerId?
+      config.customerId = Meteor.user().customerId
+
     else
       config.customerId = Meteor.call 'registerCustomer'
 
@@ -34,12 +36,12 @@ Meteor.methods
     console.log result.customer
     update =
       $set:
-        'profile.customerId': result.customer.id
+        'customerId': result.customer.id
 
     Meteor.users.update this.userId, update, ->
       console.log "braintree customer created"
 
-    result.customer.id
+    return result.customer.id
 
   findPlanId: (price) ->
     # Needs tests as currently not working
@@ -49,8 +51,10 @@ Meteor.methods
     check price, String
     plan = _.find result.plans, (plan) ->
       plan.price == price
-
+    console.log plan
     unless plan == undefined then return plan.id
+    if plan == undefined
+      throw new Meteor.Error 404, "no subscription plan found for that price"
 
   findUserPaymentMethods: ->
     if Meteor.user().customerId?
@@ -92,7 +96,7 @@ Meteor.methods
     new Meteor.Error('Transaction failed', result.errors) if not result.success
 
     if result.success
-      resultUpdate = Meteor.call('addToSubscriptions', user.profile.cart, result.transaction.id)
+      resultUpdate = Meteor.call('addFromCartToSubscriptions', user.profile.cart, result.transaction.id)
       console.log resultUpdate
     result
 
@@ -115,26 +119,41 @@ Meteor.methods
           qty: data.qty-1
         ]
 
-    subscription = gateway.subscription.create subscriptionData
-    console.log subscription
-    if subscription.success
-      Meteor.call('addToSubscriptions',
-      user.profile.cart,
-      subscription.subscription.transactions[0].id,
-      subscription.subscription.id)
 
-      {
-        status: subscriptions.success
-        price: subscription.subscription.price
-        planId: subscription.subscription.planId
-      }
-    else
-      # throw new Meteor.Error('subscription failed', subscription.errors)
+    try
+      subscription = gateway.subscription.create subscriptionData
+
+      if subscription.success == true
+        data.subscription.transactionId = subscription.subscription.transactions[0].id
+        data.subscription.subscriptionId = subscription.subscription.id
+        data.subscription.status = 'active'
+
+        Subscriptions.insert data.subscription, (err, result) ->
+          if err
+            console.log err
+          else
+            console.log result
+
+        return {
+          status: subscription.success
+          price: subscription.subscription.price
+          planId: subscription.subscription.planId
+        }
+
+    catch e
+      throw new Meteor.Error 500, "Braintree Subscription Error", e.stack
+
+      throw new Meteor.Error 'subscription failed', subscription.errors
+
+
+
+
 
 
 validCurrency = (amount) ->
   if typeof amount == "number"
-    amount = Number(amount).toFixed 2
+    amount = Math.round(amount * 100) / 100
+    amount = amount.toFixed 2
   if typeof amount != "number" and not /^\d+(\.)?(\d{0,2})?/.test(amount)
     throw new Meteor.Error('invalid amount format', 'invalid amount to be transacted', 'validCurrency function')
   amount

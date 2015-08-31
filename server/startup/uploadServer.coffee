@@ -4,7 +4,9 @@ Meteor.startup () ->
     uploadDir: process.env.PWD + '/.uploads/',
     checkCreateDirectories: true, #create the directories for you
     imageVersions:
-      thumbnailBig: {width: 400, height: 400},
+      thumbnailBig: {width: 900, height: 900},
       thumbnailSmall: {width: 200, height: 200}
     getFileName: (fileInfo, formData) ->
-      return "product-" + fileInfo.name
+      "product-" + fileInfo.name
+    getDirectory: (fileInfo, formData) ->
+      '/'

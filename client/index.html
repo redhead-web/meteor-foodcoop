@@ -2,7 +2,8 @@
   <base href="/">
 </head>
 <body ng-app="food-collective">
-  <md-toolbar md-scroll-shrink>
+
+  <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding class="no-print">
     <div class="md-toolbar-tools">
       <h3>
         <span>Fresh Food Collective</span>
@@ -10,82 +11,40 @@
       <span flex></span>
       <meteor-include src="loginButtons"></meteor-include>
       <md-button class="md-icon-button" aria-label="Favorite">
-        <md-icon md-svg-icon="action:favorite" style="color: greenyellow;"></md-icon>
+        <md-icon md-font-set="material-icons" style="color: greenyellow;">favorite</md-icon>
       </md-button>
     </div>
   </md-toolbar>
 
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-    <md-toolbar class="md-theme-indigo">
-      <h1 class="md-toolbar-tools">Menu</h1>
-    </md-toolbar>
-    <md-content layout-padding ng-controller="navCtrl">
-      <md-button ng-click="close()" class="md-primary" hide-gt-md>
-        Close Menu
-      </md-button>
-      <md-list>
-        <md-list-item ng-click="go('store')">
-          <md-icon md-svg-icon="action:cart"></md-icon>
-          <p> Store </p>
-      </md-list>
-      <md-divider></md-divider>
-      <md-list>
-        <md-list-item ng-click="go('hubs')">
-          <md-icon md-svg-icon="action:store"></md-icon>
-          <p> Hubs </p>
-      </md-list>
-      <md-divider></md-divider>
-      <md-list>
-        <md-list-item ng-click="go('hubs')">
-          <md-icon md-svg-icon="action:store"></md-icon>
-          <p> Hubs </p>
-      </md-list>
-      <md-divider></md-divider>
-      <md-list ng-if="!!currentUser">
-        <md-list-item ng-click="go('profile')">
-          <md-icon md-svg-icon="action:account_box"></md-icon>
-          <p> Profile </p>
-      </md-list>
+  <div style="position: fixed; z-index:999" class="no-print">
+    <md-fab-speed-dial class="md-fling" md-direction="right" md-open="false">
+      <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+          <md-icon md-font-set="material-icons">menu</md-icon>
+        </md-button>
+      </md-fab-trigger>
 
-    </md-content>
-  </md-sidenav>
+      <md-fab-actions>
+        <md-button ui-sref="store" aria-label="store" class="md-fab md-raised md-mini md-primary">
+          <md-icon md-font-set="material-icons">shopping_cart</md-icon>
+        </md-button>
 
-  <md-content>
-    <ui-view><md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular></ui-view>
-  </md-content>
+        <md-button ui-sref="hubs" aria-label="Hubs Directory" class="md-fab md-raised md-mini md-primary">
+          <md-icon md-font-set="material-icons">store</md-icon>
+        </md-button>
+        <md-button ui-sref="profile" ng-if="!!currentUser" aria-label="User Profile" class="md-fab md-raised md-mini md-warn">
+          <md-icon md-font-set="material-icons">account_box</md-icon>
+        </md-button>
+        <md-button ui-sref="admin" ng-if="!!currentUser && hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-fab md-raised md-mini md-warn">
+          <md-icon md-font-set="material-icons">dashboard</md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+  </div>
 
-  <nav class="top-bar" data-topbar role="navigation">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="#">Fresh Food Collective</a></h1>
-      </li>
-       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
 
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li><a ui-sref="store">Store</a></li>
-        <li><a ui-sref="hubs">Hubs</a></li>
-        <li class="has-dropdown" ng-show="currentUser && hasRole(currentUser, 'admin')">
-          <a href="">Admin Links</a>
-          <ul class="dropdown">
-            <li><a ui-sref="admin">Dashboard</a></li>
-            <li><a ui-sref="productCreate">Add a new Product</a></li>
-          </ul>
-        </li>
-      </ul>
 
-      <!-- Left Nav Section -->
-      <ul class="left">
-        <li>  <meteor-include src="loginButtons"></meteor-include></li>
-        <li><a ui-sref="profile" ng-if="!!currentUser">Profile
-          <!-- <meteor-include src="avatarImage"></meteor-include> -->
-        </a></li>
-      </ul>
-    </section>
-  </nav>
+  <ui-view><md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular></ui-view>
 
-  <ui-view></ui-view>
+
 </body>

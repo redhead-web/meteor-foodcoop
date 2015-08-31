@@ -3,11 +3,10 @@ angular.module("food-collective").controller("ProductCreateCtrl", function($scop
 
   Uploader.finished = imageUploadComplete;
 
-  $scope.products = $scope.$meteorCollection(Products);
+  $scope.products = $scope.$meteorCollection(Products).subscribe('products');
 
 
-  $scope.publish = function() {
-    $scope.product.publish = !$scope.product.publish;
+  $scope.save = function() {
     if (!$scope.hasOwnProperty('_id')) {
       $scope.products.save($scope.product);
     }

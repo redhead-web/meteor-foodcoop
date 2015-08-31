@@ -21,7 +21,6 @@ accounts-password
 accounts-ui
 accounts-facebook
 alanning:roles
-ewall:foundation
 momentjs:moment
 patrickml:braintree
 stevezhu:lodash
@@ -29,3 +28,4 @@ angular:angular-material
 tmeasday:publish-counts
 dburles:collection-helpers
 rgnevashev:meteor-angular-coffee
+fourseven:scss

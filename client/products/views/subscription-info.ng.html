@@ -1,0 +1,35 @@
+<md-dialog role="dialog" aria-label="subscribe info">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Get a {{product.name}} every week</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="answer('')" aria-label="Close dialog">
+        <md-icon md-font-set="material-icons">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    <p>With a Fresh Food Collective Subscription we'll charge your credit card a fixed monthly rate and you'll receive continuous {{product.name}} each week. You won't have to remember to order, when your subscription is up so it's that much more convenient for you.</p>
+
+    <h1 class="md-title">Price</h1>
+    <p>The price of the subscription is based on a 50 week / year price. Divided into 12 monthly payments that start the day you subscribe. The next payment will be charged the next calendar month of your initial subscription.</p>
+    <p style="text-align:center">
+      <strong>{{total | currency}} = {{product.price | currency}} x 50 weeks / 12 months + transaction fee of {{product.price * 50/12 * 0.029 + 0.45 | currency}}</strong>
+    </p>
+
+    <h1 class="md-title">Add on's and extras</h1>
+    <p>Once you have an active subscription with us you can still shop as normal and even create new subscriptions if you want to order extra or for friends.</p>
+
+    <h1 class="md-title">Cancellations</h1>
+    <p>When you cancel, you will stop receiving your {{product.name}} immediately and you are free to cancel at any time. Simply access your subscriptions from your profile page and click cancel to stop your subscription.</p>
+
+    <h3 class="md-title">Would you like to setup a subscription for {{product.name}}?</h3>
+
+    <md-button ng-click="answer('NO THANKYOU')">
+      I've Changed my mind
+    </md-button>
+    <md-button ng-click="answer('YES')" style="margin-right:20px;">
+      Yes I'll subscribe
+    </md-button>
+  </md-content>
+</md-dialog>

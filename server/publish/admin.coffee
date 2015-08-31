@@ -9,14 +9,18 @@ Meteor.publish 'orderCount', ->
     countFromField: 'qty'
   undefined
 
-Meteor.publish 'orders', ->
-  unless date
-    date = new Date
+Meteor.publish 'product-count', ->
+  Counts.publish this, 'product-count', Products.find()
+  undefined
 
-  Meteor.users.find({},
-    'profile.subscriptions': 1
-    'profile.name': 1
-    'profile.hub': 1
-    'profile.phone':1
-    'emails':1
-  )
+Meteor.publish "orders", ->
+  if Roles.userIsInRole this.userId, 'admin'
+    return Subscriptions.find()
+  else
+    console.log "cannot publish orders to non admin"
+
+Meteor.publish "users-admin", ->
+  if Roles.userIsInRole this.userId, 'admin'
+    return Meteor.users.find {}, {profile:1, emails:1, customerId:1}
+  else
+    console.log "cannot publish users to non admin"

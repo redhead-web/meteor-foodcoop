@@ -3,6 +3,13 @@ angular.module('food-collective',[
   'ui.router',
   'uiGmapgoogle-maps',
   'ngMaterial'])
-.run(function($rootScope) {
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default').primaryPalette('orange').accentPalette('indigo');
+})
+
+
+.run(function($rootScope, $meteor) {
   $rootScope.hasRole = Roles.userIsInRole;
+
+  $meteor.subscribe('products');
 })
