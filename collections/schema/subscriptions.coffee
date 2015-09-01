@@ -35,5 +35,8 @@ subscriptions = new SimpleSchema
   subscriptionId:
     type:String
     optional:true
+  localTransactionId:
+    type: String
+    optional: true
 
 Subscriptions.attachSchema subscriptions

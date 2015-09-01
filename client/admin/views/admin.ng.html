@@ -1,32 +1,26 @@
-<h2>Fresh Food Collective Admin Panel</h2>
-
-<ul>
-  <li><a ui-sref="admin.users">Users</a></li>
-  <li><a ui-sref="admin.orders">Orders</a></li>
-</ul>
+<md-toolbar layout="row" layout-align="center center" class="md-accent">
+  <h1 class="md-display-2">Fresh Food Collective Admin Panel</h1>
+</md-toolbar>
 
 <ui-view>
-  <div layout="row" layout-margin>
+  <div layout="row" layout-margin class="text-center">
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="3">
-      <a ui-sref="admin.users">
-        <h1>Users</h1>
-        <md-icon md-font-set="material-icons">users</md-icon>
-        {{userCount}}
-      </a>
+      <md-button class="md-fab" ui-sref="admin.users">
+        <md-icon md-font-set="material-icons">account_box</md-icon>
+      </md-button>
+      <div class="label">Total Users: {{userCount}}</div>
     </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="2">
-      <a ui-sref="admin.orders">
-        <h1>Orders</h1>
+      <md-button class="md-fab" ui-sref="admin.orders">
         <md-icon md-font-set="material-icons">shopping_basket</md-icon>
-        {{ordersCount}}
-      </a>
+      </md-button>
+      <div class="label">Total Orders: {{ordersCount}}</div>
     </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="1">
-      <a ui-sref="productCreate">
-        <h1>+ Product</h1>
+      <md-button class="md-fab" ui-sref="productCreate">
         <md-icon md-font-set="material-icons">add_shopping_cart</md-icon>
-        {{productCount}}
-      </a>
+      </md-button>
+      <div class="label">Total Products: {{productsCount}}</div>
     </md-whiteframe>
   </div>
 </ui-view>

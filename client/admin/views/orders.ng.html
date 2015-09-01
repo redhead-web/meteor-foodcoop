@@ -41,7 +41,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="order in vm.orders | filter:vm.search | filter:vm.filterByPresent | filter:vm.filterByHub |  orderBy:predicate:reverse as filteredOrders track by order._id">
+    <tr ng-repeat="order in vm.orders | filter:vm.search | filter:vm.filterByPresent | filter:vm.filterByHub |  orderBy:predicate:reverse as filteredOrders track by order._id" ng-click="vm.goTo(order._id)">
       <td>
         {{vm.user(order).profile.hub.location}}
       </td>

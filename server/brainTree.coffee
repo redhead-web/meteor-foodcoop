@@ -146,9 +146,10 @@ Meteor.methods
       throw new Meteor.Error 'subscription failed', subscription.errors
 
 
-
-
-
+  getTransaction: (transactionId) ->
+    check transactionId, String
+    result = gateway.transaction.find transactionId
+    result
 
 validCurrency = (amount) ->
   if typeof amount == "number"

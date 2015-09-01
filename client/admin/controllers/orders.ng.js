@@ -1,5 +1,5 @@
 /* Globals: angular, moment */
-angular.module("food-collective").controller("OrderAdminCtrl", function($scope, $rootScope, $meteor){
+angular.module("food-collective").controller("OrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
   self = this;
   self.orders = $scope.$meteorCollection(Subscriptions).subscribe('orders')
 
@@ -13,6 +13,8 @@ angular.module("food-collective").controller("OrderAdminCtrl", function($scope, 
   self.filterByPresent = filterByPresent;
 
   self.occurences = productsCount;
+
+  self.goTo = goTo;
 
   function search (order) {
     if (!self.query) {
@@ -54,6 +56,9 @@ angular.module("food-collective").controller("OrderAdminCtrl", function($scope, 
     return occurences;
   }
 
+  function goTo (id) {
+    $state.go('admin.order', {orderId: id});
+  }
 
 
 });

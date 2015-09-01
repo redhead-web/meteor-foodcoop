@@ -12,6 +12,9 @@ angular.module('food-collective').config(function($stateProvider) {
       },
       'orderCount': function($meteor) {
           return $meteor.subscribe('orderCount');
+      },
+      'productCount': function($meteor) {
+          return $meteor.subscribe("product-count");
       }
     }
   }).state('admin.members', {
@@ -26,11 +29,24 @@ angular.module('food-collective').config(function($stateProvider) {
   }).state('admin.orders', {
     url: '/orders',
     templateUrl: 'client/admin/views/orders.ng.html',
+    controller: 'OrdersAdminCtrl',
+    controllerAs: 'vm',
+    resolve: {
+      "admin": function($meteor) {
+        return $meteor.requireValidUser(isAdmin);
+      }
+    }
+  }).state('admin.order', {
+    url: '/order/:orderId',
+    templateUrl: 'client/admin/views/order.ng.html',
     controller: 'OrderAdminCtrl',
     controllerAs: 'vm',
     resolve: {
       "admin": function($meteor) {
         return $meteor.requireValidUser(isAdmin);
+      },
+      "order": function($meteor, $stateParams) {
+        return $meteor.subscribe('orders', $stateParams.orderId)
       }
     }
   });

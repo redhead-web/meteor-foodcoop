@@ -65,6 +65,7 @@ observe-sequence@1.0.6
 ordered-dict@1.0.3
 package-version-parser@3.0.3
 patrickml:braintree@1.0.4
+planettraining:material-design-icons@2.0.0
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2
 random@1.0.3

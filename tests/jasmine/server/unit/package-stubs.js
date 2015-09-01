@@ -7093,7 +7093,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "f30d1774ac07c7e2015ee13a8699e4e42ca6d263"
+                  "value": "ede7725bb7077f9b5dd41451a545d94557f4736f"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7869,11 +7869,11 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "06e09461dee4c547791cc1d15891416029762d72"
+          "value": "9ffd64e63d10c3ba7148ed9b8138aa2c777b70b9"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "82a372c00c3bcd880414f88cdd75d75c8455f9bd"
+          "value": "51d967a7b39dff57ac82f7078f62ab72316009a9"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
@@ -8843,11 +8843,11 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 18439
+                  "value": 60077
                 },
                 "fout": {
                   "type": "constant",
-                  "value": 79
+                  "value": 54
                 },
                 "child": {
                   "type": "object",
@@ -8866,7 +8866,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 18439
+                      "value": 60077
                     },
                     "stdin": {
                       "type": "null",
@@ -10345,7 +10345,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1441030099819
+                  "value": 1441139112247
                 },
                 "newSessions": {
                   "type": "constant",
@@ -10388,7 +10388,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1441030100368
+                  "value": 1441139112875
                 },
                 "maxErrors": {
                   "type": "constant",
@@ -12035,6 +12035,7 @@ var packageMetadata = {
   "dburles:collection-helpers": {},
   "rgnevashev:meteor-angular-coffee": {},
   "fourseven:scss": {},
+  "planettraining:material-design-icons": {},
   "session": {}
 }
 var globalContext = (typeof global !== 'undefined') ? global : window
