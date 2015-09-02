@@ -39,8 +39,10 @@ profile = new SimpleSchema
     type: String
   address:
     type: String
+    optional:true
   phone:
     type: String
+    optional:true
   hub:
     type: Object
     optional: true

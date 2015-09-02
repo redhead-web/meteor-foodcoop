@@ -1,5 +1,13 @@
 angular.module("food-collective").controller "usersAdminCtrl", ($scope, $meteor, $stateParams) ->
 
-  $scope.users = $scope.$meteorCollection(Meteor.users).subscribe('admin-user-list')
+  $scope.users = ->
+    Meteor.users.find {},
+      sort: $scope.sort
+
+  $meteor.subscribe 'users-admin',
+    limit: parseInt $scope.perPage
+    skip: parseInt ($scope.page - 1) * $scope.perPage
+    sort: parseInt $scope.sort
+
 
   return

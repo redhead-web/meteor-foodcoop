@@ -19,7 +19,7 @@
                 <md-button href="/product/{{product._id}}" class="md-fab md-info"
                 ng-if="currentUser && hasRole(currentUser, 'admin')"
                 aria-label="Edit Product">
-                  <md-icon md-font-set="material-icons">create</md-icon>
+                  <md-icon md-svg-icon="action:ic_note_add_24px"></md-icon>
                 </md-button>
               </h2>
               <p>{{product.price | currency}}</p>
@@ -29,14 +29,14 @@
         </md-list>
         <div layout="column">
           <md-button flex ng-click="showDialog($event, product)" class="md-raised md-primary">
-            <md-icon md-font-set="material-icons">add_shopping_cart</md-icon>
+            <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
             Add To Cart
           </md-button>
           <md-button flex ng-click="showConfirm($event, product)" class="md-raised md-primary">
             Continuous Order
           </md-button>
           <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
-            <md-icon md-font-set="material-icons">delete</md-icon>
+            <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
           </md-button>
         </div>
       </md-card-content>

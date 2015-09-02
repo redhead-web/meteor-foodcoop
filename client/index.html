@@ -9,9 +9,13 @@
         <span>Fresh Food Collective</span>
       </h3>
       <span flex></span>
-      <meteor-include src="loginButtons"></meteor-include>
+      <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
+      <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
+      <div ng-show="$root.currentUser">{{ $root.currentUser.profile.name }}</div>
+      <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button>
+
       <md-button class="md-icon-button" aria-label="Favorite">
-        <md-icon md-font-set="material-icons" style="color: greenyellow;">favorite</md-icon>
+        <md-icon md-svg-icon="action:favorite" style="color: greenyellow;"></md-icon>
       </md-button>
     </div>
   </md-toolbar>
@@ -20,23 +24,23 @@
     <md-fab-speed-dial class="md-fling" md-direction="right" md-open="false">
       <md-fab-trigger>
         <md-button aria-label="menu" class="md-fab md-warn">
-          <md-icon md-font-set="material-icons">menu</md-icon>
+          <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
         </md-button>
       </md-fab-trigger>
 
       <md-fab-actions>
         <md-button ui-sref="store" aria-label="store" class="md-fab md-raised md-mini md-primary">
-          <md-icon md-font-set="material-icons">shopping_cart</md-icon>
+          <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
         </md-button>
 
         <md-button ui-sref="hubs" aria-label="Hubs Directory" class="md-fab md-raised md-mini md-primary">
-          <md-icon md-font-set="material-icons">store</md-icon>
+          <md-icon md-svg-icon="action:ic_store_24px">store</md-icon>
         </md-button>
         <md-button ui-sref="profile" ng-if="!!currentUser" aria-label="User Profile" class="md-fab md-raised md-mini md-warn">
-          <md-icon md-font-set="material-icons">account_box</md-icon>
+          <md-icon md-svg-icon="action:ic_account_box_24px">account_box</md-icon>
         </md-button>
         <md-button ui-sref="admin" ng-if="!!currentUser && hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-fab md-raised md-mini md-warn">
-          <md-icon md-font-set="material-icons">dashboard</md-icon>
+          <md-icon md-svg-icon="action:ic_dashboard_24px"></md-icon>
         </md-button>
       </md-fab-actions>
     </md-fab-speed-dial>

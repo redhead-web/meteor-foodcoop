@@ -1,0 +1,60 @@
+<md-content layout="row">
+  <span flex></span>
+  <md-whiteframe layout="column" flex="50">
+    <div layout="row" layout-align="space-around center">
+      <div>Login with:</div>
+      <md-button ng-click="facebookLogin()">Facebook</md-button>
+    </div>
+    <div ng-show="rc.error" class="md-warn">
+      <small>{{ rc.error }}</small>
+    </div>
+    <form layout="column">
+      <md-input-container>
+        <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="rc.credentials.profile.name"
+               placeholder="name" aria-label="name"/>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="rc.credentials.email"
+               placeholder="email" aria-label="email"/>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="action:ic_lock_open_24px" class="md-accent"></md-icon>
+        <input type="password" ng-model="rc.credentials.password"
+               placeholder="password" aria-label="password"/>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
+        <md-select style="margin-left:36px" ng-model="rc.credentials.profile.hub"
+        placeholder="Select a hub near you to collect your order from.">
+          <md-option ng-value="{
+            _id: hub._id,
+            location: hub.location,
+            title: hub.title,
+            dayOfTheWeek: hub.dayOfTheWeek,
+            openHours: hub.openHours
+          }" ng-repeat="hub in rc.hubs"> {{hub.location}}</md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="communication:ic_contact_phone_black_48px" class="md-accent"></md-icon>
+        <input type="text" ng-model="rc.credentials.profile.phone"
+               placeholder="phone" aria-label="phone"/>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="rc.credentials.profile.address"
+               g-places-autocomplete
+               placeholder="home address" aria-label="address"/>
+      </md-input-container>
+      <md-button class="md-raised md-primary"
+                 ng-click="rc.register()">Create Account
+      </md-button>
+    </form>
+    <div layout="row" layout-align="end center">
+      <md-button href="/login">Login</md-button>
+    </div>
+  </md-whiteframe>
+  <span flex></span>
+</md-content>

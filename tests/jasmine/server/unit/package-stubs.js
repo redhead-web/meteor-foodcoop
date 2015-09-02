@@ -7093,7 +7093,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "ede7725bb7077f9b5dd41451a545d94557f4736f"
+                  "value": "a89daa8d2bbc6a1a3837aa203571e0b1a5ac76c4"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7869,11 +7869,11 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "9ffd64e63d10c3ba7148ed9b8138aa2c777b70b9"
+          "value": "410c805d42d427374f551b5af0bfb3f551ae2dfa"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "51d967a7b39dff57ac82f7078f62ab72316009a9"
+          "value": "890ba4fe2d8ffcb1017970ed6cb9d14ffa339317"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
@@ -8843,11 +8843,11 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 60077
+                  "value": 65449
                 },
                 "fout": {
                   "type": "constant",
-                  "value": 54
+                  "value": 55
                 },
                 "child": {
                   "type": "object",
@@ -8866,7 +8866,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 60077
+                      "value": 65449
                     },
                     "stdin": {
                       "type": "null",
@@ -10345,7 +10345,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1441139112247
+                  "value": 1441162573432
                 },
                 "newSessions": {
                   "type": "constant",
@@ -10388,7 +10388,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1441139112875
+                  "value": 1441162573929
                 },
                 "maxErrors": {
                   "type": "constant",
@@ -12036,6 +12036,8 @@ var packageMetadata = {
   "rgnevashev:meteor-angular-coffee": {},
   "fourseven:scss": {},
   "planettraining:material-design-icons": {},
+  "urigo:angular-blaze-template": {},
+  "jonatan:angular-google-places-autocomplete": {},
   "session": {}
 }
 var globalContext = (typeof global !== 'undefined') ? global : window

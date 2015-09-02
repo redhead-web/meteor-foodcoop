@@ -37,5 +37,36 @@ angular.module('food-collective').config( function($stateProvider) {
         return $meteor.call('generateClientToken');
       }
     }
-  });
+  })
+  .state('login', {
+    url: '/login',
+    templateUrl: 'client/user/auth/views/login.ng.html',
+    controller: 'LoginCtrl',
+    controllerAs: 'lc'
+  })
+  .state('register',{
+    url: '/register',
+    templateUrl: 'client/user/auth/views/register.ng.html',
+    controller: 'RegisterCtrl',
+    controllerAs: 'rc'
+  })
+  .state('resetpw', {
+    url: '/resetpw',
+    templateUrl: 'client/user/auth/views/reset-password.ng.html',
+    controller: 'ResetCtrl',
+    controllerAs: 'rpc'
+  })
+  .state('logout', {
+    url: '/logout',
+    resolve: {
+      "logout": function($meteor, $state) {
+        return $meteor.logout().then(function(){
+          $state.go('store');
+        }, function(err){
+          console.log('logout error - ', err);
+        });
+      }
+    }
+  })
+  ;
 });
