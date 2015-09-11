@@ -1,0 +1,48 @@
+
+<md-content layout="row" layout-sm="column">
+<span flex="20" hide-sm></span>
+<div flex>
+  <md-button ui-sref="admin.users">Back To User List</md-button>
+  <h2>Editing {{user.profile.name}}</h2>
+
+  <form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
+    <p>Current Hub: {{user.profile.hub.title || 'none'}}</p>
+    <md-input-container>
+      <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
+      <md-select style="margin-left:36px" ng-model="user.profile.hub"
+      placeholder="Select a new hub for {{user.profile.name}}">
+        <md-option ng-repeat="hub in hubs"
+        ng-value="{
+          _id: hub._id,
+          title: hub.title,
+          location: hub.location,
+          dayOfTheWeek: hub.dayOfTheWeek,
+          openHours: hub.openHours
+        }"> {{hub.title}} @{{hub.location}}</md-option>
+      </md-select>
+    </md-input-container>
+
+    <md-input-container>
+      <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.profile.name"
+             placeholder="name" aria-label="name"/>
+    </md-input-container>
+
+    <md-input-container>
+      <md-icon md-svg-icon="communication:ic_contact_phone_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.profile.phone"
+             placeholder="phone" aria-label="phone"/>
+    </md-input-container>
+
+    <md-input-container>
+      <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.profile.address"
+             placeholder="home address" aria-label="address"/>
+    </md-input-container>
+
+    <md-button type="submit">Save</md-button>
+
+  </form>
+</div>
+<span flex="20" hide-sm></span>
+</md-content>

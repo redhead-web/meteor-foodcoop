@@ -6112,6 +6112,9 @@ var packageMetadata = {
             },
             "resumeObservers": {
               "type": "function"
+            },
+            "simpleSchema": {
+              "type": "function"
             }
           }
         }
@@ -7094,7 +7097,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "a89daa8d2bbc6a1a3837aa203571e0b1a5ac76c4"
+                  "value": "a078dd2272873285bc7906095a23fda3d2331357"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7870,11 +7873,11 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "410c805d42d427374f551b5af0bfb3f551ae2dfa"
+          "value": "f909aec75aeb64b720eef25a5863207091b02b30"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "890ba4fe2d8ffcb1017970ed6cb9d14ffa339317"
+          "value": "608a8c0c7e48f030ae94b7c50d7099aea9d47b65"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
@@ -7888,7 +7891,6 @@ var packageMetadata = {
     }
   },
   "meteor-platform": {},
-  "urigo:angular": {},
   "angularui:angular-ui-router": {},
   "coffeescript": {},
   "practicalmeteor:loglevel": {
@@ -8829,127 +8831,7 @@ var packageMetadata = {
       "type": "object",
       "members": {
         "karmaChilds": {
-          "type": "object",
-          "members": {
-            "jasmine-client-unit": {
-              "type": "object",
-              "members": {
-                "taskName": {
-                  "type": "constant",
-                  "value": "jasmine-client-unit"
-                },
-                "appPath": {
-                  "type": "constant",
-                  "value": "/Users/seanstanley/sites/freshfoodcollective.com"
-                },
-                "pid": {
-                  "type": "constant",
-                  "value": 65449
-                },
-                "fout": {
-                  "type": "constant",
-                  "value": 55
-                },
-                "child": {
-                  "type": "object",
-                  "members": {
-                    "domain": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "signalCode": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "exitCode": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "pid": {
-                      "type": "constant",
-                      "value": 65449
-                    },
-                    "stdin": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stdout": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stderr": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stdio": {
-                      "type": "array"
-                    },
-                    "spawn": {
-                      "type": "function"
-                    },
-                    "kill": {
-                      "type": "function"
-                    },
-                    "ref": {
-                      "type": "function"
-                    },
-                    "unref": {
-                      "type": "function"
-                    },
-                    "setMaxListeners": {
-                      "type": "function"
-                    },
-                    "emit": {
-                      "type": "function"
-                    },
-                    "addListener": {
-                      "type": "function",
-                      "refID": 17
-                    },
-                    "on": {
-                      "ref": 17
-                    },
-                    "once": {
-                      "type": "function"
-                    },
-                    "removeListener": {
-                      "type": "function"
-                    },
-                    "removeAllListeners": {
-                      "type": "function"
-                    },
-                    "listeners": {
-                      "type": "function"
-                    }
-                  }
-                },
-                "getTaskName": {
-                  "type": "function"
-                },
-                "getChild": {
-                  "type": "function"
-                },
-                "getPid": {
-                  "type": "function"
-                },
-                "isDead": {
-                  "type": "function"
-                },
-                "isRunning": {
-                  "type": "function"
-                },
-                "readPid": {
-                  "type": "function"
-                },
-                "spawn": {
-                  "type": "function"
-                },
-                "kill": {
-                  "type": "function"
-                }
-              }
-            }
-          }
+          "type": "object"
         },
         "getKarmaChild": {
           "type": "function"
@@ -10064,7 +9946,7 @@ var packageMetadata = {
             },
             "hostname": {
               "type": "constant",
-              "value": "mac-air.telecom"
+              "value": "mac-air"
             },
             "proxy": {
               "type": "null",
@@ -10346,7 +10228,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1441162573432
+                  "value": 1441934021488
                 },
                 "newSessions": {
                   "type": "constant",
@@ -10358,6 +10240,49 @@ var packageMetadata = {
                 },
                 "usageLookup": {
                   "type": "function"
+                },
+                "evloopMonitor": {
+                  "type": "object",
+                  "members": {
+                    "timeoutMillis": {
+                      "type": "constant",
+                      "value": 200
+                    },
+                    "start": {
+                      "type": "function"
+                    },
+                    "stop": {
+                      "type": "function"
+                    },
+                    "status": {
+                      "type": "function"
+                    },
+                    "setMaxListeners": {
+                      "type": "function"
+                    },
+                    "emit": {
+                      "type": "function"
+                    },
+                    "addListener": {
+                      "type": "function",
+                      "refID": 101
+                    },
+                    "on": {
+                      "ref": 101
+                    },
+                    "once": {
+                      "type": "function"
+                    },
+                    "removeListener": {
+                      "type": "function"
+                    },
+                    "removeAllListeners": {
+                      "type": "function"
+                    },
+                    "listeners": {
+                      "type": "function"
+                    }
+                  }
                 },
                 "buildPayload": {
                   "type": "function"
@@ -10378,7 +10303,7 @@ var packageMetadata = {
             },
             "error": {
               "type": "object",
-              "refID": 100,
+              "refID": 121,
               "members": {
                 "appId": {
                   "type": "constant",
@@ -10389,7 +10314,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1441162573929
+                  "value": 1441934021879
                 },
                 "maxErrors": {
                   "type": "constant",
@@ -10459,7 +10384,7 @@ var packageMetadata = {
           }
         },
         "errors": {
-          "ref": 100
+          "ref": 121
         },
         "connect": {
           "type": "function"
@@ -11135,7 +11060,7 @@ var packageMetadata = {
         },
         "version": {
           "type": "constant",
-          "value": "1.27.0"
+          "value": "1.29.0"
         },
         "Environment": {
           "type": "function",
@@ -11281,6 +11206,10 @@ var packageMetadata = {
             "serverError": {
               "type": "constant",
               "value": "serverError"
+            },
+            "testOperationPerformedInProductionError": {
+              "type": "constant",
+              "value": "testOperationPerformedInProductionError"
             },
             "unexpectedError": {
               "type": "constant",
@@ -11447,6 +11376,10 @@ var packageMetadata = {
                 "Settling": {
                   "type": "constant",
                   "value": "settling"
+                },
+                "SettlementConfirmed": {
+                  "type": "constant",
+                  "value": "settlement_confirmed"
                 },
                 "SettlementDeclined": {
                   "type": "constant",
@@ -11847,6 +11780,47 @@ var packageMetadata = {
             }
           }
         },
+        "TestingGateway": {
+          "type": "function",
+          "refID": 54,
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "constructor": {
+                  "ref": 54
+                },
+                "settle": {
+                  "type": "function"
+                },
+                "settlementPending": {
+                  "type": "function"
+                },
+                "settlementConfirm": {
+                  "type": "function"
+                },
+                "settlementDecline": {
+                  "type": "function"
+                },
+                "settlementOperationWithEnvironmentCheck": {
+                  "type": "function"
+                },
+                "createResponseHandler": {
+                  "type": "function"
+                },
+                "createSearchResponse": {
+                  "type": "function"
+                },
+                "searchResponseHandler": {
+                  "type": "function"
+                },
+                "pagingFunctionGenerator": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
         "Test": {
           "type": "object",
           "members": {
@@ -11961,6 +11935,10 @@ var packageMetadata = {
                   "type": "constant",
                   "value": "fake-paypal-future-nonce"
                 },
+                "PayPalBillingAgreement": {
+                  "type": "constant",
+                  "value": "fake-paypal-billing-agreement-nonce"
+                },
                 "ApplePayVisa": {
                   "type": "constant",
                   "value": "fake-apple-pay-visa-nonce"
@@ -11988,6 +11966,130 @@ var packageMetadata = {
                 "AndroidPay": {
                   "type": "constant",
                   "value": "fake-android-pay-nonce"
+                },
+                "AndroidPayDiscover": {
+                  "type": "constant",
+                  "value": "fake-android-pay-discover-nonce"
+                },
+                "AndroidPayVisa": {
+                  "type": "constant",
+                  "value": "fake-android-pay-visa-nonce"
+                },
+                "AndroidPayMasterCard": {
+                  "type": "constant",
+                  "value": "fake-android-pay-mastercard-nonce"
+                },
+                "AndroidPayAmEx": {
+                  "type": "constant",
+                  "value": "fake-android-pay-amex-nonce"
+                },
+                "TransactableVisa": {
+                  "type": "constant",
+                  "value": "fake-valid-visa-nonce"
+                },
+                "TransactableAmEx": {
+                  "type": "constant",
+                  "value": "fake-valid-amex-nonce"
+                },
+                "TransactableMasterCard": {
+                  "type": "constant",
+                  "value": "fake-valid-mastercard-nonce"
+                },
+                "TransactableDiscover": {
+                  "type": "constant",
+                  "value": "fake-valid-discover-nonce"
+                },
+                "TransactableJCB": {
+                  "type": "constant",
+                  "value": "fake-valid-jcb-nonce"
+                },
+                "TransactableMaestro": {
+                  "type": "constant",
+                  "value": "fake-valid-maestro-nonce"
+                },
+                "TransactableDinersClub": {
+                  "type": "constant",
+                  "value": "fake-valid-dinersclub-nonce"
+                },
+                "TransactablePrepaid": {
+                  "type": "constant",
+                  "value": "fake-valid-prepaid-nonce"
+                },
+                "TransactableCommercial": {
+                  "type": "constant",
+                  "value": "fake-valid-commercial-nonce"
+                },
+                "TransactableDurbinRegulated": {
+                  "type": "constant",
+                  "value": "fake-valid-durbin-regulated-nonce"
+                },
+                "TransactableHealthcare": {
+                  "type": "constant",
+                  "value": "fake-valid-healthcare-nonce"
+                },
+                "TransactableDebit": {
+                  "type": "constant",
+                  "value": "fake-valid-debit-nonce"
+                },
+                "TransactablePayroll": {
+                  "type": "constant",
+                  "value": "fake-valid-payroll-nonce"
+                },
+                "TransactableNoIndicators": {
+                  "type": "constant",
+                  "value": "fake-valid-no-indicators-nonce"
+                },
+                "TransactableUnknownIndicators": {
+                  "type": "constant",
+                  "value": "fake-valid-unknown-indicators-nonce"
+                },
+                "TransactableCountryOfIssuanceUSA": {
+                  "type": "constant",
+                  "value": "fake-valid-country-of-issuance-usa-nonce"
+                },
+                "TransactableCountryOfIssuanceCAD": {
+                  "type": "constant",
+                  "value": "fake-valid-country-of-issuance-cad-nonce"
+                },
+                "TransactableIssuingBankNetworkOnly": {
+                  "type": "constant",
+                  "value": "fake-valid-issuing-bank-network-only-nonce"
+                },
+                "ProcessorDeclinedVisa": {
+                  "type": "constant",
+                  "value": "fake-processor-declined-visa-nonce"
+                },
+                "ProcessorDeclinedMasterCard": {
+                  "type": "constant",
+                  "value": "fake-processor-declined-mastercard-nonce"
+                },
+                "ProcessorDeclinedAmEx": {
+                  "type": "constant",
+                  "value": "fake-processor-declined-amex-nonce"
+                },
+                "ProcessorDeclinedDiscover": {
+                  "type": "constant",
+                  "value": "fake-processor-declined-discover-nonce"
+                },
+                "ProcessorFailureJCB": {
+                  "type": "constant",
+                  "value": "fake-processor-failure-jcb-nonce"
+                },
+                "LuhnInvalid": {
+                  "type": "constant",
+                  "value": "fake-luhn-invalid-nonce"
+                },
+                "PayPalFuturePaymentRefreshToken": {
+                  "type": "constant",
+                  "value": "fake-paypal-future-refresh-token-nonce"
+                },
+                "SEPA": {
+                  "type": "constant",
+                  "value": "fake-sepa-bank-account-nonce"
+                },
+                "GatewayRejectedFraud": {
+                  "type": "constant",
+                  "value": "fake-gateway-rejected-fraud-nonce"
                 }
               }
             },
@@ -12039,6 +12141,8 @@ var packageMetadata = {
   "planettraining:material-design-icons": {},
   "urigo:angular-blaze-template": {},
   "jonatan:angular-google-places-autocomplete": {},
+  "angularutils:pagination": {},
+  "angular": {},
   "session": {}
 }
 var globalContext = (typeof global !== 'undefined') ? global : window

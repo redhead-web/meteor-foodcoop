@@ -1,3 +1,4 @@
+
 cart = new SimpleSchema
   last_modified:
     type: Date
@@ -46,10 +47,10 @@ profile = new SimpleSchema
   hub:
     type: Object
     optional: true
-  'hub._id':
+  'hub.id':
     type: String
     regEx: SimpleSchema.RegEx.Id
-  'hub.title'
+  'hub.title':
     type: String
     optional: true
   'hub.location':
@@ -77,6 +78,7 @@ Schema = new SimpleSchema
 
   createdAt:
     type: Date
+    defaultValue: new Date()
 
   profile:
     type: profile

@@ -1,76 +1,37 @@
-<form name="editUser" ng-submit="validate('editUser.$isValid')">
-  <!-- Hub they will pickup from -->
-  <div class="row">
-    <div class="small-8 columns">
-      <div class="row">
-        <div class="small-3 columns">
-          <label for="hub">Order Collection</label>
-        </div>
-        <div class="small-9 columns">
-          <select ng-model="currentUser.profile.hub" name="hub" ng-selected="currentUser.profile.hub.location"
-          ng-options="{
-            _id: hub._id,
-            location: hub.location,
-            dayOfTheWeek: hub.dayOfTheWeek,
-            openHours: hub.openHours
-          } as hub.location for hub in hubs">
-            <option value="">{{'Current Choice: ' + currentUser.profile.hub.location || "Select a Hub to Pick up from" }}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
+<form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
 
-  <!-- Name -->
-  <div class="row">
-    <div class="small-8 columns">
-      <div class="row">
-        <div class="small-3 columns">
-          <label for="name" class="right inline">Full Name</label>
-        </div>
-        <div class="small-9 columns">
-          <input type="text" name="name" placeholder="name" ng-model="currentUser.profile.name" required>
-          <div ng-if="submitted && editUser.name.$invalid">
-            <span ng-if="editUser.name.$error.required">Please tell us your name.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <md-input-container>
+    <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
+    <md-select style="margin-left:36px" ng-model="currentUser.profile.hub"
+    placeholder="Select a hub near you to collect your order from.">
+      <md-option ng-value="{
+        _id: hub._id,
+        location: hub.location,
+        title: hub.title,
+        dayOfTheWeek: hub.dayOfTheWeek,
+        openHours: hub.openHours
+      }" ng-repeat="hub in hubs"> {{hub.location}}</md-option>
+    </md-select>
+  </md-input-container>
 
-  <!-- Phone -->
-  <div class="row">
-    <div class="small-8 columns">
-      <div class="row">
-        <div class="small-3 columns">
-          <label for="phone" class="right inline">Primary Phone</label>
-        </div>
-        <div class="small-9 columns">
-          <input type="tel" name="phone" placeholder="09 555 5555" ng-model="currentUser.profile.phone">
-          <div ng-if="submitted && editUser.phone.$invalid">
-            <span ng-if="editUser.phone.$error.required">Please tell us your phone number.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <md-input-container>
+    <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
+    <input type="text" ng-model="currentUser.profile.name"
+           placeholder="name" aria-label="name"/>
+  </md-input-container>
 
-  <!-- Address -->
-  <div class="row">
-    <div class="small-8 columns">
-      <div class="row">
-        <div class="small-3 columns">
-          <label for="address" class="right inline">Home Address</label>
-        </div>
-        <div class="small-9 columns">
-          <input type="text" name="address" placeholder="name" ng-model="currentUser.profile.address">
-          <div ng-if="submitted && editUser.address.$invalid">
-            <span ng-if="editUser.address.$error.required">Please tell us your address.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <md-input-container>
+    <md-icon md-svg-icon="communication:ic_contact_phone_black_48px" class="md-accent"></md-icon>
+    <input type="text" ng-model="currentUser.profile.phone"
+           placeholder="phone" aria-label="phone"/>
+  </md-input-container>
+
+  <md-input-container>
+    <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
+    <input type="text" ng-model="currentUser.profile.address"
+           g-places-autocomplete
+           placeholder="home address" aria-label="address"/>
+  </md-input-container>
 
   <button type="submit">Save</button>
 

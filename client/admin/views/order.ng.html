@@ -15,7 +15,7 @@
       phone: user.profile.phone, address: user.profile.address,
       hub: user.profile.hub.location + ' ' + user.profile.hub.title
     }">
-      <md-icon md-font-set="material-icons" ng-if="$index === 0">account_box</md-icon>
+      <md-icon md-svg-icon="active:ic_account_box_24px">account_box</md-icon>
       <div class="md-list-item-text" ng-class="{'md-offset': $index !== 0}">
         <h3> {{ value }}</h3>
         <p> {{ key }} </p>
@@ -25,7 +25,7 @@
   <md-list flex="33">
     <md-subheader class="md-no-sticky">Product Details</md-subheader>
     <md-list-item class="md-2-line" ng-repeat="(key, value) in order.productDetails">
-      <md-icon md-font-set="material-icons" ng-if="$index === 0">shopping_basket</md-icon>
+      <md-icon md-svg-icon="action:ic_shopping_basket_24px" ng-if="$index === 0"></md-icon>
       <div class="md-list-item-text" ng-class="{'md-offset': $index !== 0}">
         <h3> {{ value }}</h3>
         <p> {{ key }} </p>
@@ -35,7 +35,7 @@
   <md-list flex="33">
     <md-subheader class="md-no-sticky">Transaction Details</md-subheader>
     <md-list-item class="md-2-line">
-      <md-icon md-font-set="material-icons">attach_money</md-icon>
+      <md-icon md-svg-icon="action:ic_attach_money_24px">attach_money</md-icon>
       <div class="md-list-item-text">
         <h3> {{transaction.amount}}</h3>
         <p> Service Fee Amount: {{ transaction.serviceFeeAmount || 0 }} </p>
@@ -49,7 +49,7 @@
     </md-list-item>
     <md-subheader class="md-no-sticky" ng-show="transaction.subscriptionId">Subscription Details</md-subheader>
     <md-list-item class="md-2-line" ng-show="transaction.subscriptionId" ng-repeat="(key, value) in transaction.subscription">
-      <md-icon md-font-set="material-icons">credit_card</md-icon>
+      <md-icon md-svg-icon="action:ic_credit_card_24px">credit_card</md-icon>
       <div class="md-list-item-text">
         <h3> {{value | date:'dd/MM/YYYY'}}</h3>
         <p> {{key}} </p>

@@ -21,8 +21,33 @@ Meteor.publish 'orders', ->
   else
     console.log "cannot publish orders to non admin"
 
-Meteor.publish "users-admin", (options) ->
-  if options.fields?
-    options.fields = {profile:1, emails:1, customerId:1}
+Meteor.publish "user-list", (options, searchstring) ->
+  unless searchstring?
+    searchstring = ""
+
+  options.fields =
+    profile:1,
+    emails:1,
+    customerId:1,
+    createdAt: 1
+
   if Roles.userIsInRole this.userId, 'admin'
-    return Meteor.users.find {}, options
+
+    Counts.publish this, 'filteredUserCount', Meteor.users.find(
+      'profile.name':
+        '$regex': ".*#{searchstring}" or '' + '.*'
+        '$options': 'i'
+    ), noReady: true
+
+    return Meteor.users.find
+      'profile.name':
+        '$regex': ".*#{searchstring}" or '' + '.*'
+        '$options': 'i'
+    , options
+
+Meteor.publish "user", (userId) ->
+
+  if Roles.userIsInRole this.userId, 'admin'
+    Meteor.users.find
+      _id: userId
+    , {limit:1, fields: profile:1,emails:1, customerId:1, createdAt:1}

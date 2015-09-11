@@ -8,19 +8,19 @@
       <md-button class="md-fab" ui-sref="admin.users">
         <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
       </md-button>
-      <div class="label">Total Users: {{userCount}}</div>
+      <div class="label">Total Users: {{rt.userCount}}</div>
     </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="2">
       <md-button class="md-fab" ui-sref="admin.orders">
         <md-icon md-svg-icon="action:ic_shopping_basket_24px"></md-icon>
       </md-button>
-      <div class="label">Total Orders: {{ordersCount}}</div>
+      <div class="label">Total Orders: {{rt.ordersCount}}</div>
     </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="1">
       <md-button class="md-fab" ui-sref="productCreate">
         <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
       </md-button>
-      <div class="label">Total Products: {{productsCount}}</div>
+      <div class="label">Total Products: {{rt.productsCount}}</div>
     </md-whiteframe>
   </div>
 </ui-view>

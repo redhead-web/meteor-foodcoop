@@ -93,5 +93,5 @@ loadDefaultFixtures = function () {
 
 beforeAll(function () {
   resetDatabase();
-  loadDefaultFixtures();
+  //loadDefaultFixtures();
 });

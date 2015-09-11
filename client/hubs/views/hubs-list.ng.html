@@ -19,7 +19,7 @@
 <h1>Hub Directory</h1>
 <ul>
   <li ng-repeat="hub in hubs">
-    <h4>{{hub.location}} <small><a ui-sref="hubDetails({hubId: hub._id})">edit</a></small></h4>
+    <h4>{{hub.title || hub.location}} <small><a ui-sref="hubDetails({hubId: hub._id})">edit</a></small></h4>
     <ul>
       <li>{{hub.dayOfTheWeek}} from {{hub.openHours}}</li>
       <li>{{hub.description}}</li>

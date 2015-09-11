@@ -15,8 +15,7 @@
 </section>
 
 <md-input-container class="md-icon-float">
-  <label>search</label>
-  <md-icon md-font-set="material-icons">search</md-icon>
+  <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
   <input ng-model="vm.query" type="search">
 </md-input-container>
 
@@ -56,7 +55,7 @@
       </td>
       <td>
         <span ng-show="order.end_date">{{order.end_date | date:'dd/MM/yyyy'}}</span>
-        <span ng-show="order.indefinate">Indefinite</span>
+        <span ng-show="order.indefinate">Continuous</span>
       </td>
     </tr>
   </tbody>

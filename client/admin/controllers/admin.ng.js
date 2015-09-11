@@ -1,5 +1,6 @@
-angular.module("food-collective").controller("AdminCtrl", function($scope, $rootScope, admin, userCount, orderCount){
-  $scope.userCount = Counts.get('userCount');
-  $scope.ordersCount = Counts.get('upcoming-ordersCount');
-  $scope.productsCount = Counts.get('product-count');
+angular.module("food-collective").controller("AdminCtrl", function() {
+  var self = this;
+  self.userCount = Counts.get('userCount');
+  self.ordersCount = Counts.get('upcoming-ordersCount');
+  self.productsCount = Counts.get('product-count');
 });

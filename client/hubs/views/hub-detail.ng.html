@@ -1,20 +1,29 @@
+<md-content layout="column">
+
+<h2>Editing {{hub.title}}</h2>
+
 <form id="updateHubForm" novalidate="novalidate" class="ng-pristine ng-valid ng-scope">
   <div class="form-group" data-required="true">
     <label for="T8CH9aXvgSKF245dQ" class="control-label">Location</label>
-    <input type="text" name="location" required="" data-schema-key="location" ng-model="hub.location" maxlength="200" class="form-control">
+    <input type="text" name="location" required data-schema-key="location" ng-model="hub.location" maxlength="200" class="form-control"
+    >
     <span class="help-block"></span>
   </div>
 
+  <md-input-container>
+    <input type="text" ng-model="hub.title" placeholder="title" aria-label="Hub Title">
+  </md-input-container>
+
   <div class="form-group" data-required="true">
     <label for="TTHxGEJHDtPcnkcmo" class="control-label">Day of the week</label>
-    <input type="text" name="dayOfTheWeek" id="TTHxGEJHDtPcnkcmo" ng-model="hub.dayOfTheWeek" required="" data-schema-key="dayOfTheWeek" maxlength="20" class="form-control">
+    <input type="text" name="dayOfTheWeek" id="TTHxGEJHDtPcnkcmo" ng-model="hub.dayOfTheWeek" required data-schema-key="dayOfTheWeek" maxlength="20" class="form-control">
     <span class="help-block"></span>
   </div>
 
   <div class="form-group" data-required="true">
 
     <label for="iumF6AcyxssYxSZW6" class="control-label">Hours of Operation</label>
-    <input type="text" name="openHours" id="iumF6AcyxssYxSZW6" required="" ng-model="hub.openHours" data-schema-key="openHours" class="form-control">
+    <input type="text" name="openHours" id="iumF6AcyxssYxSZW6" required ng-model="hub.openHours" data-schema-key="openHours" class="form-control">
     <span class="help-block"></span>
   </div>
 
@@ -30,5 +39,4 @@
   </div>
 
 </form>
-
-{{hub.coords}}
+</md-content>

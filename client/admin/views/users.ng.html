@@ -1,0 +1,101 @@
+<md-content layout="row">
+  <span flex></span>
+  <div flex="75">
+    <md-list>
+      <md-subheader class="md-no-sticky">Fresh Food Collective Users</md-subheader>
+      <md-list-item>
+        <md-input-container>
+          <md-icon md-svg-icon="content:ic_sort_24px"></md-icon>
+          <md-select style="margin-left:36px" aria-label="Sort Ascending or Descending" ng-model="orderProperty">
+            <md-option ng-value="-1">Newest</md-option>
+            <md-option ng-value="1">Oldest</md-option>
+          </md-select>
+        </md-input-container>
+      </md-list-item>
+      <md-list-item>
+        <md-input-container>
+          <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+          <input type="text" placeholder="search" ng-model="searchstring">
+        </md-input-container>
+      </md-list-item>
+      <md-list-item class="md-2-line" dir-paginate="u in users | itemsPerPage: perPage" total-items="userCount.count">
+        <md-icon flex md-svg-icon="action:ic_account_circle_24px"></md-icon>
+        <md-menu flex="90">
+          <div class="md-list-item-text" ng-click="$mdOpenMenu($event)">
+            <h3>{{u.profile.name}}</h3>
+            <p>{{u.profile.hub.title || u.profile.hub.location}}</p>
+          </div>
+          <md-menu-content width="6">
+            <md-menu-item>
+              <md-button ng-href="tel:{{u.profile.phone}}">
+                <div layout="row">
+                  <md-icon md-menu-align-target md-svg-icon="communication:ic_call_24px"></md-icon>
+                  <p flex>{{u.profile.phone || 'no number on record'}}</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="mailto:{{u.emails[0].address}}">
+                <div layout="row">
+                  <md-icon md-menu-align-target md-svg-icon="communication:ic_email_24px"></md-icon>
+                  <p flex>{{u.emails[0].address}}</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ui-sref="hubs">
+                <div layout="row">
+                  <md-icon md-menu-align-target md-svg-icon="action:ic_store_24px" ></md-icon>
+                  <p flex>{{u.profile.hub.title || u.profile.hub.location || "Not a member of any hub"}}</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ui-sref="admin.userOrder({userId: u._id})">
+                <div layout="row">
+                  <md-icon md-menu-align-target md-svg-icon="editor:ic_attach_money_24px" ></md-icon>
+                  <p flex>Order History</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ui-sref="admin.user({userId: u._id})">
+                <div layout="row">
+                  <md-icon md-menu-align-target md-svg-icon="editor:ic_mode_edit_24px" ></md-icon>
+                  <p flex>edit me</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-list-item>
+    </md-list>
+
+    <section ng-hide="userCount.count <= perPage">
+       <md-button class="md-icon-button" ng-click="page = 1" ng-show="page == 1"
+       aria-label="first page">
+        <md-icon md-svg-icon="av:ic_skip_previous_24px"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" ng-click="page = page -1"
+        ng-show="page == 1"
+        aria-label="previous page">
+         <md-icon md-svg-icon="navigation:ic_chevron_left_24px"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" ng-click="page = page +1"
+         ng-show="page >= rt.userCount / perPage "
+         aria-label="next page">
+        <md-icon md-svg-icon="navigation:ic_chevron_right_24px"></md-icon>
+      </md-button>
+
+      <md-button ng-click="page = round(rt.userCount / perPage)"
+        ng-show="page >= rt.userCount / perPage"
+        aria-label="last page">
+        <md-icon md-svg-icon="av:ic_skip_next_24px"></md-icon>
+      </md-button>
+      <div class="label" ng-show="perPage < userCount.count">Displaying {{ (perPage * page) - perPage }} - {{ perPage * page }} of {{ userCount.count }}</div>
+    </section>
+  </div>
+  <span flex></span>
+</md-content>
