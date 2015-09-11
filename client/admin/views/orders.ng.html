@@ -45,7 +45,10 @@
         {{vm.user(order).profile.hub.location}}
       </td>
       <td>
-        {{vm.user(order).profile.name}}
+        <md-button ui-sref="admin.user({userId: order.user})"
+        class="md-primary md-hue-1">
+          {{vm.user(order).profile.name}}
+        </md-button>
       </td>
       <td>
         {{order.productDetails.name}} x{{order.qty}}
