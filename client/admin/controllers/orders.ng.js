@@ -8,7 +8,7 @@ angular.module("food-collective").controller("OrdersAdminCtrl", function($scope,
   self.hubs = $scope.$meteorCollection(Hubs).subscribe('hubs')
   self.hubFilter = '';
 
-  self.search = search;
+  //self.search = search;
   self.filterByHub = filterByHub;
   self.filterByPresent = filterByPresent;
 
@@ -16,14 +16,14 @@ angular.module("food-collective").controller("OrdersAdminCtrl", function($scope,
 
   self.goTo = goTo;
 
-  function search (order) {
-    if (!self.query) {
-      return true;
-    }
-    if ( order.status.toLowerCase().indexOf(self.query) !=-1 || order.productDetails.name.toLowerCase().indexOf(self.query) !=-1 ) {
-      return true;
-    } return false;
-  }
+  // function search (order) {
+  //   if (!self.query) {
+  //     return true;
+  //   }
+  //   if ( order.status.toLowerCase().indexOf(self.query) !=-1 || order.productDetails.name.toLowerCase().indexOf(self.query) !=-1 ) {
+  //     return true;
+  //   } return false;
+  // }
 
 // this filter may hurt performance significantly so may be better to have each
 // hub have their own page and subscription using server-side helpers.

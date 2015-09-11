@@ -14,10 +14,10 @@
   </figure>
 </section>
 
-<md-input-container class="md-icon-float">
+<!-- <md-input-container class="md-icon-float">
   <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
   <input ng-model="vm.query" type="search">
-</md-input-container>
+</md-input-container> -->
 
 <table class="material-table">
   <thead>
@@ -40,7 +40,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="order in vm.orders | filter:vm.search | filter:vm.filterByPresent | filter:vm.filterByHub |  orderBy:predicate:reverse as filteredOrders track by order._id" ng-click="vm.goTo(order._id)">
+    <tr ng-repeat="order in vm.orders | filter:vm.filterByPresent | filter:vm.filterByHub |  orderBy:predicate:reverse as filteredOrders track by order._id" ng-click="vm.goTo(order._id)">
       <td>
         {{vm.user(order).profile.hub.location}}
       </td>
