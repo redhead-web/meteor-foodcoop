@@ -35,7 +35,7 @@ subscriptions = new SimpleSchema
   subscriptionId:
     type:String
     optional:true
-  localTransactionId:
+  invoiceId:
     type: String
     optional: true
 

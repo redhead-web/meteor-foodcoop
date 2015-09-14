@@ -53,7 +53,7 @@ resetDatabase = function () {
 loadDefaultFixtures = function () {
   console.log('Loading default fixtures');
   // TODO: Insert your data into the database here
-  var i, id, len, user, users;
+  var i, id, user, users;
 
   users = [
     {
@@ -87,11 +87,34 @@ loadDefaultFixtures = function () {
       Roles.addUsersToRoles(id, user.roles);
     }
   }
+
+  var j, len, product, products;
+
+  products = [
+    {
+      name: 'Small Fruit & Veggie Box',
+      description: 'Get a great deal on all the best priced vegetables',
+      published: true,
+      price: 10.0
+    }, {
+      name: 'Big Fruit & Veggie Box',
+      description: 'Get a great deal on all the best priced vegetables',
+      published: true,
+      price: 20.0
+    }
+  ];
+
+  for (j = 0, len = products.length; j < len; j++) {
+    product = products[j];
+    Products.insert(product);
+  }
+
+
   console.log('Finished loading default fixtures');
 };
 
 
 beforeAll(function () {
   resetDatabase();
-  //loadDefaultFixtures();
+  loadDefaultFixtures();
 });

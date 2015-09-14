@@ -3,5 +3,6 @@
     "MERCHANT_ID" : "c54nm7mbjfwnxf3x",
     "PUBLIC_KEY" : "tqn8c86wyzq4wtk3",
     "PRIVATE_KEY" : "42009c617f558b001711e35a7df3a0c7"
-  }
+  },
+  "MAIL_URL": "smtp://postmaster%40mg.strategicdevelopment.nz:c6317514103d5b3d9e43e60aedc4c607@smtp.mailgun.org:587"
 }

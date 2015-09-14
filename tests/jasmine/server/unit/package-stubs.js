@@ -6327,26 +6327,105 @@ var packageMetadata = {
             "registerHelper": {
               "ref": 49
             },
+            "body": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "body"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "contentViews": {
+                  "type": "array"
+                },
+                "view": {
+                  "type": "null",
+                  "value": null
+                },
+                "addContent": {
+                  "type": "function"
+                },
+                "renderToDocument": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "type": "function",
+                  "refID": 64
+                },
+                "onRendered": {
+                  "type": "function",
+                  "refID": 66
+                },
+                "onDestroyed": {
+                  "type": "function",
+                  "refID": 68
+                },
+                "constructView": {
+                  "type": "function",
+                  "refID": 70
+                },
+                "helpers": {
+                  "type": "function",
+                  "refID": 72
+                },
+                "events": {
+                  "type": "function",
+                  "refID": 74
+                }
+              }
+            },
+            "invoiceEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "prototype": {
               "type": "object",
               "members": {
                 "onCreated": {
-                  "type": "function"
+                  "ref": 64
                 },
                 "onRendered": {
-                  "type": "function"
+                  "ref": 66
                 },
                 "onDestroyed": {
-                  "type": "function"
+                  "ref": 68
                 },
                 "constructView": {
-                  "type": "function"
+                  "ref": 70
                 },
                 "helpers": {
-                  "type": "function"
+                  "ref": 72
                 },
                 "events": {
-                  "type": "function"
+                  "ref": 74
                 }
               }
             }
@@ -6510,26 +6589,105 @@ var packageMetadata = {
             "registerHelper": {
               "ref": 49
             },
+            "body": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "body"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "contentViews": {
+                  "type": "array"
+                },
+                "view": {
+                  "type": "null",
+                  "value": null
+                },
+                "addContent": {
+                  "type": "function"
+                },
+                "renderToDocument": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "type": "function",
+                  "refID": 64
+                },
+                "onRendered": {
+                  "type": "function",
+                  "refID": 66
+                },
+                "onDestroyed": {
+                  "type": "function",
+                  "refID": 68
+                },
+                "constructView": {
+                  "type": "function",
+                  "refID": 70
+                },
+                "helpers": {
+                  "type": "function",
+                  "refID": 72
+                },
+                "events": {
+                  "type": "function",
+                  "refID": 74
+                }
+              }
+            },
+            "invoiceEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "prototype": {
               "type": "object",
               "members": {
                 "onCreated": {
-                  "type": "function"
+                  "ref": 64
                 },
                 "onRendered": {
-                  "type": "function"
+                  "ref": 66
                 },
                 "onDestroyed": {
-                  "type": "function"
+                  "ref": 68
                 },
                 "constructView": {
-                  "type": "function"
+                  "ref": 70
                 },
                 "helpers": {
-                  "type": "function"
+                  "ref": 72
                 },
                 "events": {
-                  "type": "function"
+                  "ref": 74
                 }
               }
             }
@@ -6770,26 +6928,105 @@ var packageMetadata = {
             "registerHelper": {
               "ref": 49
             },
+            "body": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "body"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "contentViews": {
+                  "type": "array"
+                },
+                "view": {
+                  "type": "null",
+                  "value": null
+                },
+                "addContent": {
+                  "type": "function"
+                },
+                "renderToDocument": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "type": "function",
+                  "refID": 64
+                },
+                "onRendered": {
+                  "type": "function",
+                  "refID": 66
+                },
+                "onDestroyed": {
+                  "type": "function",
+                  "refID": 68
+                },
+                "constructView": {
+                  "type": "function",
+                  "refID": 70
+                },
+                "helpers": {
+                  "type": "function",
+                  "refID": 72
+                },
+                "events": {
+                  "type": "function",
+                  "refID": 74
+                }
+              }
+            },
+            "invoiceEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "prototype": {
               "type": "object",
               "members": {
                 "onCreated": {
-                  "type": "function"
+                  "ref": 64
                 },
                 "onRendered": {
-                  "type": "function"
+                  "ref": 66
                 },
                 "onDestroyed": {
-                  "type": "function"
+                  "ref": 68
                 },
                 "constructView": {
-                  "type": "function"
+                  "ref": 70
                 },
                 "helpers": {
-                  "type": "function"
+                  "ref": 72
                 },
                 "events": {
-                  "type": "function"
+                  "ref": 74
                 }
               }
             }
@@ -6953,26 +7190,105 @@ var packageMetadata = {
             "registerHelper": {
               "ref": 49
             },
+            "body": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "body"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "contentViews": {
+                  "type": "array"
+                },
+                "view": {
+                  "type": "null",
+                  "value": null
+                },
+                "addContent": {
+                  "type": "function"
+                },
+                "renderToDocument": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "type": "function",
+                  "refID": 64
+                },
+                "onRendered": {
+                  "type": "function",
+                  "refID": 66
+                },
+                "onDestroyed": {
+                  "type": "function",
+                  "refID": 68
+                },
+                "constructView": {
+                  "type": "function",
+                  "refID": 70
+                },
+                "helpers": {
+                  "type": "function",
+                  "refID": 72
+                },
+                "events": {
+                  "type": "function",
+                  "refID": 74
+                }
+              }
+            },
+            "invoiceEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "prototype": {
               "type": "object",
               "members": {
                 "onCreated": {
-                  "type": "function"
+                  "ref": 64
                 },
                 "onRendered": {
-                  "type": "function"
+                  "ref": 66
                 },
                 "onDestroyed": {
-                  "type": "function"
+                  "ref": 68
                 },
                 "constructView": {
-                  "type": "function"
+                  "ref": 70
                 },
                 "helpers": {
-                  "type": "function"
+                  "ref": 72
                 },
                 "events": {
-                  "type": "function"
+                  "ref": 74
                 }
               }
             }
@@ -7096,7 +7412,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "6073cc9fe0e34814af873194814dd70e243cdc87"
+                  "value": "a11def7b569f2e382079e3a4a0f128c889ad9474"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7220,7 +7536,7 @@ var packageMetadata = {
             },
             "connections": {
               "type": "constant",
-              "value": 0
+              "value": 1
             },
             "timeout": {
               "type": "constant",
@@ -7872,7 +8188,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "395d16e5092c3265088d1d8a2975d38713a26a84"
+          "value": "69dbf06f88f52e8b76c5342b4231296c3b1d3351"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -9945,7 +10261,7 @@ var packageMetadata = {
             },
             "hostname": {
               "type": "constant",
-              "value": "mac-air"
+              "value": "mac-air.local"
             },
             "proxy": {
               "type": "null",
@@ -10084,7 +10400,67 @@ var packageMetadata = {
               "type": "object",
               "members": {
                 "methodMetricsByMinute": {
-                  "type": "object"
+                  "type": "object",
+                  "members": {
+                    "1442188440000": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445436
+                        },
+                        "methods": {
+                          "type": "object",
+                          "members": {
+                            "login": {
+                              "type": "object",
+                              "members": {
+                                "count": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 55
+                                },
+                                "http": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "email": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "async": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 16
+                                },
+                                "total": {
+                                  "type": "constant",
+                                  "value": 72
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "endTime": {
+                          "type": "undefined"
+                        }
+                      }
+                    }
+                  }
                 },
                 "errorMap": {
                   "type": "object"
@@ -10111,7 +10487,62 @@ var packageMetadata = {
                       "type": "object"
                     },
                     "currentMaxTrace": {
-                      "type": "object"
+                      "type": "object",
+                      "members": {
+                        "method::login": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "19"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "method"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "login"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445436
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 72
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 55
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 16
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                     },
                     "traceArchive": {
                       "type": "array"
@@ -10124,23 +10555,23 @@ var packageMetadata = {
                     },
                     "addTrace": {
                       "type": "function",
-                      "refID": 56
+                      "refID": 62
                     },
                     "collectTraces": {
                       "type": "function",
-                      "refID": 58
+                      "refID": 64
                     },
                     "start": {
                       "type": "function",
-                      "refID": 60
+                      "refID": 66
                     },
                     "stop": {
                       "type": "function",
-                      "refID": 62
+                      "refID": 68
                     },
                     "processTraces": {
                       "type": "function",
-                      "refID": 64
+                      "refID": 70
                     }
                   }
                 },
@@ -10156,10 +10587,816 @@ var packageMetadata = {
               "type": "object",
               "members": {
                 "metricsByMinute": {
-                  "type": "object"
+                  "type": "object",
+                  "members": {
+                    "1442188440000": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445444
+                        },
+                        "pubs": {
+                          "type": "object",
+                          "members": {
+                            "meteor_autoupdate_clientVersions": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 74
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityTestFiles": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 128
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityFixtureFiles": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 140
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityTestReports": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 151
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityAggregateReports": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 177
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityLogs": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 208
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityMirrors": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 226
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "VelocityOptions": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 233
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "meteor.loginServiceConfiguration": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 237
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "products": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 242
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "null(autopublish)": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 46
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "login": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 3
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 "subscriptions": {
-                  "type": "object"
+                  "type": "object",
+                  "members": {
+                    "8WAdBZMuD94ZhpF8F": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445444
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "meteor_autoupdate_clientVersions"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "8WAdBZMuD94ZhpF8F"
+                        }
+                      }
+                    },
+                    "okSqnLs23HLFag7jx": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445445
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityTestFiles"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "okSqnLs23HLFag7jx"
+                        }
+                      }
+                    },
+                    "8BwcQLRPntn8sjmfH": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445446
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityFixtureFiles"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "8BwcQLRPntn8sjmfH"
+                        }
+                      }
+                    },
+                    "56KS9hyLzPzDNiWAE": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445446
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityTestReports"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "56KS9hyLzPzDNiWAE"
+                        }
+                      }
+                    },
+                    "yeHQJhjTcWYP6WHuy": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445447
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityAggregateReports"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "yeHQJhjTcWYP6WHuy"
+                        }
+                      }
+                    },
+                    "48kwcTbWYhZnBSTHe": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445447
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityLogs"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "48kwcTbWYhZnBSTHe"
+                        }
+                      }
+                    },
+                    "zeEEH2abiZuzYMSHe": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445447
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityMirrors"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "zeEEH2abiZuzYMSHe"
+                        }
+                      }
+                    },
+                    "FRAnFXLHEbNuoyBBN": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445447
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "VelocityOptions"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "FRAnFXLHEbNuoyBBN"
+                        }
+                      }
+                    },
+                    "sxyfwy36ftopykqgH": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445449
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "meteor.loginServiceConfiguration"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "sxyfwy36ftopykqgH"
+                        }
+                      }
+                    },
+                    "ekHanZBYzKJheZBjy": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442188445453
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "products"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "ekHanZBYzKJheZBjy"
+                        }
+                      }
+                    }
+                  }
                 },
                 "tracerStore": {
                   "type": "object",
@@ -10180,7 +11417,539 @@ var packageMetadata = {
                       "type": "object"
                     },
                     "currentMaxTrace": {
-                      "type": "object"
+                      "type": "object",
+                      "members": {
+                        "sub::meteor_autoupdate_clientVersions": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "8WAdBZMuD94ZhpF8F"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "meteor_autoupdate_clientVersions"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445444
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 73
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 62
+                                },
+                                "async": {
+                                  "type": "constant",
+                                  "value": 9
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityTestFiles": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "okSqnLs23HLFag7jx"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityTestFiles"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445445
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 128
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 74
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 52
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityFixtureFiles": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "8BwcQLRPntn8sjmfH"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityFixtureFiles"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445446
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 140
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 127
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 13
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityTestReports": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "56KS9hyLzPzDNiWAE"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityTestReports"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445446
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 151
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 141
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 10
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityAggregateReports": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "yeHQJhjTcWYP6WHuy"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityAggregateReports"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445447
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 177
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 151
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 26
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityLogs": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "48kwcTbWYhZnBSTHe"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityLogs"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445447
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 208
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 177
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 30
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityMirrors": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "zeEEH2abiZuzYMSHe"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityMirrors"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445447
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 226
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 209
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 17
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::VelocityOptions": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "FRAnFXLHEbNuoyBBN"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "VelocityOptions"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445447
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 233
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 227
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 6
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::meteor.loginServiceConfiguration": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "sxyfwy36ftopykqgH"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "meteor.loginServiceConfiguration"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445449
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 237
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 232
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 4
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::products": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "3Q5oxSWQfkC3BLK9f"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "ekHanZBYzKJheZBjy"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "products"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442188445453
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 242
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 234
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 6
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 2
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                     },
                     "traceArchive": {
                       "type": "array"
@@ -10192,19 +11961,19 @@ var packageMetadata = {
                       "type": "object"
                     },
                     "addTrace": {
-                      "ref": 56
-                    },
-                    "collectTraces": {
-                      "ref": 58
-                    },
-                    "start": {
-                      "ref": 60
-                    },
-                    "stop": {
                       "ref": 62
                     },
-                    "processTraces": {
+                    "collectTraces": {
                       "ref": 64
+                    },
+                    "start": {
+                      "ref": 66
+                    },
+                    "stop": {
+                      "ref": 68
+                    },
+                    "processTraces": {
+                      "ref": 70
                     }
                   }
                 },
@@ -10227,7 +11996,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1441940244647
+                  "value": 1442188443917
                 },
                 "newSessions": {
                   "type": "constant",
@@ -10264,10 +12033,10 @@ var packageMetadata = {
                     },
                     "addListener": {
                       "type": "function",
-                      "refID": 101
+                      "refID": 171
                     },
                     "on": {
-                      "ref": 101
+                      "ref": 171
                     },
                     "once": {
                       "type": "function"
@@ -10302,7 +12071,7 @@ var packageMetadata = {
             },
             "error": {
               "type": "object",
-              "refID": 121,
+              "refID": 191,
               "members": {
                 "appId": {
                   "type": "constant",
@@ -10313,7 +12082,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1441940245091
+                  "value": 1442188445068
                 },
                 "maxErrors": {
                   "type": "constant",
@@ -10383,7 +12152,7 @@ var packageMetadata = {
           }
         },
         "errors": {
-          "ref": 121
+          "ref": 191
         },
         "connect": {
           "type": "function"
@@ -12142,6 +13911,1357 @@ var packageMetadata = {
   "jonatan:angular-google-places-autocomplete": {},
   "angularutils:pagination": {},
   "angular": {},
+  "sacha:juice": {
+    "juice": {
+      "type": "function",
+      "members": {
+        "version": {
+          "type": "constant",
+          "value": "1.0.0"
+        },
+        "Selector": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "parsed": {
+                  "type": "function"
+                },
+                "specificity": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "Property": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "compare": {
+                  "type": "function"
+                },
+                "toString": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "utils": {
+          "type": "object",
+          "members": {
+            "extract": {
+              "type": "function"
+            },
+            "parseCSS": {
+              "type": "function"
+            },
+            "getMediaQueryText": {
+              "type": "function"
+            },
+            "cheerio": {
+              "type": "function"
+            },
+            "inlineExternal": {
+              "type": "function"
+            },
+            "normalizeLineEndings": {
+              "type": "function"
+            },
+            "toArray": {
+              "type": "function"
+            },
+            "compare": {
+              "type": "function"
+            },
+            "extend": {
+              "type": "function"
+            }
+          }
+        },
+        "ignoredPseudos": {
+          "type": "array"
+        },
+        "widthElements": {
+          "type": "array"
+        },
+        "juiceDocument": {
+          "type": "function"
+        },
+        "juiceResources": {
+          "type": "function"
+        },
+        "juiceFile": {
+          "type": "function"
+        },
+        "inlineDocument": {
+          "type": "function"
+        },
+        "inlineContent": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "chrisbutler:node-sass": {
+    "sass": {
+      "type": "object",
+      "members": {
+        "render": {
+          "type": "function"
+        },
+        "renderSync": {
+          "type": "function"
+        },
+        "info": {
+          "type": "constant",
+          "value": "node-sass\t3.2.0\t(Wrapper)\t[JavaScript]\nlibsass  \t3.2.5\t(Sass Compiler)\t[C/C++]"
+        },
+        "types": {
+          "type": "object",
+          "members": {
+            "Number": {
+              "type": "function",
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "getValue": {
+                      "type": "function"
+                    },
+                    "getUnit": {
+                      "type": "function"
+                    },
+                    "setValue": {
+                      "type": "function"
+                    },
+                    "setUnit": {
+                      "type": "function"
+                    }
+                  }
+                }
+              }
+            },
+            "String": {
+              "type": "function",
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "getValue": {
+                      "type": "function"
+                    },
+                    "setValue": {
+                      "type": "function"
+                    }
+                  }
+                }
+              }
+            },
+            "Color": {
+              "type": "function",
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "getR": {
+                      "type": "function"
+                    },
+                    "getG": {
+                      "type": "function"
+                    },
+                    "getB": {
+                      "type": "function"
+                    },
+                    "getA": {
+                      "type": "function"
+                    },
+                    "setR": {
+                      "type": "function"
+                    },
+                    "setG": {
+                      "type": "function"
+                    },
+                    "setB": {
+                      "type": "function"
+                    },
+                    "setA": {
+                      "type": "function"
+                    }
+                  }
+                }
+              }
+            },
+            "Boolean": {
+              "type": "function",
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "getValue": {
+                      "type": "function"
+                    }
+                  }
+                }
+              }
+            },
+            "List": {
+              "type": "function",
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "getLength": {
+                      "type": "function"
+                    },
+                    "getSeparator": {
+                      "type": "function"
+                    },
+                    "setSeparator": {
+                      "type": "function"
+                    },
+                    "getValue": {
+                      "type": "function"
+                    },
+                    "setValue": {
+                      "type": "function"
+                    }
+                  }
+                }
+              }
+            },
+            "Map": {
+              "type": "function",
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "getLength": {
+                      "type": "function"
+                    },
+                    "getKey": {
+                      "type": "function"
+                    },
+                    "setKey": {
+                      "type": "function"
+                    },
+                    "getValue": {
+                      "type": "function"
+                    },
+                    "setValue": {
+                      "type": "function"
+                    }
+                  }
+                }
+              }
+            },
+            "Null": {
+              "type": "function"
+            },
+            "Error": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "iron:core": {
+    "Iron": {
+      "type": "object",
+      "members": {
+        "utils": {
+          "type": "object",
+          "members": {
+            "assert": {
+              "type": "function"
+            },
+            "warn": {
+              "type": "function"
+            },
+            "defaultValue": {
+              "type": "function"
+            },
+            "inherits": {
+              "type": "function"
+            },
+            "extend": {
+              "type": "function"
+            },
+            "namespace": {
+              "type": "function"
+            },
+            "resolve": {
+              "type": "function"
+            },
+            "capitalize": {
+              "type": "function"
+            },
+            "classCase": {
+              "type": "function"
+            },
+            "camelCase": {
+              "type": "function"
+            },
+            "notifyDeprecated": {
+              "type": "function"
+            },
+            "withDeprecatedNotice": {
+              "type": "function"
+            },
+            "debug": {
+              "type": "function"
+            },
+            "get": {
+              "type": "function"
+            }
+          }
+        },
+        "DynamicTemplate": {
+          "type": "function",
+          "members": {
+            "getParentDataContext": {
+              "type": "function",
+              "refID": 31
+            },
+            "getDataContext": {
+              "type": "function",
+              "refID": 33
+            },
+            "getInclusionArguments": {
+              "type": "function",
+              "refID": 35
+            },
+            "args": {
+              "type": "function",
+              "refID": 37
+            },
+            "extend": {
+              "type": "function",
+              "refID": 39
+            },
+            "findFirstLookupHost": {
+              "type": "function",
+              "refID": 41
+            },
+            "findLookupHostWithProperty": {
+              "type": "function",
+              "refID": 43
+            },
+            "findLookupHostWithHelper": {
+              "type": "function",
+              "refID": 45
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "template": {
+                  "type": "function",
+                  "refID": 48
+                },
+                "defaultTemplate": {
+                  "type": "function",
+                  "refID": 50
+                },
+                "clear": {
+                  "type": "function"
+                },
+                "data": {
+                  "type": "function",
+                  "refID": 54
+                },
+                "create": {
+                  "type": "function",
+                  "refID": 56
+                },
+                "renderView": {
+                  "type": "function",
+                  "refID": 58
+                },
+                "destroy": {
+                  "type": "function",
+                  "refID": 60
+                },
+                "onViewCreated": {
+                  "type": "function",
+                  "refID": 62
+                },
+                "onViewReady": {
+                  "type": "function",
+                  "refID": 64
+                },
+                "onViewDestroyed": {
+                  "type": "function",
+                  "refID": 66
+                },
+                "events": {
+                  "type": "function",
+                  "refID": 68
+                },
+                "insert": {
+                  "type": "function",
+                  "refID": 70
+                }
+              }
+            }
+          }
+        },
+        "Layout": {
+          "type": "function",
+          "refID": 72,
+          "members": {
+            "DEFAULT_REGION": {
+              "type": "constant",
+              "value": "main"
+            },
+            "getParentDataContext": {
+              "ref": 31
+            },
+            "getDataContext": {
+              "ref": 33
+            },
+            "getInclusionArguments": {
+              "ref": 35
+            },
+            "args": {
+              "ref": 37
+            },
+            "extend": {
+              "ref": 39
+            },
+            "findFirstLookupHost": {
+              "ref": 41
+            },
+            "findLookupHostWithProperty": {
+              "ref": 43
+            },
+            "findLookupHostWithHelper": {
+              "ref": 45
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "constructor": {
+                  "ref": 72
+                },
+                "region": {
+                  "type": "function"
+                },
+                "destroyRegions": {
+                  "type": "function"
+                },
+                "render": {
+                  "type": "function"
+                },
+                "has": {
+                  "type": "function"
+                },
+                "regionKeys": {
+                  "type": "function"
+                },
+                "clear": {
+                  "type": "function"
+                },
+                "clearAll": {
+                  "type": "function"
+                },
+                "beginRendering": {
+                  "type": "function"
+                },
+                "onRegionCreated": {
+                  "type": "function"
+                },
+                "onRegionRendered": {
+                  "type": "function"
+                },
+                "onRegionDestroyed": {
+                  "type": "function"
+                },
+                "template": {
+                  "ref": 48
+                },
+                "defaultTemplate": {
+                  "ref": 50
+                },
+                "data": {
+                  "ref": 54
+                },
+                "create": {
+                  "ref": 56
+                },
+                "renderView": {
+                  "ref": 58
+                },
+                "destroy": {
+                  "ref": 60
+                },
+                "onViewCreated": {
+                  "ref": 62
+                },
+                "onViewReady": {
+                  "ref": 64
+                },
+                "onViewDestroyed": {
+                  "ref": 66
+                },
+                "events": {
+                  "ref": 68
+                },
+                "insert": {
+                  "ref": 70
+                }
+              }
+            }
+          }
+        },
+        "Url": {
+          "type": "function",
+          "members": {
+            "normalize": {
+              "type": "function"
+            },
+            "isSameOrigin": {
+              "type": "function"
+            },
+            "fromQueryString": {
+              "type": "function"
+            },
+            "toQueryString": {
+              "type": "function"
+            },
+            "parse": {
+              "type": "function"
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "test": {
+                  "type": "function"
+                },
+                "exec": {
+                  "type": "function"
+                },
+                "params": {
+                  "type": "function"
+                },
+                "resolve": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "MiddlewareStack": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "findByName": {
+                  "type": "function"
+                },
+                "push": {
+                  "type": "function"
+                },
+                "append": {
+                  "type": "function"
+                },
+                "insertAt": {
+                  "type": "function"
+                },
+                "insertBefore": {
+                  "type": "function"
+                },
+                "insertAfter": {
+                  "type": "function"
+                },
+                "concat": {
+                  "type": "function"
+                },
+                "dispatch": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "Controller": {
+          "type": "function",
+          "members": {
+            "extend": {
+              "type": "function",
+              "refID": 135
+            },
+            "events": {
+              "type": "function",
+              "refID": 137
+            },
+            "helpers": {
+              "type": "function",
+              "refID": 139
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "layout": {
+                  "type": "function",
+                  "refID": 142
+                },
+                "render": {
+                  "type": "function",
+                  "refID": 144
+                },
+                "beginRendering": {
+                  "type": "function",
+                  "refID": 146
+                },
+                "init": {
+                  "type": "function"
+                },
+                "wait": {
+                  "type": "function",
+                  "refID": 150
+                },
+                "ready": {
+                  "type": "function",
+                  "refID": 152
+                }
+              }
+            }
+          }
+        },
+        "RouteController": {
+          "type": "function",
+          "members": {
+            "extend": {
+              "ref": 135
+            },
+            "events": {
+              "ref": 137
+            },
+            "helpers": {
+              "ref": 139
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "constructor": {
+                  "type": "function"
+                },
+                "lookupOption": {
+                  "type": "function"
+                },
+                "configureFromUrl": {
+                  "type": "function"
+                },
+                "runHooks": {
+                  "type": "function"
+                },
+                "getParams": {
+                  "type": "function"
+                },
+                "setParams": {
+                  "type": "function"
+                },
+                "init": {
+                  "type": "function"
+                },
+                "dispatch": {
+                  "type": "function"
+                },
+                "layout": {
+                  "ref": 142
+                },
+                "render": {
+                  "ref": 144
+                },
+                "beginRendering": {
+                  "ref": 146
+                },
+                "wait": {
+                  "ref": 150
+                },
+                "ready": {
+                  "ref": 152
+                }
+              }
+            }
+          }
+        },
+        "Route": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "getName": {
+                  "type": "function"
+                },
+                "findControllerConstructor": {
+                  "type": "function"
+                },
+                "createController": {
+                  "type": "function"
+                },
+                "setControllerParams": {
+                  "type": "function"
+                },
+                "dispatch": {
+                  "type": "function"
+                },
+                "path": {
+                  "type": "function"
+                },
+                "url": {
+                  "type": "function"
+                },
+                "params": {
+                  "type": "function"
+                },
+                "get": {
+                  "type": "function"
+                },
+                "post": {
+                  "type": "function"
+                },
+                "put": {
+                  "type": "function"
+                },
+                "delete": {
+                  "type": "function"
+                },
+                "patch": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "Router": {
+          "type": "function",
+          "members": {
+            "HOOK_TYPES": {
+              "type": "array"
+            },
+            "hooks": {
+              "type": "object",
+              "members": {
+                "loading": {
+                  "type": "function"
+                },
+                "dataNotFound": {
+                  "type": "function"
+                }
+              }
+            },
+            "plugins": {
+              "type": "object",
+              "members": {
+                "loading": {
+                  "type": "function"
+                },
+                "dataNotFound": {
+                  "type": "function"
+                }
+              }
+            },
+            "bodyParser": {
+              "type": "function",
+              "members": {
+                "json": {
+                  "type": "function"
+                },
+                "raw": {
+                  "type": "function"
+                },
+                "text": {
+                  "type": "function"
+                },
+                "urlencoded": {
+                  "type": "function"
+                }
+              }
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "init": {
+                  "type": "function"
+                },
+                "configure": {
+                  "type": "function"
+                },
+                "map": {
+                  "type": "function"
+                },
+                "route": {
+                  "type": "function"
+                },
+                "findFirstRoute": {
+                  "type": "function"
+                },
+                "path": {
+                  "type": "function"
+                },
+                "url": {
+                  "type": "function"
+                },
+                "createController": {
+                  "type": "function"
+                },
+                "setTemplateNameConverter": {
+                  "type": "function"
+                },
+                "setControllerNameConverter": {
+                  "type": "function"
+                },
+                "toTemplateName": {
+                  "type": "function"
+                },
+                "toControllerName": {
+                  "type": "function"
+                },
+                "addHook": {
+                  "type": "function"
+                },
+                "lookupHook": {
+                  "type": "function"
+                },
+                "getHooks": {
+                  "type": "function"
+                },
+                "onRun": {
+                  "type": "function"
+                },
+                "onRerun": {
+                  "type": "function"
+                },
+                "onBeforeAction": {
+                  "type": "function"
+                },
+                "onAfterAction": {
+                  "type": "function"
+                },
+                "onStop": {
+                  "type": "function"
+                },
+                "waitOn": {
+                  "type": "function"
+                },
+                "subscriptions": {
+                  "type": "function"
+                },
+                "load": {
+                  "type": "function"
+                },
+                "before": {
+                  "type": "function"
+                },
+                "after": {
+                  "type": "function"
+                },
+                "unload": {
+                  "type": "function"
+                },
+                "plugin": {
+                  "type": "function"
+                },
+                "configureBodyParsers": {
+                  "type": "function"
+                },
+                "start": {
+                  "type": "function"
+                },
+                "dispatch": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "iron:dynamic-template": {},
+  "iron:layout": {},
+  "iron:url": {},
+  "iron:middleware-stack": {
+    "Handler": {
+      "type": "function",
+      "members": {
+        "prototype": {
+          "type": "object",
+          "members": {
+            "test": {
+              "type": "function"
+            },
+            "params": {
+              "type": "function"
+            },
+            "resolve": {
+              "type": "function"
+            },
+            "clone": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "iron:location": {},
+  "reactive-dict": {
+    "ReactiveDict": {
+      "type": "function",
+      "members": {
+        "prototype": {
+          "type": "object",
+          "members": {
+            "set": {
+              "type": "function"
+            },
+            "setDefault": {
+              "type": "function"
+            },
+            "get": {
+              "type": "function"
+            },
+            "equals": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "iron:controller": {},
+  "iron:router": {
+    "Router": {
+      "type": "function",
+      "members": {
+        "routes": {
+          "type": "array"
+        },
+        "options": {
+          "type": "object"
+        },
+        "init": {
+          "type": "function"
+        },
+        "configure": {
+          "type": "function"
+        },
+        "map": {
+          "type": "function"
+        },
+        "route": {
+          "type": "function"
+        },
+        "findFirstRoute": {
+          "type": "function"
+        },
+        "path": {
+          "type": "function"
+        },
+        "url": {
+          "type": "function"
+        },
+        "createController": {
+          "type": "function"
+        },
+        "setTemplateNameConverter": {
+          "type": "function"
+        },
+        "setControllerNameConverter": {
+          "type": "function"
+        },
+        "toTemplateName": {
+          "type": "function"
+        },
+        "toControllerName": {
+          "type": "function"
+        },
+        "addHook": {
+          "type": "function"
+        },
+        "lookupHook": {
+          "type": "function"
+        },
+        "getHooks": {
+          "type": "function"
+        },
+        "onRun": {
+          "type": "function"
+        },
+        "onRerun": {
+          "type": "function"
+        },
+        "onBeforeAction": {
+          "type": "function"
+        },
+        "onAfterAction": {
+          "type": "function"
+        },
+        "onStop": {
+          "type": "function"
+        },
+        "waitOn": {
+          "type": "function"
+        },
+        "subscriptions": {
+          "type": "function"
+        },
+        "load": {
+          "type": "function"
+        },
+        "before": {
+          "type": "function"
+        },
+        "after": {
+          "type": "function"
+        },
+        "unload": {
+          "type": "function"
+        },
+        "plugin": {
+          "type": "function"
+        },
+        "configureBodyParsers": {
+          "type": "function"
+        },
+        "start": {
+          "type": "function"
+        },
+        "dispatch": {
+          "type": "function"
+        }
+      }
+    },
+    "RouteController": {
+      "type": "function",
+      "members": {
+        "extend": {
+          "type": "function"
+        },
+        "events": {
+          "type": "function"
+        },
+        "helpers": {
+          "type": "function"
+        },
+        "prototype": {
+          "type": "object",
+          "members": {
+            "constructor": {
+              "type": "function"
+            },
+            "lookupOption": {
+              "type": "function"
+            },
+            "configureFromUrl": {
+              "type": "function"
+            },
+            "runHooks": {
+              "type": "function"
+            },
+            "getParams": {
+              "type": "function"
+            },
+            "setParams": {
+              "type": "function"
+            },
+            "init": {
+              "type": "function"
+            },
+            "dispatch": {
+              "type": "function"
+            },
+            "layout": {
+              "type": "function"
+            },
+            "render": {
+              "type": "function"
+            },
+            "beginRendering": {
+              "type": "function"
+            },
+            "wait": {
+              "type": "function"
+            },
+            "ready": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "meteorhacks:ssr": {
+    "Template": {
+      "type": "function",
+      "members": {
+        "instance": {
+          "type": "function"
+        },
+        "currentData": {
+          "type": "function"
+        },
+        "parentData": {
+          "type": "function"
+        },
+        "registerHelper": {
+          "type": "function"
+        },
+        "body": {
+          "type": "object",
+          "members": {
+            "viewName": {
+              "type": "constant",
+              "value": "body"
+            },
+            "renderFunction": {
+              "type": "function"
+            },
+            "contentViews": {
+              "type": "array"
+            },
+            "view": {
+              "type": "null",
+              "value": null
+            },
+            "addContent": {
+              "type": "function"
+            },
+            "renderToDocument": {
+              "type": "function"
+            },
+            "onCreated": {
+              "type": "function",
+              "refID": 17
+            },
+            "onRendered": {
+              "type": "function",
+              "refID": 19
+            },
+            "onDestroyed": {
+              "type": "function",
+              "refID": 21
+            },
+            "constructView": {
+              "type": "function",
+              "refID": 23
+            },
+            "helpers": {
+              "type": "function",
+              "refID": 25
+            },
+            "events": {
+              "type": "function",
+              "refID": 27
+            }
+          }
+        },
+        "invoiceEmail": {
+          "type": "object",
+          "members": {
+            "viewName": {
+              "type": "constant",
+              "value": "invoiceEmail"
+            },
+            "renderFunction": {
+              "type": "function"
+            },
+            "onCreated": {
+              "ref": 17
+            },
+            "onRendered": {
+              "ref": 19
+            },
+            "onDestroyed": {
+              "ref": 21
+            },
+            "constructView": {
+              "ref": 23
+            },
+            "helpers": {
+              "ref": 25
+            },
+            "events": {
+              "ref": 27
+            }
+          }
+        },
+        "prototype": {
+          "type": "object",
+          "members": {
+            "onCreated": {
+              "ref": 17
+            },
+            "onRendered": {
+              "ref": 19
+            },
+            "onDestroyed": {
+              "ref": 21
+            },
+            "constructView": {
+              "ref": 23
+            },
+            "helpers": {
+              "ref": 25
+            },
+            "events": {
+              "ref": 27
+            }
+          }
+        }
+      }
+    },
+    "SSR": {
+      "type": "object",
+      "members": {
+        "render": {
+          "type": "function"
+        },
+        "compileTemplate": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "lookback:emails": {
+    "Mailer": {
+      "type": "object",
+      "members": {
+        "settings": {
+          "type": "object",
+          "members": {
+            "routePrefix": {
+              "type": "constant",
+              "value": "emails"
+            },
+            "baseUrl": {
+              "type": "constant",
+              "value": "http://localhost:3000/"
+            },
+            "testEmail": {
+              "type": "constant",
+              "value": "Sean Stanley <sean@maplekiwi.com>"
+            },
+            "logger": {
+              "type": "object",
+              "members": {
+                "log": {
+                  "type": "function"
+                },
+                "info": {
+                  "type": "function"
+                },
+                "warn": {
+                  "type": "function"
+                },
+                "error": {
+                  "type": "function"
+                },
+                "dir": {
+                  "type": "function"
+                },
+                "time": {
+                  "type": "function"
+                },
+                "timeEnd": {
+                  "type": "function"
+                },
+                "trace": {
+                  "type": "function"
+                },
+                "assert": {
+                  "type": "function"
+                },
+                "Console": {
+                  "type": "function",
+                  "members": {
+                    "prototype": {
+                      "type": "object",
+                      "members": {
+                        "log": {
+                          "type": "function",
+                          "refID": 14
+                        },
+                        "info": {
+                          "ref": 14
+                        },
+                        "warn": {
+                          "type": "function",
+                          "refID": 16
+                        },
+                        "error": {
+                          "ref": 16
+                        },
+                        "dir": {
+                          "type": "function"
+                        },
+                        "time": {
+                          "type": "function"
+                        },
+                        "timeEnd": {
+                          "type": "function"
+                        },
+                        "trace": {
+                          "type": "function"
+                        },
+                        "assert": {
+                          "type": "function"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "language": {
+              "type": "constant",
+              "value": "html"
+            },
+            "juiceOpts": {
+              "type": "object",
+              "members": {
+                "webResources": {
+                  "type": "object"
+                }
+              }
+            },
+            "from": {
+              "type": "constant",
+              "value": "Laura <laura@freshfoodcollective.com>"
+            },
+            "replyTo": {
+              "type": "constant",
+              "value": "Laura <laura@freshfoodcollective.com>"
+            }
+          }
+        },
+        "config": {
+          "type": "function"
+        },
+        "init": {
+          "type": "function"
+        },
+        "precompile": {
+          "type": "function"
+        },
+        "render": {
+          "type": "function"
+        },
+        "send": {
+          "type": "function"
+        }
+      }
+    }
+  },
   "session": {}
 }
 var globalContext = (typeof global !== 'undefined') ? global : window

@@ -51,7 +51,6 @@ Meteor.methods
     check price, String
     plan = _.find result.plans, (plan) ->
       plan.price == price
-    console.log plan
     unless plan == undefined then return plan.id
     if plan == undefined
       throw new Meteor.Error 404, "no subscription plan found for that price"

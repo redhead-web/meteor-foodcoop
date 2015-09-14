@@ -27,5 +27,6 @@ describe "meteor method findPlanId", ->
     result = Meteor.call "findPlanId", 83.333333
     expect(result).toBe 'kgqg'
   it "should be able to not find a plan id with price $45.00", ->
-    result = Meteor.call "findPlanId", 45
-    expect(result).toBeUndefined
+    expect ->
+      Meteor.call "findPlanId", 45
+    .toThrow()

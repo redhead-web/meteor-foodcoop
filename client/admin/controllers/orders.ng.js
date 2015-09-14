@@ -1,26 +1,51 @@
-/* Globals: angular, moment */
+/* globals: angular, moment */
 angular.module("food-collective").controller("OrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
-  self = this;
-  self.orders = $scope.$meteorCollection(Subscriptions).subscribe('orders')
+  $scope.start = moment().startOf('week').format();
+  $scope.end = moment().endOf('week').format();
 
-  self.user = function (order) { return $meteor.object(Meteor.users, order.user, false); }
+  $meteor.autorun($scope, function() {
+    $meteor.subscribe('orders', {
+      sort: {'productDetails.name':1, status: -1}
+    }, $scope.getReactively('start'), $scope.getReactively('end') )
+    .then(function() {
+      // $scope.orderCount = $meteor.object(Counts, 'filteredOrderCount',false);
+    });
+  });
 
-  self.hubs = $scope.$meteorCollection(Hubs).subscribe('hubs')
-  self.hubFilter = '';
+  $scope.orders = $scope.$meteorCollection(function() {
+    //var start = $scope.getReactively('vm.start');
+    return Subscriptions.find({
+      //start_date: {$gte: start}
+    }, {
+      sort: {'productDetails.name':1, status: -1}
+    });
+  });
 
-  //self.search = search;
-  self.filterByHub = filterByHub;
-  self.filterByPresent = filterByPresent;
+  $scope.user = function (order) { return $meteor.object(Meteor.users, order.user, false); };
 
-  self.occurences = productsCount;
+  $scope.hubs = $scope.$meteorCollection(Hubs).subscribe('hubs');
+  $scope.hubFilter = '';
 
-  self.goTo = goTo;
+  $scope.lastweek = function() {
+    $scope.start = moment($scope.start).subtract(1, 'weeks').format();
+    $scope.end = moment($scope.end).subtract(1, 'weeks').format();
+  };
+  $scope.nextweek = function() {
+    $scope.start = moment($scope.start).add(1, 'weeks').format();
+    $scope.end = moment($scope.end).add(1, 'weeks').format();
+  };
+
+  $scope.filterByHub = filterByHub;
+
+  $scope.occurences = productsCount;
+
+  $scope.goTo = goTo;
 
   // function search (order) {
-  //   if (!self.query) {
+  //   if (!$scope.query) {
   //     return true;
   //   }
-  //   if ( order.status.toLowerCase().indexOf(self.query) !=-1 || order.productDetails.name.toLowerCase().indexOf(self.query) !=-1 ) {
+  //   if ( order.status.toLowerCase().indexOf($scope.query) !=-1 || order.productDetails.name.toLowerCase().indexOf($scope.query) !=-1 ) {
   //     return true;
   //   } return false;
   // }
@@ -29,17 +54,10 @@ angular.module("food-collective").controller("OrdersAdminCtrl", function($scope,
 // hub have their own page and subscription using server-side helpers.
 
   function filterByHub (order) {
-    if (!self.hubFilter) return true;
-    if (self.user(order).profile.hub.location === self.hubFilter) {
+    if (!$scope.hubFilter) return true;
+    if ($scope.user(order).profile.hub.location === $scope.hubFilter) {
       return true;
     } return false;
-  }
-
-  function filterByPresent (order) {
-    if (!self.isPresent) return true;
-    if (order.indefinate === true) return true;
-    if ( moment().isAfter(order.end_date) || moment().isBefore(order.start_date)) return false;
-    return true;
   }
 
   function productsCount (orders) {

@@ -27,7 +27,7 @@ Schema = new SimpleSchema
     optional:true
   published:
     type: Boolean
-    defaultValue: false
+    defaultValue:false
   description:
     type: String
     label: "Product Description"
@@ -35,6 +35,6 @@ Schema = new SimpleSchema
     max: 2000
   dateCreated:
     type: Date
-    defaultValue: new Date
+    defaultValue: new Date()
 
 Products.attachSchema Schema

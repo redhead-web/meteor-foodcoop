@@ -26,6 +26,7 @@ Meteor.startup ->
     hubs = [
       {
         'location': 'Whau Valley'
+        'title': 'South Kamo Hub'
         'dayOfTheWeek': 'Tuesday'
         'openHours': '2:30pm-3:30pm'
         'description': 'Pick up your box in Whau Valley now. Perfect if you live or work in Kamo or Kensington'
@@ -33,6 +34,7 @@ Meteor.startup ->
       },
       {
         'location': 'Rust Ave, The Old Library, Whangarei'
+        'title': 'Central Whangarei Hub'
         'dayOfTheWeek': 'Tuesday'
         'openHours': '4pm-6:30pm'
         'description': 'Pick up your box in Central Whangarei. Perfect if you live or work in Whangarei CBD'

@@ -15,9 +15,34 @@ Meteor.publish 'product-count', ->
   Counts.publish this, 'product-count', Products.find()
   undefined
 
-Meteor.publish 'orders', ->
+Meteor.publish 'orders', (options, start_date, end_date) ->
+  check(start_date, String)
+  check(end_date, String)
+
+
   if Roles.userIsInRole this.userId, 'admin'
-    return Subscriptions.find()
+
+    # Counts.publish this, 'filteredOrderCount', Subscriptions.find(
+    #   $or: [
+    #     {indefinate: true,
+    #     $not: start_date: $gt: new Date(end_date).toISOString()}
+    #
+    #     end_date: $gte: new Date(start_date).toISOString()
+    #   ]
+    #
+    # ), noReady: true
+
+    return Subscriptions.find
+    	$or: [
+        {
+          indefinate: true,
+          start_date: $not: $gt: new Date(end_date)
+        }
+
+        end_date: $gte: new Date(start_date)
+        start_date: $not: $gt: new Date(end_date)
+      ]
+  	 ,options
   else
     console.log "cannot publish orders to non admin"
 
