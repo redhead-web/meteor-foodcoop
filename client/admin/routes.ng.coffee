@@ -22,6 +22,12 @@ angular.module('food-collective').config ($stateProvider) ->
     controller: 'UsersAdminCtrl'
     resolve: 'admin': ($meteor) ->
       $meteor.requireValidUser isAdmin
+  ).state('admin.createUser',
+    url: '/user/new'
+    templateUrl: 'client/admin/views/create-user.ng.html'
+    controller: 'CreateUserAdminCtrl'
+    resolve: 'admin': ($meteor) ->
+      $meteor.requireValidUser isAdmin
   ).state('admin.user',
     url: '/user/:userId'
     templateUrl: 'client/admin/views/user.ng.html'
@@ -50,7 +56,7 @@ angular.module('food-collective').config ($stateProvider) ->
       'admin': ($meteor) ->
         $meteor.requireValidUser isAdmin
       'order': ($meteor, $stateParams) ->
-        $meteor.subscribe 'orders'
+        $meteor.subscribe 'order', $stateParams.orderId
   return
 
 # ---

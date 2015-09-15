@@ -18,6 +18,7 @@ Schema = new SimpleSchema
         return result[0]
   dayOfTheWeek:
     type: String
+    allowedValues: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     defaultValue: 'Tuesday'
     max: 20
   openHours:

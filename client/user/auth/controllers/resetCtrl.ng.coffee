@@ -5,8 +5,8 @@ angular.module('food-collective').controller 'ResetCtrl',
     vm.error = ''
 
     vm.reset = ->
-      $meteor.forgotPassword(vm.credentials.email).then (->
-        $state.go 'parties'
+      $meteor.forgotPassword(vm.credentials).then (->
+        $state.go 'store'
         return
       ), (err) ->
         vm.error = 'Error sending forgot password email - ' + err

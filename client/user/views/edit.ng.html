@@ -1,38 +1,44 @@
-<form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
+<md-content layout="row" layout-sm="column">
+  <span flex></span>
+  <md-whiteframe layout="column" flex="50" flex-sm="95">
 
-  <md-input-container>
-    <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
-    <md-select style="margin-left:36px" ng-model="currentUser.profile.hub"
-    placeholder="Select a hub near you to collect your order from.">
-      <md-option ng-value="{
-        _id: hub._id,
-        location: hub.location,
-        title: hub.title,
-        dayOfTheWeek: hub.dayOfTheWeek,
-        openHours: hub.openHours
-      }" ng-repeat="hub in hubs"> {{hub.location}}</md-option>
-    </md-select>
-  </md-input-container>
+    <form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
+      <p>Current Hub: {{currentUser.profile.hub.title || 'none'}}</p>
+      <md-input-container>
+        <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
+        <md-select style="margin-left:36px" ng-model="currentUser.profile.hub"
+        placeholder="Select a hub near you to collect your order from.">
+          <md-option ng-value="{
+            id: hub._id,
+            location: hub.location,
+            title: hub.title,
+            dayOfTheWeek: hub.dayOfTheWeek,
+            openHours: hub.openHours
+          }" ng-repeat="hub in hubs"> {{hub.location}}</md-option>
+        </md-select>
+      </md-input-container>
 
-  <md-input-container>
-    <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
-    <input type="text" ng-model="currentUser.profile.name"
-           placeholder="name" aria-label="name"/>
-  </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="currentUser.profile.name"
+               placeholder="name" aria-label="name"/>
+      </md-input-container>
 
-  <md-input-container>
-    <md-icon md-svg-icon="communication:ic_contact_phone_black_48px" class="md-accent"></md-icon>
-    <input type="text" ng-model="currentUser.profile.phone"
-           placeholder="phone" aria-label="phone"/>
-  </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="communication:ic_chat_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="currentUser.profile.phone"
+               placeholder="phone" aria-label="phone"/>
+      </md-input-container>
 
-  <md-input-container>
-    <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
-    <input type="text" ng-model="currentUser.profile.address"
-           g-places-autocomplete
-           placeholder="home address" aria-label="address"/>
-  </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="currentUser.profile.address"
+          placeholder="home address" aria-label="address"/>
+      </md-input-container>
 
-  <button type="submit">Save</button>
+      <md-button type="submit">Save</md-button>
 
-</form>
+    </form>
+  </md-whiteframe>
+  <span flex></span>
+</md-content>

@@ -56,6 +56,12 @@ angular.module('food-collective').config( function($stateProvider) {
     controller: 'ResetCtrl',
     controllerAs: 'rpc'
   })
+  .state('setpw', {
+    url: '/resetpw/:token',
+    templateUrl: 'client/user/auth/views/set-password.ng.html',
+    controller: 'ActivateCtrl',
+    controllerAs: 'vm'
+  })
   .state('logout', {
     url: '/logout',
     resolve: {

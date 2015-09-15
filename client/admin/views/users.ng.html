@@ -3,6 +3,7 @@
   <div flex="75">
     <md-list>
       <md-subheader class="md-no-sticky">Fresh Food Collective Users</md-subheader>
+      <md-button class="md-raised md-accent" ui-sref="admin.createUser">Create New User</md-button>
       <md-list-item>
         <md-input-container>
           <md-icon md-svg-icon="content:ic_sort_24px"></md-icon>
@@ -18,13 +19,17 @@
           <input type="text" placeholder="search" ng-model="searchstring">
         </md-input-container>
       </md-list-item>
-      <md-list-item class="md-2-line" dir-paginate="u in users | itemsPerPage: perPage" total-items="userCount.count">
-        <md-icon flex md-svg-icon="action:ic_account_circle_24px"></md-icon>
-        <md-menu flex="90">
-          <div class="md-list-item-text" ng-click="$mdOpenMenu($event)">
-            <h3>{{u.profile.name}}</h3>
-            <p>{{u.profile.hub.title || u.profile.hub.location}}</p>
-          </div>
+      <div dir-paginate="u in users | itemsPerPage: perPage" total-items="userCount.count">
+        <md-menu md-offset="25 0">
+          <md-list-item class="md-3-line" ng-click="$mdOpenMenu($event)">
+            <md-icon md-svg-icon="action:ic_account_circle_24px"></md-icon>
+
+            <div class="md-list-item-text" md-menu-origin>
+              <h3>{{u.profile.name}} <small>{{u.emails[0].address}}</small></h3>
+              <p>{{u.profile.hub.title || u.profile.hub.location}}</p>
+              <p>{{u.roles}}</p>
+            </div>
+          </md-list-item>
           <md-menu-content width="6">
             <md-menu-item>
               <md-button ng-href="tel:{{u.profile.phone}}">
@@ -68,7 +73,7 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-      </md-list-item>
+      </div>
     </md-list>
 
     <section ng-hide="userCount.count <= perPage">

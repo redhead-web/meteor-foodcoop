@@ -15,6 +15,9 @@ Meteor.publish 'product-count', ->
   Counts.publish this, 'product-count', Products.find()
   undefined
 
+Meteor.publish 'order', (id) ->
+  Subscriptions.find _id:id
+
 Meteor.publish 'orders', (options, start_date, end_date) ->
   check(start_date, String)
   check(end_date, String)
@@ -53,7 +56,7 @@ Meteor.publish "user-list", (options, searchstring) ->
   options.fields =
     profile:1,
     emails:1,
-    customerId:1,
+    roles: 1,
     createdAt: 1
 
   if Roles.userIsInRole this.userId, 'admin'
@@ -75,4 +78,4 @@ Meteor.publish "user", (userId) ->
   if Roles.userIsInRole this.userId, 'admin'
     Meteor.users.find
       _id: userId
-    , {limit:1, fields: profile:1,emails:1, customerId:1, createdAt:1}
+    , {limit:1, fields: profile:1,emails:1, createdAt:1, roles:1}

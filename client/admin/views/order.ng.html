@@ -1,41 +1,45 @@
 <header layout="row" layout-align="center center">
     <h1 class="md-headline">Transaction Details</h1>
 </header>
-<md-content md-theme="docs-dark" layout-padding layout="rows" layout-wrap>
-  <md-list flex="100">
+<md-content layout-padding layout="rows" layout-wrap layout-align="center center">
+  <span flex></span>
+  <md-list flex="50" flex-sm="80">
     <md-list-item>
       <md-switch class="md-secondary" ng-model="order.status" ng-true-value="'active'" ng-false-value="'cancelled'"></md-switch>
-      <p>Order Status: {{order.status}}</p>
+      <p><strong>Order Status</strong>: {{order.status}}</p>
     </md-list-item>
   </md-list>
-  <md-list flex="33">
+  <span flex></span>
+</md-content>
+<md-content layout-padding layout="rows" layout-wrap>
+  <md-list flex="33" flex-sm="95">
     <md-subheader class="md-no-sticky">User Details</md-subheader>
     <md-list-item class="md-2-line" ng-repeat="(key, value) in {
       name: user.profile.name, email: user.emails[0].address,
       phone: user.profile.phone, address: user.profile.address,
       hub: user.profile.hub.location + ' ' + user.profile.hub.title
     }">
-      <md-icon md-svg-icon="active:ic_account_box_24px">account_box</md-icon>
+      <md-icon md-svg-icon="action:ic_account_box_24px" aria-label="user details"></md-icon>
       <div class="md-list-item-text" ng-class="{'md-offset': $index !== 0}">
         <h3> {{ value }}</h3>
         <p> {{ key }} </p>
       </div>
     </md-list-item>
   </md-list>
-  <md-list flex="33">
+  <md-list flex="33" flex-sm="95">
     <md-subheader class="md-no-sticky">Product Details</md-subheader>
     <md-list-item class="md-2-line" ng-repeat="(key, value) in order.productDetails">
-      <md-icon md-svg-icon="action:ic_shopping_basket_24px" ng-if="$index === 0"></md-icon>
+      <md-icon md-svg-icon="action:ic_shopping_basket_24px" ng-if="$index == 0"></md-icon>
       <div class="md-list-item-text" ng-class="{'md-offset': $index !== 0}">
         <h3> {{ value }}</h3>
         <p> {{ key }} </p>
       </div>
     </md-list-item>
   </md-list>
-  <md-list flex="33">
+  <md-list flex="33" flex-sm="95">
     <md-subheader class="md-no-sticky">Transaction Details</md-subheader>
     <md-list-item class="md-2-line">
-      <md-icon md-svg-icon="action:ic_attach_money_24px">attach_money</md-icon>
+      <md-icon md-svg-icon="action:ic_attach_money_24px" aria-label="transaction details"></md-icon>
       <div class="md-list-item-text">
         <h3> {{transaction.amount}}</h3>
         <p> Service Fee Amount: {{ transaction.serviceFeeAmount || 0 }} </p>
@@ -49,7 +53,7 @@
     </md-list-item>
     <md-subheader class="md-no-sticky" ng-show="transaction.subscriptionId">Subscription Details</md-subheader>
     <md-list-item class="md-2-line" ng-show="transaction.subscriptionId" ng-repeat="(key, value) in transaction.subscription">
-      <md-icon md-svg-icon="action:ic_credit_card_24px">credit_card</md-icon>
+      <md-icon md-svg-icon="action:ic_credit_card_24px"></md-icon>
       <div class="md-list-item-text">
         <h3> {{value | date:'dd/MM/YYYY'}}</h3>
         <p> {{key}} </p>

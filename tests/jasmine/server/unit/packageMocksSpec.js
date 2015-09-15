@@ -6377,12 +6377,132 @@ var packageMetadata = {
                 }
               }
             },
+            "emailLayout": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "emailLayout"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "invoiceEmail": {
               "type": "object",
               "members": {
                 "viewName": {
                   "type": "constant",
                   "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "confirmOrderEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "confirmOrderEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "subscriptionConfirmation": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "subscriptionConfirmation"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "hubReminder": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "hubReminder"
                 },
                 "renderFunction": {
                   "type": "function"
@@ -6639,12 +6759,132 @@ var packageMetadata = {
                 }
               }
             },
+            "emailLayout": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "emailLayout"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "invoiceEmail": {
               "type": "object",
               "members": {
                 "viewName": {
                   "type": "constant",
                   "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "confirmOrderEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "confirmOrderEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "subscriptionConfirmation": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "subscriptionConfirmation"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "hubReminder": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "hubReminder"
                 },
                 "renderFunction": {
                   "type": "function"
@@ -6978,12 +7218,132 @@ var packageMetadata = {
                 }
               }
             },
+            "emailLayout": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "emailLayout"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "invoiceEmail": {
               "type": "object",
               "members": {
                 "viewName": {
                   "type": "constant",
                   "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "confirmOrderEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "confirmOrderEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "subscriptionConfirmation": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "subscriptionConfirmation"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "hubReminder": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "hubReminder"
                 },
                 "renderFunction": {
                   "type": "function"
@@ -7240,12 +7600,132 @@ var packageMetadata = {
                 }
               }
             },
+            "emailLayout": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "emailLayout"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
             "invoiceEmail": {
               "type": "object",
               "members": {
                 "viewName": {
                   "type": "constant",
                   "value": "invoiceEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "confirmOrderEmail": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "confirmOrderEmail"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "subscriptionConfirmation": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "subscriptionConfirmation"
+                },
+                "renderFunction": {
+                  "type": "function"
+                },
+                "onCreated": {
+                  "ref": 64
+                },
+                "onRendered": {
+                  "ref": 66
+                },
+                "onDestroyed": {
+                  "ref": 68
+                },
+                "constructView": {
+                  "ref": 70
+                },
+                "helpers": {
+                  "ref": 72
+                },
+                "events": {
+                  "ref": 74
+                }
+              }
+            },
+            "hubReminder": {
+              "type": "object",
+              "members": {
+                "viewName": {
+                  "type": "constant",
+                  "value": "hubReminder"
                 },
                 "renderFunction": {
                   "type": "function"
@@ -7413,7 +7893,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "a11def7b569f2e382079e3a4a0f128c889ad9474"
+                  "value": "a27d57c286a5346430d6a396d48b44abac360b5d"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -8189,11 +8669,11 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "69dbf06f88f52e8b76c5342b4231296c3b1d3351"
+          "value": "5ee15df141b465302e76de0f6179e12b29a71a9a"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "608a8c0c7e48f030ae94b7c50d7099aea9d47b65"
+          "value": "0f4ca67b3914ed9377c5b404bf65c518773779ad"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
@@ -10403,12 +10883,12 @@ var packageMetadata = {
                 "methodMetricsByMinute": {
                   "type": "object",
                   "members": {
-                    "1442188440000": {
+                    "1442282100000": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445436
+                          "value": 1442282138688
                         },
                         "methods": {
                           "type": "object",
@@ -10430,7 +10910,7 @@ var packageMetadata = {
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 55
+                                  "value": 68
                                 },
                                 "http": {
                                   "type": "constant",
@@ -10446,11 +10926,11 @@ var packageMetadata = {
                                 },
                                 "compute": {
                                   "type": "constant",
-                                  "value": 16
+                                  "value": 13
                                 },
                                 "total": {
                                   "type": "constant",
-                                  "value": 72
+                                  "value": 82
                                 }
                               }
                             }
@@ -10495,7 +10975,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -10503,7 +10983,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "19"
+                              "value": "6"
                             },
                             "events": {
                               "type": "array"
@@ -10518,14 +10998,14 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445436
+                              "value": 1442282138688
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 72
+                                  "value": 82
                                 },
                                 "wait": {
                                   "type": "constant",
@@ -10533,11 +11013,11 @@ var packageMetadata = {
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 55
+                                  "value": 68
                                 },
                                 "compute": {
                                   "type": "constant",
-                                  "value": 16
+                                  "value": 13
                                 }
                               }
                             }
@@ -10590,12 +11070,12 @@ var packageMetadata = {
                 "metricsByMinute": {
                   "type": "object",
                   "members": {
-                    "1442188440000": {
+                    "1442282100000": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445444
+                          "value": 1442282138693
                         },
                         "pubs": {
                           "type": "object",
@@ -10613,7 +11093,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 74
+                                  "value": 92
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10662,7 +11142,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 128
+                                  "value": 120
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10711,7 +11191,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 140
+                                  "value": 180
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10760,7 +11240,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 151
+                                  "value": 195
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10809,7 +11289,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 177
+                                  "value": 269
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10858,7 +11338,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 208
+                                  "value": 288
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10907,7 +11387,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 226
+                                  "value": 335
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -10956,7 +11436,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 233
+                                  "value": 381
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -11005,7 +11485,7 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 237
+                                  "value": 396
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -11054,7 +11534,56 @@ var packageMetadata = {
                                 },
                                 "resTime": {
                                   "type": "constant",
-                                  "value": 242
+                                  "value": 407
+                                },
+                                "activeSubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "activeDocs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "lifeTime": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "totalObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "cachedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "createdObservers": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "deletedObservers": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "errors": {
+                                  "type": "constant",
+                                  "value": 0
+                                }
+                              }
+                            },
+                            "hubs": {
+                              "type": "object",
+                              "members": {
+                                "subs": {
+                                  "type": "constant",
+                                  "value": 1
+                                },
+                                "unsubs": {
+                                  "type": "constant",
+                                  "value": 0
+                                },
+                                "resTime": {
+                                  "type": "constant",
+                                  "value": 415
                                 },
                                 "activeSubs": {
                                   "type": "constant",
@@ -11115,7 +11644,7 @@ var packageMetadata = {
                                 },
                                 "lifeTime": {
                                   "type": "constant",
-                                  "value": 46
+                                  "value": 26
                                 },
                                 "totalObservers": {
                                   "type": "constant",
@@ -11197,12 +11726,12 @@ var packageMetadata = {
                 "subscriptions": {
                   "type": "object",
                   "members": {
-                    "8WAdBZMuD94ZhpF8F": {
+                    "oKGqbeWYiKZG5mtqR": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445444
+                          "value": 1442282138693
                         },
                         "publication": {
                           "type": "constant",
@@ -11213,16 +11742,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "8WAdBZMuD94ZhpF8F"
+                          "value": "oKGqbeWYiKZG5mtqR"
                         }
                       }
                     },
-                    "okSqnLs23HLFag7jx": {
+                    "rWuYMx3kbt7JXqKCC": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445445
+                          "value": 1442282138695
                         },
                         "publication": {
                           "type": "constant",
@@ -11233,16 +11762,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "okSqnLs23HLFag7jx"
+                          "value": "rWuYMx3kbt7JXqKCC"
                         }
                       }
                     },
-                    "8BwcQLRPntn8sjmfH": {
+                    "ESqQEtowvt9j598tP": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445446
+                          "value": 1442282138695
                         },
                         "publication": {
                           "type": "constant",
@@ -11253,16 +11782,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "8BwcQLRPntn8sjmfH"
+                          "value": "ESqQEtowvt9j598tP"
                         }
                       }
                     },
-                    "56KS9hyLzPzDNiWAE": {
+                    "doNx94AuRZpxRknZM": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445446
+                          "value": 1442282138695
                         },
                         "publication": {
                           "type": "constant",
@@ -11273,16 +11802,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "56KS9hyLzPzDNiWAE"
+                          "value": "doNx94AuRZpxRknZM"
                         }
                       }
                     },
-                    "yeHQJhjTcWYP6WHuy": {
+                    "7ewEyQp5wh355mnL3": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445447
+                          "value": 1442282138698
                         },
                         "publication": {
                           "type": "constant",
@@ -11293,16 +11822,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "yeHQJhjTcWYP6WHuy"
+                          "value": "7ewEyQp5wh355mnL3"
                         }
                       }
                     },
-                    "48kwcTbWYhZnBSTHe": {
+                    "zh9am9phw3HFwwZPN": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445447
+                          "value": 1442282138699
                         },
                         "publication": {
                           "type": "constant",
@@ -11313,16 +11842,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "48kwcTbWYhZnBSTHe"
+                          "value": "zh9am9phw3HFwwZPN"
                         }
                       }
                     },
-                    "zeEEH2abiZuzYMSHe": {
+                    "f6LHoLsamoYyyDvKk": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445447
+                          "value": 1442282138699
                         },
                         "publication": {
                           "type": "constant",
@@ -11333,16 +11862,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "zeEEH2abiZuzYMSHe"
+                          "value": "f6LHoLsamoYyyDvKk"
                         }
                       }
                     },
-                    "FRAnFXLHEbNuoyBBN": {
+                    "hqN7SXJ4LpMMqiXuo": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445447
+                          "value": 1442282138699
                         },
                         "publication": {
                           "type": "constant",
@@ -11353,16 +11882,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "FRAnFXLHEbNuoyBBN"
+                          "value": "hqN7SXJ4LpMMqiXuo"
                         }
                       }
                     },
-                    "sxyfwy36ftopykqgH": {
+                    "akiFmnbbHothFS5Pc": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445449
+                          "value": 1442282138699
                         },
                         "publication": {
                           "type": "constant",
@@ -11373,16 +11902,16 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "sxyfwy36ftopykqgH"
+                          "value": "akiFmnbbHothFS5Pc"
                         }
                       }
                     },
-                    "ekHanZBYzKJheZBjy": {
+                    "cCZP62uRBWT8mti2m": {
                       "type": "object",
                       "members": {
                         "startTime": {
                           "type": "constant",
-                          "value": 1442188445453
+                          "value": 1442282138699
                         },
                         "publication": {
                           "type": "constant",
@@ -11393,7 +11922,27 @@ var packageMetadata = {
                         },
                         "id": {
                           "type": "constant",
-                          "value": "ekHanZBYzKJheZBjy"
+                          "value": "cCZP62uRBWT8mti2m"
+                        }
+                      }
+                    },
+                    "xyLqK9YGWX2eEgj6H": {
+                      "type": "object",
+                      "members": {
+                        "startTime": {
+                          "type": "constant",
+                          "value": 1442282138699
+                        },
+                        "publication": {
+                          "type": "constant",
+                          "value": "hubs"
+                        },
+                        "params": {
+                          "type": "array"
+                        },
+                        "id": {
+                          "type": "constant",
+                          "value": "xyLqK9YGWX2eEgj6H"
                         }
                       }
                     }
@@ -11425,7 +11974,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11433,7 +11982,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "8WAdBZMuD94ZhpF8F"
+                              "value": "oKGqbeWYiKZG5mtqR"
                             },
                             "events": {
                               "type": "array"
@@ -11448,22 +11997,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445444
+                              "value": 1442282138693
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 73
+                                  "value": 92
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 62
+                                  "value": 74
                                 },
                                 "async": {
                                   "type": "constant",
-                                  "value": 9
+                                  "value": 16
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11478,7 +12027,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11486,7 +12035,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "okSqnLs23HLFag7jx"
+                              "value": "rWuYMx3kbt7JXqKCC"
                             },
                             "events": {
                               "type": "array"
@@ -11501,26 +12050,26 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445445
+                              "value": 1442282138694
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 128
+                                  "value": 121
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 74
+                                  "value": 92
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 52
+                                  "value": 28
                                 },
                                 "compute": {
                                   "type": "constant",
-                                  "value": 2
+                                  "value": 1
                                 }
                               }
                             }
@@ -11531,7 +12080,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11539,7 +12088,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "8BwcQLRPntn8sjmfH"
+                              "value": "ESqQEtowvt9j598tP"
                             },
                             "events": {
                               "type": "array"
@@ -11554,22 +12103,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445446
+                              "value": 1442282138695
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 140
+                                  "value": 180
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 127
+                                  "value": 121
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 13
+                                  "value": 59
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11584,7 +12133,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11592,7 +12141,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "56KS9hyLzPzDNiWAE"
+                              "value": "doNx94AuRZpxRknZM"
                             },
                             "events": {
                               "type": "array"
@@ -11607,26 +12156,26 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445446
+                              "value": 1442282138695
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 151
+                                  "value": 195
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 141
+                                  "value": 181
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 10
+                                  "value": 12
                                 },
                                 "compute": {
                                   "type": "constant",
-                                  "value": 0
+                                  "value": 2
                                 }
                               }
                             }
@@ -11637,7 +12186,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11645,7 +12194,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "yeHQJhjTcWYP6WHuy"
+                              "value": "7ewEyQp5wh355mnL3"
                             },
                             "events": {
                               "type": "array"
@@ -11660,22 +12209,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445447
+                              "value": 1442282138698
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 177
+                                  "value": 269
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 151
+                                  "value": 196
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 26
+                                  "value": 73
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11690,7 +12239,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11698,7 +12247,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "48kwcTbWYhZnBSTHe"
+                              "value": "zh9am9phw3HFwwZPN"
                             },
                             "events": {
                               "type": "array"
@@ -11713,22 +12262,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445447
+                              "value": 1442282138699
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 208
+                                  "value": 288
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 177
+                                  "value": 268
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 30
+                                  "value": 19
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11743,7 +12292,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11751,7 +12300,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "zeEEH2abiZuzYMSHe"
+                              "value": "f6LHoLsamoYyyDvKk"
                             },
                             "events": {
                               "type": "array"
@@ -11766,22 +12315,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445447
+                              "value": 1442282138699
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 226
+                                  "value": 335
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 209
+                                  "value": 307
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 17
+                                  "value": 28
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11796,7 +12345,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11804,7 +12353,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "FRAnFXLHEbNuoyBBN"
+                              "value": "hqN7SXJ4LpMMqiXuo"
                             },
                             "events": {
                               "type": "array"
@@ -11819,22 +12368,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445447
+                              "value": 1442282138699
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 233
+                                  "value": 381
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 227
+                                  "value": 335
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 6
+                                  "value": 46
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11849,7 +12398,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11857,7 +12406,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "sxyfwy36ftopykqgH"
+                              "value": "akiFmnbbHothFS5Pc"
                             },
                             "events": {
                               "type": "array"
@@ -11872,22 +12421,22 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445449
+                              "value": 1442282138699
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 237
+                                  "value": 396
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 232
+                                  "value": 382
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 4
+                                  "value": 13
                                 },
                                 "compute": {
                                   "type": "constant",
@@ -11902,7 +12451,7 @@ var packageMetadata = {
                           "members": {
                             "session": {
                               "type": "constant",
-                              "value": "3Q5oxSWQfkC3BLK9f"
+                              "value": "wdXtjydEHtfMNuG3m"
                             },
                             "userId": {
                               "type": "null",
@@ -11910,7 +12459,7 @@ var packageMetadata = {
                             },
                             "id": {
                               "type": "constant",
-                              "value": "ekHanZBYzKJheZBjy"
+                              "value": "cCZP62uRBWT8mti2m"
                             },
                             "events": {
                               "type": "array"
@@ -11925,26 +12474,79 @@ var packageMetadata = {
                             },
                             "at": {
                               "type": "constant",
-                              "value": 1442188445453
+                              "value": 1442282138699
                             },
                             "metrics": {
                               "type": "object",
                               "members": {
                                 "total": {
                                   "type": "constant",
-                                  "value": 242
+                                  "value": 407
                                 },
                                 "wait": {
                                   "type": "constant",
-                                  "value": 234
+                                  "value": 397
                                 },
                                 "db": {
                                   "type": "constant",
-                                  "value": 6
+                                  "value": 10
                                 },
                                 "compute": {
                                   "type": "constant",
-                                  "value": 2
+                                  "value": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "sub::hubs": {
+                          "type": "object",
+                          "members": {
+                            "session": {
+                              "type": "constant",
+                              "value": "wdXtjydEHtfMNuG3m"
+                            },
+                            "userId": {
+                              "type": "null",
+                              "value": null
+                            },
+                            "id": {
+                              "type": "constant",
+                              "value": "xyLqK9YGWX2eEgj6H"
+                            },
+                            "events": {
+                              "type": "array"
+                            },
+                            "type": {
+                              "type": "constant",
+                              "value": "sub"
+                            },
+                            "name": {
+                              "type": "constant",
+                              "value": "hubs"
+                            },
+                            "at": {
+                              "type": "constant",
+                              "value": 1442282138699
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "members": {
+                                "total": {
+                                  "type": "constant",
+                                  "value": 415
+                                },
+                                "wait": {
+                                  "type": "constant",
+                                  "value": 408
+                                },
+                                "db": {
+                                  "type": "constant",
+                                  "value": 7
+                                },
+                                "compute": {
+                                  "type": "constant",
+                                  "value": 0
                                 }
                               }
                             }
@@ -11997,7 +12599,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1442188443917
+                  "value": 1442282137178
                 },
                 "newSessions": {
                   "type": "constant",
@@ -12034,10 +12636,10 @@ var packageMetadata = {
                     },
                     "addListener": {
                       "type": "function",
-                      "refID": 171
+                      "refID": 177
                     },
                     "on": {
-                      "ref": 171
+                      "ref": 177
                     },
                     "once": {
                       "type": "function"
@@ -12072,7 +12674,7 @@ var packageMetadata = {
             },
             "error": {
               "type": "object",
-              "refID": 191,
+              "refID": 197,
               "members": {
                 "appId": {
                   "type": "constant",
@@ -12083,7 +12685,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1442188445068
+                  "value": 1442282138306
                 },
                 "maxErrors": {
                   "type": "constant",
@@ -12153,7 +12755,7 @@ var packageMetadata = {
           }
         },
         "errors": {
-          "ref": 191
+          "ref": 197
         },
         "connect": {
           "type": "function"
@@ -12506,7 +13108,7 @@ var packageMetadata = {
           "members": {
             "from": {
               "type": "constant",
-              "value": "Meteor Accounts <no-reply@meteor.com>"
+              "value": "accounts@freshfoodcollective.com"
             },
             "siteName": {
               "type": "constant",
@@ -12520,6 +13122,9 @@ var packageMetadata = {
                 },
                 "text": {
                   "type": "function"
+                },
+                "html": {
+                  "type": "function"
                 }
               }
             },
@@ -12531,6 +13136,9 @@ var packageMetadata = {
                 },
                 "text": {
                   "type": "function"
+                },
+                "html": {
+                  "type": "function"
                 }
               }
             },
@@ -12541,6 +13149,9 @@ var packageMetadata = {
                   "type": "function"
                 },
                 "text": {
+                  "type": "function"
+                },
+                "html": {
                   "type": "function"
                 }
               }
@@ -15066,12 +15677,132 @@ var packageMetadata = {
             }
           }
         },
+        "emailLayout": {
+          "type": "object",
+          "members": {
+            "viewName": {
+              "type": "constant",
+              "value": "emailLayout"
+            },
+            "renderFunction": {
+              "type": "function"
+            },
+            "onCreated": {
+              "ref": 17
+            },
+            "onRendered": {
+              "ref": 19
+            },
+            "onDestroyed": {
+              "ref": 21
+            },
+            "constructView": {
+              "ref": 23
+            },
+            "helpers": {
+              "ref": 25
+            },
+            "events": {
+              "ref": 27
+            }
+          }
+        },
         "invoiceEmail": {
           "type": "object",
           "members": {
             "viewName": {
               "type": "constant",
               "value": "invoiceEmail"
+            },
+            "renderFunction": {
+              "type": "function"
+            },
+            "onCreated": {
+              "ref": 17
+            },
+            "onRendered": {
+              "ref": 19
+            },
+            "onDestroyed": {
+              "ref": 21
+            },
+            "constructView": {
+              "ref": 23
+            },
+            "helpers": {
+              "ref": 25
+            },
+            "events": {
+              "ref": 27
+            }
+          }
+        },
+        "confirmOrderEmail": {
+          "type": "object",
+          "members": {
+            "viewName": {
+              "type": "constant",
+              "value": "confirmOrderEmail"
+            },
+            "renderFunction": {
+              "type": "function"
+            },
+            "onCreated": {
+              "ref": 17
+            },
+            "onRendered": {
+              "ref": 19
+            },
+            "onDestroyed": {
+              "ref": 21
+            },
+            "constructView": {
+              "ref": 23
+            },
+            "helpers": {
+              "ref": 25
+            },
+            "events": {
+              "ref": 27
+            }
+          }
+        },
+        "subscriptionConfirmation": {
+          "type": "object",
+          "members": {
+            "viewName": {
+              "type": "constant",
+              "value": "subscriptionConfirmation"
+            },
+            "renderFunction": {
+              "type": "function"
+            },
+            "onCreated": {
+              "ref": 17
+            },
+            "onRendered": {
+              "ref": 19
+            },
+            "onDestroyed": {
+              "ref": 21
+            },
+            "constructView": {
+              "ref": 23
+            },
+            "helpers": {
+              "ref": 25
+            },
+            "events": {
+              "ref": 27
+            }
+          }
+        },
+        "hubReminder": {
+          "type": "object",
+          "members": {
+            "viewName": {
+              "type": "constant",
+              "value": "hubReminder"
             },
             "renderFunction": {
               "type": "function"
@@ -15258,6 +15989,1185 @@ var packageMetadata = {
           "type": "function"
         },
         "send": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "handlebars": {},
+  "cmather:handlebars-server": {
+    "Handlebars": {
+      "type": "object",
+      "members": {
+        "templates": {
+          "type": "object",
+          "members": {
+            "footer": {
+              "type": "function"
+            },
+            "call-to-action": {
+              "type": "function"
+            },
+            "basic": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    },
+    "OriginalHandlebars": {
+      "type": "object",
+      "members": {
+        "VERSION": {
+          "type": "constant",
+          "value": "1.0.0-rc.3"
+        },
+        "COMPILER_REVISION": {
+          "type": "constant",
+          "value": 2
+        },
+        "REVISION_CHANGES": {
+          "type": "object",
+          "members": {
+            "1": {
+              "type": "constant",
+              "value": "<= 1.0.rc.2"
+            },
+            "2": {
+              "type": "constant",
+              "value": ">= 1.0.0-rc.3"
+            }
+          }
+        },
+        "helpers": {
+          "type": "object",
+          "members": {
+            "helperMissing": {
+              "type": "function"
+            },
+            "blockHelperMissing": {
+              "type": "function"
+            },
+            "each": {
+              "type": "function"
+            },
+            "if": {
+              "type": "function"
+            },
+            "unless": {
+              "type": "function"
+            },
+            "with": {
+              "type": "function"
+            },
+            "log": {
+              "type": "function"
+            },
+            "footer": {
+              "type": "function"
+            },
+            "eachLine": {
+              "type": "function"
+            }
+          }
+        },
+        "partials": {
+          "type": "object"
+        },
+        "registerHelper": {
+          "type": "function"
+        },
+        "registerPartial": {
+          "type": "function"
+        },
+        "K": {
+          "type": "function"
+        },
+        "createFrame": {
+          "type": "function"
+        },
+        "logger": {
+          "type": "object",
+          "members": {
+            "DEBUG": {
+              "type": "constant",
+              "value": 0
+            },
+            "INFO": {
+              "type": "constant",
+              "value": 1
+            },
+            "WARN": {
+              "type": "constant",
+              "value": 2
+            },
+            "ERROR": {
+              "type": "constant",
+              "value": 3
+            },
+            "level": {
+              "type": "constant",
+              "value": 3
+            },
+            "methodMap": {
+              "type": "object",
+              "members": {
+                "0": {
+                  "type": "constant",
+                  "value": "debug"
+                },
+                "1": {
+                  "type": "constant",
+                  "value": "info"
+                },
+                "2": {
+                  "type": "constant",
+                  "value": "warn"
+                },
+                "3": {
+                  "type": "constant",
+                  "value": "error"
+                }
+              }
+            },
+            "log": {
+              "type": "function"
+            }
+          }
+        },
+        "log": {
+          "type": "function"
+        },
+        "Exception": {
+          "type": "function"
+        },
+        "SafeString": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "toString": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "Utils": {
+          "type": "object",
+          "members": {
+            "escapeExpression": {
+              "type": "function"
+            },
+            "isEmpty": {
+              "type": "function"
+            }
+          }
+        },
+        "Visitor": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "accept": {
+                  "type": "function",
+                  "refID": 47
+                }
+              }
+            }
+          }
+        },
+        "print": {
+          "type": "function"
+        },
+        "PrintVisitor": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "pad": {
+                  "type": "function"
+                },
+                "program": {
+                  "type": "function"
+                },
+                "block": {
+                  "type": "function"
+                },
+                "mustache": {
+                  "type": "function"
+                },
+                "partial": {
+                  "type": "function"
+                },
+                "hash": {
+                  "type": "function"
+                },
+                "STRING": {
+                  "type": "function"
+                },
+                "INTEGER": {
+                  "type": "function"
+                },
+                "BOOLEAN": {
+                  "type": "function"
+                },
+                "ID": {
+                  "type": "function"
+                },
+                "PARTIAL_NAME": {
+                  "type": "function"
+                },
+                "DATA": {
+                  "type": "function"
+                },
+                "content": {
+                  "type": "function"
+                },
+                "comment": {
+                  "type": "function"
+                },
+                "accept": {
+                  "ref": 47
+                }
+              }
+            }
+          }
+        },
+        "AST": {
+          "type": "object",
+          "members": {
+            "ProgramNode": {
+              "type": "function"
+            },
+            "MustacheNode": {
+              "type": "function"
+            },
+            "PartialNode": {
+              "type": "function"
+            },
+            "BlockNode": {
+              "type": "function"
+            },
+            "ContentNode": {
+              "type": "function"
+            },
+            "HashNode": {
+              "type": "function"
+            },
+            "IdNode": {
+              "type": "function"
+            },
+            "PartialNameNode": {
+              "type": "function"
+            },
+            "DataNode": {
+              "type": "function"
+            },
+            "StringNode": {
+              "type": "function"
+            },
+            "IntegerNode": {
+              "type": "function"
+            },
+            "BooleanNode": {
+              "type": "function"
+            },
+            "CommentNode": {
+              "type": "function"
+            }
+          }
+        },
+        "Parser": {
+          "type": "object",
+          "members": {
+            "yy": {
+              "type": "object"
+            },
+            "trace": {
+              "type": "function",
+              "refID": 110
+            },
+            "symbols_": {
+              "type": "object",
+              "refID": 112,
+              "members": {
+                "error": {
+                  "type": "constant",
+                  "value": 2
+                },
+                "root": {
+                  "type": "constant",
+                  "value": 3
+                },
+                "program": {
+                  "type": "constant",
+                  "value": 4
+                },
+                "EOF": {
+                  "type": "constant",
+                  "value": 5
+                },
+                "simpleInverse": {
+                  "type": "constant",
+                  "value": 6
+                },
+                "statements": {
+                  "type": "constant",
+                  "value": 7
+                },
+                "statement": {
+                  "type": "constant",
+                  "value": 8
+                },
+                "openInverse": {
+                  "type": "constant",
+                  "value": 9
+                },
+                "closeBlock": {
+                  "type": "constant",
+                  "value": 10
+                },
+                "openBlock": {
+                  "type": "constant",
+                  "value": 11
+                },
+                "mustache": {
+                  "type": "constant",
+                  "value": 12
+                },
+                "partial": {
+                  "type": "constant",
+                  "value": 13
+                },
+                "CONTENT": {
+                  "type": "constant",
+                  "value": 14
+                },
+                "COMMENT": {
+                  "type": "constant",
+                  "value": 15
+                },
+                "OPEN_BLOCK": {
+                  "type": "constant",
+                  "value": 16
+                },
+                "inMustache": {
+                  "type": "constant",
+                  "value": 17
+                },
+                "CLOSE": {
+                  "type": "constant",
+                  "value": 18
+                },
+                "OPEN_INVERSE": {
+                  "type": "constant",
+                  "value": 19
+                },
+                "OPEN_ENDBLOCK": {
+                  "type": "constant",
+                  "value": 20
+                },
+                "path": {
+                  "type": "constant",
+                  "value": 21
+                },
+                "OPEN": {
+                  "type": "constant",
+                  "value": 22
+                },
+                "OPEN_UNESCAPED": {
+                  "type": "constant",
+                  "value": 23
+                },
+                "OPEN_PARTIAL": {
+                  "type": "constant",
+                  "value": 24
+                },
+                "partialName": {
+                  "type": "constant",
+                  "value": 25
+                },
+                "params": {
+                  "type": "constant",
+                  "value": 26
+                },
+                "hash": {
+                  "type": "constant",
+                  "value": 27
+                },
+                "DATA": {
+                  "type": "constant",
+                  "value": 28
+                },
+                "param": {
+                  "type": "constant",
+                  "value": 29
+                },
+                "STRING": {
+                  "type": "constant",
+                  "value": 30
+                },
+                "INTEGER": {
+                  "type": "constant",
+                  "value": 31
+                },
+                "BOOLEAN": {
+                  "type": "constant",
+                  "value": 32
+                },
+                "hashSegments": {
+                  "type": "constant",
+                  "value": 33
+                },
+                "hashSegment": {
+                  "type": "constant",
+                  "value": 34
+                },
+                "ID": {
+                  "type": "constant",
+                  "value": 35
+                },
+                "EQUALS": {
+                  "type": "constant",
+                  "value": 36
+                },
+                "PARTIAL_NAME": {
+                  "type": "constant",
+                  "value": 37
+                },
+                "pathSegments": {
+                  "type": "constant",
+                  "value": 38
+                },
+                "SEP": {
+                  "type": "constant",
+                  "value": 39
+                },
+                "$accept": {
+                  "type": "constant",
+                  "value": 0
+                },
+                "$end": {
+                  "type": "constant",
+                  "value": 1
+                }
+              }
+            },
+            "terminals_": {
+              "type": "object",
+              "refID": 113,
+              "members": {
+                "2": {
+                  "type": "constant",
+                  "value": "error"
+                },
+                "5": {
+                  "type": "constant",
+                  "value": "EOF"
+                },
+                "14": {
+                  "type": "constant",
+                  "value": "CONTENT"
+                },
+                "15": {
+                  "type": "constant",
+                  "value": "COMMENT"
+                },
+                "16": {
+                  "type": "constant",
+                  "value": "OPEN_BLOCK"
+                },
+                "18": {
+                  "type": "constant",
+                  "value": "CLOSE"
+                },
+                "19": {
+                  "type": "constant",
+                  "value": "OPEN_INVERSE"
+                },
+                "20": {
+                  "type": "constant",
+                  "value": "OPEN_ENDBLOCK"
+                },
+                "22": {
+                  "type": "constant",
+                  "value": "OPEN"
+                },
+                "23": {
+                  "type": "constant",
+                  "value": "OPEN_UNESCAPED"
+                },
+                "24": {
+                  "type": "constant",
+                  "value": "OPEN_PARTIAL"
+                },
+                "28": {
+                  "type": "constant",
+                  "value": "DATA"
+                },
+                "30": {
+                  "type": "constant",
+                  "value": "STRING"
+                },
+                "31": {
+                  "type": "constant",
+                  "value": "INTEGER"
+                },
+                "32": {
+                  "type": "constant",
+                  "value": "BOOLEAN"
+                },
+                "35": {
+                  "type": "constant",
+                  "value": "ID"
+                },
+                "36": {
+                  "type": "constant",
+                  "value": "EQUALS"
+                },
+                "37": {
+                  "type": "constant",
+                  "value": "PARTIAL_NAME"
+                },
+                "39": {
+                  "type": "constant",
+                  "value": "SEP"
+                }
+              }
+            },
+            "productions_": {
+              "type": "array",
+              "refID": 114
+            },
+            "performAction": {
+              "type": "function",
+              "refID": 115
+            },
+            "table": {
+              "type": "array",
+              "refID": 117
+            },
+            "defaultActions": {
+              "type": "object",
+              "refID": 118,
+              "members": {
+                "17": {
+                  "type": "array"
+                },
+                "25": {
+                  "type": "array"
+                },
+                "38": {
+                  "type": "array"
+                },
+                "57": {
+                  "type": "array"
+                }
+              }
+            },
+            "parseError": {
+              "type": "function",
+              "refID": 123
+            },
+            "parse": {
+              "type": "function",
+              "refID": 125
+            },
+            "lexer": {
+              "type": "object",
+              "refID": 127,
+              "members": {
+                "EOF": {
+                  "type": "constant",
+                  "value": 1
+                },
+                "parseError": {
+                  "type": "function"
+                },
+                "setInput": {
+                  "type": "function"
+                },
+                "input": {
+                  "type": "function"
+                },
+                "unput": {
+                  "type": "function"
+                },
+                "more": {
+                  "type": "function"
+                },
+                "less": {
+                  "type": "function"
+                },
+                "pastInput": {
+                  "type": "function"
+                },
+                "upcomingInput": {
+                  "type": "function"
+                },
+                "showPosition": {
+                  "type": "function"
+                },
+                "next": {
+                  "type": "function"
+                },
+                "lex": {
+                  "type": "function"
+                },
+                "begin": {
+                  "type": "function"
+                },
+                "popState": {
+                  "type": "function"
+                },
+                "topState": {
+                  "type": "function"
+                },
+                "pushState": {
+                  "type": "function"
+                },
+                "options": {
+                  "type": "object"
+                },
+                "performAction": {
+                  "type": "function"
+                },
+                "rules": {
+                  "type": "array"
+                },
+                "conditions": {
+                  "type": "object",
+                  "members": {
+                    "mu": {
+                      "type": "object",
+                      "members": {
+                        "rules": {
+                          "type": "array"
+                        }
+                      }
+                    },
+                    "emu": {
+                      "type": "object",
+                      "members": {
+                        "rules": {
+                          "type": "array"
+                        }
+                      }
+                    },
+                    "com": {
+                      "type": "object",
+                      "members": {
+                        "rules": {
+                          "type": "array"
+                        }
+                      }
+                    },
+                    "par": {
+                      "type": "object",
+                      "members": {
+                        "rules": {
+                          "type": "array"
+                        }
+                      }
+                    },
+                    "INITIAL": {
+                      "type": "object",
+                      "members": {
+                        "rules": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Parser": {
+              "type": "function",
+              "refID": 173,
+              "members": {
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "trace": {
+                      "ref": 110
+                    },
+                    "yy": {
+                      "type": "object"
+                    },
+                    "symbols_": {
+                      "ref": 112
+                    },
+                    "terminals_": {
+                      "ref": 113
+                    },
+                    "productions_": {
+                      "ref": 114
+                    },
+                    "performAction": {
+                      "ref": 115
+                    },
+                    "table": {
+                      "ref": 117
+                    },
+                    "defaultActions": {
+                      "ref": 118
+                    },
+                    "parseError": {
+                      "ref": 123
+                    },
+                    "parse": {
+                      "ref": 125
+                    },
+                    "lexer": {
+                      "ref": 127
+                    },
+                    "Parser": {
+                      "ref": 173
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parse": {
+          "type": "function"
+        },
+        "Compiler": {
+          "type": "function",
+          "refID": 178,
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "compiler": {
+                  "ref": 178
+                },
+                "disassemble": {
+                  "type": "function"
+                },
+                "equals": {
+                  "type": "function"
+                },
+                "guid": {
+                  "type": "constant",
+                  "value": 0
+                },
+                "compile": {
+                  "type": "function"
+                },
+                "accept": {
+                  "type": "function"
+                },
+                "program": {
+                  "type": "function"
+                },
+                "compileProgram": {
+                  "type": "function"
+                },
+                "block": {
+                  "type": "function"
+                },
+                "hash": {
+                  "type": "function"
+                },
+                "partial": {
+                  "type": "function"
+                },
+                "content": {
+                  "type": "function"
+                },
+                "mustache": {
+                  "type": "function"
+                },
+                "ambiguousMustache": {
+                  "type": "function"
+                },
+                "simpleMustache": {
+                  "type": "function"
+                },
+                "helperMustache": {
+                  "type": "function"
+                },
+                "ID": {
+                  "type": "function"
+                },
+                "DATA": {
+                  "type": "function"
+                },
+                "STRING": {
+                  "type": "function"
+                },
+                "INTEGER": {
+                  "type": "function"
+                },
+                "BOOLEAN": {
+                  "type": "function"
+                },
+                "comment": {
+                  "type": "function"
+                },
+                "opcode": {
+                  "type": "function"
+                },
+                "declare": {
+                  "type": "function"
+                },
+                "addDepth": {
+                  "type": "function"
+                },
+                "classifyMustache": {
+                  "type": "function"
+                },
+                "pushParams": {
+                  "type": "function"
+                },
+                "setupMustacheParams": {
+                  "type": "function"
+                },
+                "setupFullMustacheParams": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "JavaScriptCompiler": {
+          "type": "function",
+          "refID": 234,
+          "members": {
+            "RESERVED_WORDS": {
+              "type": "object"
+            },
+            "isValidJavaScriptVariableName": {
+              "type": "function"
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "nameLookup": {
+                  "type": "function"
+                },
+                "appendToBuffer": {
+                  "type": "function"
+                },
+                "initializeBuffer": {
+                  "type": "function"
+                },
+                "namespace": {
+                  "type": "constant",
+                  "value": "Handlebars"
+                },
+                "compile": {
+                  "type": "function"
+                },
+                "nextOpcode": {
+                  "type": "function"
+                },
+                "eat": {
+                  "type": "function"
+                },
+                "preamble": {
+                  "type": "function"
+                },
+                "createFunctionContext": {
+                  "type": "function"
+                },
+                "mergeSource": {
+                  "type": "function"
+                },
+                "blockValue": {
+                  "type": "function"
+                },
+                "ambiguousBlockValue": {
+                  "type": "function"
+                },
+                "appendContent": {
+                  "type": "function"
+                },
+                "append": {
+                  "type": "function"
+                },
+                "appendEscaped": {
+                  "type": "function"
+                },
+                "getContext": {
+                  "type": "function"
+                },
+                "lookupOnContext": {
+                  "type": "function"
+                },
+                "pushContext": {
+                  "type": "function"
+                },
+                "resolvePossibleLambda": {
+                  "type": "function"
+                },
+                "lookup": {
+                  "type": "function"
+                },
+                "lookupData": {
+                  "type": "function"
+                },
+                "pushStringParam": {
+                  "type": "function"
+                },
+                "emptyHash": {
+                  "type": "function"
+                },
+                "pushHash": {
+                  "type": "function"
+                },
+                "popHash": {
+                  "type": "function"
+                },
+                "pushString": {
+                  "type": "function"
+                },
+                "push": {
+                  "type": "function"
+                },
+                "pushLiteral": {
+                  "type": "function"
+                },
+                "pushProgram": {
+                  "type": "function"
+                },
+                "invokeHelper": {
+                  "type": "function"
+                },
+                "invokeKnownHelper": {
+                  "type": "function"
+                },
+                "invokeAmbiguous": {
+                  "type": "function"
+                },
+                "invokePartial": {
+                  "type": "function"
+                },
+                "assignToHash": {
+                  "type": "function"
+                },
+                "compiler": {
+                  "ref": 234
+                },
+                "compileChildren": {
+                  "type": "function"
+                },
+                "matchExistingProgram": {
+                  "type": "function"
+                },
+                "programExpression": {
+                  "type": "function"
+                },
+                "register": {
+                  "type": "function"
+                },
+                "useRegister": {
+                  "type": "function"
+                },
+                "pushStackLiteral": {
+                  "type": "function"
+                },
+                "pushStack": {
+                  "type": "function"
+                },
+                "replaceStack": {
+                  "type": "function"
+                },
+                "nextStack": {
+                  "type": "function"
+                },
+                "incrStack": {
+                  "type": "function"
+                },
+                "topStackName": {
+                  "type": "function"
+                },
+                "flushInline": {
+                  "type": "function"
+                },
+                "isInline": {
+                  "type": "function"
+                },
+                "popStack": {
+                  "type": "function"
+                },
+                "topStack": {
+                  "type": "function"
+                },
+                "quotedString": {
+                  "type": "function"
+                },
+                "setupHelper": {
+                  "type": "function"
+                },
+                "setupParams": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "precompile": {
+          "type": "function"
+        },
+        "compile": {
+          "type": "function"
+        },
+        "VM": {
+          "type": "object",
+          "members": {
+            "template": {
+              "type": "function",
+              "refID": 346
+            },
+            "programWithDepth": {
+              "type": "function"
+            },
+            "program": {
+              "type": "function"
+            },
+            "noop": {
+              "type": "function"
+            },
+            "invokePartial": {
+              "type": "function"
+            }
+          }
+        },
+        "template": {
+          "ref": 346
+        },
+        "create": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "yogiben:pretty-email": {
+    "PrettyEmail": {
+      "type": "object",
+      "members": {
+        "options": {
+          "type": "object",
+          "members": {
+            "from": {
+              "type": "constant",
+              "value": "accounts@freshfoodcollective.com"
+            },
+            "logoUrl": {
+              "type": "constant",
+              "value": "http://localhost:3000/logo.png"
+            },
+            "companyName": {
+              "type": "constant",
+              "value": "Fresh Food Collective"
+            },
+            "companyUrl": {
+              "type": "constant",
+              "value": "http://mycompany.com"
+            },
+            "companyAddress": {
+              "type": "constant",
+              "value": "Whangarei, New Zealand"
+            },
+            "companyTelephone": {
+              "type": "constant",
+              "value": "+1234567890"
+            },
+            "companyEmail": {
+              "type": "constant",
+              "value": "sean@maplekiwi.com"
+            },
+            "siteName": {
+              "type": "constant",
+              "value": "Fresh Food Collective Ordering Website"
+            }
+          }
+        },
+        "defaults": {
+          "type": "object",
+          "members": {
+            "verifyEmail": {
+              "type": "object",
+              "members": {
+                "heading": {
+                  "type": "constant",
+                  "value": "Just one more step..."
+                },
+                "message": {
+                  "type": "constant",
+                  "value": "Click on the big button below to activate your account"
+                },
+                "buttonText": {
+                  "type": "constant",
+                  "value": "Activate account"
+                }
+              }
+            },
+            "resetPassword": {
+              "type": "object",
+              "members": {
+                "heading": {
+                  "type": "constant",
+                  "value": "Reset your password"
+                },
+                "message": {
+                  "type": "constant",
+                  "value": "Click the big button below to reset your password"
+                },
+                "buttonText": {
+                  "type": "constant",
+                  "value": "Reset password"
+                }
+              }
+            },
+            "enrollAccount": {
+              "type": "object",
+              "members": {
+                "heading": {
+                  "type": "constant",
+                  "value": "To start using our new ordering website, simply click below"
+                },
+                "buttonText": {
+                  "type": "constant",
+                  "value": "Set a Password"
+                }
+              }
+            }
+          }
+        },
+        "style": {
+          "type": "object",
+          "members": {
+            "fontFamily": {
+              "type": "constant",
+              "value": "Helvetica"
+            },
+            "fontColor": {
+              "type": "constant",
+              "value": "#606060"
+            },
+            "buttonColor": {
+              "type": "constant",
+              "value": "#FFFFFF"
+            },
+            "buttonBgColor": {
+              "type": "constant",
+              "value": "#3071a9"
+            }
+          }
+        },
+        "send": {
+          "type": "function"
+        },
+        "render": {
           "type": "function"
         }
       }

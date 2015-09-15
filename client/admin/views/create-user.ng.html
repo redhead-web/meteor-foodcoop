@@ -29,6 +29,12 @@
     </md-input-container>
 
     <md-input-container>
+      <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.email"
+             placeholder="email" aria-label="email"/>
+    </md-input-container>
+
+    <md-input-container>
       <md-icon md-svg-icon="communication:ic_chat_24px" class="md-accent" aria-label="phone number"></md-icon>
       <input type="text" ng-model="user.profile.phone"
              placeholder="phone" aria-label="phone"/>
@@ -40,7 +46,7 @@
              placeholder="home address" aria-label="address"/>
     </md-input-container>
 
-    <md-checkbox ng-model="wholesaleUser" aria-label="wholesale buyer permission">
+    <md-checkbox ng-model="wholesaleBuyer" aria-label="wholesale buyer permission">
         Is {{user.profile.name}} a Whole Sale Buyer?
     </md-checkbox>
 

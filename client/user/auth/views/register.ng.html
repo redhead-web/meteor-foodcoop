@@ -1,6 +1,6 @@
 <md-content layout="row">
   <span flex></span>
-  <md-whiteframe layout="column" flex="50">
+  <md-whiteframe layout="column" flex="50" flex-sm="95">
     <div layout="row" layout-align="space-around center">
       <div>Login with:</div>
       <md-button ng-click="facebookLogin()">Facebook</md-button>
@@ -29,7 +29,7 @@
         <md-select style="margin-left:36px" ng-model="rc.credentials.profile.hub"
         placeholder="Select a hub near you to collect your order from.">
           <md-option ng-value="{
-            _id: hub._id,
+            id: hub._id,
             location: hub.location,
             title: hub.title,
             dayOfTheWeek: hub.dayOfTheWeek,
@@ -38,7 +38,7 @@
         </md-select>
       </md-input-container>
       <md-input-container>
-        <md-icon md-svg-icon="communication:ic_contact_phone_black_48px" class="md-accent"></md-icon>
+        <md-icon md-svg-icon="communication:ic_chat_24_48px" class="md-accent"></md-icon>
         <input type="text" ng-model="rc.credentials.profile.phone"
                placeholder="phone" aria-label="phone"/>
       </md-input-container>
