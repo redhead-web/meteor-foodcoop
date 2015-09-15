@@ -5,5 +5,5 @@
   <p>Powered by Braintree</p>
   <form id="checkout" method="post" action="/checkout" autocomplete="off">
     <div id="payment-form"></div>
-    <button type="submit" class="button">Process Payment of {{total | currency}}</button>
+    <md-button type="submit" class="md-warn md-raised">Process Payment of {{total | currency}}</md-button>
   </form>

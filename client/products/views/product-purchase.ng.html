@@ -4,7 +4,7 @@
       <h2>Order your {{product.name}}</h2>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
-        <md-icon md-font-set="material-icons">close</md-icon>
+        <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
       </md-button>
     </div>
   </md-toolbar>
@@ -38,7 +38,7 @@
       </div>
     </form>
     <md-button class="md-raised md-primary" ng-click="addToCart(product, qty, duration)" ng-disabled="orderForm.$invalid">
-      <md-icon md-font-set="material-icons">add_shopping_cart</md-icon>
+      <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
         Add To Cart
       </md-button>
   </md-content>

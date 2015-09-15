@@ -1,6 +1,6 @@
 angular.module("food-collective").controller "OrderAdminCtrl", ($scope, $meteor, $stateParams) ->
 
-  $scope.order = $scope.$meteorObject Subscriptions, $stateParams.orderId, false
+  $scope.order = $scope.$meteorObject Subscriptions, $stateParams.orderId
 
   transactionId = $scope.order.getRawObject().transactionId
 

@@ -64,3 +64,12 @@ Meteor.startup ->
       }
 
       Roles.addUsersToRoles id, user.roles unless user.roles.length is 0
+
+
+
+  if Subscriptions.find().count() > 0
+    Subscriptions.update
+      status: 'active'
+      end_date: $lt: new Date()
+    , {$set: status: 'cancelled'} #expired?
+    , {multi: true}

@@ -1,65 +1,41 @@
-<h2 ng-if="currentUser.profile.hasOwnProperty('hub')"> Your Deliveries will be on: {{currentUser.profile.hub.dayOfTheWeek}} {{currentUser.profile.hub.openHours}}</h2>
+<div layout="column" layout-align="center center">
+  <h2 ng-if="currentUser.profile.hasOwnProperty('hub')"> Your Deliveries will be on: {{currentUser.profile.hub.dayOfTheWeek}} {{currentUser.profile.hub.openHours}}</h2>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <td>
-        Last Modified
-      </td>
-      <td>
-        Product
-      </td>
-      <td>
-        Duration
-      </td>
-      <td>
-        Total price
-      </td>
-      <td>
-        Status
-      </td>
-      <td>
-        Expiry Date
-      </td>
-      <td>
-        Options
-      </td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="item in subscriptions | orderBy:'status' track by item._id">
-      <td>
-        {{item.last_modified | date:'short'}}
-      </td>
-      <td>
-        <img ng-src="item.details.thumb" ng-if="item.details.thumb">
-        x{{item.qty}} {{item.productDetails.name}} for {{item.user.profile.name}}
-      </td>
-      <td>
-        {{duration(item.end_date, item.start_date)}}
-      </td>
-      <td>
-        <span ng-if="item.indefinate">
+<md-content layout="column" layout-align="start center">
+
+  <md-list>
+    <md-subheader>Active Subscriptions</md-subheader>
+    <md-list-item ng-repeat="item in subscriptions | filter:{status:'active'} track by item._id" class="md-3-line">
+      <img ng-src="item.details.thumb" ng-if="item.details.thumb" class="md-avatar">
+      <div class="md-list-item-text">
+        <h3>x{{item.qty}} {{item.productDetails.name}}</h3>
+        <h4>total duration: {{duration(item.end_date, item.start_date)}} <span ng-hide="item.indefinate">ending on {{item.end_date | date:'d MMM, y'}}</span></h4>
+        <p><span ng-if="item.indefinate">
           {{item.productDetails.price * item.qty * 50/12 | currency}}
         </span>
         <span ng-if="!item.indefinate">
           {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
-        </span>
-      </td>
-      <td>
-        {{item.status}}
-      </td>
-      <td>
-        {{item.end_date | date:'d MMM, y'}}
-      </td>
-      <td>
-        <button ng-click="cancel(item)">Cancel</button>
-        <!-- <button ng-click="pause(item)">Pause</button> -->
-        <!-- <button>Extend</button> -->
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </span></p>
+      </div>
+    </md-list-item>
+  </md-list>
 
-<ui-view>
-</ui-view>
+  <md-list>
+    <md-subheader>Expired or Cancelled Subscriptions</md-subheader>
+    <md-list-item ng-repeat="item in subscriptions | filter:{status:'cancelled'} track by item._id" class="md-3-line">
+      <img ng-src="item.details.thumb" ng-if="item.details.thumb" class="md-avatar">
+      <div class="md-list-item-text">
+        <h3>x{{item.qty}} {{item.productDetails.name}}</h3>
+        <h4>total duration: {{duration(item.end_date, item.start_date)}} <span ng-hide="item.indefinate">ending on {{item.end_date | date:'d MMM, y'}}</span></h4>
+        <p><span ng-if="item.indefinate">
+          {{item.productDetails.price * item.qty * 50/12 | currency}}
+        </span>
+        <span ng-if="!item.indefinate">
+          {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
+        </span></p>
+      </div>
+    </md-list-item>
+  </md-list>
+
+</md-content>

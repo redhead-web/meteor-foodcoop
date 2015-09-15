@@ -1,22 +1,7 @@
-<h1>Welcome {{currentUser.profile.name}}</h1>
 
-<ul class="side-nav">
-  <li><a ui-sref="profile.cart">Cart</a>
-  </li>
-  <li><a ui-sref="profile.subscriptions">Subscriptions</a>
-  </li>
-  <li><a ui-sref="profile.edit">Edit My Details</a>
-  </li>
-  <li><a ui-sref="profile.paymentMethods">Saved Payment Details</a></li>
-</ul>
+<section layout="row" layout-align="center center" layout-wrap>
+  <h1>Welcome {{currentUser.profile.name}}</h1>
+</section>
 
 <ui-view>
-  <div
-  ng-repeat="item in currentUser.profile.subscriptions | filter:upcomingSubscriptions track by item._id">
-    <div class="alert alert-info">
-      <p>Pick up your {{item.productDetails.name}} between {{currentUser.profile.hub.openHours}} from {{currentUser.profile.hub.location}} next {{currentUser.profile.hub.dayOfTheWeek}}</p>
-      <small>{{countdown()}}</small>
-    </div>
-  </div>
-
 </ui-view>

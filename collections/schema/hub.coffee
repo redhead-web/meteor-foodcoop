@@ -33,6 +33,6 @@ Schema = new SimpleSchema
   show:
     type: Boolean
     label: "Show popup window on map when page loads"
-    defaultValue: false
+    defaultValue: true
 
 Hubs.attachSchema Schema

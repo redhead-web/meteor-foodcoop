@@ -1,6 +1,40 @@
-<div ng-if="currentUser.profile.cart">
-Last Modified: {{currentUser.profile.cart.last_modified | date:long}}
-<table>
+<md-content ng-if="currentUser.profile.cart" layout="row" layout-align="center center">
+<span flex></span>
+<div flex="70" flex-md=100 flex-sm=100>
+  <h1 class="text-center"> Shopping Cart </h1>
+  <md-grid-list
+        md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
+        md-row-height-gt-md="1:1" md-row-height="4:4"
+        md-gutter="8px" md-gutter-gt-sm="4px" >
+    <md-grid-tile ng-repeat="item in currentUser.profile.cart.products track by item._id"
+                  md-rowspan="2"
+                  md-colspan="2"
+                  md-rowspan-sm="1"
+                  ng-style="{'background': 'url(\'{{item.details.img}}\') no-repeat center center', 'background-size':'cover'}"
+                  >
+      <div layout="column" layout-align="center center">
+        <h3 class="cart-grid-title">x{{item.qty}} {{item.details.name}} @ {{item.details.price | currency}}/week
+        </h3>
+        <md-button class="md-raised md-fab md-accent md-hue-3" ng-click="removeFromCart(item._id)" aria-label="delete cart item">
+          <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
+        </md-button>
+      </div>
+
+
+
+      <md-grid-tile-footer>
+        <h3>Duration: {{timeRemaining(item.end_date)}}<br>
+          Subtotal: {{item.details.price * item.qty * weeksRemaining(item.end_date) | currency}}
+        </h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+</div>
+<span flex></span>
+</md-content>
+
+
+<!-- <table>
   <thead>
     <tr>
       <td>
@@ -31,7 +65,7 @@ Last Modified: {{currentUser.profile.cart.last_modified | date:long}}
     <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
       <td>
         <button ng-click="removeFromCart(item._id)" class="small rounded secondary">X</button>
-        <img ng-src="item.details.thumb" ng-if="item.details.thumb">
+        <img ng-src="{{item.details.img}}" ng-if="item.details.img">
         {{item.details.name}}
       </td>
       <td>
@@ -53,9 +87,10 @@ Last Modified: {{currentUser.profile.cart.last_modified | date:long}}
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
 <ui-view>
-  <a class="button" ui-sref="profile.cart.checkout">Checkout</a>
+  <div layout="row" layout-align="center center">
+    <md-button class="md-raised md-warn" ui-sref="profile.cart.checkout">Checkout</md-button>
+  </div>
 </ui-view>
-</div>

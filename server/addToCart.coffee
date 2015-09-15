@@ -17,6 +17,7 @@ Meteor.methods
           details:
             name: product.name
             price: product.price
+            img: product.img
             thumb: product.thumb
             wholeSaleOnly: product.wholeSaleOnly
           #  description: product.description

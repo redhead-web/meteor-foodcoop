@@ -1,36 +1,23 @@
-<h1>Manage your Payment Methods with us</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        Payment Type
-      </th>
-      <th>
-        Number
-      </th>
-      <th colspan="2">
-        Default
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="p in paymentMethods">
-      <td>
-        <img ng-src="{{p.imageUrl}}" alt=""/>
-      </td>
-      <td>
-        {{p.maskedNumber}}
-      </td>
-      <td>
-        {{p.default}}
-      </td>
-      <td>
-        <button type="button" class="btn" ng-click="p.makeDefault(callback)">
-          Make Default
-        </button>
-        <button type="button" ng-click="p.delete(callback)"><i class="fa fa-trash"></i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+<section layout="column" layout-align="center center" layout-wrap>
+  <h1>Manage your Payment Methods with us</h1>
+  <md-content layout="row">
+    <span flex></span>
+    <p flex="60" flex-sm="90">Note: only credit cards and paypal will show up here. Click a payment method to make it the default payment method or click the trash can to delete your payment method</p>
+    <span flex></span>
+  </md-content>
+</section>
+<md-content layout="row">
+  <span flex></span>
+  <md-list flex="60" flex-sm="90">
+    <md-divider></md-divider>
+    <md-list-item ng-repeat="p in paymentMethods" ng-click="p.makeDefault(callback)">
+      <img ng-src="{{p.imageUrl}}" alt="" class="md-avatar"/>
+      <p>{{p.maskedNumber}} <span ng-show="p.default">(default)</span></p>
+      <md-icon md-svg-icon="action:ic_delete_24px" ng-click="p.delete(callback)" aria-label="delete payment method" ng-class="{'md-primary': p.default}"></md-icon>
+
+    </md-list-item>
+  </md-list>
+  <span flex></span>
+</md-content>

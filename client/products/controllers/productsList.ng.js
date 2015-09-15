@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("ProductsListCtrl", function($scope, $rootScope, $meteor, $mdDialog, $state){
+angular.module("food-collective").controller("ProductsListCtrl", function($scope, $rootScope, $meteor, $mdDialog, $mdToast, $state){
 
   $scope.products = $scope.$meteorCollection(Products);
   $scope.remove = function(product){
@@ -12,41 +12,61 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
   //$scope.addToCart = addToCart;
   $scope.showConfirm = showConfirm;
 
+  function showAlert ($event) {
+    $mdDialog.show(
+    $mdDialog.alert()
+      .clickOutsideToClose(true)
+      .title('Oops! We don\'t know who you are!')
+      .content('You must be logged in to shop. Please login and then continue shopping.')
+      .ariaLabel('Please login to shop')
+      .ok('Got it!')
+      .targetEvent($event)
+    );
+  }
 
   function showDialog ($event, product) {
-    $mdDialog.show({
-      targetEvent: $event,
-      templateUrl: 'client/products/views/product-purchase.ng.html',
-      locals: {product: product},
-      controller: DialogCtrl
-    })
+    if ($rootScope.currentUser) {
+      $mdDialog.show({
+        targetEvent: $event,
+        templateUrl: 'client/products/views/product-purchase.ng.html',
+        locals: {product: product},
+        controller: DialogCtrl
+      });
+    } else {
+      showAlert($event)
+    }
+
   }
 
   function showConfirm (ev, product) {
     var total = 0.45 + (product.price * 50/12 * 1.029)
-    $mdDialog.show({
-      targetEvent: ev,
-      templateUrl: 'client/products/views/subscription-info.ng.html',
-      locals: {product: product, total: total},
-      controller: confirmSubscribeCtrl
-    }).then(function(answer) {
-      if (answer === "YES")  {
-        $rootScope.subscription = {
-          productId: product._id,
-          productDetails: {
-            name: product.name,
-            price: product.price,
-            thumb: product.thumb,
-            description: product.description
-          },
-          qty: 1,
-          start_date: new Date(),
-          indefinate: true,
-          user: $rootScope.currentUser._id
+    if ($rootScope.currentUser) {
+      $mdDialog.show({
+        targetEvent: ev,
+        templateUrl: 'client/products/views/subscription-info.ng.html',
+        locals: {product: product, total: total},
+        controller: confirmSubscribeCtrl
+      }).then(function(answer) {
+        if (answer === "YES")  {
+          $rootScope.subscription = {
+            productId: product._id,
+            productDetails: {
+              name: product.name,
+              price: product.price,
+              thumb: product.thumb,
+              description: product.description
+            },
+            qty: 1,
+            start_date: new Date(),
+            indefinate: true,
+            user: $rootScope.currentUser._id
+          }
+          $state.go('profile.subscriptionCheckout')
         }
-        $state.go('profile.subscriptionCheckout')
-      }
-    })
+      })
+    } else {
+      showAlert(ev)
+    }
   }
 
   function DialogCtrl ($scope, $mdDialog, product) {
@@ -85,8 +105,22 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
 
     promise.then(function(success) {
       console.log('success!')
+      var toast = $mdToast.simple()
+          .content('Added to Cart! Ready to Checkout?')
+          .action('OK')
+          .highlightAction(false)
+          .position('bottom left');
+      $mdToast.show(toast).then(function(response) {
+        if ( response == 'ok' ) {
+          $state.go('profile.cart.checkout');
+        }
+      });
+
     }, function (error) {
       console.log(error);
+      $mdToast.show(
+        $mdToast.simple().content("Sorry, that didn't work!").position('bottom left').hideDelay(3000)
+      );
     })
   }
 

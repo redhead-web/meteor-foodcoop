@@ -7,7 +7,6 @@
 meteor-platform
 angularui:angular-ui-router
 sanjo:jasmine
-velocity:html-reporter
 meteorhacks:kadira
 coffeescript
 aldeed:collection2
@@ -35,3 +34,4 @@ angularutils:pagination
 angular
 lookback:emails
 yogiben:pretty-email
+velocity:html-reporter
