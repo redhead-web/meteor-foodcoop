@@ -38,6 +38,11 @@ cart = new SimpleSchema
 profile = new SimpleSchema
   name:
     type: String
+  customerNumber:
+    type: Number
+    autoValue: ->
+      if @isInsert
+        return incrementCounter Counters, 'customerNumber'
   address:
     type: String
     optional:true

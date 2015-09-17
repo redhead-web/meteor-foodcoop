@@ -1,11 +1,11 @@
+Templates = {
+}
+
 Mailer.config
   from: 'Laura <laura@freshfoodcollective.com>'
   replyTo: 'Laura <laura@freshfoodcollective.com>'
-  routePrefix: 'emails'
   testEmail: 'Sean Stanley <sean@maplekiwi.com>'
   logger: console
-
-Templates = {}
 
 Templates.invoiceEmail =
   path: 'invoice/invoice-email.html'
@@ -20,6 +20,7 @@ Templates.hubReminder =
   path: 'hub/hub-reminder.html'
 
 Meteor.startup ->
+  console.log Templates
 	Mailer.init
     templates: Templates
     layout:

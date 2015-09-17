@@ -1,4 +1,30 @@
-Create a new product here. Hit the publish button when you are ready for the product to go live.
+<md-content layout="row">
+  <span flex></span>
+  <md-whiteframe layout="column" flex="50" flex-sm="95">
+    <div ng-show="error" class="md-warn">
+      <small>{{ error }}</small>
+    </div>
+    <form layout="column">
+      <md-input-container>
+        <input ng-model="product.name" placeholder="Name">
+      </md-input-container>
+      <md-input-container>
+        <input ng-model="product.price" type="number" placeholder="Price">
+      </md-input-container>
+      <md-input-container>
+        <md-checkbox ng-model="product.wholeSaleOnly" aria-label="Checkbox 1">
+          Checkbox 1: {{ data.cb1 }}
+        </md-checkbox>
+      </md-input-container>
+      <md-button ng-click="products.save(product)">Publish</md-button>
+      <md-button ui-sref="store">Cancel</md-button>
+    </form>
+  </md-whiteframe>
+  <span flex></span>
+</md-content>
+
+
+<!-- Create a new product here. Hit the publish button when you are ready for the product to go live.
 
 <img ng-if="product.img" ng-src="{{product.img}}">
 
@@ -13,4 +39,4 @@ Create a new product here. Hit the publish button when you are ready for the pro
 
 
 <button ng-click="products.save(product)">Publish</button>
-<button ui-sref="store">Cancel</button>
+<button ui-sref="store">Cancel</button> -->

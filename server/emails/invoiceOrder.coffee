@@ -9,6 +9,11 @@ Meteor.methods
         date: moment().format('dddd, MMMM Do YYYY')
         items: user.profile.cart.products
 
+      # add latency compensation
+      if @isSimulation
+        #remove items from cart
+        console.log "running on the client!"
+
       result = Mailer.send
         to: "#{user.profile.name} <#{user.emails[0].address}>"
         subject: "Fresh Food Collective Invoice"

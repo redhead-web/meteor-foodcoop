@@ -32,10 +32,12 @@ describe 'Invoice Emails', ->
     expect(invoice.items[0].productDetails.price).toBeDefined()
     expect(invoice.items[0].productDetails.price).toBeDefined()
 
-    result = Mailer.send
-      to: "Sean Stanley <sean@maplekiwi.com>"
-      subject: "Your invoice is here"
-      template: "invoiceEmail"
-      data: invoice
+    # result = Mailer.send
+    #   to: "Sean Stanley <sean@maplekiwi.com>"
+    #   subject: "Your invoice is here"
+    #   template: "invoiceEmail"
+    #   data: invoice
 
-    expect(result).toBe true
+    result = Mailer.render('invoiceEmail', invoice)
+    console.log result
+    expect(result).toBeDefined()

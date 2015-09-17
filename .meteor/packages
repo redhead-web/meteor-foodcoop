@@ -7,7 +7,7 @@
 meteor-platform
 angularui:angular-ui-router
 sanjo:jasmine
-meteorhacks:kadira
+meteorhacks:kadira@2.23.2
 coffeescript
 aldeed:collection2
 aldeed:autoform
@@ -32,6 +32,7 @@ urigo:angular-blaze-template
 jonatan:angular-google-places-autocomplete
 angularutils:pagination
 angular
-lookback:emails
+lookback:emails@0.4.5
 yogiben:pretty-email
 velocity:html-reporter
+konecty:mongo-counter
