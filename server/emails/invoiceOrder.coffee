@@ -17,7 +17,7 @@ Meteor.methods
       result = Mailer.send
         to: "#{user.profile.name} <#{user.emails[0].address}>"
         subject: "Fresh Food Collective Invoice"
-        template: "invoiceEmail"
+        template: "wholesaleInvoiceEmail"
         data: invoice
 
       if result

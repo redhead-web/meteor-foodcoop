@@ -36,6 +36,13 @@
           placeholder="home address" aria-label="address"/>
       </md-input-container>
 
+      <md-input-container ng-if="hasRole(currentUser._id, 'wholesaleBuyer')">
+        <md-icon md-svg-icon="maps:ic_local_shipping_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="currentUser.profile.deliveryAddress"
+          g-places-autocomplete
+          placeholder="wholesale delivery address" aria-label="delivery address"/>
+      </md-input-container>
+
       <md-button type="submit">Save</md-button>
 
     </form>

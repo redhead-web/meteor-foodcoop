@@ -6,7 +6,16 @@ angular.module("food-collective").controller("UserSubscriptionCtrl", function($s
   $scope.weeksRemaining = weeksRemaining;
   $scope.duration = duration;
 
-  $scope.subscriptions = $scope.$meteorCollection(Subscriptions).subscribe('mySubscriptions')
+  $scope.$meteorSubscribe('mySubscriptions').then(function(subscriptionHanle) {
+    $scope.subscriptions = $scope.$meteorCollection(Subscriptions)
+
+    $scope.hasAp = _.find($scope.subscriptions, {ap:true});
+
+  });
+
+
+
+
 
   function cancel(item) {
     meteor.call('cancelSubscription', item._id)

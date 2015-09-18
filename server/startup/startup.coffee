@@ -20,6 +20,7 @@ Meteor.startup ->
 
     for product in products
       Products.insert product
+    console.log "product fixtures added"
 
   if Hubs.find().count() is 0
 
@@ -44,6 +45,7 @@ Meteor.startup ->
 
     for hub in hubs
       Hubs.insert hub
+    console.log "hub fixtures added"
 
   if Meteor.users.find().count() is 0
     users = [
@@ -64,6 +66,8 @@ Meteor.startup ->
       }
 
       Roles.addUsersToRoles id, user.roles unless user.roles.length is 0
+
+    console.log "user fixtures added"
 
 
 

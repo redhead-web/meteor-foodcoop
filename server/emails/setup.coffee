@@ -1,14 +1,12 @@
-Templates = {
-}
+Templates = {}
 
 Mailer.config
   from: 'Laura <laura@freshfoodcollective.com>'
   replyTo: 'Laura <laura@freshfoodcollective.com>'
-  testEmail: 'Sean Stanley <sean@maplekiwi.com>'
-  logger: console
 
-Templates.invoiceEmail =
+Templates.wholesaleInvoiceEmail =
   path: 'invoice/invoice-email.html'
+  scss: 'invoice/invoice-email.scss'
 
 Templates.confirmOrderEmail =
   path: 'order/confirmation-email.html'
@@ -20,8 +18,7 @@ Templates.hubReminder =
   path: 'hub/hub-reminder.html'
 
 Meteor.startup ->
-  console.log Templates
-	Mailer.init
+  Mailer.init
     templates: Templates
     layout:
       name:'emailLayout'
@@ -56,3 +53,10 @@ Meteor.startup ->
           t += item.qty * item.productDetails.price * duration
         , 0
         total
+
+
+  # Mailer.send
+  #   to: "nobody <nobody@nowhere.com"
+  #   subject: "Collect your Order Today"
+  #   template: "wholesaleInvoiceEmail"
+  #   data: {recipient:"Sean"}

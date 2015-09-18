@@ -1,35 +1,64 @@
-Here you will see and change the details of the product:
-<img ng-if="product.img" ng-src="{{product.img}}" flex>
-<form>
-  <div layout layout-sm="column">
-    <md-input-container flex>
-      <label>Product Name</label>
-      <input ng-model="product.name">
-    </md-input-container>
-    <md-input-container flex>
-      <label>Price</label>
-      <input ng-model="product.price" type="number">
-    </md-input-container>
-    <md-input-container flex>
-      <label>Description</label>
-      <textarea ng-model="product.description" columns="2" md-maxlength="400"></textarea>
-    </md-input-container>
-  </div>
-  <div flex="50">
-    <md-checkbox ng-model="product.wholeSaleOnly">
-      Whole Sale Only: {{product.wholeSaleOnly}}
-    </md-checkbox>
-  </div>
-  <div flex="50">
-    <md-checkbox ng-model="product.published">
-      List in the Store: {{product.published}}
-    </md-checkbox>
-  </div>
+<md-content layout="row" layout-padding>
 
-  <meteor-include src="imageUpload"></meteor-include>
+  <md-card flex="30">
+    <img ng-if="product.img" ng-src="{{product.img}}">
+    <md-card-content>
+      <md-list>
+        <md-list-item class="md-3-line">
+          <div class="md-list-item-text">
+            <h2>{{product.name}}</h2>
+            <p>{{product.price | currency}}</p>
+            <p>{{product.description}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+      <div layout="column">
+        <md-button flex class="md-raised md-primary">
+          <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+          I want to place an Order
+        </md-button>
+        <md-button flex class="md-raised md-primary">
+          Continuous Order
+        </md-button>
+      </div>
+    </md-card-content>
+  </md-card>
+  <md-card flex>
+    <md-card-content>
+      <form>
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>Product Name</label>
+            <input ng-model="product.name">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Price</label>
+            <input ng-model="product.price" type="number">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Description</label>
+            <textarea ng-model="product.description" columns="2" md-maxlength="400"></textarea>
+          </md-input-container>
+        </div>
+        <div flex="50">
+          <md-checkbox ng-model="product.wholeSaleOnly">
+            Whole Sale Only: {{product.wholeSaleOnly}}
+          </md-checkbox>
+        </div>
+        <div flex="50">
+          <md-checkbox ng-model="product.published">
+            List in the Store: {{product.published}}
+          </md-checkbox>
+        </div>
 
-</form>
+        <blaze-template src="imageUpload"></blaze-template>
 
-<md-button ng-click="save()">Save</md-button>
-<md-button ng-click="reset()">Reset form</md-button>
-<md-button ui-sref="store">Done</md-button>
+      </form>
+
+      <md-button ng-click="save()">Save</md-button>
+      <md-button ng-click="reset()">Reset form</md-button>
+      <md-button ui-sref="store">Done</md-button>
+    </md-card-content>
+  </md-card>
+
+</md-content>

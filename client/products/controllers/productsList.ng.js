@@ -72,6 +72,11 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
   function DialogCtrl ($scope, $mdDialog, product) {
     $scope.product = product;
     $scope.addToCart = addToCart;
+    $scope.createAP = createAP;
+
+    $scope.step = 0
+
+    $scope.order = {}
 
     $scope.cancel = function() {
       $mdDialog.cancel();
@@ -96,7 +101,7 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
     start_date = new Date();
 
     if (duration !== 'INDEFINATE') {
-      end_date = moment(start_date).add(duration).format();
+      end_date = moment(start_date).add(duration).toDate();
     }
 
     promise = $meteor.call('addToCart', product, qty, start_date, end_date)
@@ -122,6 +127,41 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
         $mdToast.simple().content("Sorry, that didn't work!").position('bottom left').hideDelay(3000)
       );
     })
+  }
+
+  function createAP (product, qty, duration) {
+    var order, start_date, promise;
+    start_date = new Date();
+    order = {
+      status: 'active',
+      productId: product._id,
+      productDetails: {
+        name: product.name,
+        description: product.description,
+        price: product.price
+      },
+      qty: qty,
+      start_date: start_date,
+      user: $rootScope.currentUser._id,
+      ap:true
+    };
+
+    if (duration !== 'INDEFINATE') {
+      order.end_date = moment(start_date).add(duration).toDate();
+    } else {
+      order.continuous = true
+    }
+    console.log(order);
+    Subscriptions.insert(order, function(err) {
+      if (err) {
+        $mdToast.show(
+          $mdToast.simple().content("Sorry, something went wrong!").position('bottom left').hideDelay(3000)
+        );
+      }
+    });
+
+    $mdDialog.hide();
+    $state.go("profile.subscriptions")
   }
 
 });

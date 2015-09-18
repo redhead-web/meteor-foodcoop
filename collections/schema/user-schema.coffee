@@ -46,6 +46,10 @@ profile = new SimpleSchema
   address:
     type: String
     optional:true
+  deliveryAddress:
+    type: Object
+    optional:true
+    blackbox:true
   phone:
     type: String
     optional:true

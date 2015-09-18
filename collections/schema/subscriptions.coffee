@@ -5,7 +5,7 @@ subscriptions = new SimpleSchema
       new Date()
   status:
     type: String
-    allowedValues: ['active', 'paused', 'cancelled', 'expiring', 'expired']
+    allowedValues: ['active', 'paused', 'cancelled', 'expiring', 'expired', 'no payment received']
   productId:
     type: String
     regEx: SimpleSchema.RegEx.Id
@@ -23,7 +23,7 @@ subscriptions = new SimpleSchema
   pause_date:
     type: Date
     optional: true
-  indefinate:
+  continuous:
     type: Boolean
     optional: true
   user:
@@ -37,6 +37,9 @@ subscriptions = new SimpleSchema
     optional:true
   invoiceId:
     type: String
+    optional: true
+  ap:
+    type:Boolean
     optional: true
 
 Subscriptions.attachSchema subscriptions

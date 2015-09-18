@@ -35,9 +35,7 @@ describe 'Invoice Emails', ->
     # result = Mailer.send
     #   to: "Sean Stanley <sean@maplekiwi.com>"
     #   subject: "Your invoice is here"
-    #   template: "invoiceEmail"
-    #   data: invoice
-
-    result = Mailer.render('invoiceEmail', invoice)
-    console.log result
-    expect(result).toBeDefined()
+    #   template: "wholesaleInvoiceEmail"
+    #   #data: invoice
+    #
+    # expect(result).toBe true

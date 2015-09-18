@@ -46,6 +46,13 @@
              placeholder="home address" aria-label="address"/>
     </md-input-container>
 
+    <md-input-container>
+      <md-icon md-svg-icon="maps:ic_local_shipping_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.profile.deliveryAddress"
+        g-places-autocomplete
+        placeholder="wholesale delivery address (optional)" aria-label="delivery address"/>
+    </md-input-container>
+
     <md-checkbox ng-model="wholesaleBuyer" aria-label="wholesale buyer permission">
         Is {{user.profile.name}} a Whole Sale Buyer?
     </md-checkbox>

@@ -2,6 +2,10 @@
   <h2 ng-if="currentUser.profile.hasOwnProperty('hub')"> Your Deliveries will be on: {{currentUser.profile.hub.dayOfTheWeek}} {{currentUser.profile.hub.openHours}}</h2>
 </div>
 
+<div layout="column" layout-align="center center">
+  <h3 ng-show="hasAP"> Please make your automatic bank account payments to <strong>02-0000-000000-01</strong> and user your customer number (<strong>{{currentUser.profile.customerNumber}}</strong>) as a reference.</h3>
+</div>
+
 <md-content layout="column" layout-align="start center">
 
   <md-list>

@@ -1,4 +1,4 @@
-<md-dialog role="dialog" ng-init="qty = 1">
+<md-dialog role="dialog">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <h2>Order your {{product.name}}</h2>
@@ -8,10 +8,76 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-content layout-padding>
-    <h2>Ordering {{product.name}}</h2>
-    <form name="orderForm">
-      <!-- Qty -->
+  <md-content>
+    <md-tabs md-selected="step" md-dynamic-height class="shopping-steps-tabs">
+      <md-tab label="Step 1">
+        <h2>Hi {{$root.currentUser.profile.name}}!</h2>
+        <p>Thanks for requesting one of our {{product.name}}'s.</p>
+        <p>Let's get started placing your order. First please choose the number of boxes you'd like.</p>
+        <div layout="row" flex>
+          <span flex></span>
+          <md-slider flex=60 min="0" max="25" ng-model="order.qty" aria-label="qty" id="qty" class>
+          </md-slider>
+          <md-input-container flex="10">
+            <label for="qty">Quantity</label>
+            <input type="number" name="qty" ng-model="order.qty" required aria-label="qty" aria-controls="qty">
+          </md-input-container>
+          <span flex></span>
+        </div>
+        <hr>
+        <p ng-if="order.qty && order.qty > 0">That would cost {{product.price * order.qty | currency}}.</p>
+        <p ng-if="order.qty && order.qty > 0">Great! <a ng-click="step = step+1">Next</a> please tell me for how many weeks you'll want a {{product.name}}.</p>
+        <md-button class="md-raised md-primary" ng-click="step = step+1">Next</md-button>
+      </md-tab>
+      <md-tab label="Step 2">
+        <h2>Great!</h2>
+        <p>Most people like to order all at once for the next few weeks.</p>
+        <!-- duration -->
+        <div flex>
+          <label>Please choose how many weeks you'd like your order to go for.</label>
+          <md-radio-group ng-model="order.duration" layout="row">
+            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 1}" id="oneWeek" flex>One Week</md-radio-button>
+            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 2}" id="twoWeeks" flex>Two Weeks</md-radio-button>
+            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 4}" id="oneMonth" flex>Four Weeks</md-radio-button>
+            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 8}" id="eightWeeks" flex>Eight Weeks</md-radio-button>
+            <md-radio-button type="radio" name="duration"  ng-value="'continuous'" id="continuous" flex>Continuously</md-radio-button>
+          </md-radio-group>
+          <hr>
+          <span ng-show="order.duration.weeks">total for {{order.duration.weeks}} weeks: {{product.price * order.qty * order.duration.weeks| currency}}</span>
+          <span ng-show="order.duration === 'continuous'">subtotal: {{product.price * order.qty | currency}} each week</span>
+          <div layout="row">
+            <md-button class="md-raised md-primary" ng-click="step = step-1">Back</md-button>
+            <md-button class="md-raised md-primary" ng-click="step = step+1">Next</md-button>
+          </div>
+        </div>
+      </md-tab>
+      <md-tab label="Step 3">
+        <div ng-hide="order.duration.weeks == 1 || !order.duration">
+          <h2>How would you like to pay?</h2>
+          <p>You can pay right away by credit card for your entire order, or you can pay with an automatic payment setup with your bank.</p>
+        </div>
+        <div ng-show="order.duration.weeks == 1">
+          <h2>Put your order in your cart</h2>
+          <p>Thanks for ordering from the fresh food collective.</p>
+          <p> Simply click the button below to add your order to your cart.</p>
+        </div>
+        <div layout="row">
+          <md-button class="md-raised md-primary" ng-click="addToCart(product, order.qty, order.duration)">
+            <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+            add to cart
+          </md-button>
+          <md-button class="md-raised md-primary"
+          ng-hide="order.duration.weeks == 1 || !order.duration"
+          ng-click="createAP(product, order.qty, order.duration)">
+            <md-icon md-svg-icon="action:ic_account_balance_24px"></md-icon>
+            setup automatic payment
+          </md-button>
+          <md-button class="md-raised md-primary" ng-click="step = step-1">back</md-button>
+        </div>
+      </md-tab>
+
+    </md-tabs>
+    <!-- <form name="orderForm">
       <div layout="row">
 
         <md-slider flex=80 min="0" max="25" ng-model="qty" aria-label="qty" id="qty" class>
@@ -24,7 +90,6 @@
       <div ng-if="orderForm.qty.$invalid && orderForm.qty.$dirty">
         <span ng-if="orderForm.name.$error.required">Please tell us how many you want.</span>
       </div>
-      <!-- duration -->
       <div class="row">
         <div class="small-12 columns">
           <label>How many weeks would you like to get this product for?</label>
@@ -39,7 +104,7 @@
     </form>
     <md-button class="md-raised md-primary" ng-click="addToCart(product, qty, duration)" ng-disabled="orderForm.$invalid">
       <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-        Add To Cart
-      </md-button>
+      Add To Cart
+    </md-button> -->
   </md-content>
 </md-dialog>
