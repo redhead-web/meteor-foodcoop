@@ -2,13 +2,14 @@
   <md-button class="md-raised md-primary" ng-click="lastweek()">Last Week</md-button> {{start | date:'MMMM dd yyyy'}} - {{end | date:'MMMM dd yyyy'}}
   <md-button class="md-raised md-primary" ng-click="nextweek()">Next Week</md-button>
 </section>
-<!-- <section layout="row" layout-align="center center" layout-wrap>
-  <md-checkbox ng-model="isPresent" aria-label="show upcoming">Show Current Week's Subscriptions Only</md-checkbox>
-</section>-->
+<section layout="row" layout-align="center center" layout-wrap>
+  <md-checkbox ng-model="isActive" ng-true-value="'active'" ng-false-value="'all'" aria-label="show active">Show Current Week's Subscriptions Only</md-checkbox>
+</section>
 <section layout="row" layout-align="center center" layout-wrap>
   <md-button class="md-success" ng-repeat="hub in hubs" ng-click="$parent.hubFilter = hub.location">{{hub.title || hub.location}}</md-button>
 </section>
-<section layout="row" layout-align="center center" layout-wrap>
+
+<section layout="row" layout-align="center center" layout-wrap ng-show="isActive == 'active'">
   <figure ng-repeat="(product, count) in occurences(filteredOrders)" class="text-center">
     <h1 class="md-display-1">{{count}}</h1>
     <figcaption>
@@ -44,7 +45,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="order in orders | filter:filterByHub |  orderBy:predicate:reverse as filteredOrders track by order._id">
+    <tr ng-repeat="order in orders | filter:filterByHub | orderBy:predicate:reverse as filteredOrders track by order._id">
       <td>
         {{user(order).profile.hub.location}}
       </td>

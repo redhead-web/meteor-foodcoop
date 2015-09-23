@@ -150,6 +150,15 @@ Meteor.methods
     result = gateway.transaction.find transactionId
     result
 
+  cancelSubscription: (id) ->
+    try
+      result = gateway.subscription.cancel(id)
+      console.log result
+      result
+    catch e
+      throw new Meteor.Error 'Subscription Cancellation Failed', result.errors
+
+
 validCurrency = (amount) ->
   if typeof amount == "number"
     amount = Math.round(amount * 100) / 100

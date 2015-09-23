@@ -32,9 +32,6 @@
             <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
             I want to place an Order
           </md-button>
-          <md-button flex ng-click="showConfirm($event, product)" class="md-raised md-primary">
-            Continuous Order
-          </md-button>
           <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
             <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
           </md-button>

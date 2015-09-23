@@ -23,6 +23,9 @@ subscriptions = new SimpleSchema
   pause_date:
     type: Date
     optional: true
+  cancelled_date:
+    type: Date
+    optional:true
   continuous:
     type: Boolean
     optional: true

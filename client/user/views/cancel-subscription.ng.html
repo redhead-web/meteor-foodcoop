@@ -1,0 +1,23 @@
+<md-dialog role="dialog" aria-label="cancel subscription warning info">
+  <md-toolbar class="md-warn">
+    <div class="md-toolbar-tools">
+      <h2>Cancelling Order</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+        <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout="row" layout-align="center center">
+    <span flex></span>
+    <div flex="80">
+      <h2>Are you sure you want to cancel your subscription of a {{item.productDetails.name}}?</h2>
+      <p>Once you cancel, you cannot later resume a subscription but must purcahse or setup another.</p>
+      <p ng-show="item.transactionId && (item.end_date > now || item.continuous)">
+        The remaining time on your subscription cannot be refunded if you cancel your order.
+      </p>
+      <md-button class="md-raised md-warn" ng-click="ok()">I Understand, Cancel Anyway</md-button>
+    </div>
+    <span flex></span>
+  </md-content>
+</md-dialog>

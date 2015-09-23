@@ -16,9 +16,10 @@
         <p>Let's get started placing your order. First please choose the number of boxes you'd like.</p>
         <div layout="row" flex>
           <span flex></span>
-          <md-slider flex=60 min="0" max="25" ng-model="order.qty" aria-label="qty" id="qty" class>
+          <h3 style="margin-top:0.6em; margin-right:8px">Slider</h3>
+          <md-slider flex=60 min="1" max="10" md-discrete ng-model="order.qty" aria-label="qty" id="qty" class>
           </md-slider>
-          <md-input-container flex="10">
+          <md-input-container flex="10" style="margin-top:-0.6em">
             <label for="qty">Quantity</label>
             <input type="number" name="qty" ng-model="order.qty" required aria-label="qty" aria-controls="qty">
           </md-input-container>
@@ -43,7 +44,7 @@
             <md-radio-button type="radio" name="duration"  ng-value="'continuous'" id="continuous" flex>Continuously</md-radio-button>
           </md-radio-group>
           <hr>
-          <span ng-show="order.duration.weeks">total for {{order.duration.weeks}} weeks: {{product.price * order.qty * order.duration.weeks| currency}}</span>
+          <span ng-show="order.duration.weeks">total: x{{order.qty}} {{product.name}} @{{product.price | currency}} each x {{order.duration.weeks}} weeks = <strong style="colour: rgb(139,195,74)">{{product.price * order.qty * order.duration.weeks| currency}}</strong></span>
           <span ng-show="order.duration === 'continuous'">subtotal: {{product.price * order.qty | currency}} each week</span>
           <div layout="row">
             <md-button class="md-raised md-primary" ng-click="step = step-1">Back</md-button>
@@ -61,16 +62,21 @@
           <p>Thanks for ordering from the fresh food collective.</p>
           <p> Simply click the button below to add your order to your cart.</p>
         </div>
-        <div layout="row">
-          <md-button class="md-raised md-primary" ng-click="addToCart(product, order.qty, order.duration)">
+        <hr>
+        <div layout="row" layout-sm="column">
+          <md-button ng-hide="order.duration == 'continuous'" class="md-raised md-primary" ng-click="addToCart(product, order.qty, order.duration)">
             <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
             add to cart
+          </md-button>
+          <md-button ng-show="order.duration == 'continuous'" class="md-raised md-primary" ng-click="continuousOrder(product, order.qty, order.duration)">
+            <md-icon md-svg-icon="action:ic_credit_card_24px"></md-icon>
+            pay monthly by credit card
           </md-button>
           <md-button class="md-raised md-primary"
           ng-hide="order.duration.weeks == 1 || !order.duration"
           ng-click="createAP(product, order.qty, order.duration)">
             <md-icon md-svg-icon="action:ic_account_balance_24px"></md-icon>
-            setup automatic payment
+            setup weekly automatic payment
           </md-button>
           <md-button class="md-raised md-primary" ng-click="step = step-1">back</md-button>
         </div>

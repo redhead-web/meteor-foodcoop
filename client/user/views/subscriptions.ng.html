@@ -2,44 +2,77 @@
   <h2 ng-if="currentUser.profile.hasOwnProperty('hub')"> Your Deliveries will be on: {{currentUser.profile.hub.dayOfTheWeek}} {{currentUser.profile.hub.openHours}}</h2>
 </div>
 
-<div layout="column" layout-align="center center">
-  <h3 ng-show="hasAP"> Please make your automatic bank account payments to <strong>02-0000-000000-01</strong> and user your customer number (<strong>{{currentUser.profile.customerNumber}}</strong>) as a reference.</h3>
+<div layout="column" layout-align="center center" ng-show="hasAP">
+  <h3> Please make your automatic bank account payments to:<br>
+     <strong>02-0000-000000-01</strong><br>
+      use <strong>{{currentUser.profile.customerNumber}}</strong> (your customer number)  as a reference.
+  </h3>
 </div>
 
-<md-content layout="column" layout-align="start center">
+<md-content layout="row" layout-align="start center">
+  <span flex></span>
+  <div flex="70" flex-md=100 flex-sm=100>
+    <h2 class="text-center" ng-if="subscriptions.length > 0"> Active Subscriptions </h2>
+    <h2 class="text-center" ng-hide="subscriptions.length > 0"> You have no orders right now </h2>
+    <md-grid-list ng-if="subscriptions.length > 0"
+                  md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
+                  md-row-height-gt-md="1:1" md-row-height="4:4"
+                  md-row-height-sm="300px"
+                  md-gutter="8px" md-gutter-gt-sm="4px" >
+      <md-grid-tile ng-repeat="item in subscriptions | filter:{status:'active'} track by item._id"
+                    md-rowspan="2"
+                    md-colspan="2"
+                    md-rowspan-sm="1"
+                    ng-style="{'background': 'url(\'{{item.productDetails.img}}\') no-repeat center center', 'background-size':'cover'}"
+                    >
+        <div layout="column" layout-align="center center">
+          <h3 class="cart-grid-title">x{{item.qty}} {{item.productDetails.name}}</h3>
+          <md-button class="md-raised md-fab md-warn" ng-click="cancel(item, $event)" aria-label="cancel subscription">
+            <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+          </md-button>
+        </div>
 
-  <md-list>
-    <md-subheader>Active Subscriptions</md-subheader>
-    <md-list-item ng-repeat="item in subscriptions | filter:{status:'active'} track by item._id" class="md-3-line">
-      <img ng-src="item.details.thumb" ng-if="item.details.thumb" class="md-avatar">
-      <div class="md-list-item-text">
-        <h3>x{{item.qty}} {{item.productDetails.name}}</h3>
-        <h4>total duration: {{duration(item.end_date, item.start_date)}} <span ng-hide="item.indefinate">ending on {{item.end_date | date:'d MMM, y'}}</span></h4>
-        <p><span ng-if="item.indefinate">
-          {{item.productDetails.price * item.qty * 50/12 | currency}}
-        </span>
-        <span ng-if="!item.indefinate">
-          {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
-        </span></p>
-      </div>
-    </md-list-item>
-  </md-list>
 
-  <md-list>
-    <md-subheader>Expired or Cancelled Subscriptions</md-subheader>
-    <md-list-item ng-repeat="item in subscriptions | filter:{status:'cancelled'} track by item._id" class="md-3-line">
-      <img ng-src="item.details.thumb" ng-if="item.details.thumb" class="md-avatar">
-      <div class="md-list-item-text">
-        <h3>x{{item.qty}} {{item.productDetails.name}}</h3>
-        <h4>total duration: {{duration(item.end_date, item.start_date)}} <span ng-hide="item.indefinate">ending on {{item.end_date | date:'d MMM, y'}}</span></h4>
-        <p><span ng-if="item.indefinate">
-          {{item.productDetails.price * item.qty * 50/12 | currency}}
-        </span>
-        <span ng-if="!item.indefinate">
-          {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
-        </span></p>
-      </div>
-    </md-list-item>
-  </md-list>
+
+        <md-grid-tile-footer class="my-grid-footer">
+          <h3>total duration: {{duration(item.end_date, item.start_date)}} <span ng-hide="item.continuous">ending on {{item.end_date | date:'d MMM, y'}}</span>
+            <br>Time remaining: {{duration(item.end_date)}}<br>
+            <span ng-if="item.continuous && !!item.subscriptionId">
+              {{item.productDetails.price * item.qty * 50/12 | currency}} / month
+            </span>
+            <span ng-if="item.continuous && item.ap">
+              {{item.productDetails.price * item.qty | currency}}/ week
+            </span>
+            <span ng-if="!item.continuous">
+              {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
+            </span>
+          </h3>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+
+    <md-list>
+      <md-subheader>Expired or Cancelled Subscriptions</md-subheader>
+      <md-list-item ng-repeat="item in subscriptions | filter:{status:'cancelled'} track by item._id" class="md-3-line">
+        <img ng-src="item.details.thumb" ng-if="item.details.thumb" class="md-avatar">
+        <div class="md-list-item-text">
+          <h3>x{{item.qty}} {{item.productDetails.name}}</h3>
+          <h4>total duration: {{duration(item.end_date, item.start_date)}} <span ng-hide="item.continuous">ending on {{item.end_date | date:'d MMM, y'}}</span>
+           <span ng-show="item.cancelled_date"> cancelled on: {{item.cancelled_date | date:'d MMM, y'}}</span></h4>
+          <p><span ng-if="item.continuous && !!item.subscriptionId">
+            {{item.productDetails.price * item.qty * 50/12 | currency}} / month
+          </span>
+          <span ng-if="item.ap">
+            {{item.productDetails.price * item.qty | currency}} / week
+          </span>
+          <span ng-if="!item.continuous && !item.ap">
+            {{item.productDetails.price * item.qty * weeksRemaining(item.end_date) | currency}}
+          </span>
+          </p>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+  <span flex></span>
 
 </md-content>

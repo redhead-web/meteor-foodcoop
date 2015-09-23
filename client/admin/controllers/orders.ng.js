@@ -3,6 +3,8 @@ angular.module("food-collective").controller("OrdersAdminCtrl", function($scope,
   $scope.start = moment().startOf('week').format();
   $scope.end = moment().endOf('week').format();
 
+  $scope.isActive = 'active';
+
   $meteor.autorun($scope, function() {
     $meteor.subscribe('orders', {
       sort: {'productDetails.name':1, status: -1}
@@ -13,10 +15,13 @@ angular.module("food-collective").controller("OrdersAdminCtrl", function($scope,
   });
 
   $scope.orders = $scope.$meteorCollection(function() {
-    //var start = $scope.getReactively('vm.start');
-    return Subscriptions.find({
-      //start_date: {$gte: start}
-    }, {
+    var query = {}
+    , status = $scope.getReactively('isActive');
+
+    if (status === 'active') {
+      query = {status: $scope.getReactively('isActive')}
+    }
+    return Subscriptions.find(query, {
       sort: {'productDetails.name':1, status: -1}
     });
   });
@@ -40,6 +45,8 @@ angular.module("food-collective").controller("OrdersAdminCtrl", function($scope,
   $scope.occurences = productsCount;
 
   $scope.goTo = goTo;
+
+
 
   // function search (order) {
   //   if (!$scope.query) {

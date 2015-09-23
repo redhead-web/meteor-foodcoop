@@ -7893,7 +7893,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "3530c9cffc81286468a7c0970199dcbafb3aa61e"
+                  "value": "41d92facb072bdfd2140b6e9072e75de03a2da99"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -8669,11 +8669,11 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "eaebca61873b0528b9050e79bdd1a2ac9583a656"
+          "value": "e0ef108f43c19de9c05d415b0e3a1e085bd8dcef"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "d240d37f73a95bec988d27df68a5c5a08f481c68"
+          "value": "406458a84d444e95a6dc77b0d57a5f2a04574f97"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
@@ -10740,7 +10740,7 @@ var packageMetadata = {
             },
             "hostname": {
               "type": "constant",
-              "value": "mac-air"
+              "value": "mac-air.local"
             },
             "proxy": {
               "type": "null",
@@ -11018,7 +11018,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1442550541678
+                  "value": 1442890171071
                 },
                 "newSessions": {
                   "type": "constant",
@@ -11104,7 +11104,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1442550543248
+                  "value": 1442890172320
                 },
                 "maxErrors": {
                   "type": "constant",

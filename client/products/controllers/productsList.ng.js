@@ -9,8 +9,6 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
   };
 
   $scope.showDialog = showDialog;
-  //$scope.addToCart = addToCart;
-  $scope.showConfirm = showConfirm;
 
   function showAlert ($event) {
     $mdDialog.show(
@@ -38,41 +36,11 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
 
   }
 
-  function showConfirm (ev, product) {
-    var total = 0.45 + (product.price * 50/12 * 1.029)
-    if ($rootScope.currentUser) {
-      $mdDialog.show({
-        targetEvent: ev,
-        templateUrl: 'client/products/views/subscription-info.ng.html',
-        locals: {product: product, total: total},
-        controller: confirmSubscribeCtrl
-      }).then(function(answer) {
-        if (answer === "YES")  {
-          $rootScope.subscription = {
-            productId: product._id,
-            productDetails: {
-              name: product.name,
-              price: product.price,
-              thumb: product.thumb,
-              description: product.description
-            },
-            qty: 1,
-            start_date: new Date(),
-            indefinate: true,
-            user: $rootScope.currentUser._id
-          }
-          $state.go('profile.subscriptionCheckout')
-        }
-      })
-    } else {
-      showAlert(ev)
-    }
-  }
-
   function DialogCtrl ($scope, $mdDialog, product) {
     $scope.product = product;
     $scope.addToCart = addToCart;
     $scope.createAP = createAP;
+    $scope.continuousOrder = continuousOrder;
 
     $scope.step = 0
 
@@ -81,19 +49,6 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
-  }
-
-  function confirmSubscribeCtrl ($scope, $mdDialog, product, total) {
-    $scope.product = product;
-    $scope.total = total;
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-
-    $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
-  };
-
   }
 
   function addToCart (product, qty, duration) {
@@ -138,7 +93,9 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
       productDetails: {
         name: product.name,
         description: product.description,
-        price: product.price
+        price: product.price,
+        img: product.img,
+        thumb:product.thumb,
       },
       qty: qty,
       start_date: start_date,
@@ -161,7 +118,30 @@ angular.module("food-collective").controller("ProductsListCtrl", function($scope
     });
 
     $mdDialog.hide();
-    $state.go("profile.subscriptions")
+    $state.go("profile.subscriptions");
+  }
+
+  function continuousOrder (product, qty, duration) {
+    if (duration === 'continuous') {
+      $rootScope.subscription = {
+        productId: product._id,
+        productDetails: {
+          name: product.name,
+          price: product.price,
+          description: product.description,
+          img: product.img,
+          thumb:product.thumb,
+        },
+        qty: qty,
+        start_date: new Date(),
+        continuous: true,
+        user: $rootScope.currentUser._id
+      };
+      $mdDialog.hide();
+      $state.go('profile.subscriptionCheckout');
+
+    } else $mdToast.show($mdToast.simple().content("Sorry, something went wrong!").position('bottom left').hideDelay(3000));
+
   }
 
 });

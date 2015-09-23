@@ -27,7 +27,7 @@ Meteor.publish 'orders', (options, start_date, end_date) ->
 
     # Counts.publish this, 'filteredOrderCount', Subscriptions.find(
     #   $or: [
-    #     {indefinate: true,
+    #     {continuous: true,
     #     $not: start_date: $gt: new Date(end_date).toISOString()}
     #
     #     end_date: $gte: new Date(start_date).toISOString()
@@ -38,7 +38,7 @@ Meteor.publish 'orders', (options, start_date, end_date) ->
     return Subscriptions.find
     	$or: [
         {
-          indefinate: true,
+          continuous: true,
           start_date: $not: $gt: new Date(end_date)
         }
 
