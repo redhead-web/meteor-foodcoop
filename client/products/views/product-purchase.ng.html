@@ -1,7 +1,8 @@
 <md-dialog role="dialog">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>Order your {{product.name}}</h2>
+      <span flex></span>
+      <h2>{{product.name}}</h2>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
         <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
@@ -10,10 +11,10 @@
   </md-toolbar>
   <md-content>
     <md-tabs md-selected="step" md-dynamic-height class="shopping-steps-tabs">
-      <md-tab label="Step 1">
-        <h2>Hi {{$root.currentUser.profile.name}}!</h2>
-        <p>Thanks for requesting one of our {{product.name}}'s.</p>
-        <p>Let's get started placing your order. First please choose the number of boxes you'd like.</p>
+      <md-tab label="1">
+        <h2>Hi {{$root.currentUser.profile.name}}</h2>
+        <p>How many {{product.name}}es would you like to buy?</p>
+        <p><br></p>
         <div layout="row" flex>
           <span flex></span>
           <h3 style="margin-top:0.6em; margin-right:8px">Slider</h3>
@@ -27,58 +28,77 @@
         </div>
         <hr>
         <p ng-if="order.qty && order.qty > 0">That would cost {{product.price * order.qty | currency}}.</p>
-        <p ng-if="order.qty && order.qty > 0">Great! <a ng-click="step = step+1">Next</a> please tell me for how many weeks you'll want a {{product.name}}.</p>
-        <md-button class="md-raised md-primary" ng-click="step = step+1">Next</md-button>
+        <!-- <p ng-if="order.qty && order.qty > 0">Click <a ng-click="step = step+1">Next</a> to continue.</p> -->
+        <md-button style="margin-bottom:16px"
+        class="md-raised md-primary"
+        ng-click="step = step+1"
+        ng-disabled="!order.qty"
+        >Next</md-button>
+
       </md-tab>
-      <md-tab label="Step 2">
+      <md-tab label="2">
         <h2>Great!</h2>
-        <p>Most people like to order all at once for the next few weeks.</p>
+        <p>Would you like that just once, or every week?</p>
         <!-- duration -->
         <div flex>
-          <label>Please choose how many weeks you'd like your order to go for.</label>
+          <!-- <label>Please choose how many weeks you'd like your order to go for.</label> -->
           <md-radio-group ng-model="order.duration" layout="row">
-            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 1}" id="oneWeek" flex>One Week</md-radio-button>
-            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 2}" id="twoWeeks" flex>Two Weeks</md-radio-button>
+            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 1}" id="oneWeek" flex>Just Once</md-radio-button>
+            <!-- <md-radio-button type="radio" name="duration"  ng-value="{weeks: 2}" id="twoWeeks" flex>Two Weeks</md-radio-button>
             <md-radio-button type="radio" name="duration"  ng-value="{weeks: 4}" id="oneMonth" flex>Four Weeks</md-radio-button>
-            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 8}" id="eightWeeks" flex>Eight Weeks</md-radio-button>
-            <md-radio-button type="radio" name="duration"  ng-value="'continuous'" id="continuous" flex>Continuously</md-radio-button>
+            <md-radio-button type="radio" name="duration"  ng-value="{weeks: 8}" id="eightWeeks" flex>Eight Weeks</md-radio-button> -->
+            <md-radio-button type="radio" name="duration"  ng-value="'continuous'" id="continuous" flex>Every Week</md-radio-button>
           </md-radio-group>
           <hr>
-          <span ng-show="order.duration.weeks">total: x{{order.qty}} {{product.name}} @{{product.price | currency}} each x {{order.duration.weeks}} weeks = <strong style="colour: rgb(139,195,74)">{{product.price * order.qty * order.duration.weeks| currency}}</strong></span>
-          <span ng-show="order.duration === 'continuous'">subtotal: {{product.price * order.qty | currency}} each week</span>
           <div layout="row">
-            <md-button class="md-raised md-primary" ng-click="step = step-1">Back</md-button>
-            <md-button class="md-raised md-primary" ng-click="step = step+1">Next</md-button>
+            <md-button style="margin-bottom:16px" class="md-raised md-primary" ng-click="step = step-1">Back</md-button>
+            <span flex >
+            <p ng-show="!!order.duration">{{order.qty}}x {{product.name}}es @ {{product.price | currency}} each = <strong style="colour: rgb(139,195,74)">{{product.price * order.qty | currency}}</strong>
+            <strong ng-show="order.duration == 'continuous'" style="colour: rgb(139,195,74)"> / week</strong></p></span>
+            <md-button style="margin-bottom:16px"
+            class="md-raised md-primary"
+            ng-click="step = step+1"
+            ng-disabled="!order.duration"
+            >Next</md-button>
           </div>
         </div>
       </md-tab>
-      <md-tab label="Step 3">
-        <div ng-hide="order.duration.weeks == 1 || !order.duration">
-          <h2>How would you like to pay?</h2>
-          <p>You can pay right away by credit card for your entire order, or you can pay with an automatic payment setup with your bank.</p>
+      <md-tab label="3">
+        <div ng-hide="order.duration.weeks == 1 || order.duration == 'continuous'">
+          <h2>Payment</h2>
+          <p>You can pay for one-off orders by credit card or PayPal. <br> Or sign up to get a box every week, and pay by direct debit.</p>
+          <p><br></p>
         </div>
-        <div ng-show="order.duration.weeks == 1">
-          <h2>Put your order in your cart</h2>
-          <p>Thanks for ordering from the fresh food collective.</p>
-          <p> Simply click the button below to add your order to your cart.</p>
-        </div>
-        <hr>
-        <div layout="row" layout-sm="column">
-          <md-button ng-hide="order.duration == 'continuous'" class="md-raised md-primary" ng-click="addToCart(product, order.qty, order.duration)">
-            <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-            add to cart
-          </md-button>
-          <md-button ng-show="order.duration == 'continuous'" class="md-raised md-primary" ng-click="continuousOrder(product, order.qty, order.duration)">
-            <md-icon md-svg-icon="action:ic_credit_card_24px"></md-icon>
-            pay monthly by credit card
-          </md-button>
+        <div ng-show="order.duration == 'continuous'">
+          <h2>Confirm Your Payment</h2>
+          <p>Thanks for ordering from the Fresh Food Collective.</p>
+          <p>Click the button below to set up your automatic payment</p>
           <md-button class="md-raised md-primary"
           ng-hide="order.duration.weeks == 1 || !order.duration"
           ng-click="createAP(product, order.qty, order.duration)">
             <md-icon md-svg-icon="action:ic_account_balance_24px"></md-icon>
-            setup weekly automatic payment
+            setup automatic payment
           </md-button>
+        </div>
+        <div ng-show="order.duration.weeks == 1">
+          <h2>Confirm Your Order</h2>
+          <p>Thanks for ordering from the Fresh Food Collective.</p>
+          <p> Click the button below to checkout.</p>
+          <md-button ng-hide="order.duration == 'continuous'|| !order.duration" class="md-raised md-primary" ng-click="addToCart(product, order.qty, order.duration)">
+            <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+            add to cart
+          </md-button>
+        </div>
+        <hr>
+        <div layout="row" layout-sm="column">
           <md-button class="md-raised md-primary" ng-click="step = step-1">back</md-button>
+          <span flex></span>
+
+          <!-- <md-button ng-show="order.duration == 'continuous'" class="md-raised md-primary" ng-click="continuousOrder(product, order.qty, order.duration)">
+            <md-icon md-svg-icon="action:ic_credit_card_24px"></md-icon>
+            pay monthly by credit card
+          </md-button> -->
+
         </div>
       </md-tab>
 

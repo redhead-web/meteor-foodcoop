@@ -28,9 +28,9 @@
           </md-list-item>
         </md-list>
         <div layout="column">
-          <md-button flex ng-click="showDialog($event, product)" class="md-raised md-primary">
+          <md-button flex style="margin:0" ng-click="showDialog($event, product)" class="md-raised md-primary">
             <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-            I want to place an Order
+            Place Order
           </md-button>
           <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
             <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>

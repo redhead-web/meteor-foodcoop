@@ -25,4 +25,5 @@ angular.module('food-collective',[
   $rootScope.hasRole = Roles.userIsInRole;
 
   $meteor.subscribe('products');
-})
+  $meteor.subscribe('hubs');
+});

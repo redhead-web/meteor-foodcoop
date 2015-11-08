@@ -51,13 +51,13 @@
           </md-checkbox>
         </div>
 
-        <blaze-template src="imageUpload"></blaze-template>
+        <blaze-template name="imageUpload"></blaze-template>
 
       </form>
-
-      <md-button ng-click="save()">Save</md-button>
-      <md-button ng-click="reset()">Reset form</md-button>
-      <md-button ui-sref="store">Done</md-button>
+      <div layout="row">
+        <md-button ng-click="save()">Save</md-button>
+        <md-button ui-sref="store">Done</md-button>
+      </div>
     </md-card-content>
   </md-card>
 

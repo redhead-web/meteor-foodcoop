@@ -5,6 +5,7 @@
     <md-toolbar class="md-primary md-hue-1">
       <div class="md-toolbar-tools">
         <h1 class="md-display-1">Hub Directory</h1>
+        <md-button ng-show="currentUser && hasRole(currentUser, 'admin')" ui-sref="newHub">New</md-button>
       </div>
     </md-toolbar>
     <md-list>

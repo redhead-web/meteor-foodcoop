@@ -7893,7 +7893,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "41d92facb072bdfd2140b6e9072e75de03a2da99"
+                  "value": "4508c29464251abcc75bf64a0454758564eafd39"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -8669,7 +8669,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "e0ef108f43c19de9c05d415b0e3a1e085bd8dcef"
+          "value": "6403bec5e6317e003ad2d7f520031de2e7b7898a"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -10740,7 +10740,7 @@ var packageMetadata = {
             },
             "hostname": {
               "type": "constant",
-              "value": "mac-air.local"
+              "value": "mac-air"
             },
             "proxy": {
               "type": "null",
@@ -11018,7 +11018,7 @@ var packageMetadata = {
               "members": {
                 "startTime": {
                   "type": "constant",
-                  "value": 1442890171071
+                  "value": 1444853342678
                 },
                 "newSessions": {
                   "type": "constant",
@@ -11104,7 +11104,7 @@ var packageMetadata = {
                 },
                 "startTime": {
                   "type": "constant",
-                  "value": 1442890172320
+                  "value": 1444853344607
                 },
                 "maxErrors": {
                   "type": "constant",

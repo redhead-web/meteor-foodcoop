@@ -35,26 +35,6 @@ angular.module('food-collective').config( function($urlRouterProvider, $statePro
       templateUrl: 'client/products/views/product-create.ng.html',
       controller: 'ProductCreateCtrl'
     })
-    .state('hubs', {
-      url: '/pickup',
-      templateUrl: 'client/hubs/views/hubs-list.ng.html',
-      controller: 'HubsListCtrl',
-      resolve: {
-        'subscription': function($meteor) {
-          return $meteor.subscribe('hubs')
-        }
-      }
-    })
-    .state('hubDetails', {
-      url: '/pickup/:hubId',
-      templateUrl: 'client/hubs/views/hub-detail.ng.html',
-      controller: 'HubDetailsCtrl',
-      resolve: {
-        "admin" : function($meteor) {
-          return $meteor.requireValidUser(isAdmin);
-        }
-      }
-    })
     .state('profile', {
       url: '/me',
       templateUrl: 'client/user/views/profile.ng.html',
