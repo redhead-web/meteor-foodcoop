@@ -1,4 +1,4 @@
-angular.module("food-collective")
+angular.module("food-coop")
 .config(['$mdIconProvider', function ($mdIconProvider) {
   $mdIconProvider
     .iconSet("social", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg")

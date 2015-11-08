@@ -1,1 +1,1 @@
-angular.module('food-collective');
+angular.module('food-coop');

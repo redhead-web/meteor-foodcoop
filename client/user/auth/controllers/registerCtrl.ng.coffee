@@ -1,4 +1,4 @@
-angular.module('food-collective').controller 'RegisterCtrl', ($meteor, $state) ->
+angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
   vm = this
   vm.credentials =
     email: ''

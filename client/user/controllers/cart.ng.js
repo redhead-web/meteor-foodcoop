@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("UserCartCtrl", function($scope, $rootScope, $meteor){
+angular.module("food-coop").controller("UserCartCtrl", function($scope, $rootScope, $meteor){
   $scope.total = 0;
   $scope.countTotal = countTotal;
   $scope.removeFromCart = removeFromCart;

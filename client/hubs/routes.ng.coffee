@@ -1,7 +1,7 @@
 isAdmin = (user) ->
   Roles.userIsInRole user, 'admin'
 
-angular.module('food-collective').config ($stateProvider) ->
+angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
   	.state 'hubs',
     	url: '/pickup'

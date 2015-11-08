@@ -1,4 +1,4 @@
-angular.module("food-collective").controller "UsersAdminCtrl", ($scope, $meteor, $stateParams) ->
+angular.module("food-coop").controller "UsersAdminCtrl", ($scope, $meteor, $stateParams) ->
 
   $scope.perPage = 25
   $scope.page = 1

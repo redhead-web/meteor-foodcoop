@@ -1,4 +1,4 @@
-angular.module('food-collective').controller 'UserAdminCtrl', ($scope, $rootScope, $meteor, $stateParams, $mdToast) ->
+angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $rootScope, $meteor, $stateParams, $mdToast) ->
   $scope.hubs = $meteor.collection(Hubs).subscribe('hubs')
 
   $scope.validate = (isValid) ->

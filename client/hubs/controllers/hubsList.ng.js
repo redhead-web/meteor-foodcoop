@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("HubsListCtrl", function($scope, $rootScope, $meteor, $mdToast){
+angular.module("food-coop").controller("HubsListCtrl", function($scope, $rootScope, $meteor, $mdToast){
   var mapProperties;
   $scope.hubs = $meteor.collection(Hubs, false);
 

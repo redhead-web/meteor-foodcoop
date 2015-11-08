@@ -1,5 +1,5 @@
 /* globals: angular, moment */
-angular.module("food-collective").controller("OrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
+angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
   $scope.start = moment().startOf('week').format();
   $scope.end = moment().endOf('week').format();
 

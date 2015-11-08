@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("ProductDetailsCtrl", function($scope, $stateParams, $meteor){
+angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $meteor){
   $scope.product = $scope.$meteorObject(Products, $stateParams.productId, false).subscribe('products');
 
   Uploader.finished = imageUploadComplete;

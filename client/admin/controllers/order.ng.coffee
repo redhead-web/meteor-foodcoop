@@ -1,4 +1,4 @@
-angular.module("food-collective").controller "OrderAdminCtrl", ($scope, $meteor, $stateParams) ->
+angular.module("food-coop").controller "OrderAdminCtrl", ($scope, $meteor, $stateParams) ->
 
   $scope.order = $scope.$meteorObject Subscriptions, $stateParams.orderId
 

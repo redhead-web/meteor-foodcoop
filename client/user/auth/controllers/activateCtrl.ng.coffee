@@ -1,4 +1,4 @@
-angular.module('food-collective').controller 'ActivateCtrl',
+angular.module('food-coop').controller 'ActivateCtrl',
 ($meteor, $state, $stateParams) ->
     vm = this
     vm.password = ''

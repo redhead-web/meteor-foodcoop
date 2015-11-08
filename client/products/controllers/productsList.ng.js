@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("ProductsListCtrl", function($scope, $rootScope, $meteor, $mdDialog, $mdToast, $state){
+angular.module("food-coop").controller("ProductsListCtrl", function($scope, $rootScope, $meteor, $mdDialog, $mdToast, $state){
 
   $scope.products = $scope.$meteorCollection(Products);
   $scope.remove = function(product){

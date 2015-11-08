@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("ProductCreateCtrl", function($scope){
+angular.module("food-coop").controller("ProductCreateCtrl", function($scope){
   $scope.product = {};
 
   Uploader.finished = imageUploadComplete;

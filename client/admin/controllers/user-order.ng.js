@@ -1,5 +1,5 @@
 /* Globals: angular, moment */
-angular.module("food-collective").controller("UserOrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
+angular.module("food-coop").controller("UserOrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
   self = this;
   self.orders = $scope.$meteorCollection(Subscriptions).subscribe('orders')
 

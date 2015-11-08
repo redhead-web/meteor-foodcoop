@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("checkoutCtrl", function($scope, $rootScope, $meteor, $state, currentUser, token){
+angular.module("food-coop").controller("checkoutCtrl", function($scope, $rootScope, $meteor, $state, currentUser, token){
   var nonce = ""
   //Meteor.users.update({_id: Meteor.user()._id}, {$set: {'profile.cart.status':'pending'}}, {validate: false})
   $scope.total = 0;

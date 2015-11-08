@@ -1,4 +1,4 @@
-angular.module('food-collective').config( function($stateProvider) {
+angular.module('food-coop').config( function($stateProvider) {
   $stateProvider
   .state('profile.edit', {
     url: '/edit',

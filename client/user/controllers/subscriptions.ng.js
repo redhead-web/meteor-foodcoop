@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("UserSubscriptionCtrl", function($scope, $mdDialog, $meteor){
+angular.module("food-coop").controller("UserSubscriptionCtrl", function($scope, $mdDialog, $meteor){
   // TODO: not MVP feature
   // $scope.pause = pause;
   // $scope.resume = resume;

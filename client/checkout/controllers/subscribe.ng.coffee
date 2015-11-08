@@ -1,4 +1,4 @@
-angular.module("food-collective").controller "subscribeCtrl", ($scope, $rootScope, $meteor, $state) ->
+angular.module("food-coop").controller "subscribeCtrl", ($scope, $rootScope, $meteor, $state) ->
 
   unless $rootScope.subscription
     $state.go('store')

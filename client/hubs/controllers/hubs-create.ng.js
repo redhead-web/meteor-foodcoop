@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("HubCreateCtrl", function($scope, $stateParams, $state){
+angular.module("food-coop").controller("HubCreateCtrl", function($scope, $stateParams, $state){
   $scope.newHub = {}
 
   $scope.hubs = $scope.$meteorCollection(Hubs);

@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("HubDetailsCtrl", function($scope, $stateParams){
+angular.module("food-coop").controller("HubDetailsCtrl", function($scope, $stateParams){
   $scope.hub = $scope.$meteorObject(Hubs, $stateParams.hubId);
 
 });

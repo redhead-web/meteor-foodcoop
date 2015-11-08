@@ -1,4 +1,4 @@
-angular.module("food-collective").run(["$rootScope", "$state", function($rootScope, $state) {
+angular.module("food-coop").run(["$rootScope", "$state", function($rootScope, $state) {
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireUser promise is rejected
     // and redirect the user back to the main page
@@ -10,7 +10,7 @@ angular.module("food-collective").run(["$rootScope", "$state", function($rootSco
   });
 }]);
 
-angular.module('food-collective').config( function($urlRouterProvider, $stateProvider, $locationProvider) {
+angular.module('food-coop').config( function($urlRouterProvider, $stateProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 

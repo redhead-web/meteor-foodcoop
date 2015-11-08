@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("ProfileCtrl", function($scope, $rootScope){
+angular.module("food-coop").controller("ProfileCtrl", function($scope, $rootScope){
   // $scope.upcomingSubscriptions = function(item) {
   //   if (item.status === 'active') {
   //     if (item.indefinate) return true

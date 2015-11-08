@@ -1,4 +1,4 @@
-angular.module('food-collective').controller 'navCtrl', ($mdUtil, $mdSidenav, $log, $state) ->
+angular.module('food-coop').controller 'navCtrl', ($mdUtil, $mdSidenav, $log, $state) ->
   vm = this
   ###
    * Build handler to open/close a SideNav; when animation finishes

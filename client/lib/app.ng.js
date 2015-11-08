@@ -1,4 +1,4 @@
-angular.module('food-collective',[
+angular.module('food-coop',[
   'angular-meteor',
   'ui.router',
   'uiGmapgoogle-maps',

@@ -1,4 +1,4 @@
-angular.module('food-collective').controller 'CreateUserAdminCtrl', ($scope, $rootScope, $meteor, $stateParams, $mdToast) ->
+angular.module('food-coop').controller 'CreateUserAdminCtrl', ($scope, $rootScope, $meteor, $stateParams, $mdToast) ->
   $scope.hubs = $meteor.collection(Hubs).subscribe('hubs')
 
   $scope.user = {}

@@ -1,4 +1,4 @@
-angular.module("food-collective").controller("UserPaymentMethodCtrl", function($scope, paymentMethods, $meteor){
+angular.module("food-coop").controller("UserPaymentMethodCtrl", function($scope, paymentMethods, $meteor){
   if (paymentMethods) {
     $scope.paymentMethods = angular.copy(paymentMethods)
     _.map($scope.paymentMethods, function(p) {
