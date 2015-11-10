@@ -1,3 +1,14 @@
+producerData = new SimpleSchema
+  companyName: type: String, optional:true
+  summary: type: String, optional:true
+  bio: type: String, optional:true
+  bankAccount: type: String, optional: true
+  shareAddress: type: Boolean, optional: true
+  logo: type: String, optional:true
+  thumbnail: type: String, optional: true
+  website: type: String, optional: true
+  chemicals: type: String, optional:true
+  certification: type: String, optional: true
 
 cart = new SimpleSchema
   last_modified:
@@ -26,14 +37,6 @@ cart = new SimpleSchema
   "products.$.qty":
     type: Number
     min: 1
-  "products.$.start_date":
-    type: Date
-  "products.$.end_date":
-    type: Date
-    optional: true
-  "products.$.indefinate":
-    type: Boolean
-    optional: true
 
 profile = new SimpleSchema
   name:
@@ -53,24 +56,26 @@ profile = new SimpleSchema
   phone:
     type: String
     optional:true
-  hub:
-    type: Object
-    optional: true
-  'hub.id':
-    type: String
-    regEx: SimpleSchema.RegEx.Id
-  'hub.title':
-    type: String
-    optional: true
-  'hub.location':
-    type: String
-  'hub.dayOfTheWeek':
-    type: String
-  'hub.openHours':
-    type: String
   cart:
     type: cart
     optional: true
+  lastOrder:
+    label: "Last Order"
+    type: [String]
+    optional:true
+    defaultValue: []
+  favourites:
+    label: "Last Order"
+    type: [String]
+    optional:true
+    defaultValue: []
+  producerData:
+    label: "Producer Data"
+    type: producerData
+    optional:true
+  balance: type: Number, decimal: true,
+  businessBalance: type: Number, decimal: true, optional: true
+  useBusinessBalance: type: Boolean, defaultValue: false
 
 Schema = new SimpleSchema
   emails:

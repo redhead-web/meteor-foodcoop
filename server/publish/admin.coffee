@@ -1,11 +1,9 @@
-
-
 Meteor.publish 'userCount', ->
   Counts.publish this, 'userCount', Meteor.users.find()
   undefined
 
 Meteor.publish 'orderCount', ->
-  Counts.publish this, 'upcoming-ordersCount', Subscriptions.find
+  Counts.publish this, 'upcoming-ordersCount', Orders.find
     status: 'active'
   ,
     countFromField: 'qty'
@@ -16,35 +14,15 @@ Meteor.publish 'product-count', ->
   undefined
 
 Meteor.publish 'order', (id) ->
-  Subscriptions.find _id:id
+  Orders.find _id:id
 
-Meteor.publish 'orders', (options, start_date, end_date) ->
-  check(start_date, String)
-  check(end_date, String)
-
+Meteor.publish 'orders', (options, deliveryDay) ->
+  check(deliveryDay, String)
 
   if Roles.userIsInRole this.userId, 'admin'
 
-    # Counts.publish this, 'filteredOrderCount', Subscriptions.find(
-    #   $or: [
-    #     {continuous: true,
-    #     $not: start_date: $gt: new Date(end_date).toISOString()}
-    #
-    #     end_date: $gte: new Date(start_date).toISOString()
-    #   ]
-    #
-    # ), noReady: true
-
     return Subscriptions.find
-    	$or: [
-        {
-          continuous: true,
-          start_date: $not: $gt: new Date(end_date)
-        }
-
-        end_date: $gte: new Date(start_date)
-        start_date: $not: $gt: new Date(end_date)
-      ]
+      deliveryDay: new Date(deliveryDay)
   	 ,options
   else
     console.log "cannot publish orders to non admin"

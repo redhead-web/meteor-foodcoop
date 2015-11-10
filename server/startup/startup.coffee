@@ -1,57 +1,12 @@
 Meteor.startup ->
   SimpleSchema.debug = true
   console.log "starting the app... :-)"
-  if Products.find().count() is 0
-
-    products = [
-      {
-        'name': 'Small Fruit & Veggie Box'
-        'description': 'Get a great deal on all the best priced vegetables'
-        published: true
-        price: 10
-      },
-      {
-        'name': 'Big Fruit & Veggie Box'
-        'description': 'Get a great deal on all the best priced vegetables'
-        published: true
-        price: 20
-      }
-    ]
-
-    for product in products
-      Products.insert product
-    console.log "product fixtures added"
-
-  if Hubs.find().count() is 0
-
-    hubs = [
-      {
-        'location': 'Whau Valley'
-        'title': 'South Kamo Hub'
-        'dayOfTheWeek': 'Tuesday'
-        'openHours': '2:30pm-3:30pm'
-        'description': 'Pick up your box in Whau Valley now. Perfect if you live or work in Kamo or Kensington'
-        'coords': {}
-      },
-      {
-        'location': 'Rust Ave, The Old Library, Whangarei'
-        'title': 'Central Whangarei Hub'
-        'dayOfTheWeek': 'Tuesday'
-        'openHours': '4pm-6:30pm'
-        'description': 'Pick up your box in Central Whangarei. Perfect if you live or work in Whangarei CBD'
-        'coords': {}
-      }
-    ]
-
-    for hub in hubs
-      Hubs.insert hub
-    console.log "hub fixtures added"
 
   if Meteor.users.find().count() is 0
     users = [
-      { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin']}
+      { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer']}
       { email: 'sean@foodcoop.nz', name: 'Sean Stanley Customer Role', roles: []}
-      { email: 'sean@corymbosa.me', name: 'Sean Stanley Big Customer Role', roles: ['wholesaleBuyer']}
+      { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer']}
     ]
 
     for user in users
@@ -69,11 +24,27 @@ Meteor.startup ->
 
     console.log "user fixtures added"
 
+  if Products.find().count() is 0
+    producer = Meteor.users().findOne {'profile.name': 'Sean Stanley Master Role'}
+    products = []
 
+    products.push
+      name: 'Plum Jam'
+      producer: producer._id
+      producerName: producer.profile.name
+      price: 5
+      unitOfMeasure: "400 g jar"
+      categories: ["processed goods", "jam", "fruit", "vegan"]
+      stocklevel: 50
+      published: true
 
-  if Subscriptions.find().count() > 0
-    Subscriptions.update
-      status: 'active'
-      end_date: $lt: new Date()
-    , {$set: status: 'cancelled'} #expired?
-    , {multi: true}
+    products.push
+      name: 'Raw Milk'
+      producer: producer._id
+      producerName: producer.profile.name
+      price: 2
+      unitOfMeasure: "L"
+      categories: ["Dairy", "Milk", "Raw"]
+      published: true
+
+    # modify addToCart functions to ignore products with no stocklevel

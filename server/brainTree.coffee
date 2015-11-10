@@ -95,7 +95,7 @@ Meteor.methods
     new Meteor.Error('Transaction failed', result.errors) if not result.success
 
     if result.success
-      resultUpdate = Meteor.call('addFromCartToSubscriptions', user.profile.cart, result.transaction.id)
+      resultUpdate = Meteor.call('addFromCartToOrder', user.profile.cart.products, data.total, result.transaction.id)
       console.log resultUpdate
     result
 

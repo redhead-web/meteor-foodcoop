@@ -27,10 +27,13 @@
             </div>
           </md-list-item>
         </md-list>
-        <div layout="column">
-          <md-button flex style="margin:0" ng-click="showDialog($event, product)" class="md-raised md-primary">
+        <div layout="row">
+          <md-input-container>
+            <input type="number" ng-min="product.minimumOrder || 1" ng-model="qty">
+          </md-input-container>
+          <md-button flex style="margin:0" ng-click="addToCart($event, product, qty)" class="md-raised md-primary">
             <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-            Place Order
+            Order
           </md-button>
           <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
             <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
