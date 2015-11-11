@@ -5,7 +5,7 @@ Products.allow({
     return userId && Roles.userIsInRole(userId, 'producer') && (userId === product.producer || isAdmin(userId) );
   },
   update: function (userId, product, fields, modifier) {
-    if (fields === ['qty'])) {
+    if (fields === ['qty']) {
       return !!userId
     }
     return userId && isAdmin(userId);

@@ -21,17 +21,15 @@ alanning:roles
 momentjs:moment
 patrickml:braintree@1.29.0
 stevezhu:lodash
-angular:angular-material@0.11.0
+angular:angular-material
 tmeasday:publish-counts
 dburles:collection-helpers
 rgnevashev:meteor-angular-coffee
 fourseven:scss
 planettraining:material-design-icons
-urigo:angular-blaze-template
 jonatan:angular-google-places-autocomplete
 angularutils:pagination
 angular
-lookback:emails
 yogiben:pretty-email
 velocity:html-reporter
 konecty:mongo-counter
@@ -39,7 +37,6 @@ standard-minifiers
 meteor-base
 mobile-experience
 mongo
-blaze-html-templates
 session
 jquery
 tracker

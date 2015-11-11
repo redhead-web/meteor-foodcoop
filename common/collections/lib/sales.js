@@ -22,7 +22,7 @@ Sales.allow({
 Sales.deny({
   fetch: ['user', 'status'],
   update: function(userId, sale, fields, modifier) {
-    if (_.contains(fields, 'orderId') {
+    if (_.contains(fields, 'orderId') ) {
       return true;
     }
   }

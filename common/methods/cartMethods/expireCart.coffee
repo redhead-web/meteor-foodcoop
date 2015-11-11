@@ -20,6 +20,7 @@ Meteor.methods
           Products.update
             _id: product.productId
             'carted.user': user._id
+            stocklevel: $exists: 1
           ,
             $inc: stocklevel: product.qty
             $pull: carted: user: user._id

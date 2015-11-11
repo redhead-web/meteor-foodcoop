@@ -73,8 +73,8 @@ profile = new SimpleSchema
     label: "Producer Data"
     type: producerData
     optional:true
-  balance: type: Number, decimal: true,
-  businessBalance: type: Number, decimal: true, optional: true
+  balance: type: Number, decimal: true, defaultValue: 0
+  businessBalance: type: Number, decimal: true, optional: true, defaultValue: 0
   useBusinessBalance: type: Boolean, defaultValue: false
 
 Schema = new SimpleSchema

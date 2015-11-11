@@ -2,7 +2,8 @@
 
 Meteor.methods
   updateCartQty: (id, new_qty, old_qty) ->
-    check qty, Number
+    check new_qty, Number
+    check old_qty, Number
     check id, String
     self = this
     deltaQty = new_qty - old_qty

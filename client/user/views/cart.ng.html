@@ -13,7 +13,7 @@
                   ng-style="{'background': 'url(\'{{item.details.img}}\') no-repeat center center', 'background-size':'cover'}"
                   >
       <div layout="column" layout-align="center center">
-        <h3 class="cart-grid-title">x{{item.qty}} {{item.details.name}} @ {{item.details.price | currency}}/week
+        <h3 class="cart-grid-title">x{{item.qty}} {{item.details.name}} @ {{item.details.price | currency}}
         </h3>
         <md-button class="md-raised md-fab md-accent md-hue-3" ng-click="removeFromCart(item._id)" aria-label="delete cart item">
           <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
@@ -75,7 +75,7 @@
         {{item.details.price | currency}}
       </td>
       <td>
-        <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="changeQuantity(item.qty, item._id)" min="1">
+        <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="changeQuantity(item._id, item.qty,  '{{item.qty}}')" min="1">
       </td>
       <td>
         <span ng-if="item.indefinate">

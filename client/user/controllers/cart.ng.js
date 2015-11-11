@@ -47,9 +47,9 @@ angular.module("food-coop").controller("UserCartCtrl", function($scope, $rootSco
     }
   }
 
-  function changeQuantity (qty, id) {
+  function changeQuantity (id, new_qty, old_qty) {
     countTotal();
-    $meteor.call('updateCartQty', qty, id)
+    $meteor.call('updateCartQty', id, new_qty, old_qty)
     .then(countTotal, function(error) {
       console.log(error);
     });

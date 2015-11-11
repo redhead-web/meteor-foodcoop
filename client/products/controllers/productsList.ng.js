@@ -51,3 +51,4 @@ angular.module("food-coop").controller("ProductsListCtrl", function($scope, $roo
       );
     })
   }
+});

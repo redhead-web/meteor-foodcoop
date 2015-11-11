@@ -24,7 +24,7 @@ Orders.allow({
 Orders.deny({
   fetch: ['user', 'status'],
   update: function(userId, subscription, fields, modifier) {
-    if (_.contains(fields, 'user') {
+    if (_.contains(fields, 'user') ) {
       return true;
     }
 

@@ -56,19 +56,9 @@ loadDefaultFixtures = function () {
   var i, id, user, users;
 
   users = [
-    {
-      email: 'sean@maplekiwi.com',
-      name: 'Sean Stanley Master Role',
-      roles: ['admin']
-    }, {
-      email: 'sean@foodcoop.nz',
-      name: 'Sean Stanley Customer Role',
-      roles: []
-    }, {
-      email: 'sean@corymbosa.me',
-      name: 'Sean Stanley Big Customer Role',
-      roles: ['wholesaleBuyer']
-    }
+    { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer', 'deliveryCoordinator']},
+    { email: 'sean@foodcoop.nz', name: 'Sean Stanley Customer Role', roles: []},
+    { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer']}
   ];
 
   for (i = 0; i < users.length; i++) {
@@ -79,8 +69,6 @@ loadDefaultFixtures = function () {
       createdAt: Date.now,
       profile: {
         name: user.name,
-        address: 'home',
-        phone: '123'
       }
     });
     if (user.roles.length !== 0) {
@@ -92,15 +80,22 @@ loadDefaultFixtures = function () {
 
   products = [
     {
-      name: 'Small Fruit & Veggie Box',
-      description: 'Get a great deal on all the best priced vegetables',
-      published: true,
-      price: 10.0
+      name: 'Plum Jam'
+      producer: producer._id
+      producerName: producer.profile.name
+      price: 5
+      unitOfMeasure: "400 g jar"
+      categories: ["processed goods", "jam", "fruit", "vegan"]
+      stocklevel: 50
+      published: true
     }, {
-      name: 'Big Fruit & Veggie Box',
-      description: 'Get a great deal on all the best priced vegetables',
-      published: true,
-      price: 20.0
+      name: 'Raw Milk'
+      producer: producer._id
+      producerName: producer.profile.name
+      price: 2
+      unitOfMeasure: "L"
+      categories: ["Dairy", "Milk", "Raw"]
+      published: true
     }
   ];
 
@@ -108,7 +103,6 @@ loadDefaultFixtures = function () {
     product = products[j];
     Products.insert(product);
   }
-
 
   console.log('Finished loading default fixtures');
 };
