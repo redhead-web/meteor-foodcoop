@@ -8,8 +8,8 @@
 <!-- <meteor-include src="imageUpload"></meteor-include> -->
 
 <!-- <meteor-include src="insertProductForm"></meteor-include> -->
-  <md-content layout="row" layout-align="center center">
-    <md-card ng-repeat="product in products" flex='40'>
+  <md-content layout="row" layout-align="center center" layout-sm="column">
+    <md-card ng-repeat="product in products" flex='33' flex-sm="95">
       <img ng-src="{{product.img}}">
       <md-card-content>
         <md-list>

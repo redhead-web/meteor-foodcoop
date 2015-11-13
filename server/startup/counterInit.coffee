@@ -1,2 +1,2 @@
 Meteor.startup ->
-	setCounter Counters, 'customerNumber', 2000
+	setCounter Counters, 'customerNumber', 490

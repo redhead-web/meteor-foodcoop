@@ -1,6 +1,30 @@
-<md-content layout="row">
+<md-content layout="row" layout-sm="column">
   <span flex></span>
-  <md-whiteframe layout="column" flex="50" flex-sm="95">
+  <md-whiteframe flex="20" flex-sm="95" layout="column" ng-controller="photoUploadCtrl">
+    <div
+      ngf-drop="uploadFiles($files)"
+      ngf-drag-over-class="dragOverClass($event)"
+      ng-model="product.img"
+      ngf-min-size="'5MB'"
+      ngf-min-width="400"
+      ngf-min-height="300">
+      <h3>Product Image</h3>
+      <form><md-button
+        class="md-fab"
+        aria-label="upload image"
+        ngf-capture="'camera'"
+        ngf-select="uploadFiles($files)"
+        ngf-min-size="'5MB'"
+        ngf-min-width="400"
+        ngf-min-height="300"
+      >
+        <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
+      </md-button></form>
+      <img ngf-src="product.img.result.url || product.img">
+    </div>
+  </md-whiteframe>
+  <md-whiteframe layout="column" flex="60" flex-sm="95">
+    <br>
     <div ng-show="error" class="md-warn">
       <small>{{ error }}</small>
     </div>
@@ -12,16 +36,20 @@
         <input ng-model="product.price" type="number" placeholder="Price">
       </md-input-container>
       <md-input-container>
-        <md-checkbox ng-model="product.wholeSaleOnly" aria-label="Checkbox 1">
-          Checkbox 1: {{ data.cb1 }}
+        <md-checkbox ng-model="product.saveAsDraft" aria-label="Checkbox 1">
+          : {{ data.cb1 }}
         </md-checkbox>
       </md-input-container>
       <md-button ng-click="products.save(product)">Publish</md-button>
       <md-button ui-sref="store">Cancel</md-button>
     </form>
   </md-whiteframe>
+  <md-whiteframe flex="20" flex-sm="100" layout="column">
+    <md-switch ng-model="product.published" class="md-block">State: <span ng-show="product.published">Published</span><span ng-hide="product.published">draft</span> </md-switch>
+  </md-whiteframe>
   <span flex></span>
 </md-content>
+{{product.img}}
 
 
 <!-- Create a new product here. Hit the publish button when you are ready for the product to go live.

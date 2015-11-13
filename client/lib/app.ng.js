@@ -3,7 +3,8 @@ angular.module('food-coop',[
   'ui.router',
   'uiGmapgoogle-maps',
   'google.places',
-  'angularUtils.directives.dirPagination',
+  'ngFileUpload',
+  'cloudinary',
   'ngMaterial'])
 // .config(function(uiGmapGoogleMapApiProvider) {
 //     uiGmapGoogleMapApiProvider.configure({

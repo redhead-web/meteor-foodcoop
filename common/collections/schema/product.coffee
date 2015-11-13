@@ -26,9 +26,7 @@ Schema = new SimpleSchema
   categories:
     type: [String]
   stocklevel:
-    type: Number
-    min:0
-    optional: true
+    type: Number, min:0, optional: true
   carted:
     type: [Object]
     optional: true
@@ -43,10 +41,6 @@ Schema = new SimpleSchema
   img:
     type: String
     label: "Product Image"
-    optional:true
-  thumb:
-    type: String
-    label: "Product Thumbnail Image"
     optional:true
   wholeSaleOnly:
     type: Boolean

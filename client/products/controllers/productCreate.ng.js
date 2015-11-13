@@ -1,21 +1,15 @@
-angular.module("food-coop").controller("ProductCreateCtrl", function($scope){
-  $scope.product = {};
+angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $rootScope){
+  $scope.product = {
+    producer: $rootScope.currentUser._id,
+    producerName: $rootScope.currentUser.profile.name,
+    producerCompanyName: $rootScope.currentUser.profile.companyName || undefined
+  };
 
-  Uploader.finished = imageUploadComplete;
-
-  $scope.products = $scope.$meteorCollection(Products).subscribe('products');
-
+  $scope.products = $scope.$meteorCollection(Products);
 
   $scope.save = function() {
-    if (!$scope.hasOwnProperty('_id')) {
+    if (!$scope.product.hasOwnProperty('_id')) {
       $scope.products.save($scope.product);
     }
   };
-
-  function imageUploadComplete (index, fileInfo, templateContext) {
-    $scope.$apply( function() {
-      $scope.product.img = fileInfo.thumbnailBigUrl;
-      $scope.product.thumb = fileInfo.thumbnailSmallUrl;
-    });
-  }
 });

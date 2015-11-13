@@ -4,8 +4,14 @@
     "PUBLIC_KEY" : "tqn8c86wyzq4wtk3",
     "PRIVATE_KEY" : "42009c617f558b001711e35a7df3a0c7"
   },
-  "deliveryDayOfWeek": 4,
-  "shoppingStopDay": 2,
-  "cartExpiryDays": 7
+  "public": {
+    "cloudinary": {
+      "cloud_name": "foodcoop",
+      "upload_preset": "mzahab1a"
+    },
+    "deliveryDayOfWeek": 4,
+    "shoppingStopDay": 2,
+    "cartExpiryDays": 7
+  }
 
 }

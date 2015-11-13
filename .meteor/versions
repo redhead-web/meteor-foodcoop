@@ -33,6 +33,7 @@ callback-hook@1.0.4
 check@1.1.0
 cmather:handlebars-server@2.0.0
 coffeescript@1.0.11
+danialfarid:ng-file-upload@5.0.9
 dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
@@ -94,6 +95,7 @@ random@1.0.5
 rate-limit@1.0.0
 reactive-dict@1.1.3
 reactive-var@1.0.6
+redhead:angular-cloudinary@0.0.1
 reload@1.1.4
 retry@1.0.4
 rgnevashev:meteor-angular-coffee@1.9.3

@@ -1,15 +1,3 @@
-producerData = new SimpleSchema
-  companyName: type: String, optional:true
-  summary: type: String, optional:true
-  bio: type: String, optional:true
-  bankAccount: type: String, optional: true
-  shareAddress: type: Boolean, optional: true
-  logo: type: String, optional:true
-  thumbnail: type: String, optional: true
-  website: type: String, optional: true
-  chemicals: type: String, optional:true
-  certification: type: String, optional: true
-
 cart = new SimpleSchema
   last_modified:
     type: Date
@@ -69,13 +57,19 @@ profile = new SimpleSchema
     type: [String]
     optional:true
     defaultValue: []
-  producerData:
-    label: "Producer Data"
-    type: producerData
-    optional:true
   balance: type: Number, decimal: true, defaultValue: 0
   businessBalance: type: Number, decimal: true, optional: true, defaultValue: 0
   useBusinessBalance: type: Boolean, defaultValue: false
+  companyName: type: String, optional:true
+  summary: type: String, optional:true
+  bio: type: String, optional:true
+  bankAccount: type: String, optional: true
+  shareAddress: type: Boolean, optional: true
+  logo: type: String, optional:true
+  thumbnail: type: String, optional: true
+  website: type: String, optional: true
+  chemicals: type: String, optional:true
+  certification: type: String, optional: true
 
 Schema = new SimpleSchema
   emails:

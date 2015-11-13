@@ -47,4 +47,7 @@ Meteor.startup ->
       categories: ["Dairy", "Milk", "Raw"]
       published: true
 
+    for product in products
+      Products.insert product
+
     # modify addToCart functions to ignore products with no stocklevel
