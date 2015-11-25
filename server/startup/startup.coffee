@@ -2,6 +2,31 @@ Meteor.startup ->
   SimpleSchema.debug = true
   console.log "starting the app... :-)"
 
+  if Categories.find().count() is 0
+    categories = [
+      {name: 'Seedlings'}
+      {name: 'Baked Goods'}
+      {name: 'Meat'}
+      {name: 'Dairy & Eggs'}
+      {name: 'Produce'}
+      {name: 'Preserves'}
+      {name: 'Tea & Beverages'}
+      {name: 'Ready-made Meals'}
+    ]
+    for cat in categories
+      Categories.insert cat
+
+  if Certifications.find().count() is 0
+    certifications = [
+      {name: 'Assure Qual', img: 'certification/assure-quality.png'}
+      {name: 'Biogro', img: 'certification/biogro.png'}
+      {name: 'Demeter', img: 'certification/demgreen.gif'}
+      {name: 'Organic Farm NZ', img: 'certification/organicfarmnz.png'}
+      {name: 'In Transition'}
+    ]
+    for cert in certifications
+      Certifications.insert cert
+
   if Meteor.users.find().count() is 0
     users = [
       { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer']}
@@ -34,7 +59,7 @@ Meteor.startup ->
       producerName: producer.profile.name
       price: 5
       unitOfMeasure: "400 g jar"
-      categories: ["processed goods", "jam", "fruit", "vegan"]
+      category: "Processed Goods"
       stocklevel: 50
       published: true
 
@@ -44,7 +69,7 @@ Meteor.startup ->
       producerName: producer.profile.name
       price: 2
       unitOfMeasure: "L"
-      categories: ["Dairy", "Milk", "Raw"]
+      category: "Dairy & Eggs"
       published: true
 
     for product in products

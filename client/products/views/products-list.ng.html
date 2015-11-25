@@ -1,29 +1,18 @@
-<!-- <form>
-  <label>Name</label>
-  <input ng-model="newProduct.name">
-  <label>Description</label>
-  <input ng-model="newProduct.description">
-  <md-button ng-click="newProduct.price = 200; products.save(newProduct)">Add</md-button>
-</form> -->
-<!-- <meteor-include src="imageUpload"></meteor-include> -->
 
-<!-- <meteor-include src="insertProductForm"></meteor-include> -->
   <md-content layout="row" layout-align="center center" layout-sm="column">
     <md-card ng-repeat="product in products" flex='33' flex-sm="95">
-      <img ng-src="{{product.img}}">
+      <a href="/product/{{product._id}}">
+        <cl-image public-id="{{product.img.result}}" flex="100" format="jpg">
+          <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
+        </cl-image>
+      </a>
       <md-card-content>
         <md-list>
           <md-list-item class="md-3-line">
             <div class="md-list-item-text">
-              <h2>{{product.name}}
-                <md-button href="/product/{{product._id}}" class="md-fab md-info"
-                ng-if="currentUser && hasRole(currentUser, 'admin')"
-                aria-label="Edit Product">
-                  <md-icon md-svg-icon="action:ic_note_add_24px"></md-icon>
-                </md-button>
+              <h2><a href="/product/{{product._id}}">{{product.name}}</a>
               </h2>
-              <p>{{product.price | currency}}</p>
-              <p>{{product.description}}</p>
+              <p><a href="/product/{{product._id}}">{{product.price * markup | currency}}</a></p>
             </div>
           </md-list-item>
         </md-list>

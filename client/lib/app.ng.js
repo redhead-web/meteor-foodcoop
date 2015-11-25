@@ -1,11 +1,13 @@
 angular.module('food-coop',[
+  'ngMessages',
   'angular-meteor',
   'ui.router',
+  'ngMaterial',
   'uiGmapgoogle-maps',
   'google.places',
   'ngFileUpload',
   'cloudinary',
-  'ngMaterial'])
+  ])
 // .config(function(uiGmapGoogleMapApiProvider) {
 //     uiGmapGoogleMapApiProvider.configure({
 //         //    key: 'your api key',

@@ -1,24 +1,39 @@
-angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $meteor){
-  $scope.product = $scope.$meteorObject(Products, $stateParams.productId, false).subscribe('products');
+angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $rootScope, $meteor){
 
-  $scope.save = function() {
-    $scope.product.save().then(updateCarts, function(error) {
+  var vm = this;
+
+  vm.markup = Meteor.settings.public.markup/100 + 1;
+
+  vm.edit = {
+    name: false,
+    price: false,
+    unitOfMeasure: false,
+    stocklevel: false,
+    description: false
+  }
+
+  vm.product = $scope.$meteorObject(Products, $stateParams.productId, false);
+  if ($rootScope.currentUser) {
+    vm.isOwner = $rootScope.currentUser._id === vm.product.producer || Roles.userIsInRole($rootScope.currentUser._id, 'admin');
+  }
+
+  vm.save = function() {
+    vm.product.save().then(updateCarts, function(error) {
       console.warn(error);
     })
   };
 
-  $scope.reset = function() {
-    $scope.product.reset();
-  };
+  $scope.$watch( function() {
+    return vm.product.img;
+  }, function(n) {
+    if (n && !!n.result) {
+      vm.save();
+    }
+  });
 
   function updateCarts() {
-    $meteor.call('editProduct', $scope.product);
+    $meteor.call('editProduct', vm.product);
   };
 
-  function imageUploadComplete (index, fileInfo, templateContext) {
-    $scope.$apply( function() {
-      $scope.product.img = fileInfo.thumbnailBigUrl;
-      $scope.product.thumb = fileInfo.thumbnailSmallUrl;
-    });
-  }
+  return vm;
 });

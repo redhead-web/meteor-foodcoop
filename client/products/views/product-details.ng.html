@@ -1,64 +1,125 @@
 <md-content layout="row" layout-padding>
 
-  <md-card flex="30">
-    <img ng-if="product.img" ng-src="{{product.img}}">
-    <md-card-content>
-      <md-list>
-        <md-list-item class="md-3-line">
-          <div class="md-list-item-text">
-            <h2>{{product.name}}</h2>
-            <p>{{product.price | currency}}</p>
-            <p>{{product.description}}</p>
-          </div>
-        </md-list-item>
-      </md-list>
-      <div layout="column">
-        <md-button flex class="md-raised md-primary">
-          <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-          I want to place an Order
-        </md-button>
-        <md-button flex class="md-raised md-primary">
-          Continuous Order
+  <md-content flex="60">
+    <div class="img-wrapper" ng-controller="photoUploadCtrl">
+      <img ng-if="!!ctrl.product.img" ngf-src="ctrl.product.img.result || ctrl.product.img" flex="100">
+      <md-button
+        ng-if="!!ctrl.product.img && ctrl.isOwner"
+        class="md-icon-button"
+        aria-label="upload new image"
+        accept="image/*"
+        ngf-capture="'camera'"
+        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
+        ng-model="ctrl.product.img"
+        ngf-max-size="'10MB'"
+        ngf-min-width="400"
+        ngf-min-height="300"
+      >
+        <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
+      </md-button>
+      <div class="upload-button" ng-if="!ctrl.product.img && ctrl.isOwner" layout="column" layout-align="center center">
+        <md-button
+          class="md-fab"
+          accept="image/*"
+          aria-label="upload image"
+          ngf-capture="'camera'"
+          ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
+          ng-model="ctrl.product.img"
+          ngf-max-size="'10MB'"
+          ngf-min-width="400"
+          ngf-min-height="300"
+        >
+          <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
         </md-button>
       </div>
-    </md-card-content>
-  </md-card>
-  <md-card flex>
-    <md-card-content>
-      <form>
-        <div layout layout-sm="column">
-          <md-input-container flex>
-            <label>Product Name</label>
-            <input ng-model="product.name">
-          </md-input-container>
-          <md-input-container flex>
-            <label>Price</label>
-            <input ng-model="product.price" type="number">
-          </md-input-container>
-          <md-input-container flex>
-            <label>Description</label>
-            <textarea ng-model="product.description" columns="2" md-maxlength="400"></textarea>
-          </md-input-container>
-        </div>
-        <div flex="50">
-          <md-checkbox ng-model="product.wholeSaleOnly">
-            Whole Sale Only: {{product.wholeSaleOnly}}
-          </md-checkbox>
-        </div>
-        <div flex="50">
-          <md-checkbox ng-model="product.published">
-            List in the Store: {{product.published}}
-          </md-checkbox>
-        </div>
+      <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
+      <md-progress-linear ng-if="product && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
+    </div>
+    {{ctrl.product.img}}
 
-        <blaze-template name="imageUpload"></blaze-template>
+  </md-content>
 
-      </form>
-      <div layout="row">
-        <md-button ng-click="save()">Save</md-button>
-        <md-button ui-sref="store">Done</md-button>
-      </div>
-    </md-card-content>
-  </md-card>
+  <md-content flex layout="column">
+    <h1 ng-hide="ctrl.edit.name">
+      <md-button
+        ng-if="ctrl.isOwner"
+        ng-click="ctrl.edit.name = !ctrl.edit.name"
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+     </md-button>
+      {{ctrl.product.name}}
+    </h1>
+    <form name="editName"
+    ng-submit="ctrl.save(ctrl.product); ctrl.edit.name = !ctrl.edit.name"
+    ng-if="ctrl.edit.name && ctrl.isOwner">
+      <md-input-container flex>
+        <label>Product Name</label>
+        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="40">
+        <div ng-messages="editName.productName.$error" ng-if="editName.productName.$touched">
+          <div ng-message="required">A product name is required.</div>
+          <div ng-message="maxlength">Please use a shorter name.</div>
+        </div>
+      </md-input-container>
+      <md-button type="submit">Save</md-button>
+    </form>
+
+    <h2 ng-hide="ctrl.edit.price">
+      <md-button
+        ng-if="ctrl.isOwner"
+        ng-click="ctrl.edit.price = !ctrl.edit.price;"
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+      {{ctrl.product.price * ctrl.markup | currency}} / {{ctrl.product.unitOfMeasure}}
+    </h2>
+    <form name="editPrice"
+    ng-submit="ctrl.save(ctrl.product); ctrl.edit.price = !ctrl.edit.price;"
+    ng-if="ctrl.edit.price && ctrl.isOwner">
+      <md-input-container class="md-icon-float md-block">
+        <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
+        <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="Price" name="price">
+        <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
+          <div ng-message="required">A product name is required.</div>
+          <div ng-message="maxlength">Please use a shorter name.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Unit Of Measure</label>
+        <input ng-model="ctrl.product.unitOfMeasure" type="text" maxlength="10" required>
+        <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
+          <div ng-message="required">this field is required.</div>
+          <div ng-message="maxlength">Please use a unit of measure with fewer characters.</div>
+        </div>
+      </md-input-container>
+      <md-button type="submit">Save</md-button>
+    </form>
+
+    <form ng-if="!!$root.currentUser" name="addToCartForm" ng-controller="orderProductCtrl as sh" ng-submit="sh.addToCart($event, ctrl.product, sh.qty)" layout="column">
+      <md-input-container flex>
+        <label>Quantity</label>
+        <input ng-model="sh.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">
+        <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
+          <div ng-message="required">this field is required.</div>
+          <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
+        </div>
+      </md-input-container>
+      <md-button class="md-raised md-primary" flex>
+        <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+        Add To Cart
+      </md-button>
+    </form>
+    <md-button ui-sref="store">Keep Shopping</md-button>
+    <md-switch ng-if="ctrl.isOwner" class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
+    <md-list>
+      <md-list-item ng-click="ctrl.navigateTo(ctrl.product.category)">
+        <p>{{ctrl.product.category}}</p>
+      </md-list-item>
+    </md-list>
+    <md-divider></md-divider>
+    <md-content>
+      <p>{{ctrl.product.description}}</p>
+    </md-content>
+
+  </md-content>
 
 </md-content>

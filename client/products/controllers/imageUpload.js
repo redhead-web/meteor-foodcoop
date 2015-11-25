@@ -3,10 +3,11 @@ angular.module("food-coop").controller('photoUploadCtrl', ['$scope', '$rootScope
 function($scope, $rootScope, Upload) {
   var d = new Date();
   var title = "Image (" + d.getDate() + " - " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
-  $scope.uploadFiles = function(file, title){
-    if (!file) return;
+  $scope.uploadFiles = function(file, errFiles, title){
+    if (errFiles.length > 0) return $scope.invalidFiles = errFiles;
     if (file && !file.$error) {
-      file.upload = Upload.upload({
+      if (title == undefined) title = Random.id(6);
+      Upload.upload({
         url: "https://api.cloudinary.com/v1_1/" + Meteor.settings.public.cloudinary.cloud_name + "/image/upload",
         fields: {
           upload_preset: Meteor.settings.public.cloudinary.upload_preset,
@@ -14,15 +15,15 @@ function($scope, $rootScope, Upload) {
           context: 'photo=' + title
         },
         file: file
-      }).progress(function (e) {
-        file.progress = Math.round((e.loaded * 100.0) / e.total);
+      }).then(function (data, status, headers, config) {
+        file.result = data.data.public_id;
+        file.url = data.data.url;
+        delete file.status
+      }, function (data, status, headers, config) {
+        file.result = data;
+      }, function (e) {
+        $scope.progress = Math.round((e.loaded * 100.0) / e.total);
         file.status = "Uploading... " + file.progress + "%";
-      }).success(function (data, status, headers, config) {
-        data.context = {custom: {photo: title}};
-        file.result = data;
-        $rootScope.photos.push(data);
-      }).error(function (data, status, headers, config) {
-        file.result = data;
       });
     }
   };

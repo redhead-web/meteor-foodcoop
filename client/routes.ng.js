@@ -24,16 +24,23 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
       url: '/product/:productId',
       templateUrl: 'client/products/views/product-details.ng.html',
       controller: 'ProductDetailsCtrl',
-      resolve: {
-        "admin" : function($meteor) {
-          return $meteor.requireValidUser(isAdmin);
-        }
-      }
+      controllerAs: 'ctrl',
+      // resolve: {
+      //   "admin" : function($meteor) {
+      //     return $meteor.requireValidUser(isAdmin);
+      //   }
+      // }
     })
     .state('productCreate', {
       url: '/new-product',
       templateUrl: 'client/products/views/product-create.ng.html',
-      controller: 'ProductCreateCtrl'
+      controller: 'ProductCreateCtrl',
+      controllerAs: 'ctrl',
+      resolve: {
+        "currentUser" : function($meteor) {
+          return $meteor.requireUser();
+        }
+      }
     })
     .state('profile', {
       url: '/me',

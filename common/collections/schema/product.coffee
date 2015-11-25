@@ -23,8 +23,8 @@ Schema = new SimpleSchema
   unitOfMeasure:
     type: String
     max:10
-  categories:
-    type: [String]
+  category:
+    type: String
   stocklevel:
     type: Number, min:0, optional: true
   carted:
@@ -39,9 +39,10 @@ Schema = new SimpleSchema
   'carted.$.timestamp':
     type: Date
   img:
-    type: String
+    type: Object
     label: "Product Image"
     optional:true
+    blackbox: true
   wholeSaleOnly:
     type: Boolean
     defaultValue: false

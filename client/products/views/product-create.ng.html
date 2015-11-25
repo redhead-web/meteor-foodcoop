@@ -1,55 +1,142 @@
 <md-content layout="row" layout-sm="column">
   <span flex></span>
-  <md-whiteframe flex="20" flex-sm="95" layout="column" ng-controller="photoUploadCtrl">
+  <md-whiteframe
+  flex="20" flex-sm="95"
+  layout="column"
+  layout-align="start center"
+  ng-controller="photoUploadCtrl">
     <div
-      ngf-drop="uploadFiles($files)"
+      layout="column"
+      ngf-drop="uploadFiles($file, $invalidFiles, ctrl.product.name)"
       ngf-drag-over-class="dragOverClass($event)"
-      ng-model="product.img"
-      ngf-min-size="'5MB'"
+      ng-model="ctrl.product.img"
+      ngf-max-size="'5MB'"
       ngf-min-width="400"
+      accept="image/*"
       ngf-min-height="300">
       <h3>Product Image</h3>
-      <form><md-button
+      <md-button
         class="md-fab"
+        accept="image/*"
         aria-label="upload image"
         ngf-capture="'camera'"
-        ngf-select="uploadFiles($files)"
-        ngf-min-size="'5MB'"
+        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
+        ng-model="ctrl.product.img"
+        ngf-max-size="'5MB'"
         ngf-min-width="400"
         ngf-min-height="300"
       >
         <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
-      </md-button></form>
-      <img ngf-src="product.img.result.url || product.img">
+      </md-button>
+      <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
+      <md-progress-linear ng-if="progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
+      <img ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
     </div>
   </md-whiteframe>
   <md-whiteframe layout="column" flex="60" flex-sm="95">
     <br>
-    <div ng-show="error" class="md-warn">
-      <small>{{ error }}</small>
+    <div ng-show="ctrl.error" class="md-warn">
+      <small>{{ ctrl.error }}</small>
     </div>
-    <form layout="column">
+    <form layout="column" name="productUploadForm">
       <md-input-container>
-        <input ng-model="product.name" placeholder="Name">
+        <label>Product Name</label>
+        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="40">
+        <div ng-messages="productUploadForm.productName.$error" ng-if="productUploadForm.productName.$touched">
+          <div ng-message="required">A product name is required.</div>
+          <div ng-message="maxlength">Please use a shorter name.</div>
+        </div>
       </md-input-container>
+      <div layout="row">
+        <md-input-container flex="50" class="md-icon-float md-block">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
+          <input ng-model="ctrl.product.price" type="number" min="0" placeholder="Price" name="price">
+          <div ng-messages="productUploadForm.price.$error" ng-if="productUploadForm.price.$touched">
+            <div ng-message="required">A product price is required.</div>
+          </div>
+        </md-input-container>
+        <!-- <md-input-container flex="50">
+
+          <input s ng-model="ctrl.product.unitOfMeasure" type="text" >
+        </md-input-container> -->
+        <div style="position:relative; margin-top: -12px">
+          <span class="text-slash">/</span>
+          <md-autocomplete style="margin-left: 36px" required md-input-name="unitofmeasure" placeholder="Unit of Measure" md-search-text="ctrl.search"
+          md-select-on-match="true" ng-model="ctrl.product.unitOfMeasure"
+          md-items="item in ctrl.getUnitsOfMeasure(ctrl.search)"
+          md-item-text="item" md-floating-label="Unit of Measure">
+            <md-item-template>
+              <span md-highlight-text="searchText">{{item}}</span>
+            </md-item-template>
+            <div ng-messages="productUploadForm.unitofmeasure.$error" ng-if="productUploadForm.unitofmeasure.$touched">
+              <div ng-message="required">This field is required</div>
+            </div>
+          </md-autocomplete>
+        </div>
+      </div>
+
+      <div layout="row" layout-align="center end">
+        <div flex="50">
+          <label>Number Available</label>
+          <div layout="row" style="align-items:flex-end">
+            <md-input-container flex="50">
+              <label>Amount</label>
+              <input ng-model="ctrl.product.stocklevel" type="number" min="0" ng-disabled="ctrl.unlimited">
+            </md-input-container>
+            <md-input-container flex="50">
+              <md-checkbox ng-model="ctrl.unlimited">Unlimited</md-checkbox>
+            </md-input-container>
+          </div>
+        </div>
+
+        <md-input-container flex="50">
+          <label>Min. Order</label>
+          <input ng-model="ctrl.product.minimumOrder" type="number">
+        </md-input-container>
+      </div>
+
+      <section layout="row" layout-sm="column" layout-wrap>
+        <md-button
+        class="md-raised"
+        ng-repeat="category in ctrl.categories"
+        ng-class="{'md-primary' : ctrl.product.category === category.name}"
+        ng-click="ctrl.product.category = category.name">
+          {{category.name}}
+        </md-button>
+      </section>
+
+      <md-chips
+      ng-model="ctrl.product.ingredients"
+      md-separator-keys="ctrl.keys"
+      secondary-placeholder="Ingredients (Optional)"
+      placeholder="Add another"></md-chips>
+
       <md-input-container>
-        <input ng-model="product.price" type="number" placeholder="Price">
+        <label>Certification</label>
+        <md-select ng-model="ctrl.product.certification">
+          <md-option ng-repeat="c in ctrl.certifications" ng-value="{name: c.name, img: c.img}">
+            <img ng-src="{{c.img}}" height="40" style="position: absolute; top: 2px; left: 2px;"> <span style="margin-left: 48px">{{c.name}}</span>
+          </md-option>
+        </md-select>
       </md-input-container>
-      <md-input-container>
-        <md-checkbox ng-model="product.saveAsDraft" aria-label="Checkbox 1">
-          : {{ data.cb1 }}
-        </md-checkbox>
+
+      <md-input-container class="md-block">
+        <label>Description</label>
+        <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"></textarea>
+        <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
+          <div ng-message="maxlength">Please use a shorter description.</div>
+        </div>
       </md-input-container>
-      <md-button ng-click="products.save(product)">Publish</md-button>
+
+      <md-button ng-click="ctrl.products.save()">List In Store</md-button>
       <md-button ui-sref="store">Cancel</md-button>
     </form>
   </md-whiteframe>
   <md-whiteframe flex="20" flex-sm="100" layout="column">
-    <md-switch ng-model="product.published" class="md-block">State: <span ng-show="product.published">Published</span><span ng-hide="product.published">draft</span> </md-switch>
+    <md-switch class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
   </md-whiteframe>
   <span flex></span>
 </md-content>
-{{product.img}}
 
 
 <!-- Create a new product here. Hit the publish button when you are ready for the product to go live.
