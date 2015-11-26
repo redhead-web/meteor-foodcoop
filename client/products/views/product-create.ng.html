@@ -50,9 +50,11 @@
       <div layout="row">
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
-          <input ng-model="ctrl.product.price" type="number" min="0" placeholder="Price" name="price">
+          <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="Price" name="price">
           <div ng-messages="productUploadForm.price.$error" ng-if="productUploadForm.price.$touched">
             <div ng-message="required">A product price is required.</div>
+            <div ng-message="number">Please use just a positive number here.</div>
+            <div ng-message="min">Please use a positive number here.</div>
           </div>
         </md-input-container>
         <!-- <md-input-container flex="50">
@@ -91,7 +93,11 @@
 
         <md-input-container flex="50">
           <label>Min. Order</label>
-          <input ng-model="ctrl.product.minimumOrder" type="number">
+          <input ng-model="ctrl.product.minimumOrder" name="minOrder" type="number" min="0">
+          <div ng-messages="productUploadForm.minOrder.$error">
+            <div ng-message="min">You must have a positive number here.</div>
+            <div ng-message="number">Please use just a number here.</div>
+          </div>
         </md-input-container>
       </div>
 
@@ -104,6 +110,20 @@
           {{category.name}}
         </md-button>
       </section>
+
+      <md-input-container>
+        <label>Short Packaging Description</label>
+        <input ng-model="ctrl.product.packagingDescription" type="text">
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+        <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
+        <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" placeholder="Packaging Refund amount">
+        <div ng-messages="productUploadForm.packagingRefund.$error">
+          <div ng-message="min">You must have a positive number here.</div>
+          <div ng-message="number">Please use just a number here.</div>
+        </div>
+      </md-input-container>
 
       <md-chips
       ng-model="ctrl.product.ingredients"

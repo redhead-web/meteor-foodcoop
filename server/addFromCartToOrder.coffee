@@ -1,41 +1,46 @@
 
 Meteor.methods
-  addFromCartToOrder: (products, total, transactionId, subscriptionId) ->
+  addFromCartToOrder: (products, total, transactionId) ->
     userId = this.userId
     check transactionId, String
 
-    orderTotal = _.sum products, (product) ->
-      product.qty * product.details.price
+    orderTotal = _.reduce(products, ((total, product) ->
+      total + product.qty * product.details.price
+    ), 0)
 
-    products = _.map products, (product) ->
 
-      product.productName = product.details.name
-      product.packagingDescription = product.details.packagingDescription
-      product.packagingRefund = product.details.packagingRefund
-      product.price = product.details.price
-
-      delete product._id
-      delete product.details
-
-      product
 
     id = Orders.insert
-
-      transationTotal: total
+      transactionTotal: parseFloat(total, 10)
       user: userId
       orderTotal: orderTotal
       status: 'paid'
       transactionId: transactionId
-      products: products
+
     if typeof id != 'string'
       return id
 
-    sale =
-      orderId: id
-      deliveryDay: GetDeliveryDay()
-      customer: userId 
+    sales = _.map products, (sale) ->
+      # sale.qty = sale.qty
+      # sale.productId = sale.productId
+      sale.producerId = sale.details.producer
+      sale.price = sale.details.price
+      sale.productName = sale.details.name
+      sale.packagingDescription = sale.details.packagingDescription
+      sale.packagingRefund = sale.details.packagingRefund
 
-    Sales.insert product
+      sale.orderId = id
+      sale.deliveryDay = GetDeliveryDay()
+      sale.customer = userId
+
+      delete sale._id
+      delete sale.details
+
+      sale
+
+
+    for sale in sales
+      Sales.insert sale
 
     update = Meteor.users.update {
       _id: userId

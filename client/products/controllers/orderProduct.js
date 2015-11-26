@@ -15,25 +15,29 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $roo
     );
   }
 
-  function showIsOwnerAlert ($event) {
+  function isOwnerAlert ($event) {
     $mdToast.show(
       $mdToast.simple().content("Sorry, you can't order your own items!").position('bottom left').hideDelay(3000)
     );
   }
 
   function addToCart ($event, product, qty) {
-    var promise;
+    var promise, rawProduct;
+
+    if (typeof product.getRawObject === 'function') {
+      rawProduct = product.getRawObject();
+    } else rawProduct = product;
 
     if (!$rootScope.currentUser) {
       return showLoginAlert($event)
     }
 
     if ($rootScope.currentUser._id === product.producer) {
-
+      return isOwnerAlert($event);
     }
 
 
-    promise = $meteor.call('addToCart', product, qty)
+    promise = $meteor.call('addToCart', rawProduct, qty)
 
     promise.then(function(success) {
       console.log('success!')

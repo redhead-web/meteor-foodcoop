@@ -9,5 +9,6 @@ saleSchema = new SimpleSchema
   deliveryDay:
     type: Date
   orderId: type: String
+  customer: type: String, SimpleSchema.RegEx.Id
 
 Sales.attachSchema saleSchema

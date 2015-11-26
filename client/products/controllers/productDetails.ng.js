@@ -9,7 +9,9 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
     price: false,
     unitOfMeasure: false,
     stocklevel: false,
-    description: false
+    description: false,
+    packagingDescription: false,
+    packagingRefund: false
   }
 
   vm.product = $scope.$meteorObject(Products, $stateParams.productId, false);
@@ -32,7 +34,8 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
   });
 
   function updateCarts() {
-    $meteor.call('editProduct', vm.product);
+    var product = vm.product.getRawObject();
+    $meteor.call('editProduct', product);
   };
 
   return vm;

@@ -16,7 +16,21 @@
             </div>
           </md-list-item>
         </md-list>
-        <div layout="row">
+        <form ng-if="!!$root.currentUser" name="addToCartForm" ng-controller="orderProductCtrl as sh" ng-submit="sh.addToCart($event, product, sh.qty)" layout="row">
+          <md-input-container flex>
+            <label>Quantity</label>
+            <input ng-model="sh.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">
+            <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
+              <div ng-message="required">this field is required.</div>
+              <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
+            </div>
+          </md-input-container>
+          <md-button class="md-raised md-primary" flex>
+            <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+            Add To Cart
+          </md-button> 
+        </form>
+        <!-- <div layout="row">
           <md-input-container>
             <input type="number" ng-min="product.minimumOrder || 1" ng-model="qty">
           </md-input-container>
@@ -27,7 +41,7 @@
           <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
             <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
           </md-button>
-        </div>
+        </div> -->
       </md-card-content>
     </md-card>
   </md-content>

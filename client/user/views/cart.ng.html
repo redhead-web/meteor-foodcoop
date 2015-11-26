@@ -1,8 +1,12 @@
+<md-content ng-if="!currentUser.profile.cart" layout="column" layout-align="center center">
+  <h2>No items in your cart yet</h2>
+  <h3>Maybe do some shopping and then come back?</h3>
+</md-content>
 <md-content ng-if="currentUser.profile.cart" layout="row" layout-align="center center">
 <span flex></span>
 <div flex="70" flex-md=100 flex-sm=100>
   <h1 class="text-center"> Shopping Cart </h1>
-  <md-grid-list
+  <!-- <md-grid-list
         md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
         md-row-height-gt-md="1:1" md-row-height="4:4"
         md-gutter="8px" md-gutter-gt-sm="4px" >
@@ -28,69 +32,73 @@
         </h3>
       </md-grid-tile-footer>
     </md-grid-tile>
-  </md-grid-list>
+  </md-grid-list> -->
 </div>
 <span flex></span>
 </md-content>
 
 
-<!-- <table>
+<table class="material-table">
   <thead>
     <tr>
-      <td>
+      <td colspan="2">
         Product
       </td>
       <td>
-        Duration
+        Producer
       </td>
       <td>
-        Unit price
+        Price
       </td>
       <td>
         Quantity
       </td>
       <td>
-        Price
+        Total
       </td>
     </tr>
   </thead>
   <tfoot>
     <tr>
-      <td colspan="5">
-        Total: {{total | currency}}
+      <td colspan="6">
+        Cart Total: {{total | currency}}
       </td>
     </tr>
   </tfoot>
   <tbody>
     <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
       <td>
-        <button ng-click="removeFromCart(item._id)" class="small rounded secondary">X</button>
-        <img ng-src="{{item.details.img}}" ng-if="item.details.img">
+        <cl-image public-id="{{item.details.img.result}}" class="thumbnail" format="jpg">
+          <cl-transformation height="200" width="200" crop="fill" gravity="center"></cl-transformation>
+        </cl-image>
+      </td>
+      <td>
+        <md-button class="md-icon-button" aria-label="More" ng-click="removeFromCart(item._id)">
+          <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
+        </md-button>
         {{item.details.name}}
       </td>
       <td>
-        {{timeRemaining(item.end_date)}}
+        {{item.details.producerCompanyName || item.details.producerName}}
       </td>
       <td>
-        {{item.details.price | currency}}
+        {{item.details.price * markup | currency}}
       </td>
       <td>
-        <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="changeQuantity(item._id, item.qty,  '{{item.qty}}')" min="1">
+        <md-input-container>
+          <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
+        </md-input-container>
       </td>
       <td>
-        <span ng-if="item.indefinate">
-          {{item.details.price * item.qty * 50/12 | currency}}
-        </span>
-        <span ng-if="!item.indefinate">
-          {{item.details.price * item.qty * weeksRemaining(item.end_date) | currency}}
-        </span>
+        {{item.details.price * item.qty * markup | currency}}
       </td>
     </tr>
   </tbody>
-</table> -->
+</table>
 
 <ui-view>
   <div layout="row" layout-align="center center">
     <md-button class="md-raised md-warn" ui-sref="profile.cart.checkout">Checkout</md-button>
+    <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
   </div>
 </ui-view>

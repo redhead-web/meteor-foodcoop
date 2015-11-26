@@ -11,7 +11,8 @@
     },
     "deliveryDayOfWeek": 4,
     "shoppingStopDay": 2,
-    "cartExpiryDays": 7
+    "cartExpiryDays": 7,
+    "markup": 15
   }
 
 }

@@ -2,16 +2,16 @@
 
   <md-content flex="60">
     <div class="img-wrapper" ng-controller="photoUploadCtrl">
-      <img ng-if="!!ctrl.product.img" ngf-src="ctrl.product.img.result || ctrl.product.img" flex="100">
+      <img ng-if="!!ctrl.product.img" ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
       <md-button
         ng-if="!!ctrl.product.img && ctrl.isOwner"
-        class="md-icon-button"
+        class="md-icon-button image-replace"
         aria-label="upload new image"
         accept="image/*"
         ngf-capture="'camera'"
         ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
         ng-model="ctrl.product.img"
-        ngf-max-size="'10MB'"
+        ngf-max-size="'5MB'"
         ngf-min-width="400"
         ngf-min-height="300"
       >
@@ -25,7 +25,7 @@
           ngf-capture="'camera'"
           ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
           ng-model="ctrl.product.img"
-          ngf-max-size="'10MB'"
+          ngf-max-size="'5MB'"
           ngf-min-width="400"
           ngf-min-height="300"
         >
@@ -33,13 +33,19 @@
         </md-button>
       </div>
       <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
-      <md-progress-linear ng-if="product && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
+      <md-progress-linear ng-if="ctrl.product && progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
     </div>
     {{ctrl.product.img}}
 
   </md-content>
 
   <md-content flex layout="column">
+    <md-switch
+    class="md-primary md-block"
+    ng-model="ctrl.product.published"
+    ng-if="ctrl.isOwner"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
+    <h2><md-icon md-svg-src="social:ic_person_24px" aria-label="producer"></md-icon> {{ctrl.product.producerCompanyName || ctrl.product.producerName}}</h2>
+    <md-divider></md-divider>
     <h1 ng-hide="ctrl.edit.name">
       <md-button
         ng-if="ctrl.isOwner"
@@ -93,6 +99,7 @@
       </md-input-container>
       <md-button type="submit">Save</md-button>
     </form>
+    <p>Stock Level: {{ctrl.product.stocklevel}}</p>
 
     <form ng-if="!!$root.currentUser" name="addToCartForm" ng-controller="orderProductCtrl as sh" ng-submit="sh.addToCart($event, ctrl.product, sh.qty)" layout="column">
       <md-input-container flex>
@@ -110,6 +117,7 @@
     </form>
     <md-button ui-sref="store">Keep Shopping</md-button>
     <md-switch ng-if="ctrl.isOwner" class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
+
     <md-list>
       <md-list-item ng-click="ctrl.navigateTo(ctrl.product.category)">
         <p>{{ctrl.product.category}}</p>
@@ -117,7 +125,74 @@
     </md-list>
     <md-divider></md-divider>
     <md-content>
-      <p>{{ctrl.product.description}}</p>
+      <p ng-hide="ctrl.edit.description">
+        <md-button
+          ng-if="ctrl.isOwner"
+          ng-click="ctrl.edit.description = !ctrl.edit.description;"
+          class="md-icon-button md-accent" aria-label="edit packaging description">
+         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        </md-button>
+        {{ctrl.product.description}}
+        <span ng-if="ctrl.isOwner && !ctrl.product.description">No Description Set</span>
+      </p>
+      <form name="editDescription"
+      ng-submit="ctrl.save(ctrl.product); ctrl.edit.description = !ctrl.edit.description;"
+      ng-if="ctrl.edit.description && ctrl.isOwner">
+        <md-input-container class="md-block">
+          <label>Description</label>
+          <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"></textarea>
+          <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
+            <div ng-message="maxlength">Please use a shorter description.</div>
+          </div>
+        </md-input-container>
+        <md-button type="submit">Save</md-button>
+      </form>
+
+    </md-content>
+    <md-divider></md-divider>
+    <md-content>
+      <p ng-hide="ctrl.edit.packagingDescription">
+        <md-button
+          ng-if="ctrl.isOwner"
+          ng-click="ctrl.edit.packagingDescription = !ctrl.edit.packagingDescription;"
+          class="md-icon-button md-accent" aria-label="edit packaging description">
+         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        </md-button>
+        {{ctrl.product.packagingDescription}}
+        <span ng-if="ctrl.isOwner && !ctrl.product.packagingDescription">No Packaging Description Set</span>
+      </p>
+      <form name="editPackagingDescription"
+      ng-submit="ctrl.save(ctrl.product); ctrl.edit.packagingDescription = !ctrl.edit.packagingDescription;"
+      ng-if="ctrl.edit.packagingDescription && ctrl.isOwner">
+        <md-input-container>
+          <label>Short Packaging Description</label>
+          <input ng-model="ctrl.product.packagingDescription" type="text">
+        </md-input-container>
+        <md-button type="submit">Save</md-button>
+      </form>
+      <p ng-hide="ctrl.edit.packagingRefund">
+        <md-button
+          ng-if="ctrl.isOwner"
+          ng-click="ctrl.edit.packagingRefund = !ctrl.edit.packagingRefund;"
+          class="md-icon-button md-accent" aria-label="edit packaging description">
+         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        </md-button>
+        {{ctrl.product.packagingRefund | currency}}
+        <span ng-if="ctrl.isOwner && !ctrl.product.packagingRefund">No Packaging Refund Set</span>
+      </p>
+      <form name="editPackagingRefund"
+      ng-submit="ctrl.save(ctrl.product); ctrl.edit.packagingRefund = !ctrl.edit.packagingRefund;"
+      ng-if="ctrl.edit.packagingRefund && ctrl.isOwner">
+        <md-input-container class="md-icon-float md-block">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
+          <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" placeholder="Packaging Refund amount">
+          <div ng-messages="productUploadForm.packagingRefund.$error">
+            <div ng-message="min">You must have a positive number here.</div>
+            <div ng-message="number">Please use just a number here.</div>
+          </div>
+        </md-input-container>
+        <md-button type="submit">Save</md-button>
+      </form>
     </md-content>
 
   </md-content>
