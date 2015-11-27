@@ -10,6 +10,11 @@ Meteor.methods
     if product.stocklevel && qty > product.stocklevel
       throw new Meteor.Error 401, "Insufficient Stock Sorry!", product.stocklevel - qty
 
+    user = Meteor.users.findOne {_id: this.userId, 'profile.cart.products.productId': product._id}
+
+    if user?
+      throw new Meteor.Error 401, "That item is already in your cart", product.name
+
     try
       result = Meteor.users.update {
         _id: userId

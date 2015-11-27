@@ -58,7 +58,7 @@ Meteor.methods
     Products.update
       'carted.user': userId
     ,
-      $pull: 'carted.user' : userId
+      $pull: 'carted.$.user' : userId
     ,
       multi:yes
     , (error) ->

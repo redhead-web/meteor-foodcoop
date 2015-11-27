@@ -10,10 +10,15 @@ angular.module('food-coop').config( function($stateProvider) {
     controller: 'UserCartCtrl',
     templateUrl: 'client/user/views/cart.ng.html'
   })
-  .state('profile.subscriptions', {
-    url: '/subscriptions',
-    controller: 'UserSubscriptionCtrl',
-    templateUrl: 'client/user/views/subscriptions.ng.html'
+  // .state('profile.subscriptions', {
+  //   url: '/subscriptions',
+  //   controller: 'UserSubscriptionCtrl',
+  //   templateUrl: 'client/user/views/subscriptions.ng.html'
+  // })
+  .state('profile.orders', {
+    url: '/orders',
+    controller: 'UserOrderCtrl',
+    templateUrl: 'client/user/views/orders.ng.html'
   })
   .state('profile.paymentMethods', {
     url: '/payment-methods',

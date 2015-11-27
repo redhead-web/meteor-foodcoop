@@ -1,0 +1,76 @@
+<div layout="column" layout-align="center center" ng-if="!currentUser">
+  <h2> Please login to see this page</h2>
+</div>
+
+<div layout="column" layout-align="center center" ng-if="currentUser">
+  <md-toolbar class="md-tall md-primary">
+    <span flex></span>
+    <h1 class="md-toolbar-tools md-toolbar-tools-bottom">
+      <span class="md-flex">Your Orders</span>
+    </h1>
+  </md-toolbar>
+</div>
+
+<md-content layout="row" layout-align="start center">
+  <span flex></span>
+  <div flex="70" flex-md=100 flex-sm=100>
+    <div layout="row" layout-align="center center">
+      <md-button class="md-icon-button" aria-label="" ng-click="backward()">
+        <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
+      </md-button>
+      <h2 class="text-center">Order for {{deliveryDay | date:'dd/MM/yyyy'}}</h2>
+      <md-button class="md-icon-button" aria-label="" ng-click="forward()">
+        <md-icon md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
+      </md-button>
+    </div>
+
+    <md-input-container class="md-icon-float md-block">
+      <!-- Use floating label instead of placeholder -->
+      <label>Search</label>
+      <md-icon md-svg-src="action:ic_search_24px"></md-icon>
+      <input ng-model="search" type="text">
+    </md-input-container>
+
+    <!-- <div layout="row" layout-align="center center">
+      <md-button></md-button>
+    </div> -->
+
+    <h4>Total: {{total(filteredOrders) | currency}}</h4>
+
+    <table class="material-table">
+      <thead>
+        <tr>
+          <th>
+            Product
+          </th>
+          <th>
+            Price
+          </th>
+          <th>
+            Quantity
+          </th>
+          <th>
+            Total
+          </th>
+        </tr>
+      </thead>
+      <tr ng-repeat="i in orders | filter:search as filteredOrders ">
+        <td>
+          {{i.productName}}
+        </td>
+        <td>
+          {{i.price * markup | currency}}
+        </td>
+        <td>
+          {{i.qty}}
+        </td>
+        <td>
+          {{i.qty * i.price * markup | currency}}
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <span flex></span>
+
+</md-content>

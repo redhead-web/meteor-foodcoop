@@ -10,5 +10,6 @@ saleSchema = new SimpleSchema
     type: Date
   orderId: type: String
   customer: type: String, SimpleSchema.RegEx.Id
+  butchery: type: Object, optional: true, blackbox: true
 
 Sales.attachSchema saleSchema

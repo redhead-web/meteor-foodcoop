@@ -9,11 +9,11 @@
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
       </md-button>
       <h3>
-        <span>Fresh Food Collective</span>
+        <span>Food Co-op</span>
       </h3>
       <span flex></span>
       <md-button hide-sm ui-sref="store"> <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon> Store</md-button>
-      <md-button hide-sm ui-sref="hubs"> <md-icon md-svg-icon="action:ic_store_24px">store</md-icon> Hubs</md-button>
+      <!-- <md-button hide-sm ui-sref="hubs"> <md-icon md-svg-icon="action:ic_store_24px">store</md-icon> Hubs</md-button> -->
       <md-button hide-sm ui-sref="faq"> How it Works</md-button>
 
       <md-button hide-sm ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
@@ -35,10 +35,18 @@
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ui-sref="profile.subscriptions">
+            <md-button ui-sref="profile.orders">
               <div layout="row">
                 <md-icon md-svg-icon="action:ic_description_24px"></md-icon>
-                <p flex>Subscriptions</p>
+                <p flex>Orders</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-if="nav.isProducer(currentUser._id)">
+            <md-button ui-sref="profile.orders">
+              <div layout="row">
+                <md-icon md-svg-icon="action:ic_description_24px"></md-icon>
+                <p flex>Orders</p>
               </div>
             </md-button>
           </md-menu-item>

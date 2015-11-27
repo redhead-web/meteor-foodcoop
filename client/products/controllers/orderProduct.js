@@ -55,7 +55,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $roo
     }, function (error) {
       console.log(error);
       $mdToast.show(
-        $mdToast.simple().content("Sorry, something went wrong!").position('bottom left').hideDelay(3000)
+        $mdToast.simple().content(error.message).position('bottom left').hideDelay(4000)
       );
     })
   }

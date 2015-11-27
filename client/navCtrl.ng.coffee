@@ -17,6 +17,9 @@ angular.module('food-coop').controller 'navCtrl', ($mdUtil, $mdSidenav, $log, $s
 
   vm.toggleLeft = buildToggler 'left'
 
+  vm.isProducer = (user) ->
+    Roles.userIsInRole(user, 'producer')
+
   vm.goTo = (route) ->
     $state.go(route)
   return

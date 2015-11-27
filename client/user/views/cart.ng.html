@@ -69,7 +69,7 @@
     <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
       <td>
         <cl-image public-id="{{item.details.img.result}}" class="thumbnail" format="jpg">
-          <cl-transformation height="200" width="200" crop="fill" gravity="center"></cl-transformation>
+          <cl-transformation height="150" width="150" crop="fill" gravity="center"></cl-transformation>
         </cl-image>
       </td>
       <td>
@@ -86,7 +86,7 @@
       </td>
       <td>
         <md-input-container>
-          <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
+          <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
         </md-input-container>
       </td>
       <td>

@@ -1,5 +1,7 @@
 Meteor.methods
   removeFromCart: (id) ->
+    userId = this.userId
+
     check id, String
     cartItem = _.find Meteor.users.findOne(this.userId).profile.cart.products, (product) ->
       return product._id == id
@@ -10,7 +12,7 @@ Meteor.methods
 
 
     Meteor.users.update {
-      _id: this.userId
+      _id: userId
     }, {
       $set:
         'profile.cart.status' : 'active'
@@ -23,6 +25,7 @@ Meteor.methods
           stocklevel: $exists: 1
         ,
           $inc: stocklevel: cartItem.qty
+          $pull: 'carted.$.user': userId 
         , (error, num) ->
           Meteor.error error if error
           'SUCCESSFULLY ADDED TO CART'
