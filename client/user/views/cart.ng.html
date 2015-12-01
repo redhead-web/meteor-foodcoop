@@ -3,102 +3,81 @@
   <h3>Maybe do some shopping and then come back?</h3>
 </md-content>
 <md-content ng-if="currentUser.profile.cart" layout="row" layout-align="center center">
-<span flex></span>
-<div flex="70" flex-md=100 flex-sm=100>
-  <h1 class="text-center"> Shopping Cart </h1>
-  <!-- <md-grid-list
-        md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
-        md-row-height-gt-md="1:1" md-row-height="4:4"
-        md-gutter="8px" md-gutter-gt-sm="4px" >
-    <md-grid-tile ng-repeat="item in currentUser.profile.cart.products track by item._id"
-                  md-rowspan="2"
-                  md-colspan="2"
-                  md-rowspan-sm="1"
-                  ng-style="{'background': 'url(\'{{item.details.img}}\') no-repeat center center', 'background-size':'cover'}"
-                  >
-      <div layout="column" layout-align="center center">
-        <h3 class="cart-grid-title">x{{item.qty}} {{item.details.name}} @ {{item.details.price | currency}}
-        </h3>
-        <md-button class="md-raised md-fab md-accent md-hue-3" ng-click="removeFromCart(item._id)" aria-label="delete cart item">
-          <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
-        </md-button>
+  <span flex></span>
+  <div flex="90" flex-md=100 flex-sm=100>
+    <h1 class="text-center"> Shopping Cart </h1>
+
+    <table class="material-table cart-table">
+      <thead>
+        <tr>
+          <td></td>
+          <td>
+            Product
+          </td>
+          <td>
+            Producer
+          </td>
+          <td>
+            Price
+          </td>
+          <td>
+            Quantity
+          </td>
+          <td>
+            Total
+          </td>
+          <td></td>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="7">
+            Cart Total: {{total | currency}}
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
+          <td>
+            <a ui-sref="productDetails({productId: item.productId})">
+              <cl-image public-id="{{item.details.img.result}}" class="thumbnail" format="jpg">
+                <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+              </cl-image>
+            </a>
+          </td>
+          <td>
+            {{item.details.name}}
+          </td>
+          <td>
+            {{item.details.producerCompanyName || item.details.producerName}}
+          </td>
+          <td>
+            {{item.details.price * markup | currency}}
+          </td>
+          <td>
+            <md-input-container class="input-table">
+              <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
+            </md-input-container>
+          </td>
+          <td>
+            {{item.details.price * item.qty * markup | currency}}
+          </td>
+          <td>
+            <md-button class="md-icon-button" aria-label="More" ng-click="removeFromCart(item._id)">
+              <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ui-view>
+      <div layout="row" layout-align="center center">
+        <md-button class="md-raised md-warn" ui-sref="profile.cart.checkout">Checkout</md-button>
+        <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
       </div>
+    </ui-view>
 
-
-
-      <md-grid-tile-footer>
-        <h3>Duration: {{timeRemaining(item.end_date)}}<br>
-          Subtotal: {{item.details.price * item.qty * weeksRemaining(item.end_date) | currency}}
-        </h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-  </md-grid-list> -->
-</div>
-<span flex></span>
-</md-content>
-
-
-<table class="material-table">
-  <thead>
-    <tr>
-      <td colspan="2">
-        Product
-      </td>
-      <td>
-        Producer
-      </td>
-      <td>
-        Price
-      </td>
-      <td>
-        Quantity
-      </td>
-      <td>
-        Total
-      </td>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <td colspan="6">
-        Cart Total: {{total | currency}}
-      </td>
-    </tr>
-  </tfoot>
-  <tbody>
-    <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
-      <td>
-        <cl-image public-id="{{item.details.img.result}}" class="thumbnail" format="jpg">
-          <cl-transformation height="150" width="150" crop="fill" gravity="center"></cl-transformation>
-        </cl-image>
-      </td>
-      <td>
-        <md-button class="md-icon-button" aria-label="More" ng-click="removeFromCart(item._id)">
-          <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
-        </md-button>
-        {{item.details.name}}
-      </td>
-      <td>
-        {{item.details.producerCompanyName || item.details.producerName}}
-      </td>
-      <td>
-        {{item.details.price * markup | currency}}
-      </td>
-      <td>
-        <md-input-container>
-          <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
-        </md-input-container>
-      </td>
-      <td>
-        {{item.details.price * item.qty * markup | currency}}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<ui-view>
-  <div layout="row" layout-align="center center">
-    <md-button class="md-raised md-warn" ui-sref="profile.cart.checkout">Checkout</md-button>
-    <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
   </div>
-</ui-view>
+  <span flex></span>
+</md-content>

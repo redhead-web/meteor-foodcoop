@@ -11,9 +11,9 @@ Meteor.methods
 
 
     id = Orders.insert
-      transactionTotal: parseFloat(total, 10)
+      transactionTotal: parseFloat(total)
       user: userId
-      orderTotal: orderTotal
+      orderTotal: orderTotal * Meteor.settings.public.markup/100+1
       status: 'paid'
       transactionId: transactionId
 
@@ -58,7 +58,7 @@ Meteor.methods
     Products.update
       'carted.user': userId
     ,
-      $pull: 'carted.$.user' : userId
+      $pull: 'carted' : 'user' : userId
     ,
       multi:yes
     , (error) ->

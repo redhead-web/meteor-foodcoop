@@ -5,6 +5,17 @@ angular.module('food-coop').config( function($stateProvider) {
     controller: 'EditUserCtrl',
     templateUrl: 'client/user/views/edit.ng.html'
   })
+  .state('profile.balance', {
+    url: '/balance',
+    controller: 'UserBalanceCtrl',
+    controllerAs: 'ctrl',
+    templateUrl: 'client/user/views/balance.ng.html',
+    resolve: {
+      'subscription': function($meteor) {
+        return $meteor.subscribe('myOrders')
+      }
+    }
+  })
   .state('profile.cart', {
     url: '/cart',
     controller: 'UserCartCtrl',
@@ -19,6 +30,11 @@ angular.module('food-coop').config( function($stateProvider) {
     url: '/orders',
     controller: 'UserOrderCtrl',
     templateUrl: 'client/user/views/orders.ng.html'
+  })
+  .state('profile.sales', {
+    url: '/sales',
+    controller: 'UserSalesCtrl',
+    templateUrl: 'client/user/views/sales.ng.html'
   })
   .state('profile.paymentMethods', {
     url: '/payment-methods',

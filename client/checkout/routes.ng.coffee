@@ -17,9 +17,9 @@ angular.module('food-coop').config ($stateProvider) ->
         $meteor.requireUser()
 
   .state 'profile.subscriptionCheckout.success',
-    url: '/success'
+    url: '/success-subscription'
     templateUrl: 'client/checkout/views/success.ng.html'
 
   .state 'profile.subscriptionCheckout.failure',
-    url: '/failure'
+    url: '/failure-subscription'
     templateUrl: 'client/checkout/views/failure.ng.html'

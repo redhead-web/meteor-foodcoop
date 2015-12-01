@@ -19,7 +19,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $rootSco
     $scope.spinner = true;
     $meteor.call('braintreeTransaction', data).then(function(result) {
       if (result.success) {
-        $state.go('.success')
+        $state.go('profile.cart.success')
       } else {
         console.log(result);
         // display error details to the user and get them to try again

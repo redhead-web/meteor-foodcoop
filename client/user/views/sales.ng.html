@@ -6,7 +6,7 @@
   <md-toolbar class="md-tall md-primary md-hue-3" layout="row">
     <span flex></span>
     <h1 class="md-display-3" flex="90">
-      Your Orders
+      Your Sales
     </h1>
     <span flex></span>
   </md-toolbar>
@@ -16,11 +16,11 @@
   <span flex></span>
   <div flex="90" flex-md=100 flex-sm=100>
     <div layout="row" layout-align="center center">
-      <md-button class="md-icon-button" aria-label="" ng-click="backward()">
+      <md-button class="md-icon-button" aria-label="back one week" ng-click="backward()">
         <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
       </md-button>
-      <h2 class="text-center">Order {{deliveryWording}} delivered {{deliveryDay | date:'EEE dd/MM/yyyy'}}</h2>
-      <md-button class="md-icon-button" aria-label="" ng-click="forward()">
+      <h2 class="text-center">Sales {{deliveryWording}} delivered {{deliveryDay | date:'EEE dd/MM/yyyy'}}</h2>
+      <md-button class="md-icon-button" aria-label="forward one week" ng-click="forward()">
         <md-icon md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
       </md-button>
     </div>
@@ -35,12 +35,28 @@
     <!-- <div layout="row" layout-align="center center">
       <md-button></md-button>
     </div> -->
-
-    <h4 class="text-right">Total: {{total(filteredOrders) | currency}}</h4>
+    <div layout="row" layout-align="center center">
+      <div flex="50" flex-sm="90">
+        <section layout="row" layout-align="center center" layout-wrap>
+          <figure ng-repeat="(product, count) in occurrences(filteredSales)" class="text-center">
+            <h1 class="md-display-1">{{count}}</h1>
+            <figcaption>
+              <h3>{{product}}</h3>
+            </figcaption>
+          </figure>
+        </section>
+      </div>
+      <div flex="50" flex-sm="90">
+        <h2 class="text-right">Total: {{total(filteredSales) | currency}}</h2>
+      </div>
+    </div>
 
     <table class="material-table order-table">
       <thead>
         <tr>
+          <th>
+            Customer
+          </th>
           <th>
             Product
           </th>
@@ -55,18 +71,21 @@
           </th>
         </tr>
       </thead>
-      <tr ng-repeat="i in orders | filter:search as filteredOrders ">
+      <tr ng-repeat="i in sales | filter:search as filteredSales ">
+        <td>
+          {{user(i).profile.name}}
+        </td>
         <td>
           {{i.productName}}
         </td>
         <td>
-          {{i.price * markup | currency}}
+          {{i.price | currency}}
         </td>
         <td>
           {{i.qty}}
         </td>
         <td>
-          {{i.qty * i.price * markup | currency}}
+          {{i.qty * i.price | currency}}
         </td>
       </tr>
     </table>

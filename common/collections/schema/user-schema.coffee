@@ -31,6 +31,7 @@ profile = new SimpleSchema
     type: String
   customerNumber:
     type: Number
+    unique: true
     autoValue: ->
       if @isInsert
         return incrementCounter Counters, 'customerNumber'

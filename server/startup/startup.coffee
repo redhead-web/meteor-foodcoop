@@ -30,6 +30,7 @@ Meteor.startup ->
   if Meteor.users.find().count() is 0
     users = [
       { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer']}
+      { email: 'sean@arrowburn.nz', name: 'Sean Magin Producer Role', roles: ['producer']}
       { email: 'sean@foodcoop.nz', name: 'Sean Stanley Customer Role', roles: []}
       { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer']}
     ]
@@ -37,7 +38,7 @@ Meteor.startup ->
     for user in users
       id = Accounts.createUser {
         email: user.email
-        password: "12345678"
+        password: "password1234"
         createdAt: Date.now
         profile:
           name: user.name
@@ -61,6 +62,7 @@ Meteor.startup ->
       unitOfMeasure: "400 g jar"
       category: "Processed Goods"
       stocklevel: 50
+      description: 'delicious and tasty jam'
       published: true
 
     products.push

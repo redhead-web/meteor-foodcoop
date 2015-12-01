@@ -16,6 +16,17 @@ angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDial
 
   $scope.total = total;
 
+  $scope.deliveryWording = '';
+
+  $scope.$watch('deliveryDay', function(newValue) {
+    var isAfter = moment().isBefore(moment(newValue));
+    if (isAfter) {
+      return $scope.deliveryWording = "to be"
+    } else {
+      return $scope.deliveryWording = ""
+    }
+  })
+
   function total(array) {
     return _.reduce(array, function(total, order) {
       return total + (order.price * order.qty * $scope.markup);
