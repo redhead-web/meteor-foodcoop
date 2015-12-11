@@ -1,59 +1,65 @@
 <md-content layout="row">
   <span flex></span>
-  <md-whiteframe layout="column" flex="50" flex-sm="95">
-    <div layout="row" layout-align="space-around center">
-      <div>Login with:</div>
-      <md-button ng-click="facebookLogin()">Facebook</md-button>
-    </div>
-    <div ng-show="rc.error" class="md-warn">
-      <small>{{ rc.error }}</small>
-    </div>
-    <form layout="column">
-      <md-input-container>
-        <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="rc.credentials.profile.name"
-               placeholder="name" aria-label="name"/>
-      </md-input-container>
+  <md-whiteframe layout="column" flex="40" flex-sm="90" flex-md="60">
+    <br><br>
+    <md-button flex ng-click="rc.facebookLogin()" class="md-raised"> sign up with
+      <md-icon md-svg-src="f_icon.svg"></md-icon>
+      Facebook
+    </md-button>
+    <br>
+    <md-divider></md-divider>
+    <br>
+    <form layout="column" flex name="signupForm">
+      <div ng-show="rc.error" class="md-warn">
+        <small>{{ rc.error }}</small>
+      </div>
       <md-input-container>
         <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="rc.credentials.email"
+        <input type="text" ng-model="rc.credentials.email" name="email" required
                placeholder="email" aria-label="email"/>
+        <div ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
+          <div ng-message="required">An email address is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="rc.credentials.profile.name" name="name" required
+               placeholder="name" aria-label="name"/>
+        <div ng-messages="signupForm.name.$error" ng-if="signupForm.name.$touched">
+          <div ng-message="required">Please tell us your full legal name.</div>
+        </div>
       </md-input-container>
       <md-input-container>
         <md-icon md-svg-icon="action:ic_lock_open_24px" class="md-accent"></md-icon>
-        <input type="password" ng-model="rc.credentials.password"
-               placeholder="password" aria-label="password"/>
+        <input type="password" ng-model="rc.credentials.password" name="password" required
+        placeholder="password" aria-label="password"/>
+        <div ng-messages="signupForm.name.$error" ng-if="signupForm.name.$touched">
+          <div ng-message="required">Don't forget a password! Security is important.</div>
+        </div>
       </md-input-container>
       <md-input-container>
-        <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
-        <md-select style="margin-left:36px" ng-model="rc.credentials.profile.hub"
-        placeholder="Select a hub near you to collect your order from.">
-          <md-option ng-value="{
-            id: hub._id,
-            location: hub.location,
-            title: hub.title,
-            dayOfTheWeek: hub.dayOfTheWeek,
-            openHours: hub.openHours
-          }" ng-repeat="hub in rc.hubs"> {{hub.location}}</md-option>
-        </md-select>
-      </md-input-container>
-      <md-input-container>
-        <md-icon md-svg-icon="communication:ic_chat_24_48px" class="md-accent"></md-icon>
+        <md-icon md-svg-icon="communication:ic_call_24px" class="md-accent"></md-icon>
         <input type="text" ng-model="rc.credentials.profile.phone"
                placeholder="phone" aria-label="phone"/>
       </md-input-container>
       <md-input-container>
         <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="rc.credentials.profile.address"
+        <input g-places-autocomplete type="text" ng-model="rc.credentials.profile.deliveryAddress"
                placeholder="home address" aria-label="address"/>
       </md-input-container>
-      <md-button class="md-raised md-primary"
+      <md-radio-group ng-model="rc.role" layout="row">
+        <md-radio-button value="customer" class="md-primary">Customer ({{rc.prices.customer | currency}})</md-radio-button>
+        <md-radio-button value="producer" class="md-primary">Producer ({{rc.prices.producer | currency}})</md-radio-button>
+      </md-radio-group>
+      <md-button class="md-raised md-primary" ng-disabled="signupForm.$invalid"
                  ng-click="rc.register()">Create Account
       </md-button>
+
     </form>
-    <div layout="row" layout-align="end center">
-      <md-button href="/login">Login</md-button>
-    </div>
+    <br><br>
+    <p class="text-center">Already have an account?</p>
+    <md-button href="/login" class="md-primary md-raised">Login</md-button>
+
   </md-whiteframe>
   <span flex></span>
 </md-content>

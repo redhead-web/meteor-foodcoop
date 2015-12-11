@@ -6,6 +6,7 @@ cart = new SimpleSchema
         new Date()
   status:
     type: String
+    optional:true
     allowedValues: ['active', 'pending', 'upcoming', 'complete', 'expiring', 'expired']
   products:
     type: [Object]
@@ -66,11 +67,15 @@ profile = new SimpleSchema
   bio: type: String, optional:true
   bankAccount: type: String, optional: true
   shareAddress: type: Boolean, optional: true
-  logo: type: String, optional:true
-  thumbnail: type: String, optional: true
+  logo: type: Object, blackbox: true, optional:true
+  personalPic: type: Object, blackbox:true, optional:true
+  banner: type: Object, blackbox: true, optional: true
   website: type: String, optional: true
+  facebook: type: String, optional: true
   chemicals: type: String, optional:true
   certification: type: String, optional: true
+  loveCount: type: Number, min: 0, optional: true
+  lovedProducers: type: [String], optional: true
 
 Schema = new SimpleSchema
   emails:

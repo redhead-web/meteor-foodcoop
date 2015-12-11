@@ -65,5 +65,7 @@ Schema = new SimpleSchema
   packagingDescription: type: String, optional:true
   packagingRefund: type: Number, decimal: yes, optional: true
 
+  stockcode: type: String, max: 12, optional: true
+
 
 Products.attachSchema Schema

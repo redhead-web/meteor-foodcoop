@@ -25,7 +25,7 @@ Meteor.methods
           stocklevel: $exists: 1
         ,
           $inc: stocklevel: cartItem.qty
-          $pull: 'carted.$.user': userId 
+          $pull: 'carted': user: userId 
         , (error, num) ->
           Meteor.error error if error
           'SUCCESSFULLY ADDED TO CART'

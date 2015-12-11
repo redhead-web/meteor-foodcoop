@@ -8,7 +8,6 @@ angularui:angular-ui-router
 sanjo:jasmine
 coffeescript
 aldeed:collection2
-angularui:angular-google-maps
 aldeed:geocoder
 accounts-password
 accounts-facebook
@@ -46,3 +45,9 @@ urigo:angular-blaze-template
 redhead:angular-cloudinary
 angular:angular-messages
 matb33:collection-hooks
+nmccready:angular-simple-logger
+angularui:angular-google-maps
+redhead:ng-parallax
+francocatena:compass
+lookback:emails
+blaze

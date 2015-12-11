@@ -20,6 +20,6 @@ angular.module('food-coop').controller 'navCtrl', ($mdUtil, $mdSidenav, $log, $s
   vm.isProducer = (user) ->
     Roles.userIsInRole(user, 'producer')
 
-  vm.goTo = (route) ->
-    $state.go(route)
+  vm.goTo = (route, params) ->
+    $state.go(route, params)
   return

@@ -1,5 +1,4 @@
 angular.module("food-coop").controller("EditUserCtrl", function($scope, $rootScope, $meteor, $mdToast){
-  $scope.hubs = $meteor.collection(Hubs).subscribe('hubs');
 
   $scope.validate = function(isValid) {
     if (isValid) {
@@ -8,8 +7,8 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $rootSco
           $scope.error = error;
         } else {
           $mdToast.show($mdToast
-            .simple().content('Saved Successfully')
-            .position('bottom left')
+            .simple().content('Poof! Saved Successfully!')
+            .position('bottom right')
             .hideDelay(3000))
         }
       })

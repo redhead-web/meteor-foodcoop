@@ -9,6 +9,10 @@
       "cloud_name": "foodcoop",
       "upload_preset": "mzahab1a"
     },
+    "shares": {
+      "customer": 30,
+      "producer": 60
+    },
     "deliveryDayOfWeek": 4,
     "shoppingStopDay": 2,
     "cartExpiryDays": 7,

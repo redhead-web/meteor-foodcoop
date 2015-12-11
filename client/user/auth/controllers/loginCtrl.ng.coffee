@@ -19,6 +19,7 @@ angular.module("food-coop").controller "LoginCtrl", ($meteor, $state) ->
     .then (result) ->
       console.log(result)
     , (err) ->
+      console.error err
       vm.error = "Login Error: #{err}"
 
 

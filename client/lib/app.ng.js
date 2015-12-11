@@ -7,14 +7,15 @@ angular.module('food-coop',[
   'google.places',
   'ngFileUpload',
   'cloudinary',
+  'ngParallax'
   ])
-// .config(function(uiGmapGoogleMapApiProvider) {
-//     uiGmapGoogleMapApiProvider.configure({
-//         //    key: 'your api key',
-//         v: '3.20', //defaults to latest 3.X anyhow
-//         libraries: 'weather,geometry,visualization'
-//     });
-// })
+.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        //    key: 'your api key',
+        v: '3.22', //defaults to latest 3.X anyhow
+        libraries: 'places,geometry,visualization'
+    });
+})
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default').primaryPalette('light-green').accentPalette('brown');
   $mdThemingProvider.theme('orange').primaryPalette('orange').accentPalette('teal').warnPalette('red');

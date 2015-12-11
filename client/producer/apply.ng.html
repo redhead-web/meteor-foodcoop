@@ -1,0 +1,70 @@
+<div class="page-header" layout="column" layout-align="center center">
+	<h1 class="text-center md-display-2">Become an NNFC Producer in 3 Steps</h1>
+</div>
+
+<div layout="row" layout-align="center center" class="md-display-3">
+
+  <md-icon class="s54" md-svg-src="action:ic_assignment_24px"></md-icon>
+  <md-icon class="s54" md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
+  <md-icon class="s54" md-svg-src="social:ic_person_24px"></md-icon>
+  <md-icon class="s54" md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
+  <md-icon class="s54" md-svg-src="action:ic_assignment_turned_in_24px"></md-icon>
+
+</div>
+
+<md-content layout="column" layout-padding layout-margin>
+  <h1 class="md-display-1">Questions? Please <a ui-sref="contact"> contact us</a></h1>
+  <h1 class="md-display-1"><a ui-sref="policy">Learn more</a> about our producer application policy.</h1>
+
+  <h1 class="md-display-3"><span class="step">1</span> Agree</h1>
+  <ul>
+		<li style="list-style:none">I agree:</li>
+		<li>To sell only products produced in Northland by me or my household or business </li>
+		<li>To sell only GE free products </li>
+		<li>Not to sell products which result from <strong>confined animal feeding operations (CAFO)</strong></li>
+		<li>To comply with all applicable NZ legislation, including GST and tax requirements</li>
+		<li>To comply with all NNFC rules, policies, and guidelines</li>
+		<li>That all information I have provided is true and correct to the best of my knowledge and ability</li>
+	</ul>
+	<md-checkbox ng-model="ctrl.application.agreed" aria-label="I Agree">
+    I Agree
+  </md-checkbox>
+  <md-divider></md-divider>
+
+  <h1 class="md-display-3"><span class="step">2</span> About You</h1>
+
+  <form name="producerForm" id="applicationForm" class="application-list">
+    <md-input-container>
+  		<md-select ng-model="ctrl.application.certification"
+  		name="certification" class="form-control" placeholder="If certified organic, who with?">
+        <md-option ng-repeat="c in ctrl.certifications" ng-value="c.name">
+          <img ng-src="{{c.img}}" height="40" style="position: absolute; top: 2px; left: 2px;">
+          <span style="margin-left: 48px">{{c.name}}</span>
+        </md-option>
+      </md-select>
+    </md-input-container>
+		<md-input-container>
+	    <label for="chemicals">What agrochemicals do you use? </label>
+			<textarea ng-model="ctrl.application.chemicals"
+			name="chemcials" type="text" class="form-control"
+			placeholder="Please list all chemical pesticides, fertilisers, herbicides and other chemical products you use. Seperate each item with a comma. Feel free to use either product brand names or scientific names." required></textarea>
+      <div ng-messages="producerForm.chemcials.$error" ng-if="producerForm.chemcials.$touched">
+        <div ng-message="required">Please fill out this field</div>
+      </div>
+		</md-input-container>
+		<md-input-container>
+	    <label for="products">I plan to sell:</label>
+			<textarea ng-model="ctrl.application.products"
+			name="products" type="text" class="form-control"
+			required></textarea>
+      <div ng-messages="producerForm.products.$error" ng-if="producerForm.products.$touched">
+        <div ng-message="required">Please fill out this field</div>
+      </div>
+		</md-input-container>
+  </form>
+	<h1 class="md-display-3"><span class="step">3</span> Apply</h1>
+	<div layout="column" layout-align="center center">
+
+  	<md-button type="button" ng-click="ctrl.apply()" class="md-primary md-raised">Apply</md-button>
+	</div>
+</md-content>

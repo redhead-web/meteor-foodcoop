@@ -83,6 +83,10 @@ angular.module('food-coop').config( function($stateProvider) {
     controller: 'ActivateCtrl',
     controllerAs: 'vm'
   })
+  .state('welcome', {
+    url: '/welcome',
+    templateUrl: 'client/user/auth/views/welcome.ng.html'
+  })
   .state('logout', {
     url: '/logout',
     resolve: {

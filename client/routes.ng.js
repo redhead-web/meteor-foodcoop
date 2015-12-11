@@ -16,7 +16,7 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
 
   $stateProvider
     .state('store', {
-      url: '/store',
+      url: '/store?name&category&certification&producer&favourite&lastOrdered&search',
       templateUrl: 'client/products/views/products-list.ng.html',
       controller: 'ProductsListCtrl'
     })

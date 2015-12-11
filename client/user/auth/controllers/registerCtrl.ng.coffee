@@ -5,17 +5,24 @@ angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
     password: ''
     profile:
       name: ""
-      address: ""
+      deliveryAddress: ""
       phone: ""
 
   vm.error = ''
 
-  vm.hubs = $meteor.collection Hubs
-  .subscribe 'hubs'
+  vm.role = 'customer'
+
+  vm.prices =
+    customer: Meteor.settings.public.shares.customer
+    producer: Meteor.settings.public.shares.producer
 
   vm.register = ->
-    $meteor.createUser(vm.credentials).then (->
-      $state.go 'store'
+    $meteor.createUser(vm.credentials).then ((result) ->
+      console.log result
+      if vm.role == 'producer'
+        $state.go 'producer-application'
+      else
+        $state.go 'welcome'
       return
     ), (err) ->
       vm.error = 'Registration error - ' + err
@@ -26,8 +33,13 @@ angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
     $meteor.loginWithFacebook
       requestPermissions: ['email']
     .then (result) ->
+      if vm.role == 'producer'
+        $state.go 'producer-application'
+      else
+        $state.go 'welcome'
       console.log(result)
     , (err) ->
+      console.error err
       vm.error = "Login Error: #{err}"
 
   return

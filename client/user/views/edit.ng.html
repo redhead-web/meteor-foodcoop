@@ -1,23 +1,9 @@
 <md-content layout="row" layout-sm="column">
   <span flex></span>
   <md-whiteframe layout="column" flex="50" flex-sm="95">
-
-    <form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
-      <p>Current Hub: {{currentUser.profile.hub.title || 'none'}}</p>
-      <md-input-container>
-        <md-icon md-svg-icon="action:ic_store_24px" class="md-accent"></md-icon>
-        <md-select style="margin-left:36px" ng-model="currentUser.profile.hub"
-        placeholder="Select a hub near you to collect your order from.">
-          <md-option ng-value="{
-            id: hub._id,
-            location: hub.location,
-            title: hub.title,
-            dayOfTheWeek: hub.dayOfTheWeek,
-            openHours: hub.openHours
-          }" ng-repeat="hub in hubs"> {{hub.location}}</md-option>
-        </md-select>
-      </md-input-container>
-
+    <br><br><br>
+    {{error}}
+    <form name="editUser" layout="column" ng-submit="validate(editUser.$valid)">
       <md-input-container>
         <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
         <input type="text" ng-model="currentUser.profile.name"
@@ -30,20 +16,26 @@
                placeholder="phone" aria-label="phone"/>
       </md-input-container>
 
-      <md-input-container>
+      <!-- <md-input-container>
         <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
         <input type="text" ng-model="currentUser.profile.address"
           placeholder="home address" aria-label="address"/>
-      </md-input-container>
+      </md-input-container> -->
 
-      <md-input-container ng-if="hasRole(currentUser._id, 'wholesaleBuyer')">
-        <md-icon md-svg-icon="maps:ic_local_shipping_24px" class="md-accent"></md-icon>
+      <md-input-container>
+        <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
         <input type="text" ng-model="currentUser.profile.deliveryAddress"
           g-places-autocomplete
-          placeholder="wholesale delivery address" aria-label="delivery address"/>
+          placeholder="home address" aria-label="home address"/>
       </md-input-container>
 
-      <md-button type="submit">Save</md-button>
+      <md-input-container>
+        <md-icon md-svg-icon="action:ic_account_balance_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="currentUser.profile.bankAccount"
+          placeholder="Bank Account to Send Sales To"/>
+      </md-input-container>
+
+      <md-button type="submit" class="md-raised md-primary">Save</md-button>
 
     </form>
   </md-whiteframe>
