@@ -98,8 +98,8 @@ oauth2@1.1.5
 observe-sequence@1.0.7
 ordered-dict@1.0.4
 package-version-parser@3.0.4
-patrickml:braintree@1.29.0
-pbastowski:angular-babel@1.0.6
+patrickml:braintree@1.32.0
+pbastowski:angular-babel@1.0.7
 planettraining:material-design-icons@2.0.0
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2

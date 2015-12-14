@@ -1,4 +1,27 @@
-
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete
+          md-no-cache="false"
+          md-selected-item="search"
+          md-search-text-change="searchTextChange(searchText)"
+          md-search-text="searchText"
+          md-selected-item-change="selectedItemChange(item)"
+          md-items="item in querySearch(searchText)"
+          md-item-text="item.name"
+          md-min-length="0"
+          placeholder="Search">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No products called "{{searchText}}" were found.
+          <!-- <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a> -->
+        </md-not-found>
+      </md-autocomplete>
+    </form>
+  </div>
+</md-toolbar>
   <md-content layout="row" layout-align="center center" layout-sm="column">
     <md-card ng-repeat="product in products" flex='33' flex-sm="95">
       <a href="/product/{{product._id}}">
@@ -28,7 +51,7 @@
           <md-button class="md-raised md-primary" flex>
             <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
             Add To Cart
-          </md-button> 
+          </md-button>
         </form>
         <!-- <div layout="row">
           <md-input-container>

@@ -1,11 +1,11 @@
-angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $rootScope, $mdConstant){
+angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $mdConstant){
   var vm = this;
 
   vm.product = {
-    producer: $rootScope.currentUser._id,
+    producer: Meteor.userId(),
     published: true,
-    producerName: $rootScope.currentUser.profile.name,
-    producerCompanyName: $rootScope.currentUser.profile.companyName || undefined,
+    producerName: Meteor.User().profile.name,
+    producerCompanyName: Meteor.User().profile.companyName || undefined,
     categories: [],
     ingredients: [],
   };
