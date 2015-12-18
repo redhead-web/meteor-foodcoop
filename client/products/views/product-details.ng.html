@@ -1,6 +1,25 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref="store" class="md-icon-button" aria-label="Settings">
+      <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+    </md-button>
+    <h2>
+      <span>{{ctrl.product.category}}</span>
+    </h2>
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="Favorite" ui-sref="store">
+      <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="More">
+      <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+    </md-button>
+  </div>
+
+</md-toolbar>
+
 <md-content layout="row" layout-padding>
 
-  <md-content flex="60">
+  <md-content flex="60" flex-sm="100">
     <div class="img-wrapper" ng-controller="photoUploadCtrl">
       <img ng-if="!!ctrl.product.img" ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
       <md-button

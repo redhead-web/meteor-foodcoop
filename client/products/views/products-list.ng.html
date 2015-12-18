@@ -1,4 +1,4 @@
-<md-toolbar>
+<md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools">
     <form ng-submit="$event.preventDefault()">
       <md-autocomplete
@@ -20,10 +20,52 @@
         </md-not-found>
       </md-autocomplete>
     </form>
+    <md-menu-bar>
+      <md-menu>
+        <button ng-click="$mdOpenMenu()">
+          {{stateParams.category || 'All Categories'}}
+        </button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="stateParams.category = undefined; changeMe = '' ">
+              All Categories
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-repeat="c in categories">
+            <md-button ng-click="stateParams.category = c.name; changeMe = c.name ">
+              {{c.name}}
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
+        <button ng-click="$mdOpenMenu()">
+          Sort
+        </button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="sort = {name: 1}">
+              Alphabetical
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="sort = {price: 1}">
+              Price lowest-highest
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="sort = {price: -1}">
+              Price highest-lowest
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+
+    </md-menu-bar>
   </div>
 </md-toolbar>
-  <md-content layout="row" layout-align="center center" layout-sm="column">
-    <md-card ng-repeat="product in products" flex='33' flex-sm="95">
+  <md-content layout="row" layout-align="center center" layout-padding layout-sm="column">
+    <md-card ng-repeat="product in products" flex='33' flex-sm="50">
       <a href="/product/{{product._id}}">
         <cl-image public-id="{{product.img.result}}" flex="100" format="jpg">
           <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>

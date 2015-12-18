@@ -60,7 +60,7 @@ Meteor.startup ->
       producerName: producer.profile.name
       price: 5
       unitOfMeasure: "400 g jar"
-      category: "Processed Goods"
+      category: "Preserves"
       stocklevel: 50
       description: 'delicious and tasty jam'
       published: true

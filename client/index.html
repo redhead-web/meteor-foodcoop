@@ -18,27 +18,22 @@
 
       <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
       <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
+      <md-button ui-sref="profile.cart" class="md-icon-button" ng-show="$root.currentUser">
+        <md-icon md-svg-icon="action:ic_shopping_basket_24px"></md-icon>
+      </md-button>
       <md-menu ng-show="$root.currentUser">
         <md-icon md-menu-origin ng-mouseenter="$mdOpenMenu($event)"
-        md-svg-icon="action:ic_account_box_24px"></md-icon>
+        md-svg-icon="navigation:ic_more_vert_24px"></md-icon>
         <md-menu-content>
-          <md-menu-item>
+          <!-- <md-menu-item>
             <p flex><strong>{{ currentUser.profile.name }} #{{currentUser.profile.customerNumber}}</strong></p>
-          </md-menu-item>
+          </md-menu-item> -->
           <md-menu-divider></md-menu-divider>
           <md-menu-item>
             <md-button ui-sref="profile.balance">
               <div layout="row">
                 <md-icon md-svg-icon="action:ic_account_balance_24px"></md-icon>
                 <p flex>Balance: {{currentUser.profile.balance | currency}}</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ui-sref="profile.cart">
-              <div layout="row">
-                <md-icon md-svg-icon="action:ic_shopping_basket_24px"></md-icon>
-                <p flex>Cart</p>
               </div>
             </md-button>
           </md-menu-item>

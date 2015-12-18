@@ -2,16 +2,21 @@ angular.module("food-coop").controller("ProductsListCtrl", function($scope, $sta
 
   $scope.go = $state.go;
 
-  $scope.stateParams = $stateParams;
+  $scope.stateParams = angular.copy($stateParams);
   $log.info($stateParams);
 
   $scope.subscribe('categories');
+  $scope.stateParams= $stateParams
 
   $scope.helpers({
+    changeMe: "",
+    sort: {name:1},
+
     products() {
+      let change = $scope.changeMe;
       let query = {}
       options = {
-        sort: $scope.sort || {name:1}
+        sort: $scope.sort
       };
       for(let key in $scope.stateParams) {
         if ($scope.stateParams[key] != null) {
@@ -19,7 +24,6 @@ angular.module("food-coop").controller("ProductsListCtrl", function($scope, $sta
         }
       }
       $log.info($scope.stateParams)
-      $log.info(query);
       return Products.find(query, options)
     },
     categories() {
