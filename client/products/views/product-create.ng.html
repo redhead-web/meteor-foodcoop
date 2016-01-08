@@ -39,6 +39,14 @@
       <small>{{ ctrl.error }}</small>
     </div>
     <form layout="column" name="productUploadForm">
+      <md-input-container ng-if="hasRole(currentUser, 'admin')">
+        <label>Producer</label>
+        <input ng-model="ctrl.product.producer" required name="producer" md-maxlength="60">
+        <div ng-messages="productUploadForm.producer.$error" ng-if="productUploadForm.producer.$touched">
+          <div ng-message="required">A producer is required.</div>
+          <div ng-message="maxlength">Please use a shorter name.</div>
+        </div>
+      </md-input-container>
       <md-input-container>
         <label>Product Name</label>
         <input ng-model="ctrl.product.name" required name="productName" md-maxlength="40">
@@ -112,13 +120,13 @@
       </section>
 
       <md-input-container>
-        <label>Short Packaging Description</label>
+        <label>Short Packaging Description (optional)</label>
         <input ng-model="ctrl.product.packagingDescription" type="text">
       </md-input-container>
 
       <md-input-container class="md-icon-float md-block">
         <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
-        <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" placeholder="Packaging Refund amount">
+        <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" placeholder="Packaging Refund amount (optional)">
         <div ng-messages="productUploadForm.packagingRefund.$error">
           <div ng-message="min">You must have a positive number here.</div>
           <div ng-message="number">Please use just a number here.</div>

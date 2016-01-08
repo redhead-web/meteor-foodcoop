@@ -40,7 +40,7 @@
         <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
           <td>
             <a ui-sref="productDetails({productId: item.productId})">
-              <cl-image public-id="{{item.details.img.result}}" class="thumbnail" format="jpg">
+              <cl-image public-id="{{item.details.img.result}}" class="thumbnail" >
                 <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
               </cl-image>
             </a>

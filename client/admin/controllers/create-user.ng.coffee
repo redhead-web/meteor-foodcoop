@@ -1,5 +1,4 @@
 angular.module('food-coop').controller 'CreateUserAdminCtrl', ($scope, $rootScope, $meteor, $stateParams, $mdToast) ->
-  $scope.hubs = $meteor.collection(Hubs).subscribe('hubs')
 
   $scope.user = {}
 
@@ -11,7 +10,7 @@ angular.module('food-coop').controller 'CreateUserAdminCtrl', ($scope, $rootScop
           $scope.success()
           return
       else
-        $meteor.call 'inviteUser', $scope.user, $scope.wholesaleBuyer
+        $meteor.call 'inviteUser', $scope.user, $scope.producer
         .then ->
           $scope.success("invited user to join the Fresh Food Collective")
         , (err) ->

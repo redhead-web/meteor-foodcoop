@@ -1,5 +1,4 @@
 angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $rootScope, $meteor, $stateParams, $mdToast) ->
-  $scope.hubs = $meteor.collection(Hubs).subscribe('hubs')
 
   $scope.validate = (isValid) ->
     if isValid
@@ -16,24 +15,24 @@ angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $rootScope, $me
     $mdToast.show $mdToast.simple().content('Saved Successfully').position('bottom left').hideDelay(3000)
     return
 
-  $scope.$watch 'wholesaleUser', (newValue, oldValue) ->
+  $scope.$watch 'producer', (newValue, oldValue) ->
     if newValue and $scope.user? and oldValue != undefined
-      $meteor.call('addRole', $scope.user._id, 'wholesaleBuyer').then ->
-          $mdToast.show $mdToast.simple().content('User is now a "Wholesale Buyer"').position('bottom left').hideDelay(3000)
+      $meteor.call('addRole', $scope.user._id, 'producer').then ->
+          $mdToast.show $mdToast.simple().content('User is now a "Producer"').position('bottom left').hideDelay(3000)
       return
     else if not newValue and $scope.user? and oldValue != undefined
-      $meteor.call('removeRole', $scope.user._id, 'wholesaleBuyer').then ->
-          $mdToast.show $mdToast.simple().content('User is no longer a "Wholesale Buyer"').position('bottom left').hideDelay(3000)
+      $meteor.call('removeRole', $scope.user._id, 'producer').then ->
+          $mdToast.show $mdToast.simple().content('User is no longer a "Producer"').position('bottom left').hideDelay(3000)
 
       return
 
   $scope.$meteorSubscribe('user',$stateParams.userId).then ->
     $scope.user = $scope.$meteorObject(Meteor.users, $stateParams.userId, false)
 
-    if Roles.userIsInRole $stateParams.userId, 'wholesaleBuyer'
-      $scope.wholesaleUser = yes
+    if Roles.userIsInRole $stateParams.userId, 'producer'
+      $scope.producer = yes
     else
-      $scope.wholesaleUser = no
+      $scope.producer = no
 
   return
 

@@ -155,7 +155,7 @@
               <span class="md-title">{{ctrl.producer.profile.name}}</span>
             </md-card-header-text>
           </md-card-header>
-          <cl-image public-id="{{ctrl.producer.profile.personalPic.result}}" format="jpg">
+          <cl-image public-id="{{ctrl.producer.profile.personalPic.result}}" >
             <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
           </cl-image>
           <!-- <img ngf-src="ctrl.producer.profile.personalPic.url || ctrl.producer.profile.personalPic || 'http://placeimg.com/600/600/people'"> -->
@@ -296,7 +296,7 @@
               <span class="md-subhead">{{product.price * ctrl.markup | currency}} / {{product.unitOfMeasure}}</span>
             </md-card-title-text>
             <md-card-title-media>
-              <cl-image public-id="{{product.img.result}}" format="jpg" class="md-media-sm card-media">
+              <cl-image public-id="{{product.img.result}}"  class="md-media-sm card-media">
                 <cl-transformation height="100" width="100" crop="fill" gravity="center"></cl-transformation>
               </cl-image>
             </md-card-title-media>

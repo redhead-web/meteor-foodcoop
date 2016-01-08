@@ -3,24 +3,9 @@
 <span flex="20" hide-sm></span>
 <div flex>
   <md-button ui-sref="admin.users">Back To User List</md-button>
-  <h2>Editing {{user.profile.name}} #{{user.profile.customerNumber}}</h2>
+  <h2 ng-if="user._id">Editing {{user.profile.name}} #{{user.profile.customerNumber}}</h2>
 
   <form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
-    <p>Current Hub: {{user.profile.hub.title || 'none'}}</p>
-    <md-input-container>
-      <md-icon md-svg-icon="action:ic_store_24px" class="md-accent" aria-label="select a hub"></md-icon>
-      <md-select style="margin-left:36px" ng-model="user.profile.hub"
-      placeholder="Select a new hub for {{user.profile.name}}">
-        <md-option ng-repeat="hub in hubs"
-        ng-value="{
-          id: hub._id,
-          title: hub.title,
-          location: hub.location,
-          dayOfTheWeek: hub.dayOfTheWeek,
-          openHours: hub.openHours
-        }"> {{hub.title}} @{{hub.location}}</md-option>
-      </md-select>
-    </md-input-container>
 
     <md-input-container>
       <md-icon md-svg-icon="social:ic_person_24px" class="md-accent" aria-label="user name"></md-icon>
@@ -33,22 +18,22 @@
       <input type="text" ng-model="user.profile.phone"
              placeholder="phone" aria-label="phone"/>
     </md-input-container>
-
+<!--
     <md-input-container>
       <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent" aria-label="address"></md-icon>
       <input type="text" ng-model="user.profile.address"
              placeholder="home address" aria-label="address"/>
-    </md-input-container>
+    </md-input-container> -->
 
-    <md-input-container ng-if="hasRole(user._id, 'wholesaleBuyer')">
+    <md-input-container>
       <md-icon md-svg-icon="maps:ic_local_shipping_24px" class="md-accent"></md-icon>
       <input type="text" ng-model="currentUser.profile.deliveryAddress"
         g-places-autocomplete
         placeholder="wholesale delivery address" aria-label="delivery address"/>
     </md-input-container>
 
-    <md-checkbox ng-model="wholesaleUser" aria-label="wholesale buyer permission">
-        Is {{user.profile.name}} a Whole Sale Buyer?
+    <md-checkbox ng-model="producer" aria-label="producer role">
+        Is {{user.profile.name}} a producer?
     </md-checkbox>
 
     <md-button type="submit">Save</md-button>

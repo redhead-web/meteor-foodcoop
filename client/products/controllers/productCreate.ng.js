@@ -4,11 +4,19 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $md
   vm.product = {
     producer: Meteor.userId(),
     published: true,
-    producerName: Meteor.User().profile.name,
-    producerCompanyName: Meteor.User().profile.companyName || undefined,
+    producerName: Meteor.user().profile.name,
+    producerCompanyName: Meteor.user().profile.companyName || undefined,
     categories: [],
     ingredients: [],
   };
+
+  $scope.$watch('vm.product.producer', (newName, oldName) => {
+    if (!!newName) {
+      let user = Meteor.users.findOne(newName);
+      vm.product.producerName = user.profile.name;
+      vm.product.producerCompanyName = user.profile.companyName || undefined;
+    }
+  })
 
   vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
