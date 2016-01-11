@@ -16,14 +16,13 @@ Meteor.publish 'product-count', ->
 Meteor.publish 'order', (id) ->
   Orders.find _id:id
 
-Meteor.publish 'orders', (options, deliveryDay) ->
+Meteor.publish 'orders', (deliveryDay) ->
   check(deliveryDay, String)
 
   if Roles.userIsInRole this.userId, 'admin'
 
-    return Subscriptions.find
+    return Sales.find
       deliveryDay: new Date(deliveryDay)
-  	 ,options
   else
     console.log "cannot publish orders to non admin"
 
@@ -41,13 +40,13 @@ Meteor.publish "user-list", (options, searchstring) ->
 
     Counts.publish this, 'filteredUserCount', Meteor.users.find(
       'profile.name':
-        '$regex': ".*#{searchstring}" or '' + '.*'
+        '$regex': ".*#{searchstring}"
         '$options': 'i'
     ), noReady: true
 
     return Meteor.users.find
       'profile.name':
-        '$regex': ".*#{searchstring}" or '' + '.*'
+        '$regex': ".*#{searchstring}"
         '$options': 'i'
     , options
 

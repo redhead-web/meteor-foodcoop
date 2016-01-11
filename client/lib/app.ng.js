@@ -1,6 +1,7 @@
 angular.module('food-coop',[
   'ngMessages',
   'angular-meteor',
+  'angular-meteor.auth',
   'ui.router',
   'ngMaterial',
   'uiGmapgoogle-maps',

@@ -1,6 +1,6 @@
 angular.module("food-coop").controller "UsersAdminCtrl", ($scope, $meteor, $stateParams) ->
 
-  $scope.perPage = 25
+  $scope.perPage = 2
   $scope.page = 1
   $scope.sort = "createdAt": -1
   $scope.orderProperty = '-1'
@@ -11,32 +11,28 @@ angular.module("food-coop").controller "UsersAdminCtrl", ($scope, $meteor, $stat
     result = 1 if result == 0
     result
 
-  $meteor.autorun $scope, ->
-    $meteor.subscribe 'user-list',
-      limit: parseInt $scope.getReactively 'perPage'
-      skip:  parseInt ( ($scope.getReactively 'page') - 1) * $scope.getReactively 'perPage'
-      sort:  $scope.getReactively 'sort'
-    , $scope.getReactively 'searchstring'
-    .then ->
-      $scope.userCount = $meteor.object Counts, 'filteredUserCount', false
+  $scope.subscribe 'user-list', =>
+    return [{
+        limit: parseInt $scope.getReactively 'perPage'
+        skip:  parseInt($scope.getReactively('page') - 1) * $scope.getReactively 'perPage'
+        sort:  {createdAt: $scope.getReactively('sort.createdAt')}
+      }, $scope.getReactively 'searchstring']
 
-  $scope.users = $scope.$meteorCollection ->
-    searchstring = $scope.getReactively 'searchstring'
-    Meteor.users.find {
-      'profile.name':
-        '$regex': ".*#{searchstring}" or '' + '.*'
-        '$options': 'i'
-      },
-      sort: $scope.getReactively 'sort'
+  $scope.helpers
+    users: () =>
+      Meteor.users.find
+        'profile.name':
+          '$regex': ".*#{$scope.getReactively('searchstring')}" or '' + '.*'
+          '$options': 'i'
+      ,
+        sort: {createdAt: $scope.getReactively('sort.createdAt')}
+    filteredUserCount: () => Counts.get 'filteredUserCount'
+    userCount: () => Counts.get 'userCount'
+
 
 
   $scope.pageChanged = (page) ->
     $scope.page = page
-    return
-
-  $scope.$watch 'orderProperty', ->
-    if $scope.orderProperty
-      $scope.sort = { "createdAt": parseInt $scope.orderProperty }
     return
 
   return

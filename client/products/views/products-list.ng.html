@@ -71,7 +71,7 @@
 </md-toolbar>
 <md-tabs md-dynamic-height>
   <md-tab label="All">
-    <md-content layout="row" layout-align="center center" layout-padding layout-sm="column">
+    <md-content layout="row" layout-align="center center" layout-padding layout-xs="column">
       <md-card ng-repeat="product in products" flex='33' flex-sm="50">
         <a href="/product/{{product._id}}">
           <cl-image public-id="{{product.img.result}}" flex="100">
@@ -121,7 +121,7 @@
   </md-tab>
   <md-tab ng-repeat="c in categories"
           label="{{c.name}}">
-    <md-content layout="row" layout-align="center center" layout-padding layout-sm="column">
+    <md-content layout="row" layout-align="center center" layout-padding layout-xs="column">
       <md-card ng-repeat="product in products|filter:c.name" flex='33' flex-sm="50">
         <a href="/product/{{product._id}}">
           <cl-image public-id="{{product.img.result}}" flex="100" >

@@ -27,7 +27,7 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
       controllerAs: 'ctrl',
       // resolve: {
       //   "admin" : function($meteor) {
-      //     return $meteor.requireValidUser(isAdmin);
+      //     return $auth.requireValidUser(isAdmin);
       //   }
       // }
     })
@@ -37,18 +37,26 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
       controller: 'ProductCreateCtrl',
       controllerAs: 'ctrl',
       resolve: {
-        "currentUser" : function($meteor) {
-          return $meteor.requireUser();
+        "currentUser" : function($auth) {
+          return $auth.requireUser();
         }
       }
+    })
+    .state('faq', {
+      url: '/faq',
+      templateUrl: 'client/static/views/faq.ng.html',
+    })
+    .state('about', {
+      url: '/about-us',
+      templateUrl: 'client/static/views/about.ng.html',
     })
     .state('profile', {
       url: '/me',
       templateUrl: 'client/user/views/profile.ng.html',
       controller: 'ProfileCtrl',
       resolve: {
-        "currentUser" : function($meteor) {
-          return $meteor.requireUser();
+        "currentUser" : function($auth) {
+          return $auth.requireUser();
         }
       }
     })

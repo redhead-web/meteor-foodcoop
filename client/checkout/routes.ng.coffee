@@ -13,8 +13,8 @@ angular.module('food-coop').config ($stateProvider) ->
     templateUrl: 'client/checkout/views/subscription-checkout.ng.html'
     controller: 'subscribeCtrl',
     resolve:
-      "currentUser" : ($meteor) ->
-        $meteor.requireUser()
+      "currentUser" : ($auth) ->
+        $auth.requireUser()
 
   .state 'profile.subscriptionCheckout.success',
     url: '/success-subscription'

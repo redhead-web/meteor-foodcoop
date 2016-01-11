@@ -10,7 +10,11 @@ angular.module('food-coop').config ($stateProvider) ->
     resolve:
       producer: ($meteor, $stateParams) ->
         return $meteor.subscribe 'producer', $stateParams.producerId
-
+  .state 'directory',
+    url: '/directory'
+    templateUrl: 'client/directory/views/directory.ng.html'
+    controllerAs: 'dir'
+    controller: 'directoryCtrl'
   return
 
 # ---

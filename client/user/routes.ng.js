@@ -51,8 +51,8 @@ angular.module('food-coop').config( function($stateProvider) {
     templateUrl: 'client/checkout/views/checkout.ng.html',
     controller: 'checkoutCtrl',
     resolve: {
-      "currentUser" : function($meteor) {
-        return $meteor.requireUser();
+      "currentUser" : function($auth) {
+        return $auth.requireUser();
       },
       "token" : function($meteor, $rootScope) {
         return $meteor.call('generateClientToken');

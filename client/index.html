@@ -3,7 +3,7 @@
 </head>
 <body ng-app="food-coop" ng-controller="navCtrl as nav">
 
-  <md-toolbar md-scroll-shrink layout="row" layout-sm="column" layout-align="start center" layout-padding class="no-print">
+  <md-toolbar md-scroll-shrink layout="row" layout-xs="column" layout-align="start center" layout-padding class="no-print">
     <div class="md-toolbar-tools">
       <md-button ng-click="nav.toggleLeft()" aria-label="navigation toggle">
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
@@ -95,6 +95,14 @@
           <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
           <p> Store </p>
         </md-list-item>
+        <md-list-item ng-click="nav.goTo('directory')">
+          <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
+          <p> Producer Directory </p>
+        </md-list-item>
+        <md-list-item ng-click="nav.goTo('about')">
+          <md-icon md-svg-icon="action:ic_help_24px"></md-icon>
+          <p> About Us </p>
+        </md-list-item>
         <md-list-item ng-click="nav.goTo('faq')">
           <md-icon md-svg-icon="action:ic_help_24px"></md-icon>
           <p> FAQ / How it Works </p>
@@ -126,7 +134,7 @@
 
 
 <footer layout="row" layout-align="center end">
-  <p><small>Cooperative Food Selling Platform Alpha version 0.0.2</small></p>
+  <p><small>Cooperative Food Selling Platform Alpha version 0.0.3</small></p>
   <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button" aria-label="github link">
     <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
   </md-button>

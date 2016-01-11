@@ -4,6 +4,7 @@ saleSchema = new SimpleSchema
   producerId: type: String, regEx: SimpleSchema.RegEx.Id
   price: type: Number, decimal: true
   productName: type: String
+  unitOfMeasure: type: String
   packagingRefund: type: Number, decimal: true, optional:true
   packagingDescription: type: String, optional: true
   deliveryDay:

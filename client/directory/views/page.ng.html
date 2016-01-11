@@ -98,7 +98,7 @@
           </md-card-title>
           <md-card-content>
             <form name="editCompanyName" ng-if="ctrl.edit.companyName && ctrl.isOwner"
-            ng-submit="ctrl.producer.save(); ctrl.edit.companyName = !ctrl.edit.companyName" layout="row" layout-padding layout-sm="column">
+            ng-submit="ctrl.producer.save(); ctrl.edit.companyName = !ctrl.edit.companyName" layout="row" layout-padding layout-xs="column">
               <md-input-container flex>
                 <label>Company Name</label>
                 <input ng-model="ctrl.producer.profile.companyName" name="summary">
@@ -118,7 +118,7 @@
             </p>
 
             <form name="editSummary" ng-if="ctrl.edit.summary && ctrl.isOwner"
-            ng-submit="ctrl.producer.save(); ctrl.edit.summary = !ctrl.edit.summary" layout="row" layout-padding layout-sm="column">
+            ng-submit="ctrl.producer.save(); ctrl.edit.summary = !ctrl.edit.summary" layout="row" layout-padding layout-xs="column">
               <md-input-container flex>
                 <label>About Your Business</label>
                 <textarea ng-model="ctrl.producer.profile.summary" name="summary"></textarea>
@@ -171,7 +171,7 @@
             </p>
 
             <form name="editBio" ng-if="ctrl.edit.bio && ctrl.isOwner"
-            ng-submit="ctrl.producer.save(); ctrl.edit.bio = !ctrl.edit.bio" layout="row" layout-padding layout-sm="column">
+            ng-submit="ctrl.producer.save(); ctrl.edit.bio = !ctrl.edit.bio" layout="row" layout-padding layout-xs="column">
               <md-input-container flex>
                 <label>About Yourself</label>
                 <textarea ng-model="ctrl.producer.profile.bio" name="bio"></textarea>
@@ -233,7 +233,7 @@
             </md-list>
 
             <form name="editWebsite" ng-if="ctrl.edit.website && ctrl.isOwner"
-            ng-submit="ctrl.producer.save(); ctrl.edit.website = !ctrl.edit.website" layout="row" layout-padding layout-sm="column">
+            ng-submit="ctrl.producer.save(); ctrl.edit.website = !ctrl.edit.website" layout="row" layout-padding layout-xs="column">
               <md-input-container flex>
                 <label>Website URL</label>
                 <input ng-model="ctrl.producer.profile.website" name="website" md-maxlength="40">
@@ -333,7 +333,7 @@
             </p>
 
             <form name="editChemicals" ng-if="ctrl.edit.chemicals && ctrl.isOwner"
-            ng-submit="ctrl.producer.save(); ctrl.edit.chemicals = !ctrl.edit.chemicals" layout="row" layout-padding layout-sm="column">
+            ng-submit="ctrl.producer.save(); ctrl.edit.chemicals = !ctrl.edit.chemicals" layout="row" layout-padding layout-xs="column">
               <md-input-container flex>
                 <label>About Yourself</label>
                 <textarea ng-model="ctrl.producer.profile.chemicals" name="chemicals"></textarea>

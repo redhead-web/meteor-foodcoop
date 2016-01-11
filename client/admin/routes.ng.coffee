@@ -8,55 +8,49 @@ angular.module('food-coop').config ($stateProvider) ->
     controllerAs: 'rt'
     controller: 'AdminCtrl'
     resolve:
-      'admin': ($meteor) ->
-        $meteor.requireValidUser isAdmin
-      'userCount': ($meteor) ->
-        $meteor.subscribe 'userCount'
-      'orderCount': ($meteor) ->
-        $meteor.subscribe 'orderCount'
-      'productCount': ($meteor) ->
-        $meteor.subscribe 'product-count'
+      'admin': ($auth) ->
+        $auth.requireValidUser isAdmin
   ).state('admin.users',
     url: '/users'
     templateUrl: 'client/admin/views/users.ng.html'
     controller: 'UsersAdminCtrl'
-    resolve: 'admin': ($meteor) ->
-      $meteor.requireValidUser isAdmin
+    resolve: 'admin': ($auth) ->
+      $auth.requireValidUser isAdmin
   ).state('admin.createUser',
     url: '/user/new'
     templateUrl: 'client/admin/views/create-user.ng.html'
     controller: 'CreateUserAdminCtrl'
-    resolve: 'admin': ($meteor) ->
-      $meteor.requireValidUser isAdmin
+    resolve: 'admin': ($auth) ->
+      $auth.requireValidUser isAdmin
   ).state('admin.user',
     url: '/user/:userId'
     templateUrl: 'client/admin/views/user.ng.html'
     controller: 'UserAdminCtrl'
-    resolve: 'admin': ($meteor) ->
-      $meteor.requireValidUser isAdmin
+    resolve: 'admin': ($auth) ->
+      $auth.requireValidUser isAdmin
   ).state('admin.userOrders',
     url: '/user/:userId/orders'
     templateUrl: 'client/admin/views/user.ng.html'
     controller: 'UserOrdersAdminCtrl'
     controllerAs: 'vm'
-    resolve: 'admin': ($meteor) ->
-      $meteor.requireValidUser isAdmin
+    resolve: 'admin': ($auth) ->
+      $auth.requireValidUser isAdmin
   ).state('admin.orders',
     url: '/orders'
     templateUrl: 'client/admin/views/orders.ng.html'
     controller: 'OrdersAdminCtrl'
-    resolve: 'admin': ($meteor) ->
-      $meteor.requireValidUser isAdmin
+    resolve: 'admin': ($auth) ->
+      $auth.requireValidUser isAdmin
   ).state 'admin.order',
     url: '/order/:orderId'
     templateUrl: 'client/admin/views/order.ng.html'
     controller: 'OrderAdminCtrl'
     controllerAs: 'vm'
     resolve:
-      'admin': ($meteor) ->
-        $meteor.requireValidUser isAdmin
-      'order': ($meteor, $stateParams) ->
-        $meteor.subscribe 'order', $stateParams.orderId
+      'admin': ($auth) ->
+        $auth.requireValidUser isAdmin
+      'order': ($auth, $stateParams) ->
+        $auth.subscribe 'order', $stateParams.orderId
   return
 
 # ---

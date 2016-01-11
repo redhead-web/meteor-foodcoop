@@ -1,23 +1,23 @@
 <md-toolbar layout="row" layout-align="center center" class="md-accent">
-  <h1 class="md-display-2">Fresh Food Collective Admin Panel</h1>
+  <h1 class="md-display-2">Kaikohe Food Co-op Admin Panel</h1>
 </md-toolbar>
 
 <ui-view>
   <div layout="row" layout-margin class="text-center">
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="3">
-      <md-button class="md-fab" ui-sref="admin.users">
+      <md-button class="md-fab" ui-sref="admin.users" aria-label="users">
         <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
       </md-button>
       <div class="label">Total Users: {{rt.userCount}}</div>
     </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="2">
-      <md-button class="md-fab" ui-sref="admin.orders">
+      <md-button class="md-fab" ui-sref="admin.orders" aria-label="orders">
         <md-icon md-svg-icon="action:ic_shopping_basket_24px"></md-icon>
       </md-button>
       <div class="label">Total Orders: {{rt.ordersCount}}</div>
     </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="1">
-      <md-button class="md-fab" ui-sref="productCreate">
+      <md-button class="md-fab" ui-sref="productCreate" aria-label="create-product">
         <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
       </md-button>
       <div class="label">Total Products: {{rt.productsCount}}</div>

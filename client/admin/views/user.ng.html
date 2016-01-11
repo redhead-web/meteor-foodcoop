@@ -1,11 +1,23 @@
 
-<md-content layout="row" layout-sm="column">
-<span flex="20" hide-sm></span>
+<md-content layout="row" layout-xs="column" layout-padding layout-margin layout-fill>
+<div flex="33" ng-controller="TransactionCtrl as tr">
+  <p>Balance: {{user.profile.balance | currency}}</p>
+  <form name="transactUser" layout="column" ng-submit="tr.transact(tr.amount)">
+    <md-input-container>
+      <md-icon md-svg-icon="action:ic_credit_card_24px" class="md-accent" aria-label="amount"></md-icon>
+      <input type="number" ng-model="tr.amount"
+             placeholder="amount (positive for credit, negative for debit)" aria-label="amount"/>
+    </md-input-container>
+    <md-button type="submit">Adjust Balance</md-button>
+
+  </form>
+
+</div>
 <div flex>
   <md-button ui-sref="admin.users">Back To User List</md-button>
   <h2 ng-if="user._id">Editing {{user.profile.name}} #{{user.profile.customerNumber}}</h2>
 
-  <form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
+  <form name="editUser" layout="column" ng-submit="validate(editUser.$valid)">
 
     <md-input-container>
       <md-icon md-svg-icon="social:ic_person_24px" class="md-accent" aria-label="user name"></md-icon>
@@ -27,9 +39,9 @@
 
     <md-input-container>
       <md-icon md-svg-icon="maps:ic_local_shipping_24px" class="md-accent"></md-icon>
-      <input type="text" ng-model="currentUser.profile.deliveryAddress"
+      <input type="text" ng-model="user.profile.deliveryAddress"
         g-places-autocomplete
-        placeholder="wholesale delivery address" aria-label="delivery address"/>
+        placeholder="delivery address" aria-label="delivery address"/>
     </md-input-container>
 
     <md-checkbox ng-model="producer" aria-label="producer role">
@@ -40,5 +52,4 @@
 
   </form>
 </div>
-<span flex="20" hide-sm></span>
 </md-content>

@@ -1,17 +1,16 @@
 /* globals: angular, moment */
 angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
-  $scope.start = moment().startOf('week').format();
-  $scope.end = moment().endOf('week').format();
+
+  $scope.deliveryDay = moment( GetDeliveryDay() ).format();
 
   $scope.isActive = 'active';
 
-  $meteor.autorun($scope, function() {
-    $meteor.subscribe('orders', {
-      sort: {'productDetails.name':1, status: -1}
-    }, $scope.getReactively('start'), $scope.getReactively('end') )
-    .then(function() {
-      // $scope.orderCount = $meteor.object(Counts, 'filteredOrderCount',false);
-    });
+  $scope.subscribe('orders', () => {
+    return [$scope.getReactively('deliveryDay')]
+  })
+
+  $scope.helpers({
+    orders: () => Sales.find(),
   });
 
   $scope.orders = $scope.$meteorCollection(function() {
@@ -26,21 +25,16 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $root
     });
   });
 
-  $scope.user = function (order) { return $meteor.object(Meteor.users, order.user, false); };
-
-  $scope.hubs = $scope.$meteorCollection(Hubs).subscribe('hubs');
-  $scope.hubFilter = '';
+  $scope.user = function (id) {
+    return Meteor.users.findOne(id);
+  };
 
   $scope.lastweek = function() {
-    $scope.start = moment($scope.start).subtract(1, 'weeks').format();
-    $scope.end = moment($scope.end).subtract(1, 'weeks').format();
+    $scope.deliveryDay = moment($scope.deliveryDay).subtract(1, 'weeks').format();
   };
   $scope.nextweek = function() {
-    $scope.start = moment($scope.start).add(1, 'weeks').format();
-    $scope.end = moment($scope.end).add(1, 'weeks').format();
+    $scope.deliveryDay = moment($scope.deliveryDay).add(1, 'weeks').format();
   };
-
-  $scope.filterByHub = filterByHub;
 
   $scope.occurences = productsCount;
 
@@ -60,17 +54,10 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $root
 // this filter may hurt performance significantly so may be better to have each
 // hub have their own page and subscription using server-side helpers.
 
-  function filterByHub (order) {
-    if (!$scope.hubFilter) return true;
-    if ($scope.user(order).profile.hub.location === $scope.hubFilter) {
-      return true;
-    } return false;
-  }
-
   function productsCount (orders) {
     var occurences = {};
     _.each(orders, function(order) {
-      var name = order.productDetails.name;
+      var name = order.productName;
       if (occurences.hasOwnProperty(name)) {
         occurences[name] += order.qty
       } else {

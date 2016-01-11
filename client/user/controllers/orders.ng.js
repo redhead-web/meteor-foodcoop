@@ -2,13 +2,16 @@ angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDial
 
   $scope.deliveryDay = moment( GetDeliveryDay() ).format();
 
-  $meteor.autorun($scope, function() {
-    $meteor.subscribe('myPurchases', $scope.getReactively('deliveryDay'))
-  });
+
+  $scope.subscribe('myPurchases', () => {
+    return [$scope.getReactively('deliveryDay')]
+  })
 
   $scope.markup = Meteor.settings.public.markup / 100 +1;
 
-  $scope.orders = $scope.$meteorCollection(Sales);
+  $scope.helpers({
+    orders: () => Sales.find()
+  })
 
   $scope.forward = forward;
 

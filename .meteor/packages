@@ -21,7 +21,6 @@ dburles:collection-helpers
 rgnevashev:meteor-angular-coffee
 fourseven:scss
 planettraining:material-design-icons
-jonatan:angular-google-places-autocomplete
 angularutils:pagination
 angular
 yogiben:pretty-email
@@ -51,3 +50,5 @@ redhead:ng-parallax
 francocatena:compass
 lookback:emails
 blaze
+redhead:angular-google-places-autocomplete
+angular-meteor-auth
