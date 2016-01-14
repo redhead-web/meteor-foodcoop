@@ -18,7 +18,7 @@ Meteor.publish "myPurchases", (deliveryDay) ->
 
   Sales.find
     deliveryDay: new Date deliveryDay
-    customer: this.userId
+    customerId: this.userId
   ,
     fields: dateCreated: 1, price: 1, productName: 1, qty: 1, productId: 1, producerId: 1, packagingRefund:1
 
@@ -36,4 +36,14 @@ Meteor.publish "mySales", (deliveryDay) ->
     deliveryDay: new Date deliveryDay
     producerId: this.userId
   ,
-    fields: dateCreated: 1, price: 1, productName: 1, qty: 1, productId: 1, customer: 1, packagingRefund:1
+    fields:
+      dateCreated: 1
+      price: 1
+      productName: 1
+      qty: 1
+      productId: 1
+      customerId: 1
+      customerName: 1
+      customerNumber:1
+      packagingRefund:1
+      butchery: 1

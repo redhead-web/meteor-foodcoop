@@ -15,33 +15,6 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
   $locationProvider.html5Mode(true);
 
   $stateProvider
-    .state('store', {
-      url: '/store?name&category&certification&producer&favourite&lastOrdered&search',
-      templateUrl: 'client/products/views/products-list.ng.html',
-      controller: 'ProductsListCtrl'
-    })
-    .state('productDetails', {
-      url: '/product/:productId',
-      templateUrl: 'client/products/views/product-details.ng.html',
-      controller: 'ProductDetailsCtrl',
-      controllerAs: 'ctrl',
-      // resolve: {
-      //   "admin" : function($meteor) {
-      //     return $auth.requireValidUser(isAdmin);
-      //   }
-      // }
-    })
-    .state('productCreate', {
-      url: '/new-product',
-      templateUrl: 'client/products/views/product-create.ng.html',
-      controller: 'ProductCreateCtrl',
-      controllerAs: 'ctrl',
-      resolve: {
-        "currentUser" : function($auth) {
-          return $auth.requireUser();
-        }
-      }
-    })
     .state('faq', {
       url: '/faq',
       templateUrl: 'client/static/views/faq.ng.html',
@@ -59,8 +32,7 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
           return $auth.requireUser();
         }
       }
-    })
-    ;
+    });
 
     $urlRouterProvider.otherwise('/store');
 });

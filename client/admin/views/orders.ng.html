@@ -1,6 +1,6 @@
 <section layout="row" layout-align="center center" layout-wrap>
-  <md-button class="md-raised md-primary" ng-click="lastweek()">Last Week</md-button> {{deliveryDay | date:'EEE dd/MM/yyyy'}}
-  <md-button class="md-raised md-primary" ng-click="nextweek()">Next Week</md-button>
+  <md-button class="md-raised md-primary" ng-click="orders.lastweek()">Last Week</md-button> {{orders.deliveryDay | date:'EEE dd/MM/yyyy'}}
+  <md-button class="md-raised md-primary" ng-click="orders.nextweek()">Next Week</md-button>
 </section>
 <!-- <section layout="row" layout-align="center center" layout-wrap>
   <md-checkbox ng-model="isActive" ng-true-value="'active'" ng-false-value="'all'" aria-label="show active">Show Current Week's Subscriptions Only</md-checkbox>
@@ -9,71 +9,112 @@
   <md-button class="md-success" ng-repeat="hub in hubs" ng-click="$parent.hubFilter = hub.location">{{hub.title || hub.location}}</md-button>
 </section> -->
 
-<section layout="row" layout-align="center center" layout-wrap ng-show="isActive == 'active'">
-  <figure ng-repeat="(product, count) in occurences(filteredOrders)" class="text-center">
+<section layout="row" layout-align="center center" layout-wrap>
+  <figure ng-repeat="(product, count) in orders.occurences(filteredOrders)"
+  ng-click="orders.searchstring = product"
+  class="text-center">
     <h1 class="md-display-1">{{count}}</h1>
     <figcaption>
       <h3>{{product}}</h3>
     </figcaption>
   </figure>
 </section>
+<section layout="row" layout-align="center center" layout-wrap layout-padding>
+  <md-list flex=50>
+    <md-subheader class="md-no-sticky">Customers</md-subheader>
+    <md-list-item class="secondary-button-padding" ng-repeat="(customer, saleCount) in orders.customers" ng-click="orders.searchstring = customer">
+      <cl-image public-id="{{orders.user({'profile.name':customer}).profile.personalPic.result}}" class="thumbnail" >
+        <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+      </cl-image>
+      <p>{{customer}}</p>
+      <p class="md-secondary">{{saleCount}}</p>
+    </md-list-item>
+  </md-list>
+  <md-list flex=50>
+    <md-subheader class="md-no-sticky">Producers</md-subheader>
+    <md-list-item class="secondary-button-padding" ng-repeat="(producer, saleCount) in orders.producers"
+     ng-click="orders.searchstring = producer">
+      <cl-image public-id="{{orders.user({'profile.name':producer}).profile.personalPic.result}}" class="thumbnail" >
+        <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+      </cl-image>
+      <p>{{producer}}</p>
+      <p class="md-secondary">{{saleCount}}</p>
+    </md-list-item>
+  </md-list>
+</section>
 
-<!-- <md-input-container class="md-icon-float">
-  <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
-  <input ng-model="query" type="search">
-</md-input-container> -->
+<section layout="row">
+  <md-input-container class="md-icon-float">
+    <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+    <input ng-model="orders.searchstring" type="search" placeholder="search orders">
+  </md-input-container>
+  <h5 class="md-title">
+    Total Sales: {{orders.total(filteredOrders, true) | currency}}
+    Total for Producers: {{orders.total(filteredOrders) | currency}}
+    Total co-op revenue: {{orders.total(filteredOrders, true) - orders.total(filteredOrders) | currency}}
+  </h5>
+</section>
 
 <table class="material-table">
   <thead>
     <tr>
       <td>
-        <md-button md-no-ink ng-click="reverse = !reverse">Sorted</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='customer'; orders.reverse = !orders.reverse">Customer</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="predicate='customer'; reverse = !reverse">Customer</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='productName'; orders.reverse = !orders.reverse">Product</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="predicate='productName'; reverse = !reverse">Product</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='producer'; orders.reverse = !orders.reverse">Producer</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="predicate='producer'; reverse = !reverse">Producer</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='price'; orders.reverse = !orders.reverse">Price</md-button>
       </td>
-      <td>
-        <md-button md-no-ink ng-click="predicate='price'; reverse = !reverse">Price</md-button>
+      <td colspan="2">
+        <md-button md-no-ink ng-click="orders.predicate='price'; orders.reverse = !orders.reverse">Total</md-button>
       </td>
-      <td><md-button md-no-ink>Tools</md-button></td>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="order in orders | filter:searchstring | orderBy:predicate:reverse as filteredOrders track by order._id">
+    <tr ng-repeat="order in orders.sales |
+      filter: orders.searchstring |
+      orderBy:orders.predicate:orders.reverse as filteredOrders track by order._id">
       <td>
-        <md-button ng-click="order.sorted = !order.sorted">Sorted</md-button>
-      </td>
-      <td>
-        <md-button ui-sref="admin.user({userId: order.user})"
+        <md-button ui-sref="admin.user({userId: order.customer})"
         class="md-primary">
-          {{user(order.customer).profile.name}}
+          {{order.customerName}} #{{order.customerNumber}}
         </md-button>
       </td>
       <td>
         x{{order.qty}} {{order.productName}}
       </td>
       <td>
-        {{user(order.producerId).profile.companyName || user(order.producerId).profile.name}}
+        {{order.producerName}} #{{order.producerNumber}}
       </td>
       <td>
-        {{order.qty}} @{{order.price | currency}} / {{order.unitOfMeasure}} <span ng-if="order.qty > 1">= {{order.qty*order.price | currency}}</span>
+        @{{order.price | currency}} / {{order.unitOfMeasure}}
+      </td>
+      <td>
+        {{order.qty*order.price | currency}}
       </td>
       <td>
         <md-menu>
           <md-button md-menu-origin ng-mouseenter="$mdOpenMenu($event)"
-           class="md-primary">tools</md-button>
+           class="md-primary md-icon-button"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
           <md-menu-content>
             <md-menu-item>
               <md-button ui-sref="admin.order({orderId: order._id})">
                 <div layout="row">
                   <md-icon md-svg-icon="action:ic_credit_card_24px"></md-icon>
                   <p flex>View Payment Details</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="orders.cancel(order)">
+                <div layout="row">
+                  <md-icon md-svg-icon="action:ic_account_balance_24px"></md-icon>
+                  <p flex>Cancel and Refund Order</p>
                 </div>
               </md-button>
             </md-menu-item>

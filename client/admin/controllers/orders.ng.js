@@ -1,52 +1,53 @@
 /* globals: angular, moment */
-angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $rootScope, $meteor, $state){
+angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reactive, $state){
+  $reactive(this).attach($scope);
 
-  $scope.deliveryDay = moment( GetDeliveryDay() ).format();
+  this.cancel = cancel;
 
-  $scope.isActive = 'active';
+  this.deliveryDay = moment( GetDeliveryDay() ).format();
 
-  $scope.subscribe('orders', () => {
-    return [$scope.getReactively('deliveryDay')]
-  })
-
-  $scope.helpers({
-    orders: () => Sales.find(),
+  this.helpers({
+    sales: () => Sales.find(),
   });
 
-  $scope.orders = $scope.$meteorCollection(function() {
-    var query = {}
-    , status = $scope.getReactively('isActive');
+  // this.customers = _.countBy(this.sales, function(sale) {return sale.customerName});
+  // this.producers = _.countBy(this.sales, function(sale) {return sale.producerName});
 
-    if (status === 'active') {
-      query = {status: $scope.getReactively('isActive')}
-    }
-    return Subscriptions.find(query, {
-      sort: {'productDetails.name':1, status: -1}
-    });
+  this.subscribe('orders', () => {
+    return [this.getReactively('deliveryDay')]
   });
 
-  $scope.user = function (id) {
-    return Meteor.users.findOne(id);
+  this.autorun(() => {
+    this.customers = _.countBy(this.sales, function(sale) {return sale.customerName})
+    this.producers = _.countBy(this.sales, function(sale) {return sale.producerName})
+  });
+
+  this.user = (query) => {
+      return Meteor.users.findOne(query);
   };
 
-  $scope.lastweek = function() {
-    $scope.deliveryDay = moment($scope.deliveryDay).subtract(1, 'weeks').format();
+  this.lastweek = () => {
+    this.deliveryDay = moment(this.deliveryDay).subtract(1, 'weeks').format();
   };
-  $scope.nextweek = function() {
-    $scope.deliveryDay = moment($scope.deliveryDay).add(1, 'weeks').format();
+  this.nextweek = () => {
+    this.deliveryDay = moment(this.deliveryDay).add(1, 'weeks').format();
   };
 
-  $scope.occurences = productsCount;
+  this.occurences = productsCount;
 
-  $scope.goTo = goTo;
+  this.goTo = goTo;
 
+  this.total = total;
 
+  function cancel (sale) {
+    Sales.remove(sale._id);
+  }
 
   // function search (order) {
-  //   if (!$scope.query) {
+  //   if (!this.query) {
   //     return true;
   //   }
-  //   if ( order.status.toLowerCase().indexOf($scope.query) !=-1 || order.productDetails.name.toLowerCase().indexOf($scope.query) !=-1 ) {
+  //   if ( order.status.toLowerCase().indexOf(this.query) !=-1 || order.productDetails.name.toLowerCase().indexOf(this.query) !=-1 ) {
   //     return true;
   //   } return false;
   // }
@@ -71,6 +72,15 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $root
   function goTo (id) {
     $state.go('admin.order', {orderId: id});
   }
+
+  function total(array, markup) {
+    var mk = markup ? Meteor.settings.public.markup / 100 + 1 : 1
+    return _.reduce(array, function(total, sale) {
+      return total + (sale.price * sale.qty * mk)
+    }, 0)
+  }
+
+  return this
 
 
 });

@@ -39,6 +39,7 @@ angular.module('food-coop').config ($stateProvider) ->
     url: '/orders'
     templateUrl: 'client/admin/views/orders.ng.html'
     controller: 'OrdersAdminCtrl'
+    controllerAs: 'orders'
     resolve: 'admin': ($auth) ->
       $auth.requireValidUser isAdmin
   ).state 'admin.order',

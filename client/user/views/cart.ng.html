@@ -32,7 +32,8 @@
       <tfoot>
         <tr>
           <td colspan="7">
-            Cart Total: {{total | currency}}
+            Cart Total: {{cart.total | currency}} <br> Cart Length: {{cart.cartLength}}
+            <br> <span ng-if="$auth.currentUser.profile.balance !== 0">Balance: {{$auth.currentUser.profile.balance | currency}} <br> Total Owing {{cart.total - $auth.currentUser.profile.balance | currency}}</span>
           </td>
         </tr>
       </tfoot>
@@ -52,18 +53,18 @@
             {{item.details.producerCompanyName || item.details.producerName}}
           </td>
           <td>
-            {{item.details.price * markup | currency}}
+            {{item.details.price * cart.markup | currency}}
           </td>
           <td>
             <md-input-container class="input-table">
-              <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
+              <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
             </md-input-container>
           </td>
           <td>
-            {{item.details.price * item.qty * markup | currency}}
+            {{item.details.price * item.qty * cart.markup | currency}}
           </td>
           <td>
-            <md-button class="md-icon-button" aria-label="More" ng-click="removeFromCart(item._id)">
+            <md-button class="md-icon-button" aria-label="More" ng-click="cart.removeFromCart(item._id)">
               <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
             </md-button>
           </td>

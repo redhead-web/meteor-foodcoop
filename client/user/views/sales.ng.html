@@ -73,7 +73,7 @@
       </thead>
       <tr ng-repeat="i in sales | filter:search as filteredSales ">
         <td>
-          {{user(i).profile.name}}
+          {{i.customerName}} #{{i.customerNumber}}
         </td>
         <td>
           {{i.productName}}

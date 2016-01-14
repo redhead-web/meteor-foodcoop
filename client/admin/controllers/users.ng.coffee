@@ -1,6 +1,6 @@
 angular.module("food-coop").controller "UsersAdminCtrl", ($scope, $meteor, $stateParams) ->
 
-  $scope.perPage = 2
+  $scope.perPage = 25
   $scope.page = 1
   $scope.sort = "createdAt": -1
   $scope.orderProperty = '-1'

@@ -26,9 +26,9 @@ angular.module('food-coop',[
 //     paginationTemplateProvider.setPath('admin/views/dirPagination.ng.html');
 // })
 
-.run(function($rootScope, $meteor) {
+.run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
 
-  $meteor.subscribe('products');
-  $meteor.subscribe('hubs');
+  Meteor.subscribe('products');
+  // $meteor.subscribe('hubs');
 });

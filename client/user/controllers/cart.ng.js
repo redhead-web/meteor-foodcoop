@@ -1,30 +1,57 @@
-angular.module("food-coop").controller("UserCartCtrl", function($scope, $rootScope, $meteor){
-  $scope.total = 0;
-  $scope.countTotal = countTotal;
-  $scope.removeFromCart = removeFromCart;
-  $scope.changeQuantity = changeQuantity;
-  $scope.markup = Meteor.settings.public.markup / 100 + 1;
+angular.module("food-coop").controller("UserCartCtrl", function($scope, $reactive, $auth){
+  $reactive(this).attach($scope);
+  var vm = this;
+  vm.total = 0;
+  vm.cartLength = 0;
+  vm.markup = Meteor.settings.public.markup / 100 + 1;
 
-  function countTotal() {
-    var start, end;
-    $scope.total = _.reduce($rootScope.currentUser.profile.cart.products, function(total, item) {
-      return total + (item.details.price * $scope.markup * item.qty)
-    }, 0)
-  }
+  vm.autorun(function() {
+    var user = Meteor.user()
+    if (user != null && _.isArray(user.profile.cart.products)) {
+      vm.total = _.reduce(user.profile.cart.products, function(total, item) {
+        return total + (item.details.price * vm.markup * item.qty)
+      }, 0)
+    }
+  });
+
+  vm.autorun( function() {
+    var user = Meteor.user()
+    if (user != null) {
+      vm.cartLength = user.profile.cart.hasOwnProperty('products') ? user.profile.cart.products.length : 0
+    }
+  });
+
+
+  // vm.countTotal = countTotal;
+  vm.removeFromCart = removeFromCart;
+  vm.changeQuantity = changeQuantity;
+
+
+  // function countTotal() {
+  //   if ($auth.currentUser != null && _.isArray($auth.currentUser.profile.products) ) {
+  //     vm.total = _.reduce($auth.currentUser.profile.cart.products, function(total, item) {
+  //       return total + (item.details.price * vm.markup * item.qty)
+  //     }, 0)
+  //   } else return 0
+  // }
 
   function removeFromCart(id) {
-    $meteor.call('removeFromCart', id)
-    .then(countTotal);
-  }
-
-  function changeQuantity (id, productId, new_qty, old_qty) {
-    countTotal();
-    $meteor.call('updateCartQty', id, productId, new_qty, old_qty)
-    .then(countTotal, function(error) {
-      console.log(error);
+    Meteor.call('removeFromCart', id, function(err) {
+      console.log(err)
+      // countTotal();
     });
   }
 
-  countTotal();
+  function changeQuantity (id, productId, new_qty, old_qty) {
+    // countTotal();
+    Meteor.call('updateCartQty', id, productId, new_qty, old_qty, function(error) {
+      if (error) return console.log(error);
+      // countTotal();
+    });
+  }
+
+  // countTotal();
+
+  return vm;
 
 });

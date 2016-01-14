@@ -29,6 +29,7 @@ Meteor.methods
               producer: product.producer
               producerName: product.producerName
               producerCompanyName: product.producerCompanyName
+              unitOfMeasure: product.unitOfMeasure
               name: product.name
               price: product.price
               img: product.img

@@ -19,6 +19,7 @@ angular.module('food-coop').config( function($stateProvider) {
   .state('profile.cart', {
     url: '/cart',
     controller: 'UserCartCtrl',
+    controllerAs: 'cart',
     templateUrl: 'client/user/views/cart.ng.html'
   })
   // .state('profile.subscriptions', {

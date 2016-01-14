@@ -8,11 +8,9 @@ Meteor.methods
       total + product.qty * product.details.price
     ), 0)
 
-
-
     id = Orders.insert
       transactionTotal: parseFloat(total)
-      user: userId
+      user: this.userId
       orderTotal: orderTotal * Meteor.settings.public.markup/100+1
       status: 'paid'
       transactionId: transactionId
@@ -20,18 +18,24 @@ Meteor.methods
     if typeof id != 'string'
       return id
 
-    sales = _.map products, (sale) ->
+    sales = _.map products, (sale) =>
       # sale.qty = sale.qty
       # sale.productId = sale.productId
       sale.producerId = sale.details.producer
+      sale.producerName = Meteor.users.findOne(sale.details.producer).profile.name
+      sale.producerNumber = Meteor.users.findOne(sale.details.producer).profile.customerNumber
       sale.price = sale.details.price
       sale.productName = sale.details.name
       sale.packagingDescription = sale.details.packagingDescription
       sale.packagingRefund = sale.details.packagingRefund
-
+      sale.unitOfMeasure = sale.details.unitOfMeasure
       sale.orderId = id
       sale.deliveryDay = GetDeliveryDay()
-      sale.customer = userId
+      sale.customerId = this.userId
+      sale.customerName = Meteor.users.findOne(this.userId).profile.name
+      sale.customerNumber = Meteor.users.findOne(this.userId).profile.customerNumber
+
+      console.log "#{sale.customerNumber} #{sale.customerName} #{sale.packagingRefund} #{sale.customerNumber}"
 
       delete sale._id
       delete sale.details
@@ -43,7 +47,7 @@ Meteor.methods
       Sales.insert sale
 
     update = Meteor.users.update {
-      _id: userId
+      _id: this.userId
     }, {
       $set:
         'profile.cart.status': 'active'
@@ -56,9 +60,9 @@ Meteor.methods
       return update
 
     Products.update
-      'carted.user': userId
+      'carted.user': this.userId
     ,
-      $pull: 'carted' : 'user' : userId
+      $pull: 'carted' : 'user' : this.userId
     ,
       multi:yes
     , (error) ->

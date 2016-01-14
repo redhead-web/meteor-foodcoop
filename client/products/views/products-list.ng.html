@@ -1,4 +1,8 @@
 <md-toolbar class="md-menu-toolbar">
+  <md-tabs>
+    <md-tab label="All" md-on-select="show('all')"></md-tab>
+    <md-tab ng-repeat="c in categories" label="{{c.name}}" md-on-select="show(c.name)"></md-tab>
+  </md-tabs>
   <div class="md-toolbar-tools">
     <form ng-submit="$event.preventDefault()">
       <md-autocomplete
@@ -68,105 +72,12 @@
 
     </md-menu-bar>
   </div>
+
 </md-toolbar>
-<md-tabs md-dynamic-height>
-  <md-tab label="All">
-    <md-content layout="row" layout-align="center center" layout-padding layout-xs="column">
-      <md-card ng-repeat="product in products" flex='33' flex-sm="50">
-        <a href="/product/{{product._id}}">
-          <cl-image public-id="{{product.img.result}}" flex="100">
-            <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
-          </cl-image>
-        </a>
-        <md-card-content>
-          <md-list>
-            <md-list-item class="md-3-line">
-              <div class="md-list-item-text">
-                <h2><a href="/product/{{product._id}}">{{product.name}}</a>
-                </h2>
-                <p><a href="/product/{{product._id}}">{{product.price * markup | currency}}</a></p>
-              </div>
-            </md-list-item>
-          </md-list>
-          <form ng-if="!!$root.currentUser" name="addToCartForm" ng-controller="orderProductCtrl as sh" ng-submit="sh.addToCart($event, product, sh.qty)" layout="row">
-            <md-input-container flex>
-              <label>Quantity</label>
-              <input ng-model="sh.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">
-              <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
-                <div ng-message="required">this field is required.</div>
-                <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
-              </div>
-            </md-input-container>
-            <md-button class="md-raised md-primary" flex>
-              <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-              Add {{sh.qty || ''}} To Cart
-            </md-button>
-          </form>
-          <!-- <div layout="row">
-            <md-input-container>
-              <input type="number" ng-min="product.minimumOrder || 1" ng-model="qty">
-            </md-input-container>
-            <md-button flex style="margin:0" ng-click="addToCart($event, product, qty)" class="md-raised md-primary">
-              <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-              Order
-            </md-button>
-            <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
-              <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
-            </md-button>
-          </div> -->
-        </md-card-content>
-      </md-card>
-    </md-content>
 
-  </md-tab>
-  <md-tab ng-repeat="c in categories"
-          label="{{c.name}}">
-    <md-content layout="row" layout-align="center center" layout-padding layout-xs="column">
-      <md-card ng-repeat="product in products|filter:c.name" flex='33' flex-sm="50">
-        <a href="/product/{{product._id}}">
-          <cl-image public-id="{{product.img.result}}" flex="100" >
-            <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
-          </cl-image>
-        </a>
-        <md-card-content>
-          <md-list>
-            <md-list-item class="md-3-line">
-              <div class="md-list-item-text">
-                <h2><a href="/product/{{product._id}}">{{product.name}}</a>
-                </h2>
-                <p><a href="/product/{{product._id}}">{{product.price * markup | currency}}</a></p>
-              </div>
-            </md-list-item>
-          </md-list>
-          <form ng-if="!!$root.currentUser" name="addToCartForm" ng-controller="orderProductCtrl as sh" ng-submit="sh.addToCart($event, product, sh.qty)" layout="row">
-            <md-input-container flex>
-              <label>Quantity</label>
-              <input ng-model="sh.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">
-              <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
-                <div ng-message="required">this field is required.</div>
-                <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
-              </div>
-            </md-input-container>
-            <md-button class="md-raised md-primary" flex>
-              <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-              Add {{sh.qty || ''}} To Cart
-            </md-button>
-          </form>
-          <!-- <div layout="row">
-            <md-input-container>
-              <input type="number" ng-min="product.minimumOrder || 1" ng-model="qty">
-            </md-input-container>
-            <md-button flex style="margin:0" ng-click="addToCart($event, product, qty)" class="md-raised md-primary">
-              <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-              Order
-            </md-button>
-            <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
-              <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
-            </md-button>
-          </div> -->
-        </md-card-content>
-      </md-card>
-    </md-content>
 
-  </md-tab>
-</md-tabs>
+<div ui-view>
+  <div ng-controller="ProductCardsCtrl as card">
+    <div ng-include="'client/products/views/product-cards.ng.html'"></div>
+  </div>
+</div>

@@ -1,42 +1,29 @@
-angular.module("food-coop").controller("ProductsListCtrl", function($scope, $state, $mdDialog, $mdToast, $stateParams, $log){
+angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $state, $mdDialog, $mdToast, $stateParams, $log){
 
   $scope.go = $state.go;
 
   $scope.stateParams = angular.copy($stateParams);
-  $log.info($stateParams);
 
   $scope.subscribe('categories');
   $scope.stateParams= $stateParams
 
   $scope.helpers({
-    changeMe: "",
-    sort: {name:1},
-
     products() {
-      let change = $scope.changeMe;
-      let query = {}
-      options = {
-        sort: $scope.sort
-      };
-      for(let key in $scope.stateParams) {
-        if ($scope.stateParams[key] != null) {
-          query[key] = $scope.stateParams[key]
-        }
-      }
-      $log.info($scope.stateParams)
-      return Products.find(query, options)
+      return Products.find()
     },
     categories() {
       return Categories.find()
     }
-
   })
+
 
   $scope.markup = Meteor.settings.public.markup/100 + 1;
 
   $scope.querySearch   = querySearch;
   $scope.selectedItemChange = selectedItemChange;
   $scope.searchTextChange   = searchTextChange;
+
+  $scope.show = show;
 
   function querySearch (query) {
     var results = query ? $scope.products.filter( createFilterFor(query) ) : $scope.products;
@@ -55,6 +42,12 @@ angular.module("food-coop").controller("ProductsListCtrl", function($scope, $sta
     return function filterFn(product) {
       return (product.name.toLowerCase().indexOf(lowercaseQuery) !== -1);
     };
+  }
+
+  function show(category) {
+    if (category === 'all') {
+      $state.go('store');
+    } else $state.go('store.category', {category: category})
   }
 
 });
