@@ -1,13 +1,13 @@
-angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $state, $mdDialog, $mdToast, $stateParams, $log){
+angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $state, $mdDialog, $mdToast, $stateParams, $reactive){
 
-  $scope.go = $state.go;
+  $reactive(this).attach($scope)
 
-  $scope.stateParams = angular.copy($stateParams);
+  this.go = $state.go;
 
-  $scope.subscribe('categories');
-  $scope.stateParams= $stateParams
+  this.subscribe('categories');
+  this.stateParams= $stateParams
 
-  $scope.helpers({
+  this.helpers({
     products() {
       return Products.find()
     },
@@ -16,23 +16,20 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
     }
   })
 
+  this.markup = Meteor.settings.public.markup/100 + 1;
 
-  $scope.markup = Meteor.settings.public.markup/100 + 1;
+  this.querySearch   = querySearch;
+  this.selectedItemChange = selectedItemChange;
+  this.searchTextChange   = searchTextChange;
 
-  $scope.querySearch   = querySearch;
-  $scope.selectedItemChange = selectedItemChange;
-  $scope.searchTextChange   = searchTextChange;
-
-  $scope.show = show;
+  this.show = show;
 
   function querySearch (query) {
-    var results = query ? $scope.products.filter( createFilterFor(query) ) : $scope.products;
-    $log.info(query);
-    $log.info(results);
+    var results = query ? this.products.filter( createFilterFor(query) ) : this.products;
     return results;
   }
   function searchTextChange(text) {
-    $log.info('Text changed to ' + text);
+    console.log('Text changed to ' + text);
   }
   function selectedItemChange(item) {
     $state.go('productDetails', {productId: item._id})
@@ -49,5 +46,7 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
       $state.go('store');
     } else $state.go('store.category', {category: category})
   }
+
+  return this;
 
 });

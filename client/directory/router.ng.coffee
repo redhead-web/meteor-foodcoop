@@ -2,7 +2,7 @@ isAdmin = (user) ->
   Roles.userIsInRole user, 'admin'
 
 angular.module('food-coop').config ($stateProvider) ->
-  $stateProvider.state 'page',
+  $stateProvider.state 'producer',
     url: '/directory/:producerId'
     templateUrl: 'client/directory/views/page.ng.html'
     controllerAs: 'ctrl'

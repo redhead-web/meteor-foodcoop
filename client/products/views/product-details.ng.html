@@ -1,6 +1,6 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-    <md-button ui-sref="store" class="md-icon-button" aria-label="Settings">
+    <md-button ui-sref="store.category({category: ctrl.product.category})" class="md-icon-button" aria-label="Settings">
       <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
     </md-button>
     <h2>
@@ -14,7 +14,6 @@
       <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
     </md-button>
   </div>
-
 </md-toolbar>
 
 <md-content layout="row" layout-padding>
@@ -62,9 +61,9 @@
     class="md-primary md-block"
     ng-model="ctrl.product.published"
     ng-if="ctrl.isOwner"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
-    <h2><md-icon md-svg-src="social:ic_person_24px" aria-label="producer"></md-icon> {{ctrl.product.producerCompanyName || ctrl.product.producerName}}</h2>
+    <!-- <h2 class="md-headline"><a ui-sref="producer({producer: ctrl.product.producerId})"><md-icon md-svg-src="social:ic_person_24px" aria-label="producer"></md-icon> {{ctrl.product.producerCompanyName || ctrl.product.producerName}}</a></h2> -->
     <md-divider></md-divider>
-    <h1 ng-hide="ctrl.edit.name">
+    <h1 ng-hide="ctrl.edit.name" class="md-display-1">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.name = !ctrl.edit.name"
@@ -87,7 +86,7 @@
       <md-button type="submit">Save</md-button>
     </form>
 
-    <h2 ng-hide="ctrl.edit.price">
+    <p ng-hide="ctrl.edit.price" class="md-body-2">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.price = !ctrl.edit.price;"
@@ -95,7 +94,7 @@
        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
       </md-button>
       {{ctrl.product.price * ctrl.markup | currency}} / {{ctrl.product.unitOfMeasure}}
-    </h2>
+    </p>
     <form name="editPrice"
     ng-submit="ctrl.save(ctrl.product); ctrl.edit.price = !ctrl.edit.price;"
     ng-if="ctrl.edit.price && ctrl.isOwner">
@@ -117,21 +116,31 @@
       </md-input-container>
       <md-button type="submit">Save</md-button>
     </form>
-    <p ng-hide="ctrl.edit.stocklevel">
+
+    <p ng-hide="ctrl.edit.stocklevel || !ctrl.product.stocklevel" class="md-body-1">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.stocklevel = !ctrl.edit.stocklevel;"
         class="md-icon-button md-accent" aria-label="edit name">
        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
       </md-button>
-      Stock Level: {{ctrl.product.stocklevel}}
+      Quantity Left: {{ctrl.product.stocklevel}}
     </p>
     <md-slider ng-model="ctrl.product.stocklevel"
     ng-if="ctrl.isOwner"
-    min="1" max="500"
+    min="1" max="100"
     ng-change="ctrl.save()"
     ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
     ></md-slider>
+    <md-input-container ng-if="ctrl.isOwner">
+      <input placeholder="Stock Level or Amount Available for Sale"
+      ng-model="ctrl.product.stocklevel"
+      ng-if="ctrl.isOwner"
+      min="1"
+      ng-change="ctrl.save()"
+      ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
+      >
+    </md-input-container>
 
     <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" layout="row">
       <md-input-container flex>
@@ -149,14 +158,13 @@
         </md-button>
       </div>
     </form>
-    <md-button ui-sref="store">Keep Shopping</md-button>
-    <md-switch ng-if="ctrl.isOwner" class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
+    <!-- <md-button ui-sref="store">Keep Shopping</md-button> -->
 
-    <md-list>
+    <!-- <md-list>
       <md-list-item ng-click="nav.goTo('store.category', {category: ctrl.product.category})">
         <p>{{ctrl.product.category}}</p>
       </md-list-item>
-    </md-list>
+    </md-list> -->
     <md-divider></md-divider>
     <md-content>
       <p ng-hide="ctrl.edit.description">
@@ -232,3 +240,5 @@
   </md-content>
 
 </md-content>
+
+<fc-producer-box producer="ctrl.product.producer"></fc-producer-box>

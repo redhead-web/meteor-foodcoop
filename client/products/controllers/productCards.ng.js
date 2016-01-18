@@ -1,40 +1,73 @@
-angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $state, $mdDialog, $mdToast, $stateParams, $log, $reactive){
+angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $state, $auth, $stateParams, $reactive){
   $reactive(this).attach($scope)
 
-  var vm = this
+  this.store = $scope.store
 
-  vm.go = $state.go;
+  this.go = $state.go;
 
-  vm.stateParams = angular.copy($stateParams);
-  $log.info($stateParams);
+  this.subscribe('categories');
 
-  vm.subscribe('categories');
+  this.stateParams = $stateParams;
 
-  vm.helpers({
-
-    user() {return Meteor.user()},
-
+  this.helpers({
     products() {
       let query = {}
-      options = {
-        sort: vm.sort
-      };
-      for(let key in vm.stateParams) {
-        if (vm.stateParams[key] != null) {
-          query[key] = vm.stateParams[key]
+
+      if (this.getReactively('stateParams.category')) query.category = $stateParams.category;
+
+      if ( Meteor.userId() ) {
+        let favourites, lastOrder;
+
+        if (this.getReactively('store.favourites') || this.getReactively('store.lastOrder')) {
+          favourites = Meteor.users.findOne(Meteor.userId()).profile.favourites || [];
+          lastOrder = Meteor.users.findOne(Meteor.userId()).profile.lastOrder || [];
+          if (this.store.favourites && this.store.lastOrder) {
+            query._id = {
+              $in: _.union(favourites, lastOrder)
+            };
+          }
+          if (this.store.favourites) {
+            query._id = {
+              $in: favourites
+            };
+          }
+          if (this.store.lastOrder) {
+            query._id = {
+              $in: lastOrder
+            };
+          }
         }
       }
-      $log.info(vm.stateParams)
-      return Products.find(query, options)
-    },
-    categories() {
-      return Categories.find()
+
+      console.log(query)
+      return Products.find(query)
     }
 
-  })
+  });
 
-  vm.markup = Meteor.settings.public.markup/100 + 1;
+  this.markup = Meteor.settings.public.markup/100 + 1;
 
-  return vm;
+  this.toggleFavourite = toggleFavourite;
+
+  this.isFavourite = isFavourite;
+
+  function toggleFavourite (id) {
+    var modifier = '$push'
+    let hasFavourite = Meteor.users.findOne({_id: Meteor.userId(), 'profile.favourites': id})
+    if (hasFavourite) {
+      modifier = '$pull'
+    }
+    let update = {}
+    update[modifier] = {'profile.favourites': id}
+    Meteor.users.update({_id: Meteor.userId()}, update)
+  }
+
+  function isFavourite(id) {
+		if ( Meteor.userId() ) {
+			return _.include(Meteor.user().profile.favourites, id) ? 'favourite' : 'not-favourite'
+		}
+  }
+
+  return this;
 
 });

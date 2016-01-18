@@ -1,12 +1,26 @@
-angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $mdConstant){
-  var vm = this;
+angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $reactive, $mdConstant, $mdToast){
+  $reactive(this).attach($scope);
+	
+	var vm = this;
+	
+	vm.subscribe('certifications');
+	vm.subscribe('categories');
+	
+	vm.helpers({
+		categories() {
+			return Categories.find()
+		},
+		certifications() {
+			return Certifications.find()
+		}
+	})
 
   vm.product = {
     producer: Meteor.userId(),
     published: true,
     producerName: Meteor.user().profile.name,
     producerCompanyName: Meteor.user().profile.companyName || undefined,
-    categories: [],
+    category: '',
     ingredients: [],
   };
 
@@ -20,12 +34,6 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $md
 
   vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
-  vm.products = $scope.$meteorCollection(Products);
-
-  vm.categories = $scope.$meteorCollection(Categories, false).subscribe('categories');
-
-  vm.certifications = $scope.$meteorCollection(Certifications, false).subscribe('certifications');
-
   vm.getUnitsOfMeasure = getUnitsOfMeasure;
 
   vm.categorySearch = categorySearch;
@@ -37,15 +45,46 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $md
   vm.addCategory = addCategory;
 
   vm.save = save;
+	
+	function reset() {
+	  vm.product = {
+	    producer: Meteor.userId(),
+	    published: true,
+	    producerName: Meteor.user().profile.name,
+	    producerCompanyName: Meteor.user().profile.companyName || undefined,
+	    category: '',
+	    ingredients: [],
+	  };
+	}
 
   function save () {
     if (!vm.product.hasOwnProperty('_id')) {
-      vm.products.save(vm.product);
+      Products.insert(vm.product, (err) => {
+			  if (err) {
+					console.error(err)
+        	return $mdToast.show(
+          	$mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
+        	);
+			  }
+					
+				
+				let toast = $mdToast.simple()
+			      .content(`Thank you! ${vm.product.name} successfully added to our store. Add another product?`)
+			      .action('YES')
+			      .highlightAction(false)
+			      .position('top left');
+			  $mdToast.show(toast).then(function(response) {
+			    if ( response == 'ok' ) {
+			      reset();
+			    }
+			  });
+      });
+		  
     }
-  };
+  }
 
   function addCategory (category) {
-    vm.product.categories.push(category)
+    Categories.insert(category)
   }
 
   function getUnitsOfMeasure (query) {

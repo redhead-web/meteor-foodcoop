@@ -1,0 +1,25 @@
+<md-content>
+<h1 class="md-headline">My Products</h1>
+
+<md-card ng-repeat="p in products">
+	<md-card-title>
+		<md-card-title-text>
+			<span>{{p.name}}</span>
+		</md-card-title-text>
+	</md-card-title>
+	<md-card-content>
+		<p>Price: {{p.price | currency}} <br>
+		Stocklevel: {{p.stocklevel}}</p>
+	</md-card-content>
+	<md-card-actions>
+		<md-switch class="md-primary md-block" ng-model="p.published">
+			<span ng-show="p.published">For Sale</span><span ng-hide="p.published">Not For Sale</span>
+		</md-switch>
+	</md-card-actions>
+</md-card>
+
+</md-content>
+
+<md-button class="md-warn md-fab" ui-sref="productCreate">
+	<md-icon md-svg-src="content:ic_add_24px"></md-icon>
+</md-button>

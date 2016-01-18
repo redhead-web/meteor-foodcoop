@@ -69,11 +69,12 @@
 
           <input s ng-model="ctrl.product.unitOfMeasure" type="text" >
         </md-input-container> -->
-        <div style="position:relative; margin-top: -12px">
+        <div style="position:relative">
           <span class="text-slash">/</span>
-          <md-autocomplete style="margin-left: 36px" required md-input-name="unitofmeasure" placeholder="Unit of Measure" md-search-text="ctrl.search"
-          md-select-on-match="true" ng-model="ctrl.product.unitOfMeasure"
-          md-items="item in ctrl.getUnitsOfMeasure(ctrl.search)"
+          <md-autocomplete style="margin-left: 36px" required md-input-name="unitofmeasure" placeholder="Unit of Measure" 
+					md-search-text="ctrl.product.unitOfMeasure"
+          md-select-on-match="true"
+          md-items="item in ctrl.getUnitsOfMeasure(ctrl.product.unitOfMeasure)"
           md-item-text="item" md-floating-label="Unit of Measure">
             <md-item-template>
               <span md-highlight-text="searchText">{{item}}</span>
@@ -156,7 +157,7 @@
         </div>
       </md-input-container>
 
-      <md-button ng-click="ctrl.products.save()">List In Store</md-button>
+      <md-button ng-click="ctrl.save()">List In Store</md-button>
       <md-button ui-sref="store">Cancel</md-button>
     </form>
   </md-whiteframe>

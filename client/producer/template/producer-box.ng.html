@@ -1,0 +1,34 @@
+<section>
+	<md-content layout="row" layout-align="center center"> <!-- Put background image and extra padding here -->
+		<span flex></span>
+		<md-card flex="80" class="md-primary">
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">{{producer.profile.companyName || producer.profile.name}}</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content layout="row">
+				<md-list flex="33">
+	        <md-list-item ng-click="nav.goTo('directory')">
+	          <md-icon md-svg-icon="communication:ic_phone_24px"></md-icon>
+	          <p> {{producer.profile.phone}} </p>
+	        </md-list-item>
+	        <md-list-item ng-click="nav.goTo('directory')">
+	          <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+	          <p> {{producer.emails[0].address}} </p>
+	        </md-list-item>
+	        <md-list-item ng-click="nav.goTo('directory')">
+	          <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
+	          <p> {{producer.profile.website}} </p>
+	        </md-list-item>
+				</md-list>
+				<section flex>
+					{{producer.profile.summary}}
+					<md-button ui-sref="store({producer:producer._id})">See our Full Range of Products</md-button>
+				</section>
+				
+			</md-card-content>
+		</md-card>
+		<span flex></span>
+	</md-content>
+</section>

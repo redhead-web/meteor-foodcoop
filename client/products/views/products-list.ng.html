@@ -1,22 +1,22 @@
-<md-toolbar class="md-menu-toolbar">
+<md-toolbar>
   <md-tabs>
-    <md-tab label="All" md-on-select="show('all')"></md-tab>
-    <md-tab ng-repeat="c in categories" label="{{c.name}}" md-on-select="show(c.name)"></md-tab>
+    <md-tab label="All" md-on-select="store.show('all')"></md-tab>
+    <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.show(c.name)"></md-tab>
   </md-tabs>
   <div class="md-toolbar-tools">
     <form ng-submit="$event.preventDefault()">
       <md-autocomplete
           md-no-cache="false"
-          md-selected-item="search"
-          md-search-text-change="searchTextChange(searchText)"
-          md-search-text="searchText"
-          md-selected-item-change="selectedItemChange(item)"
-          md-items="item in querySearch(searchText)"
+          md-selected-item="store.search"
+          md-search-text-change="store.searchTextChange(searchText)"
+          md-search-text="store.searchText"
+          md-selected-item-change="store.selectedItemChange(item)"
+          md-items="item in store.querySearch(store.searchText)"
           md-item-text="item.name"
           md-min-length="0"
           placeholder="Search">
         <md-item-template>
-          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+          <span md-highlight-text="store.searchText" md-highlight-flags="^i">{{item.name}}</span>
         </md-item-template>
         <md-not-found>
           No products called "{{searchText}}" were found.
@@ -25,7 +25,7 @@
       </md-autocomplete>
     </form>
     <md-menu-bar>
-      <md-menu>
+      <!-- <md-menu>
         <button ng-click="$mdOpenMenu()">
           Filter
         </button>
@@ -46,31 +46,36 @@
             </md-button>
           </md-menu-item>
         </md-menu-content>
-      </md-menu>
+      </md-menu> -->
       <md-menu>
         <button ng-click="$mdOpenMenu()">
           Sort
         </button>
         <md-menu-content>
           <md-menu-item>
-            <md-button ng-click="sort = {name: 1}">
+            <md-button ng-click="store.sort = {name: 1}">
               Alphabetical
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="sort = {price: 1}">
+            <md-button ng-click="store.sort = {price: 1}">
               Price lowest-highest
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="sort = {price: -1}">
+            <md-button ng-click="store.sort = {price: -1}">
               Price highest-lowest
             </md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>
-
     </md-menu-bar>
+    <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="$auth.currentUser">
+      <span class="md-body-1">Show Only Favourites</span>
+    </md-switch>
+    <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="$auth.currentUser">
+      <span class="md-body-1">Show My Last Order</span>
+    </md-switch>
   </div>
 
 </md-toolbar>
