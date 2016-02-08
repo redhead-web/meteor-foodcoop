@@ -2,8 +2,6 @@
 packages/redhead:angular-cloudinary/
 settings.json
 
-settings.json
-
 *.jpg
 
 .uploads
