@@ -82,7 +82,10 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   function total(array, markup) {
     var mk = markup ? Meteor.settings.public.markup / 100 + 1 : 1
     return _.reduce(array, function(total, sale) {
-      return total + (sale.price * sale.qty * mk)
+      if (sale.status !== 'cancelled' && sale.status !== 'refunded') {
+        return total + (sale.price * sale.qty * mk)
+      }
+      return total;
     }, 0)
   }
 
