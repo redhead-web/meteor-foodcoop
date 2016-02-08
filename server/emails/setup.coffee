@@ -1,8 +1,11 @@
 Templates = {}
 
 Mailer.config
-  from: 'Sean <sean@foodcoop.nz>'
-  replyTo: 'Sean <sean@foodcoop.nz>'
+  from: 'Kai kohekohe Food Co-op <kaikohe.cooperative@gmail.com>'
+  replyTo: 'Kai kohekohe Food Co-op <kaikohe.cooperative@gmail.com>'
+
+Templates.contactMessage = 
+  path: 'contact/contact-email.html'
 
 Templates.wholesaleInvoiceEmail =
   path: 'invoice/invoice-email.html'
@@ -28,9 +31,16 @@ Meteor.startup ->
       path: 'email-layout.html'
       scss: 'email-layout.scss'
     helpers:
-      companyName: "Food Co-op"
-      bankAccount: "02-0000-000000-01"
-      GSTNumber: "021-030-303"
+      companyName: "Kai kohekohe Food Co-op"
+      bankAccount: "06-0333-0082913-03"
+      GSTNumber: "113-091-103"
+      deliveryDay: () ->
+        day = GetDeliveryDay()
+        moment(day).calendar null,
+          nextDay : '[Tomorrow]',
+          sameDay : '[Today]',
+          nextWeek : '[this] dddd',
+          sameElse : 'dddd MMMM dd, yyyy'
       duration: () ->
         #similar to userCartCtrl weeksRemaining function
         end = moment(@end_date).startOf('day');
@@ -39,11 +49,8 @@ Meteor.startup ->
           weeks++
         "#{weeks} weeks"
 
-      price: () ->
-          duration = Math.abs moment(@end_date).startOf('day').diff(moment(@start_date).startOf('day'), 'weeks')
-          if duration == 0
-            duration++
-          price = @qty * @productDetails.price * duration
+      totalPrice: () ->
+          price = @qty * @price * (Meteor.settings.public.markup / 100 + 1)
           return "$#{price.toFixed(2)}"
 
       total: () ->

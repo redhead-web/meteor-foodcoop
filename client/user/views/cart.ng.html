@@ -5,7 +5,7 @@
 <md-content ng-if="currentUser.profile.cart" layout="row" layout-align="center center">
   <span flex></span>
   <div flex="90" flex-md=100 flex-sm=100>
-    <h1 class="text-center"> Shopping Cart </h1>
+    <h1 class="text-center md-title"> Shopping Cart </h1>
 
     <table class="material-table cart-table">
       <thead>
@@ -31,14 +31,33 @@
       </thead>
       <tfoot>
         <tr>
-          <td colspan="7">
-            Cart Total: {{cart.total | currency}} <br> Cart Length: {{cart.cartLength}}
-            <br> <span ng-if="$auth.currentUser.profile.balance !== 0">Balance: {{$auth.currentUser.profile.balance | currency}} <br> Total Owing {{cart.total - $auth.currentUser.profile.balance | currency}}</span>
+          <td colspan="6">
+            Cart Total
+          </td>
+          <td>{{cart.total | currency}}</td>
+        </tr>
+        <tr ng-if="$auth.currentUser.profile.balance !== 0">
+          <td colspan="6">Balance</td>
+          <td ng-class="{'green-text': $auth.currentUser.profile.balance > 0, 'red-text': $auth.currentUser.profile.balance < 0}">
+            {{$auth.currentUser.profile.balance | currency}}
+          </td>
+        </tr>
+        <tr ng-if="$auth.currentUser.profile.balance !== 0">
+          <td colspan="6">
+            Total Owing
+          </td>
+          <td>
+            <span ng-if="$auth.currentUser.profile.balance < cart.total">
+              {{cart.total - $auth.currentUser.profile.balance | currency}}
+            </span>
+            <span ng-if="$auth.currentUser.profile.balance > cart.total">
+              $0.00
+            </span>
           </td>
         </tr>
       </tfoot>
       <tbody>
-        <tr ng-repeat="item in currentUser.profile.cart.products track by item._id">
+        <tr ng-repeat="item in cart.Items track by item._id">
           <td>
             <a ui-sref="productDetails({productId: item.productId})">
               <cl-image public-id="{{item.details.img.result}}" class="thumbnail" >
@@ -71,7 +90,11 @@
         </tr>
       </tbody>
     </table>
-
+    <md-content layout="row">
+      <span flex></span>
+      <h1 class="md-headline">You can pick up this order {{cart.nextDeliveryDay | calendar}}</h1>
+      <span flex></span>
+    </md-content>
     <ui-view>
       <div layout="row" layout-align="center center">
         <md-button class="md-raised md-warn" ui-sref="profile.cart.checkout">Checkout</md-button>
@@ -82,3 +105,4 @@
   </div>
   <span flex></span>
 </md-content>
+

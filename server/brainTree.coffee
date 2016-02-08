@@ -71,18 +71,32 @@ Meteor.methods
   braintreeTransaction: (data) ->
     ###
      data Object
-     @total = total to be transacted either as a Number or String $100.00
      @paymentMethodNonce = payment nonce for once-off transaction or a new
      transaction with a saved payment method
      @user = used for mocking user data for integration tests
 
-    ###
+    ###    
+    # Calculate Total on Server for security reasons
+    items = Cart.Items.find({userId: @userId}).fetch()
+    data.cardAmount = data.orderTotal = _.reduce items, ((total, item) ->
+      total + item.details.price * ((Meteor.settings.public.markup / 100) + 1) * item.qty
+    ), 0
 
     user = data.user or Meteor.user()
-    data.total = validCurrency(data.total)
+    data.balanceAmount = user.profile.balance
+    
+    if data.balanceAmount > data.orderTotal
+      data.balanceAmount = data.orderTotal
+      data.cardAmount = 0
+      Meteor.users.update @userId,
+        $set: 'profile.balance': 0
+      resultUpdate = Meteor.call('addFromCartToOrder', data, result.transaction.id)
+      
+    if data.balanceAmount != 0 and data.orderTotal > data.balanceAmount
+      data.cardAmount -= data.balanceAmount
 
     config = {
-      amount: data.total
+      amount: data.cardAmount.toFixed 2
       paymentMethodNonce: data.payment_method_nonce
       customerId: user.profile.customerId
       options:
@@ -90,60 +104,61 @@ Meteor.methods
         storeInVaultOnSuccess: true
     }
 
+    @unblock()
     result = gateway.transaction.sale config
-
-    new Meteor.Error('Transaction failed', result.errors) if not result.success
+    
+    unless result.success
+      throw new Meteor.Error('Transaction failed', result.errors) 
 
     if result.success
-      resultUpdate = Meteor.call('addFromCartToOrder', user.profile.cart.products, data.total, result.transaction.id)
-      console.log resultUpdate
+      if data.balanceAmount
+        Meteor.users.update @userId,
+          $set: 'profile.balance': 0
+      resultUpdate = Meteor.call 'addFromCartToOrder', items, data, result.transaction.id
     result
 
-  braintreeSubscription: (data) ->
-    #does user have a braintree id? if not get them one. then update their id
-    id = Meteor.call 'findPlanId', data.price
-    user = Meteor.user()
-
-    subscriptionData =
-      planId: id
-      paymentMethodNonce: data.payment_method_nonce
-      neverExpires: true
-      options: startImmediately: true
-
-    if data.qty > 1
-      addOnId = if data.price == '41.66' then 'extra10' else 'extra20'
-      subscriptionData.addOns =
-        add: [
-          inheritedFromId: addOnId
-          qty: data.qty-1
-        ]
-
-
-    try
-      subscription = gateway.subscription.create subscriptionData
-
-      if subscription.success == true
-        data.subscription.transactionId = subscription.subscription.transactions[0].id
-        data.subscription.subscriptionId = subscription.subscription.id
-        data.subscription.status = 'active'
-
-        Subscriptions.insert data.subscription, (err, result) ->
-          if err
-            console.log err
-          else
-            console.log result
-
-        return {
-          status: subscription.success
-          price: subscription.subscription.price
-          planId: subscription.subscription.planId
-        }
-
-    catch e
-      throw new Meteor.Error 500, "Braintree Subscription Error", e.stack
-
-      throw new Meteor.Error 'subscription failed', subscription.errors
-
+  # braintreeSubscription: (data) ->
+#     #does user have a braintree id? if not get them one. then update their id
+#     id = Meteor.call 'findPlanId', data.price
+#     user = Meteor.user()
+#
+#     subscriptionData =
+#       planId: id
+#       paymentMethodNonce: data.payment_method_nonce
+#       neverExpires: true
+#       options: startImmediately: true
+#
+#     if data.qty > 1
+#       addOnId = if data.price == '41.66' then 'extra10' else 'extra20'
+#       subscriptionData.addOns =
+#         add: [
+#           inheritedFromId: addOnId
+#           qty: data.qty-1
+#         ]
+#
+#
+#     try
+#       subscription = gateway.subscription.create subscriptionData
+#
+#       if subscription.success == true
+#         data.subscription.transactionId = subscription.subscription.transactions[0].id
+#         data.subscription.subscriptionId = subscription.subscription.id
+#         data.subscription.status = 'active'
+#
+#         Subscriptions.insert data.subscription, (err, result) ->
+#           if err
+#             console.log err
+#           else
+#             console.log result
+#
+#         return {
+#           status: subscription.success
+#           price: subscription.subscription.price
+#           planId: subscription.subscription.planId
+#         }
+#
+#     catch e
+#       throw new Meteor.Error 500, "Braintree Subscription Error", e.stack
 
   getTransaction: (transactionId) ->
     check transactionId, String
@@ -157,12 +172,4 @@ Meteor.methods
       result
     catch e
       throw new Meteor.Error 'Subscription Cancellation Failed', result.errors
-
-
-validCurrency = (amount) ->
-  if typeof amount == "number"
-    amount = Math.round(amount * 100) / 100
-    amount = amount.toFixed 2
-  if typeof amount != "number" and not /^\d+(\.)?(\d{0,2})?/.test(amount)
-    throw new Meteor.Error('invalid amount format', 'invalid amount to be transacted', 'validCurrency function')
-  amount
+  

@@ -1,52 +1,32 @@
-<md-content layout="row" layout-align="center center">
-<md-card ng-repeat="product in card.products | orderBy: store.sort track by product._id" flex='33' flex-sm="50">
+<div layout="row" layout-align="start end" layout-wrap>
+<div ng-repeat="product in card.products | orderBy: store.sort track by product._id" 
+	flex="25" flex-sm="33" flex-xs="50">
+<md-card class="product-card">
   <a ui-sref="productDetails({productId: product._id})">
     <cl-image public-id="{{product.img.result}}" class="md-card-image">
       <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
     </cl-image>
   </a>
-  <md-card-actions layout="row" layout-align="center start" style="margin-top:-25px;" >
-    <!-- <md-button class="md-fab md-primary md-hue-2" aria-label="favourite">
-      <md-icon md-svg-icon="social:ic_share_24px"></md-icon>
-    </md-button> -->
-    <md-fab-speed-dial md-open="product.share" md-direction="down" class="md-fling">
-      <md-fab-trigger>
-        <md-button aria-label="share menu" class="md-fab md-primary md-hue-2">
-          <md-icon md-svg-icon="social:ic_share_24px"></md-icon>
-        </md-button>
-      </md-fab-trigger>
-      <md-fab-actions class="floating-fab-actions">
-        <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-          <md-icon md-svg-icon="social:ic_share_24px" aria-label="Twitter"></md-icon>
-        </md-button>
-        <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-          <md-icon md-svg-icon="action:ic_user_24px" aria-label="Facebook"></md-icon>
-        </md-button>
-        <md-button aria-label="Email" class="md-fab md-raised md-mini">
-          <md-icon md-svg-icon="action:ic_user_24px" aria-label="Google Hangout"></md-icon>
-        </md-button>
-      </md-fab-actions>
-    </md-fab-speed-dial>
+	<div>
+  <md-card-actions layout="row" layout-align="center start" layout-margin class="floating-actions">
     <div ng-controller="orderProductCtrl as shop">
       <md-button class="md-fab md-primary md-hue-2" aria-label="shopping cart"
         ng-click="shop.addToCart($event, product, 1)"
       >
-        <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
+        <md-icon md-svg-icon="{{ shop.alreadyInCart(product._id) }}"></md-icon>
+        
       </md-button>
     </div>
-    <md-button class="md-fab md-warn" aria-label="favourite" ng-click="card.toggleFavourite(product._id)">
-      <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
-    </md-button>
   </md-card-actions>
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-headline">{{product.name}}</span>
+  <md-card-header class="product-card-header">
+    <md-card-header-text>
+      <span class="md-title">{{product.name}}</span>
       <span class="md-subhead">{{product.price * store.markup | currency}} / {{product.unitOfMeasure}}</span>
-    </md-card-title-text>
-  </md-card-title>
+    </md-card-header-text>
+  </md-card-header>
 
-  <md-card-content>
-    <form ng-if="!!$auth.currentUser" name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, product, shop.qty)" layout="row">
+  <md-card-content class="product-card-order-form">
+    <form ng-if="!!$auth.currentUser" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, product, shop.qty)" layout="row">
       <md-input-container flex class="add-to-cart-input">
         <label>Quantity</label>
         <input ng-model="shop.qty" type="number" min="{{product.minimumOrder || 1}}" required name="qty">
@@ -56,22 +36,21 @@
         </div>
       </md-input-container>
       <md-button class="md-primary" type="submit">
-        <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
         Add {{shop.qty || ''}} To Cart
       </md-button>
     </form>
   </md-card-content>
-  <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-icon-button is-favourite"
-      ng-class="card.isFavourite(product._id)"
-      aria-label="Favourite"
-      ng-click="card.toggleFavourite(product._id)"
-      >
-      <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" aria-label="share">
-      <md-icon md-svg-icon="social:ic_share_24px"></md-icon>
-    </md-button>
+  <md-card-actions layout="row" layout-align="space-between center">
+    <div ng-cloak>
+      <md-button class="md-icon-button is-favourite" ng-if="$auth.currentUser"
+	      ng-class="card.isFavourite(product._id)"
+	      aria-label="Favourite"
+	      ng-click="card.toggleFavourite(product._id)"
+	      >
+	      <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
+	    </md-button>
+      <fc-social-menu url="/product/{{product._id}}"></fc-social-menu>
+		</div>
     <md-button class="md-icon-button" href="/product/{{product._id}}" arai-label="product details">
       <md-icon md-svg-icon="navigation:ic_more_horiz_24px"></md-icon>
     </md-button>
@@ -89,6 +68,7 @@
         <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
       </md-button>
     </div> -->
-
+	</div>
 </md-card>
-</md-content>
+</div>
+</div>

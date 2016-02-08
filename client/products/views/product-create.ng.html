@@ -7,9 +7,8 @@
   ng-controller="photoUploadCtrl">
     <div
       layout="column"
-      ngf-drop="uploadFiles($file, $invalidFiles, ctrl.product.name)"
+      ngf-drop="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name)"
       ngf-drag-over-class="dragOverClass($event)"
-      ng-model="ctrl.product.img"
       ngf-max-size="'5MB'"
       ngf-min-width="400"
       accept="image/*"
@@ -20,8 +19,7 @@
         accept="image/*"
         aria-label="upload image"
         ngf-capture="'camera'"
-        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
-        ng-model="ctrl.product.img"
+        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name)"
         ngf-max-size="'5MB'"
         ngf-min-width="400"
         ngf-min-height="300"
@@ -49,12 +47,16 @@
       </md-input-container>
       <md-input-container>
         <label>Product Name</label>
-        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="40">
+        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="100">
         <div ng-messages="productUploadForm.productName.$error" ng-if="productUploadForm.productName.$touched">
           <div ng-message="required">A product name is required.</div>
           <div ng-message="maxlength">Please use a shorter name.</div>
         </div>
       </md-input-container>
+      <div layout="row">
+        <h3 class="md-subhead">Current Co-op Markup is {{ctrl.markup}}%. Your product will cost customers {{ctrl.product.price * (ctrl.markup/100 +1) || 0 | currency}}</h3>
+      </div>
+      
       <div layout="row">
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>

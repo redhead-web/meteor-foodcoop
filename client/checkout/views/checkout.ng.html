@@ -1,9 +1,22 @@
-<p ng-show="hasSubscriptionAndTransaction()" class="red md-body-2">
-  Oops, looks like you are trying to buy an indefinate subscription and some limited duration items at the same time. Our checkout can only let you purchase one at a time.
-</p>
+<!-- <p>Powered by eWay</p>
+<div ng-if="spinner">
+  <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
+</div>
+<div ng-if="!spinner && !paymentToken">
+  <balancePayment></balancePayment>
+  <tokenPayment total="total"></tokenPayment>
+  <cardPayment total="total"></cardPayment>
+</div> -->
+<div ng-if="checkout.spinner">
+  <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
+</div>
+<form id="checkout" method="post" action="/checkout" autocomplete="off">
+  <div id="payment-form" ng-show="checkout.total > 0"></div>
+  <div layout="row">
+    <span flex></span>
+    <md-button type="submit" class="md-primary md-raised" ng-if="checkout.total > 0">Pay {{checkout.total | currency}} by Credit Card</md-button>
+    <fc-balance-payment total="checkout.total"></fc-balance-payment>
+    <span flex></span>
+  </div>
+</form>
 
-  <p>Powered by Braintree</p>
-  <form id="checkout" method="post" action="/checkout" autocomplete="off">
-    <div id="payment-form"></div>
-    <md-button type="submit" class="md-warn md-raised">Process Payment of {{total | currency}}</md-button>
-  </form>

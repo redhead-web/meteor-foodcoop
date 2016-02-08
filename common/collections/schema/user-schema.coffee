@@ -8,24 +8,24 @@ cart = new SimpleSchema
     type: String
     optional:true
     allowedValues: ['active', 'pending', 'upcoming', 'complete', 'expiring', 'expired']
-  products:
-    type: [Object]
-    optional: true
-  "products.$._id":
-    type: String
-    regEx: SimpleSchema.RegEx.Id
-    autoValue: ->
-      unless @isSet
-        Random.id()
-  "products.$.productId":
-    type: String
-    regEx: SimpleSchema.RegEx.Id
-  "products.$.details":
-    type: Object
-    blackbox: true
-  "products.$.qty":
-    type: Number
-    min: 1
+  # products:
+  #   type: [Object]
+  #   optional: true
+  # "products.$._id":
+  #   type: String
+  #   regEx: SimpleSchema.RegEx.Id
+  #   autoValue: ->
+  #     unless @isSet
+  #       Random.id()
+  # "products.$.productId":
+  #   type: String
+  #   regEx: SimpleSchema.RegEx.Id
+  # "products.$.details":
+  #   type: Object
+  #   blackbox: true
+  # "products.$.qty":
+  #   type: Number
+  #   min: 1
 
 profile = new SimpleSchema
   name:

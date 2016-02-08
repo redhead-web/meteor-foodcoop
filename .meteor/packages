@@ -46,9 +46,14 @@ angular:angular-messages
 matb33:collection-hooks
 nmccready:angular-simple-logger
 angularui:angular-google-maps
-redhead:ng-parallax
 francocatena:compass
 lookback:emails
 blaze
 redhead:angular-google-places-autocomplete
 angular-meteor-auth
+redhead:cart
+redhead:like-useraccount
+promise
+redhead:angular-socialshare
+spiderable
+miro:mailchimp-lists

@@ -22,11 +22,6 @@ angular.module('food-coop').config( function($stateProvider) {
     controllerAs: 'cart',
     templateUrl: 'client/user/views/cart.ng.html'
   })
-  // .state('profile.subscriptions', {
-  //   url: '/subscriptions',
-  //   controller: 'UserSubscriptionCtrl',
-  //   templateUrl: 'client/user/views/subscriptions.ng.html'
-  // })
   .state('profile.orders', {
     url: '/orders',
     controller: 'UserOrderCtrl',
@@ -51,12 +46,10 @@ angular.module('food-coop').config( function($stateProvider) {
     url: '/checkout',
     templateUrl: 'client/checkout/views/checkout.ng.html',
     controller: 'checkoutCtrl',
+    controllerAs: 'checkout',
     resolve: {
       "currentUser" : function($auth) {
         return $auth.requireUser();
-      },
-      "token" : function($meteor, $rootScope) {
-        return $meteor.call('generateClientToken');
       }
     }
   })
@@ -73,13 +66,13 @@ angular.module('food-coop').config( function($stateProvider) {
     controllerAs: 'rc'
   })
   .state('resetpw', {
-    url: '/resetpw',
+    url: '/reset-password',
     templateUrl: 'client/user/auth/views/reset-password.ng.html',
     controller: 'ResetCtrl',
     controllerAs: 'rpc'
   })
   .state('setpw', {
-    url: '/resetpw/:token',
+    url: '/reset-password/:token',
     templateUrl: 'client/user/auth/views/set-password.ng.html',
     controller: 'ActivateCtrl',
     controllerAs: 'vm'

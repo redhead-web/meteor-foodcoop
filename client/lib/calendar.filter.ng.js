@@ -8,9 +8,11 @@ function calendar () {
 
     return moment(time).calendar(null, {
       lastDay : '[Yesterday]',
-      sameDay : 'LT',
-      lastWeek : 'dddd',
-      sameElse : 'DD/MM/YY'
+      nextDay : '[Tomorrow]',
+      sameDay : '[Today]',
+      nextWeek : '[on] dddd',
+      lastWeek : '[Last] dddd',
+      sameElse : 'dddd MMMM DD, YYYY'
     });
   };
 }

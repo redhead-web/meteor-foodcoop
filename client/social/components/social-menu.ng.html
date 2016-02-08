@@ -1,0 +1,40 @@
+<md-menu md-position-mode="target-right target">
+  <md-button class="md-icon-button" aria-label="Share" ng-click="$mdOpenMenu($event)">
+    <md-icon md-menu-origin md-svg-icon="social:ic_share_24px" class="{{class}}"></md-icon>
+  </md-button>
+  <md-menu-content width="4">
+    <md-menu-item>
+      <md-button 
+        socialshare
+        socialshare-provider="facebook"
+        socialshare-text="{{text}}"
+        socialshare-url="https://kaicoop.nz{{url}}"
+      >
+        <md-icon md-svg-icon="f_icon.svg" md-menu-align-target></md-icon>
+        Facebook
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button
+        socialshare
+        socialshare-provider="twitter"
+        socialshare-text="{{text}}"
+        socialshare-url="https://kaicoop.nz{{url}}"
+        socialshare-hashtags="kai-kohekohe-food-coop, eat-local-food"
+      >
+        <md-icon md-svg-icon="twitter.svg"></md-icon>
+        Twitter
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button 
+        socialshare
+        socialshare-provider="google+"
+        socialshare-url="https://kaicoop.nz{{url}}"
+      >
+        <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+        Google+
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

@@ -3,9 +3,13 @@ angular.module("food-coop").controller('photoUploadCtrl', ['$scope', '$rootScope
 function($scope, $rootScope, Upload) {
   var d = new Date();
   var title = "Image (" + d.getDate() + " - " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
-  $scope.uploadFiles = function(file, errFiles, title){
+  $scope.uploadFiles = function(file, errFiles, model, key, title, callback){
+    let cb = callback || angular.noop;
     if (errFiles.length > 0) return $scope.invalidFiles = errFiles;
     if (file && !file.$error) {
+      //get instant preview
+      model[key] = file.$ngfBlobUrl;
+      
       if (title == undefined) title = Random.id(6);
       Upload.upload({
         url: "https://api.cloudinary.com/v1_1/" + Meteor.settings.public.cloudinary.cloud_name + "/image/upload",
@@ -17,8 +21,12 @@ function($scope, $rootScope, Upload) {
         file: file
       }).then(function (data, status, headers, config) {
         file.result = data.data.public_id;
-        file.url = data.data.url;
-        delete file.status
+        file.url = data.data.secure_url;
+				model[key] = {
+					url: data.data.secure_url,
+					result: data.data.public_id
+				}
+        cb(model, data);
       }, function (data, status, headers, config) {
         file.result = data;
       }, function (e) {

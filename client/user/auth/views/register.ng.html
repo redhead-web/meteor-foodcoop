@@ -1,6 +1,6 @@
 <md-content layout="row">
   <span flex></span>
-  <md-whiteframe layout="column" flex="40" flex-sm="90" flex-md="60">
+  <md-whiteframe layout="column" flex="40" flex-xs="90" flex-sm="60">
     <br><br>
     <md-button flex ng-click="rc.facebookLogin()" class="md-raised"> sign up with
       <md-icon md-svg-src="f_icon.svg"></md-icon>
@@ -33,7 +33,7 @@
         <md-icon md-svg-icon="action:ic_lock_open_24px" class="md-accent"></md-icon>
         <input type="password" ng-model="rc.credentials.password" name="password" required
         placeholder="password" aria-label="password"/>
-        <div ng-messages="signupForm.name.$error" ng-if="signupForm.name.$touched">
+        <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
           <div ng-message="required">Don't forget a password! Security is important.</div>
         </div>
       </md-input-container>
@@ -48,8 +48,8 @@
                placeholder="home address" aria-label="address"/>
       </md-input-container>
       <md-radio-group ng-model="rc.role" layout="row">
-        <md-radio-button value="customer" class="md-primary">Customer ({{rc.prices.customer | currency}})</md-radio-button>
-        <md-radio-button value="producer" class="md-primary">Producer ({{rc.prices.producer | currency}})</md-radio-button>
+        <md-radio-button value="customer" class="md-primary">Customer <!-- ({{rc.prices.customer | currency}}) --></md-radio-button>
+        <md-radio-button value="producer" class="md-primary">Producer <!-- ({{rc.prices.producer | currency}}) --></md-radio-button>
       </md-radio-group>
       <md-button class="md-raised md-primary" ng-disabled="signupForm.$invalid"
                  ng-click="rc.register()">Create Account

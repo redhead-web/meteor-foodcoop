@@ -23,6 +23,12 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
       url: '/about-us',
       templateUrl: 'client/static/views/about.ng.html',
     })
+    .state('contact', {
+      url: '/contact-us',
+      templateUrl: 'client/static/views/contact.ng.html',
+      controller: 'contactCtrl',
+      controllerAs: 'msg'
+    })
     .state('profile', {
       url: '/me',
       templateUrl: 'client/user/views/profile.ng.html',
