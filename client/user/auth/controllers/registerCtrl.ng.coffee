@@ -22,7 +22,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
       if vm.role == 'producer'
         $state.go 'producer-application'
       else
-        $state.go 'welcome'
+        $state.go 'store'
       return
     ), (err) ->
       vm.error = 'Registration error - ' + err
@@ -36,7 +36,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
       if vm.role == 'producer'
         $state.go 'producer-application'
       else
-        $state.go 'welcome'
+        $state.go 'profile.edit'
       console.log(result)
     , (err) ->
       console.error err

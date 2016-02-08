@@ -1,4 +1,4 @@
-Meteor.methods
+Meteor.methods    
   removeFromCart: (id) ->
     userId = this.userId
 
@@ -10,22 +10,20 @@ Meteor.methods
     check cartItem.qty, Number
     check cartItem.productId, String
 
-
-    Meteor.users.update {
+    
+    result = Meteor.users.update {
       _id: userId
     }, {
       $set:
         'profile.cart.status' : 'active'
       $pull:
         'profile.cart.products' : _id: id
-      }, (error, num) ->
-        error if error
-        Products.update
-          _id: cartItem.productId
-          stocklevel: $exists: 1
-        ,
-          $inc: stocklevel: cartItem.qty
-          $pull: 'carted': user: userId 
-        , (error, num) ->
-          Meteor.error error if error
-          'SUCCESSFULLY ADDED TO CART'
+      }
+        
+    if result > 0
+      Products.update
+        _id: cartItem.productId
+        stocklevel: $exists: 1
+      ,
+        $inc: stocklevel: cartItem.qty
+        $pull: 'carted': user: userId       

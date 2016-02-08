@@ -8,22 +8,26 @@ Products.allow({
     if (fields === ['qty']) {
       return !!userId
     }
-    return userId && isAdmin(userId);
+    return userId && isProducer(userId);
   },
   remove: function (userId, product) {
     return userId && isAdmin(userId);
   }
 });
 
-Products.deny({
-  update: function(userId, product, fields, modifier) {
-    if (_.contains(fields, 'producer') || _.contains(fields, 'producerName') ||  _.contains(fields, 'producerCompanyName') || _.contains(fields, 'dateCreated')) {
-      return true
-    }
-  }
-})
+// Products.deny({
+//   update: function(userId, product, fields, modifier) {
+//     if (_.contains(fields, 'producer') || _.contains(fields, 'producerName') ||  _.contains(fields, 'producerCompanyName') || _.contains(fields, 'dateCreated')) {
+//       return true
+//     }
+//   }
+// })
 
 
 function isAdmin (user) {
   return Roles.userIsInRole(user, 'admin');
+}
+
+function isProducer (user) {
+  return Roles.userIsInRole(user, 'producer');
 }

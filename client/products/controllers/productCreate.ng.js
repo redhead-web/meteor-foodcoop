@@ -14,7 +14,9 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 			return Certifications.find()
 		}
 	})
-
+  
+  vm.markup = Meteor.settings.public.markup;
+  
   vm.product = {
     producer: Meteor.userId(),
     published: true,
@@ -67,13 +69,13 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
         	);
 			  }
 					
-				
-				let toast = $mdToast.simple()
+			  $mdToast.show(
+					$mdToast.simple()
 			      .content(`Thank you! ${vm.product.name} successfully added to our store. Add another product?`)
 			      .action('YES')
 			      .highlightAction(false)
-			      .position('top left');
-			  $mdToast.show(toast).then(function(response) {
+			      .position('bottom left')
+				).then(function(response) {
 			    if ( response == 'ok' ) {
 			      reset();
 			    }

@@ -11,11 +11,11 @@ angular.module('food-coop').controller 'navCtrl', ($mdUtil, $mdSidenav, $log, $s
         .toggle()
         .then ->
           $log.debug("toggle " + navID + " is done");
-    ,200
+    , 200
 
     return debounceFn;
 
-  vm.toggleLeft = buildToggler 'left'
+  vm.toggleRight = buildToggler 'right'
 
   vm.isProducer = (user) ->
     Roles.userIsInRole(user, 'producer')

@@ -17,7 +17,7 @@ angular.module("food-coop").controller "LoginCtrl", ($meteor, $state) ->
     $meteor.loginWithFacebook
       requestPermissions: ['email']
     .then (result) ->
-      console.log(result)
+      $state.go 'store'
     , (err) ->
       console.error err
       vm.error = "Login Error: #{err}"

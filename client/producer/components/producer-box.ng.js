@@ -4,7 +4,7 @@ angular.module('food-coop')
     restrict: 'E',
     // transclude: true,
     scope: {producerId:'=producer'},
-    controller: function($scope, $element) {
+    controller: function($scope, $element, $window) {
       $scope.subscribe('producer', () => {
         return [$scope.getReactively('producerId')]
       })

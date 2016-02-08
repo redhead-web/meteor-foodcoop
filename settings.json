@@ -4,6 +4,14 @@
     "PUBLIC_KEY" : "tqn8c86wyzq4wtk3",
     "PRIVATE_KEY" : "42009c617f558b001711e35a7df3a0c7"
   },
+  "MailChimp": {
+    "apiKey": "1d86770e2ad1a1c605e734a4a4cffe1b-us12",
+    "listId": "1787f38ae0"
+  },
+  "email": {
+    "name": "Sean Stanley",
+    "address": "sean@maplekiwi.com"
+  },
   "public": {
     "cloudinary": {
       "cloud_name": "foodcoop",

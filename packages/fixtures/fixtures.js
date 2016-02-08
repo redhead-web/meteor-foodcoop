@@ -28,7 +28,55 @@ var resetDatabase = function () {
 var loadDefaultFixtures = function () {
   console.log('Loading default fixtures');
   // TODO: Insert your data into the database here
-  var i, id, user, users;
+  var id, users, categories, certifications;
+
+	categories = [
+	  {
+	    name: 'Seedlings'
+	  }, {
+	    name: 'Baked Goods'
+	  }, {
+	    name: 'Meat'
+	  }, {
+	    name: 'Dairy & Eggs'
+	  }, {
+	    name: 'Produce'
+	  }, {
+	    name: 'Preserves'
+	  }, {
+	    name: 'Tea & Beverages'
+	  }, {
+	    name: 'Ready-made Meals'
+	  }
+	];
+
+	for (let i = 0, len = categories.length; i < len; i++) {
+	  let cat = categories[i];
+	  Categories.insert(cat);
+	}
+
+	certifications = [
+	  {
+	    name: 'Assure Qual',
+	    img: 'certification/assure-quality.png'
+	  }, {
+	    name: 'Biogro',
+	    img: 'certification/biogro.png'
+	  }, {
+	    name: 'Demeter',
+	    img: 'certification/demgreen.gif'
+	  }, {
+	    name: 'Organic Farm NZ',
+	    img: 'certification/organicfarmnz.png'
+	  }, {
+	    name: 'In Transition'
+	  }
+	];
+
+	for (let i = 0, len = certifications.length; i < len; i++) {
+	  let cert = certifications[i];
+	  Certifications.insert(cert);
+	}
 
   users = [
     { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer', 'deliveryCoordinator']},
@@ -36,8 +84,8 @@ var loadDefaultFixtures = function () {
     { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer']}
   ];
 
-  for (i = 0; i < users.length; i++) {
-    user = users[i];
+  for (let i = 0, len = users.length; i < len; i++) {
+    let user = users[i];
     id = Accounts.createUser({
       email: user.email,
       password: "12345678",
@@ -51,7 +99,7 @@ var loadDefaultFixtures = function () {
     }
   }
 
-  var j, len, product, products;
+  var products;
 
   producer = Meteor.users.findOne(id)
 
@@ -62,7 +110,7 @@ var loadDefaultFixtures = function () {
       producerName: producer.profile.name,
       price: 5,
       unitOfMeasure: "400 g jar",
-      categories: ["processed goods", "jam", "fruit", "vegan"],
+      category: "processed goods",
       stocklevel: 50,
       published: true
     }, {
@@ -71,13 +119,13 @@ var loadDefaultFixtures = function () {
       producerName: producer.profile.name,
       price: 2,
       unitOfMeasure: "L",
-      categories: ["Dairy", "Milk", "Raw"],
+      category: "Eggs & Dairy",
       published: true
     }
   ];
 
-  for (j = 0, len = products.length; j < len; j++) {
-    product = products[j];
+  for (let i = 0, len = products.length; i < len; i++) {
+    let product = products[i];
     Products.insert(product);
   }
 

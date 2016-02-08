@@ -2,12 +2,29 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
   var vm = this;
 
   vm.addToCart = addToCart;
+  
+  vm.alreadyInCart = alreadyInCart;
+  
+  function alreadyInCart(productId) {
+    let item = Cart.Items.findOne({productId: productId})
+    return item != null ? "content:ic_add_24px" : "action:ic_shopping_cart_24px"
+  }
 
   function showLoginAlert ($event) {
     $mdDialog.show(
       $mdDialog.alert()
       .title("Login or Sign up")
       .textContent("Kaikohe Co-operative services are only available to members. Please login or sign up to shop with us.")
+      .ok('Got it!')
+      .targetEvent($event)
+    );
+  }
+  
+  function storeStockingAlert ($event) {
+    $mdDialog.show(
+      $mdDialog.alert()
+      .title("Openning Soon")
+      .textContent("Thank you for your interest in shopping with us. Our co-op store is brand new and still being filled with products. If you are a signed up member you'll get an email when our online store is ready to use.")
       .ok('Got it!')
       .targetEvent($event)
     );
@@ -35,27 +52,43 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     if (Meteor.userId() === product.producer) {
       return isOwnerAlert($event);
     }
+    
+    // Delete the below code when we are ready to enable shopping
+    return storeStockingAlert($event)
 
 
-    Meteor.call('addToCart', rawProduct, qty, function(err, success) {
-      if (err) {
-        console.log(err);
-        return $mdToast.show(
-          $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
-        );
-      }
-      console.log('success!')
-      var toast = $mdToast.simple()
-          .content('Poof! Added to Cart! Ready to Checkout?')
-          .action('YES')
-          .highlightAction(false)
-          .position('bottom left');
-      $mdToast.show(toast).then(function(response) {
-        if ( response == 'ok' ) {
-          $state.go('profile.cart.checkout');
-        }
-      });
-    });
+		// Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
+//       if (err) {
+//         console.error(err);
+//         return $mdToast.show(
+//           $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
+//         );
+//       }
+//
+//       if (success !== "UPDATE SUCCESS") {
+//         let toast = $mdToast.simple()
+//             .content('Poof! Added to Cart! Ready to Checkout?')
+//             .action('YES')
+//             .highlightAction(false)
+//             .position('bottom left');
+//         $mdToast.show(toast).then(function(response) {
+//           if ( response == 'ok' ) {
+//             $state.go('profile.cart.checkout');
+//           }
+//         });
+//       } else if (success === "UPDATE SUCCESS") {
+//         let toast = $mdToast.simple()
+//         .content(`Poof! More ${product.name} for you! Ready to checkout?`)
+//         .action('YES')
+//         .highlightAction(false)
+//         .position('bottom left');
+//         $mdToast.show(toast).then(function(response) {
+//             if ( response == 'ok' ) {
+//               $state.go('profile.cart.checkout');
+//             }
+//           });
+//       }
+//     });
   }
   return vm;
 

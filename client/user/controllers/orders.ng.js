@@ -1,7 +1,10 @@
 angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDialog, $meteor){
-
-  $scope.deliveryDay = moment( GetDeliveryDay() ).format();
-
+  
+  if ( moment().day() == Meteor.settings.public.deliveryDayOfWeek ) {
+    $scope.deliveryDay = moment().startOf('day').format();
+  } else {
+    $scope.deliveryDay = moment( GetDeliveryDay() ).format();
+  }
 
   $scope.subscribe('myPurchases', () => {
     return [$scope.getReactively('deliveryDay')]
@@ -22,9 +25,9 @@ angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDial
   $scope.deliveryWording = '';
 
   $scope.$watch('deliveryDay', function(newValue) {
-    var isAfter = moment().isBefore(moment(newValue));
+    var isAfter = moment().startOf('day').isBefore(moment(newValue)) || moment().isSame(moment(newValue), 'day');
     if (isAfter) {
-      return $scope.deliveryWording = "to be"
+      return $scope.deliveryWording = "Pick up"
     } else {
       return $scope.deliveryWording = ""
     }

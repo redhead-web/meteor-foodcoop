@@ -1,2 +1,5 @@
 Meteor.startup ->
-	setCounter Counters, 'customerNumber', 490
+  if Counters.findOne('customerNumber')?
+	  setCounter Counters, 'customerNumber', Counters.findOne('customerNumber').next_val
+  else 
+    setCounter Counters, 'customerNumber', 10

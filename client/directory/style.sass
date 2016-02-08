@@ -4,14 +4,15 @@
   height: 400px
 
 .producer-banner
-  background-image: url(http://placeimg.com/1280/600/nature)
   height: 460px
   background-size: cover
-  background-position: 50% 50%
+  background-position: center center
+  background-repeat: none
+  background-attachment: fixed
   position: relative
   text-align: center
   background-color: #121212
-  color: rgba(255, 255, 255, 0.74)
+  color: rgba(255, 255, 255, 0.74)  
 
   h1
     margin-bottom: 0
@@ -22,6 +23,20 @@
 .text-protection
   height: 100%
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(50%, rgba(0, 0, 0, 0.34)), color-stop(100%, rgba(125, 185, 232, 0)))
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.34) 50%, rgba(125, 185, 232, 0) 100%)
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.34) 50%, rgba(125, 185, 232, 0) 100%)
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.34) 50%, rgba(125, 185, 232, 0) 100%)
+  background: -moz-linear-gradient(to top, rgba(0, 0, 0, 0.34) 50%, rgba(125, 185, 232, 0) 100%)
+  background: -webkit-linear-gradient(to top, rgba(0, 0, 0, 0.34) 50%, rgba(125, 185, 232, 0) 100%)
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.34) 50%, rgba(125, 185, 232, 0) 100%)
+  
+.dragover::before
+  width: 100%
+  height: 100%
+  background-colour: rgba(255,255,255,0.8)
+  content: ""
+  display: block
+  top: 0
+  left: 0
+  position: absolute
+  z-index: 15
+  
+.is-liked.liked md-icon
+  color: #4DA028

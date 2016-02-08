@@ -28,13 +28,13 @@ angular.module('food-coop').config ($stateProvider) ->
     controller: 'ProductCreateCtrl'
     controllerAs: 'ctrl'
     resolve: 'currentUser': ($auth) ->
-      $auth.requireUser()
+      $auth.requireValidUser isProducer
   .state 'myProducts',
     url: '/my-products'
     templateUrl: 'client/products/views/my-products.ng.html'
     controller: 'MyProductsCtrl'
     resolve: 'currentUser': ($auth) ->
-      $auth.requireUser()
+      $auth.requireValidUser isProducer
   return
 
 # ---

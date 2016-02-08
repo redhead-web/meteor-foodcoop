@@ -1,24 +1,17 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-    <md-button ui-sref="store.category({category: ctrl.product.category})" class="md-icon-button" aria-label="Settings">
+    <md-button ui-sref="store.category({category: ctrl.product.category})" aria-label="Settings">
       <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+      {{ctrl.product.category}}
     </md-button>
-    <h2>
-      <span>{{ctrl.product.category}}</span>
-    </h2>
     <span flex></span>
-    <md-button class="md-icon-button" aria-label="Favorite" ui-sref="store">
-      <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" aria-label="More">
-      <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-    </md-button>
+    <fc-social-menu url="/product/{{product._id}}"></fc-social-menu>
   </div>
 </md-toolbar>
 
-<md-content layout="row" layout-padding>
+<md-content layout="row" layout-padding layout-wrap>
 
-  <md-content flex="60" flex-sm="40" flex-xs="100">
+  <md-content flex="50" flex-sm="40" flex-xs="100">
     <div class="img-wrapper" ng-controller="photoUploadCtrl">
       <img ng-if="!!ctrl.product.img" ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
       <md-button
@@ -27,7 +20,7 @@
         aria-label="upload new image"
         accept="image/*"
         ngf-capture="'camera'"
-        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
+        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name, ctrl.save)"
         ng-model="ctrl.product.img"
         ngf-max-size="'5MB'"
         ngf-min-width="400"
@@ -41,7 +34,7 @@
           accept="image/*"
           aria-label="upload image"
           ngf-capture="'camera'"
-          ngf-select="uploadFiles($file, $invalidFiles, ctrl.product.name)"
+          ngf-select="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name, ctrl.save)"
           ng-model="ctrl.product.img"
           ngf-max-size="'5MB'"
           ngf-min-width="400"
@@ -63,7 +56,7 @@
     ng-if="ctrl.isOwner"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
     <!-- <h2 class="md-headline"><a ui-sref="producer({producer: ctrl.product.producerId})"><md-icon md-svg-src="social:ic_person_24px" aria-label="producer"></md-icon> {{ctrl.product.producerCompanyName || ctrl.product.producerName}}</a></h2> -->
     <md-divider></md-divider>
-    <h1 ng-hide="ctrl.edit.name" class="md-display-1">
+    <h1 class="md-display-1">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.name = !ctrl.edit.name"
@@ -72,21 +65,22 @@
       </md-button>
       {{ctrl.product.name}}
     </h1>
-    <form name="editName"
-    ng-submit="ctrl.save(ctrl.product); ctrl.edit.name = !ctrl.edit.name"
+    <form name="editName" flex
+    ng-submit="ctrl.edit.name = !ctrl.edit.name"
     ng-if="ctrl.edit.name && ctrl.isOwner">
       <md-input-container flex>
         <label>Product Name</label>
-        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="40">
+        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="40"
+        ng-change="ctrl.save(ctrl.product)" ng-model-options="ctrl.modelOptions"
+        >
         <div ng-messages="editName.productName.$error" ng-if="editName.productName.$touched">
           <div ng-message="required">A product name is required.</div>
           <div ng-message="maxlength">Please use a shorter name.</div>
         </div>
       </md-input-container>
-      <md-button type="submit">Save</md-button>
     </form>
 
-    <p ng-hide="ctrl.edit.price" class="md-body-2">
+    <p class="md-body-2">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.price = !ctrl.edit.price;"
@@ -95,12 +89,13 @@
       </md-button>
       {{ctrl.product.price * ctrl.markup | currency}} / {{ctrl.product.unitOfMeasure}}
     </p>
-    <form name="editPrice"
+    <form name="editPrice" flex
     ng-submit="ctrl.save(ctrl.product); ctrl.edit.price = !ctrl.edit.price;"
     ng-if="ctrl.edit.price && ctrl.isOwner">
       <md-input-container class="md-icon-float md-block">
         <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
-        <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="Price" name="price">
+        <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="Price" name="price"
+        ng-change="ctrl.save()" ng-model-options="ctrl.modelOptions">
         <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
           <div ng-message="required">A product name is required.</div>
           <div ng-message="maxlength">Please use a shorter name.</div>
@@ -108,16 +103,16 @@
       </md-input-container>
       <md-input-container>
         <label>Unit Of Measure</label>
-        <input ng-model="ctrl.product.unitOfMeasure" type="text" maxlength="10" required>
+        <input ng-model="ctrl.product.unitOfMeasure" type="text" maxlength="10" required
+        ng-change="ctrl.save()" ng-model-options="ctrl.modelOptions">
         <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
           <div ng-message="required">this field is required.</div>
           <div ng-message="maxlength">Please use a unit of measure with fewer characters.</div>
         </div>
       </md-input-container>
-      <md-button type="submit">Save</md-button>
     </form>
 
-    <p ng-hide="ctrl.edit.stocklevel || !ctrl.product.stocklevel" class="md-body-1">
+    <p ng-hide="!ctrl.product.stocklevel" class="md-body-1">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.stocklevel = !ctrl.edit.stocklevel;"
@@ -127,18 +122,16 @@
       Quantity Left: {{ctrl.product.stocklevel}}
     </p>
     <md-slider ng-model="ctrl.product.stocklevel"
-    ng-if="ctrl.isOwner"
+    ng-if="ctrl.isOwner && ctrl.edit.stocklevel"
     min="1" max="100"
     ng-change="ctrl.save()"
-    ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
     ></md-slider>
-    <md-input-container ng-if="ctrl.isOwner">
+    <md-input-container ng-if="ctrl.isOwner && ctrl.edit.stocklevel">
       <input placeholder="Stock Level or Amount Available for Sale"
       ng-model="ctrl.product.stocklevel"
       ng-if="ctrl.isOwner"
       min="1"
       ng-change="ctrl.save()"
-      ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
       >
     </md-input-container>
 
@@ -152,8 +145,7 @@
         </div>
       </md-input-container>
       <div flex>
-        <md-button class="md-raised md-primary" type="submit">
-          <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+        <md-button class="md-primary" type="submit">
           Add To Cart
         </md-button>
       </div>
@@ -165,9 +157,9 @@
         <p>{{ctrl.product.category}}</p>
       </md-list-item>
     </md-list> -->
-    <md-divider></md-divider>
-    <md-content>
-      <p ng-hide="ctrl.edit.description">
+    <md-divider ng-if="ctrl.product.description"></md-divider>
+    <md-content ng-if="ctrl.product.description || ctrl.isOwner">
+      <p>
         <md-button
           ng-if="ctrl.isOwner"
           ng-click="ctrl.edit.description = !ctrl.edit.description;"
@@ -177,23 +169,24 @@
         {{ctrl.product.description}}
         <span ng-if="ctrl.isOwner && !ctrl.product.description">No Description Set</span>
       </p>
-      <form name="editDescription"
-      ng-submit="ctrl.save(ctrl.product); ctrl.edit.description = !ctrl.edit.description;"
+      <form name="editDescription" flex
+      ng-submit="ctrl.edit.description = !ctrl.edit.description;"
       ng-if="ctrl.edit.description && ctrl.isOwner">
         <md-input-container class="md-block">
           <label>Description</label>
-          <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"></textarea>
+          <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"
+          ng-change="ctrl.save()" 
+          ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"></textarea>
           <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
             <div ng-message="maxlength">Please use a shorter description.</div>
           </div>
         </md-input-container>
-        <md-button type="submit">Save</md-button>
       </form>
 
     </md-content>
     <md-divider></md-divider>
     <md-content>
-      <p ng-hide="ctrl.edit.packagingDescription">
+      <p ng-if="ctrl.product.packagingDescription || ctrl.isOwner">
         <md-button
           ng-if="ctrl.isOwner"
           ng-click="ctrl.edit.packagingDescription = !ctrl.edit.packagingDescription;"
@@ -203,37 +196,37 @@
         Packaging: {{ctrl.product.packagingDescription}}
         <span ng-if="ctrl.isOwner && !ctrl.product.packagingDescription">No Packaging Description Set</span>
       </p>
-      <form name="editPackagingDescription"
-      ng-submit="ctrl.save(ctrl.product); ctrl.edit.packagingDescription = !ctrl.edit.packagingDescription;"
+      <form name="editPackagingDescription" flex
+      ng-submit="ctrl.edit.packagingDescription = !ctrl.edit.packagingDescription;"
       ng-if="ctrl.edit.packagingDescription && ctrl.isOwner">
         <md-input-container>
           <label>Short Packaging Description</label>
-          <input ng-model="ctrl.product.packagingDescription" type="text">
+          <input ng-model="ctrl.product.packagingDescription" type="text"
+          ng-change="ctrl.save()" ng-model-options="ctrl.modelOptions">
         </md-input-container>
-        <md-button type="submit">Save</md-button>
       </form>
-      <p ng-hide="ctrl.edit.packagingRefund">
+      <p ng-if="ctrl.product.packagingRefund || ctrl.isOwner">
         <md-button
           ng-if="ctrl.isOwner"
           ng-click="ctrl.edit.packagingRefund = !ctrl.edit.packagingRefund;"
           class="md-icon-button md-accent" aria-label="edit packaging description">
          <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
         </md-button>
-        Packaging Refund:{{ctrl.product.packagingRefund | currency}}
+        Packaging Refund: {{ctrl.product.packagingRefund | currency}}
         <span ng-if="ctrl.isOwner && !ctrl.product.packagingRefund">No Packaging Refund Set</span>
       </p>
       <form name="editPackagingRefund"
-      ng-submit="ctrl.save(ctrl.product); ctrl.edit.packagingRefund = !ctrl.edit.packagingRefund;"
+      ng-submit="ctrl.edit.packagingRefund = !ctrl.edit.packagingRefund;"
       ng-if="ctrl.edit.packagingRefund && ctrl.isOwner">
-        <md-input-container class="md-icon-float md-block">
+        <md-input-container class="md-icon-float md-block" flex>
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
-          <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" placeholder="Packaging Refund amount">
+          <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" 
+          placeholder="Packaging Refund amount" ng-change="ctrl.save()" ng-model-options="ctrl.modelOptions">
           <div ng-messages="productUploadForm.packagingRefund.$error">
             <div ng-message="min">You must have a positive number here.</div>
             <div ng-message="number">Please use just a number here.</div>
           </div>
         </md-input-container>
-        <md-button type="submit">Save</md-button>
       </form>
     </md-content>
 

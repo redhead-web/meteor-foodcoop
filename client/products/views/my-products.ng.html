@@ -1,25 +1,33 @@
-<md-content>
-<h1 class="md-headline">My Products</h1>
 
-<md-card ng-repeat="p in products">
-	<md-card-title>
-		<md-card-title-text>
-			<span>{{p.name}}</span>
-		</md-card-title-text>
-	</md-card-title>
-	<md-card-content>
-		<p>Price: {{p.price | currency}} <br>
-		Stocklevel: {{p.stocklevel}}</p>
-	</md-card-content>
-	<md-card-actions>
-		<md-switch class="md-primary md-block" ng-model="p.published">
-			<span ng-show="p.published">For Sale</span><span ng-hide="p.published">Not For Sale</span>
-		</md-switch>
-	</md-card-actions>
-</md-card>
+<h1 class="md-headline text-center">My Products</h1>
+
+<md-content layout-xs="column" layout="row" layout-wrap>
+  <md-card ng-repeat="p in products" flex="25" flex-lt-md="50">
+  	<md-card-title>
+  		<md-card-title-text>
+  			<span class="md-headline">{{p.name}}</span>
+        <span class="md-subhead">{{p.price | currency}} / {{p.unitOfMeasure}}</span>
+  		</md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-md card-media">
+          <cl-image public-id="{{p.img.result}}" class="md-avatar">
+            <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+          </cl-image>
+        </div>
+      </md-card-title-media>
+  	</md-card-title>
+  	<md-card-actions layout="row" layout-align="end center">
+  		<md-switch class="md-primary md-block" ng-model="p.published" ng-change="save(p)">
+  			<span ng-show="p.published">For Sale</span><span ng-hide="p.published">Not For Sale</span>
+  		</md-switch>
+      <md-button class="md-icon-button" ui-sref="productDetails({productId: p._id})">
+        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+  	</md-card-actions>
+  </md-card>
 
 </md-content>
 
-<md-button class="md-warn md-fab" ui-sref="productCreate">
+<md-button class="md-warn md-fab md-fab-bottom-right" ui-sref="productCreate">
 	<md-icon md-svg-src="content:ic_add_24px"></md-icon>
 </md-button>

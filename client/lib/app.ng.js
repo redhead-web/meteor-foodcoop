@@ -8,8 +8,8 @@ angular.module('food-coop',[
   'google.places',
   'ngFileUpload',
   'cloudinary',
-  'ngParallax'
-  ])
+  '720kb.socialshare'
+])
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         //    key: 'your api key',
@@ -29,6 +29,6 @@ angular.module('food-coop',[
 .run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
 
-  Meteor.subscribe('products');
+  Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
 });

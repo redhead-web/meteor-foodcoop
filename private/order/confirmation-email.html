@@ -1,29 +1,44 @@
-<p>Hi {{recipient}}, thank you for ordering from the Fresh Food Collective</p>
+<p>Hi {{recipient}}, thank you for ordering from the Kai Kohekohe Food Co-op.</p>
 
-<p class="alert alert-success">Important: your order is confirmed and you can collect from your hub on your next Collection Day.</p>
+<p class="alert alert-success">Important: please come collect your order between 6-8pm {{deliveryDay}}. Other arrangements can be made if you are unable to come.</p>
 
 <p>
   Date:<strong>{{date}}</strong><br>
   GST Number {{GSTNumber}}<br>
-  Invoice # {{number}}
+  Invoice # {{number}}<br>
+  Customer Number: {{customerNumber}}
 </p>
 
 <table cellspacing="0" cellpadding="5" border="1" width="100%">
   <tr class="header">
     <td>Product</td>
+    <td>Producer</td>
     <td>Unit Price</td>
-    <td>Duration</td>
+    <td>Quantity</td>
     <td>Price</td>
   </tr>
   {{#each items}}
     <tr>
-      <td>x{{qty}} {{productDetails.name}}</td>
-      <td>{{productDetails.price}}</td>
-      <td>{{duration}}</td>
-      <td>{{price}}</td>
+      <td><a href="https://kaicoop.nz/products/{{productId}}">{{productName}}</a></td>
+      <td><a href="https://kaicoop.nz/directory/{{producerId}}">{{producerName}}</a></td>
+      <td>${{price}} / {{unitOfMeasure}}</td>
+      <td>{{qty}}</td>
+      <td>{{totalPrice}}</td>
     </tr>
   {{/each}}
-  <tr>
-    <td colspan="4">Total: {{total}}</td>
-  </tr>
+  
+  {{#if order.balanceAmount}}
+    <tr><td colspan="3">Balance Charge</td><td style="color: green">${{order.balanceAmount}}</td></tr>
+  {{/if}}
+  {{#if order.cardAmount}}
+    <tr><td>Card Charge</td><td>${{order.cardAmount}}</td></tr>
+  {{/if}}
+  {{#if order.cardAmount}}
+    {{#if order.balanceAmount}}
+      <tr><td>Order Total</td><td>${{order.orderTotal}}</td></tr>
+    {{/if}}
+  {{/if}}
 </table>
+
+<h2>Questions or help with your order</h2>
+<p>If you have any questions about your order please reply to this email.</p>

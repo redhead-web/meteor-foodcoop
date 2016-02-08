@@ -1,10 +1,9 @@
-angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $rootScope, $meteor){
+angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $auth, $reactive){
+  $reactive(this).attach($scope);
 
-  var vm = this;
+  this.markup = Meteor.settings.public.markup/100 + 1;
 
-  vm.markup = Meteor.settings.public.markup/100 + 1;
-
-  vm.edit = {
+  this.edit = {
     name: false,
     price: false,
     unitOfMeasure: false,
@@ -13,30 +12,45 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
     packagingDescription: false,
     packagingRefund: false
   }
+  
+  this.subscribe('product', () => [$stateParams.productId])
+  
+  this.helpers({
+    product() {
+      return Products.findOne($stateParams.productId)
+    },
+    isOwner() {
+      if ( Meteor.userId() ) {
+        
+        return Meteor.userId() === this.getReactively('product.producer') ? Meteor.userId() : false;
+      }
+    }
+  })
+  
 
-  vm.product = $scope.$meteorObject(Products, $stateParams.productId, false);
-  if ($rootScope.currentUser) {
-    vm.isOwner = $rootScope.currentUser._id === vm.product.producer || Roles.userIsInRole($rootScope.currentUser._id, 'admin');
-  }
-
-  vm.save = function() {
-    vm.product.save().then(updateCarts, function(error) {
-      console.warn(error);
-    })
-  };
-
-  $scope.$watch( function() {
-    return vm.product.img;
-  }, function(n) {
-    if (n && !!n.result) {
-      vm.save();
+  // vm.product = $scope.$meteorObject(Products, $stateParams.productId, false);
+  this.autorun(() => {
+    if (Meteor.userId() && this.product) {
+      this.isOwner = Meteor.userId() === this.getReactively('product.producer') || Roles.userIsInRole(Meteor.userId(), 'admin');
     }
   });
+  
+  this.modelOptions = {
+    updateOn: 'default blur',
+    debounce: { 
+      default: 400, 
+      blur: 0 
+    } 
+  };
+  
 
-  function updateCarts() {
-    var product = vm.product.getRawObject();
-    $meteor.call('editProduct', product);
+  this.save = (product, data) => {
+    Products.update(this.product._id, {$set: this.product}, function(error) {
+      if (error) {
+        console.warn(error);
+      }
+    });
   };
 
-  return vm;
+  return this;
 });

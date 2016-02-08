@@ -1,9 +1,9 @@
-<md-toolbar>
-  <md-tabs>
-    <md-tab label="All" md-on-select="store.show('all')"></md-tab>
-    <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.show(c.name)"></md-tab>
-  </md-tabs>
-  <div class="md-toolbar-tools">
+<md-tabs class="md-primary">
+  <md-tab label="All" md-on-select="store.show('all')"></md-tab>
+  <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.show(c.name)"></md-tab>
+</md-tabs>
+<md-toolbar class="md-menu-toolbar">
+  <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
     <form ng-submit="$event.preventDefault()">
       <md-autocomplete
           md-no-cache="false"
@@ -24,6 +24,15 @@
         </md-not-found>
       </md-autocomplete>
     </form>
+    <div layout="row" layout-align="center center" ng-if="store.producer">
+      <md-button class="md-icon-button" ui-sref="store({producer: undefined})">
+        <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+      </md-button>
+      <h1 class="md-headline">
+        {{store.producer.profile.companyName || store.producer.profile.name}}
+      </h1>
+    </div>
+		<div layout="row">
     <md-menu-bar>
       <!-- <md-menu>
         <button ng-click="$mdOpenMenu()">
@@ -31,20 +40,12 @@
         </button>
         <md-menu-content>
           <md-menu-item>
-            <md-button ng-click="stateParams.filter = undefined; changeMe = '' ">
+            <md-button ng-click="store.favourites = undefined; store.lastOrder = undefined">
               All
             </md-button>
           </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="stateParams.filter = 'favourites'; changeMe = 'favourites' ">
-              Favourites
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="stateParams.filter = 'last-order'; changeMe = 'last-order' ">
-              Last Order
-            </md-button>
-          </md-menu-item>
+          <md-menu-item type="checkbox" ng-model="store.favourites" >Show Just My Favourites</md-menu-item>
+					<md-menu-item type="checkbox" ng-model="store.lastOrder" >Show My Last Order</md-menu-item>
         </md-menu-content>
       </md-menu> -->
       <md-menu>
@@ -53,34 +54,49 @@
         </button>
         <md-menu-content>
           <md-menu-item>
-            <md-button ng-click="store.sort = {name: 1}">
+            <md-button ng-click="store.sort = 'name'">
               Alphabetical
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.sort = {price: 1}">
+            <md-button ng-click="store.sort = 'price' ">
               Price lowest-highest
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.sort = {price: -1}">
+            <md-button ng-click="store.sort = 'price'">
               Price highest-lowest
             </md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>
     </md-menu-bar>
-    <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="$auth.currentUser">
+    <!-- <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="$auth.currentUser">
       <span class="md-body-1">Show Only Favourites</span>
-    </md-switch>
-    <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="$auth.currentUser">
+    </md-switch> -->
+		<md-button class="md-icon-button" ng-class="{'md-warn': store.favourites}" ng-click="store.favourites = !store.favourites" aria-label="Favorite">
+			<md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
+		</md-button>
+		<md-button class="md-icon-button" ng-class="{'md-primary': store.lastOrder}" ng-click="store.lastOrder = !store.lastOrder" aria-label="Favorite">
+			<md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
+		</md-button>
+    <!-- <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="$auth.currentUser">
       <span class="md-body-1">Show My Last Order</span>
-    </md-switch>
+    </md-switch> -->
+		</div>
   </div>
 
 </md-toolbar>
 
-
+<div layout="row" layout-align="center center">
+  <md-card flex="60" flex-xs="90">
+    <md-card-content>
+      <h2 class="md-title text-center">Thanks for stopping by</h2>
+      <p>We're still stocking the co-op's store. <a ui-sref="register">Sign up</a> and we'll let you know when it's ready for you to shop.</p>
+      <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+    </md-card-content>
+  </md-card>
+</div>
 <div ui-view>
   <div ng-controller="ProductCardsCtrl as card">
     <div ng-include="'client/products/views/product-cards.ng.html'"></div>

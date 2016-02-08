@@ -1,7 +1,27 @@
-<h1>Success!</h1>
 
-<p>Your payment has been received and your order is confirmed.</p>
+<section class="md-whiteframe-z1" layout-padding layout-margin>
+  <article layout-padding>
+    <h1 class="text-center md-display-1">High Fives! You Rock!</h1>
 
-<p>Thank you so much for your order. Your participation in this co-op is an important part of the fight against unsustainability and the archaic inequiety of the past.</p>
+    <h2 class="md-title text-center">Order Confirmed</h2>
+    
+    <p class="text-center">Help us keep prices low. Spread the word on social media, so we don’t need to add marketing costs to your food.</p>
+    
+    <div layout="row" layout-align="center center">
+      <md-button class="md-raised"
+      socialshare
+      socialshare-provider="facebook"
+      socialshare-text="Kai Kohekohe Food Co-op, Get Fresh Local Quality"
+      socialshare-url="https://kaicoop.nz"
+      >
+        <md-icon md-svg-icon="f_icon.svg"></md-icon> Please Share
+      </md-button>
+      
+    </div>
 
-<md-button class="md-raised" ui-sref="profile.orders">See my current orders</md-button>
+    <p>Thank you so much for your order. Your participation in this co-op is an important part of the fight against unsustainability and the archaic inequiety of the past. Together we can build the future of food.</p>
+  
+
+    <md-button class="md-raised md-primary" ui-sref="profile.orders">See my current orders</md-button>
+  </article>
+</section>

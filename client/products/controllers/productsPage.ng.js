@@ -6,8 +6,15 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
 
   this.subscribe('categories');
   this.stateParams= $stateParams
+  
+  this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
 
   this.helpers({
+    producer() {
+      if (this.getReactively('stateParams.producer')) {
+        return Meteor.users.findOne($stateParams.producer)
+      }
+    },  
     products() {
       return Products.find()
     },

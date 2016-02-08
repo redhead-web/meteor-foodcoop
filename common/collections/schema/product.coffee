@@ -22,7 +22,7 @@ Schema = new SimpleSchema
     decimal: true
   unitOfMeasure:
     type: String
-    max:10
+    max:20
   category:
     type: String
   stocklevel:
@@ -42,7 +42,8 @@ Schema = new SimpleSchema
     type: Object
     label: "Product Image"
     optional:true
-    blackbox: true
+  'img.result': type: String, label: "cloudinary public_id"
+  'img.url': type: String, label: "cloudinary url of image"
   wholeSaleOnly:
     type: Boolean
     defaultValue: false
@@ -54,6 +55,7 @@ Schema = new SimpleSchema
     type: String
     label: "Product Description"
     optional: true
+    trim: false
     max: 2000
   dateCreated:
     type: Date

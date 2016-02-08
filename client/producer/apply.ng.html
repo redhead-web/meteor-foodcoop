@@ -2,69 +2,111 @@
 	<h1 class="text-center md-display-2">Become an NNFC Producer in 3 Steps</h1>
 </div>
 
-<div layout="row" layout-align="center center" class="md-display-3">
+<div layout="row" layout-align="center center" class="md-display-3" layout-margin>
 
-  <md-icon class="s54" md-svg-src="action:ic_assignment_24px"></md-icon>
-  <md-icon class="s54" md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
-  <md-icon class="s54" md-svg-src="social:ic_person_24px"></md-icon>
-  <md-icon class="s54" md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
-  <md-icon class="s54" md-svg-src="action:ic_assignment_turned_in_24px"></md-icon>
+  <md-icon md-svg-src="action:ic_assignment_24px"></md-icon>
+  <md-icon md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
+  <md-icon md-svg-src="social:ic_person_24px"></md-icon>
+  <md-icon md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
+  <md-icon md-svg-src="action:ic_assignment_turned_in_24px"></md-icon>
 
 </div>
-
-<md-content layout="column" layout-padding layout-margin>
-  <h1 class="md-display-1">Questions? Please <a ui-sref="contact"> contact us</a></h1>
-  <h1 class="md-display-1"><a ui-sref="policy">Learn more</a> about our producer application policy.</h1>
-
-  <h1 class="md-display-3"><span class="step">1</span> Agree</h1>
-  <ul>
-		<li style="list-style:none">I agree:</li>
-		<li>To sell only products produced in Northland by me or my household or business </li>
-		<li>To sell only GE free products </li>
-		<li>Not to sell products which result from <strong>confined animal feeding operations (CAFO)</strong></li>
-		<li>To comply with all applicable NZ legislation, including GST and tax requirements</li>
-		<li>To comply with all NNFC rules, policies, and guidelines</li>
-		<li>That all information I have provided is true and correct to the best of my knowledge and ability</li>
-	</ul>
-	<md-checkbox ng-model="ctrl.application.agreed" aria-label="I Agree">
-    I Agree
-  </md-checkbox>
-  <md-divider></md-divider>
-
-  <h1 class="md-display-3"><span class="step">2</span> About You</h1>
-
-  <form name="producerForm" id="applicationForm" class="application-list">
-    <md-input-container>
-  		<md-select ng-model="ctrl.application.certification"
-  		name="certification" class="form-control" placeholder="If certified organic, who with?">
-        <md-option ng-repeat="c in ctrl.certifications" ng-value="c.name">
-          <img ng-src="{{c.img}}" height="40" style="position: absolute; top: 2px; left: 2px;">
-          <span style="margin-left: 48px">{{c.name}}</span>
-        </md-option>
-      </md-select>
-    </md-input-container>
-		<md-input-container>
-	    <label for="chemicals">What agrochemicals do you use? </label>
-			<textarea ng-model="ctrl.application.chemicals"
-			name="chemcials" type="text" class="form-control"
-			placeholder="Please list all chemical pesticides, fertilisers, herbicides and other chemical products you use. Seperate each item with a comma. Feel free to use either product brand names or scientific names." required></textarea>
-      <div ng-messages="producerForm.chemcials.$error" ng-if="producerForm.chemcials.$touched">
-        <div ng-message="required">Please fill out this field</div>
+<div layout="row" layout-margin layout-align="center center">
+  <span flex></span>
+  
+  <!-- <h1 class="md-display-1"><a ui-sref="policy">Learn more</a> about our producer application policy.</h1> -->
+  <section class="md-whiteframe-2dp" flex="80">
+    <md-toolbar>
+     <div class="md-toolbar-tools">
+       <h2>
+         <span><span class="step">1</span> Agree</span>
+       </h2>
+       <span flex></span>
       </div>
-		</md-input-container>
-		<md-input-container>
-	    <label for="products">I plan to sell:</label>
-			<textarea ng-model="ctrl.application.products"
-			name="products" type="text" class="form-control"
-			required></textarea>
-      <div ng-messages="producerForm.products.$error" ng-if="producerForm.products.$touched">
-        <div ng-message="required">Please fill out this field</div>
+    </md-toolbar>
+    <div class="section-content" layout-padding>
+      <ul style="margin-left: 20px">
+    		<li>I agree:</li>
+        <li>To deliver or arrange delivery for any and all products I sell</li>
+    		<li>To sell only products produced in Northland by me or my household or business </li>
+    		<li>To sell only GE free products </li>
+    		<li>Not to sell products which result from <strong>confined animal feeding operations (CAFO)</strong></li>
+    		<li>To comply with all applicable NZ legislation, including GST and tax requirements</li>
+    		<li>To comply with all KFC rules, policies, and guidelines</li>
+    		<li>That all information I have provided is true and correct to the best of my knowledge and ability</li>
+    	</ul>
+    	<md-checkbox ng-model="ctrl.application.agreed" aria-label="I Agree">
+        I Agree
+      </md-checkbox>
+    </div>
+  </section>
+  <span flex></span>
+</div>
+<div layout="row" layout-margin layout-align="center center">
+  <span flex></span>
+  <section class="md-whiteframe-2dp" flex="80">
+    <md-toolbar>
+     <div class="md-toolbar-tools">
+       <h2>
+         <span><span class="step">2</span> About You</span>
+       </h2>
+       <span flex></span>
       </div>
-		</md-input-container>
-  </form>
-	<h1 class="md-display-3"><span class="step">3</span> Apply</h1>
-	<div layout="column" layout-align="center center">
-
-  	<md-button type="button" ng-click="ctrl.apply()" class="md-primary md-raised">Apply</md-button>
-	</div>
-</md-content>
+    </md-toolbar>
+    <div class="section-content" layout-padding>
+      <form name="producerForm" id="applicationForm" class="application-list" layout="column" flex>
+        <md-input-container>
+      		<md-select ng-model="ctrl.application.certification"
+      		name="certification" class="form-control" placeholder="If certified organic, who with?">
+            <md-option ng-repeat="c in ctrl.certifications" ng-value="c.name">
+              <img ng-src="{{c.img}}" height="40" style="position: absolute; top: 2px; left: 2px;">
+              <span style="margin-left: 48px">{{c.name}}</span>
+            </md-option>
+            <md-option ng-value="'Currently Uncertified'">
+              <span style="margin-left: 48px">Currently Uncertified</span>
+            </md-option>
+          </md-select>
+        </md-input-container>
+    		<md-input-container>
+    	    <label for="chemicals">What agrochemicals do you use? </label>
+    			<textarea ng-model="ctrl.application.chemicals"
+    			name="chemcials" type="text" class="form-control"
+    			placeholder="Please list all chemical pesticides, fertilisers, herbicides and other chemical products you use. Seperate each item with a comma. Feel free to use either product brand names or scientific names." required></textarea>
+          <div ng-messages="producerForm.chemcials.$error" ng-if="producerForm.chemcials.$touched">
+            <div ng-message="required">Please fill out this field</div>
+          </div>
+    		</md-input-container>
+    		<md-input-container>
+    	    <label for="products">I plan to sell:</label>
+    			<textarea ng-model="ctrl.application.products"
+    			name="products" type="text" class="form-control"
+    			required></textarea>
+          <div ng-messages="producerForm.products.$error" ng-if="producerForm.products.$touched">
+            <div ng-message="required">Please fill out this field</div>
+          </div>
+    		</md-input-container>
+      </form>
+    </div>
+  </section>
+  <span flex></span>
+</div>
+<div layout="row" layout-margin layout-align="center center">
+  <span flex></span>
+  <section class="md-whiteframe-2dp" flex="80">
+    <md-toolbar>
+     <div class="md-toolbar-tools">
+       <h2>
+         <span><span class="step">3</span> Apply</span>
+       </h2>
+       <span flex></span>
+      </div>
+    </md-toolbar>
+    <div class="section-content" layout-padding>
+      <p flex="no-grow">If you are happy with all details provided just click apply to get started. Someone will have a look at your application and you'll be approved within 48 hours. In the meantime, feel free to shop with us.</p>
+  	
+      <md-button type="button" ng-click="ctrl.apply()" class="md-primary md-raised">Apply</md-button>
+    </div>
+  </section>
+  <span flex></span>
+</div>
+<h1 class="md-display-1 text-center">Questions? Please <a ui-sref="contact"> contact us</a></h1>

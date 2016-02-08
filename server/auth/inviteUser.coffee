@@ -10,5 +10,5 @@ Meteor.methods
     userId = Accounts.createUser user
 
     if wholesaleBuyer?
-      Roles.addUsersToRoles userId, 'wholesaleBuyer'
+      Roles.addUsersToRoles userId, 'producer'
     Accounts.sendEnrollmentEmail userId

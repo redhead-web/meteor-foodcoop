@@ -1,19 +1,26 @@
-
 Meteor.methods
-  addFromCartToOrder: (products, total, transactionId) ->
-    userId = this.userId
-    check transactionId, String
+  addFromCartToOrder: (products, data, transactionId) ->
+    userId = @userId
+    
+    check products, Array
+    check data, Object
+    
+    if transactionId
+      check transactionId, String
 
-    orderTotal = _.reduce(products, ((total, product) ->
-      total + product.qty * product.details.price
-    ), 0)
-
-    id = Orders.insert
-      transactionTotal: parseFloat(total)
-      user: this.userId
-      orderTotal: orderTotal * Meteor.settings.public.markup/100+1
-      status: 'paid'
-      transactionId: transactionId
+    try
+      id = Orders.insert
+        user: this.userId
+        orderTotal: data.orderTotal
+        cardAmount: data.cardAmount
+        balanceAmount: data.balanceAmount
+        status: 'paid'
+        transactionId: transactionId
+    catch error
+      if data.balanceAmount > 0
+        Meteor.users.update @userId,
+          $inc: 'profile.balance': data.balanceAmount
+      throw new Meteor.Error error.status, error.message
 
     if typeof id != 'string'
       return id
@@ -31,39 +38,35 @@ Meteor.methods
       sale.unitOfMeasure = sale.details.unitOfMeasure
       sale.orderId = id
       sale.deliveryDay = GetDeliveryDay()
-      sale.customerId = this.userId
-      sale.customerName = Meteor.users.findOne(this.userId).profile.name
-      sale.customerNumber = Meteor.users.findOne(this.userId).profile.customerNumber
-
-      console.log "#{sale.customerNumber} #{sale.customerName} #{sale.packagingRefund} #{sale.customerNumber}"
+      sale.customerId = @userId
+      sale.customerName = Meteor.users.findOne(@userId).profile.name
+      sale.customerNumber = Meteor.users.findOne(@userId).profile.customerNumber
 
       delete sale._id
       delete sale.details
 
       sale
 
+    try
+      for sale in sales
+        Sales.insert sale
 
-    for sale in sales
-      Sales.insert sale
+      update = Cart.Items.remove userId: @userId
 
-    update = Meteor.users.update {
-      _id: this.userId
-    }, {
-      $set:
-        'profile.cart.status': 'active'
-        'profile.lastOrder': _.pluck products, 'productId'
-      $unset:
-        'profile.cart.products': ""
-    }
+      if typeof update != 'number'
+        return update
 
-    if typeof update != 'number'
-      return update
-
-    Products.update
-      'carted.user': this.userId
-    ,
-      $pull: 'carted' : 'user' : this.userId
-    ,
-      multi:yes
-    , (error) ->
-      throw new Meteor.Error 500, "removing carted objects from product failed." if error
+      Products.update
+        'carted.user': @userId
+      ,
+        $pull: 'carted' : 'user' : @userId
+      ,
+        multi: yes
+        
+      Meteor.call "confirmOrder", products, data
+        
+    catch error
+      if data.balanceAmount > 0
+        Meteor.users.update @userId,
+          $inc: 'profile.balance': data.balanceAmount
+      throw new Meteor.Error error.status, error.message

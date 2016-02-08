@@ -2,25 +2,31 @@
 angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reactive, $state){
   $reactive(this).attach($scope);
 
-  this.cancel = cancel;
+  this.status = status;
 
   this.deliveryDay = moment( GetDeliveryDay() ).format();
+  
+  this.subscribe('orders', () => {
+    return [this.getReactively('deliveryDay')]
+  });
 
   this.helpers({
     sales: () => Sales.find(),
+    customers() {
+      return _.countBy(Sales.find().fetch(), function(sale) {return sale.customerName})
+    },
+    producers() {
+      return _.countBy(Sales.find().fetch(), function(sale) {return sale.producerName})
+    }
   });
 
   // this.customers = _.countBy(this.sales, function(sale) {return sale.customerName});
   // this.producers = _.countBy(this.sales, function(sale) {return sale.producerName});
 
-  this.subscribe('orders', () => {
-    return [this.getReactively('deliveryDay')]
-  });
-
-  this.autorun(() => {
-    this.customers = _.countBy(this.sales, function(sale) {return sale.customerName})
-    this.producers = _.countBy(this.sales, function(sale) {return sale.producerName})
-  });
+  // this.autorun(() => {
+  //   this.customers =
+  //   this.producers = _.countBy(this.sales, function(sale) {return sale.producerName})
+  // });
 
   this.user = (query) => {
       return Meteor.users.findOne(query);
@@ -39,8 +45,8 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
 
   this.total = total;
 
-  function cancel (sale) {
-    Sales.remove(sale._id);
+  function status (sale, status) {
+    Sales.update(sale._id, {$set: {'status': status} });
   }
 
   // function search (order) {

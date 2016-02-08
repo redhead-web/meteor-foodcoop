@@ -4,14 +4,12 @@ angular.module('food-coop').controller 'ApplyCtrl', ($scope, $reactive, $state, 
   vm = this
 
   vm.application = {}
-
-  vm.helpers =
-    certifications: ->
-      Certifications.find {}
-
-  vm.certifications = Certifications.find({}).fetch()
-
+  
   vm.subscribe 'certifications'
+
+  vm.helpers
+    certifications: ->
+      return Certifications.find()
 
   vm.apply = ->
     Meteor.call "apply", vm.application, (error, result) ->
@@ -19,6 +17,6 @@ angular.module('food-coop').controller 'ApplyCtrl', ($scope, $reactive, $state, 
         console.log "error", error
         $mdToast.show $mdToast.simple().content("something went wrong, please try again.").position('bottom left').hideDelay(4000)
       if result
-        $state.go('welcome')
+        $state.go('store')
 
   return vm

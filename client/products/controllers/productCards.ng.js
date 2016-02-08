@@ -14,6 +14,8 @@ angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $sta
       let query = {}
 
       if (this.getReactively('stateParams.category')) query.category = $stateParams.category;
+      
+      if (this.getReactively('stateParams.producer')) query.producer = $stateParams.producer;
 
       if ( Meteor.userId() ) {
         let favourites, lastOrder;
@@ -59,13 +61,13 @@ angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $sta
     }
     let update = {}
     update[modifier] = {'profile.favourites': id}
-    Meteor.users.update({_id: Meteor.userId()}, update)
+    Meteor.users.update(Meteor.userId(), update)
   }
-
+  
   function isFavourite(id) {
-		if ( Meteor.userId() ) {
-			return _.include(Meteor.user().profile.favourites, id) ? 'favourite' : 'not-favourite'
-		}
+    if ( Meteor.userId() ) {
+      return _.include(Meteor.user().profile.favourites, id) ? 'favourite' : 'not-favourite'
+    }
   }
 
   return this;

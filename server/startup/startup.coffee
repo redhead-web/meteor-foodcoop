@@ -1,3 +1,10 @@
+environment = process.env.METEOR_ENVIRONMENT ? 'development'
+
+Meteor.startup ->
+  if environment is "production"
+    process.env.MAIL_URL = 'smtp://postmaster%40kaicoop.nz:15c6d42356412d1a60742550a4e7f597@smtp.mailgun.org:587'
+    
+
 Meteor.startup ->
   SimpleSchema.debug = true
   console.log "starting the app... :-)"
@@ -29,10 +36,8 @@ Meteor.startup ->
 
   if Meteor.users.find().count() is 0
     users = [
-      { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer']}
-      { email: 'sean@arrowburn.nz', name: 'Sean Magin Producer Role', roles: ['producer']}
-      { email: 'sean@foodcoop.nz', name: 'Sean Stanley Customer Role', roles: []}
-      { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer']}
+      { email: 'sean@maplekiwi.com', name: 'Sean and Rowan Stanley', roles: ['admin', 'producer']}
+      { email: 'office@heartofthenorth.co.nz', name: 'Mike Shaw', roles: ['producer', 'admin']}
     ]
 
     for user in users
@@ -50,31 +55,31 @@ Meteor.startup ->
 
     console.log "user fixtures added"
 
-  if Products.find().count() is 0
-    producer = Meteor.users.findOne {'profile.name': 'Sean Stanley Master Role'}
-    products = []
-
-    products.push
-      name: 'Plum Jam'
-      producer: producer._id
-      producerName: producer.profile.name
-      price: 5
-      unitOfMeasure: "400 g jar"
-      category: "Preserves"
-      stocklevel: 50
-      description: 'delicious and tasty jam'
-      published: true
-
-    products.push
-      name: 'Raw Milk'
-      producer: producer._id
-      producerName: producer.profile.name
-      price: 2
-      unitOfMeasure: "L"
-      category: "Dairy & Eggs"
-      published: true
-
-    for product in products
-      Products.insert product
+  # if Products.find().count() is 0
+#     producer = Meteor.users.findOne {'profile.name': 'Sean Stanley Master Role'}
+#     products = []
+#
+#     products.push
+#       name: 'Plum Jam'
+#       producer: producer._id
+#       producerName: producer.profile.name
+#       price: 5
+#       unitOfMeasure: "400 g jar"
+#       category: "Preserves"
+#       stocklevel: 50
+#       description: 'delicious and tasty jam'
+#       published: true
+#
+#     products.push
+#       name: 'Raw Milk'
+#       producer: producer._id
+#       producerName: producer.profile.name
+#       price: 2
+#       unitOfMeasure: "L"
+#       category: "Dairy & Eggs"
+#       published: true
+#
+#     for product in products
+#       Products.insert product
 
     # modify addToCart functions to ignore products with no stocklevel
