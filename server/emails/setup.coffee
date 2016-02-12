@@ -22,6 +22,9 @@ Templates.hubReminder =
 
 Templates.applications =
   path: 'apply/producer-application.html'
+  
+Templates.salesNotification = 
+  path: 'order/sales-notification.html'
 
 Meteor.startup ->
   Mailer.init
@@ -52,17 +55,10 @@ Meteor.startup ->
       totalPrice: () ->
           price = @qty * @price * (Meteor.settings.public.markup / 100 + 1)
           return "$#{price.toFixed(2)}"
-
-      total: () ->
-        #enspired by userCartCtrl total function
-        total = _.reduce @items, (t, item) ->
-          duration = Math.abs moment(item.end_date).startOf('day').diff(moment(item.start_date).startOf('day'), 'weeks')
-
-          if duration == 0
-            duration++
-          t += item.qty * item.productDetails.price * duration
-        , 0
-        total
+          
+      saleTotal: () ->
+          price = @qty * @price
+          return "$#{price.toFixed(2)}"
 
 
   # Mailer.send
