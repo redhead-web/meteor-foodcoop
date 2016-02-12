@@ -1,3 +1,5 @@
 Meteor.startup ->
   if process.env.METEOR_ENVIRONMENT == 'production'
-    process.env.MAIL_URL = 'smtp://postmaster%40mg.strategicdevelopment.nz:c6317514103d5b3d9e43e60aedc4c607@smtp.mailgun.org:587'
+    process.env.MAIL_URL = 'smtp://postmaster%40kaicoop.nz:15c6d42356412d1a60742550a4e7f597@smtp.mailgun.org:587'
+    
+  # process.env.MAIL_URL = 'smtp://postmaster%40kaicoop.nz:15c6d42356412d1a60742550a4e7f597@smtp.mailgun.org:587'
