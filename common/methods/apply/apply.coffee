@@ -10,6 +10,7 @@ Meteor.methods
       $set:
         'profile.certification': application.certification
         'profile.chemicals': application.chemicals
+        'profile.gst': application.gst
 
     if Meteor.isServer
       this.unblock()

@@ -44,10 +44,7 @@ angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $sta
       console.log(query)
       return Products.find(query)
     }
-
   });
-
-  this.markup = Meteor.settings.public.markup/100 + 1;
 
   this.toggleFavourite = toggleFavourite;
 

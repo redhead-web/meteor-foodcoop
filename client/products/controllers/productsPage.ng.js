@@ -3,9 +3,11 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
   $reactive(this).attach($scope)
 
   this.go = $state.go;
+  
+  this.showGST = true;
 
   this.subscribe('categories');
-  this.stateParams= $stateParams
+  this.stateParams = $stateParams
   
   this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
 
@@ -23,7 +25,7 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
     }
   })
 
-  this.markup = Meteor.settings.public.markup/100 + 1;
+  this.markup =  Meteor.settings.public.markup/100 + 1;
 
   this.querySearch   = querySearch;
   this.selectedItemChange = selectedItemChange;

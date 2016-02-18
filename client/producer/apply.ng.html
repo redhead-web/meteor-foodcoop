@@ -85,6 +85,12 @@
             <div ng-message="required">Please fill out this field</div>
           </div>
     		</md-input-container>
+    		<md-input-container>
+    	    <label for="gst">GST Number (if registered)</label>
+    			<input ng-model="ctrl.application.gst"
+    			name="gst" type="text"
+    			>
+    		</md-input-container>
       </form>
     </div>
   </section>

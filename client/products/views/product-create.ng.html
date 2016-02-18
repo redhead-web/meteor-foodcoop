@@ -60,7 +60,7 @@
       <div layout="row">
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
-          <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="Price" name="price">
+          <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="Price with GST" name="price">
           <div ng-messages="productUploadForm.price.$error" ng-if="productUploadForm.price.$touched">
             <div ng-message="required">A product price is required.</div>
             <div ng-message="number">Please use just a positive number here.</div>
@@ -141,6 +141,21 @@
       md-separator-keys="ctrl.keys"
       secondary-placeholder="Ingredients (Optional)"
       placeholder="Add another"></md-chips>
+      
+      <md-input-container>
+        <label>Butchery Form?</label>
+        <md-select ng-model="ctrl.product.butcheryForm">
+          <md-option value="lamb">
+            Lamb/Mutton/Goat
+          </md-option>
+          <md-option value="beef">
+            Beef
+          </md-option>
+          <!-- <md-option value="pig">
+            Pig
+          </md-option> -->
+        </md-select>
+      </md-input-container>
 
       <md-input-container>
         <label>Certification</label>

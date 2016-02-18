@@ -15,7 +15,7 @@ alanning:roles
 momentjs:moment
 patrickml:braintree@1.29.0
 stevezhu:lodash
-angular:angular-material
+angular:angular-material@1.0.1
 tmeasday:publish-counts
 dburles:collection-helpers
 rgnevashev:meteor-angular-coffee
@@ -45,15 +45,16 @@ redhead:angular-cloudinary
 angular:angular-messages
 matb33:collection-hooks
 nmccready:angular-simple-logger
-angularui:angular-google-maps
+angularui:angular-google-maps@2.3.2
 francocatena:compass
 lookback:emails
 blaze
 redhead:angular-google-places-autocomplete
-angular-meteor-auth
+angular-meteor-auth@0.0.2
 redhead:cart
 redhead:like-useraccount
 promise
 redhead:angular-socialshare
 spiderable
 miro:mailchimp-lists
+angular:angular@1.4.8

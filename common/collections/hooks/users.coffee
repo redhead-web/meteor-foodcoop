@@ -7,3 +7,5 @@ Meteor.users.after.insert (userId, doc) ->
         if result
           console.log result.fresh
           console.log result.grocery
+
+       

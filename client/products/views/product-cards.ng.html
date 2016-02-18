@@ -1,4 +1,4 @@
-<div layout="row" layout-align="start end" layout-wrap>
+<md-content layout="row" layout-align="start end" layout-wrap>
 <div ng-repeat="product in card.products | orderBy: store.sort track by product._id" 
 	flex="25" flex-sm="33" flex-xs="50">
 <md-card class="product-card">
@@ -35,9 +35,11 @@
           <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
         </div>
       </md-input-container>
-      <md-button class="md-primary" type="submit">
-        Add {{shop.qty || ''}} To Cart
-      </md-button>
+      <div>
+        <md-button class="md-primary margin-top" type="submit">
+          Add {{shop.qty || ''}} To Cart
+        </md-button>
+      </div>
     </form>
   </md-card-content>
   <md-card-actions layout="row" layout-align="space-between center">
@@ -49,9 +51,9 @@
 	      >
 	      <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
 	    </md-button>
-      <fc-social-menu url="/product/{{product._id}}"></fc-social-menu>
+      <fc-social-menu url="/product/{{product._id}}" text="Check out the awesome {{product.name}} in the Kaikohe Food Co-op Store" media="{{product.img.url}}"></fc-social-menu>
 		</div>
-    <md-button class="md-icon-button" href="/product/{{product._id}}" arai-label="product details">
+    <md-button class="md-icon-button" ui-sref="productDetails({productId: product._id})" arai-label="product details">
       <md-icon md-svg-icon="navigation:ic_more_horiz_24px"></md-icon>
     </md-button>
   </md-card-actions>
@@ -71,4 +73,4 @@
 	</div>
 </md-card>
 </div>
-</div>
+</md-content>
