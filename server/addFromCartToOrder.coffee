@@ -32,6 +32,7 @@ Meteor.methods
       sale.producerName = Meteor.users.findOne(sale.details.producer).profile.name
       sale.producerNumber = Meteor.users.findOne(sale.details.producer).profile.customerNumber
       sale.price = sale.details.price
+      sale.gst = Meteor.users.findOne(sale.details.producer).profile.gst
       sale.productName = sale.details.name
       sale.packagingDescription = sale.details.packagingDescription
       sale.packagingRefund = sale.details.packagingRefund

@@ -112,7 +112,7 @@
       </md-input-container>
     </form>
 
-    <p ng-hide="!ctrl.product.stocklevel" class="md-body-1">
+    <p ng-if="ctrl.product.stocklevel >= 0" class="md-body-1">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.stocklevel = !ctrl.edit.stocklevel;"

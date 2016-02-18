@@ -60,6 +60,11 @@ Schema = new SimpleSchema
   dateCreated:
     type: Date
     defaultValue: new Date()
+  last_modified:
+    type: Date
+    autoValue: ->
+      if @isUpdate
+        new Date()
   certification: type: certification, optional: true
   butcheryForm: type: String, optional:true
   ingredients: type: [String], optional: true
@@ -68,6 +73,5 @@ Schema = new SimpleSchema
   packagingRefund: type: Number, decimal: yes, optional: true
 
   stockcode: type: String, max: 12, optional: true
-
 
 Products.attachSchema Schema

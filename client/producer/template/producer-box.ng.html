@@ -1,29 +1,44 @@
 <section class="producer-banner-products">
-	<div layout="row" layout-align="center center" layout-margin> <!-- Put background image and extra padding here -->
+	<div layout="row" layout-align="center center"> <!-- Put background image and extra padding here -->
 		<span flex></span>
-		<md-card flex="80" flex-xs="90" class="md-primary" layout-margin>
+		<md-card flex="80" flex-xs="90" class="md-primary" style="position: relative">
 			<md-card-title>
 				<md-card-title-text>
 					<span class="md-headline">{{producer.profile.companyName || producer.profile.name}}</span>
 				</md-card-title-text>
 			</md-card-title>
-			<md-card-content layout="row" layout-wrap>
-				<md-list flex="noshrink">
-	        <md-list-item ng-click="nav.goTo('directory')">
-	          <md-icon md-svg-icon="communication:ic_phone_24px"></md-icon>
-	          <p> {{producer.profile.phone}} </p>
-	        </md-list-item>
-	        <md-list-item ng-click="nav.goTo('directory')">
-	          <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
-	          <p> {{producer.emails[0].address}} </p>
-	        </md-list-item>
-	        <md-list-item ng-click="nav.goTo('directory')">
-	          <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
-	          <p> {{producer.profile.website}} </p>
-	        </md-list-item>
-				</md-list>
-				<section flex="66" layout="column" layout-align="center center">
+			<md-card-content layout="row">
+				<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left-contacts" md-is-locked-open="$mdMedia('gt-md')">
+					<md-toolbar hide-gt-md layout="row">
+						<h1 class="md-toolbar-tools">Contact Details</h1>
+					  <md-button ng-click="toggleLeft()" aria-label="toggle contact details"
+							class="md-icon-button">
+							<md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+						</md-button>
+					</md-toolbar>
+					<md-content>
+						<md-list flex="noshrink">
+			        <md-list-item ng-click="nav.goTo('directory')">
+			          <md-icon md-svg-icon="communication:ic_phone_24px"></md-icon>
+			          <p> {{producer.profile.phone}} </p>
+			        </md-list-item>
+			        <md-list-item ng-click="nav.goTo('directory')">
+			          <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+			          <p> {{producer.emails[0].address}} </p>
+			        </md-list-item>
+			        <md-list-item ng-click="nav.goTo('directory')">
+			          <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
+			          <p> {{producer.profile.website}} </p>
+			        </md-list-item>
+						</md-list>
+					</md-content>
+				</md-sidenav>
+				<section flex layout="column" layout-align="center center" layout-margin>
 					{{producer.profile.summary}}
+				  <md-button ng-click="toggleLeft()"
+						hide-gt-md>
+						Contact Details
+					</md-button>
 					<md-button ui-sref="store({producer:producer._id})">See our Full Range of Products</md-button>
 				</section>
 				

@@ -60,7 +60,7 @@ profile = new SimpleSchema
     optional:true
     defaultValue: []
   balance: type: Number, decimal: true, defaultValue: 0
-  gst: label: "GST Number", type: String, optional: true
+  gst: label: "GST Number", type: String, optional: true, max: 30
   companyName: type: String, optional:true
   summary: type: String, optional:true
   bio: type: String, optional:true

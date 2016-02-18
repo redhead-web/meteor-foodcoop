@@ -1,0 +1,55 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref="profile.balance" aria-label="back" class="md-icon-button">
+      <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+    </md-button>
+    <span flex></span>
+    <h1 class="md-headline">GST Report for order {{gst.orderId}}</h1>
+    <span flex></span>
+  </div>
+</md-toolbar>
+<md-content layout="column"  layout-align="center center">
+
+  
+  <p ng-if="gst.coopGST">Kai kohekohe Co-op GST Number is: {{gst.coopGST}} </p>
+
+  <md-card class="md-whiteframe-2dp" ng-repeat="(id, sales) in gst.groupedItems">
+    <md-card-header>
+      <md-card-avatar>
+        <cl-image public-id="{{gst.user(id).profile.logo.result}}" class="md-avatar">
+          <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+        </cl-image>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{gst.user(id).profile.companyName || gst.user(id).profile.name}}</span>
+        <span class="md-subhead">{{gst.user(id).profile.gst || 'not GST registered'}}</span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <md-list>
+        <md-subheader class="md-no-sticky">Products</md-subheader>
+        <md-list-item ng-repeat="item in sales" ng-class="{'cancelled': sale.status === 'cancelled', 'refunded': sale.status === 'refunded'}">
+          <cl-image public-id="{{gst.product(id).img.result}}" class="md-avatar">
+            <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+          </cl-image>
+          <div class="md-list-item-text" layout="row" layout-align="space-between">
+            <p>{{ item.productName }}</p>
+            <p>&nbsp; Qty: {{item.qty}} &nbsp;</p>
+            <p>&nbsp;<strong>{{ item.price | currency}}</strong></p>
+          </div>
+        </md-list-item>
+      </md-list>
+      <md-divider></md-divider>
+      <div layout="row" layout-align="end">
+        <p>
+          GST: {{gst.getGST(sales, id) | currency}} <br>
+          Co-op Markup: {{gst.getMarkup(sales) | currency}} <br>
+          <span ng-if="gst.coopGST">Co-op GST: {{gst.getGST(gst.getMarkup(sales)) | currency}}<br></span>
+          <strong>Total: {{gst.getTotal(sales) | currency}}</strong>
+          
+        </p>
+      </div>
+    </md-card-content>
+  </md-card>
+
+</md-content>
