@@ -54,41 +54,41 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     }
     
     // Delete the below code when we are ready to enable shopping
-    return storeStockingAlert($event)
+    // return storeStockingAlert($event)
 
 
-		// Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
-//       if (err) {
-//         console.error(err);
-//         return $mdToast.show(
-//           $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
-//         );
-//       }
-//
-//       if (success !== "UPDATE SUCCESS") {
-//         let toast = $mdToast.simple()
-//             .content('Poof! Added to Cart! Ready to Checkout?')
-//             .action('YES')
-//             .highlightAction(false)
-//             .position('bottom left');
-//         $mdToast.show(toast).then(function(response) {
-//           if ( response == 'ok' ) {
-//             $state.go('profile.cart.checkout');
-//           }
-//         });
-//       } else if (success === "UPDATE SUCCESS") {
-//         let toast = $mdToast.simple()
-//         .content(`Poof! More ${product.name} for you! Ready to checkout?`)
-//         .action('YES')
-//         .highlightAction(false)
-//         .position('bottom left');
-//         $mdToast.show(toast).then(function(response) {
-//             if ( response == 'ok' ) {
-//               $state.go('profile.cart.checkout');
-//             }
-//           });
-//       }
-//     });
+		Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
+      if (err) {
+        console.error(err);
+        return $mdToast.show(
+          $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
+        );
+      }
+
+      if (success !== "UPDATE SUCCESS") {
+        let toast = $mdToast.simple()
+            .content('Poof! Added to Cart! Ready to Checkout?')
+            .action('YES')
+            .highlightAction(false)
+            .position('bottom left');
+        $mdToast.show(toast).then(function(response) {
+          if ( response == 'ok' ) {
+            $state.go('profile.cart.checkout');
+          }
+        });
+      } else if (success === "UPDATE SUCCESS") {
+        let toast = $mdToast.simple()
+        .content(`Poof! More ${product.name} for you! Ready to checkout?`)
+        .action('YES')
+        .highlightAction(false)
+        .position('bottom left');
+        $mdToast.show(toast).then(function(response) {
+            if ( response == 'ok' ) {
+              $state.go('profile.cart.checkout');
+            }
+          });
+      }
+    });
   }
   return vm;
 

@@ -7,3 +7,5 @@ settings.json
 .uploads
 
 kai-deploy
+
+*.json
