@@ -2,25 +2,28 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   $reactive(this).attach($scope)
   let vm = this;
   let nonce = ""
+  let teardown;
+  let braintreeOptions = {
+    container: "payment-form",
+    onReady(obj) {
+      teardown = obj.teardown;
+      $scope.$apply( function () { vm.disablePaymentButton = false })
+    },
+    onPaymentMethodReceived: checkout,
+    onError(err) {
+      vm.error = `Error: ${err.type}: ${err.message}`
+    },
+  };
   const MARKUP = Meteor.settings.public.markup / 100 + 1;
   vm.disablePaymentButton = true;
   
   function getClientToken () {
     Meteor.call("generateClientToken", function(err, token) {
-      if (err) {
+      if (err || !token) {
         vm.error = "Sorry connection error occurred to payment provider. Please try again later";
         return console.log(err);
       }
-      braintree.setup(token, "dropin", {
-        container: "payment-form",
-        onReady(obj) {
-          $scope.$apply( function () { vm.disablePaymentButton = false })
-        },
-        onPaymentMethodReceived: checkout,
-        onError(err) {
-          vm.error = `Error: ${err.type}: ${err.message}`
-        },
-      });
+      braintree.setup(token, "dropin", braintreeOptions);
     })
   }
   
@@ -63,6 +66,9 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
         console.log(err);
         // display error details to the user and get them to try again
         vm.error = "Sorry, something went wrong, please confirm your payment details and try again."
+        teardown(function() {
+          getClientToken()
+        });
       }
       // end spinning wheel animation
       vm.spinner = false;
