@@ -15,7 +15,7 @@ alanning:roles
 momentjs:moment
 patrickml:braintree@1.29.0
 stevezhu:lodash
-angular:angular-material@1.0.1
+angular:angular-material
 tmeasday:publish-counts
 dburles:collection-helpers
 rgnevashev:meteor-angular-coffee
