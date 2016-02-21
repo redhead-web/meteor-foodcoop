@@ -5,8 +5,8 @@
     "PRIVATE_KEY" : "42009c617f558b001711e35a7df3a0c7"
   },
   "MailChimp": {
-    "apiKey": "1d86770e2ad1a1c605e734a4a4cffe1b-us12",
-    "listId": "1787f38ae0"
+    "apiKey": "4552dea32350bc610872806485dde9ae-us9",
+    "listId": "e481a3338d"
   },
   "email": {
     "name": "Sean Stanley",
@@ -21,12 +21,10 @@
       "customer": 30,
       "producer": 60
     },
-    "deliveryDayOfWeek": 4,
-    "shoppingStopDay": 2,
+    "deliveryDayOfWeek": 2,
+    "shoppingStopDay": 4,
     "cartExpiryDays": 7,
-    "markup": 15,
-		"gst": 15,
-    "gstNumber": "123-123-123-123"
+    "markup": 10
   }
 
 }
