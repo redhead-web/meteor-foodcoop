@@ -11,3 +11,7 @@ md-toast {
 md-input-container.md-icon-float > md-icon {
   top: 8px;
 }
+
+.greyscale {
+  filter: grayscale(100%);
+}
