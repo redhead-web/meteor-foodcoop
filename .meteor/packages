@@ -26,7 +26,6 @@ angular
 yogiben:pretty-email
 velocity:html-reporter
 konecty:mongo-counter
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -59,3 +58,4 @@ spiderable
 miro:mailchimp-lists
 mrt:cron
 angular:angular
+seba:minifiers-autoprefixer
