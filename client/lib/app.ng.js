@@ -31,4 +31,8 @@ angular.module('food-coop',[
 
   Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
+  
+  $rootScope.$on('$stateChangeSuccess', function() {
+     document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
 });

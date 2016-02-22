@@ -142,7 +142,7 @@
   </md-sidenav>
 
 
-  <div ui-view flex layout-fill>
+  <div ui-view flex>
     <div layout="rows" layout-align="center center">
       <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
     </div>
@@ -151,11 +151,12 @@
 </section>
 
 
-<footer layout="row" layout-align="center end" flex="noshrink">
-  <p><small>Created from the Cooperative Food Selling Platform Beta version 0.1.2</small></p>
-  <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button" aria-label="github link">
+<footer layout="row" layout-align="center end">
+  <p><small>Created from the Food Co-op Platform Beta version 0.1.2</small></p>
+  <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
     <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
   </md-button>
+  <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
 </footer>
 
 </body>
