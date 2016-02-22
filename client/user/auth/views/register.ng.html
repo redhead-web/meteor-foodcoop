@@ -1,15 +1,18 @@
-<md-content layout="row">
+<md-content layout="row" layout-margin>
   <span flex></span>
-  <md-whiteframe layout="column" flex="40" flex-xs="90" flex-sm="60">
-    <br><br>
-    <md-button flex ng-click="rc.facebookLogin()" class="md-raised"> sign up with
+  <div layout="column" flex="40" flex-xs="90" flex-sm="60">
+    <div layout layout-align="center">
+      <md-button ui-sref="customer-benefits" class="md-raised md-primary">Why be a Customer?</md-button>
+      <md-button ui-sref="producer-benefits" class="md-raised md-primary">Why be a Producer?</md-button>
+    </div>
+    <md-button ng-click="rc.facebookLogin()" class="md-raised"> sign up with
       <md-icon md-svg-src="f_icon.svg"></md-icon>
       Facebook
     </md-button>
     <br>
     <md-divider></md-divider>
     <br>
-    <form layout="column" flex name="signupForm">
+    <form layout="column" name="signupForm">
       <div ng-show="rc.error" class="md-warn">
         <small>{{ rc.error }}</small>
       </div>
@@ -39,27 +42,35 @@
       </md-input-container>
       <md-input-container>
         <md-icon md-svg-icon="communication:ic_call_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="rc.credentials.profile.phone"
-               placeholder="phone" aria-label="phone"/>
+        <input type="text" ng-model="rc.credentials.profile.phone" name="phone"
+               placeholder="phone" aria-label="phone" required/>
+        <div ng-messages="signupForm.phone.$error" ng-if="signupForm.phone.$touched">
+          <div ng-message="required">Please provide a phone number for us to contact you on.</div>
+        </div>
       </md-input-container>
       <md-input-container>
         <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
-        <input g-places-autocomplete type="text" ng-model="rc.credentials.profile.deliveryAddress"
+        <input required g-places-autocomplete type="text" ng-model="rc.credentials.profile.deliveryAddress"
                placeholder="home address" aria-label="address"/>
+        <div ng-messages="signupForm.phone.$error" ng-if="signupForm.phone.$touched">
+          <div ng-message="required">Please provide your home address.</div>
+        </div>
       </md-input-container>
-      <md-radio-group ng-model="rc.role" layout="row">
+      <md-radio-group ng-model="rc.role" layout="row" layout-margin>
         <md-radio-button value="customer" class="md-primary">Customer <!-- ({{rc.prices.customer | currency}}) --></md-radio-button>
         <md-radio-button value="producer" class="md-primary">Producer <!-- ({{rc.prices.producer | currency}}) --></md-radio-button>
       </md-radio-group>
-      <md-button class="md-raised md-primary" ng-disabled="signupForm.$invalid"
-                 ng-click="rc.register()">Create Account
+      <md-divider></md-divider>
+      <md-button 
+        class="md-raised md-primary" 
+        ng-disabled="signupForm.$invalid"
+        ng-click="rc.register()">Create Account
       </md-button>
 
     </form>
-    <br><br>
     <p class="text-center">Already have an account?</p>
     <md-button href="/login" class="md-primary md-raised">Login</md-button>
 
-  </md-whiteframe>
+  </div>
   <span flex></span>
 </md-content>
