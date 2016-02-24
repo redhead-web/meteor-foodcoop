@@ -32,6 +32,12 @@ angular.module('food-coop').config( function($stateProvider) {
     controller: 'UserSalesCtrl',
     templateUrl: 'client/user/views/sales.ng.html'
   })
+  .state('profile.gstReceipt', {
+    url: '/order/gst/:orderId',
+    controller: 'gstReceiptCtrl',
+    controllerAs: 'gst',
+    templateUrl: 'client/user/views/gst.ng.html'
+  })
   .state('profile.paymentMethods', {
     url: '/payment-methods',
     controller: 'UserPaymentMethodCtrl',

@@ -30,7 +30,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     );
   }
 
-  function isOwnerAlert ($event) {
+  function isOwnerAlert ($event, id) {
     $mdToast.show(
       $mdToast.simple().content("Sorry, you can't order your own items!").position('bottom left').hideDelay(3000)
     );
@@ -50,7 +50,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     }
 
     if (Meteor.userId() === product.producer) {
-      return isOwnerAlert($event);
+      return isOwnerAlert($event, product._id);
     }
     
     // Delete the below code when we are ready to enable shopping
@@ -67,8 +67,8 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
 //
 //       if (success !== "UPDATE SUCCESS") {
 //         let toast = $mdToast.simple()
-//             .content('Poof! Added to Cart! Ready to Checkout?')
-//             .action('YES')
+//             .content('Poof! Added to Cart!')
+//             .action('CHECKOUT')
 //             .highlightAction(false)
 //             .position('bottom left');
 //         $mdToast.show(toast).then(function(response) {
@@ -78,8 +78,8 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
 //         });
 //       } else if (success === "UPDATE SUCCESS") {
 //         let toast = $mdToast.simple()
-//         .content(`Poof! More ${product.name} for you! Ready to checkout?`)
-//         .action('YES')
+//         .content(`Poof! +${qty}`)
+//         .action('CHECKOUT')
 //         .highlightAction(false)
 //         .position('bottom left');
 //         $mdToast.show(toast).then(function(response) {

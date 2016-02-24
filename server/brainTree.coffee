@@ -1,11 +1,14 @@
+environment = Braintree.Environment.Sandbox
 
+if process.env.METEOR_ENVIRONMENT == 'production'
+  environment = Braintree.Environment.Production
 
-gateway = BrainTreeConnect {
-  environment: Braintree.Environment.Sandbox,
-  merchantId: Meteor.settings.BRAIN_TREE.MERCHANT_ID,
-  publicKey:  Meteor.settings.BRAIN_TREE.PUBLIC_KEY,
+gateway = BrainTreeConnect
+  environment: environment
+  merchantId: Meteor.settings.BRAIN_TREE.MERCHANT_ID
+  publicKey:  Meteor.settings.BRAIN_TREE.PUBLIC_KEY
   privateKey: Meteor.settings.BRAIN_TREE.PRIVATE_KEY
-}
+
 
 Meteor.methods
   generateClientToken: () ->
@@ -18,7 +21,8 @@ Meteor.methods
       config.customerId = Meteor.call 'registerCustomer'
 
     getToken = gateway.clientToken.generate config
-
+    unless getToken.success == true
+      console.log getToken
     getToken.clientToken
 
   registerCustomer: ->
@@ -108,7 +112,13 @@ Meteor.methods
     result = gateway.transaction.sale config
     
     unless result.success
-      throw new Meteor.Error('Transaction failed', result.errors) 
+      console.log result
+      if result.transaction?
+        console.error result.transaction.processorResponseCode, result.transaction.processorResponseText
+        throw new Meteor.Error result.transaction.processorResponseCode, result.transaction.processorResponseText
+      else 
+        console.error result.message
+        throw new Meteor.Error 500, result.message
 
     if result.success
       if data.balanceAmount

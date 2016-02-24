@@ -18,13 +18,14 @@
   <md-list>
     <md-divider></md-divider>
     <md-subheader class="md-no-sticky">Transactions Total: {{ctrl.total | currency}}</md-subheader>
-    <md-list-item ng-repeat="order in ctrl.orders|orderBy:'dateCreated':true track by order._id" class="md-3-line">
+    <md-list-item ng-repeat="order in ctrl.orders|orderBy:'dateCreated':true track by order._id" class="md-3-line secondary-button-padding">
       <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
       <div class="md-list-item-text" layout="column">
         <h3>{{order.orderTotal | currency}} </h3>
         <h4><span ng-if="order.cardAmount">Card Charge: {{order.cardAmount | currency}}</span><span ng-if="order.balanceAmount"> Store Credit: {{order.balanceAmount | currency}}</span></h4>
         <p> Status: {{order.status}} Date: {{order.dateCreated | calendar }}</p>
       </div>
+      <md-button class="md-secondary" ui-sref="profile.gstReceipt({orderId: order._id})">GST Report</md-button>
     </md-list-item>
   </md-list>
 </div>

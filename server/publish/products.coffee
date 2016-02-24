@@ -16,4 +16,10 @@ Meteor.publish "my-products", ->
     producer: @userId
 
 Meteor.publish "all-products", ->
-  Products.find
+  Products.find {},
+    fields: 
+      published: 1
+      name: 1
+      price: 1
+      unitOfMeasure: 1
+      'img.result': 1

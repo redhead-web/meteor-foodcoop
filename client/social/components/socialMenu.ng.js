@@ -5,7 +5,8 @@ angular.module('food-coop')
     scope: {
       url: '@url',
       'class': '@class',
-      text: '@text'
+      text: '@text',
+			media: '@media'
     },
     // transclude: true,
     // replace: true,

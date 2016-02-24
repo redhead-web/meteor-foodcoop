@@ -4,6 +4,7 @@ saleSchema = new SimpleSchema
   producerName: type: String
   producerNumber: type: Number
   price: type: Number, decimal: true
+  gst: type: String, max: 30, optional: true #GST Number
   productId: type: String, regEx: SimpleSchema.RegEx.Id
   productName: type: String
   unitOfMeasure: type: String

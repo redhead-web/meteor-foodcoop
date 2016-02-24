@@ -21,7 +21,6 @@
         accept="image/*"
         ngf-capture="'camera'"
         ngf-select="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name, ctrl.save)"
-        ng-model="ctrl.product.img"
         ngf-max-size="'5MB'"
         ngf-min-width="400"
         ngf-min-height="300"
@@ -35,7 +34,6 @@
           aria-label="upload image"
           ngf-capture="'camera'"
           ngf-select="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name, ctrl.save)"
-          ng-model="ctrl.product.img"
           ngf-max-size="'5MB'"
           ngf-min-width="400"
           ngf-min-height="300"
@@ -112,7 +110,7 @@
       </md-input-container>
     </form>
 
-    <p ng-hide="!ctrl.product.stocklevel" class="md-body-1">
+    <p ng-if="ctrl.product.stocklevel >= 0" class="md-body-1">
       <md-button
         ng-if="ctrl.isOwner"
         ng-click="ctrl.edit.stocklevel = !ctrl.edit.stocklevel;"
@@ -134,8 +132,10 @@
       ng-change="ctrl.save()"
       >
     </md-input-container>
-
-    <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" layout="row">
+    <p class="md-body-2 text-center" ng-if="ctrl.product.stocklevel != null && ctrl.product.stocklevel <= 0">SOLD OUT</p>
+    <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" 
+    ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0"
+    layout="row">
       <md-input-container flex>
         <label>Quantity</label>
         <input ng-model="shop.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">

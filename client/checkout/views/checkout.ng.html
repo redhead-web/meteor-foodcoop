@@ -10,13 +10,15 @@
 <div ng-if="checkout.spinner">
   <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
 </div>
+<p class="text-center" ng-if="checkout.error">{{checkout.error}}</p>
 <form id="checkout" method="post" action="/checkout" autocomplete="off">
   <div id="payment-form" ng-show="checkout.total > 0"></div>
   <div layout="row">
     <span flex></span>
-    <md-button type="submit" class="md-primary md-raised" ng-if="checkout.total > 0">Pay {{checkout.total | currency}} by Credit Card</md-button>
+    <md-button type="submit" class="md-primary md-raised" ng-show="checkout.total > 0" ng-disabled="checkout.disablePaymentButton">Pay {{checkout.total | currency}} with Credit Card</md-button>
     <fc-balance-payment total="checkout.total"></fc-balance-payment>
     <span flex></span>
   </div>
 </form>
+
 

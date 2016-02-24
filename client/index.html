@@ -6,7 +6,7 @@
         <span>Food Co-op (alpha)</span>
       </h3> -->
       <a ui-sref="store">
-        <img src="https://res.cloudinary.com/foodcoop/image/upload/c_scale,h_54/v1453857038/KFC_landscape_nggfz5.png" height="54">
+        <img src="https://res.cloudinary.com/foodcoop/image/upload/c_scale,h_54/whangarei/WFC_landscape.png" height="54">
       </a>
       <span flex></span>
       <!-- <md-button hide-sm ui-sref="store"> <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon> Store</md-button> -->
@@ -15,10 +15,12 @@
 
       <md-button ng-href="/login" ng-hide="$auth.currentUser" hide-xs>Login</md-button>
       <md-button ng-href="/register" ng-hide="$auth.currentUser" hide-xs>Sign up</md-button>
-      <span ng-controller="UserCartCtrl as cr"><md-button ui-sref="profile.cart" ng-show="$auth.currentUser">
-        {{cr.total | currency}} ({{cr.cartLength}})
-        <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
-      </md-button></span>
+      <span ng-controller="UserCartCtrl as cr">
+        <md-button ui-sref="profile.cart" ng-if="$auth.currentUser">
+          {{cr.total | currency}} ({{cr.cartLength}})
+          <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
+        </md-button>
+      </span>
       <md-button ng-click="nav.toggleRight()" aria-label="navigation toggle" class="md-icon-button">
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
       </md-button>
@@ -94,7 +96,7 @@
   </md-toolbar>
 
 
-<section layout="row" flex>
+<section id="PageRoot">
 
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
 
@@ -149,11 +151,12 @@
 </section>
 
 
-<footer layout="row" layout-align="center end" flex="noshrink">
-  <p><small>Created from the Cooperative Food Selling Platform Beta version 0.1.1</small></p>
-  <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button" aria-label="github link">
+<footer layout="row" layout-align="center end">
+  <p><small>Created from the Food Co-op Platform Beta version 0.1.2</small></p>
+  <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
     <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
   </md-button>
+  <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
 </footer>
 
 </body>

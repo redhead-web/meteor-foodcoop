@@ -1,0 +1,17 @@
+// Global overrides go here
+
+md-toast {
+  position: fixed;
+}
+
+.img-responsive {
+  max-width: 100%;
+}
+
+md-input-container.md-icon-float > md-icon {
+  top: 8px;
+}
+
+.greyscale {
+  filter: grayscale(100%);
+}

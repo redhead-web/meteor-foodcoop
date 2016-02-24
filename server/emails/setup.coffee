@@ -1,8 +1,8 @@
 Templates = {}
 
 Mailer.config
-  from: 'Kai kohekohe Food Co-op <kaikohe.cooperative@gmail.com>'
-  replyTo: 'Kai kohekohe Food Co-op <kaikohe.cooperative@gmail.com>'
+  from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
+  replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz'
 
 Templates.contactMessage = 
   path: 'contact/contact-email.html'
@@ -22,6 +22,9 @@ Templates.hubReminder =
 
 Templates.applications =
   path: 'apply/producer-application.html'
+  
+Templates.salesNotification = 
+  path: 'order/sales-notification.html'
 
 Meteor.startup ->
   Mailer.init
@@ -31,7 +34,7 @@ Meteor.startup ->
       path: 'email-layout.html'
       scss: 'email-layout.scss'
     helpers:
-      companyName: "Kai kohekohe Food Co-op"
+      companyName: "Whangarei Food Co-op"
       bankAccount: "06-0333-0082913-03"
       GSTNumber: "113-091-103"
       deliveryDay: () ->
@@ -52,17 +55,10 @@ Meteor.startup ->
       totalPrice: () ->
           price = @qty * @price * (Meteor.settings.public.markup / 100 + 1)
           return "$#{price.toFixed(2)}"
-
-      total: () ->
-        #enspired by userCartCtrl total function
-        total = _.reduce @items, (t, item) ->
-          duration = Math.abs moment(item.end_date).startOf('day').diff(moment(item.start_date).startOf('day'), 'weeks')
-
-          if duration == 0
-            duration++
-          t += item.qty * item.productDetails.price * duration
-        , 0
-        total
+          
+      saleTotal: () ->
+          price = @qty * @price
+          return "$#{price.toFixed(2)}"
 
 
   # Mailer.send

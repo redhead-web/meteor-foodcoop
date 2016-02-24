@@ -97,8 +97,8 @@
     </md-card-content>
   </md-card>
 </div>
-<div ui-view>
-  <div ng-controller="ProductCardsCtrl as card">
-    <div ng-include="'client/products/views/product-cards.ng.html'"></div>
-  </div>
+<div ui-view layout-fill id="StoreRoot">
+  <md-content ng-controller="ProductCardsCtrl as card">
+    <md-content layout-fill ng-include="'client/products/views/product-cards.ng.html'"></md-content>
+  </md-content>
 </div>

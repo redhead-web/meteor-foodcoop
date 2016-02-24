@@ -35,7 +35,7 @@ Meteor.methods
 		check product, Object
 		check qty, Number
 
-		if product.stocklevel && qty > product.stocklevel
+		if product.stocklevel? && qty > product.stocklevel
 			throw new Meteor.Error 401, "Insufficient Stock Sorry!", product.stocklevel - qty
 
 		
@@ -43,7 +43,8 @@ Meteor.methods
 		
 		if cartItem? and cartItem._id?
 
-			return Meteor.call "/cart/item/increment", cartItem._id, qty
+			result = Meteor.call "/cart/item/increment", cartItem._id, qty
+			return result
 
 		else
 			result = Cart.Items.insert
@@ -97,7 +98,7 @@ Meteor.methods
 		check product, Object
 		check qty, Number
 
-		if product.stocklevel && qty > product.stocklevel
+		if product.stocklevel? && qty > product.stocklevel
 			throw new Meteor.Error 401, "Insufficient Stock Sorry!", product.stocklevel - qty
 
 		user = Meteor.users.findOne {_id: this.userId, 'profile.cart.products.productId': product._id}
@@ -117,26 +118,26 @@ Meteor.methods
 					'profile.cart.status' : 'active'
 					'profile.cart.products.$.qty': parseInt cartProduct.qty
 		else
-      result = Meteor.users.update
-        _id: userId
-      ,
-        $set:
-          'profile.cart.status' : 'active'
-        $push:
-          'profile.cart.products' :
-            productId: product._id
-            qty: qty
-            details:
-              producer: product.producer
-              producerName: product.producerName
-              producerCompanyName: product.producerCompanyName
-              unitOfMeasure: product.unitOfMeasure
-              name: product.name
-              price: product.price
-              img: product.img
-              minimumOrder: product.minimumOrder or undefined
-              packagingRefund: product.packagingRefund or 0
-              packagingDescription: product.packagingDescription or undefined
+			result = Meteor.users.update
+				_id: userId
+			,
+				$set:
+					'profile.cart.status' : 'active'
+				$push:
+					'profile.cart.products' :
+						productId: product._id
+						qty: qty
+						details:
+							producer: product.producer
+							producerName: product.producerName
+							producerCompanyName: product.producerCompanyName
+							unitOfMeasure: product.unitOfMeasure
+							name: product.name
+							price: product.price
+							img: product.img
+							minimumOrder: product.minimumOrder or undefined
+							packagingRefund: product.packagingRefund or 0
+							packagingDescription: product.packagingDescription or undefined
 
 
 		if result > 0 and product.stocklevel
@@ -171,8 +172,8 @@ Meteor.methods
 
 			Products.update productQuery, productUpdate, (error, num) ->
 				if error
-          console.log "could not add item to cart because Product stocklevels errored"
-          console.error error.details
+					console.log "could not add item to cart because Product stocklevels errored"
+					console.error error.details
 					undoCartAdd(userId, product, qty, user)
 				if num is 0 and not product.stocklevel?
 					console.log "Stocklevel not tracked on #{product.name}"
@@ -197,5 +198,5 @@ undoCartAdd = (userId, product, qty, userHasProduct) ->
 			$inc: 'profile.cart.products.$.qty': -qty
 
 	else
-    Meteor.users.update userId,
-      $pull: 'profile.cart.products': productId: product._id
+		Meteor.users.update userId,
+			$pull: 'profile.cart.products': productId: product._id

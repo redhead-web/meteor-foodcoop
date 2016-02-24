@@ -24,7 +24,9 @@
     "deliveryDayOfWeek": 4,
     "shoppingStopDay": 2,
     "cartExpiryDays": 7,
-    "markup": 15
+    "markup": 15,
+		"gst": 15,
+    "gstNumber": "123-123-123-123"
   }
 
 }

@@ -1,5 +1,5 @@
 Cart.Items.after.remove (userId, cartItem) ->
-  if Meteor.isClient
+  if Meteor.isServer
     Products.update cartItem.productId,
       $inc: stocklevel: cartItem.qty
       $pull: 

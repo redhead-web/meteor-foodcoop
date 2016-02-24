@@ -19,19 +19,24 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
     product() {
       return Products.findOne($stateParams.productId)
     },
-    isOwner() {
-      if ( Meteor.userId() ) {
-        
-        return Meteor.userId() === this.getReactively('product.producer') ? Meteor.userId() : false;
-      }
-    }
-  })
+    // isOwner() {
+//       if ( Meteor.userId() ) {
+//
+//         return Meteor.userId() === this.getReactively('product.producer') ? Meteor.userId() : false;
+//       }
+//     }
+  });
   
 
   // vm.product = $scope.$meteorObject(Products, $stateParams.productId, false);
   this.autorun(() => {
-    if (Meteor.userId() && this.product) {
-      this.isOwner = Meteor.userId() === this.getReactively('product.producer') || Roles.userIsInRole(Meteor.userId(), 'admin');
+    if (Meteor.userId() && this.getReactively('product._id') != null) {
+			if (Meteor.userId() === this.getReactively('product.producer') ) {
+				this.isOwner = Meteor.userId()
+			} else if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+				this.isOwner = Meteor.userId()
+			} else
+				this.isOwner = undefined
     }
   });
   
@@ -45,6 +50,7 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
   
 
   this.save = (product, data) => {
+    
     Products.update(this.product._id, {$set: this.product}, function(error) {
       if (error) {
         console.warn(error);

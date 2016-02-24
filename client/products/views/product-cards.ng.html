@@ -1,16 +1,18 @@
-<div layout="row" layout-align="start end" layout-wrap>
+<md-content layout="row" layout-align="start end" layout-wrap>
 <div ng-repeat="product in card.products | orderBy: store.sort track by product._id" 
 	flex="25" flex-sm="33" flex-xs="50">
 <md-card class="product-card">
   <a ui-sref="productDetails({productId: product._id})">
-    <cl-image public-id="{{product.img.result}}" class="md-card-image">
+    <cl-image public-id="{{product.img.result}}" class="md-card-image" ng-class="{'greyscale': product.stocklevel != null && product.stocklevel <= 0}">
       <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
     </cl-image>
   </a>
 	<div>
   <md-card-actions layout="row" layout-align="center start" layout-margin class="floating-actions">
     <div ng-controller="orderProductCtrl as shop">
-      <md-button class="md-fab md-primary md-hue-2" aria-label="shopping cart"
+      <md-button class="md-fab" aria-label="shopping cart" ng-class="{
+        'md-hue-2 md-primary': product.stocklevel == null || product.stocklevel > 0
+      }"
         ng-click="shop.addToCart($event, product, 1)"
       >
         <md-icon md-svg-icon="{{ shop.alreadyInCart(product._id) }}"></md-icon>
@@ -26,7 +28,8 @@
   </md-card-header>
 
   <md-card-content class="product-card-order-form">
-    <form ng-if="!!$auth.currentUser" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, product, shop.qty)" layout="row">
+    <p class="md-body-2 text-center" ng-if="product.stocklevel != null && product.stocklevel <= 0">SOLD OUT</p>
+    <form ng-if="product.stocklevel == null || product.stocklevel > 0" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, product, shop.qty)" layout="row" >
       <md-input-container flex class="add-to-cart-input">
         <label>Quantity</label>
         <input ng-model="shop.qty" type="number" min="{{product.minimumOrder || 1}}" required name="qty">
@@ -35,9 +38,11 @@
           <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
         </div>
       </md-input-container>
-      <md-button class="md-primary" type="submit">
-        Add {{shop.qty || ''}} To Cart
-      </md-button>
+      <div>
+        <md-button class="md-primary margin-top" type="submit">
+          Add {{shop.qty || ''}} To Cart
+        </md-button>
+      </div>
     </form>
   </md-card-content>
   <md-card-actions layout="row" layout-align="space-between center">
@@ -49,9 +54,9 @@
 	      >
 	      <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
 	    </md-button>
-      <fc-social-menu url="/product/{{product._id}}"></fc-social-menu>
+      <fc-social-menu url="/product/{{product._id}}" text="Check out the awesome {{product.name}} in the Kaikohe Food Co-op Store" media="{{product.img.url}}"></fc-social-menu>
 		</div>
-    <md-button class="md-icon-button" href="/product/{{product._id}}" arai-label="product details">
+    <md-button class="md-icon-button" ui-sref="productDetails({productId: product._id})" arai-label="product details">
       <md-icon md-svg-icon="navigation:ic_more_horiz_24px"></md-icon>
     </md-button>
   </md-card-actions>
@@ -71,4 +76,4 @@
 	</div>
 </md-card>
 </div>
-</div>
+</md-content>
