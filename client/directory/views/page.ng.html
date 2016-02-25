@@ -99,36 +99,44 @@
       </cl-image>
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">{{ctrl.producer.profile.companyName}}</span>
-          <md-button
-            ng-if="ctrl.isOwner"
-            ng-click="ctrl.edit.companyName = !ctrl.edit.companyName"
-            class="md-icon-button md-accent" aria-label="edit company name">
-            <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
-          </md-button>
+          
+          <span class="md-headline">
+            <md-button
+              ng-if="ctrl.isOwner"
+              ng-click="ctrl.edit.companyName = !ctrl.edit.companyName"
+              class="md-icon-button md-accent" aria-label="edit company name">
+              <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+            </md-button>
+            {{ctrl.producer.profile.companyName}}
+          </span>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
         <form name="editCompanyName" 
+        ng-if="ctrl.edit.companyName && ctrl.isOwner"
+        class="editContent"
         ng-submit="ctrl.edit.companyName = !ctrl.edit.companyName" layout="row" layout-padding layout-xs="column">
-          <md-input-container flex ng-if="ctrl.edit.companyName && ctrl.isOwner">
+          <md-input-container flex>
             <label>Company Name</label>
             <input ng-model="ctrl.producer.profile.companyName" name="companyName"
             ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions">
           </md-input-container>
-        </form>
-
-        <p>{{ctrl.producer.profile.summary}}
-          <span ng-if="ctrl.isOwner && !ctrl.producer.profile.summary">Write a short paragraph about how great your business is.</span>
+        </form>        
+        <p ng-if="ctrl.isOwner && !ctrl.producer.profile.summary">Write a short paragraph about how great your business is.</p>
+        
+        <div ng-bind-html="ctrl.producer.profile.summary | md"></div>
+        <div layout>
           <md-button
-            ng-if="ctrl.isOwner"
-            ng-click="ctrl.edit.summary = !ctrl.edit.summary"
-            class="md-icon-button md-accent" aria-label="edit summary">
+          ng-if="ctrl.isOwner"
+          ng-click="ctrl.edit.summary = !ctrl.edit.summary"
+          class="md-icon-button md-accent" aria-label="edit summary">
             <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
           </md-button>
-        </p>
+          <span flex></span>
+          <markdown-help></markdown-help>
+        </div>
 
-        <form name="editSummary" ng-if="ctrl.edit.summary && ctrl.isOwner"
+        <form name="editSummary" ng-if="ctrl.edit.summary && ctrl.isOwner" class="editContent"
         ng-submit="ctrl.edit.summary = !ctrl.edit.summary" layout="row" layout-padding layout-xs="column">
           <md-input-container flex>
             <label>About Your Business</label>
@@ -192,7 +200,7 @@
           </md-list-item>
         </md-list>
 
-        <form name="editWebsite" ng-if="ctrl.edit.website && ctrl.isOwner"
+        <form name="editWebsite" ng-if="ctrl.edit.website && ctrl.isOwner" class="editContent"
         ng-submit="ctrl.edit.website = !ctrl.edit.website" layout="row" layout-padding layout-xs="column">
           <md-input-container flex>
             <label>Website URL</label>
@@ -253,23 +261,30 @@
       <img ng-if="ctrl.producer.profile.personalPic && !ctrl.producer.profile.personalPic.result" 
       ngf-src="ctrl.producer.profile.personalPic">
       <md-card-content>
-        <p>{{ctrl.producer.profile.bio}}
-          <span ng-if="ctrl.isOwner && !ctrl.producer.profile.bio">Write a short paragraph about yourself and your experience</span>
+        <p ng-if="ctrl.isOwner && !ctrl.producer.profile.bio">Write a short paragraph about yourself and your experience</p>
+        
+        <div ng-bind-html="ctrl.producer.profile.bio | md"></div>
+        <div layout>
           <md-button
             ng-if="ctrl.isOwner"
             ng-click="ctrl.edit.bio = !ctrl.edit.bio"
             class="md-icon-button md-accent" aria-label="edit summary">
             <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
           </md-button>
-        </p>
+          <span flex></span>
+          <markdown-help></markdown-help>
+        </div>
 
-        <form name="editBio" ng-if="ctrl.edit.bio && ctrl.isOwner"
+        <form name="editBio" ng-if="ctrl.edit.bio && ctrl.isOwner" class="editContent"
         ng-submit="ctrl.edit.bio = !ctrl.edit.bio" layout="row" layout-padding layout-xs="column">
           <md-input-container flex>
             <label>About Yourself</label>
             <textarea ng-model-options="ctrl.modelOptions" ng-model="ctrl.producer.profile.bio" name="bio" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
           </md-input-container>
         </form>
+        
+        
+        
       </md-card-content>
       <div ng-if="ctrl.isOwner" ng-controller="photoUploadCtrl">
         <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
@@ -331,21 +346,25 @@
         </md-card-header-text>
       </md-card-header>
       <md-card-content>
-        <p>{{ctrl.producer.profile.chemicals}}
-          <span ng-if="ctrl.isOwner && !ctrl.producer.profile.chemicals">Write what kinds of agricultural chemicals you use in your business, or promote the organic alternatives you love.</span>
+        <p ng-if="ctrl.isOwner && !ctrl.producer.profile.chemicals">Write what kinds of agricultural chemicals you use in your business, or promote the organic alternatives you love.</p>
+        <div ng-bind-html="ctrl.producer.profile.chemicals | md"></div>
+        <div layout>
           <md-button
             ng-if="ctrl.isOwner"
             ng-click="ctrl.edit.chemicals = !ctrl.edit.chemicals"
             class="md-icon-button md-accent" aria-label="edit summary">
             <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
           </md-button>
-        </p>
+          <span flex></span>
+          <markdown-help></markdown-help>
+        </div>
 
-        <form name="editChemicals" ng-if="ctrl.edit.chemicals && ctrl.isOwner"
+        <form name="editChemicals" ng-if="ctrl.edit.chemicals && ctrl.isOwner" class="editContent"
         ng-submit="ctrl.edit.chemicals = !ctrl.edit.chemicals" layout="row" layout-padding layout-xs="column">
           <md-input-container flex>
             <label>Farm Chemicals if any?</label>
-            <textarea ng-model="ctrl.producer.profile.chemicals" name="chemicals" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
+            
+            <textarea ng-model="ctrl.producer.profile.chemicals" name="chemicals" ng-model-options="ctrl.modelOptions" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
           </md-input-container>
         </form>
 

@@ -34,7 +34,7 @@
 					</md-content>
 				</md-sidenav>
 				<section flex layout="column" layout-align="center center" layout-margin>
-					{{producer.profile.summary}}
+					<div class="md" ng-bind-html="producer.profile.summary | md"></div>
 				  <md-button ng-click="toggleLeft()"
 						hide-gt-md>
 						Contact Details
