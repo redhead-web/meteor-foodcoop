@@ -21,6 +21,7 @@ angular:angular-animate@1.5.0
 angular:angular-aria@1.5.0
 angular:angular-material@1.0.5
 angular:angular-messages@1.5.0
+angular:angular-sanitize@1.5.0
 angularui:angular-google-maps@2.3.2
 angularui:angular-ui-router@0.2.15
 angularutils:pagination@0.9.1_2
@@ -91,6 +92,7 @@ mongo@1.1.3
 mongo-id@1.0.1
 mongo-livedata@1.0.9
 mrt:cron@0.0.1
+natestrauser:animate-css@3.5.1
 nmccready:angular-simple-logger@0.1.7
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
@@ -112,9 +114,11 @@ reactive-dict@1.1.3
 reactive-var@1.0.6
 redhead:angular-cloudinary@0.0.1
 redhead:angular-google-places-autocomplete@0.0.1
+redhead:angular-remarkable@0.0.1
 redhead:angular-socialshare@0.1.20
 redhead:cart@0.0.2
 redhead:like-useraccount@0.0.1
+redhead:remarkable@1.6.2
 reload@1.1.4
 retry@1.0.4
 rgnevashev:meteor-angular-coffee@1.9.3
