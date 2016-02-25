@@ -14,8 +14,10 @@ Meteor.methods
         id: listId
         email: email: user.emails[0].address
         merge_vars:
+          FNAME: user.profile.name.split(" ")[0]
+          LNAME: user.profile.name.split(" ")[1]
           mc_notes:[
-            note: "Subscribed from successful signup at kaicoop.nz"
+            note: "Subscribed from successful signup at foodcoop.nz"
             note: "#{user.profile.name}"
           ]
         "send_welcome": true
