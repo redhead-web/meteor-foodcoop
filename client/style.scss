@@ -12,6 +12,33 @@ md-input-container.md-icon-float > md-icon {
   top: 8px;
 }
 
+.md-button.md-fab.md-fab-bottom-right {
+  position: fixed;
+}
+
 .greyscale {
   filter: grayscale(100%);
+}
+
+
+
+[ui-view] {
+  
+  
+  &.ng-enter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    animation: slideInRight 600ms;
+  }
+  
+  &.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    animation: slideOutLeft 600ms;
+  }
+  
 }

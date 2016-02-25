@@ -141,21 +141,6 @@
       md-separator-keys="ctrl.keys"
       secondary-placeholder="Ingredients (Optional)"
       placeholder="Add another"></md-chips>
-      
-      <md-input-container>
-        <label>Butchery Form?</label>
-        <md-select ng-model="ctrl.product.butcheryForm">
-          <md-option value="lamb">
-            Lamb/Mutton/Goat
-          </md-option>
-          <md-option value="beef">
-            Beef
-          </md-option>
-          <!-- <md-option value="pig">
-            Pig
-          </md-option> -->
-        </md-select>
-      </md-input-container>
 
       <md-input-container>
         <label>Certification</label>
@@ -165,14 +150,34 @@
           </md-option>
         </md-select>
       </md-input-container>
-
-      <md-input-container class="md-block">
-        <label>Description</label>
-        <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"></textarea>
-        <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
-          <div ng-message="maxlength">Please use a shorter description.</div>
-        </div>
-      </md-input-container>
+      
+      <section class="md-whiteframe-3dp" ng-cloak>
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Description</span></h2>
+            <span flex></span>
+          </div>
+        </md-toolbar>
+        <md-tabs md-dynamic-height md-border-bottom>
+           <md-tab label="Editor">
+             <md-content class="md-padding">
+               <md-input-container class="md-block">
+                 <label>Description</label>
+                 <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"></textarea>
+                 <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
+                   <div ng-message="maxlength">Please use a shorter description.</div>
+                 </div>
+               </md-input-container>
+               <markdown-help></markdown-help>
+             </md-content>
+           </md-tab>
+           <md-tab label="Preview">
+             <md-content class="md-padding">
+               <div class="md" ng-bind-html="ctrl.product.description | md"></div>
+             </md-content>
+           </md-tab>
+         </md-tabs>
+      </section>
 
       <md-button ng-click="ctrl.save()">List In Store</md-button>
       <md-button ui-sref="store">Cancel</md-button>

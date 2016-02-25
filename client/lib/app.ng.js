@@ -1,5 +1,6 @@
 angular.module('food-coop',[
   'ngMessages',
+  'ngSanitize',
   'angular-meteor',
   'angular-meteor.auth',
   'ui.router',
@@ -8,7 +9,8 @@ angular.module('food-coop',[
   'google.places',
   'ngFileUpload',
   'cloudinary',
-  '720kb.socialshare'
+  '720kb.socialshare',
+  'remarkable'
 ])
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
