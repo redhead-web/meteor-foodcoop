@@ -63,7 +63,7 @@
       </md-button>
       {{ctrl.product.name}}
     </h1>
-    <form name="editName" flex
+    <form name="editName" flex class="editContent"
     ng-submit="ctrl.edit.name = !ctrl.edit.name"
     ng-if="ctrl.edit.name && ctrl.isOwner">
       <md-input-container flex>
@@ -87,7 +87,7 @@
       </md-button>
       {{ctrl.product.price * ctrl.markup | currency}} / {{ctrl.product.unitOfMeasure}}
     </p>
-    <form name="editPrice" flex
+    <form name="editPrice" flex class="editContent"
     ng-submit="ctrl.save(ctrl.product); ctrl.edit.price = !ctrl.edit.price;"
     ng-if="ctrl.edit.price && ctrl.isOwner">
       <md-input-container class="md-icon-float md-block">
@@ -101,7 +101,7 @@
       </md-input-container>
       <md-input-container>
         <label>Unit Of Measure</label>
-        <input ng-model="ctrl.product.unitOfMeasure" type="text" maxlength="10" required
+        <input ng-model="ctrl.product.unitOfMeasure" type="text" maxlength="20" required
         ng-change="ctrl.save()" ng-model-options="ctrl.modelOptions">
         <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
           <div ng-message="required">this field is required.</div>
@@ -134,7 +134,7 @@
     </md-input-container>
     <p class="md-body-2 text-center" ng-if="ctrl.product.stocklevel != null && ctrl.product.stocklevel <= 0">SOLD OUT</p>
     <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" 
-    ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0"
+    ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0" class="editContent"
     layout="row">
       <md-input-container flex>
         <label>Quantity</label>
@@ -159,17 +159,15 @@
     </md-list> -->
     <md-divider ng-if="ctrl.product.description"></md-divider>
     <md-content ng-if="ctrl.product.description || ctrl.isOwner">
-      <p>
         <md-button
           ng-if="ctrl.isOwner"
           ng-click="ctrl.edit.description = !ctrl.edit.description;"
           class="md-icon-button md-accent" aria-label="edit packaging description">
          <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
         </md-button>
-        {{ctrl.product.description}}
-        <span ng-if="ctrl.isOwner && !ctrl.product.description">No Description Set</span>
-      </p>
-      <form name="editDescription" flex
+        <p ng-if="ctrl.isOwner && !ctrl.product.description">No Description Set</p>
+        <div ng-bind-html="ctrl.product.description | md"></div>
+      <form name="editDescription" flex class="editContent"
       ng-submit="ctrl.edit.description = !ctrl.edit.description;"
       ng-if="ctrl.edit.description && ctrl.isOwner">
         <md-input-container class="md-block">
@@ -181,6 +179,7 @@
             <div ng-message="maxlength">Please use a shorter description.</div>
           </div>
         </md-input-container>
+        <markdown-help></markdown-help>
       </form>
 
     </md-content>
@@ -196,7 +195,7 @@
         Packaging: {{ctrl.product.packagingDescription}}
         <span ng-if="ctrl.isOwner && !ctrl.product.packagingDescription">No Packaging Description Set</span>
       </p>
-      <form name="editPackagingDescription" flex
+      <form name="editPackagingDescription" flex class="editContent"
       ng-submit="ctrl.edit.packagingDescription = !ctrl.edit.packagingDescription;"
       ng-if="ctrl.edit.packagingDescription && ctrl.isOwner">
         <md-input-container>
@@ -215,7 +214,7 @@
         Packaging Refund: {{ctrl.product.packagingRefund | currency}}
         <span ng-if="ctrl.isOwner && !ctrl.product.packagingRefund">No Packaging Refund Set</span>
       </p>
-      <form name="editPackagingRefund"
+      <form name="editPackagingRefund" class="editContent"
       ng-submit="ctrl.edit.packagingRefund = !ctrl.edit.packagingRefund;"
       ng-if="ctrl.edit.packagingRefund && ctrl.isOwner">
         <md-input-container class="md-icon-float md-block" flex>

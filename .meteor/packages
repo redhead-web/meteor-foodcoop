@@ -59,3 +59,7 @@ miro:mailchimp-lists
 mrt:cron
 angular:angular
 seba:minifiers-autoprefixer
+redhead:remarkable
+angular:angular-sanitize
+redhead:angular-remarkable
+natestrauser:animate-css

@@ -36,6 +36,12 @@
         g-places-autocomplete
         placeholder="address" aria-label="delivery address"/>
     </md-input-container>
+    
+    <md-input-container>
+      <md-icon md-svg-icon="action:ic_assignment_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.profile.gst"
+        placeholder="GST Number (if registered)"/>
+    </md-input-container>
 
     <md-checkbox ng-model="producer" aria-label="producer role">
         Is {{user.profile.name}} a producer?
