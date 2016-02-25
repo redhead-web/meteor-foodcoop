@@ -1,6 +1,6 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-    <md-button ui-sref="store.category({category: ctrl.product.category})" aria-label="Settings">
+    <md-button ui-sref="store({category: ctrl.product.category})" aria-label="Settings">
       <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
       {{ctrl.product.category}}
     </md-button>
@@ -153,7 +153,7 @@
     <!-- <md-button ui-sref="store">Keep Shopping</md-button> -->
 
     <!-- <md-list>
-      <md-list-item ng-click="nav.goTo('store.category', {category: ctrl.product.category})">
+      <md-list-item ng-click="nav.goTo('store', {category: ctrl.product.category})">
         <p>{{ctrl.product.category}}</p>
       </md-list-item>
     </md-list> -->

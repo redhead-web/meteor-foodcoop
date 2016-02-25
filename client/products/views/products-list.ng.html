@@ -1,6 +1,6 @@
-<md-tabs class="md-primary">
-  <md-tab label="All" md-on-select="store.show('all')"></md-tab>
-  <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.show(c.name)"></md-tab>
+<md-tabs class="md-primary" md-selected="store.selectedCategory">
+  <md-tab label="All" md-on-select="store.query.category = undefined"></md-tab>
+  <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.query.category=c.name"></md-tab>
 </md-tabs>
 <md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
@@ -34,37 +34,23 @@
     </div>
 		<div layout="row">
     <md-menu-bar>
-      <!-- <md-menu>
-        <button ng-click="$mdOpenMenu()">
-          Filter
-        </button>
-        <md-menu-content>
-          <md-menu-item>
-            <md-button ng-click="store.favourites = undefined; store.lastOrder = undefined">
-              All
-            </md-button>
-          </md-menu-item>
-          <md-menu-item type="checkbox" ng-model="store.favourites" >Show Just My Favourites</md-menu-item>
-					<md-menu-item type="checkbox" ng-model="store.lastOrder" >Show My Last Order</md-menu-item>
-        </md-menu-content>
-      </md-menu> -->
       <md-menu>
         <button ng-click="$mdOpenMenu()">
           Sort
         </button>
         <md-menu-content>
           <md-menu-item>
-            <md-button ng-click="store.sort = 'name'">
+            <md-button ng-click="store.options.sort = 'name'">
               Alphabetical
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.sort = 'price' ">
+            <md-button ng-click="store.options.sort = 'price' ">
               Price lowest-highest
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.sort = 'price'">
+            <md-button ng-click="store.options.sort = 'price'">
               Price highest-lowest
             </md-button>
           </md-menu-item>
@@ -74,10 +60,10 @@
     <!-- <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="$auth.currentUser">
       <span class="md-body-1">Show Only Favourites</span>
     </md-switch> -->
-		<md-button class="md-icon-button" ng-class="{'md-warn': store.favourites}" ng-click="store.favourites = !store.favourites" aria-label="Favorite">
+		<md-button class="md-icon-button" ng-class="{'md-warn': store.query.favourites}" ng-click="store.query.favourites = !store.query.favourites" aria-label="Favorite">
 			<md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-class="{'md-primary': store.lastOrder}" ng-click="store.lastOrder = !store.lastOrder" aria-label="Favorite">
+		<md-button class="md-icon-button" ng-class="{'md-primary': store.query.lastOrder}" ng-click="store.query.lastOrder = !store.query.lastOrder" aria-label="Favorite">
 			<md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
 		</md-button>
     <!-- <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="$auth.currentUser">
@@ -97,8 +83,11 @@
     </md-card-content>
   </md-card>
 </div>
-<div ui-view layout-fill id="StoreRoot">
+
+<product-gallery query="store.query" options="store.options" markup="store.markup"></product-gallery>
+
+<!-- <div ui-view layout-fill id="StoreRoot">
   <md-content ng-controller="ProductCardsCtrl as card">
     <md-content layout-fill ng-include="'client/products/views/product-cards.ng.html'"></md-content>
   </md-content>
-</div>
+</div> -->

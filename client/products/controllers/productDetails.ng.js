@@ -1,4 +1,4 @@
-angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $auth, $reactive){
+angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $reactive){
   $reactive(this).attach($scope);
 
   this.markup = Meteor.settings.public.markup/100 + 1;
