@@ -7,16 +7,10 @@ isProducer = (user) ->
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
   .state('store',
-    url: '/store?name&certification&producer&search'
+    url: '/store?name&certification&producer&search&category'
     templateUrl: 'client/products/views/products-list.ng.html'
     controllerAs: 'store'
     controller: 'ProductsPageCtrl')
-  .state('store.category',
-    url: '/:category?name&certification&producer&search'
-    templateUrl: 'client/products/views/product-cards.ng.html'
-    controller: 'ProductCardsCtrl'
-    controllerAs: 'card'
-  )
   .state('productDetails',
     url: '/product/:productId'
     templateUrl: 'client/products/views/product-details.ng.html'

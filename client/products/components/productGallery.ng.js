@@ -1,48 +1,45 @@
-angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $state, $auth, $stateParams, $reactive){
+
+function productGalleryController ($scope, $state, $auth, $reactive) {
   $reactive(this).attach($scope)
 
   this.store = $scope.store
 
   this.go = $state.go;
-
-  this.subscribe('categories');
-
-  this.stateParams = $stateParams;
-
+  
   this.helpers({
     products() {
-      let query = {}
+      let q = {}
 
-      if (this.getReactively('stateParams.category')) query.category = $stateParams.category;
+      if (this.getReactively('query.category') ) q.category = this.query.category;
       
-      if (this.getReactively('stateParams.producer')) query.producer = $stateParams.producer;
+      if (this.getReactively('query.producer') ) q.producer = this.query.producer;
 
       if ( Meteor.userId() ) {
         let favourites, lastOrder;
 
-        if (this.getReactively('store.favourites') || this.getReactively('store.lastOrder')) {
-          favourites = Meteor.users.findOne(Meteor.userId()).profile.favourites || [];
-          lastOrder = Meteor.users.findOne(Meteor.userId()).profile.lastOrder || [];
+        if (this.getReactively('query.favourites') || this.getReactively('query.lastOrder')) {
+          favourites = Meteor.users.findOne(Meteor.userId()).profile.favourites;
+          lastOrder = Meteor.users.findOne(Meteor.userId()).profile.lastOrder;
           if (this.store.favourites && this.store.lastOrder) {
-            query._id = {
+            q._id = {
               $in: _.union(favourites, lastOrder)
             };
           }
           if (this.store.favourites) {
-            query._id = {
+            q._id = {
               $in: favourites
             };
           }
           if (this.store.lastOrder) {
-            query._id = {
+            q._id = {
               $in: lastOrder
             };
           }
         }
       }
 
-      console.log(query)
-      return Products.find(query)
+      console.log(q)
+      return Products.find(q)
     }
   });
 
@@ -68,5 +65,16 @@ angular.module("food-coop").controller("ProductCardsCtrl", function($scope, $sta
   }
 
   return this;
+}
 
-});
+
+angular.module('food-coop').component('productGallery', {
+  templateUrl: 'client/products/components/product-cards.ng.html',
+  controller: productGalleryController,
+  controllerAs: 'card',
+  bindings: {
+    query: '<',
+    options: '<',
+    markup: '<'
+  }
+})

@@ -7,19 +7,21 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
   this.showGST = true;
 
   this.subscribe('categories');
-  this.stateParams = $stateParams
+  this.stateParams = angular.copy($stateParams);
   
+  this.query = {
+    category: this.stateParams.category,
+    producer: this.stateParams.producer
+  };
+    
   this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
 
   this.helpers({
-    producer() {
-      if (this.getReactively('stateParams.producer')) {
-        return Meteor.users.findOne($stateParams.producer)
-      }
-    },  
-    products() {
-      return Products.find()
-    },
+    // producer() {
+//       if (this.getReactively('stateParams.producer')) {
+//         return Meteor.users.findOne($stateParams.producer)
+//       }
+//     },
     categories() {
       return Categories.find()
     }
@@ -30,9 +32,16 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
   this.querySearch   = querySearch;
   this.selectedItemChange = selectedItemChange;
   this.searchTextChange   = searchTextChange;
-
-  this.show = show;
-
+  
+  this.autorun( () => {
+    if (this.stateParams.category) {
+      this.selectedCategory = _.indexOf( _.pluck(Categories.find().fetch(), 'name'), this.stateParams.category) + 1;
+    } else {
+      this.selectedCategory = 0;
+    }
+  })
+  
+  
   function querySearch (query) {
     var results = query ? this.products.filter( createFilterFor(query) ) : this.products;
     return results;
@@ -48,12 +57,6 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
     return function filterFn(product) {
       return (product.name.toLowerCase().indexOf(lowercaseQuery) !== -1);
     };
-  }
-
-  function show(category) {
-    if (category === 'all') {
-      $state.go('store');
-    } else $state.go('store.category', {category: category})
   }
 
   return this;
