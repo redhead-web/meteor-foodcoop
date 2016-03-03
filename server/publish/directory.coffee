@@ -5,7 +5,7 @@ Meteor.publish "producer", (producer) ->
   Meteor.users.find _id: producer,
     limit: 1
     fields:
-      'emails.address':1
+      'emails':1
       'profile.deliveryAddress': 1
       'profile.phone': 1
       'profile.name': 1
@@ -23,6 +23,7 @@ Meteor.publish "producers", ->
   
   Meteor.users.find roles: 'producer',
     fields: 
+      'emails':1
       'profile.companyName': 1
       'profile.name': 1
       'profile.logo': 1

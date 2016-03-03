@@ -1,6 +1,6 @@
 <section layout="row">
   <span flex></span>
-    <md-content flex="70" flex-xs="90">
+    <md-content flex="70" flex-xs="90" layout-margin>
       <md-list>
         <md-subheader class="md-no-sticky">Whangarei Food Co-op Producers</md-subheader>
         <md-list-item layout="row">
@@ -16,7 +16,6 @@
             </md-select>
           </md-input-container>
           <md-input-container flex>
-            <md-icon md-svg-icon="content:ic_sort_24px"></md-icon>
             <md-select style="margin-bottom:24px" placeholder="sort by" aria-label="Sort Ascending or Descending" ng-model="dir.sort">
               <md-option ng-value="{createdAt: -1}">Newest</md-option>
               <md-option ng-value="{createdAt: 1}">Oldest</md-option>
@@ -24,19 +23,14 @@
             </md-select>
           </md-input-container>
         </md-list-item>
-        <md-list-item ng-repeat="u in dir.producers | filter:dir.searchstring track by u._id" class="md-3-line" ng-click="nav.goTo('producer', {producerId: u._id})">
-          <cl-image public-id="{{u.profile.logo.result}}" class="md-avatar">
-            <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
-          </cl-image>
-
+        <md-list-item ng-repeat="u in dir.producers | filter:dir.searchstring track by u._id" class="md-3-line md-whiteframe-1dp" ng-click="nav.goTo('producer', {producerId: u._id})">
+          <multi-avatar user="u" width="40" class="md-avatar"></multi-avatar>
           <div class="md-list-item-text" md-menu-origin>
             <h3>{{u.profile.name}}</h3>
             <p>{{u.profile.deliveryAddress.formatted_address}}</p>
             <p>Member since {{ u.createdAt | date:'mediumDate' }}</p>
           </div>
-          <md-button class="md-secondary is-liked md-icon-button" ng-class="dir.likesProducer(u._id)" ng-click="dir.toggleLike(u._id)">
-            <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
-          </md-button>
+          <like-heart ng-click="null" class="md-secondary" target-id="u._id" category="producer" like-text="Clap clap! Thanks for endorsing {{u.profile.name}}" unlike-text="you are no longer endorsing this producer"></like-heart>
         </md-list-item>
       </md-list>
     </md-content>

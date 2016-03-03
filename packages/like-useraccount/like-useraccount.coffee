@@ -8,7 +8,7 @@ Likes.allow
     no
   remove: (userId, doc) ->
     doc.liker is userId
-  fetch: [ 'liker', 'likee' ]
+  fetch: [ 'liker' ]
 
 schema = new SimpleSchema
   liker:
@@ -18,6 +18,9 @@ schema = new SimpleSchema
   likee:
     type: String
     regEx: SimpleSchema.RegEx.Id
+    index: 1
+  category:
+    type: String
     index: 1
 
 Likes.attachSchema schema
@@ -45,29 +48,38 @@ if Meteor.isServer
 #       if match
 #         return false
 #       return true
-      
-  Meteor.publish "userLikes", (userId) ->
+   
+  # get all the likes on a given target  anonymously
+  Meteor.publish "targetLikes", (userId) ->
     Likes.find 
       likee: userId
     , fields: liker: 0
-    
+  
+  # get all the likes anonymously
   Meteor.publish "allLikes", ->
     Likes.find {},
       fields: liker: 0
-    
+  # get all the currentUser's likes
   Meteor.publish "myLikes", ->
-    Likes.find
-      liker: @userId
+    if @userId
+      Likes.find
+        liker: @userId
+    else
+      @ready()
 
 
 if Meteor.isClient
   Meteor.subscribe 'myLikes'
   
 Meteor.methods
-  "/likes/add": (likee) ->
-    query = 
-      likee: likee
-      liker: @userId
-    result = Likes.upsert query, $set: query
-    result
+  "/likes/add": (likee, category) ->
+    if @userId
+      pair = 
+        likee: likee
+        liker: @userId
+        category: category
+      result = Likes.upsert pair, $set: pair
+      result
+    else 
+      throw new Meteor.Error 401, "You must be logged in to register a like on something."
   

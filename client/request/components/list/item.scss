@@ -1,0 +1,65 @@
+.request-animate {
+  transition: all ease 600ms;
+  transform-origin: left top;
+  background-color: #fff;
+  &.ng-enter {
+    transform: scaleY(0);
+    margin-left: 50px;
+    margin-right: 50px;
+    &.ng-enter-active {
+      transform: scaleY(1);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  
+  &.ng-leave {
+    transform: scaleY(1);
+    margin-left: 0;
+    margin-right: 0;
+    
+    &.ng-leave-active {
+      transform: scaleY(0);
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+  }
+}
+
+.request-body-wrapper {
+  padding: 16px;
+}
+
+.requestBody {
+  @extend .request-animate;
+  
+  margin-bottom: 50px;
+  
+  multi-avatar {
+    margin-right: 20px;
+  }
+  
+  
+  .expiry-text {
+    color: red;
+  }
+  
+  .created-text {
+    color: #cdcdcd;
+  }
+  
+  .request-description {
+    margin: 8px 0;
+  }
+}
+
+.request-footer {
+  
+  transition: all ease 600ms;
+  
+  md-input-container.notFocus {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+

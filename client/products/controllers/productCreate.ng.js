@@ -15,7 +15,7 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 		}
 	})
   
-  vm.markup = Meteor.settings.public.markup;
+  vm.markup = Meteor.settings.public.markup / 100;
   
   vm.product = {
     producer: Meteor.userId(),
@@ -47,6 +47,28 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
   vm.addCategory = addCategory;
 
   vm.save = save;
+  
+  vm.round = round;
+  
+  function round(prop, value, model) {
+    if (model === 'price' && !vm.product.price) {
+      vm[prop] = undefined;
+    } else if (model === 'priceWithMarkup' && !vm[model]) {
+      vm.product.price = undefined;
+    }
+    
+    if (!vm[prop]) {
+      vm[prop] = 0;
+    }
+    if (value) {
+      let val = _.round(value, 2);
+      if (prop === 'price') {
+        vm.product[prop] = val;
+      } else {
+        vm[prop] = val;
+      }
+    }
+  }
 	
 	function reset() {
 	  vm.product = {

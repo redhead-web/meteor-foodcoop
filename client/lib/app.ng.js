@@ -10,7 +10,9 @@ angular.module('food-coop',[
   'ngFileUpload',
   'cloudinary',
   '720kb.socialshare',
-  'remarkable'
+  'remarkable',
+  'multi-avatar',
+  'ngLetterAvatar'
 ])
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
