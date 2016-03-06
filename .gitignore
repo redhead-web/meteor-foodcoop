@@ -13,3 +13,5 @@ kai-deploy
 wh-deploy
 
 kaikohe.txt
+
+server/startup/email.coffee

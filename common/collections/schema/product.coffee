@@ -61,6 +61,7 @@ Schema = new SimpleSchema
     type: Date
     defaultValue: new Date()
   last_modified:
+    optional: true
     type: Date
     autoValue: ->
       if @isUpdate
