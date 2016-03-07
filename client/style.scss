@@ -8,6 +8,17 @@ md-toast {
   max-width: 100%;
 }
 
+multi-avatar {
+  position: relative;
+}
+
+.img-round {
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  z-index: 30;
+}
+
 md-input-container.md-icon-float > md-icon {
   top: 8px;
 }

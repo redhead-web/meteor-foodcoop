@@ -1,0 +1,14 @@
+<md-content>
+<form ng-submit="$ctrl.submit()" layout="column">
+  <h2 class="md-title">Your {{$ctrl.formName}}</h2>
+<md-input-container>
+  <label>your {{$ctrl.formName}}</label>
+  <textarea 
+    ng-model="$ctrl.data"
+    required
+  >
+  </textarea>
+</md-input-container>
+<md-button ng-disabled="!$ctrl.data" type="submit">Post your {{$ctrl.formName}}</md-button>
+</form>
+</md-content>

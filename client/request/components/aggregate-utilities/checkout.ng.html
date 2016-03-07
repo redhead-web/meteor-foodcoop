@@ -1,0 +1,41 @@
+<md-dialog aria-label="Accept Offer"  ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>
+        <span>Accepting Offers</span>
+      </h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="checkout.cancel()">
+        <md-icon md-svg-icon="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+<md-dialog-content>
+  <div layout-padding><p>After payment is successful, we will contact your suppliers for you so your request can be carried out.</p></div>
+  <md-list>
+    <md-list-item ng-repeat="offer in checkout.offers">
+      <multi-avatar user="offer.user" width="40" height="40" class="md-avatar"></multi-avatar>
+      <p>{{offer.name}} <span ng-if="offer.companyName">of {{offer.companyName}}</span> offers {{offer.quantity}}</p>
+      <span class="md-secondary"><strong>{{offer.bid | currency}}</strong></span>
+    </md-list-item>
+  </md-list>
+  <div ng-if="checkout.spinner">
+    <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
+  </div>
+  <p class="text-center" ng-if="checkout.error">{{checkout.error}}</p>
+  <form id="checkout" method="post" action="/checkout" autocomplete="off">
+    <div id="payment-form" ng-show="checkout.total > 0"></div>
+    <div layout="row">
+      <span flex></span>
+      <md-button type="submit" class="md-primary md-raised" ng-show="checkout.total > 0" ng-disabled="checkout.disablePaymentButton">Pay {{checkout.total | currency}} with Credit Card</md-button>
+      <fc-balance-payment total="checkout.total"></fc-balance-payment>
+      <span flex></span>
+    </div>
+  </form>
+</md-dialog-content>
+<md-dialog-actions ng-if="checkout.success">
+  <md-button ng-click="checkout.answer(true)">Close this Request</md-button>
+  <md-button ng-click="checkout.answer()">Leave this Request Open</md-button>
+</md-dialog-actions>
+</md-dialog>

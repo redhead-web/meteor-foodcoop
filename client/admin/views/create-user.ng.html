@@ -5,7 +5,7 @@
   <md-button ui-sref="admin.users">Back To User List</md-button>
   <h2>New Member</h2>
 
-  <form name="editUser" layout="column" ng-submit="validate('editUser.$isValid')">
+  <form name="createUser" layout="column" ng-submit="validate(createUser.$valid)">
     <md-input-container>
       <md-icon md-svg-icon="social:ic_person_24px" class="md-accent" aria-label="user name"></md-icon>
       <input type="text" ng-model="user.profile.name"

@@ -39,7 +39,7 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
       Likes.remove(like._id)
       $mdToast.show $mdToast.simple().content("Removed your endorsement").position('bottom left').hideDelay(4000)
     else
-      Meteor.call "/likes/add", vm.producer._id, (err, response) ->
+      Meteor.call "/likes/add", vm.producer._id, 'user', (err, response) ->
         if (err)
           console.log(err)
           $mdToast.show $mdToast.simple().content("Clap clap! Thanks for your endorsement!").position('bottom left').hideDelay(4000)

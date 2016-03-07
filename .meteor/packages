@@ -39,7 +39,6 @@ ejson
 spacebars
 check
 fixtures
-urigo:angular-blaze-template
 redhead:angular-cloudinary
 angular:angular-messages
 matb33:collection-hooks
@@ -49,7 +48,7 @@ francocatena:compass
 lookback:emails
 blaze
 redhead:angular-google-places-autocomplete
-angular-meteor-auth@0.0.2
+angular-meteor-auth
 redhead:cart
 redhead:like-useraccount
 promise
@@ -63,3 +62,5 @@ redhead:remarkable
 angular:angular-sanitize
 redhead:angular-remarkable
 natestrauser:animate-css
+redhead:angular-avatar
+redhead:ng-letter-avatar

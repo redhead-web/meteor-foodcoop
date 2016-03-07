@@ -3,10 +3,15 @@
   <div flex="75">
     <p> Total Users: <span class="badge">{{userCount}}</span></p>
     <md-list>
-      <md-subheader class="md-no-sticky">Kaikohe Food Co-op Members</md-subheader>
-
+      <md-subheader class="md-no-sticky">Whangarei Food Co-op Members</md-subheader>
       <md-list-item>
         <md-button class="md-raised md-accent" ui-sref="admin.createUser">Create New User</md-button>
+        <md-button class="md-raised md-accent" ng-click="balance = !balance">
+          <span ng-if="!balance">Show producers who need paying</span>
+          <span ng-if="balance">Show All</span>
+        </md-button>
+      </md-list-item>
+      <md-list-item>
         <md-input-container>
           <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
           <input type="text" placeholder="search" ng-model="searchstring">
@@ -29,14 +34,17 @@
         </md-input-container>
 
       </md-list-item>
-      <div ng-repeat="u in users | orderBy: orderProperty | limitTo: perPage track by u._id">
+      <div ng-repeat="u in users track by u._id">
         <md-menu md-offset="25 0">
           <md-list-item class="md-3-line" ng-click="$mdOpenMenu($event)">
             <md-icon md-svg-icon="action:ic_account_circle_24px"></md-icon>
 
             <div class="md-list-item-text" md-menu-origin>
-              <h3>{{u.profile.name}} <small>#{{u.profile.customerNumber}}</small></h3>
-              <p>{{u.profile.deliveryAddress.formatted_address}}</p>
+              <h3>{{u.profile.name}} <small>#{{u.profile.customerNumber}}</small> <span ng-if="balance">{{u.profile.balance | currency}}</span></h3>
+              <p>
+                <span ng-if="!balance">{{u.profile.deliveryAddress.formatted_address}}</span>
+                <span ng-if="balance">{{u.profile.bankAccount || "no bank account on record"}}</span>
+              </p>
               <p>Joined: {{ u.createdAt | calendar }} {{u.roles}}</p>
             </div>
           </md-list-item>

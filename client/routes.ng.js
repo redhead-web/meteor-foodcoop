@@ -38,6 +38,10 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
           return $auth.requireUser();
         }
       }
+    })
+    .state('requests', {
+      url: '/requests',
+      template: "<request-list></request-list>"
     });
 
     $urlRouterProvider.otherwise('/store');

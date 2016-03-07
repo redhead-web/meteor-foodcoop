@@ -59,18 +59,12 @@
                 ui-sref="directory">
           <md-icon class="white-icon" md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
         </md-button>
-        <div><md-button class="md-secondary md-icon-button is-liked" ng-class="ctrl.likesProducer(ctrl.producer._id)" 
-        aria-label="Favorite" style="padding: 8px 0" ng-if="$auth.currentUser"
-        ng-click="ctrl.toggleLike()">
-          <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
-        </md-button>
-        <!-- <md-button class="md-icon-button md-warn" aria-label="Favorite" style="padding: 8px 0" ng-click="ctrl.toggleLove()" ng-if="$auth.currentUser">
-          <md-icon md-svg-icon="action:ic_favorite_24px" ng-if="currentUser && ctrl.lovesProducer()"></md-icon>
-        </md-button>
-
-        <md-button class="md-icon-button md-warn" aria-label="Favorite" style="padding: 8px 0" ng-click="ctrl.toggleLove()" ng-if="!ctrl.lovesProducer">
-          <md-icon md-svg-icon="action:ic_favorite_outline_24px"></md-icon>
-        </md-button> -->
+        <div>
+          <md-button class="md-secondary md-icon-button is-liked" 
+            aria-label="Favorite" style="padding: 8px 0" ng-if="$auth.currentUser"
+            >
+            <like-heart target-id="ctrl.producer._id" category="producer" like-text="Clap clap! Thanks for endorsing {{ctrl.producer.profile.name}}" unlike-text="you are no longer endorsing this producer"></like-heart>
+          </md-button>
         <fc-social-menu url="/directory/{{ctrl.producer._id}}" class="white-icon" text="Love {{ctrl.producer.profile.name}}'s profile on the Kai Kohekohe Co-op"></fc-social-menu></div>
       </div>
     </div>
@@ -246,7 +240,7 @@
     <md-card>
       <md-card-header>
         <md-card-avatar>
-          <md-icon class="md-avatar-icon" md-svg-icon="social:ic_person_24px"></md-icon>
+          <multi-avatar user="ctrl.producer" width="40"></multi-avatar>
         </md-card-avatar>
         <md-card-header-text>
           <span class="md-title">Personal Profile</span>

@@ -1,16 +1,7 @@
-PrettyEmail.options =
-  from: 'accounts@freshfoodcollective.com'
-  logoUrl: '{{process.env.ROOT_URL}}/logo.png'
-  companyName: 'Kai Kohekohe Food Co-op'
-  companyUrl: process.env.ROOT_URL
-  companyAddress: 'Whangarei, New Zealand'
-  companyTelephone: '+1234567890'
-  companyEmail: 'sean@foodcoop.nz'
-  siteName: 'Kai Kohekohe Food Co-op ordering website'
-
 PrettyEmail.defaults.enrollAccount =
-  heading: "To start using our new ordering website, simply click below"
-  buttonText: "Set a Password"
+  heading: "Even better co-op ordering, click below to get started"
+  buttonText: "Set a new Password"
+  subject: "Food Co-op Account moved to new website"
 
 Accounts.urls.resetPassword = (token) ->
   return Meteor.absoluteUrl("reset-password/" + token)

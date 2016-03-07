@@ -10,7 +10,9 @@ angular.module('food-coop',[
   'ngFileUpload',
   'cloudinary',
   '720kb.socialshare',
-  'remarkable'
+  'remarkable',
+  'multi-avatar',
+  'ngLetterAvatar'
 ])
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
@@ -31,7 +33,7 @@ angular.module('food-coop',[
 .run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
 
-  Meteor.subscribe('active-products');
+  // Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
   
   $rootScope.$on('$stateChangeSuccess', function() {
