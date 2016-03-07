@@ -1,4 +1,7 @@
 function markDownHelpCtrl ($scope, $mdDialog, $mdMedia) {
+  
+  "ngInject";
+  
   var vm = this;
   vm.openMarkdownHints = function($event) {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && vm.customFullscreen;

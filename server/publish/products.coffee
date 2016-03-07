@@ -1,10 +1,40 @@
-Meteor.publish "active-products", ->
+Meteor.publish "active-products", (query, limit, sort)->
+  check query, Object
+  check limit, Number
+  check sort, Object
+  q = 
+    published : true
+  
+  if query.favourites or query.lastOrder
+    favourites = _.pluck(Likes.find(
+      liker: @userId
+      category: 'products').fetch(), 'likee')
+    lastOrder = Meteor.users.findOne(@userId).profile.lastOrder
+    if query.favourites and query.lastOrder
+      q._id = $in: _.union(favourites, lastOrder)
+    if query.favourites
+      q._id = $in: favourites
+    if query.lastOrder
+      q._id = $in: lastOrder
+  Products.find q,
+    fields:
+      published: 1
+      name: 1
+      price: 1
+      unitOfMeasure: 1
+      stocklevel: 1
+      img: 1
+      producer: 1
+      producerName: 1
+      category: 1
+      minimumOrder: 1
+    limit: limit
+    sort: sort
+    
+Meteor.publish "all-active-products", ()->
   Products.find
     published: true
-  ,
-    fields:
-      description: 0
-      ingredients: 0
+    
       
 Meteor.publish "product", (id) ->
   Products.find
@@ -14,6 +44,11 @@ Meteor.publish "product", (id) ->
 Meteor.publish "my-products", ->
   Products.find
     producer: @userId
+
+Meteor.publish "product-names", ->
+  Products.find {},
+    fields: 
+      name: 1
 
 Meteor.publish "all-products", ->
   Products.find {},

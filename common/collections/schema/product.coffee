@@ -1,6 +1,6 @@
 certification = new SimpleSchema
   name: type: String
-  img: type: String
+  img: type: String, optional: true
 
 Schema = new SimpleSchema
   name:
@@ -22,7 +22,7 @@ Schema = new SimpleSchema
     decimal: true
   unitOfMeasure:
     type: String
-    max:20
+    max:30
   category:
     type: String
   stocklevel:
@@ -61,6 +61,7 @@ Schema = new SimpleSchema
     type: Date
     defaultValue: new Date()
   last_modified:
+    optional: true
     type: Date
     autoValue: ->
       if @isUpdate

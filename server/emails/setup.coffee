@@ -2,29 +2,36 @@ Templates = {}
 
 Mailer.config
   from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
-  replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz'
+  replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz>'
 
 Templates.contactMessage = 
   path: 'contact/contact-email.html'
+  route: path: 'contact'
 
 Templates.wholesaleInvoiceEmail =
   path: 'invoice/invoice-email.html'
   scss: 'invoice/invoice-email.scss'
+  route: path: 'invoice'
 
 Templates.confirmOrderEmail =
   path: 'order/confirmation-email.html'
+  route: path: 'confirmation'
 
 Templates.subscriptionConfirmation =
   path: 'order/subscription-confirmation-email.html'
+  route: path: 'subscribe-confirmation'
 
 Templates.hubReminder =
   path: 'hub/hub-reminder.html'
+  route: path: 'hub'
 
 Templates.applications =
   path: 'apply/producer-application.html'
+  route: path: 'producer-application'
   
 Templates.salesNotification = 
   path: 'order/sales-notification.html'
+  route: path: 'sales-notification'
 
 Meteor.startup ->
   Mailer.init
@@ -36,7 +43,7 @@ Meteor.startup ->
     helpers:
       companyName: "Whangarei Food Co-op"
       bankAccount: "06-0333-0082913-03"
-      GSTNumber: "113-091-103"
+      # GSTNumber: "113-091-103"
       deliveryDay: () ->
         day = GetDeliveryDay()
         moment(day).calendar null,

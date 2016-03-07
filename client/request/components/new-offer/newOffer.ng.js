@@ -1,4 +1,7 @@
 function newOfferCtrl($scope, $reactive) {
+  
+  "ngInject";
+  
   var vm = this;
   
   vm.markup = _.round( Meteor.settings.public.markup / 100, 2)

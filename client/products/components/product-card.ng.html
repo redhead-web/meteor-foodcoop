@@ -1,0 +1,75 @@
+<md-card class="product-card">
+  <a ui-sref="productDetails({productId: card.product._id})">
+    <cl-image public-id="{{card.product.img.result}}" class="md-card-image" ng-class="{'greyscale': card.product.stocklevel != null && card.product.stocklevel <= 0}">
+      <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
+    </cl-image>
+  </a>
+	<div>
+  <md-card-actions layout="row" layout-align="center start" layout-margin class="floating-actions">
+    <div ng-controller="orderProductCtrl as shop">
+      <md-button class="md-fab" aria-label="shopping cart" ng-class="{
+        'md-hue-2 md-primary': card.product.stocklevel == null || card.product.stocklevel > 0
+      }"
+        ng-click="shop.addToCart($event, card.product, 1)"
+      >
+        <md-icon md-svg-icon="{{ shop.alreadyInCart(card.product._id) }}"></md-icon>
+        
+      </md-button>
+    </div>
+  </md-card-actions>
+  <md-card-header class="product-card-header">
+    <md-card-header-text>
+      <span class="md-title">{{card.product.name}}</span>
+      <span class="md-subhead">{{card.product.price * card.markup | currency}} / {{card.product.unitOfMeasure}}</span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-content class="product-card-order-form">
+    <p class="md-body-2 text-center" ng-if="card.product.stocklevel != null && card.product.stocklevel <= 0">SOLD OUT</p>
+    <form ng-if="card.product.stocklevel == null || card.product.stocklevel > 0" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, product, shop.qty)" layout="row" >
+      <md-input-container flex class="add-to-cart-input">
+        <label>Quantity</label>
+        <input ng-model="shop.qty" type="number" min="{{card.product.minimumOrder || 1}}" required name="qty">
+        <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
+          <div ng-message="required">this field is required.</div>
+          <div ng-message="min">You must order a minimum of {{card.product.minimumOrder || 1}} for this order.</div>
+        </div>
+      </md-input-container>
+      <div>
+        <md-button class="md-primary margin-top" type="submit">
+          Add {{shop.qty || ''}} To Cart
+        </md-button>
+      </div>
+    </form>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="space-between center">
+    <div ng-cloak>
+      <like-heart-button target-id="card.product._id" category="products" ></like-heart-button>
+      <!-- <md-button class="md-icon-button is-favourite" ng-if="$auth.currentUser"
+        ng-class="card.isFavourite(product._id)"
+        aria-label="Favourite"
+        ng-click="card.toggleFavourite(product._id)"
+        >
+        <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
+      </md-button> -->
+      <fc-social-menu url="/product/{{card.product._id}}" text="Check out the awesome {{card.product.name}} in the Whangarei Food Co-op Store" media="{{card.product.img.url}}"></fc-social-menu>
+		</div>
+    <md-button class="md-icon-button" ui-sref="productDetails({productId: card.product._id})" aria-label="product details">
+      <md-icon md-svg-icon="navigation:ic_more_horiz_24px"></md-icon>
+    </md-button>
+  </md-card-actions>
+
+    <!-- <div layout="row">
+      <md-input-container>
+        <input type="number" ng-min="product.minimumOrder || 1" ng-model="qty">
+      </md-input-container>
+      <md-button flex style="margin:0" ng-click="addToCart($event, product, qty)" class="md-raised md-primary">
+        <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+        Order
+      </md-button>
+      <md-button class="md-fab md-danger" ng-click="remove(product)" ng-if="currentUser && hasRole(currentUser, 'admin')">
+        <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
+      </md-button>
+    </div> -->
+	</div>
+</md-card>

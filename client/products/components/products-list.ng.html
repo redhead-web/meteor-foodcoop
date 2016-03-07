@@ -1,6 +1,7 @@
+<md-content layout="column">
 <md-tabs class="md-primary" md-selected="store.selectedCategory">
-  <md-tab label="All" md-on-select="store.query.category = undefined"></md-tab>
-  <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.query.category=c.name"></md-tab>
+  <md-tab label="All" md-on-select="store.query.category = undefined; store.limit=24;"></md-tab>
+  <md-tab ng-repeat="c in store.categories" label="{{c.name}}" md-on-select="store.query.category=c.name; store.limit=24;"></md-tab>
 </md-tabs>
 <md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
@@ -40,17 +41,17 @@
         </button>
         <md-menu-content>
           <md-menu-item>
-            <md-button ng-click="store.options.sort = 'name'">
+            <md-button ng-click="store.options.sort = {'name':1}">
               Alphabetical
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.options.sort = 'price' ">
+            <md-button ng-click="store.options.sort = {'price': 1} ">
               Price lowest-highest
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.options.sort = 'price'">
+            <md-button ng-click="store.options.sort = {'price': -1}">
               Price highest-lowest
             </md-button>
           </md-menu-item>
@@ -74,7 +75,7 @@
 
 </md-toolbar>
 
-<div layout="row" layout-align="center center">
+<!-- <div layout="row" layout-align="center center">
   <md-card flex="60" flex-xs="90">
     <md-card-content>
       <h2 class="md-title text-center">Thanks for stopping by</h2>
@@ -82,12 +83,7 @@
       <md-progress-linear md-mode="indeterminate"></md-progress-linear>
     </md-card-content>
   </md-card>
-</div>
-
-<product-gallery query="store.query" options="store.options" markup="store.markup"></product-gallery>
-
-<!-- <div ui-view layout-fill id="StoreRoot">
-  <md-content ng-controller="ProductCardsCtrl as card">
-    <md-content layout-fill ng-include="'client/products/views/product-cards.ng.html'"></md-content>
-  </md-content>
 </div> -->
+
+<product-cards query="store.query" options="store.options"></product-cards>
+</md-content>

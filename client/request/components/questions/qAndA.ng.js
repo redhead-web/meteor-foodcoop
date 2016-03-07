@@ -1,4 +1,7 @@
 function QandAController($scope) {
+  
+  "ngInject";
+  
   var vm = this;
   vm.questions = [
     { 

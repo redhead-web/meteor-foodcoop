@@ -33,7 +33,7 @@ angular.module('food-coop',[
 .run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
 
-  Meteor.subscribe('active-products');
+  // Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
   
   $rootScope.$on('$stateChangeSuccess', function() {

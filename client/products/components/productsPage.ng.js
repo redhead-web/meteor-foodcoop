@@ -1,33 +1,38 @@
-angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $state, $mdDialog, $mdToast, $stateParams, $reactive){
-
+function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
+  
+  "ngInject";
+  
   $reactive(this).attach($scope)
 
   this.go = $state.go;
   
   this.showGST = true;
-
+  
   this.subscribe('categories');
+  this.subscribe('product-names');
+  this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
+
+  
   this.stateParams = angular.copy($stateParams);
   
   this.query = {
-    category: this.stateParams.category,
-    producer: this.stateParams.producer
+    category: $stateParams.category,
+    producer: $stateParams.producer
   };
-    
-  this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
+  
 
   this.helpers({
-    // producer() {
-//       if (this.getReactively('stateParams.producer')) {
-//         return Meteor.users.findOne($stateParams.producer)
-//       }
-//     },
     categories() {
       return Categories.find()
+    },
+    products() {
+      return Products.find()
     }
   })
-
-  this.markup =  Meteor.settings.public.markup/100 + 1;
+  
+  this.options = {
+    sort: {name: 1}
+  };
 
   this.querySearch   = querySearch;
   this.selectedItemChange = selectedItemChange;
@@ -61,4 +66,11 @@ angular.module("food-coop").controller("ProductsPageCtrl", function($scope, $sta
 
   return this;
 
+}
+
+
+angular.module("food-coop").component("productsPage", {
+  controller: ProductsPageCtrl,
+  controllerAs: 'store',
+  templateUrl: 'client/products/components/products-list.ng.html'
 });

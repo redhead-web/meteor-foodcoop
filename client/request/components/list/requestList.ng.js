@@ -1,4 +1,7 @@
 function requestListCtrl($reactive, $scope) {
+  
+  "ngInject";
+  
   $reactive(this).attach($scope);
   
   var vm = this;

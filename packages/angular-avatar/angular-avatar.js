@@ -3,7 +3,7 @@ angular.module('multi-avatar', ['md5'])
     return {
       restrict: 'E',
       scope: {
-        user: '=',
+        user: '<',
         width: '@',
         height: '@'
       },
@@ -21,8 +21,7 @@ angular.module('multi-avatar', ['md5'])
           width: $scope.width,
           height: $scope.height
         });
-      },
-      controller: function($scope, md5) {
+        
         var services = [
   			  {id: 'facebook', tpl: 'http://graph.facebook.com/{id}/picture?width={width}&height={height}'} ,
   			  {id: 'twitter',  tpl: 'https://pbs.twimg.com/profile_images/{id}_bigger.jpeg'} ,
@@ -32,9 +31,7 @@ angular.module('multi-avatar', ['md5'])
                 
         $scope.userId = typeof $scope.user === 'string' ? $scope.user : $scope.user._id;
         
-        $scope.name = "test";
-        
-        $scope.subscribe('basic-user', function() { return [$scope.getReactively('userId')]}, onReady)
+        $scope.subscribe('basic-user', function() { return [$scope.userId]});
         
         if ($scope.width == null) {
           $scope.width = 50
@@ -42,35 +39,39 @@ angular.module('multi-avatar', ['md5'])
         
         if ($scope.height == null) {
           $scope.height = $scope.width
-        }  
+        }
         
-        function onReady() {
-          var service, id, user;
-          user = Meteor.users.findOne($scope.userId);
-          $scope.name = user.profile.name;
-          if (user.hasOwnProperty('emails')) {
-            service = services[3];
-            id = md5.createHash(user.emails[0].address.toLowerCase())
+        var service, id;
+        
+        $scope.helpers({
+          u: function() {
+            return Meteor.users.findOne($scope.userId);
           }
-          
-          if (user.hasOwnProperty('services')) {
-            if (user.services.hasOwnProperty('facebook')) {
-              service = services[0];
-              id = $scope.userObject.services.facebook.id;
-            } else if (user.services.hasOwnProperty('twitter')) {
-              service = services[1];
-              id = user.services.twitter.id
-            } else if (user.services.hasOwnProperty('github')) {
-              service = services[2];
-              id = user.services.github.id
-            }
+        })
+        
+        $scope.name = $scope.u.profile.name;
+        if ($scope.u.hasOwnProperty('emails')) {
+          service = services[3];
+          id = md5.createHash($scope.u.emails[0].address.toLowerCase())
+        }
+        
+        if ($scope.u.hasOwnProperty('services')) {
+          if ($scope.u.services.hasOwnProperty('facebook')) {
+            service = services[0];
+            id = $scope.u.services.facebook.id;
+          } else if ($scope.u.services.hasOwnProperty('twitter')) {
+            service = services[1];
+            id = $scope.u.services.twitter.id
+          } else if ($scope.u.services.hasOwnProperty('github')) {
+            service = services[2];
+            id = $scope.u.services.github.id
           }
-          
-          if (service != null) {
-            $scope.tag = service.tpl.replace('{id}', id)
-            .replace('{width}', $scope.width)
-            .replace('{height}', $scope.height);
-          }
+        }
+        
+        if (service != null) {
+          $scope.tag = service.tpl.replace('{id}', id)
+          .replace('{width}', $scope.width)
+          .replace('{height}', $scope.height);
         }
         
       },

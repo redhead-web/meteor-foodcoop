@@ -1,4 +1,7 @@
 function LikeHeartCtrl ($scope, $mdToast) {
+  
+  "ngInject";
+  
   var vm = this;
   
   vm.likesTarget= likesTarget;
@@ -17,13 +20,17 @@ function LikeHeartCtrl ($scope, $mdToast) {
     });
     if (like != null) {
       Likes.remove(like._id);
-      return $mdToast.show($mdToast.simple().content(vm.unlikeText).position('bottom left').hideDelay(4000));
+      if (vm.unlikeText) {
+        $mdToast.show($mdToast.simple().content(vm.unlikeText).position('bottom left').hideDelay(4000));
+      }
     } else {
       Meteor.call("/likes/add", vm.targetId, vm.category, function(err, response) {
         if (err) {
           return console.log(err);
+        } else if (vm.likeText) {
+          $mdToast.show($mdToast.simple().content(vm.likeText).position('bottom left').hideDelay(4000));
         }
-        return $mdToast.show($mdToast.simple().content(vm.likeText).position('bottom left').hideDelay(4000));
+        return 
       });
     }
   };
@@ -44,6 +51,18 @@ function LikeHeartCtrl ($scope, $mdToast) {
         
 angular.module('food-coop').component('likeHeart', {
   templateUrl: 'client/utilities/components/likes/like-heart.ng.html',
+  controller: LikeHeartCtrl,
+  bindings: {
+    likeText: "@",
+    unlikeText: "@",
+    targetId: "<",
+    category: "@"
+  }
+})
+
+
+angular.module('food-coop').component('likeHeartButton', {
+  templateUrl: 'client/utilities/components/likes/like-heart-button.ng.html',
   controller: LikeHeartCtrl,
   bindings: {
     likeText: "@",

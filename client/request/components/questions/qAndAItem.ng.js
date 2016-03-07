@@ -1,4 +1,7 @@
 function Controller($scope) {
+  
+  "ngInject";
+  
   var vm = this;
   
   vm.$onInit = function() {

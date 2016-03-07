@@ -1,5 +1,5 @@
 function requestCtrl($scope) {
-  
+  "ngInject";
   
   
 }

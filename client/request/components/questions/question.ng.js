@@ -1,4 +1,7 @@
 function QuestionCtrl($scope) {
+  
+  "ngInject";
+  
   var vm = this;
   vm.formName = 'Question';
   

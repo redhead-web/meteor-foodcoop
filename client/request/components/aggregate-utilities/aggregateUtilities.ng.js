@@ -4,7 +4,7 @@ var acceptedOffers = [
       // request: vm.request._id,
       user: Meteor.userId(),
       name: "Sean Stanley",
-      companyName: Meteor.user().profile.companyName,
+      // companyName: Meteor.user().profile.companyName,
       bid: 10,
       dateCreated: moment().subtract(1, 'days').toDate(),
       status: 'aggregate',
@@ -15,7 +15,7 @@ var acceptedOffers = [
       // request: vm.request._id,
       user: Meteor.userId(),
       name: "Matt Stanley",
-      companyName: Meteor.user().profile.companyName,
+      // companyName: Meteor.user().profile.companyName,
       bid: 8,
       dateCreated: moment().subtract(9, 'hours').toDate(),
       quantity: 8,
@@ -24,6 +24,8 @@ var acceptedOffers = [
     }
   ]
 function AggregateCheckoutController($scope, $mdDialog, $reactive) {
+  
+  "ngInject";
   
   var vm = this;
   
@@ -76,6 +78,9 @@ angular.module('food-coop').component('aggregateCheckout', {
 });
 
 function AggregatePercentageController($scope, $mdDialog, $reactive) {
+  
+  "ngInject";
+  
   var vm = this;
   
   /*

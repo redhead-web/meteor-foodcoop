@@ -1,1 +1,5 @@
-<md-button><like-heart target-id="$ctrl.targetId" category="{{$ctrl.category}}" like-text="{{$ctrl.likeText}}" unlike-text="{{$ctrl.unlikeText}}"></like-heart></md-button>
+<!-- <md-button><like-heart target-id="$ctrl.targetId" category="{{$ctrl.category}}" like-text="{{$ctrl.likeText}}" unlike-text="{{$ctrl.unlikeText}}"></like-heart></md-button> -->
+
+<md-button class="is-liked md-icon-button" ng-class="$ctrl.likesTarget()" ng-click="$ctrl.toggleLike()" aria-label="like button">
+  <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
+</md-button>
