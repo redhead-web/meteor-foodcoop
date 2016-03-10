@@ -24,3 +24,5 @@ server/startup/startup.coffee
 settings.json
 
 wh-settings.json
+
+server/startup/email.coffee
