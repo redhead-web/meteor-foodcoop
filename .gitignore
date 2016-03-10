@@ -19,3 +19,7 @@ server/startup/startup.coffee
 *.json
 
 *.json
+
+settings.json
+
+wh-settings.json
