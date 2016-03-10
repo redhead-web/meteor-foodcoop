@@ -12,9 +12,6 @@ kai-deploy-x
 
 *.json
 
-settings.json
-wh-settings.json
-
 wh-deploy
 
 kaikohe.txt
@@ -23,3 +20,7 @@ server/startup/email.coffee
 
 server/startup/startup.coffee
 
+
+settings.json
+
+wh-settings.json
