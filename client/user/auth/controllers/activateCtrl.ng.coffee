@@ -1,18 +1,18 @@
 angular.module('food-coop').controller 'ActivateCtrl',
-($meteor, $state, $stateParams) ->
+($state, $scope, $stateParams, $reactive) ->
+    $reactive(this).attach($scope)
     vm = this
     vm.password = ''
     vm.error = ''
 
     vm.set = ->
-      $meteor.resetPassword($stateParams.token, vm.password).then (->
-        $state.go 'store'
-        return
-      ), (err) ->
-        vm.error = 'Error sending forgot password email - ' + err
+      Accounts.resetPassword $stateParams.token, vm.password, vm.$bindToContext (err) =>
+        if err
+          vm.error = 'Error sending forgot password email - ' + err
+        else
+          $state.go 'store'
         return
       return
-    return
 
     return
 

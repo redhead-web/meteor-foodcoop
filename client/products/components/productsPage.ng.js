@@ -64,8 +64,6 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
     };
   }
 
-  return this;
-
 }
 
 

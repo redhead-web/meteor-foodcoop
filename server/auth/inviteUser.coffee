@@ -1,6 +1,6 @@
 
 Meteor.methods
-  inviteUser: (user, wholesaleBuyer) ->
+  inviteUser: (user, producer) ->
     console.log user
 
     check user.profile.name, String
@@ -9,6 +9,6 @@ Meteor.methods
 
     userId = Accounts.createUser user
 
-    if wholesaleBuyer?
+    if producer?
       Roles.addUsersToRoles userId, 'producer'
     Accounts.sendEnrollmentEmail userId

@@ -19,4 +19,4 @@ angular.module('food-coop').controller 'ApplyCtrl', ($scope, $reactive, $state, 
       if result
         $state.go('store')
 
-  return vm
+  

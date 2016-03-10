@@ -67,7 +67,6 @@ if Meteor.isServer
     else
       @ready()
 
-
 if Meteor.isClient
   Meteor.subscribe 'myLikes'
   

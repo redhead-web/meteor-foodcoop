@@ -15,12 +15,12 @@ angular.module('food-coop')
       })
       
       $scope.invoice = function () {
-        Meteor.call("balanceCheckout", function(err, response) {
+        $scope.call("balanceCheckout", function(err, response) {
           if (err) {
             return console.error(err)
           }
           console.log(response)
-          $state.go('profile.cart.success')
+          $state.go('cart.success')
         });
       }
     },

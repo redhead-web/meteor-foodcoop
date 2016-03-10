@@ -16,6 +16,7 @@ schema = new SimpleSchema
     type: Object
     blackbox: true
   "qty":
+    label: "Quantity"
     type: Number
     min: 1
 

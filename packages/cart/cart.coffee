@@ -12,7 +12,7 @@ Cart.Items.allow
 
 if Meteor.isClient
   Cart.subscriptionHandles = userOrders: Meteor.subscribe('Cart-userOrders')
-  
+
   Tracker.autorun ->
     if !Session.equals('deviceId', undefined)
       Cart.subscriptionHandles.deviceOrders = Meteor.subscribe('Cart-deviceOrders', Session.get('Cart-deviceId'))
@@ -42,14 +42,16 @@ if Meteor.isServer
 	
   Meteor.publish "Cart-userOrders", () ->
     if @userId
-      return Cart.Items.find userId: @userId
-    @ready()
+      Cart.Items.find userId: @userId
+    else
+      @ready()
 	
   Meteor.publish "Cart-deviceOrders", (deviceId) ->
     if deviceId
       check deviceId, String
-      return Cart.Items.find deviceId: deviceId
-    @ready()
+      Cart.Items.find deviceId: deviceId
+    else
+      @ready()
 
 
 

@@ -67,6 +67,6 @@ angular.module("food-coop").controller("gstReceiptCtrl", function($scope, $react
     }
   }
   
-  return this;
+  ;
   
 });

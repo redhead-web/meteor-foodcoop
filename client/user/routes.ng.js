@@ -16,7 +16,7 @@ angular.module('food-coop').config( function($stateProvider) {
       }
     }
   })
-  .state('profile.cart', {
+  .state('cart', {
     url: '/cart',
     controller: 'UserCartCtrl',
     controllerAs: 'cart',
@@ -48,7 +48,7 @@ angular.module('food-coop').config( function($stateProvider) {
       }
     }
   })
-  .state('profile.cart.checkout', {
+  .state('cart.checkout', {
     url: '/checkout',
     templateUrl: 'client/checkout/views/checkout.ng.html',
     controller: 'checkoutCtrl',

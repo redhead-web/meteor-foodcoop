@@ -19,7 +19,7 @@ function CheckoutController ($mdDialog) {
   };
   
   function getClientToken () {
-    Meteor.call("generateClientToken", function(err, token) {
+    vm.call("generateClientToken", function(err, token) {
       if (err || !token) {
         vm.error = "Sorry connection error occurred to payment provider. Please try again later";
         return console.log(err);
@@ -44,7 +44,7 @@ function CheckoutController ($mdDialog) {
 //       vm.spinner = true;
 //     });
 //
-//     Meteor.call('braintreeAuthorization', data, function(err, result) {
+//     vm.call('braintreeAuthorization', data, function(err, result) {
 //       if (result && result.success) {
 //         vm.success = true;
 //       } else {
@@ -73,5 +73,5 @@ function CheckoutController ($mdDialog) {
     $mdDialog.hide(answer);
   };
   
-  return vm;
+  ;
 }

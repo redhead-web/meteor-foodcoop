@@ -20,7 +20,7 @@ Meteor.methods
         result = Mailer.send
           to: "#{user.profile.name} <#{user.emails[0].address}>"
           replyTo: "#{Meteor.settings.email.name} <#{Meteor.settings.email.address}>>"
-          subject: "Sales through Whangarei Food Co-op for next week"
+          subject: "Sales through Kai Kohekohe Food Co-op for the week"
           template: "salesNotification"
           data:
             recipient: user.profile.name

@@ -7,7 +7,7 @@ angular.module('food-coop').controller('contactCtrl', function($mdToast) {
   
   vm.send = function () {
     vm.disabled = true;
-    Meteor.call('/email/contactForm', vm.content, function (err, result) {
+    vm.call('/email/contactForm', vm.content, function (err, result) {
       vm.disabled = false;
       if (err) {
         vm.error = err.message
@@ -22,6 +22,6 @@ angular.module('food-coop').controller('contactCtrl', function($mdToast) {
     });
   };
   
-  return vm;
+  ;
 })
 

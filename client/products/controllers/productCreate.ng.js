@@ -141,5 +141,5 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
     } else return chip
   }
 
-  return vm
+  
 });

@@ -24,4 +24,4 @@ angular.module('food-coop').controller 'directoryCtrl', ($scope, $state, $reacti
     
   
   
-  return vm
+  
