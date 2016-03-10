@@ -12,6 +12,9 @@ kai-deploy-x
 
 *.json
 
+settings.json
+wh-settings.json
+
 wh-deploy
 
 kaikohe.txt
