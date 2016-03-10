@@ -1,13 +1,13 @@
-<md-content ng-if="!currentUser.profile.cart" layout="column" layout-align="center center">
+<!-- <md-content ng-if="!$auth.currentUser.profile.cart" layout="column" layout-align="center center">
   <h2>No items in your cart yet</h2>
   <h3>Maybe do some shopping and then come back?</h3>
-</md-content>
-<md-content ng-if="currentUser.profile.cart" layout="row" layout-align="center center">
+</md-content> -->
+<md-content layout="row" layout-align="center center">
   <span flex></span>
   <div flex="90" flex-md=100 flex-sm=100>
     <h1 class="text-center md-title"> Shopping Cart </h1>
 
-    <table class="material-table cart-table">
+    <table class="material-table cart-table" ng-cloak>
       <thead>
         <tr>
           <td></td>
@@ -57,12 +57,13 @@
         </tr>
       </tfoot>
       <tbody>
-        <tr ng-repeat="item in cart.Items track by item._id">
+        <tr ng-repeat="item in cart.items track by item._id">
           <td>
             <a ui-sref="productDetails({productId: item.productId})">
               <cl-image public-id="{{item.details.img.result}}" class="thumbnail" >
-                <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+                <cl-transformation height="60" width="60" crop="fill" gravity="center"></cl-transformation>
               </cl-image>
+              <ng-letter-avatar ng-if="!item.details.img.result" data="{{item.details.name}}" font-size="36" shape="round" width="60" height="60"></ng-letter-avatar>
             </a>
           </td>
           <td>
@@ -76,7 +77,7 @@
           </td>
           <td>
             <md-input-container class="input-table">
-              <input type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
+              <input aria-label="item quantity" type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
             </md-input-container>
           </td>
           <td>
@@ -97,7 +98,7 @@
     </md-content>
     <ui-view>
       <div layout="row" layout-align="center center">
-        <md-button class="md-raised md-warn" ui-sref="profile.cart.checkout">Checkout</md-button>
+        <md-button class="md-raised md-warn" ui-sref="cart.checkout">Checkout</md-button>
         <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
       </div>
     </ui-view>

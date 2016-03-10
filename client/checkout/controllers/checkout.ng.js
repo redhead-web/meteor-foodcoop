@@ -1,13 +1,16 @@
 angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactive, $state, currentUser){
   $reactive(this).attach($scope)
+  
   let vm = this;
   let nonce = ""
   let teardown;
+  
   let braintreeOptions = {
     container: "payment-form",
     onReady(obj) {
       teardown = obj.teardown;
       $scope.$apply( function () { vm.disablePaymentButton = false })
+      //vm.disablePaymentButton = false
     },
     onPaymentMethodReceived: checkout,
     onError(err) {
@@ -15,10 +18,11 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     },
   };
   const MARKUP = Meteor.settings.public.markup / 100 + 1;
+  
   vm.disablePaymentButton = true;
   
   function getClientToken () {
-    Meteor.call("generateClientToken", function(err, token) {
+    vm.call("generateClientToken", function(err, token) {
       if (err || !token) {
         vm.error = "Sorry connection error occurred to payment provider. Please try again later";
         return console.log(err);
@@ -28,22 +32,18 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   }
   
   getClientToken()
-  
 
-  vm.helpers({
-    total() {
-      let user = Meteor.user();
-      let items = Cart.Items.find().fetch();
-      let total = _.reduce(items, (total, item) => {
-        return total + (item.details.price * MARKUP * item.qty)
-      }, 0);
-      if (user.profile.balance > 0) {
-        if (user.profile.balance < total) {
-          return total - user.profile.balance;
-        } else return 0
-      }
-      return total;
-    }
+  vm.autorun(() => {
+    let user = Meteor.user();
+    let items = Cart.Items.find().fetch();
+    let total = _.reduce(items, (total, item) => {
+      return total + (item.details.price * MARKUP * item.qty)
+    }, 0);
+    if (user.profile.balance > 0) {
+      if (user.profile.balance < total) {
+        vm.total = total - user.profile.balance;
+      } else vm.total = 0
+    } else vm.total = total
   })
 
   
@@ -55,13 +55,15 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     data.payment_method_nonce = obj.nonce
 
     // start spinning wheel animation
-    $scope.$apply( function () { 
+    $scope.$apply( function () {
       vm.spinner = true;
     });
     
-    Meteor.call('braintreeTransaction', data, function(err, result) {
+    //vm.spinner = true;
+    
+    vm.call('braintreeTransaction', data, function(err, result) {
       if (result && result.success) {
-        $state.go('profile.cart.success')
+        $state.go('cart.success')
       } else {
         console.log(err);
         // display error details to the user and get them to try again
@@ -72,7 +74,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
       }
       // end spinning wheel animation
       vm.spinner = false;
-      $scope.$apply()
+      //$scope.$apply()
     });
   }
 

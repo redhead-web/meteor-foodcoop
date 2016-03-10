@@ -1,15 +1,18 @@
-angular.module("food-coop").controller("UserPaymentMethodCtrl", function($scope, paymentMethods, $meteor){
+angular.module("food-coop").controller("UserPaymentMethodCtrl", function($scope, paymentMethods, $mdToast){
   if (paymentMethods) {
+    
     $scope.paymentMethods = angular.copy(paymentMethods)
+    
     _.map($scope.paymentMethods, function(p) {
       p.delete = function(cb) {
-        $meteor.call('deletePaymentMethod', p.token).then(cb)
+        $scope.call('deletePaymentMethod', p.token, cb)
+        
         $scope.paymentMethods = _.reject($scope.paymentMethods, function(pay) {
           return pay.token === p.token;
         });
       }
       p.makeDefault = function(cb) {
-        $meteor.call('makeDefaultPaymentMethod', p.token).then(cb)
+        $scope.call('makeDefaultPaymentMethod', p.token, cb)
       }
       return p
     });
@@ -17,7 +20,9 @@ angular.module("food-coop").controller("UserPaymentMethodCtrl", function($scope,
 
   $scope.callback = function(result) {
     if (result.token) {
-      alert('Success!')
+      $mdToast.show(
+        $mdToast.simple().content("Success!").position('bottom left').hideDelay(4000)
+      )
     }
   }
 });

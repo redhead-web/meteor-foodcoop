@@ -1,4 +1,6 @@
-angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state){
+angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state, $reactive){
+  $reactive(this).attach($scope);
+  
   var vm = this;
 
   vm.addToCart = addToCart;
@@ -14,7 +16,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     $mdDialog.show(
       $mdDialog.alert()
       .title("Login or Sign up")
-      .textContent("Whangarei Co-operative services are only available to members. Please login or sign up to shop with us.")
+      .textContent("Kai kohekohe Co-operative services are only available to members. Please login or sign up to shop with us.")
       .ok('Got it!')
       .targetEvent($event)
     );
@@ -57,7 +59,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     // return storeStockingAlert($event)
 
 
-    Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
+    vm.call('/cart/insert', rawProduct, qty, function(err, success) {
       if (err) {
         console.error(err);
         return $mdToast.show(
@@ -73,7 +75,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
             .position('bottom left');
         $mdToast.show(toast).then(function(response) {
           if ( response == 'ok' ) {
-            $state.go('profile.cart.checkout');
+            $state.go('cart.checkout');
           }
         });
       } else if (success === "UPDATE SUCCESS") {
@@ -84,12 +86,12 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
         .position('bottom left');
         $mdToast.show(toast).then(function(response) {
             if ( response == 'ok' ) {
-              $state.go('profile.cart.checkout');
+              $state.go('cart.checkout');
             }
           });
       }
     });
   }
-  return vm;
+  ;
 
 });

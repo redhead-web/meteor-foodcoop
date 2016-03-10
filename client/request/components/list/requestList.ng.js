@@ -101,7 +101,7 @@ function requestListCtrl($reactive, $scope) {
     }
   }
   
-  return vm;
+  ;
 }
 
 angular.module('food-coop').component('requestList', {

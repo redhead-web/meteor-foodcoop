@@ -12,7 +12,7 @@ function Controller($scope) {
     vm.onUpdate({item: vm.item, modifier: modifier});
   }
   
-  return vm
+  
   
 }
 

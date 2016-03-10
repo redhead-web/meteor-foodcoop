@@ -76,7 +76,7 @@
 #               unitOfMeasure: product.units
 #               category: product.category || 'Produce'
 #               stocklevel: product.quantity
-#               published: true
+#               published: false
 #               description: product.description
 #               dateCreated: new Date product.dateUploaded
 #               last_modified: new Date()

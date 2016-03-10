@@ -1,4 +1,7 @@
-angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
+angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $state) ->
+  
+  $reactive(this).attach($scope)
+  
   vm = this
   vm.credentials =
     email: ''
@@ -17,30 +20,29 @@ angular.module('food-coop').controller 'RegisterCtrl', ($meteor, $state) ->
     producer: Meteor.settings.public.shares.producer
 
   vm.register = ->
-    $meteor.createUser(vm.credentials).then ((result) ->
-      console.log result
-      if vm.role == 'producer'
-        $state.go 'producer-application'
+    Accounts.createUser vm.credentials, vm.$bindToContext (err) =>
+      if err
+        console.log result
       else
-        $state.go 'store'
+        if vm.role == 'producer'
+          $state.go 'producer-application'
+        else
+          $state.go 'store'
       return
-    ), (err) ->
-      vm.error = 'Registration error - ' + err
-      return
-    return
 
   vm.facebookLogin = ->
-    $meteor.loginWithFacebook
+    Meteor.loginWithFacebook
       requestPermissions: ['email']
-    .then (result) ->
-      if vm.role == 'producer'
-        $state.go 'producer-application'
+    , vm.$bindToContext (err) ->
+      if err
+        console.error err
+        vm.error = "Login Error: #{err}"
       else
-        $state.go 'profile.edit'
-      console.log(result)
-    , (err) ->
-      console.error err
-      vm.error = "Login Error: #{err}"
+        if vm.role == 'producer'
+          $state.go 'producer-application'
+        else
+          $state.go 'profile.edit'
+        console.log(result)
 
   return
 

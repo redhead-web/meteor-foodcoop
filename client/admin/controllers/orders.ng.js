@@ -89,7 +89,7 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
     }, 0)
   }
 
-  return this
+  
 
 
 });

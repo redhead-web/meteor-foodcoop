@@ -64,8 +64,6 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
       //$timeout(()=>{}, 2000)
     }
   }
-
-  return this;
 }
 
 

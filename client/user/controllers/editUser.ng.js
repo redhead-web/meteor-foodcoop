@@ -10,7 +10,7 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $meteor,
   
   $scope.validate = function() {
     if ($scope.email !== Meteor.user().emails[0].address) {
-      Meteor.call('addEmail', $scope.email, Meteor.user().emails[0].address, function(err, response) {
+      $scope.call('addEmail', $scope.email, Meteor.user().emails[0].address, function(err, response) {
         if (err) {
           console.log (err)
           $scope.error = `Error: ${err.reason}`;

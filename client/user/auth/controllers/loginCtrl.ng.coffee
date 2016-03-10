@@ -1,6 +1,6 @@
-angular.module("food-coop").controller "LoginCtrl", ($state, $timeout) ->
-  
-  "ngInject";
+angular.module("food-coop").controller "LoginCtrl", ($state, $reactive, $scope, $timeout) ->
+    
+  $reactive(this).attach($scope)
   
   vm = this
 
@@ -11,28 +11,24 @@ angular.module("food-coop").controller "LoginCtrl", ($state, $timeout) ->
   vm.error = ''
 
   vm.login = ->
-    Meteor.loginWithPassword vm.credentials.email, vm.credentials.password, (err) ->
+    Meteor.loginWithPassword vm.credentials.email, vm.credentials.password, vm.$bindToContext (err) =>
       if err 
         vm.error = "Login Error: #{err}"
       else 
         console.log "logged in"
-        $timeout ->
-          $state.go('store')
-        , 10
+        $state.go('store')
         return
     return
 
   vm.facebookLogin = ->
     Meteor.loginWithFacebook
       requestPermissions: ['email']
-    , (err) ->
+    , vm.$bindToContext (err) ->
       if err 
         vm.error = "Login Error: #{err}"
       else 
         console.log "logged in"
-        $timeout ->
-          $state.go('store')
-        , 10
+        $state.go('store')
         return
     return
 

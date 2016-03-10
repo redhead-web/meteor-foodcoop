@@ -63,7 +63,7 @@ function AggregateCheckoutController($scope, $mdDialog, $reactive) {
     });
   }
   
-  return vm;
+  ;
   
 }
 
@@ -96,7 +96,7 @@ function AggregatePercentageController($scope, $mdDialog, $reactive) {
     return _.round(vm.offerQuantity/vm.request.quantity*100)
   }
   
-  return vm
+  
   
 }
 

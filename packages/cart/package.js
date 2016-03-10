@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use(['ecmascript', 'mongo', 'random', 'coffeescript', 'check']);
+  api.use(['mongo', 'random', 'coffeescript', 'check']);
   api.use(['tracker', 'session'], 'client');
   api.addFiles('cart.coffee');
   api.export('Cart');

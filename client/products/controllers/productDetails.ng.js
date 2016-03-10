@@ -58,5 +58,5 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
     });
   };
 
-  return this;
+  ;
 });
