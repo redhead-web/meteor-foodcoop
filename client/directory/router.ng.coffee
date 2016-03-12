@@ -5,8 +5,8 @@ angular.module('food-coop').config ($stateProvider) ->
   $stateProvider.state 'producer',
     url: '/directory/:producerId'
     templateUrl: 'client/directory/views/page.ng.html'
-    controllerAs: 'ctrl'
     controller: 'pageCtrl'
+    controllerAs: 'ctrl'
   .state 'directory',
     url: '/directory'
     templateUrl: 'client/directory/views/directory.ng.html'

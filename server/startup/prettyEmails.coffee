@@ -1,5 +1,5 @@
 PrettyEmail.options =
-  from: 'Kai kohekohe Food Co-op <accounts@freshfoodcollective.com>'
+  from: 'Kai kohekohe Food Co-op <admin@kaicoop.nz>'
   logoUrl: 'http://res.cloudinary.com/foodcoop/image/upload/c_scale,w_300/v1453437173/kaikohe/Kaikohe_Green_mnyu0j.jpg'
   companyName: 'Kai Kohekohe Food Co-op'
   companyUrl: process.env.ROOT_URL

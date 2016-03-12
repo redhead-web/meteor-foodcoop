@@ -83,6 +83,12 @@ angular.module('food-coop').config( function($stateProvider) {
     controller: 'ActivateCtrl',
     controllerAs: 'vm'
   })
+  .state('invite', {
+    url: '/invite/:token',
+    templateUrl: 'client/user/auth/views/invite.ng.html',
+    controller: 'ActivateCtrl',
+    controllerAs: 'vm'
+  })
   .state('welcome', {
     url: '/welcome',
     templateUrl: 'client/user/auth/views/welcome.ng.html'
@@ -98,6 +104,5 @@ angular.module('food-coop').config( function($stateProvider) {
         });
       }
     }
-  })
-  ;
+  });
 });

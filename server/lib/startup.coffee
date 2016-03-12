@@ -2,7 +2,6 @@ environment = process.env.METEOR_ENVIRONMENT ? 'development'
     
 
 Meteor.startup ->
-  SimpleSchema.debug = true
   console.log "starting the app... :-)"
 
   if Categories.find().count() is 0

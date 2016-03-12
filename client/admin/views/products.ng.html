@@ -13,6 +13,7 @@
     		<md-card-title-text>
     			<span class="md-headline">{{p.name}}</span>
           <span class="md-subhead">{{p.price | currency}} / {{p.unitOfMeasure}}</span>
+          <span class="md-subhead">{{p.producerCompanyName || p.producerName}}</span>
     		</md-card-title-text>
         <md-card-title-media>
           <div class="md-media-md card-media">
@@ -22,6 +23,12 @@
           </div>
         </md-card-title-media>
     	</md-card-title>
+      <md-card-content>
+        <md-input-container>
+          <label>Stock Level</label>
+          <input ng-model="p.stocklevel" type="number" ng-change="save(p)">
+        </md-input-container>
+      </md-card-content>
     	<md-card-actions layout="row" layout-align="end center">
     		<md-switch class="md-primary md-block" ng-model="p.published" ng-change="save(p)">
     			<span ng-show="p.published">For Sale</span><span ng-hide="p.published">Not For Sale</span>
