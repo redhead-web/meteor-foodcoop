@@ -1,0 +1,26 @@
+<h1>Congratulations! You may have sold all your {{product.name}}</h1>
+
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    {{#if product.img.result}}
+    <td>
+      <img src="http://res.cloudinary.com/foodcoop/image/upload/c_scale,e_grayscale,w_400/{{product.img.result}}.jpg" width="500">
+    </td>
+    {{/if}}
+    <td>
+      <h3 style="text-align: center">{{product.name}}</h3>
+      <p>${{product.price}} / {{product.unitOfMeasure}}</p>
+      <p style="color: #F44336">SOLD OUT</p>
+      <br>
+      <p style="text-align: center">
+        <a href="{{rootUrl}}/product/{{product._id}}"
+        style="text-decoration: none; line-height: 60px; text-align: center; background-color: #8BC34A; color: white; padding: 20px 10px; font-weight: 900; text-align: center; font-size: 16px"
+      >
+        VIEW PRODUCT
+      </a>
+      </p>
+      <p style="font-size: 10px">Note: The stock level for this product may increase if a user reduces the amount of product in their cart or decides before completing checkout to not buy your product.</p>
+    </td>
+  </tr>
+</table>
+

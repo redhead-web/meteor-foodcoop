@@ -1,4 +1,6 @@
-angular.module('food-coop').controller('contactCtrl', function($mdToast) {
+angular.module('food-coop').controller('contactCtrl', function($mdToast, $reactive, $scope) {
+  $reactive(this).attach($scope)
+  
   var vm = this;
   
   vm.disabled = false;

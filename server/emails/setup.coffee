@@ -7,6 +7,10 @@ Mailer.config
 Templates.contactMessage = 
   path: 'contact/contact-email.html'
   route: path: 'contact'
+  
+Templates.soldOutMessage = 
+  path: 'products/sold-out.html'
+  route: path: 'sold-out'
 
 Templates.wholesaleInvoiceEmail =
   path: 'invoice/invoice-email.html'
@@ -43,6 +47,8 @@ Meteor.startup ->
     helpers:
       companyName: "Whangarei Food Co-op"
       bankAccount: "06-0333-0082913-03"
+      rootUrl: () ->
+        return process.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
       deliveryDay: () ->
         day = GetDeliveryDay()

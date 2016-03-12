@@ -26,7 +26,7 @@
 
   <md-card-content class="product-card-order-form">
     <p class="md-body-2 text-center" ng-if="card.product.stocklevel != null && card.product.stocklevel <= 0">SOLD OUT</p>
-    <form ng-if="card.product.stocklevel == null || card.product.stocklevel > 0" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, product, shop.qty)" layout="row" >
+    <form ng-if="card.product.stocklevel == null || card.product.stocklevel > 0" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, card.product, shop.qty)" layout="row" >
       <md-input-container flex class="add-to-cart-input">
         <label>Quantity</label>
         <input ng-model="shop.qty" type="number" min="{{card.product.minimumOrder || 1}}" required name="qty">
