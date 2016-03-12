@@ -8,13 +8,13 @@
             <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
             <input type="text" placeholder="search" ng-model="dir.searchstring">
           </md-input-container>
-          <md-input-container flex>
+          <!-- <md-input-container flex>
             <md-icon md-svg-icon="social:ic_location_city_24px"></md-icon>
             <md-select style="margin-bottom:24px" placeholder="Filter by Town" aria-label="Search by town" ng-model="dir.townSearch">
               <md-option ng-value="">All</md-option>
               <md-option ng-value="town.value" ng-repeat="town in dir.towns">{{town.label}}</md-option>
             </md-select>
-          </md-input-container>
+          </md-input-container> -->
           <md-input-container flex>
             <md-select style="margin-bottom:24px" placeholder="sort by" aria-label="Sort Ascending or Descending" ng-model="dir.sort">
               <md-option ng-value="{createdAt: -1}">Newest</md-option>

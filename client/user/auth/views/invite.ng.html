@@ -1,0 +1,37 @@
+<md-content layout="row">
+  <span flex></span>
+  <section layout="column" flex="40" flex-sm="90" flex-md="60">
+    <br>
+    <h1 class="md-headline">Welcome to the Kai Kohekohe Food Co-op</h1>
+    <p class="md-body-1">Want to make more sales? We'd love it if you joined us. And to make it easy, we're offering free membership to you, the producers of the Whangarei Food Co-op.</p>
+     <p class="md-body-1"> Just log in below and we'll import your products and account details. You'll need to re-upload your product images, but everything else will be ready to go.</p>
+    
+    <h1 class="md-title text-center">Sign In To Get Started</h1>
+    <div ng-show="rpc.error" class="md-warn">
+      <small>{{ rpc.error }}</small>
+    </div>
+    <form layout="column" ng-submit="vm.set()">
+      <md-input-container>
+        <md-icon md-svg-icon="action:ic_lock_24px"></md-icon>
+        <input type="password" ng-model="vm.password" required
+               placeholder="password" aria-label="password"/>
+      </md-input-container>
+      <md-button class="md-raised md-primary"
+        type="submit" aria-label="login">Import Account
+      </md-button>
+    </form>
+    <br>
+    
+    <h2 class="md-title">Remember</h2>
+    
+    <ul class="md-body-1">
+      <li>You're responsible for getting your products to us on our Delivery Day, which is from 6-8pm on Thursday.</li>
+      <li>Our shopping cycle ends on Tuesday instead of Thursday.</li>
+      <li>We have minimal cool storage space, so please contact us if your products need to be refrigerated or frozen.</li>
+      <li>We can collect shelf stable products from the Whangarei Food Co-op on Tuesdays. Please contact us to arrange this.</li>
+      <li>Want to sell even more? We also run a Night Market in Kaikohe every Thursday. You're welcome to come along and hire a stall. We'd love to see you there.</li>
+    </ul>
+    
+  </section>
+  <span flex></span>
+</md-content>

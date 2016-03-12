@@ -1,4 +1,5 @@
 angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $stateParams, uiGmapGoogleMapApi, $mdToast, $window, $timeout) ->
+  
   $reactive(this).attach($scope)
   vm = this;
   
@@ -20,7 +21,7 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
           limit: 4
         
   vm.autorun ->
-    vm.isOwner = Meteor.userId()? and Meteor.userId() == $stateParams.producerId
+    vm.isOwner = Meteor.userId()? and (Meteor.userId() == $stateParams.producerId || Roles.userIsInRole(Meteor.userId(), 'admin') )
   
   vm.autorun ->
     if Meteor.user()
@@ -28,7 +29,8 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
       if Meteor.users.findOne($stateParams.producerId._id) in list
         vm.lovesProducer = true
       else
-        vm.lovesProducer = false
+        vm.lovesProducer = false    
+      
   
   vm.toggleLike = ->
     unless Meteor.userId()?
@@ -39,33 +41,13 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
       Likes.remove(like._id)
       $mdToast.show $mdToast.simple().content("Removed your endorsement").position('bottom left').hideDelay(4000)
     else
-      Meteor.call "/likes/add", vm.producer._id, 'user', (err, response) ->
+      vm.call "/likes/add", vm.producer._id, 'user', (err, response) ->
         if (err)
           console.log(err)
           $mdToast.show $mdToast.simple().content("Clap clap! Thanks for your endorsement!").position('bottom left').hideDelay(4000)
         
   vm.likesProducer = (producerId) ->
     if Likes.findOne(liker: Meteor.userId(), likee: producerId) then return 'liked' else return 'not-liked'
-  
-  # vm.toggleLove = ->
-  #   unless Meteor.userId()?
-  #     $mdToast.show $mdToast.simple().content("Please login to endorse this producer").position('bottom left').hideDelay(4000)
-  #     return
-  #
-  #   unless vm.producer.profile.loveCount?
-  #     Meteor.users.update vm.producer._id, $set: 'profile.loveCount' : 0
-  #
-  #   list = Meteor.user().profile.lovedProducers or []
-  #   if vm.producer._id in list
-  #     Meteor.users.update vm.producer._id, $inc: 'profile.loveCount' : -1
-  #     Meteor.users.update Meteor.userId(), $pull: 'profile.lovedProducers': vm.producer._id
-  #
-  #     $mdToast.show $mdToast.simple().content("Your endorsement has been removed").position('bottom left').hideDelay(4000)
-  #   else
-  #     Meteor.users.update vm.producer._id, $inc: 'profile.loveCount' : 1
-  #     Meteor.users.update Meteor.userId(), $push: 'profile.lovedProducers': vm.producer._id
-  #
-  #     $mdToast.show $mdToast.simple().content("Clap clap! Thanks for your endorsement!").position('bottom left').hideDelay(4000)
 
   vm.mapSettings =
     center: {latitude:-35.7251117, longitude: 174.323708}
@@ -73,23 +55,38 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
     options: scrollwheel: false
     events: tilesloaded: (map) ->
       uiGmapGoogleMapApi.then (maps) ->
-        service = new maps.places.PlacesService(map)
-        service.getDetails
-          placeId: vm.producer.profile.deliveryAddress.place_id
-        , (result, status) ->
-          $scope.$apply ->
+        if vm.producer.profile.deliveryAddress.latitude?
+          
+          vm.mapSettings.center =
+            latitude: vm.producer.profile.deliveryAddress.latitude
+            longitude: vm.producer.profile.deliveryAddress.longitude
+          
+          vm.markerSettings =
+            id: $stateParams.producerId
+            coords:
+              latitude: vm.producer.profile.deliveryAddress.latitude
+              longitude: vm.producer.profile.deliveryAddress.longitude
+            options: {}
+        
+        if vm.producer.profile.deliveryAddress.place_id?
+          service = new maps.places.PlacesService(map)
+          service.getDetails
+            placeId: vm.producer.profile.deliveryAddress.place_id
+          , (result, status) ->
+            $scope.$apply ->
 
-            vm.mapSettings.center =
-              latitude: result.geometry.location.lat()
-              longitude: result.geometry.location.lng()
-
-            vm.markerSettings =
-              id: $stateParams.producerId
-              coords:
+              vm.mapSettings.center =
                 latitude: result.geometry.location.lat()
                 longitude: result.geometry.location.lng()
-              options: {}
-            return
+
+              vm.markerSettings =
+                id: $stateParams.producerId
+                coords:
+                  latitude: result.geometry.location.lat()
+                  longitude: result.geometry.location.lng()
+                options: {}
+              return
+              
           return
         return
 
@@ -106,11 +103,10 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
     , (err, result) ->
       if err
         console.error err
-        return $mdToast.show $mdToast.simple().content("Connection Error: Failed to Save").position('bottom left').hideDelay(4000)
-    return  
+        $mdToast.show $mdToast.simple().content("Connection Error: Failed to Save").position('bottom left').hideDelay(4000)
+    return
+  return 
       
-  
-  ;
 
 # ---
 # generated by js2coffee 2.1.0
