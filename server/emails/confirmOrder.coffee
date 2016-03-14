@@ -12,7 +12,7 @@ Meteor.methods
 
     Mailer.send
       to: "#{user.profile.name} <#{user.emails[0].address}>"
-      subject: "Whangarei Food Co-op Order Confirmation"
+      subject: "Kai kohekohe Food Co-op Order Confirmation"
       template: "confirmOrderEmail"
       data: dataObject
     

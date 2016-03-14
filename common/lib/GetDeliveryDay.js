@@ -4,7 +4,6 @@ Meteor.startup(function(){
     let nearestDeliveryDay = moment(date)
     .day(Meteor.settings.public.deliveryDayOfWeek)
     .startOf('day')
-    .add(1, 'weeks'); 
     let shoppingStopDay = moment(date)
     .day(Meteor.settings.public.shoppingStopDay)
     .startOf('day');

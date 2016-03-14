@@ -14,7 +14,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     $mdDialog.show(
       $mdDialog.alert()
       .title("Login or Sign up")
-      .textContent("Whangarei Co-operative services are only available to members. Please login or sign up to shop with us.")
+      .textContent("Kaikohe Co-operative services are only available to members. Please login or sign up to shop with us.")
       .ok('Got it!')
       .targetEvent($event)
     );
@@ -73,7 +73,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
             .position('bottom left');
         $mdToast.show(toast).then(function(response) {
           if ( response == 'ok' ) {
-            $state.go('profile.cart.checkout');
+            $state.go('cart.checkout');
           }
         });
       } else if (success === "UPDATE SUCCESS") {
@@ -84,7 +84,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
         .position('bottom left');
         $mdToast.show(toast).then(function(response) {
             if ( response == 'ok' ) {
-              $state.go('profile.cart.checkout');
+              $state.go('cart.checkout');
             }
           });
       }

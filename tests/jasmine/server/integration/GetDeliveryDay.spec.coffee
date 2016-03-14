@@ -1,6 +1,6 @@
-# Whangarei Delivery Days
+# Kaikohe Delivery Days
 
-# describe "GetDeliveryDay Function for Whangarei", ->
+# describe "GetDeliveryDay Function for Kaikohe", ->
 #   it "should get the right delivery day on sunday", ->
 #     date = moment().day(0)
 #     result = GetDeliveryDay(date)
