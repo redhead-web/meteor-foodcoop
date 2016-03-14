@@ -23,7 +23,7 @@ Meteor.startup ->
 
       for user in usersArray
         existingUser = Accounts.findUserByEmail user.email
-        if existingUser || !user.user_type.canSell
+        if existingUser
           # update the user
           console.log "skipping user"
         else

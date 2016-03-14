@@ -2,7 +2,7 @@ function ProductCardCtrl($scope, $reactive) {
 
   "ngInject";
 
-  this.markup =  Meteor.settings.public.markup/100 + 1;
+  this.priceWithMarkup =  (product) => Markup(product).total();
 
 }
 

@@ -82,9 +82,7 @@ Meteor.methods
     ###    
     # Calculate Total on Server for security reasons
     items = Cart.Items.find({userId: @userId}).fetch()
-    data.cardAmount = data.orderTotal = _.reduce items, ((total, item) ->
-      total + item.details.price * ((Meteor.settings.public.markup / 100) + 1) * item.qty
-    ), 0
+    data.cardAmount = data.orderTotal = Markup(items).cartTotal()
 
     user = data.user or Meteor.user()
     data.balanceAmount = user.profile.balance

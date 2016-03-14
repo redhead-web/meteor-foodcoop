@@ -1,9 +1,8 @@
 Templates = {}
 
 Mailer.config
-  from: 'Kai Kohekohe Food Co-op <kaikohe.cooperative@gmail.com>'
-  replyTo: 'Kai Kohekohe Food Co-op <kaikohe.cooperative@gmail.com>'
-
+  from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
+  replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz>'
 
 Templates.contactMessage = 
   path: 'contact/contact-email.html'
@@ -46,7 +45,7 @@ Meteor.startup ->
       path: 'email-layout.html'
       scss: 'email-layout.scss'
     helpers:
-      companyName: "Kai Kohekohe Food Co-op"
+      companyName: "Whangarei Food Co-op"
       bankAccount: "06-0333-0082913-03"
       rootUrl: () ->
         return process.ROOT_URL || "http://localhost:3000"

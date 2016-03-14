@@ -85,7 +85,7 @@
         class="md-icon-button md-accent" aria-label="edit name">
        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
       </md-button>
-      {{ctrl.product.price * ctrl.markup | currency}} / {{ctrl.product.unitOfMeasure}}
+      {{ctrl.priceWithMarkup(ctrl.product) | currency}} / {{ctrl.product.unitOfMeasure}}
     </p>
     <form name="editPrice" flex class="editContent"
     ng-submit="ctrl.save(ctrl.product); ctrl.edit.price = !ctrl.edit.price;"

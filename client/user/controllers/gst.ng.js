@@ -27,14 +27,12 @@ angular.module("food-coop").controller("gstReceiptCtrl", function($scope, $react
   
   this.gstAmount = Meteor.settings.public.gst
   this.coopGST = "123-123-123-123"
-  
-  this.markup = Meteor.settings.public.markup / 100;
-  
+    
   this.getGST = getGST;
   
-  this.getMarkup = getMarkup;
+  this.getMarkup = (amount) => Markup(amount).markup();
   
-  this.getTotal = getTotal
+  this.getTotal = (amount) => Markup(amount).saleTotal()
   
   function getGST(amount, user) {
     if (user && Meteor.users.findOne(user).profile.gst == null) {
@@ -50,23 +48,5 @@ angular.module("food-coop").controller("gstReceiptCtrl", function($scope, $react
     
     
   };
-  
-  function getMarkup(amount) {
-    if (_.isArray(amount)) {
-      return _.reduce(amount, function (total, sale) {return total + (sale.price*sale.qty)}, 0) * (this.markup)
-    } else {
-      return amount * (this.markup / 100)
-    }
-  }
-  
-  function getTotal(amount) {
-    if (_.isArray(amount)) {
-      return _.reduce(amount, function (total, sale) {return total + (sale.price*sale.qty)}, 0) * (this.markup + 1)
-    } else {
-      return amount * (this.markup + 1)
-    }
-  }
-  
-  ;
   
 });

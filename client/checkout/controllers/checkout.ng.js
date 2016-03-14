@@ -17,7 +17,6 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
       vm.error = `Error: ${err.type}: ${err.message}`
     },
   };
-  const MARKUP = Meteor.settings.public.markup / 100 + 1;
   
   vm.disablePaymentButton = true;
   
@@ -36,9 +35,8 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   vm.autorun(() => {
     let user = Meteor.user();
     let items = Cart.Items.find().fetch();
-    let total = _.reduce(items, (total, item) => {
-      return total + (item.details.price * MARKUP * item.qty)
-    }, 0);
+    let total = Markup(items).cartTotal();
+    
     if (user.profile.balance > 0) {
       if (user.profile.balance < total) {
         vm.total = total - user.profile.balance;

@@ -4,7 +4,7 @@ function OfferCtrl($scope, $reactive, $mdMedia, $mdDialog) {
   
   var vm = this;
   
-  vm.markup = _.round( Meteor.settings.public.markup / 100, 2)
+  vm.markup = Meteor.settings.public.markup
   
   vm.indentAvatar = $mdMedia('gt-xs');
   

@@ -1,6 +1,4 @@
-angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state, $reactive){
-  $reactive(this).attach($scope);
-  
+angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state){
   var vm = this;
 
   vm.addToCart = addToCart;
@@ -16,7 +14,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     $mdDialog.show(
       $mdDialog.alert()
       .title("Login or Sign up")
-      .textContent("Kai kohekohe Co-operative services are only available to members. Please login or sign up to shop with us.")
+      .textContent("Whangarei Co-operative services are only available to members. Please login or sign up to shop with us.")
       .ok('Got it!')
       .targetEvent($event)
     );
@@ -56,10 +54,10 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     }
     
     // Delete the below code when we are ready to enable shopping
-    // return storeStockingAlert($event)
+    //return storeStockingAlert($event)
 
 
-    vm.call('/cart/insert', rawProduct, qty, function(err, success) {
+		Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
       if (err) {
         console.error(err);
         return $mdToast.show(
@@ -75,7 +73,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
             .position('bottom left');
         $mdToast.show(toast).then(function(response) {
           if ( response == 'ok' ) {
-            $state.go('cart.checkout');
+            $state.go('profile.cart.checkout');
           }
         });
       } else if (success === "UPDATE SUCCESS") {
@@ -86,12 +84,12 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
         .position('bottom left');
         $mdToast.show(toast).then(function(response) {
             if ( response == 'ok' ) {
-              $state.go('cart.checkout');
+              $state.go('profile.cart.checkout');
             }
           });
       }
     });
   }
-  ;
+  return vm;
 
 });

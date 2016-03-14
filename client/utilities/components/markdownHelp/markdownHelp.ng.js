@@ -25,7 +25,6 @@ function markDownHelpCtrl ($scope, $mdDialog, $mdMedia) {
       vm.customFullscreen = (wantsFullScreen === true);
     });
   };
-  ;
 }
 
 function DialogController($scope, $mdDialog) {

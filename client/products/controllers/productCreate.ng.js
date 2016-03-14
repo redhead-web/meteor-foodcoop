@@ -15,8 +15,8 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 		}
 	})
   
-  vm.markup = Meteor.settings.public.markup / 100;
-  
+  vm.markup = Meteor.settings.public.markup - 1;
+    
   vm.product = {
     producer: Meteor.userId(),
     published: true,
