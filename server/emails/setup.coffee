@@ -46,7 +46,7 @@ Meteor.startup ->
       scss: 'email-layout.scss'
     helpers:
       companyName: "Whangarei Food Co-op"
-      bankAccount: "06-0333-0082913-03"
+      bankAccount: Meteor.settings.public.bankAccount
       rootUrl: () ->
         return process.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
@@ -66,12 +66,11 @@ Meteor.startup ->
         "#{weeks} weeks"
 
       totalPrice: () ->
-          price = @qty * @price * (Meteor.settings.public.markup / 100 + 1)
-          return "$#{price.toFixed(2)}"
+          Markup(this).total()
           
       saleTotal: () ->
-          price = @qty * @price
-          return "$#{price.toFixed(2)}"
+         Markup(this).saleTotal()
+         
 
 
   # Mailer.send

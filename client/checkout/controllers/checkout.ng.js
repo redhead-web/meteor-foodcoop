@@ -55,6 +55,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     // start spinning wheel animation
     $scope.$apply( function () {
       vm.spinner = true;
+      vm.disablePaymentButton = true;
     });
     
     //vm.spinner = true;
@@ -68,6 +69,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
         vm.error = "Sorry, something went wrong, please confirm your payment details and try again."
         teardown(function() {
           getClientToken()
+          vm.disablePaymentButton = false
         });
       }
       // end spinning wheel animation
