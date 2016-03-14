@@ -27,6 +27,9 @@
       >
         <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
       </md-button>
+      <md-button ng-if="!!ctrl.product.img && ctrl.isOwner" aria-label="remove picture" class="md-icon-button image-delete" ng-click="ctrl.product.img = undefined; ctrl.removeImg(ctrl.product)">
+        <md-icon md-svg-src="navigation:ic_close_24px"></md-icon>
+      </md-button>
       <div class="upload-button" ng-if="!ctrl.product.img && ctrl.isOwner" layout="column" layout-align="center center">
         <md-button
           class="md-fab"

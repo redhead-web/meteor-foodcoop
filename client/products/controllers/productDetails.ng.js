@@ -57,6 +57,14 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
       }
     });
   };
+  
+  this.removeImg = (product) => {
+    Products.update(this.product._id, {$unset: {img: 1}}, function(error) {
+      if (error) {
+        console.warn(error);
+      }
+    });
+  };
 
   ;
 });
