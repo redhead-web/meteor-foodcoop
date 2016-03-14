@@ -4,9 +4,7 @@ Meteor.methods
     
     user = Meteor.user();
     items = Cart.Items.find(userId: @userId).fetch();
-    total = _.reduce items, ((total, item) ->
-      total + item.details.price * ((Meteor.settings.public.markup / 100) + 1) * item.qty
-    ), 0
+    total = Markup(items).cartTotal()
     
     
     if Roles.userIsInRole(@userId, 'allowNegativeBalance') or user.profile.balance > total

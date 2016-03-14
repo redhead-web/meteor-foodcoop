@@ -73,7 +73,7 @@
             {{item.details.producerCompanyName || item.details.producerName}}
           </td>
           <td>
-            {{item.details.price * cart.markup | currency}}
+            {{cart.priceWithMarkup(item) | currency}}
           </td>
           <td>
             <md-input-container class="input-table">
@@ -81,7 +81,7 @@
             </md-input-container>
           </td>
           <td>
-            {{item.details.price * item.qty * cart.markup | currency}}
+            {{cart.totalWithMarkup(item) | currency}}
           </td>
           <td>
             <md-button class="md-icon-button" aria-label="More" ng-click="cart.removeFromCart(item._id)">

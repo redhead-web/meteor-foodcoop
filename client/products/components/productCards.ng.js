@@ -73,6 +73,5 @@ angular.module('food-coop').component('productCards', {
   bindings: {
     query: '<',
     options: '<',
-    markup: '<'
   }
 })

@@ -60,13 +60,13 @@
           {{i.productName}}
         </td>
         <td>
-          {{i.price * markup | currency}}
+          {{priceWithMarkup(i) | currency}}
         </td>
         <td>
           {{i.qty}}
         </td>
         <td>
-          {{i.qty * i.price * markup | currency}}
+          {{totalWithMarkup(i) | currency}}
         </td>
       </tr>
     </table>

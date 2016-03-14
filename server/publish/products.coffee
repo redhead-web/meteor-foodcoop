@@ -58,3 +58,6 @@ Meteor.publish "all-products", ->
       price: 1
       unitOfMeasure: 1
       'img.result': 1
+      stocklevel: 1
+      producerCompanyName: 1
+      producerName: 1

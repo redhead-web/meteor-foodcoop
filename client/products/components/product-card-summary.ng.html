@@ -1,0 +1,30 @@
+<md-card>
+	<md-card-title>
+		<md-card-title-text>
+			<span class="md-headline">{{card.product.name}}</span>
+      <span class="md-subhead">{{card.product.price | currency}} / {{card.product.unitOfMeasure}}</span>
+      <span class="md-subhead">{{card.product.producerCompanyName || card.product.producerName}}</span>
+		</md-card-title-text>
+    <md-card-title-media>
+      <div class="md-media-md card-media">
+        <cl-image public-id="{{card.product.img.result}}" class="md-avatar">
+          <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
+        </cl-image>
+      </div>
+    </md-card-title-media>
+	</md-card-title>
+  <md-card-content>
+    <md-input-container>
+      <label>Stock Level</label>
+      <input ng-model="card.product.stocklevel" type="number" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="card.save()">
+    </md-input-container>
+  </md-card-content>
+	<md-card-actions layout="row" layout-align="end center">
+		<md-switch class="md-primary md-block" ng-model="card.product.published" ng-change="card.save()">
+			<span ng-show="card.product.published">For Sale</span><span ng-hide="card.product.published">Not For Sale</span>
+		</md-switch>
+    <md-button class="md-icon-button" ui-sref="productDetails({productId: card.product._id})" aria-label="edit product">
+      <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+    </md-button>
+	</md-card-actions>
+</md-card>

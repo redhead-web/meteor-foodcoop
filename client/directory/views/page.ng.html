@@ -313,7 +313,7 @@
       <md-card-title ng-repeat="product in ctrl.products">
         <md-card-title-text>
           <span class="md-headline">{{product.name}}</span>
-          <span class="md-subhead">{{product.price * ctrl.markup | currency}} / {{product.unitOfMeasure}}</span>
+          <span class="md-subhead">{{ctrl.priceWithMarkup(product)| currency}} / {{product.unitOfMeasure}}</span>
         </md-card-title-text>
         <md-card-title-media>
           <cl-image public-id="{{product.img.result}}"  class="md-media-sm card-media img-circle">

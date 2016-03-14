@@ -9,8 +9,10 @@ angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDial
   $scope.subscribe('myPurchases', () => {
     return [$scope.getReactively('deliveryDay')]
   })
-
-  $scope.markup = Meteor.settings.public.markup / 100 +1;
+  
+  $scope.totalWithMarkup = (sale) => Markup(sale).saleTotal();
+  $scope.priceWithMarkup = (sale) => Markup(sale).total();
+  
 
   $scope.helpers({
     orders: () => Sales.find()
@@ -20,7 +22,7 @@ angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDial
 
   $scope.backward = backward;
 
-  $scope.total = total;
+  $scope.total = (array) => Markup(array).saleTotal();
 
   $scope.deliveryWording = '';
 
@@ -32,12 +34,6 @@ angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDial
       return $scope.deliveryWording = ""
     }
   })
-
-  function total(array) {
-    return _.reduce(array, function(total, order) {
-      return total + (order.price * order.qty * $scope.markup);
-    }, 0)
-  }
 
   function forward() {
     $scope.deliveryDay = moment( $scope.deliveryDay ).add(1, 'weeks').format();

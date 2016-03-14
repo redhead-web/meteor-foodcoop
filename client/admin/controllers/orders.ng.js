@@ -11,22 +11,15 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   });
 
   this.helpers({
-    sales: () => Sales.find(),
-    customers() {
-      return _.countBy(Sales.find().fetch(), function(sale) {return sale.customerName})
-    },
-    producers() {
-      return _.countBy(Sales.find().fetch(), function(sale) {return sale.producerName})
-    }
+    sales: () => Sales.find()
   });
-
-  // this.customers = _.countBy(this.sales, function(sale) {return sale.customerName});
-  // this.producers = _.countBy(this.sales, function(sale) {return sale.producerName});
-
-  // this.autorun(() => {
-  //   this.customers =
-  //   this.producers = _.countBy(this.sales, function(sale) {return sale.producerName})
-  // });
+  
+  this.autorun(() => {
+    let sales = Sales.find().fetch();    
+    this.customers = _.countBy(sales, function(sale) {return sale.customerName})
+    
+    this.producers = _.countBy(sales, function(sale) {return sale.producerName})
+  });
 
   this.user = (query) => {
       return Meteor.users.findOne(query);
@@ -80,16 +73,16 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   }
 
   function total(array, markup) {
-    var mk = markup ? Meteor.settings.public.markup / 100 + 1 : 1
+    if (markup) {
+      return Markup(array).saleTotal()
+    }
+    
     return _.reduce(array, function(total, sale) {
       if (sale.status !== 'cancelled' && sale.status !== 'refunded') {
-        return total + (sale.price * sale.qty * mk)
+        return total + (sale.price * sale.qty)
       }
       return total;
     }, 0)
   }
-
-  
-
 
 });

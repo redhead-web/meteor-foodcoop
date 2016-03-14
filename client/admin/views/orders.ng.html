@@ -19,25 +19,19 @@
     </figcaption>
   </figure>
 </section>
-<section layout="row" layout-align="center center" layout-wrap layout-padding>
-  <md-list flex=50>
+<section layout="row" layout-align="center center" layout-margin>
+  <md-list flex="50" md-whiteframe="1dp">
     <md-subheader class="md-no-sticky">Customers</md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="(customer, saleCount) in orders.customers" 
     ng-click="orders.searchstring = {customerName: customer}">
-      <cl-image public-id="{{orders.user({'profile.name':customer}).profile.personalPic.result}}" class="md-avatar" >
-        <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
-      </cl-image>
       <p>{{customer}}</p>
       <p class="md-secondary">{{saleCount}}</p>
     </md-list-item>
   </md-list>
-  <md-list flex=50>
+  <md-list flex='50' md-whiteframe="1dp">
     <md-subheader class="md-no-sticky">Producers</md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="(producer, saleCount) in orders.producers"
      ng-click="orders.searchstring = {producerName: producer}">
-      <cl-image public-id="{{orders.user({'profile.name':producer}).profile.personalPic.result}}" class="md-avatar" >
-        <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
-      </cl-image>
       <p>{{producer}}</p>
       <p class="md-secondary">{{saleCount}}</p>
     </md-list-item>

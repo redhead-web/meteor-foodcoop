@@ -7,12 +7,8 @@ angular.module("food-coop").controller("MyProductsCtrl", function($scope, $mdDia
 		}
 	});
   
-  $scope.save = function (product) {
-    Products.update(product._id, {
-      $set: {
-        published: product.published
-      }
-    });
+  $scope.save = function (product, modifier) {
+    Products.update(product._id, modifier)
   };
   
 });

@@ -5,9 +5,10 @@ angular.module('food-coop').controller 'ProductsAdminCtrl', ($scope, $mdToast) -
   $scope.helpers
     products: () => return Products.find()
     
-  $scope.save = (product) ->
-    Products.update product._id, 
-      $set: published: product.published
+  $scope.save = (product, modifier) ->
+    console.log product._id, modifier.toString()
+    Products.update product._id, modifier
+          
 
   return
 

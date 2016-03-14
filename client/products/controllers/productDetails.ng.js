@@ -1,7 +1,7 @@
 angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $reactive){
   $reactive(this).attach($scope);
 
-  this.markup = Meteor.settings.public.markup/100 + 1;
+  this.priceWithMarkup =  (product) => Markup(product).total();
 
   this.edit = {
     name: false,

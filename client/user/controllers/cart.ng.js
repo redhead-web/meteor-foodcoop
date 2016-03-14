@@ -6,22 +6,19 @@ function UserCartCtrl ($scope, $reactive, $mdToast) {
   
   var vm = this;
 
-  vm.nextDeliveryDay = moment( GetDeliveryDay() ).format()
-  vm.markup = Meteor.settings.public.markup / 100 + 1;
+  vm.nextDeliveryDay = moment( GetDeliveryDay() ).format();
+  vm.priceWithMarkup = (item) => Markup(item).total();
+  vm.totalWithMarkup = (item) => Markup(item).cartTotal();
     
   vm.helpers({
     items() {
-      console.log("cart items helper started")
       return Cart.Items.find()
     }
   })
   
   vm.autorun(() => {
-    console.log('cart autorun started')
     let cartItems = Cart.Items.find().fetch()
-    vm.total = _.reduce(cartItems, (total, item) => {
-      return total + (item.details.price * vm.markup * item.qty)
-    }, 0)
+    vm.total = Markup(cartItems).cartTotal()
     vm.cartLength = Cart.Items.find().count()
   });
 

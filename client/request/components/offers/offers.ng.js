@@ -4,7 +4,7 @@ function OffersCtrl($scope, $reactive) {
   
   var vm = this;
   
-  vm.markup = _.round( Meteor.settings.public.markup / 100, 2)
+  vm.markup = Meteor.settings.public.markup;
   
   vm.offers = [
     {

@@ -91,7 +91,8 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
         return
 
 
-  vm.markup = Meteor.settings.public.markup / 100 + 1;
+  vm.priceWithmarkup = (product) ->
+    return Markup(product).total()
   
   vm.modelOptions = updateOn: 'default blur', debounce: { default: 200, blur: 0 }
   

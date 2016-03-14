@@ -62,6 +62,7 @@ Meteor.methods
 					minimumOrder: product.minimumOrder or undefined
 					packagingRefund: product.packagingRefund or 0
 					packagingDescription: product.packagingDescription or undefined
+					extraMarkup: product.extraMarkup or undefined
 
 		Meteor.users.update @userId,
 			$set:
