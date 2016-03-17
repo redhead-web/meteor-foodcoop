@@ -1,5 +1,5 @@
 Products.after.update (userId, doc, fieldNames, modifier, options) ->
-  if doc.stocklevel <= 0
+  if doc.stocklevel? and doc.stocklevel <= 0 and @previous.stocklevel > 0
     if Meteor.isServer
       user = Meteor.users.findOne(doc.producer)
       
