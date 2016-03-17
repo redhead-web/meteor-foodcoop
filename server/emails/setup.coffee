@@ -48,7 +48,7 @@ Meteor.startup ->
       companyName: "Whangarei Food Co-op"
       bankAccount: Meteor.settings.public.bankAccount
       rootUrl: () ->
-        return process.ROOT_URL || "http://localhost:3000"
+        return process.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
       deliveryDay: () ->
         day = GetDeliveryDay()
