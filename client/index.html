@@ -127,7 +127,7 @@
         </md-list-item>
         <md-list-item ng-click="nav.goTo('directory'); nav.toggleRight()">
           <md-icon md-svg-icon="social:ic_people_24px"></md-icon>
-          <p> Our Producers </p>
+          <p> Producer Directory </p>
         </md-list-item>
         <md-list-item ng-click="nav.goTo('about'); nav.toggleRight()">
           <md-icon md-svg-icon="action:ic_info_24px"></md-icon>
@@ -152,7 +152,7 @@
 
 
   <div ui-view flex>
-    <div layout layout-align="center center">
+    <div layout="rows" layout-align="center center">
       <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
     </div>
   </div>

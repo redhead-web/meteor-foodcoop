@@ -24,15 +24,6 @@
       <input type="text" ng-model="user.profile.name"
              placeholder="name" aria-label="name"/>
     </md-input-container>
-    
-    <md-input-container>
-      <md-icon md-svg-icon="communication:ic_email_24px" class="md-accent"></md-icon>
-      <input type="text" ng-model="email"
-             placeholder="email address" aria-label="name"/>
-    </md-input-container>
-    
-    <p ng-if="user.services.facebook.id">Signed up through Facebook</p>
-    
 
     <md-input-container>
       <md-icon md-svg-icon="communication:ic_chat_24px" class="md-accent" aria-label="phone number"></md-icon>
@@ -45,7 +36,7 @@
       <input type="text" ng-model="user.profile.address"
              placeholder="home address" aria-label="address"/>
     </md-input-container> -->
-    <p ng-if="user.profile.deliveryAddress.formattedAddress">Formatted Address from import: {{user.profile.deliveryAddress.formattedAddress}}</p>
+
     <md-input-container>
       <md-icon md-svg-icon="maps:ic_local_shipping_24px" class="md-accent"></md-icon>
       <input type="text" ng-model="user.profile.deliveryAddress"
@@ -58,14 +49,8 @@
       <input type="text" ng-model="user.profile.gst"
         placeholder="GST Number (if registered)"/>
     </md-input-container>
-    
-    <md-input-container>
-      <md-icon md-svg-icon="action:ic_assignment_24px" class="md-accent"></md-icon>
-      <input type="text" ng-model="user.profile.bankAccount"
-        placeholder="bank Account Number (for sales)"/>
-    </md-input-container>
 
-    <md-checkbox ng-model="producer" ng-change="changeRole()" aria-label="producer role">
+    <md-checkbox ng-model="producer" aria-label="producer role">
         Is {{user.profile.name}} a producer?
     </md-checkbox>
 

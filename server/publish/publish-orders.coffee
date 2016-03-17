@@ -1,3 +1,9 @@
+# Meteor.publish 'mySubscriptions', ->
+#   Subscriptions.find({user: this.userId}, {transactionId: 0})
+#
+# Meteor.publish 'myAutomaticPaymentSubscriptions', ->
+#   Subscriptions.find({user:this.userId, ap:true})
+
 Meteor.publish "myOrders", ->
 
   Counts.publish this, 'total', Orders.find({user: this.userId}, {fields: _id:1, transactionTotal:1}),
@@ -15,6 +21,13 @@ Meteor.publish "myPurchases", (deliveryDay) ->
     customerId: this.userId
   ,
     fields: dateCreated: 1, price: 1, productName: 1, qty: 1, productId: 1, producerId: 1, packagingRefund:1, extraMarkup: 1
+
+Meteor.publish "users", ->
+
+  Meteor.users.find {},
+    fields: 'profile.name':1
+
+
 
 Meteor.publish "mySales", (deliveryDay) ->
   check deliveryDay, String

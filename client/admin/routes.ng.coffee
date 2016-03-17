@@ -54,6 +54,8 @@ angular.module('food-coop').config ($stateProvider) ->
     resolve:
       'admin': ($auth) ->
         $auth.requireValidUser isAdmin
+      'order': ($auth, $stateParams) ->
+        $auth.subscribe 'order', $stateParams.orderId
   return
 
 # ---

@@ -18,12 +18,12 @@ Meteor.publish "producer", (producer) ->
       'profile.website': 1
       'profile.chemicals': 1
       'profile.certification': 1
-      'profile.balance': 1
       
-Meteor.publish "list-of-producers", ->
+Meteor.publish "producers", ->
   
   Meteor.users.find roles: 'producer',
     fields: 
+      'emails':1
       'profile.companyName': 1
       'profile.name': 1
       'profile.logo': 1

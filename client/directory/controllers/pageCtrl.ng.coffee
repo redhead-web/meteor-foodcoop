@@ -1,52 +1,35 @@
-  
-
-
-angular.module('food-coop').component('directoryPage', {
-  templateUrl: 'client/directory/views/page.ng.html',
-  controller: 'pageCtrl',
-  controllerAs: 'ctrl',
-})
-
-
 angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $stateParams, uiGmapGoogleMapApi, $mdToast, $window, $timeout) ->
   
   $reactive(this).attach($scope)
   vm = this;
   
-  vm.subscribe 'producer', -> 
-    [$stateParams.producerId]
-  , 
-    onReady: ->
-      console.log "subscribed to producer"
-    onStop: ->
-      console.log "stopped subscribing to producer"
-  
-  vm.subscribe 'active-products', -> [{producer: $stateParams.producerId}, -1, {name: 1}]
+  vm.subscribe 'producer', -> [$stateParams.producerId]
 
   vm.helpers
     likesCount: ->
       Likes.find(likee: $stateParams.producerId)
+    producer: ->
+      Meteor.users.findOne $stateParams.producerId
     products: ->
-      Products.find({}, {sort: name: 1})
+      producer = Meteor.users.findOne($stateParams.producerId)
+      if producer?
+        Products.find
+          producer: producer._id
+          published: true
+        ,
+          sort: name:1
+          limit: 4
         
-  
-  vm.autorun ->
-    vm.producer = Meteor.users.findOne $stateParams.producerId
-    return
-  
   vm.autorun ->
     vm.isOwner = Meteor.userId()? and (Meteor.userId() == $stateParams.producerId || Roles.userIsInRole(Meteor.userId(), 'admin') )
-    return
   
   vm.autorun ->
     if Meteor.user()
       list = Meteor.user().profile.lovedProducers or []
       if Meteor.users.findOne($stateParams.producerId._id) in list
         vm.lovesProducer = true
-        return
       else
-        vm.lovesProducer = false
-        return
+        vm.lovesProducer = false    
       
   
   vm.toggleLike = ->
@@ -108,7 +91,7 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
         return
 
 
-  vm.priceWithMarkup = (product) ->
+  vm.priceWithmarkup = (product) ->
     return Markup(product).total()
   
   vm.modelOptions = updateOn: 'default blur', debounce: { default: 200, blur: 0 }
@@ -116,16 +99,8 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
   _timer = null
   
   vm.save = (profile, data) ->
-    Meteor.users.update $stateParams.producerId,
-      $set: 
-        'profile.companyName': vm.producer.profile.companyName
-        'profile.summary': vm.producer.profile.summary
-        'profile.bio': vm.producer.profile.bio
-        'profile.shareAddress': vm.producer.profile.shareAddress
-        'profile.logo': vm.producer.profile.logo
-        'profile.banner': vm.producer.profile.banner
-        'profile.website': vm.producer.profile.website
-        'profile.chemicals': vm.producer.profile.chemicals
+    Meteor.users.update Meteor.userId(),
+      $set: profile: profile
     , (err, result) ->
       if err
         console.error err

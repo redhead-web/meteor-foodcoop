@@ -1,7 +1,4 @@
 <md-content layout="row" layout-align="start end" layout-wrap>
-<div layout layout-align="center center" ng-if="!$ctrl.products">
-  <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
-</div>
 <div ng-repeat="product in $ctrl.products | limitTo: $ctrl.limit track by product._id" 
 	flex="25" flex-sm="33" flex-xs="50" class="product-card-container">
   <product-card product="product"></product-card>

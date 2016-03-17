@@ -1,4 +1,4 @@
-angular.module("food-coop").controller("UserSalesCtrl", function($scope, $mdDialog){
+angular.module("food-coop").controller("UserSalesCtrl", function($scope, $mdDialog, $meteor){
   var products, counts;
   
   
@@ -7,14 +7,19 @@ angular.module("food-coop").controller("UserSalesCtrl", function($scope, $mdDial
   } else {
     $scope.deliveryDay = moment( GetDeliveryDay() ).format();
   }
-  
-  $scope.subscribe('mySales', () => [$scope.getReactively('deliveryDay')])
 
-  $scope.helpers({
-    sales() {
-      return Sales.find()
-    }
-  })
+  $meteor.autorun($scope, function() {
+    $meteor.subscribe('mySales', $scope.getReactively('deliveryDay'))
+  });
+
+  $scope.$meteorSubscribe('users').then(function() {
+    $scope.user = function (sale) { return $meteor.object(Meteor.users, sale.customer, false); };
+  });
+
+  // $scope.product = function (product) { return $meteor.object(Products, product, false); };
+
+  $scope.sales = $scope.$meteorCollection(Sales);
+
 
   $scope.occurrences = productsCount;
 

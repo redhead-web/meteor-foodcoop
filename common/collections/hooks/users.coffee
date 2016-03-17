@@ -5,6 +5,7 @@ Meteor.users.after.insert (userId, doc) ->
         if error
           console.log "error", error
         if result
-          console.log result
+          console.log result.fresh
+          console.log result.grocery
 
        

@@ -2,14 +2,16 @@ isAdmin = (user) ->
   Roles.userIsInRole user, 'admin'
 
 angular.module('food-coop').config ($stateProvider) ->
-  $stateProvider.state 'directory',
+  $stateProvider.state 'producer',
+    url: '/directory/:producerId'
+    templateUrl: 'client/directory/views/page.ng.html'
+    controller: 'pageCtrl'
+    controllerAs: 'ctrl'
+  .state 'directory',
     url: '/directory'
     templateUrl: 'client/directory/views/directory.ng.html'
     controllerAs: 'dir'
     controller: 'directoryCtrl'
-  .state 'producer',
-    url: '/directory/:producerId'
-    template: '<directory-page></directory-page>'
   return
 
 # ---

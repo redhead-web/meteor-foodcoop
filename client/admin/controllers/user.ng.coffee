@@ -1,29 +1,17 @@
 angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $meteor, $stateParams, $mdToast) ->
 
-  $scope.subscribe 'user', => 
-    [$stateParams.userId]
-    
-  $scope.autorun ->
-    $scope.user = Meteor.users.findOne($stateParams.userId)
-    if $scope.user
-      $scope.email = $scope.user.emails[0].address
-    if Roles.userIsInRole $stateParams.userId, 'producer'
-      $scope.producer = yes
-    else
-      $scope.producer = no
-    return
-    
+  $scope.subscribe 'user', => [$stateParams.userId]
 
- 
+  $scope.helpers
+    user: () => return Meteor.users.findOne($stateParams.userId),
+
+  if Roles.userIsInRole $stateParams.userId, 'producer'
+    $scope.producer = yes
+  else
+    $scope.producer = no
 
   $scope.validate = (isValid) ->
     if isValid
-      
-      if $scope.email != Meteor.users.findOne($stateParams.userId).emails[0].address
-        $scope.call 'addEmail', $scope.email, Meteor.users.findOne($stateParams.userId).emails[0].address, (err) ->
-          if err
-            console.log err
-      
       Meteor.users.update $scope.user._id,
         $set: 'profile' : $scope.user.profile
       , (err) ->
@@ -37,15 +25,16 @@ angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $meteor, $state
   $scope.success = ->
     $mdToast.show $mdToast.simple().content('Saved Successfully').position('bottom left').hideDelay(3000)
     return
-    
-  $scope.changeRole = ->
-    if $scope.producer == yes
+
+  $scope.$watch 'producer', (newValue, oldValue) ->
+    if newValue and $scope.user? and oldValue != undefined
       Meteor.call 'addRole', $scope.user._id, 'producer', () ->
         $mdToast.show $mdToast.simple().content('User is now a "Producer"').position('bottom left').hideDelay(3000)
       return
-    else if $scope.producer == no
+    else if not newValue and $scope.user? and oldValue != undefined
       Meteor.call 'removeRole', $scope.user._id, 'producer', () ->
         $mdToast.show $mdToast.simple().content('User is no longer a "Producer"').position('bottom left').hideDelay(3000)
+
     return
 
 
