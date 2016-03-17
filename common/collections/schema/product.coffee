@@ -44,7 +44,7 @@ Schema = new SimpleSchema
     optional:true
   'img.result': type: String, label: "cloudinary public_id"
   'img.url': type: String, label: "cloudinary url of image"
-  extraMarkup: type: Number, optional: true, , decimal: true, min: 0 # e.g. 0.1 adds another 10% markup
+  extraMarkup: type: Number, optional: true, decimal: true, min: 0 # e.g. 0.1 adds another 10% markup
   wholeSaleOnly:
     type: Boolean
     defaultValue: false

@@ -9,7 +9,7 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
   this.showGST = true;
   
   this.subscribe('categories');
-  this.subscribe('product-names');
+  this.subscribe('product-names-search');
   this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
 
   

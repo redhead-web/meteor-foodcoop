@@ -6,3 +6,5 @@ Meteor.methods
     
     Accounts.removeEmail @userId, oldEmail
     
+    return
+    

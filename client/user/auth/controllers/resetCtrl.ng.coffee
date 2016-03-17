@@ -19,6 +19,7 @@ angular.module('food-coop').controller 'ResetCtrl',
           $state.go 'store'
         return
       return
+    return
 
     
 
