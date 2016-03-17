@@ -172,15 +172,15 @@
       </md-card-header>
       <md-card-content>
         <md-list>
-          <md-list-item ng-click="call(ctrl.producer.profile.phone, $event)">
+          <md-list-item ng-href="tel:{{ctrl.producer.profile.phone}}">
             <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
             <p>{{ctrl.producer.profile.phone}}</p>
           </md-list-item>
-          <md-list-item ng-click="email(ctrl.producer.emails[0].address, $event)">
+          <md-list-item ng-href="mailto:{{ctrl.producer.emails[0].address}}">
             <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
             <p>{{ctrl.producer.emails[0].address}}</p>
           </md-list-item>
-          <md-list-item ng-click="url(ctrl.producer.profile.website, $event)" ng-if="ctrl.producer.profile.website || ctrl.isOwner">
+          <md-list-item ng-href="{{ctrl.producer.profile.website}}" target="_blank" ng-if="ctrl.producer.profile.website || ctrl.isOwner">
             <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
             <p>
               {{ctrl.producer.profile.website || 'your website goes here'}}
@@ -237,10 +237,11 @@
     Second Column
 -->
   <div layout-margin layout="column" flex="35" flex-sm="40" flex-xs="100">
-    <md-card ng-if="ctrl.producer">
+    <md-card ng-if="ctrl.producer.profile.name">
       <md-card-header>
         <md-card-avatar>
-          <multi-avatar user="ctrl.producer" width="40"></multi-avatar>
+          <!-- <multi-avatar user="ctrl.producer._id" width="40"></multi-avatar> -->
+          <ng-letter-avatar data="{{ctrl.producer.profile.name}}" width="40" height="40" font-Size="24" shape="round"></ng-letter-avatar>
         </md-card-avatar>
         <md-card-header-text>
           <span class="md-title">Personal Profile</span>
@@ -300,7 +301,7 @@
     </md-card>
 
     <!-- Products -->
-    <md-card>
+    <md-card class="repeating-products-card" ng-if="ctrl.products.length">
       <md-card-header>
         <md-card-avatar>
           <md-icon class="md-avatar-icon" md-svg-icon="action:ic_store_24px"></md-icon>
@@ -310,20 +311,32 @@
           <span class="md-subhead">From {{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</span>
         </md-card-header-text>
       </md-card-header>
-      <md-card-title ng-repeat="product in ctrl.products">
-        <md-card-title-text>
-          <span class="md-headline">{{product.name}}</span>
-          <span class="md-subhead">{{ctrl.priceWithMarkup(product)| currency}} / {{product.unitOfMeasure}}</span>
-        </md-card-title-text>
-        <md-card-title-media>
-          <cl-image public-id="{{product.img.result}}"  class="md-media-sm card-media img-circle">
-            <cl-transformation height="100" width="100" crop="fill" gravity="center"></cl-transformation>
-          </cl-image>
-        </md-card-title-media>
-      </md-card-title>
+      <md-virtual-repeat-container id="vertical-container">
+      
+        <md-list ng-controller="orderProductCtrl as shop">
+          <md-list-item class="md-2-line repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products"
+            ng-click="nav.goTo('product', {productId: product._id})"
+          >
+            <cl-image public-id="{{product.img.result}}" class="md-avatar">
+              <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
+            </cl-image>
+            <div class="md-list-item-text">
+              <h3>{{product.name}}</h3>
+              <p>{{ctrl.priceWithMarkup(product)| currency}} / {{product.unitOfMeasure}}</p>
+            </div>
+            <md-icon class="md-secondary" aria-label="shopping cart" ng-class="{
+              'md-hue-2 md-primary': product.stocklevel == null || product.stocklevel > 0
+            }"
+              ng-click="shop.addToCart($event, product, 1)"
+              md-svg-icon="{{ shop.alreadyInCart(product._id) }}"
+            >
+            </md-icon>
+          </md-list-item>
+        </md-list>
+      </md-virtual-repeat-container>
       <md-card-actions layout="row" layout-align="end center">
         <md-button ui-sref="store({producer: ctrl.producer._id})">
-          Shop Now
+          View in the Store
         </md-button>
       </md-card-actions>
     </md-card>

@@ -72,6 +72,7 @@ Meteor.startup ->
           Markup(this).saleTotal()
 
 
+
   # Mailer.send
   #   to: "nobody <nobody@nowhere.com"
   #   subject: "Collect your Order Today"

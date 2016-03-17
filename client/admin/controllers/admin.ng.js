@@ -5,11 +5,13 @@ angular.module("food-coop").controller("AdminCtrl", function($scope, $reactive) 
   this.subscribe('orderCount');
   this.subscribe('product-count');
 
-  this.subscribe('user-basics'); // makes names available in all admin pages
-
   this.helpers({
     userCount: () => Counts.get('userCount'),
     ordersCount: () => Counts.get('upcoming-ordersCount'),
-    productsCount: () => Counts.get('product-count')
   });
+  
+  this.autorun(()=> {
+    this.productsCount = Products.find().count()
+  });
+  
 });

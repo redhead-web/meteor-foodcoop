@@ -2,8 +2,27 @@ Meteor.publish "active-products", (query, limit, sort)->
   check query, Object
   check limit, Number
   check sort, Object
+  
+  options =
+   fields:
+     published: 1
+     name: 1
+     price: 1
+     unitOfMeasure: 1
+     stocklevel: 1
+     img: 1
+     producer: 1
+     producerName: 1
+     category: 1
+     minimumOrder: 1
+   limit: limit
+   sort: sort 
+  
   q = 
     published : true
+  
+  if query.producer
+    q.producer = query.producer
   
   if query.favourites or query.lastOrder
     favourites = _.pluck(Likes.find(
@@ -16,20 +35,13 @@ Meteor.publish "active-products", (query, limit, sort)->
       q._id = $in: favourites
     if query.lastOrder
       q._id = $in: lastOrder
-  Products.find q,
-    fields:
-      published: 1
-      name: 1
-      price: 1
-      unitOfMeasure: 1
-      stocklevel: 1
-      img: 1
-      producer: 1
-      producerName: 1
-      category: 1
-      minimumOrder: 1
-    limit: limit
-    sort: sort
+  
+  if limit == -1
+    delete options.limit
+    
+  
+  Products.find q, options
+    
     
 Meteor.publish "all-active-products", ()->
   Products.find
@@ -47,6 +59,11 @@ Meteor.publish "my-products", ->
 
 Meteor.publish "product-names", ->
   Products.find {},
+    fields: 
+      name: 1
+      
+Meteor.publish "product-names-search", ->
+  Products.find {published: true},
     fields: 
       name: 1
 
