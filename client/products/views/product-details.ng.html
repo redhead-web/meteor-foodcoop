@@ -9,7 +9,11 @@
   </div>
 </md-toolbar>
 
-<md-content layout="row" layout-padding layout-wrap>
+<div layout layout-align="center center" ng-if="!ctrl.product">
+  <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<md-content layout="row" layout-padding layout-wrap ng-if="ctrl.product">
 
   <md-content flex="50" flex-sm="40" flex-xs="100">
     <div class="img-wrapper" ng-controller="photoUploadCtrl">
@@ -54,6 +58,7 @@
     <md-switch
     class="md-primary md-block"
     ng-model="ctrl.product.published"
+    ng-change="ctrl.save()"
     ng-if="ctrl.isOwner"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
     <!-- <h2 class="md-headline"><a ui-sref="producer({producer: ctrl.product.producerId})"><md-icon md-svg-src="social:ic_person_24px" aria-label="producer"></md-icon> {{ctrl.product.producerCompanyName || ctrl.product.producerName}}</a></h2> -->
     <md-divider></md-divider>

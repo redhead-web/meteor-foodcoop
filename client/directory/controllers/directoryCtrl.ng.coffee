@@ -3,7 +3,7 @@ angular.module('food-coop').controller 'directoryCtrl', ($scope, $state, $reacti
   vm = this
   
   vm.subscribe('allLikes')
-  vm.subscribe('producers')
+  vm.subscribe('list-of-producers')
   
   vm.helpers
     producers: ->

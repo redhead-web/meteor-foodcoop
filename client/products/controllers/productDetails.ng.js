@@ -51,7 +51,7 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
 
   this.save = (product, data) => {
     
-    Products.update(this.product._id, {$set: this.product}, function(error) {
+    Products.update(this.product._id || $stateParams.productId, {$set: this.product}, function(error) {
       if (error) {
         console.warn(error);
       }

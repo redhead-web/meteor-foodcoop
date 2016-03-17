@@ -21,10 +21,6 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
     this.producers = _.countBy(sales, function(sale) {return sale.producerName})
   });
 
-  this.user = (query) => {
-      return Meteor.users.findOne(query);
-  };
-
   this.lastweek = () => {
     this.deliveryDay = moment(this.deliveryDay).subtract(1, 'weeks').format();
   };

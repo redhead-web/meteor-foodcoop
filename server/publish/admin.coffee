@@ -8,8 +8,7 @@ Meteor.publish 'orderCount', ->
   undefined
 
 Meteor.publish 'product-count', ->
-  Counts.publish this, 'product-count', Products.find()
-  undefined
+  Products.find {}, fields: _id: 1
 
 Meteor.publish 'order', (id) ->
   Orders.find _id:id
@@ -32,16 +31,23 @@ Meteor.publish "user-basics", () ->
         'profile.customerNumber': 1
         'profile.companyName': 1
         'profile.personalPic.result':1
+  else
+    @ready()
+    return
 
 Meteor.publish "user-list", (options, searchstring) ->
   unless searchstring?
     searchstring = ""
 
   options.fields =
-    profile:1,
     emails:1,
     roles: 1,
     createdAt: 1
+    'profile.name':1
+    'profile.customerNumber': 1
+    'profile.companyName': 1
+    'profile.phone':1
+    'profile.balance': 1
 
   if Roles.userIsInRole this.userId, 'admin'
 
@@ -57,9 +63,20 @@ Meteor.publish "user-list", (options, searchstring) ->
         '$options': 'i'
     , options
 
-Meteor.publish "user", (userId) ->
+Meteor.publish "user", (user) ->
 
-  if Roles.userIsInRole this.userId, 'admin'
+  if Roles.userIsInRole @userId, 'admin'
     Meteor.users.find
-      _id: userId
-    , {limit:1, fields: profile:1,emails:1, createdAt:1, roles:1}
+      _id: user
+    , 
+      limit:1
+      fields: 
+        emails:1
+        createdAt:1
+        roles:1
+        profile:1
+        'services.facebook.id':1
+  else
+    @ready()
+    return
+        

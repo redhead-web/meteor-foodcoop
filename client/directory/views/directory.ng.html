@@ -27,10 +27,10 @@
           <multi-avatar user="u" width="40" class="md-avatar"></multi-avatar>
           <div class="md-list-item-text" md-menu-origin>
             <h3>{{u.profile.name}}</h3>
-            <p>{{u.profile.deliveryAddress.formatted_address}}</p>
+            <p>{{u.profile.deliveryAddress.formatted_address || u.profile.deliveryAddress.formattedAddress}}</p>
             <p>Member since {{ u.createdAt | date:'mediumDate' }}</p>
           </div>
-          <like-heart ng-click="null" class="md-secondary" target-id="u._id" category="producer" like-text="Clap clap! Thanks for endorsing {{u.profile.name}}" unlike-text="you are no longer endorsing this producer"></like-heart>
+          <like-heart ng-click="null" class="md-secondary" target-id="u._id" category="producer" like-text="Clap clap! Thanks for endorsing {{u.profile.name}}" unlike-text="you are no longer endorsing this producer" aria-label="like producer"></like-heart>
         </md-list-item>
       </md-list>
     </md-content>
