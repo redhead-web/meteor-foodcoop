@@ -5,7 +5,7 @@ angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $meteor, $state
     
   $scope.autorun ->
     $scope.user = Meteor.users.findOne($stateParams.userId)
-    if $scope.user
+    if $scope.user && $scope.user.emails? && $scope.user.emails.length > 0
       $scope.email = $scope.user.emails[0].address
     if Roles.userIsInRole $stateParams.userId, 'producer'
       $scope.producer = yes
@@ -14,12 +14,10 @@ angular.module('food-coop').controller 'UserAdminCtrl', ($scope, $meteor, $state
     return
     
 
- 
-
   $scope.validate = (isValid) ->
     if isValid
       
-      if $scope.email != Meteor.users.findOne($stateParams.userId).emails[0].address
+      if Meteor.users.findOne($stateParams.userId).emails == null or $scope.email != Meteor.users.findOne($stateParams.userId).emails[0].address
         $scope.call 'addEmail', $scope.email, Meteor.users.findOne($stateParams.userId).emails[0].address, (err) ->
           if err
             console.log err

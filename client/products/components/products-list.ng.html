@@ -5,24 +5,18 @@
 </md-tabs>
 <md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-    <form ng-submit="$event.preventDefault()">
+    <form ng-submit="nav.goTo('productDetails', {productId: store.search._id})">
       <md-autocomplete
           md-no-cache="false"
           md-selected-item="store.search"
-          md-search-text-change="store.searchTextChange(searchText)"
-          md-search-text="store.searchText"
-          md-selected-item-change="store.selectedItemChange(item)"
-          md-items="item in store.querySearch(store.searchText)"
+          md-search-text="store.query.filter"
+          md-items="item in store.querySearch(store.query.filter)"
           md-item-text="item.name"
-          md-min-length="0"
+          md-min-length="1"
           placeholder="Search">
         <md-item-template>
           <span md-highlight-text="store.searchText" md-highlight-flags="^i">{{item.name}}</span>
         </md-item-template>
-        <md-not-found>
-          No products called "{{searchText}}" were found.
-          <!-- <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a> -->
-        </md-not-found>
       </md-autocomplete>
     </form>
     <div layout="row" layout-align="center center" ng-if="store.producer">
@@ -55,16 +49,21 @@
               Price highest-lowest
             </md-button>
           </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="store.options.sort = {'producerName': 1, 'name':1}">
+              Producer
+            </md-button>
+          </md-menu-item>
         </md-menu-content>
       </md-menu>
     </md-menu-bar>
     <!-- <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="$auth.currentUser">
       <span class="md-body-1">Show Only Favourites</span>
     </md-switch> -->
-		<md-button class="md-icon-button" ng-class="{'md-warn': store.query.favourites}" ng-click="store.query.favourites = !store.query.favourites" aria-label="Favorite">
+		<md-button class="md-icon-button" ng-class="{'md-warn': store.query.favourites}" ng-click="store.query.favourites = !store.query.favourites" aria-label="Show My Favourites">
 			<md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-class="{'md-primary': store.query.lastOrder}" ng-click="store.query.lastOrder = !store.query.lastOrder" aria-label="Favorite">
+		<md-button class="md-icon-button" ng-class="{'md-primary': store.query.lastOrder}" ng-click="store.query.lastOrder = !store.query.lastOrder" aria-label="Show My Last Order">
 			<md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
 		</md-button>
     <!-- <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="$auth.currentUser">

@@ -1,12 +1,13 @@
-angular.module('food-coop').controller 'ProductsAdminCtrl', ($scope, $mdToast) ->
+angular.module('food-coop').controller 'ProductsAdminCtrl', ($scope, $mdToast, $reactive) ->
+  $reactive(this).attach($scope)
+  @subscribe 'all-products'
   
-  $scope.subscribe 'all-products'
+  @sort = name: 1
   
-  $scope.helpers
-    products: () => return Products.find()
+  @helpers
+    products: () => return Products.find {}, {sort: @getReactively('sort') }
     
-  $scope.save = (product, modifier) ->
-    console.log product._id, modifier.toString()
+  @save = (product, modifier) ->
     Products.update product._id, modifier
           
 

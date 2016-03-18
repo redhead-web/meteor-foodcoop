@@ -17,7 +17,10 @@
 
   <md-content flex="50" flex-sm="40" flex-xs="100">
     <div class="img-wrapper" ng-controller="photoUploadCtrl">
-      <img ng-if="!!ctrl.product.img" ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
+      <cl-image flex="100" ng-if="ctrl.product.img.result" public-id="{{ctrl.product.img.result}}" ng-class="{'greyscale': ctrl.product.stocklevel != null && ctrl.product.stocklevel <= 0}">
+        <cl-transformation width="800" crop="fill" gravity="center"></cl-transformation>
+      </cl-image>
+      <img ng-if="ctrl.product.img && !ctrl.product.img.result" ngf-src="ctrl.product.img" flex="100">
       <md-button
         ng-if="!!ctrl.product.img && ctrl.isOwner"
         class="md-icon-button image-replace"
@@ -165,7 +168,19 @@
         <p>{{ctrl.product.category}}</p>
       </md-list-item>
     </md-list> -->
+    <section>
+      
+    </section>
     <md-divider ng-if="ctrl.product.description"></md-divider>
+      <md-chips 
+        ng-model="ctrl.product.ingredients"
+        readonly="!ctrl.isOwner"
+        placeholder="Enter ingredients"
+        md-separator-keys="ctrl.keys"
+        delete-button-label="Remove Ingredient"
+        delete-hint="Press delete to remove ingredient"
+        secondary-placeholder="+Ingredient"
+      ></md-chips>
     <md-content ng-if="ctrl.product.description || ctrl.isOwner">
         <md-button
           ng-if="ctrl.isOwner"

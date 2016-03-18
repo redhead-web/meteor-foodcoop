@@ -17,7 +17,8 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
   
   this.query = {
     category: $stateParams.category,
-    producer: $stateParams.producer
+    producer: $stateParams.producer,
+    filter: ''
   };
   
 
@@ -35,8 +36,6 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
   };
 
   this.querySearch   = querySearch;
-  this.selectedItemChange = selectedItemChange;
-  this.searchTextChange   = searchTextChange;
   
   this.autorun( () => {
     if (this.stateParams.category) {
@@ -46,17 +45,11 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
     }
   })
   
-  
   function querySearch (query) {
-    var results = query ? this.products.filter( createFilterFor(query) ) : this.products;
+    var results = query ? this.products.filter( createFilterFor(query) ) : '';
     return results;
   }
-  function searchTextChange(text) {
-    console.log('Text changed to ' + text);
-  }
-  function selectedItemChange(item) {
-    $state.go('productDetails', {productId: item._id})
-  }
+  
   function createFilterFor(query) {
     var lowercaseQuery = angular.lowercase(query);
     return function filterFn(product) {
