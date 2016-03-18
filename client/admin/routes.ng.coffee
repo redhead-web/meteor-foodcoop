@@ -14,6 +14,7 @@ angular.module('food-coop').config ($stateProvider) ->
     url: '/products'
     templateUrl: 'client/admin/views/products.ng.html'
     controller: 'ProductsAdminCtrl'
+    controllerAs: 'ctrl'
   ).state('admin.users',
     url: '/users'
     templateUrl: 'client/admin/views/users.ng.html'

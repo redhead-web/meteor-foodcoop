@@ -1,5 +1,7 @@
-angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $reactive){
+angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $stateParams, $mdConstant, $reactive){
   $reactive(this).attach($scope);
+  
+  this.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
   this.priceWithMarkup =  (product) => Markup(product).total();
 
@@ -51,9 +53,11 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
 
   this.save = (product, data) => {
     
-    Products.update(this.product._id || $stateParams.productId, {$set: this.product}, function(error) {
+    Products.update(this.product._id || $stateParams.productId, {$set: this.product}, function(error, num) {
       if (error) {
         console.warn(error);
+      } else if (num != 1) {
+        console.log('no product updated')
       }
     });
   };
@@ -65,4 +69,21 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
       }
     });
   };
+  
+  $scope.$watchCollection(()=> {
+    if (this.product && this.product.ingredients) {
+      return this.product.ingredients
+    }
+  }, (nv, ov) => {
+    if (this.isOwner) {
+      Products.update(this.product._id, {$set: {ingredients: nv}}, function(error, num) {
+        if (error) {
+          console.warn(error)
+        } else if (num != 1) {
+          console.log('no product updated')
+        }
+      })
+    }
+  })
+  
 });

@@ -101,7 +101,7 @@
               class="md-icon-button md-accent" aria-label="edit company name">
               <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
             </md-button>
-            {{ctrl.producer.profile.companyName}}
+            <span ng-if="!ctrl.producer.profile.companyName && ctrl.isOwner">Company Name</span>{{ctrl.producer.profile.companyName}}
           </span>
         </md-card-title-text>
       </md-card-title>
@@ -184,13 +184,13 @@
             <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
             <p>
               {{ctrl.producer.profile.website || 'your website goes here'}}
-              <md-button
-                ng-if="ctrl.isOwner"
-                ng-click="ctrl.edit.website = !ctrl.edit.website"
-                class="md-icon-button md-accent" aria-label="edit website">
-                <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
-              </md-button>
             </p>
+            <md-button
+              ng-if="ctrl.isOwner"
+              ng-click="ctrl.edit.website = !ctrl.edit.website"
+              class="md-icon-button md-accent md-secondary" aria-label="edit website">
+              <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+            </md-button>
           </md-list-item>
         </md-list>
 
