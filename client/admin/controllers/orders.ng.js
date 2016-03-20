@@ -33,9 +33,17 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   this.goTo = goTo;
 
   this.total = total;
+  
+  this.move = move;
 
   function status (sale, status) {
     Sales.update(sale._id, {$set: {'status': status} });
+  }
+  
+  function move (sale, week) {
+    Sales.update(sale._id, {$set: {
+      'deliveryDay': moment(sale.deliveryDay).add(week, 'weeks').toDate()
+    }})
   }
 
   // function search (order) {

@@ -39,14 +39,30 @@
       <small>{{ ctrl.error }}</small>
     </div>
     <form layout="column" layout-margin name="productUploadForm">
-      <md-input-container ng-if="hasRole(currentUser, 'admin')">
-        <label>Producer ID</label>
-        <input ng-model="ctrl.product.producer" required name="producer" md-maxlength="60">
-        <div ng-messages="productUploadForm.producer.$error" ng-if="productUploadForm.producer.$touched">
-          <div ng-message="required">A producer is required.</div>
-          <div ng-message="maxlength">Please use a shorter name.</div>
-        </div>
-      </md-input-container>
+      <div layout="row" ng-if="hasRole(currentUser, 'admin')">
+        <md-autocomplete flex required md-input-name="producer" placeholder="Producer" 
+        md-search-text="ctrl.producerSearch"
+        md-select-on-match="true"
+        md-selected-item="ctrl.producer"
+        md-item-text="item.profile.name"
+        md-selected-item-change="ctrl.selectedItemChange(ctrl.producer)"
+        md-items="item in ctrl.getProducers(ctrl.producerSearch)"
+        >
+          <md-item-template>
+            <span class="item-title">
+              <span> {{item.profile.name}} </span>
+            </span>
+            <span class="item-metadata">
+              <span class="item-metastat">
+                <strong>{{item.profile.companyName}}</strong>
+              </span>
+              <span class="item-metastat">
+                <i>{{item._id}}</i>
+              </span>
+            </span>
+          </md-item-template>
+        </md-autocomplete>
+      </div>
       <md-input-container>
         <label>Product Name</label>
         <input ng-model="ctrl.product.name" required name="productName" md-maxlength="100">
@@ -60,7 +76,7 @@
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
           <input ng-model="ctrl.priceWithMarkup" type="number" min="0" step="0.01" placeholder="Price With Markup" name="price"
-            ng-change="ctrl.round('price', ctrl.priceWithMarkup * (1-ctrl.markup), 'priceWithMarkup')"
+            ng-change="ctrl.round('price', ctrl.priceWithMarkup / ctrl.markup, 'priceWithMarkup')"
           >
           <div ng-messages="productUploadForm.price.$error" ng-if="productUploadForm.price.$touched">
             <div ng-message="required">A product price is required.</div>
@@ -72,7 +88,7 @@
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
           <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="You earn" name="earn"
-            ng-change="ctrl.round('priceWithMarkup', ctrl.product.price * (1+ctrl.markup), 'price')"
+            ng-change="ctrl.round('priceWithMarkup', ctrl.product.price * ctrl.markup, 'price')"
             required
           >
           <div ng-messages="productUploadForm.earn.$error" ng-if="productUploadForm.earn.$touched">

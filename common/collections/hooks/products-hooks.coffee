@@ -1,11 +1,3 @@
-Products.before.insert (userId, doc) ->
-  if doc.producer != userId
-    if Meteor.isServer
-      user = Meteor.users.findOne doc.producer
-      doc.producerName = user.profile.name
-      doc.producerCompanyName = user.profile.companyName || undefined
-
-
 Products.after.update (userId, doc, fieldNames, modifier, options) ->
   if doc.stocklevel? and doc.stocklevel <= 0 and @previous.stocklevel > 0
     if Meteor.isServer

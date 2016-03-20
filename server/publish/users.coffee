@@ -4,6 +4,7 @@ Meteor.publish 'currentUser', ->
       fields: 
         emails: 1 
         'services.facebook.id':1
+        'services.facebook.email': 1
   else
     @ready()
     return

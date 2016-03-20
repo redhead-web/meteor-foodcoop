@@ -5,6 +5,7 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 	
 	vm.subscribe('certifications');
 	vm.subscribe('categories');
+  vm.subscribe('list-of-producers');
 	
 	vm.helpers({
 		categories() {
@@ -12,10 +13,13 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 		},
 		certifications() {
 			return Certifications.find()
-		}
+		},
+    producers() {
+      return Meteor.users.find()
+    }
 	})
   
-  vm.markup = Meteor.settings.public.markup - 1;
+  vm.markup = Meteor.settings.public.markup;
     
   vm.product = {
     producer: Meteor.userId(),
@@ -41,6 +45,26 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
   vm.save = save;
   
   vm.round = round;
+  
+  vm.getProducers = getProducers;
+  vm.selectedItemChange = selectedItemChange;
+  
+  function getProducers(query) {
+    return Meteor.users.find({
+      $or: [
+        {'profile.name': {$regex: `.*${query}`, $options: 'i' }},
+        {'profile.companyName': {$regex: `.*${query}`, $options: 'i' }}
+      ]
+    }).fetch()
+  }
+  
+  function selectedItemChange(item) {
+    if ( Match.test(item, Object) ) {
+      vm.product.producer = item._id
+      vm.product.producerName = item.profile.name
+      vm.product.producerCompanyName = item.profile.companyName
+    }
+  }
   
   function round(prop, value, model) {
     if (model === 'price' && !vm.product.price) {
