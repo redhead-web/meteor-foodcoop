@@ -1,4 +1,4 @@
-angular.module("food-coop").controller("EditUserCtrl", function($scope, $meteor, $mdToast){
+angular.module("food-coop").controller("EditUserCtrl", function($scope, $mdToast){
   
   $scope.helpers({
     user() {
@@ -10,10 +10,12 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $meteor,
   
   $scope.validate = function() {
     if ($scope.email !== Meteor.user().emails[0].address) {
-      $scope.call('addEmail', $scope.email, Meteor.user().emails[0].address, function(err, response) {
+      Meteor.call('addEmail', $scope.email, Meteor.user().emails[0].address, function(err, response) {
         if (err) {
           console.log (err)
-          $scope.error = `Error: ${err.reason}`;
+          $scope.errorEmail = `Error: ${err.reason}`;
+        } else {
+          $scope.errorEmail = undefined
         }
       });
     }
@@ -23,7 +25,8 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $meteor,
       if (error) {
         $scope.error = error;
       } else {
-        if (!$scope.error) {
+        if (!error) {
+          $scope.error = undefined;
           $mdToast.show($mdToast
             .simple().content('Poof! Saved Successfully!')
             .position('bottom right')

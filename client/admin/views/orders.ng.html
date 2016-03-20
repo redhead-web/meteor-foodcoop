@@ -98,6 +98,22 @@
                 </div>
               </md-button>
             </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="orders.move(order, -1)">
+                <div layout="row">
+                  <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+                  <p flex>Move back a week</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="orders.move(order, 1)">
+                <div layout="row">
+                  <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
+                  <p flex>Move forward a week</p>
+                </div>
+              </md-button>
+            </md-menu-item>
             <md-menu-item ng-class="{'currentStatus': order.status == 'cancelled'}" class="cancelled">
               <md-button ng-click="orders.status(order, 'cancelled')">
                 <div layout="row">

@@ -12,7 +12,7 @@ angular.module('food-coop').controller 'ApplyCtrl', ($scope, $reactive, $state, 
       return Certifications.find()
 
   vm.apply = ->
-    Meteor.call "apply", vm.application, (error, result) ->
+    vm.call "apply", vm.application, (error, result) ->
       if error
         console.log "error", error
         $mdToast.show $mdToast.simple().content("something went wrong, please try again.").position('bottom left').hideDelay(4000)

@@ -9,6 +9,7 @@ angular.module('food-coop').controller 'ActivateCtrl',
     Accounts.resetPassword $stateParams.token, vm.password, vm.$bindToContext (err) =>
       if err
         vm.error = 'Error reset password - ' + err
+        console.error err
       else
         $state.go 'store'
       return
