@@ -31,7 +31,7 @@
              placeholder="email address" aria-label="name"/>
     </md-input-container>
     
-    <p ng-if="user.services.facebook.id">Signed up through Facebook</p>
+    <p ng-if="user.services.facebook.id">Signed up through Facebook <span ng-if="user.services.facebook.email">email: {{user.services.facebook.email}}</span></p>
     
 
     <md-input-container>
@@ -68,6 +68,12 @@
     <md-checkbox ng-model="producer" ng-change="changeRole()" aria-label="producer role">
         Is {{user.profile.name}} a producer?
     </md-checkbox>
+    
+    <md-input-container>
+      <md-icon md-svg-icon="action:ic_assignment_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="user.profile.companyName"
+        placeholder="Company Name -- producers only"/>
+    </md-input-container>
 
     <md-button type="submit">Save</md-button>
 

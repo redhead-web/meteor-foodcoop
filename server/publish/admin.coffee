@@ -76,6 +76,7 @@ Meteor.publish "user", (user) ->
         roles:1
         profile:1
         'services.facebook.id':1
+        'services.facebook.email': 1
   else
     @ready()
     return
