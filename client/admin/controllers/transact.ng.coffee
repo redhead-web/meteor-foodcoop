@@ -3,6 +3,7 @@ angular.module('food-coop').controller 'TransactionCtrl', ($stateParams) ->
   this.transact = (amount) ->
     Meteor.users.update $stateParams.userId,
       $inc: 'profile.balance': amount
+  return
 
   
 
