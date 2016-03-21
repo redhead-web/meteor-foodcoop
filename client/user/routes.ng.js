@@ -81,7 +81,7 @@ angular.module('food-coop').config( function($stateProvider) {
     url: '/reset-password/:token',
     templateUrl: 'client/user/auth/views/set-password.ng.html',
     controller: 'ActivateCtrl',
-    controllerAs: 'ctrl'
+    controllerAs: 'vm'
   })
   .state('invite', {
     url: '/invite/:token',

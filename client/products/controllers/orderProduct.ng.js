@@ -1,4 +1,5 @@
-angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state){
+angular.module("food-coop").controller("orderProductCtrl", function($scope, $reactive, $mdDialog, $mdToast, $state){
+  $reactive(this).attach($scope);
   var vm = this;
 
   vm.addToCart = addToCart;
@@ -14,7 +15,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     $mdDialog.show(
       $mdDialog.alert()
       .title("Login or Sign up")
-      .textContent("Whangarei Co-operative services are only available to members. Please login or sign up to shop with us.")
+      .textContent("Kaikohe Co-operative services are only available to members. Please login or sign up to shop with us.")
       .ok('Got it!')
       .targetEvent($event)
     );
@@ -57,7 +58,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     //return storeStockingAlert($event)
 
 
-		Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
+		vm.call('/cart/insert', rawProduct, qty, function(err, success) {
       if (err) {
         console.error(err);
         return $mdToast.show(

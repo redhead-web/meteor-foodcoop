@@ -15,7 +15,7 @@ function($scope, $rootScope, Upload) {
         url: "https://api.cloudinary.com/v1_1/" + Meteor.settings.public.cloudinary.cloud_name + "/image/upload",
         fields: {
           upload_preset: Meteor.settings.public.cloudinary.upload_preset,
-          tags: 'Whangareifoodcoop',
+          tags: 'Kaikohefoodcoop',
           context: 'photo=' + title
         },
         file: file

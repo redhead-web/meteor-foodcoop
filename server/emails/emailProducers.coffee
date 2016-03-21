@@ -4,7 +4,7 @@ Meteor.methods
     deliveryDay = GetDeliveryDay()
     
     sales = Sales.find
-      deliveryDay: moment().day(Meteor.settings.public.deliveryDayOfWeek).add(1, 'weeks').startOf('day').toDate()
+      deliveryDay: moment().day(Meteor.settings.public.deliveryDayOfWeek).startOf('day').toDate()
     .fetch()
     
     if sales.length > 0
