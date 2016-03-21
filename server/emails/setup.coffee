@@ -1,8 +1,8 @@
 Templates = {}
 
 Mailer.config
-  from: 'Kaikohe Food Co-op <sean@foodcoop.nz>'
-  replyTo: 'Kaikohe Food Co-op <sean@foodcoop.nz>'
+  from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
+  replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz>'
 
 Templates.contactMessage = 
   path: 'contact/contact-email.html'
@@ -45,10 +45,10 @@ Meteor.startup ->
       path: 'email-layout.html'
       scss: 'email-layout.scss'
     helpers:
-      companyName: "Kai kohekohe Food Co-op"
+      companyName: "Whangarei Food Co-op"
       bankAccount: Meteor.settings.public.bankAccount
       rootUrl: () ->
-        return process.env.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
+        return process.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
       deliveryDay: () ->
         day = GetDeliveryDay()
@@ -69,8 +69,8 @@ Meteor.startup ->
           Markup(this).total()
           
       saleTotal: () ->
-          Markup(this).saleTotal()
-
+         Markup(this).saleTotal()
+         
 
 
   # Mailer.send

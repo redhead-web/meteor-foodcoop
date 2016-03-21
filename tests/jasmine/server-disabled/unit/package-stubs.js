@@ -15493,7 +15493,7 @@ var packageMetadata = {
             },
             "companyAddress": {
               "type": "constant",
-              "value": "Kaikohe, New Zealand"
+              "value": "Whangarei, New Zealand"
             },
             "companyTelephone": {
               "type": "constant",

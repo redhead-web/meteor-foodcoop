@@ -1,9 +1,9 @@
 PrettyEmail.options =
-  from: 'Kai kohekohe Food Co-op <admin@kaicoop.nz>'
-  logoUrl: 'http://res.cloudinary.com/foodcoop/image/upload/c_scale,w_300/v1453437173/kaikohe/Kaikohe_Green_mnyu0j.jpg'
-  companyName: 'Kai Kohekohe Food Co-op'
+  from: 'Northland Natural Food Co-op <sean@foodcoop.nz>'
+  logoUrl: 'http://res.cloudinary.com/foodcoop/image/upload/c_scale,w_300/v1453841357/Whangarei_Red2_vlyh3b.png'
+  companyName: 'Whangarei Food Co-op'
   companyUrl: process.env.ROOT_URL
-  companyAddress: 'Kaikohe, New Zealand'
+  companyAddress: '1 Woods Road, Whangarei'
   companyTelephone: '021 040 9066'
-  companyEmail: 'kaikohe.cooperative@gmail.com'
-  siteName: 'Kai Kohekohe Food Co-op ordering website'
+  companyEmail: 'sean@foodcoop.nz'
+  siteName: 'Whangarei Food Co-op'

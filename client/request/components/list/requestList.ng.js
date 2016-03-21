@@ -21,7 +21,7 @@ function requestListCtrl($reactive, $scope) {
       description: "It's melon season and I'd really like a local organic melon or two. Does anyone have any for sale?",
       dateCreated: moment().subtract(2, 'days').toDate(),
       price: 1,
-      shipping: "Deliver to Kaikohe Food Co-op Sorting Center"
+      shipping: "Deliver to Whangarei Food Co-op Sorting Center"
     }, {
       _id: Random.id(),
       creator: {
@@ -41,7 +41,7 @@ function requestListCtrl($reactive, $scope) {
       _id: Random.id(),
       creator: {
         name: "John Johnson",
-        companyName: "Pak n Save Kaikohe",
+        companyName: "Pak n Save Whangarei",
         creatorId: "jhxyGsY5KW7HXyk2S"
       },
       title: "50kg of Broccoli",
