@@ -315,7 +315,7 @@
       
         <md-list ng-controller="orderProductCtrl as shop">
           <md-list-item class="md-2-line repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products"
-            ng-click="nav.goTo('product', {productId: product._id})"
+            ng-click="nav.goTo('productDetails', {productId: product._id})"
           >
             <cl-image public-id="{{product.img.result}}" class="md-avatar">
               <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
