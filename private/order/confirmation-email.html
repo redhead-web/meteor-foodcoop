@@ -1,6 +1,6 @@
 <p>Hi {{recipient}}, thank you for ordering from the Whangarei Food Co-op.</p>
 
-<p class="alert alert-success">Important: please come collect your order between 6-8pm {{deliveryDay}}. Other arrangements can be made if you are unable to come.</p>
+<p class="alert alert-success">Important: please come collect your order between 3-6pm {{deliveryDay}}. Other arrangements can be made if you are unable to come.</p>
 
 <p>
   Date:<strong>{{date}}</strong><br>
@@ -9,7 +9,7 @@
   Customer Number: {{customerNumber}}
 </p>
 
-<table cellspacing="0" cellpadding="5" border="1" width="100%">
+<table cellspacing="0" cellpadding="5" border="0" width="100%">
   <tr class="header">
     <td>Product</td>
     <td>Producer</td>
@@ -19,8 +19,8 @@
   </tr>
   {{#each items}}
     <tr>
-      <td><a href="https://kaicoop.nz/products/{{productId}}">{{productName}}</a></td>
-      <td><a href="https://kaicoop.nz/directory/{{producerId}}">{{producerName}}</a></td>
+      <td><a href="{{rootUrl}}/{{productId}}">{{productName}}</a></td>
+      <td><a href="{{rootUrl}}/{{producerId}}">{{producerName}}</a></td>
       <td>${{totalPrice}} / {{unitOfMeasure}}</td>
       <td>{{qty}}</td>
       <td>${{saleTotal}}</td>

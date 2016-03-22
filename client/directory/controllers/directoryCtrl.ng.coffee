@@ -15,6 +15,7 @@ angular.module('food-coop').controller 'directoryCtrl', ($scope, $state, $reacti
         options.sort = vm.getReactively('sort')
         
       Meteor.users.find query, options
+  return
 
     # towns: ->
 #       _.uniq Meteor.users.find().map (producer) ->

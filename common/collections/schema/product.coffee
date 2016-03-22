@@ -6,6 +6,7 @@ Schema = new SimpleSchema
   name:
     type: String
     max: 100
+    index: 1
   producer:
     type: String
     regEx: SimpleSchema.RegEx.Id

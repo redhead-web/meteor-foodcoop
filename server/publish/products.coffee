@@ -16,7 +16,7 @@ Meteor.publish "active-products", (query, limit, sort)->
      category: 1
      minimumOrder: 1
    limit: limit
-   sort: sort 
+   sort: sort || {name: 1}
   
   q = 
     published : true
