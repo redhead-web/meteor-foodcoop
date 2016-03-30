@@ -23,7 +23,7 @@
         <input type="password" ng-model="lc.credentials.password" name="password"
                placeholder="password" aria-label="password"/>
       </md-input-container>
-      <md-button class="md-raised md-primary" type="submit"
+      <md-button class="md-raised md-primary" type="submit" ng-disabled="$auth.loggingIn"
                  aria-label="login">Sign In
       </md-button>
     </form>

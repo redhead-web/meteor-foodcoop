@@ -19,6 +19,7 @@ Meteor.publish "producer", (producer) ->
       'profile.chemicals': 1
       'profile.certification': 1
       'profile.balance': 1
+      'profile.video': 1
       
 Meteor.publish "list-of-producers", ->
   

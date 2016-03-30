@@ -1,6 +1,8 @@
-function LikeHeartCtrl ($scope, $mdToast) {
+function LikeHeartCtrl ($scope, $mdToast, $reactive) {
   
   "ngInject";
+  
+  $reactive(this).attach($scope)
   
   var vm = this;
   
@@ -24,7 +26,7 @@ function LikeHeartCtrl ($scope, $mdToast) {
         $mdToast.show($mdToast.simple().content(vm.unlikeText).position('bottom left').hideDelay(4000));
       }
     } else {
-      Meteor.call("/likes/add", vm.targetId, vm.category, function(err, response) {
+      vm.call("/likes/add", vm.targetId, vm.category, function(err, response) {
         if (err) {
           return console.log(err);
         } else if (vm.likeText) {

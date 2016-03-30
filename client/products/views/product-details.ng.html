@@ -144,23 +144,28 @@
       >
     </md-input-container>
     <p class="md-body-2 text-center" ng-if="ctrl.product.stocklevel != null && ctrl.product.stocklevel <= 0">SOLD OUT</p>
-    <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" 
-    ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0" class="editContent"
-    layout="row">
-      <md-input-container flex>
-        <label>Quantity</label>
-        <input ng-model="shop.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">
-        <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
-          <div ng-message="required">this field is required.</div>
-          <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
+    <div ng-if="ctrl.product.producer === currentUser._id">
+      <p class="md-body-1 text-center">All product changes save automagically!</p>
+    </div>
+    <div ng-if="ctrl.product.producer !== currentUser._id">
+      <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" 
+      ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0" class="editContent"
+      layout="row">
+        <md-input-container flex>
+          <label>Quantity</label>
+          <input ng-model="shop.qty" type="number" min="{{ctrl.product.minimumOrder || 1}}" required name="qty">
+          <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
+            <div ng-message="required">this field is required.</div>
+            <div ng-message="min">You must order a minimum of {{ctrl.product.minimumOrder || 1}} for this order.</div>
+          </div>
+        </md-input-container>
+        <div flex>
+          <md-button class="md-primary" type="submit">
+            Add To Cart
+          </md-button>
         </div>
-      </md-input-container>
-      <div flex>
-        <md-button class="md-primary" type="submit">
-          Add To Cart
-        </md-button>
-      </div>
-    </form>
+      </form>
+    </div>
     <!-- <md-button ui-sref="store">Keep Shopping</md-button> -->
 
     <!-- <md-list>
@@ -195,7 +200,7 @@
       ng-if="ctrl.edit.description && ctrl.isOwner">
         <md-input-container class="md-block">
           <label>Description</label>
-          <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"
+          <textarea ng-model="ctrl.product.description" md-maxlength="2500" name="description"
           ng-change="ctrl.save()" 
           ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"></textarea>
           <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">

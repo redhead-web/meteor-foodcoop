@@ -21,7 +21,7 @@
   </md-card-content>
 	<md-card-actions layout="row" layout-align="end center">
 		<md-switch class="md-primary md-block" ng-model="card.product.published" ng-change="card.save()">
-			<span ng-show="card.product.published">For Sale</span><span ng-hide="card.product.published">Not For Sale</span>
+			<span ng-if="!card.product.published">Not </span>For Sale
 		</md-switch>
     <md-button class="md-icon-button" ui-sref="productDetails({productId: card.product._id})" aria-label="edit product">
       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>

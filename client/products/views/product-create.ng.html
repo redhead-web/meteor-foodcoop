@@ -199,7 +199,7 @@
              <md-content class="md-padding">
                <md-input-container class="md-block">
                  <label>Description</label>
-                 <textarea ng-model="ctrl.product.description" md-maxlength="900" name="description"></textarea>
+                 <textarea ng-model="ctrl.product.description" md-maxlength="2500" name="description"></textarea>
                  <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
                    <div ng-message="maxlength">Please use a shorter description.</div>
                  </div>
@@ -215,7 +215,7 @@
          </md-tabs>
       </section>
 
-      <md-button ng-click="ctrl.save()">List In Store</md-button>
+      <md-button ng-click="ctrl.save($event)">List In Store</md-button>
       <md-button ui-sref="store">Cancel</md-button>
     </form>
   </md-whiteframe>

@@ -58,7 +58,7 @@ Schema = new SimpleSchema
     label: "Product Description"
     optional: true
     trim: false
-    max: 2000
+    max: 2500
   dateCreated:
     type: Date
     defaultValue: new Date()

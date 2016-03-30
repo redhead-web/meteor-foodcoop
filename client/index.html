@@ -1,4 +1,4 @@
-<body ng-app="food-coop" ng-controller="navCtrl as nav" ng-strict-di="">
+<body ng-controller="navCtrl as nav" class="layout-column">
 
   <md-toolbar md-scroll-shrink layout="row" layout-xs="column" layout-align="start center" layout-padding class="no-print" ng-cloak>
     <div class="md-toolbar-tools">
@@ -27,20 +27,13 @@
       <md-button ng-click="nav.toggleRight()" aria-label="navigation toggle" class="md-icon-button">
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
       </md-button>
-      <md-menu ng-if="$auth.currentUser">
+      <md-menu ng-if="$auth.currentUser" md-position-mode="target-right target">
         <multi-avatar
+          md-menu-origin
           ng-click="$mdOpenMenu($event)"
           user="$auth.currentUser" width="40">
         </multi-avatar>
-        <!-- <md-button aria-label="open user menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-          <md-icon md-menu-origin
-          md-svg-icon="social:ic_person_24px"></md-icon>
-        </md-button> -->
-        <md-menu-content>
-          <!-- <md-menu-item>
-            <p flex><strong>{{ currentUser.profile.name }} #{{currentUser.profile.customerNumber}}</strong></p>
-          </md-menu-item> -->
-          <!-- <md-menu-divider></md-menu-divider> -->
+        <md-menu-content width="6">
           <md-menu-item>
             <md-button ui-sref="profile.balance">
               <div layout="row">
@@ -103,7 +96,7 @@
   </md-toolbar>
 
 
-<section id="PageRoot">
+<section id="PageRoot" flex>
 
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
 
@@ -160,12 +153,14 @@
 </section>
 
 
-<footer layout="row" layout-align="center end">
-  <p><small>Created from the Food Co-op Platform Beta version 0.1.4</small></p>
-  <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
-    <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
-  </md-button>
-  <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
+<footer>
+  <div layout="row" layout-align="center end" layout-margin>
+    <p><small>Created from the Food Co-op Platform Beta version 0.1.4</small></p>
+    <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
+      <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
+    </md-button>
+    <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
+  </div>
 </footer>
 
 </body>

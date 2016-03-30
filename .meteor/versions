@@ -2,9 +2,10 @@ accounts-base@1.2.2
 accounts-facebook@1.0.6
 accounts-oauth@1.1.8
 accounts-password@1.1.4
+adrianliaw:youtube-iframe-api@1.3.122
 alanning:roles@1.2.15
-aldeed:collection2@2.9.0
-aldeed:collection2-core@1.1.0
+aldeed:collection2@2.9.1
+aldeed:collection2-core@1.1.1
 aldeed:geocoder@0.3.8
 aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
@@ -14,12 +15,12 @@ angular@1.3.7
 angular-meteor-auth@0.2.1
 angular-meteor-data@0.3.0
 angular-templates@1.0.0
-angular:angular@1.5.0
-angular:angular-animate@1.5.0
-angular:angular-aria@1.5.0
+angular:angular@1.5.2
+angular:angular-animate@1.5.2
+angular:angular-aria@1.5.2
 angular:angular-material@1.0.6
-angular:angular-messages@1.5.0
-angular:angular-sanitize@1.5.0
+angular:angular-messages@1.5.2
+angular:angular-sanitize@1.5.2
 angularui:angular-google-maps@2.3.2
 angularui:angular-ui-router@0.2.15
 angularutils:pagination@0.9.1_2
@@ -38,6 +39,7 @@ callback-hook@1.0.4
 check@1.1.0
 cmather:handlebars-server@2.0.0
 coffeescript@1.0.11
+datariot:ganalytics@0.2.1
 dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
@@ -114,6 +116,7 @@ redhead:angular-cloudinary@0.0.1
 redhead:angular-google-places-autocomplete@0.0.1
 redhead:angular-remarkable@0.0.1
 redhead:angular-socialshare@0.1.20
+redhead:angular-youtube-embed@1.1.2
 redhead:cart@0.0.2
 redhead:like-useraccount@0.0.1
 redhead:ng-letter-avatar@5.0.0

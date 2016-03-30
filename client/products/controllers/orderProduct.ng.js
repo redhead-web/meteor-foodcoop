@@ -1,5 +1,7 @@
-angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state){
-  var vm = this;
+angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state, $reactive){
+  $reactive(this).attach($scope);
+  
+  let vm = this;
 
   vm.addToCart = addToCart;
   
@@ -23,7 +25,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
   function storeStockingAlert ($event) {
     $mdDialog.show(
       $mdDialog.alert()
-      .title("Openning Soon")
+      .title("Opening Soon")
       .textContent("Thank you for your interest in shopping with us. Our co-op store is brand new and still being filled with products. If you are a signed up member you'll get an email when our online store is ready to use.")
       .ok('Got it!')
       .targetEvent($event)
@@ -57,7 +59,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     //return storeStockingAlert($event)
 
 
-		Meteor.call('/cart/insert', rawProduct, qty, function(err, success) {
+		vm.call('/cart/insert', rawProduct, qty, function(err, success) {
       if (err) {
         console.error(err);
         return $mdToast.show(

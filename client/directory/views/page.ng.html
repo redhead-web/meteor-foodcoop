@@ -72,8 +72,14 @@
   <span flex></span>
 </md-content>
 
-
-<md-content layout="row" layout-align="center" layout-wrap style="margin-top: 3em;">
+<md-content ng-if="ctrl.producer.profile.video" layout layout-align="center" style="margin-top: 3em;">
+  <span flex></span>
+  <div flex="70" flex-sm="90" flex-xs="100">
+    <fc-video video-url="ctrl.producer.profile.video"></fc-video>
+  </div>
+  <span flex></span>
+</md-content>
+<md-content layout layout-align="center" layout-wrap style="margin-top: 3em;">
   <span flex></span>
   <div layout-margin layout="column" flex="35" flex-sm="40" flex-xs="100">
     <md-card>
@@ -139,6 +145,12 @@
             ></textarea>
           </md-input-container>
         </form>
+        
+        <md-input-container flex ng-if="ctrl.isOwner">
+          <label>Youtube Video Link</label>
+          <input ng-model="ctrl.producer.profile.video" name="video"
+          ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions">
+        </md-input-container>
       </md-card-content>
       <div ng-if="ctrl.isOwner" ng-controller="photoUploadCtrl">
         <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>

@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'redhead:angular-remarkable',
-  version: '0.0.1',
+  name: 'redhead:angular-youtube-embed',
+  version: '1.1.2',
   // Brief, one-line summary of the package.
-  summary: 'remarkable markdown filter for angularJS',
+  summary: '',
   // URL to the Git repository containing the source code for this package.
   git: '',
   // By default, Meteor will default to using README.md for documentation.
@@ -12,6 +12,12 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use(['angular', 'redhead:remarkable@1.6.2'], 'client');
-  api.addFiles('angular-remarkable.js', 'client');
+  api.use(['angular', 'adrianliaw:youtube-iframe-api'], 'client');
+  api.addFiles('angular-youtube-embed.js', 'client');
+});
+
+Package.onTest(function(api) {
+  api.use('tinytest');
+  api.use('redhead:angular-youtube-embed');
+  api.addFiles('angular-youtube-embed-tests.js', 'client');
 });

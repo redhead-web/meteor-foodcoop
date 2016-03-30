@@ -1,4 +1,4 @@
-angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $reactive, $mdConstant, $mdToast){
+angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $reactive, $mdConstant, $mdToast, $mdDialog){
   $reactive(this).attach($scope);
 	
 	var vm = this;
@@ -96,30 +96,63 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 	    ingredients: [],
 	  };
 	}
-
-  function save () {
-    if (!vm.product.hasOwnProperty('_id')) {
-      Products.insert(vm.product, (err) => {
-			  if (err) {
-					console.error(err)
-        	return $mdToast.show(
-          	$mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
-        	);
-			  }
-					
-			  $mdToast.show(
-					$mdToast.simple()
-			      .content(`Thank you! ${vm.product.name} successfully added to our store. Add another product?`)
-			      .action('YES')
-			      .highlightAction(false)
-			      .position('bottom left')
-				).then(function(response) {
-			    if ( response == 'ok' ) {
-			      reset();
-			    }
-			  });
+  
+  function insert() {
+    Products.insert(vm.product, (err, id) => {
+      if (err) {
+        console.error(err)
+      	return $mdToast.show(
+        	$mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
+      	);
+      }
+      
+      if (id) {
+        vm.productIdCopy = id;
+      }
+      
+      $mdToast.show(
+        $mdToast.simple()
+        .content(`Thank you! ${vm.product.name} successfully added to our store. Add another product?`)
+        .action('YES')
+        .highlightAction(false)
+        .position('bottom left')
+      ).then(function(response) {
+        if ( response == 'ok' ) {
+          reset();
+        }
       });
-		  
+    });
+  }
+
+  function save (ev) {
+    if (vm.productIdCopy) {
+      let c = $mdDialog.confirm()
+        .title('Create or Update?')
+        .textContent('Would you like to make a new product?')
+        .ariaLabel('create or update')
+        .targetEvent(ev)
+        .ok('Create New Product')
+        .cancel('Update the product');
+      $mdDialog.show(c).then(function() {
+        insert()
+      }, function() {
+        Products.update(vm.productIdCopy, {$set: vm.product}, (err, count) => {
+          if (err) {
+            console.error(err)
+          } if (count !== 1) {
+            console.log("update failed")
+          } else {
+            $mdToast.show(
+              $mdToast.simple()
+              .content(`Thank you! ${vm.product.name} successfully updated`)
+              .position('bottom left')
+            )
+          }
+        })
+      });
+      
+    } else {
+      insert()
     }
   }
 
@@ -157,5 +190,4 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
     } else return chip
   }
 
-  
 });
