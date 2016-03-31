@@ -63,6 +63,10 @@
           </md-item-template>
         </md-autocomplete>
       </div>
+      <md-input-container ng-if="hasRole(currentUser, 'admin')">
+        <label>Extra Markup (use 0.1 for 10% extra)</label>
+        <input ng-model="ctrl.product.extraMarkup" min="0" step="0.1">
+      </md-input-container>
       <md-input-container>
         <label>Product Name</label>
         <input ng-model="ctrl.product.name" required name="productName" md-maxlength="100">
@@ -224,21 +228,3 @@
   </md-whiteframe>
   <span flex></span>
 </md-content>
-
-
-<!-- Create a new product here. Hit the publish button when you are ready for the product to go live.
-
-<img ng-if="product.img" ng-src="{{product.img}}">
-
-<input ng-model="product.name" placeholder="Name">
-<input ng-model="product.price" type="number" placeholder="Price">
-<input type="checkbox" value="true" ng-model="product.wholeSaleOnly"> For Whole Sale Customers Only
-
-<meteor-include src="imageUpload"></meteor-include>
-
-<textarea ng-model="product.description" col="6" placeholder="Details"></textarea>
-
-
-
-<button ng-click="products.save(product)">Publish</button>
-<button ui-sref="store">Cancel</button> -->
