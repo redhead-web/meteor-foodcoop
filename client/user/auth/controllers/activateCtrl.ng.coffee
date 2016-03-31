@@ -6,13 +6,14 @@ angular.module('food-coop').controller 'ActivateCtrl',
   vm.error = ''
 
   vm.set = ->
-    Accounts.resetPassword $stateParams.token, vm.password, vm.$bindToContext (err) ->
-      if err
-        vm.error = 'Error reset password - ' + err
-        console.error err
-      else
-        $state.go 'store'
-      return
+    Accounts.resetPassword $stateParams.token, vm.password, (err) ->
+      $scope.$apply ->
+        if err
+          vm.error = 'Error reset password - ' + err
+          console.error err
+        else
+          $state.go 'store'
+        return
     return
 
   return

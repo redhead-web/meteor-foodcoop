@@ -61,7 +61,7 @@
         </md-button>
         <div>
           <md-button class="md-secondary md-icon-button is-liked" 
-            aria-label="Favorite" style="padding: 8px 0" ng-if="$auth.currentUser"
+            aria-label="Favorite" style="padding: 8px 0" ng-if="currentUser"
             >
             <like-heart target-id="ctrl.producer._id" category="producer" like-text="Clap clap! Thanks for endorsing {{ctrl.producer.profile.name}}" unlike-text="you are no longer endorsing this producer"></like-heart>
           </md-button>

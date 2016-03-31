@@ -30,11 +30,11 @@
       </h2>
       <q-and-a item="$ctrl.offer" questioner="$ctrl.request.creator.creatorId"></q-and-a>
       <div layout>
-        <md-button ng-class="{'md-primary': $ctrl.offer.status !== 'withdrawn'}" ng-click="$ctrl.accept($event, $ctrl.offer)" ng-disabled="$ctrl.offer.status === 'withdrawn'" ng-if="$auth.currentUser._id === $ctrl.request.creator.creatorId">Accept Offer</md-button>
-        <md-button ng-if="$ctrl.offer.status === 'aggregate' && $auth.currentUser._id === $ctrl.request.creator.creatorId" ng-click="$ctrl.unaccept($event, $ctrl.offer)">Unaccept Offer</md-button>
+        <md-button ng-class="{'md-primary': $ctrl.offer.status !== 'withdrawn'}" ng-click="$ctrl.accept($event, $ctrl.offer)" ng-disabled="$ctrl.offer.status === 'withdrawn'" ng-if="currentUser._id === $ctrl.request.creator.creatorId">Accept Offer</md-button>
+        <md-button ng-if="$ctrl.offer.status === 'aggregate' && currentUser._id === $ctrl.request.creator.creatorId" ng-click="$ctrl.unaccept($event, $ctrl.offer)">Unaccept Offer</md-button>
       </div>
       
-      <div layout ng-if="$ctrl.offer.status !== 'withdrawn' && $ctrl.offer.user === $auth.currentUser._id">
+      <div layout ng-if="$ctrl.offer.status !== 'withdrawn' && $ctrl.offer.user === currentUser._id">
         <md-button class="md-primary" ng-click="$ctrl.withdraw($ctrl.offer); $ctrl.active = false">Withdraw Your Offer</md-button>
       </div>
     </div>

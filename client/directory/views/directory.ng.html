@@ -19,14 +19,14 @@
             <md-select style="margin-bottom:24px" placeholder="sort by" aria-label="Sort Ascending or Descending" ng-model="dir.sort">
               <md-option ng-value="{createdAt: -1}">Newest</md-option>
               <md-option ng-value="{createdAt: 1}">Oldest</md-option>
-              <md-option ng-value="{'profile.name': 1}">Alphabetical</md-option>
+              <md-option ng-value="{'profile.companyName': 1, 'profile.name': 1}">Alphabetical</md-option>
             </md-select>
           </md-input-container>
         </md-list-item>
         <md-list-item ng-repeat="u in dir.producers | filter:dir.searchstring track by u._id" class="md-3-line md-whiteframe-1dp" ng-click="nav.goTo('producer', {producerId: u._id})">
           <multi-avatar user="u" width="40" class="md-avatar"></multi-avatar>
           <div class="md-list-item-text" md-menu-origin>
-            <h3>{{u.profile.name}}</h3>
+            <h3>{{u.profile.companyName || u.profile.name}}</h3>
             <p>{{u.profile.deliveryAddress.formatted_address || u.profile.deliveryAddress.formattedAddress}}</p>
             <p>Member since {{ u.createdAt | date:'mediumDate' }}</p>
           </div>

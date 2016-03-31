@@ -59,7 +59,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     //return storeStockingAlert($event)
 
 
-		vm.call('/cart/insert', rawProduct, qty, function(err, success) {
+    vm.call('/cart/insert', rawProduct, qty, function(err, success) {
       if (err) {
         console.error(err);
         return $mdToast.show(

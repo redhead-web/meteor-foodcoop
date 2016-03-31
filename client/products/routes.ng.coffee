@@ -1,8 +1,11 @@
-isAdmin = (user) ->
-  Roles.userIsInRole user, 'admin'
-	
-isProducer = (user) ->
-	Roles.userIsInRole user, 'producer'
+rolePromise = ($q, r) ->
+  $q (resolve, reject) ->
+    role = Roles.userIsInRole Meteor.userId(), r
+    if role
+      resolve role
+    else
+      reject 'FORBIDDEN'
+    return
 
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
@@ -20,14 +23,14 @@ angular.module('food-coop').config ($stateProvider) ->
     templateUrl: 'client/products/views/product-create.ng.html'
     controller: 'ProductCreateCtrl'
     controllerAs: 'ctrl'
-    resolve: 'currentUser': ($auth) ->
-      $auth.requireValidUser isProducer
+    resolve: 'currentUser': ($q) ->
+      rolePromise($q, 'producer')
   .state 'myProducts',
     url: '/my-products'
     templateUrl: 'client/products/views/my-products.ng.html'
     controller: 'MyProductsCtrl'
-    resolve: 'currentUser': ($auth) ->
-      $auth.requireValidUser isProducer
+    resolve: 'currentUser': ($q) ->
+      rolePromise($q, 'producer')
   return
 
 # ---

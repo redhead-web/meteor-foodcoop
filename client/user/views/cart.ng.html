@@ -1,4 +1,4 @@
-<!-- <md-content ng-if="!$auth.currentUser.profile.cart" layout="column" layout-align="center center">
+<!-- <md-content ng-if="!currentUser.profile.cart" layout="column" layout-align="center center">
   <h2>No items in your cart yet</h2>
   <h3>Maybe do some shopping and then come back?</h3>
 </md-content> -->
@@ -36,21 +36,21 @@
           </td>
           <td>{{cart.total | currency}}</td>
         </tr>
-        <tr ng-if="$auth.currentUser.profile.balance !== 0">
+        <tr ng-if="currentUser.profile.balance !== 0">
           <td colspan="6">Balance</td>
-          <td ng-class="{'green-text': $auth.currentUser.profile.balance > 0, 'red-text': $auth.currentUser.profile.balance < 0}">
-            {{$auth.currentUser.profile.balance | currency}}
+          <td ng-class="{'green-text': currentUser.profile.balance > 0, 'red-text': currentUser.profile.balance < 0}">
+            {{currentUser.profile.balance | currency}}
           </td>
         </tr>
-        <tr ng-if="$auth.currentUser.profile.balance !== 0">
+        <tr ng-if="currentUser.profile.balance !== 0">
           <td colspan="6">
             Total Owing
           </td>
           <td>
-            <span ng-if="$auth.currentUser.profile.balance < cart.total">
-              {{cart.total - $auth.currentUser.profile.balance | currency}}
+            <span ng-if="currentUser.profile.balance < cart.total">
+              {{cart.total - currentUser.profile.balance | currency}}
             </span>
-            <span ng-if="$auth.currentUser.profile.balance > cart.total">
+            <span ng-if="currentUser.profile.balance > cart.total">
               $0.00
             </span>
           </td>

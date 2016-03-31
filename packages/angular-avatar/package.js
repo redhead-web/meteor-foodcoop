@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use('angular@1.3.6', 'client');
+  api.imply('angular', 'client');
   api.addFiles('md5.js', 'client');
   api.addFiles('angular-avatar.js', 'client');
   api.addFiles('publish.js', 'server');

@@ -13,7 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use('pbastowski:angular-babel');
-  api.use('angular', 'client');
+  api.imply('angular', 'client');
   api.addFiles('angular-google-places-autocomplete.js', 'client');
   api.addFiles('angular-google-places-autocomplete.css', 'client');
   // api.export('google');

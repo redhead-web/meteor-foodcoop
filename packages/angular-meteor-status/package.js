@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'redhead:angular-socialshare',
-  version: '0.1.20',
+  name: 'redhead:angular-meteor-status',
+  version: '0.0.1',
   // Brief, one-line summary of the package.
-  summary: 'bower version of angular-socialshare',
+  summary: 'component for meteor connection status. Works with angular-material',
   // URL to the Git repository containing the source code for this package.
   git: '',
   // By default, Meteor will default to using README.md for documentation.
@@ -12,13 +12,12 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.imply('angular', 'client');
-  api.addFiles('bower_components/angular-socialshare/dist/angular-socialshare.min.js', 'client');
+  api.use('angular', 'client');
+  api.addFiles('angular-meteor-status.js');
 });
 
 Package.onTest(function(api) {
-  api.use('ecmascript');
   api.use('tinytest');
-  api.use('angular-socialshare');
-  api.addFiles('angular-socialshare-tests.js');
+  api.use('redhead:angular-meteor-status');
+  api.addFiles('angular-meteor-status-tests.js');
 });

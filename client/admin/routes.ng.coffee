@@ -1,5 +1,11 @@
-isAdmin = (user) ->
-  Roles.userIsInRole user, 'admin'
+isAdmin = ($q) ->
+  $q (resolve, reject) ->
+    role = Roles.userIsInRole Meteor.userId(), 'admin'
+    if role
+      resolve role
+    else
+      reject 'FORBIDDEN'
+    return
 
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider.state('admin',
@@ -8,8 +14,8 @@ angular.module('food-coop').config ($stateProvider) ->
     controllerAs: 'rt'
     controller: 'AdminCtrl'
     resolve:
-      'admin': ($auth) ->
-        $auth.requireValidUser isAdmin
+      'admin': ($q) ->
+        isAdmin($q)
   ).state('admin.products',
     url: '/products'
     templateUrl: 'client/admin/views/products.ng.html'
@@ -19,42 +25,42 @@ angular.module('food-coop').config ($stateProvider) ->
     url: '/users'
     templateUrl: 'client/admin/views/users.ng.html'
     controller: 'UsersAdminCtrl'
-    resolve: 'admin': ($auth) ->
-      $auth.requireValidUser isAdmin
+    resolve: 'admin': ($q) ->
+        isAdmin($q)
   ).state('admin.createUser',
     url: '/user/new'
     templateUrl: 'client/admin/views/create-user.ng.html'
     controller: 'CreateUserAdminCtrl'
-    resolve: 'admin': ($auth) ->
-      $auth.requireValidUser isAdmin
+    resolve: 'admin': ($q) ->
+        isAdmin($q)
   ).state('admin.user',
     url: '/user/:userId'
     templateUrl: 'client/admin/views/user.ng.html'
     controller: 'UserAdminCtrl'
-    resolve: 'admin': ($auth) ->
-      $auth.requireValidUser isAdmin
+    resolve: 'admin': ($q) ->
+        isAdmin($q)
   ).state('admin.userOrders',
     url: '/user/:userId/orders'
     templateUrl: 'client/admin/views/user.ng.html'
     controller: 'UserOrdersAdminCtrl'
     controllerAs: 'vm'
-    resolve: 'admin': ($auth) ->
-      $auth.requireValidUser isAdmin
+    resolve: 'admin': ($q) ->
+        isAdmin($q)
   ).state('admin.orders',
     url: '/orders'
     templateUrl: 'client/admin/views/orders.ng.html'
     controller: 'OrdersAdminCtrl'
     controllerAs: 'orders'
-    resolve: 'admin': ($auth) ->
-      $auth.requireValidUser isAdmin
+    resolve: 'admin': ($q) ->
+        isAdmin($q)
   ).state 'admin.order',
     url: '/order/:orderId'
     templateUrl: 'client/admin/views/order.ng.html'
     controller: 'OrderAdminCtrl'
     controllerAs: 'vm'
     resolve:
-      'admin': ($auth) ->
-        $auth.requireValidUser isAdmin
+      'admin': ($q) ->
+        isAdmin($q)
   return
 
 # ---

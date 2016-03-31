@@ -53,7 +53,7 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
       // return Products.find(q, {limit: this.getReactively('limit'), sort: this.getReactively('options.sort') })
       return Products.find(q, {sort: this.getReactively('options.sort') })
     }
-  });
+  });  
   
   this.loadMore = loadMore;
   

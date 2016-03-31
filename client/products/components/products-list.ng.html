@@ -50,14 +50,14 @@
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.options.sort = {'producerName': 1, 'name':1}">
+            <md-button ng-click="store.options.sort = [['producerCompanyName', 'asc'], ['producerName', 'asc'], ['name', 'asc']]">
               Producer
             </md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>
     </md-menu-bar>
-    <!-- <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="$auth.currentUser">
+    <!-- <md-switch class="md-accent md-hue-3" ng-model="store.favourites" aria-label="Switch Favourites" ng-if="currentUser">
       <span class="md-body-1">Show Only Favourites</span>
     </md-switch> -->
 		<md-button class="md-icon-button" ng-class="{'md-warn': store.query.favourites}" ng-click="store.query.favourites = !store.query.favourites" aria-label="Show My Favourites">
@@ -66,7 +66,7 @@
 		<md-button class="md-icon-button" ng-class="{'md-primary': store.query.lastOrder}" ng-click="store.query.lastOrder = !store.query.lastOrder" aria-label="Show My Last Order">
 			<md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
 		</md-button>
-    <!-- <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="$auth.currentUser">
+    <!-- <md-switch class="md-accent md-hue-3" ng-model="store.lastOrder" aria-label="Switch Last Order" ng-if="currentUser">
       <span class="md-body-1">Show My Last Order</span>
     </md-switch> -->
 		</div>

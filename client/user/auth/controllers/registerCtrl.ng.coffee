@@ -43,29 +43,30 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
     
 
   vm.register = ->
-    Accounts.createUser vm.credentials, vm.$bindToContext (err) =>
-      if err
-        console.log result
-      else
-        if vm.role == 'producer'
-          $state.go 'producer-application'
+    Accounts.createUser vm.credentials, (err) =>
+      $scope.$apply ->
+        if err
+          console.log result
         else
-          $state.go 'store'
-      return
+          if vm.role == 'producer'
+            $state.go 'producer-application'
+          else
+            $state.go 'store'
+        return
 
   vm.facebookLogin = ->
     Meteor.loginWithFacebook
       requestPermissions: ['email']
-    , vm.$bindToContext (err) ->
-      if err
-        console.error err
-        vm.error = "Login Error: #{err}"
-      else
-        if vm.role == 'producer'
-          $state.go 'producer-application'
+    , (err) ->
+      $scope.$apply ->
+        if err
+          console.error err
+          vm.error = "Login Error: #{err}"
         else
-          $state.go 'profile.edit'
-        console.log(result)
+          if vm.role == 'producer'
+            $state.go 'producer-application'
+          else
+            $state.go 'profile.edit'
 
   return
   

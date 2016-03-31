@@ -49,7 +49,7 @@
       <p>{{$ctrl.request.description}}</p>
     </div>
     <aggregate-checkout request="$ctrl.request" on-update="$ctrl.onUpdate(request, modifier)"
-    ng-if="$ctrl.request.status === 'partial' && $ctrl.request.creator._id === $auth.currentUser._id">
+    ng-if="$ctrl.request.status === 'partial' && $ctrl.request.creator._id === currentUser._id">
     </aggregate-checkout>
     <q-and-a item="$ctrl.request"></q-and-a>
   </div>

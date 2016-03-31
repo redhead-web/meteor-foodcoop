@@ -22,7 +22,7 @@ rgnevashev:meteor-angular-coffee
 fourseven:scss
 planettraining:material-design-icons
 angularutils:pagination
-angular
+angular@1.3.9
 yogiben:pretty-email
 velocity:html-reporter
 konecty:mongo-counter
@@ -43,7 +43,7 @@ redhead:angular-cloudinary
 angular:angular-messages
 matb33:collection-hooks
 nmccready:angular-simple-logger
-angularui:angular-google-maps@2.3.2
+angularui:angular-google-maps
 francocatena:compass
 lookback:emails
 blaze
