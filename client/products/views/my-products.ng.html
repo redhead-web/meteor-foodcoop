@@ -1,9 +1,49 @@
 
 <h1 class="md-headline text-center">My Products</h1>
 
+<section layout="row" layout-align="center center">
+  <md-input-container>
+    <input type="search" ng-model="$ctrl.searchString" placeholder="search">
+  </md-input-container>
+  <md-menu-bar>
+    <md-menu>
+      <button ng-click="$mdOpenMenu()">
+        Sort
+      </button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.sort = {'name':1}">
+            Alphabetical
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.sort = [['published', 'desc'], 'name']">
+            For Sale
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.sort = {'price': 1} ">
+            Price lowest-highest
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.sort = {'price': -1}">
+            Price highest-lowest
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.sort = ['category', 'name']">
+            Category
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </md-menu-bar>
+</section>
+
 <md-content layout-xs="column" layout="row" layout-wrap>
-  <div flex="25" flex-sm="33" flex-xs="50" ng-repeat="p in products">
-    <product-summary-card product="p" on-update="save(product, modifier)"></product-summary-card>
+  <div flex="25" flex-sm="33" flex-xs="50" ng-repeat="p in $ctrl.products | filter:$ctrl.searchString track by p._id">
+    <product-summary-card product="p" on-update="$ctrl.save(product, modifier)"></product-summary-card>
   </div>
 
 </md-content>

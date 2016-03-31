@@ -18,8 +18,8 @@
 
       <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
       <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
-      <span ng-controller="UserCartCtrl as cr" ng-if="currentUser">
-        <md-button ui-sref="cart">
+      <span ng-controller="UserCartCtrl as cr">
+        <md-button ui-sref="cart" ng-if="currentUser">
           {{cr.total | currency}} ({{cr.cartLength}})
           <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
         </md-button>

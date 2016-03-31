@@ -29,6 +29,7 @@ angular.module('food-coop').config ($stateProvider) ->
     url: '/my-products'
     templateUrl: 'client/products/views/my-products.ng.html'
     controller: 'MyProductsCtrl'
+    controllerAs: '$ctrl'
     resolve: 'currentUser': ($q) ->
       rolePromise($q, 'producer')
   return

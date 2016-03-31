@@ -1,13 +1,17 @@
-angular.module("food-coop").controller("MyProductsCtrl", function($scope, $mdDialog, $mdToast, $state){
-	$scope.subscribe("my-products");
+angular.module("food-coop").controller("MyProductsCtrl", function($scope, $reactive, $mdDialog, $mdToast, $state){
+	$reactive(this).attach($scope);
   
-  $scope.helpers({
+  this.subscribe("my-products");
+  
+  this.sort = {name: 1};
+  
+  this.helpers({
 		products() {
-			return Products.find({producer: Meteor.userId() })
+			return Products.find({producer: Meteor.userId() }, {sort: this.getReactively('sort')})
 		}
 	});
   
-  $scope.save = function (product, modifier) {
+  this.save = function (product, modifier) {
     Products.update(product._id, modifier, function(err, result) {
       if (err) {
         console.error(err);
@@ -18,5 +22,7 @@ angular.module("food-coop").controller("MyProductsCtrl", function($scope, $mdDia
       console.log(result)
     })
   };
+  
+  return this;
   
 });

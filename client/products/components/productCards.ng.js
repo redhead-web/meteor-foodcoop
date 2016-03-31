@@ -13,7 +13,10 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
   
   // this.subscribe('active-products', () => [this.getReactively('query', true), this.getReactively('limit'), this.getReactively('options.sort')])
   
-  this.subscribe('all-active-products')
+  this.subscribe('all-active-products', () => {}, (err) => {
+    if (err) console.log(err);
+    this.productsReady = true;
+  });
 
   this.go = $state.go;
   

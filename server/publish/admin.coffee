@@ -38,6 +38,9 @@ Meteor.publish "user-basics", () ->
 Meteor.publish "user-list", (options, searchstring) ->
   unless searchstring?
     searchstring = ""
+    
+  unless options?
+    options = {}
 
   options.fields =
     emails:1,
