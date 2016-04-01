@@ -34,7 +34,7 @@ angular.module('food-coop',[
 .run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
   
-  $rootScope.title = "Fresh Local Quality | Whangarei Food Co-op"
+  $rootScope.title = "Fresh Local Quality | Kai Kohekohe Food Co-op"
 
   // Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
