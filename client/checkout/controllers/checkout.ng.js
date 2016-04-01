@@ -1,4 +1,4 @@
-angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactive, $state, currentUser){
+angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactive, $state){
   $reactive(this).attach($scope)
   
   let vm = this;
@@ -37,7 +37,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     let items = Cart.Items.find().fetch();
     let total = Markup(items).cartTotal();
     
-    if (user.profile.balance > 0) {
+    if (user && user.profile && user.profile.balance > 0) {
       if (user.profile.balance < total) {
         vm.total = total - user.profile.balance;
       } else vm.total = 0

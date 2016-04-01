@@ -24,13 +24,15 @@
         <md-input-container ng-if="$ctrl.hasFocus">
           <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
           <input placeholder="you bid"
-          ng-model="$ctrl.bid" min="0.01" step="0.01" required ng-change="$ctrl.round('earn', $ctrl.bid * (1-$ctrl.markup), 'bid')">
+          ng-model="$ctrl.bid" min="0.01" step="0.01" required 
+          ng-change="$ctrl.round('earn', $ctrl.bid * $ctrl.markup, 'bid')">
           <!-- <p class="md-caption">You earn: <strong>{{ $ctrl.earn * (1-$ctrl.markup) | currency }}</strong></p> -->
         </md-input-container>
         <md-input-container ng-if="$ctrl.hasFocus">
           <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
           <input placeholder="you earn"
-        ng-model="$ctrl.earn" min="0.01" step="0.01" required ng-change="$ctrl.round('bid', $ctrl.earn * (1+$ctrl.markup), 'earn')">
+        ng-model="$ctrl.earn" min="0.01" step="0.01" required 
+        ng-change="$ctrl.round('bid', $ctrl.earn / $ctrl.markup, 'earn')">
         </md-input-container>
       </div>
         

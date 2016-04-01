@@ -73,8 +73,7 @@ profile = new SimpleSchema
   facebook: type: String, optional: true
   chemicals: type: String, optional:true
   certification: type: String, optional: true
-  loveCount: type: Number, min: 0, optional: true
-  lovedProducers: type: [String], optional: true
+  video: type: String, optional: true
 
 Schema = new SimpleSchema
   emails:

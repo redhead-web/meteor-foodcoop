@@ -53,11 +53,7 @@ angular.module('food-coop').config( function($stateProvider) {
     templateUrl: 'client/checkout/views/checkout.ng.html',
     controller: 'checkoutCtrl',
     controllerAs: 'checkout',
-    resolve: {
-      "currentUser" : function($auth) {
-        return $auth.requireUser();
-      }
-    }
+    
   })
   .state('login', {
     url: '/login',

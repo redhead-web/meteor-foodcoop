@@ -1,4 +1,4 @@
-<body ng-app="food-coop" ng-controller="navCtrl as nav" ng-strict-di="">
+<body ng-controller="navCtrl as nav" class="layout-column">
 
   <md-toolbar md-scroll-shrink layout="row" layout-xs="column" layout-align="start center" layout-padding class="no-print" ng-cloak>
     <div class="md-toolbar-tools">
@@ -16,10 +16,10 @@
       <!-- <md-button hide-sm ui-sref="hubs"> <md-icon md-svg-icon="action:ic_store_24px">store</md-icon> Hubs</md-button> -->
       <!-- <md-button hide-sm ui-sref="faq"> How it Works</md-button> -->
 
-      <md-button ng-href="/login" ng-hide="$auth.currentUser" hide-xs>Login</md-button>
-      <md-button ng-href="/register" ng-hide="$auth.currentUser" hide-xs>Sign up</md-button>
-      <span ng-controller="UserCartCtrl as cr" ng-if="$auth.currentUser">
-        <md-button ui-sref="cart">
+      <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
+      <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
+      <span ng-controller="UserCartCtrl as cr">
+        <md-button ui-sref="cart" ng-if="currentUser">
           {{cr.total | currency}} ({{cr.cartLength}})
           <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
         </md-button>
@@ -27,20 +27,13 @@
       <md-button ng-click="nav.toggleRight()" aria-label="navigation toggle" class="md-icon-button">
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
       </md-button>
-      <md-menu ng-if="$auth.currentUser">
+      <md-menu ng-if="currentUser" md-position-mode="target-right target">
         <multi-avatar
+          md-menu-origin
           ng-click="$mdOpenMenu($event)"
-          user="$auth.currentUser" width="40">
+          user="currentUser" width="40">
         </multi-avatar>
-        <!-- <md-button aria-label="open user menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-          <md-icon md-menu-origin
-          md-svg-icon="social:ic_person_24px"></md-icon>
-        </md-button> -->
-        <md-menu-content>
-          <!-- <md-menu-item>
-            <p flex><strong>{{ currentUser.profile.name }} #{{currentUser.profile.customerNumber}}</strong></p>
-          </md-menu-item> -->
-          <!-- <md-menu-divider></md-menu-divider> -->
+        <md-menu-content width="6">
           <md-menu-item>
             <md-button ui-sref="profile.balance">
               <div layout="row">
@@ -90,12 +83,12 @@
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-href="/logout" ng-show="$auth.currentUser">Logout</md-button>
+            <md-button ng-href="/logout" ng-show="currentUser">Logout</md-button>
           </md-menu-item>
         </md-menu-content>
 
       </md-menu>
-      <md-button hide-xs ui-sref="admin" ng-if="$auth.currentUser && hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-icon-button">
+      <md-button ui-sref="admin" ng-if="currentUser && hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-icon-button">
         <md-icon md-svg-icon="action:ic_settings_24px"></md-icon>
       </md-button>
       
@@ -103,7 +96,7 @@
   </md-toolbar>
 
 
-<section id="PageRoot">
+<section id="PageRoot" flex>
 
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
 
@@ -112,11 +105,11 @@
     </md-toolbar>
     <md-content layout-padding="">
       <md-list>
-        <md-list-item ng-click="nav.goTo('login'); nav.toggleRight()" ng-hide="$auth.currentUser">
+        <md-list-item ng-click="nav.goTo('login'); nav.toggleRight()" ng-hide="currentUser">
           <md-icon md-svg-icon="action:ic_lock_outline_24px"></md-icon>
           <p>Login</p>
         </md-list-item>
-        <md-list-item ng-click="nav.goTo('register'); nav.toggleRight()" ng-hide="$auth.currentUser">
+        <md-list-item ng-click="nav.goTo('register'); nav.toggleRight()" ng-hide="currentUser">
           <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
           <p>Sign up</p>
         </md-list-item>
@@ -141,8 +134,8 @@
           <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
           <p> Contact Us </p>
         </md-list-item>
-        <md-divider ng-show="$auth.currentUser"></md-divider>
-        <md-list-item ng-click="nav.goTo('logout'); nav.toggleRight()" ng-show="$auth.currentUser">
+        <md-divider ng-show="currentUser"></md-divider>
+        <md-list-item ng-click="nav.goTo('logout'); nav.toggleRight()" ng-show="currentUser">
           <p>Logout</p>
         </md-list-item>
       </md-list>
@@ -160,12 +153,14 @@
 </section>
 
 
-<footer layout="row" layout-align="center end">
-  <p><small>Created from the Food Co-op Platform Beta version 0.1.4</small></p>
-  <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
-    <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
-  </md-button>
-  <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
+<footer>
+  <div layout="row" layout-align="center end" layout-margin>
+    <p><small>Created from the Food Co-op Platform Beta version 0.1.4</small></p>
+    <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
+      <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
+    </md-button>
+    <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
+  </div>
 </footer>
 
 </body>

@@ -5,7 +5,7 @@
   <form name="transactUser" layout="column" ng-submit="tr.transact(tr.amount)">
     <md-input-container>
       <md-icon md-svg-icon="action:ic_credit_card_24px" class="md-accent" aria-label="amount"></md-icon>
-      <input type="number" ng-model="tr.amount"
+      <input type="number" ng-model="tr.amount" step="0.01"
              placeholder="amount (positive for credit, negative for debit)" aria-label="amount"/>
     </md-input-container>
     <md-button type="submit">Adjust Balance</md-button>

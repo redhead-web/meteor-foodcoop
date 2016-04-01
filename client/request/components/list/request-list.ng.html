@@ -42,10 +42,10 @@
       <request-details request="request" on-update="$ctrl.update(request, modifier)" price-category="$ctrl.priceCategory"></request-details>
     </div>
     <offers request="request" request-update="$ctrl.update(request, modifier)"></offers>
-    <md-list-item ui-sref="login" class="request-footer secondary-button-padding md-whiteframe-1dp" ng-if="request.active && !$auth.currentUser">
+    <md-list-item ui-sref="login" class="request-footer secondary-button-padding md-whiteframe-1dp" ng-if="request.active && !currentUser">
       Please Login to make an offer
     </md-list-item>
-    <new-offer request="request" class="request-footer" ng-if="request.active && $auth.currentUser"></new-offer>
+    <new-offer request="request" class="request-footer" ng-if="request.active && currentUser"></new-offer>
   </section>
   
 

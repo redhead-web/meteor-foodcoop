@@ -23,18 +23,20 @@ if Meteor.isClient
       deviceId = Random.id()
       Session.set 'deviceId', deviceId
     else if Meteor.userId() and Cart.Items.find(deviceId: Session.get('deviceId')).count() > 0
-      Meteor.call '/cart/loggedIn', Session.get('deviceId'), (err) ->
-        if err
-          return console.error(err)
-        Session.set 'deviceId', undefined
-        return
+      Session.set 'deviceId', undefined
+      # Meteor.call '/cart/loggedIn', Session.get('deviceId'), (err) ->
+#         if err
+#           return console.error(err)
+#         Session.set 'deviceId', undefined
+#         return
     return
 
 Meteor.methods '/cart/loggedIn': (deviceId) ->
-  Cart.Items.update { deviceId: deviceId }, {
-    $set: userId: @userId
-    $unset: deviceId: 1
-  }, multi: true
+  #if deviceId
+    # Cart.Items.update { deviceId: deviceId }, {
+  #     $set: userId: @userId
+  #     $unset: deviceId: 1
+  #   }, multi: true
   return
 
 

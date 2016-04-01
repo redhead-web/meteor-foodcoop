@@ -23,4 +23,3 @@ if process.env.METEOR_ENVIRONMENT == 'production'
             console.error(error)
           if result
             console.log result
- 

@@ -126,6 +126,7 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
         'profile.banner': vm.producer.profile.banner
         'profile.website': vm.producer.profile.website
         'profile.chemicals': vm.producer.profile.chemicals
+        'profile.video': vm.producer.profile.video
     , (err, result) ->
       if err
         console.error err

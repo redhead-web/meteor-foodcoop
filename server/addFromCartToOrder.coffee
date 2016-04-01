@@ -65,6 +65,9 @@ Meteor.methods
       ,
         multi: yes
         
+      Meteor.users.update @userId,
+        $set: 'profile.lastOrder': _.pluck(products, 'productId')
+        
       Meteor.call "confirmOrder", products, data
         
     catch error

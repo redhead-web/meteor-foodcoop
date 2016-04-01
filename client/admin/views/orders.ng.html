@@ -8,8 +8,25 @@
 <section layout="row" layout-align="center center" layout-wrap>
   <md-button class="md-success" ng-repeat="hub in hubs" ng-click="$parent.hubFilter = hub.location">{{hub.title || hub.location}}</md-button>
 </section> -->
+<section layout layout-align="center start">
+  <table class="material-table" flex="70" flex-xs="100">
+    <thead>
+      <tr>
+        <th><md-button md-no-ink ng-click="orders.productTable.sort='product'; orders.productTable.reverse = !orders.productTable.reverse">Product</md-button></th>
+        <th><md-button md-no-ink ng-click="orders.productTable.sort='count'; orders.productTable.reverse = !orders.productTable.reverse">Quantity</md-button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(product, count) in orders.occurences(filteredOrders)"
+        ng-click="orders.searchstring = product">
+        <td>{{product}}</td>
+        <td>{{count}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-<section layout="row" layout-align="center center" layout-wrap>
+<!-- <section layout="row" layout-align="center center" layout-wrap>
   <figure ng-repeat="(product, count) in orders.occurences(filteredOrders)"
   ng-click="orders.searchstring = product"
   class="text-center">
@@ -18,7 +35,7 @@
       <h3>{{product}}</h3>
     </figcaption>
   </figure>
-</section>
+</section> -->
 <section layout="row" layout-align="center center" layout-margin>
   <md-list flex="50" md-whiteframe="1dp">
     <md-subheader class="md-no-sticky">Customers</md-subheader>
@@ -38,16 +55,16 @@
   </md-list>
 </section>
 
-<section layout="row">
+<section layout="column" layout-margin>
   <md-input-container class="md-icon-float">
     <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
     <input ng-model="orders.searchstring" type="search" placeholder="search orders">
   </md-input-container>
-  <h5 class="md-title">
+  <p class="md-body-2">
     Total Sales: {{orders.total(filteredOrders, true) | currency}}
     Total for Producers: {{orders.total(filteredOrders) | currency}}
     Total co-op revenue: {{orders.total(filteredOrders, true) - orders.total(filteredOrders) | currency}}
-  </h5>
+  </p>
 </section>
 
 <table class="material-table">

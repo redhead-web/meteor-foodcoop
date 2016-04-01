@@ -33,11 +33,6 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
       url: '/me',
       templateUrl: 'client/user/views/profile.ng.html',
       controller: 'ProfileCtrl',
-      resolve: {
-        "currentUser" : function($auth) {
-          return $auth.requireUser();
-        }
-      }
     })
     .state('requests', {
       url: '/requests',

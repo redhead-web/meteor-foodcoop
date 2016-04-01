@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use('angular', 'client');
+  api.imply('angular', 'client');
   api.addFiles('bower_components/angular-socialshare/dist/angular-socialshare.min.js', 'client');
 });
 

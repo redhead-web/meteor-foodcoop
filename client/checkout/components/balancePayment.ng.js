@@ -8,6 +8,8 @@ angular.module('food-coop')
     },
     controller: function($scope, $state) {
       
+      "ngInject";
+      
       $scope.$watch('total', function(newValue) {
         if ( Roles.userIsInRole(Meteor.userId(), 'allowNegativeBalance') || newValue === 0) {
           $scope.canInvoice = true;
@@ -15,12 +17,14 @@ angular.module('food-coop')
       })
       
       $scope.invoice = function () {
-        $scope.call("balanceCheckout", function(err, response) {
-          if (err) {
-            return console.error(err)
-          }
-          console.log(response)
-          $state.go('cart.success')
+        Meteor.call("balanceCheckout", function(err, response) {
+          $scope.$apply(function() {
+            if (err) {
+              return console.error(err)
+            }
+            console.log(response)
+            $state.go('cart.success')
+          })
         });
       }
     },

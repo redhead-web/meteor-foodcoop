@@ -6,6 +6,7 @@ Schema = new SimpleSchema
   name:
     type: String
     max: 100
+    index: 1
   producer:
     type: String
     regEx: SimpleSchema.RegEx.Id
@@ -57,7 +58,7 @@ Schema = new SimpleSchema
     label: "Product Description"
     optional: true
     trim: false
-    max: 2000
+    max: 2500
   dateCreated:
     type: Date
     defaultValue: new Date()

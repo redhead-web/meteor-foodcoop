@@ -18,11 +18,11 @@
 					</md-toolbar>
 					<md-content>
 						<md-list flex="noshrink">
-			        <md-list-item ng-click="nav.goTo('directory')">
+			        <md-list-item ng-href="tel:{{producer.profile.phone}}">
 			          <md-icon md-svg-icon="communication:ic_phone_24px"></md-icon>
 			          <p> {{producer.profile.phone}} </p>
 			        </md-list-item>
-			        <md-list-item ng-click="nav.goTo('directory')">
+			        <md-list-item ng-href="mailto:{{producer.emails[0].address}}">
 			          <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
 			          <p> {{producer.emails[0].address}} </p>
 			        </md-list-item>

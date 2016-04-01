@@ -13,7 +13,10 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
   
   // this.subscribe('active-products', () => [this.getReactively('query', true), this.getReactively('limit'), this.getReactively('options.sort')])
   
-  this.subscribe('all-active-products')
+  this.subscribe('all-active-products', () => {}, (err) => {
+    if (err) console.log(err);
+    this.productsReady = true;
+  });
 
   this.go = $state.go;
   
@@ -53,7 +56,7 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
       // return Products.find(q, {limit: this.getReactively('limit'), sort: this.getReactively('options.sort') })
       return Products.find(q, {sort: this.getReactively('options.sort') })
     }
-  });
+  });  
   
   this.loadMore = loadMore;
   

@@ -12,6 +12,6 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use(['angular@1.3.0', 'redhead:remarkable@1.6.2'], 'client');
+  api.imply(['angular', 'redhead:remarkable@1.6.2'], 'client');
   api.addFiles('angular-remarkable.js', 'client');
 });

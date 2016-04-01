@@ -12,7 +12,8 @@ angular.module('food-coop',[
   '720kb.socialshare',
   'remarkable',
   'multi-avatar',
-  'ngLetterAvatar'
+  'ngLetterAvatar',
+  'youtube-embed'
 ])
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
@@ -32,6 +33,8 @@ angular.module('food-coop',[
 
 .run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
+  
+  $rootScope.title = "Fresh Local Quality | Whangarei Food Co-op"
 
   // Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
@@ -40,3 +43,14 @@ angular.module('food-coop',[
      document.body.scrollTop = document.documentElement.scrollTop = 0;
   });
 });
+
+function onReady() {
+  angular.bootstrap(document, ['food-coop'], {
+    strictDi: true
+  });
+}
+ 
+if (Meteor.isCordova)
+  angular.element(document).on("deviceready", onReady);
+else
+  angular.element(document).ready(onReady);
