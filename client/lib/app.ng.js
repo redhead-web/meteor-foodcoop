@@ -35,6 +35,7 @@ angular.module('food-coop',[
   $rootScope.hasRole = Roles.userIsInRole;
   
   $rootScope.title = "Fresh Local Quality | Whangarei Food Co-op"
+  $rootScope.ogImage = "/OpenGraph.png"
 
   // Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');

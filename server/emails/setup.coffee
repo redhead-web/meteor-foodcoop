@@ -56,7 +56,7 @@ Meteor.startup ->
           nextDay : '[Tomorrow]',
           sameDay : '[Today]',
           nextWeek : '[this] dddd',
-          sameElse : 'dddd MMMM dd, yyyy'
+          sameElse : 'dddd MMMM DD, YYYY'
       duration: () ->
         #similar to userCartCtrl weeksRemaining function
         end = moment(@end_date).startOf('day');
