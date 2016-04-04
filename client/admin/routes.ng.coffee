@@ -53,7 +53,7 @@ angular.module('food-coop').config ($stateProvider) ->
     controllerAs: 'orders'
     resolve: 'admin': ($q) ->
         isAdmin($q)
-  ).state 'admin.order',
+  ).state('admin.order',
     url: '/order/:orderId'
     templateUrl: 'client/admin/views/order.ng.html'
     controller: 'OrderAdminCtrl'
@@ -61,6 +61,13 @@ angular.module('food-coop').config ($stateProvider) ->
     resolve:
       'admin': ($q) ->
         isAdmin($q)
+  ).state('admin.pos', 
+    url: '/pos/'
+    template: "<point-of-sale></point-of-sale>"
+    resolve: 
+      'admin': ($q) ->
+        isAdmin($q)
+  )  
   return
 
 # ---

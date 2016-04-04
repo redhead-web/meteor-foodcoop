@@ -1,7 +1,16 @@
 Meteor.publish "active-products", (query, limit, sort)->
-  check query, Object
-  check limit, Number
-  check sort, Object
+  if query
+    check query, Object
+  else
+    query = {}
+  if limit
+    check limit, Number
+  else
+    limit = -1
+  if sort
+    check sort, Object
+  else
+    sort = {name: 1}
   
   options =
    fields:
@@ -16,7 +25,7 @@ Meteor.publish "active-products", (query, limit, sort)->
      category: 1
      minimumOrder: 1
    limit: limit
-   sort: sort || {name: 1}
+   sort: sort 
   
   q = 
     published : true

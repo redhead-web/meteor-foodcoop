@@ -12,14 +12,14 @@ function UserCartCtrl ($scope, $reactive, $mdToast) {
     
   vm.helpers({
     items() {
-      return Cart.Items.find()
+      return Cart.Items.find({userId: Meteor.userId()})
     }
   })
   
   vm.autorun(() => {
-    let cartItems = Cart.Items.find().fetch()
+    let cartItems = Cart.Items.find({userId: Meteor.userId()}).fetch()
     vm.total = Markup(cartItems).cartTotal()
-    vm.cartLength = Cart.Items.find().count()
+    vm.cartLength = Cart.Items.find({userId: Meteor.userId()}).count()
   });
 
   vm.removeFromCart = removeFromCart;
@@ -29,8 +29,8 @@ function UserCartCtrl ($scope, $reactive, $mdToast) {
     Cart.Items.remove(id);
   }
 
-  function changeQuantity (id, productId, new_qty, old_qty) {
-    vm.call('/cart/item/update', id, new_qty, old_qty, function(error) {
+  function changeQuantity (id, newQty, oldQty) {
+    vm.call('/cart/item/update', id, newQty, oldQty, function(error) {
       if (error) {
         console.log(error);
         $mdToast.show(
@@ -39,10 +39,6 @@ function UserCartCtrl ($scope, $reactive, $mdToast) {
       }
     });
   }
-  
-  
-  
-
 }
 
 angular.module("food-coop").controller('UserCartCtrl', UserCartCtrl);

@@ -1,10 +1,12 @@
 Meteor.publish 'userCount', ->
   Counts.publish this, 'userCount', Meteor.users.find()
+  @ready()
   undefined
 
 Meteor.publish 'orderCount', ->
   Counts.publish this, 'upcoming-ordersCount', Sales.find
     deliveryDay: new Date GetDeliveryDay()
+  @ready()
   undefined
 
 Meteor.publish 'product-count', ->
@@ -22,6 +24,7 @@ Meteor.publish 'orders', (deliveryDay) ->
       deliveryDay: new Date(deliveryDay)
   else
     console.log "cannot publish orders to non admin"
+    @ready()
 
 Meteor.publish "user-basics", () ->
   if Roles.userIsInRole this.userId, 'admin'
@@ -34,6 +37,13 @@ Meteor.publish "user-basics", () ->
   else
     @ready()
     return
+    
+Meteor.publish "cart-any-user", (userId) ->
+  if Roles.userIsInRole @userId, 'admin'
+    Cart.Items.find({userId: userId})
+  else
+    @ready()
+    return 
 
 Meteor.publish "user-list", (options, searchstring) ->
   unless searchstring?
@@ -65,6 +75,8 @@ Meteor.publish "user-list", (options, searchstring) ->
         '$regex': ".*#{searchstring}"
         '$options': 'i'
     , options
+  else
+    @ready()
 
 Meteor.publish "user", (user) ->
 

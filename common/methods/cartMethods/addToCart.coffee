@@ -1,6 +1,14 @@
 
 
 Meteor.methods
+	"/cart/admin/insert": (customerId, product, qty) ->
+		check customerId, String
+		if Roles.userIsInRole @userId, 'admin'
+			self = this
+			self.userId = customerId
+			Meteor.call.call self, '/cart/insert', product, qty
+		else
+			throw new Meteor.Error 401, 'only admin can call that method'
 	'/cart/item/increment': (cartId, qty) ->
 		check cartId, String
 		check qty, Number
@@ -48,6 +56,8 @@ Meteor.methods
 
 		else
 			result = Cart.Items.insert
+				dateCreated: new Date()
+				dateModified: new Date()
 				productId: product._id
 				userId: @userId
 				qty: qty

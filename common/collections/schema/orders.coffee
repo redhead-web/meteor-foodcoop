@@ -5,6 +5,7 @@ order = new SimpleSchema
   orderTotal: type: Number, decimal: true
   cardAmount: type: Number, decimal: true, defaultValue: 0
   balanceAmount: type: Number, decimal: true, defaultValue: 0
+  cashAmount: type: Number, decimal: true, optional: true
   
   status:
     type: String

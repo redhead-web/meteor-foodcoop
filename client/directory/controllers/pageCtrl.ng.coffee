@@ -27,7 +27,7 @@ angular.module('food-coop').controller 'pageCtrl', ($scope, $reactive, $statePar
     likesCount: ->
       Likes.find(likee: $stateParams.producerId)
     products: ->
-      Products.find({}, {sort: name: 1})
+      Products.find({producer: $stateParams.producerId}, {sort: name: 1})
         
   
   vm.autorun ->

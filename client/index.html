@@ -2,9 +2,6 @@
 
   <md-toolbar md-scroll-shrink layout="row" layout-xs="column" layout-align="start center" layout-padding class="no-print" ng-cloak>
     <div class="md-toolbar-tools">
-      <!-- <h3>
-        <span>Food Co-op (alpha)</span>
-      </h3> -->
       <a ui-sref="store" hide-xs>
         <img src="https://res.cloudinary.com/foodcoop/image/upload/c_scale,h_54/whangarei/WFC_landscape.png" height="54">
       </a>
@@ -12,9 +9,6 @@
         <img src="https://res.cloudinary.com/foodcoop/image/upload/c_scale,h_40/WFC_landscape_icon-01_oudfde" height="40">
       </a>
       <span flex></span>
-      <!-- <md-button hide-sm ui-sref="store"> <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon> Store</md-button> -->
-      <!-- <md-button hide-sm ui-sref="hubs"> <md-icon md-svg-icon="action:ic_store_24px">store</md-icon> Hubs</md-button> -->
-      <!-- <md-button hide-sm ui-sref="faq"> How it Works</md-button> -->
 
       <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
       <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
@@ -113,31 +107,35 @@
           <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
           <p>Sign up</p>
         </md-list-item>
-        <md-divider></md-divider>
+        <md-divider ng-hide="currentUser"></md-divider>
         <md-list-item ng-click="nav.goTo('store'); nav.toggleRight()">
-          <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
+          <md-icon class="md-primary" md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
           <p> Store </p>
         </md-list-item>
         <md-list-item ng-click="nav.goTo('directory'); nav.toggleRight()">
-          <md-icon md-svg-icon="social:ic_people_24px"></md-icon>
+          <md-icon class="md-primary" md-svg-icon="social:ic_people_24px"></md-icon>
           <p> Our Producers </p>
         </md-list-item>
         <md-list-item ng-click="nav.goTo('about'); nav.toggleRight()">
-          <md-icon md-svg-icon="action:ic_info_24px"></md-icon>
+          <md-icon class="md-primary" md-svg-icon="action:ic_info_24px"></md-icon>
           <p> About Us </p>
         </md-list-item>
         <md-list-item ng-click="nav.goTo('faq'); nav.toggleRight()">
-          <md-icon md-svg-icon="action:ic_help_24px"></md-icon>
+          <md-icon class="md-primary" md-svg-icon="action:ic_help_24px"></md-icon>
           <p> FAQ / How it Works </p>
         </md-list-item>
         <md-list-item ng-click="nav.goTo('contact'); nav.toggleRight()">
-          <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+          <md-icon class="md-primary" md-svg-icon="content:ic_mail_24px"></md-icon>
           <p> Contact Us </p>
         </md-list-item>
         <md-divider ng-show="currentUser"></md-divider>
         <md-list-item ng-click="nav.goTo('logout'); nav.toggleRight()" ng-show="currentUser">
           <p>Logout</p>
         </md-list-item>
+        <md-divider></md-divider>
+        <br>
+        <p class="md-body-2">Get In Touch</p>
+        <ng-include src="'client/static/views/contact-list.ng.html'"></ng-include>
       </md-list>
     </md-content>
 

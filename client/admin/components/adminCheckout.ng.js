@@ -1,4 +1,6 @@
-angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactive, $state){
+function AdminBraintreeCheckoutController ($scope, $reactive, $mdToast) {
+  "ngInject";
+  
   $reactive(this).attach($scope)
   
   let vm = this;
@@ -19,11 +21,9 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   };
   
   vm.disablePaymentButton = true;
-  vm.success = success;
-  vm.balanceError = balanceError;
   
   function getClientToken () {
-    vm.call("generateClientToken", function(err, token) {
+    vm.call("/admin/generateClientToken", vm.customer._id, function(err, token) {
       if (err || !token) {
         vm.error = "Sorry connection error occurred to payment provider. Please try again later";
         return console.log(err);
@@ -35,13 +35,12 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   getClientToken()
 
   vm.autorun(() => {
-    let user = Meteor.user();
-    let items = Cart.Items.find().fetch();
+    let items = Cart.Items.find({userId: vm.customer._id}).fetch();
     let total = Markup(items).cartTotal();
     
-    if (user && user.profile && user.profile.balance > 0) {
-      if (user.profile.balance < total) {
-        vm.total = total - user.profile.balance;
+    if (vm.customer && vm.customer.profile && vm.customer.profile.balance > 0) {
+      if (vm.customer.profile.balance < total) {
+        vm.total = total - vm.customer.profile.balance;
       } else vm.total = 0
     } else vm.total = total
   })
@@ -52,7 +51,8 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     console.log(obj)
     let data = {};
 
-    data.payment_method_nonce = obj.nonce;
+    data.payment_method_nonce = obj.nonce
+    data.deliveryDay = moment().day(Meteor.settings.public.deliveryDayOfWeek).startOf('day').toDate()
 
     // start spinning wheel animation
     $scope.$apply( function () {
@@ -62,16 +62,17 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     
     //vm.spinner = true;
     
-    vm.call('braintreeTransaction', data, function(err, result) {
+    vm.call('/admin/braintreeTransaction', vm.customer._id, data, function(err, result) {
       if (result && result.success) {
-        vm.success();
+        $mdToast.show($mdToast.simple().content("Card Payment handled. Well done!").position('bottom left').hideDelay(4000))
+        vm.onSuccess()
       } else {
         console.log(err);
         // display error details to the user and get them to try again
         vm.error = "Sorry, something went wrong, please confirm your payment details and try again."
         teardown(function() {
-          getClientToken();
-          vm.disablePaymentButton = false;
+          getClientToken()
+          vm.disablePaymentButton = false
         });
       }
       // end spinning wheel animation
@@ -79,14 +80,19 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
       //$scope.$apply()
     });
   }
-  
-  function success(response) {
-    vm.error = null;
-    $state.go('cart.success');
-  }
-  
-  function balanceError(err) {
-    vm.error = err.message;
-  }
 
-});
+}
+
+
+
+angular.module("food-coop").component("adminBraintreeCheckout", {
+  controller: AdminBraintreeCheckoutController,
+  controllerAs: 'checkout',
+  templateUrl: "client/checkout/views/checkout.ng.html",
+  bindings: {
+    customer: "<",
+    onSuccess: "&"
+  }
+  
+}); 
+

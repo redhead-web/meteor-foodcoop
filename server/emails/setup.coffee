@@ -17,6 +17,10 @@ Templates.wholesaleInvoiceEmail =
   scss: 'invoice/invoice-email.scss'
   route: path: 'invoice'
 
+Templates.orderReceiptPOS =
+  path: 'order/receipt-email.html'
+  route: path: 'receipt'
+
 Templates.confirmOrderEmail =
   path: 'order/confirmation-email.html'
   route: path: 'confirmation'
