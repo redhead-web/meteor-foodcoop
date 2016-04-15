@@ -25,3 +25,5 @@ settings.json
 wh-settings.json
 
 server/startup/email.coffee
+
+public
