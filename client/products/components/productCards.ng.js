@@ -3,7 +3,7 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
   
   "ngInject";
   
-  const pageSize = $mdMedia('xs') ? 12 : $mdMedia('sm') ? 24 : 36;
+  const pageSize = $mdMedia('xs') || $mdMedia('sm') ? 12 : 24;
   
   this.pageSize = pageSize;
     
@@ -13,10 +13,18 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
   
   // this.subscribe('active-products', () => [this.getReactively('query', true), this.getReactively('limit'), this.getReactively('options.sort')])
   
-  this.subscribe('all-active-products', () => {}, (err) => {
+  this.subscribe('active-products', () => [{
+    name: this.getReactively('query.filter'), 
+    category: this.getReactively('query.category'), 
+    producer: this.getReactively('query.producer'),
+    favourites: this.getReactively('query.favourites'),
+    lastOrder: this.getReactively('query.lastOrder')
+  }, this.getReactively('limit')+pageSize, this.getReactively('options.sort')], (err) => {
     if (err) console.log(err);
     this.productsReady = true;
   });
+  
+  this.productsReady = true;
 
   this.go = $state.go;
   

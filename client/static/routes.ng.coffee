@@ -14,6 +14,9 @@ angular.module('food-coop').config ($stateProvider) ->
   ).state('producer-benefits', 
     url: '/features/producer'
     templateUrl: 'client/static/views/producer-benefits.ng.html'
+  ).state('top-up', 
+    url: '/top-up'
+    templateUrl: 'client/static/views/top-up.ng.html'
   )
   
   

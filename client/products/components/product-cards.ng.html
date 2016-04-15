@@ -3,8 +3,8 @@
   <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
 </div>
 <div ng-repeat="product in $ctrl.products | filter: $ctrl.query.filter | limitTo: $ctrl.limit | orderBy: $ctrl.options.sort track by product._id" 
-	flex="25" flex-sm="33" flex-xs="50" class="product-card-container" ng-if="$ctrl.productsReady">
+	flex="25" flex-sm="33" flex-xs="50" class="product-card-container">
   <product-card product="product"></product-card>
 </div>
-<scroll-fire ng-if="$ctrl.productsReady" on-view="$ctrl.loadMore()"></scroll-fire>
+<scroll-fire on-view="$ctrl.loadMore()"></scroll-fire>
 </md-content>

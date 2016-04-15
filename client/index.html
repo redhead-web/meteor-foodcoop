@@ -12,12 +12,7 @@
 
       <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
       <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
-      <span ng-controller="UserCartCtrl as cr">
-        <md-button ui-sref="cart" ng-if="currentUser">
-          {{cr.total | currency}} ({{cr.cartLength}})
-          <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
-        </md-button>
-      </span>
+      <cart-summary ng-if="currentUser"></cart-summary>
       <md-button ng-click="nav.toggleRight()" aria-label="navigation toggle" class="md-icon-button">
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
       </md-button>
@@ -149,6 +144,36 @@
   </div>
 
 </section>
+<div ng-cloak>
+<md-fab-speed-dial md-direction="up" ng-if="currentUser && hasRole(currentUser, 'producer')"
+  class="md-fab-bottom-right-fixed md-fling">
+  <md-fab-trigger>
+    <md-button aria-label="menu" class="md-fab md-warn">
+      <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
+    </md-button>
+  </md-fab-trigger>
+  <md-fab-actions>
+    <md-button aria-label="create product" class="md-fab md-raised md-mini md-accent" ui-sref="productCreate">
+      <md-tooltip md-direction="left" md-delay="150">
+        New Product
+      </md-tooltip>
+      <md-icon md-svg-icon="action:ic_description_24px" aria-label="product"></md-icon>
+    </md-button>
+    <md-button aria-label="create user" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && hasRole(currentUser, 'admin')" ui-sref="admin.createUser">
+      <md-tooltip md-direction="left" md-delay="200">
+        New User
+      </md-tooltip>
+      <md-icon md-svg-icon="social:ic_person_add_24px" aria-label="user"></md-icon>
+    </md-button>
+    <md-button aria-label="New Payment" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && hasRole(currentUser, 'admin')" ui-sref="admin.newPayment">
+      <md-tooltip md-direction="left" md-delay="250">
+        New Payment
+      </md-tooltip>
+      <md-icon md-svg-icon="action:ic_payment_24px" aria-label="payment"></md-icon>
+    </md-button>
+  </md-fab-actions>
+</md-fab-speed-dial>
+</div>
 
 
 <footer>

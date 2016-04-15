@@ -1,0 +1,51 @@
+
+<md-content layout="row" layout-xs="column" layout-padding layout-margin layout-fill>
+<div flex>
+  <md-button ui-sref="admin.payments">Back To Payments List</md-button>
+  <h2 class="md-headline">New Payment</h2>
+
+  <form name="insertPayment" layout="column" ng-submit="$ctrl.insert()">
+
+    <md-input-container>
+      <md-icon md-svg-icon="editor:ic_attach_money_24px" class="md-accent" aria-label="user name"></md-icon>
+      <input type="number" min="0" step="0.01" ng-model="$ctrl.payment.amount"
+             placeholder="Amount" aria-label="amount"/>
+    </md-input-container>
+    
+    <md-input-container>
+      <md-icon md-svg-icon="communication:ic_email_24px" class="md-accent"></md-icon>
+      <md-select ng-model="$ctrl.payment.method">
+        <md-option ng-repeat="option in $ctrl.options" value="{{option}}">
+          {{option}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    
+    <md-autocomplete flex required md-input-name="User" placeholder="User" 
+    md-search-text="$ctrl.userSearch"
+    md-select-on-match="true"
+    md-selected-item="$ctrl.userObject"
+    md-item-text="item.profile.name"
+    md-items="item in $ctrl.getUsers($ctrl.userSearch)"
+    >
+      <md-item-template>
+        <span class="item-title">
+          <span> {{item.profile.name}} </span>
+        </span>
+        <span class="item-metadata">
+          <span class="item-metastat">
+            <strong>{{item.profile.customerNumber}}</strong>
+          </span>
+        </span>
+      </md-item-template>
+    </md-autocomplete>
+
+    <md-checkbox ng-model="$ctrl.payment.updateBalance" aria-label="producer role">
+        Update Balance?
+    </md-checkbox>
+    
+    <md-button type="submit">Create Payment Record</md-button>
+
+  </form>
+</div>
+</md-content>

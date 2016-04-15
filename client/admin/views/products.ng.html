@@ -4,6 +4,7 @@
   <md-input-container>
     <input type="search" ng-model="ctrl.search" placeholder="search">
   </md-input-container>
+  <!-- <md-checkbox ng-model="ctrl.published">Published?</md-checkbox> -->
   <md-menu-bar>
     <md-menu>
       <button ng-click="$mdOpenMenu()">
@@ -40,13 +41,27 @@
   </md-menu-bar>
 </section>
 
-<md-content layout-xs="column" layout="row" layout-wrap>
-  <div flex="25" flex-sm="33" flex-xs="50" ng-repeat="p in ctrl.products| filter: ctrl.search track by p._id">
+<md-content layout-xs="column" layout="row">
+  <span flex></span>
+  <md-virtual-repeat-container id="user-container" flex="70" flex-sm="90" flex-md="80" flex-xs="100">
+  
+    <md-list>
+      <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products">
+        <cl-image public-id="{{product.img.result}}" class="md-avatar" ng-if="product.img">
+          <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
+        </cl-image>
+        <p class="truncate">{{product.name}} {{ctrl.priceWithMarkup(product)| currency}} / {{product.unitOfMeasure}}</p>
+        <md-switch ng-model="product.published" ng-change="ctrl.save(product, {$set: {published: product.published}})" aria-label="active switch">
+        </md-switch>
+        <md-icon ui-sref="productDetails({productId: product._id})" aria-label="edit" md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        <md-input-container>
+          <input ng-model="product.stocklevel" type="number" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="ctrl.save(product, {$set: {stocklevel: product.stocklevel}})">
+        </md-input-container>
+      </md-list-item>
+    </md-list>
+  </md-virtual-repeat-container>
+  <!-- <div flex="25" flex-sm="33" flex-xs="50" ng-repeat="p in ctrl.products| filter: ctrl.search track by p._id">
     <product-summary-card product="p" on-update="ctrl.save(product, modifier)"></product-summary-card>
-  </div>
-
+  </div> -->
+  <span flex></span>
 </md-content>
-
-<md-button class="md-warn md-fab md-fab-bottom-right" ui-sref="productCreate">
-	<md-icon md-svg-src="content:ic_add_24px"></md-icon>
-</md-button>

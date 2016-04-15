@@ -1,13 +1,4 @@
-<!-- <p>Powered by eWay</p>
-<div ng-if="spinner">
-  <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
-</div>
-<div ng-if="!spinner && !paymentToken">
-  <balancePayment></balancePayment>
-  <tokenPayment total="total"></tokenPayment>
-  <cardPayment total="total"></cardPayment>
-</div> -->
-<div ng-if="checkout.spinner">
+<div ng-if="checkout.spinner" layout layout-align="center center">
   <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
 </div>
 <p class="text-center" ng-if="checkout.error">{{checkout.error}}</p>
@@ -15,10 +6,7 @@
   <div id="payment-form" ng-show="checkout.total > 0"></div>
   <div layout="row">
     <span flex></span>
-    <md-button type="submit" class="md-primary md-raised" ng-show="checkout.total > 0" ng-disabled="checkout.disablePaymentButton">Pay {{checkout.total | currency}} with Credit Card</md-button>
-    <fc-balance-payment total="checkout.total" on-success="checkout.success(response)" on-error="checkout.balanceError(error)"></fc-balance-payment>
+    <md-button type="submit" class="md-primary md-raised" ng-show="checkout.total > 0" ng-disabled="checkout.disablePaymentButton">Pay {{checkout.total | currency}} Now</md-button>
     <span flex></span>
   </div>
 </form>
-
-

@@ -67,7 +67,25 @@ angular.module('food-coop').config ($stateProvider) ->
     resolve: 
       'admin': ($q) ->
         isAdmin($q)
-  )  
+  ).state('admin.payments', 
+    url: '/payments/'
+    template: "<fc-payments></fc-payments>"
+    resolve: 
+      'admin': ($q) ->
+        isAdmin($q)
+  ).state('admin.newPayment', 
+    url: '/new-payment/'
+    template: "<new-payment></new-payment>"
+    resolve: 
+      'admin': ($q) ->
+        isAdmin($q)
+  ).state('admin.cashOrders', 
+    url: '/cash-orders/'
+    template: "<cash-orders></cash-orders>"
+    resolve: 
+      'admin': ($q) ->
+        isAdmin($q)
+  )
   return
 
 # ---

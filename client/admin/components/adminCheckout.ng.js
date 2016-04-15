@@ -93,6 +93,5 @@ angular.module("food-coop").component("adminBraintreeCheckout", {
     customer: "<",
     onSuccess: "&"
   }
-  
 }); 
 

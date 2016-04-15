@@ -1,0 +1,29 @@
+<md-content layout="row">
+  <span flex></span>
+  <div flex="75">
+    Payments Total: {{$ctrl.total | currency}}
+    <md-list>
+      <md-subheader class="md-no-sticky">Whangarei Food Co-op Payments</md-subheader>
+      <md-list-item>
+        <md-input-container>
+          <md-icon md-svg-icon="content:ic_sort_24px"></md-icon>
+          <md-select style="margin-left:36px" placeholder="sort by" aria-label="Sort Ascending or Descending" ng-model="$ctrl.sort">
+            <md-option ng-value="{dateCreated: -1}">Newest</md-option>
+            <md-option ng-value="{dateCreated: 1}">Oldest</md-option>
+          </md-select>
+        </md-input-container>
+
+      </md-list-item>
+      <md-virtual-repeat-container id="user-container" flex>
+        <div md-virtual-repeat="p in $ctrl.payments" class="md-whiteframe-2dp repeat-user">
+          <fc-payment payment="p"></fc-payment>
+        </div>
+      </md-virtual-repeat-container>
+    </md-list>
+
+  </div>
+  <span flex></span>
+</md-content>
+<md-button class="md-warn md-fab md-fab-bottom-right" ui-sref="admin.newPayment">
+	<md-icon md-svg-src="content:ic_add_24px"></md-icon>
+</md-button>

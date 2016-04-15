@@ -1,3 +1,4 @@
+# Payments made by the Co-op
 payment = new SimpleSchema
   dateCreated:
     type: Date

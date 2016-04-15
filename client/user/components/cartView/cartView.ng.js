@@ -1,4 +1,4 @@
-function UserCartCtrl ($scope, $reactive, $mdToast) {
+function UserCartCtrl ($scope, $reactive, $mdToast, $state) {
   
   "ngInject";
   
@@ -17,13 +17,20 @@ function UserCartCtrl ($scope, $reactive, $mdToast) {
   })
   
   vm.autorun(() => {
-    let cartItems = Cart.Items.find({userId: Meteor.userId()}).fetch()
+    let user = Meteor.user();
+    let cartItems = Cart.Items.find({userId: Meteor.userId()}).fetch();
     vm.total = Markup(cartItems).cartTotal()
     vm.cartLength = Cart.Items.find({userId: Meteor.userId()}).count()
+    if (user && user.profile && user.profile.balance > 0) {
+      if (user.profile.balance < vm.total) {
+        vm.totalWithBalance = vm.total - user.profile.balance;
+      } else vm.totalWithBalance = 0
+    } 
   });
 
   vm.removeFromCart = removeFromCart;
   vm.changeQuantity = changeQuantity;
+  vm.checkoutSuccess = checkoutSuccess;
 
   function removeFromCart(id) {
     Cart.Items.remove(id);
@@ -39,6 +46,14 @@ function UserCartCtrl ($scope, $reactive, $mdToast) {
       }
     });
   }
+  
+  function checkoutSuccess () {
+    $state.go('checkoutSuccess');
+  }
 }
 
-angular.module("food-coop").controller('UserCartCtrl', UserCartCtrl);
+angular.module("food-coop").component('cartView', {
+  controller: UserCartCtrl,
+  controllerAs: 'cart',
+  templateUrl: 'client/user/components/cartView/cart-view.ng.html'
+});

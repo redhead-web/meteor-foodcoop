@@ -1,12 +1,8 @@
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
-  .state 'cart.success',
+  .state 'checkoutSuccess',
     url: '/success'
     templateUrl: 'client/checkout/views/success.ng.html'
-
-  .state 'cart.failure',
-    url: '/failure'
-    templateUrl: 'client/checkout/views/failure.ng.html'
 
   .state 'profile.subscriptionCheckout',
     url: '/subscription-checkout'

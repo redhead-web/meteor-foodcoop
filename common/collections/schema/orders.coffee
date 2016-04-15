@@ -10,6 +10,7 @@ order = new SimpleSchema
   status:
     type: String
     allowedValues: ['unpaid', 'paid', 'cancelled', 'refunded']
+  cashDeposited: type: Boolean, optional: true
   user:
     type: String
     regEx: SimpleSchema.RegEx.Id

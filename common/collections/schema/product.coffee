@@ -10,6 +10,7 @@ Schema = new SimpleSchema
   producer:
     type: String
     regEx: SimpleSchema.RegEx.Id
+    index: 1
   producerName:
     type: String
     max:50
@@ -26,6 +27,7 @@ Schema = new SimpleSchema
     max:30
   category:
     type: String
+    index: 1
   stocklevel:
     type: Number, min:0, optional: true
   carted:

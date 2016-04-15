@@ -13,30 +13,23 @@
   
   <p ng-if="gst.coopGST">Whangarei Co-op GST Number is: {{gst.coopGST}} </p>
 
-  <md-card class="md-whiteframe-2dp" ng-repeat="(id, sales) in gst.groupedItems">
+  <md-card class="md-whiteframe-6dp" ng-repeat="(id, sales) in gst.groupedItems">
     <md-card-header>
       <md-card-avatar>
-        <cl-image public-id="{{gst.user(id).profile.logo.result}}" class="md-avatar">
-          <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
-        </cl-image>
+        <multi-avatar
+          user="gst.user(id)._id" width="40">
+        </multi-avatar>
       </md-card-avatar>
       <md-card-header-text>
         <span class="md-title">{{gst.user(id).profile.companyName || gst.user(id).profile.name}}</span>
-        <span class="md-subhead">{{gst.user(id).profile.gst || 'not GST registered'}}</span>
+        <span class="md-subhead">GST Number: {{gst.user(id).profile.gst || 'not GST registered'}}</span>
       </md-card-header-text>
     </md-card-header>
     <md-card-content>
       <md-list>
         <md-subheader class="md-no-sticky">Products</md-subheader>
-        <md-list-item ng-repeat="item in sales" ng-class="{'cancelled': sale.status === 'cancelled', 'refunded': sale.status === 'refunded'}">
-          <cl-image public-id="{{gst.product(id).img.result}}" class="md-avatar">
-            <cl-transformation height="80" width="80" crop="fill" gravity="center"></cl-transformation>
-          </cl-image>
-          <div class="md-list-item-text" layout="row" layout-align="space-between">
-            <p>{{ item.productName }}</p>
-            <p>&nbsp; Qty: {{item.qty}} &nbsp;</p>
-            <p>&nbsp;<strong>{{ item.price | currency}}</strong></p>
-          </div>
+        <md-list-item ng-repeat="sale in sales" ng-class="{'cancelled': sale.status === 'cancelled', 'refunded': sale.status === 'refunded'}">
+          <gst-list sale="sale"></gst-list>
         </md-list-item>
       </md-list>
       <md-divider></md-divider>

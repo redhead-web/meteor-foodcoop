@@ -95,4 +95,16 @@ Meteor.publish "user", (user) ->
   else
     @ready()
     return
+    
+Meteor.publish "cash-orders", () ->
+  if Roles.userIsInRole @userId, 'admin'
+    Orders.find cashAmount: $exists: 1
+    , 
+      sort: dateCreated: 1
+      fields: 
+        cardAmount: 0
+        balanceAmount: 0
+  else
+    @ready()
+    return
         

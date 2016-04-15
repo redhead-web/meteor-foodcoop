@@ -4,7 +4,7 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
   $reactive(@).attach($scope)
   
   @subscribe 'user-list'
-  @subscribe 'active-products'
+  @subscribe 'all-active-products'
   @subscribe 'cart-any-user', () => [@getReactively('customer._id')]
   
   @priceWithMarkup = (item) => Markup(item).total()

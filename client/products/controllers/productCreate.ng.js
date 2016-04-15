@@ -3,8 +3,7 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
 	
 	var vm = this;
 	
-	vm.subscribe('certifications');
-	vm.subscribe('categories');
+	vm.subscribe('categories-and-certifications');
   vm.subscribe('list-of-producers');
 	
 	vm.helpers({

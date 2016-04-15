@@ -19,7 +19,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   };
   
   vm.disablePaymentButton = true;
-  vm.success = success;
+  vm.onSuccess = onSuccess;
   vm.balanceError = balanceError;
   
   function getClientToken () {
@@ -46,8 +46,6 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     } else vm.total = total
   })
 
-  
-
   function checkout (obj) {
     console.log(obj)
     let data = {};
@@ -64,7 +62,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     
     vm.call('braintreeTransaction', data, function(err, result) {
       if (result && result.success) {
-        vm.success();
+        vm.onSuccess();
       } else {
         console.log(err);
         // display error details to the user and get them to try again
@@ -80,7 +78,7 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     });
   }
   
-  function success(response) {
+  function onSuccess(response) {
     vm.error = null;
     $state.go('cart.success');
   }

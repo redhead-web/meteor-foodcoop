@@ -1,0 +1,9 @@
+<md-list-item class="md-3-line">
+<md-icon md-svg-icon="{{$ctrl.icon()}}"></md-icon>
+            
+<div class="md-list-item-text">
+  <h3>{{$ctrl.payment.amount | currency}}</h3>
+  <p>To <a ui-sref="admin.user({userId: $ctrl.recipient._id})">{{$ctrl.recipient.profile.companyName || $ctrl.recipient.profile.name}}</a></p>
+  <p>Paid: {{ $ctrl.payment.dateCreated | calendar }}</p>
+</div>
+</md-list-item>

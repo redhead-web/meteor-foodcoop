@@ -4,6 +4,14 @@ md-toast {
   position: fixed;
 }
 
+.md-fab-bottom-right-fixed {
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  position: fixed;
+}
+
 .img-responsive {
   max-width: 100%;
 }
@@ -31,6 +39,12 @@ md-input-container.md-icon-float > md-icon {
   filter: grayscale(100%);
 }
 
+.truncate {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 
 [ui-view] {

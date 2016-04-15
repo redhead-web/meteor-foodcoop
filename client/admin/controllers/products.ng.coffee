@@ -4,8 +4,22 @@ angular.module('food-coop').controller 'ProductsAdminCtrl', ($scope, $mdToast, $
   
   @sort = name: 1
   
+  @priceWithMarkup =  (product) => Markup(product).total();
+  
   @helpers
-    products: () => return Products.find {}, {sort: @getReactively('sort') }
+    products: () => return Products.find 
+      $or: [
+       { name:
+           $regex: ".*#{@getReactively('search')}"
+           $options: 'i' }
+       { 'producerName': 
+           $regex: ".*#{@getReactively('search')}"
+           $options: 'i' }
+       { 'producerCompanyName': 
+           $regex: ".*#{@getReactively('search')}"
+           $options: 'i' }
+      ]
+    , {sort: @getReactively('sort') }
     
   @save = (product, modifier) ->
     Products.update product._id, modifier

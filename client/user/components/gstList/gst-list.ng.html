@@ -1,0 +1,8 @@
+<div class="md-list-item-text" layout="row" layout-align="space-between">
+  <a ui-sref="product({productId: $ctrl.sale.productId})" class="md-avatar"><cl-image public-id="{{$ctrl.product.img.result}}">
+    <cl-transformation height="40" width="40" crop="fill" gravity="center"></cl-transformation>
+  </cl-image></a>
+  <p class="truncate">{{ $ctrl.sale.productName }}</p>
+  <p>&nbsp; Qty: {{$ctrl.sale.qty}} &nbsp;</p>
+  <p>&nbsp;<strong>{{ $ctrl.sale.price | currency}}</strong></p>
+</div>

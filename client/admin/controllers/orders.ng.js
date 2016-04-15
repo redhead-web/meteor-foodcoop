@@ -9,7 +9,7 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   this.subscribe('orders', () => {
     return [this.getReactively('deliveryDay')]
   });
-
+  
   this.helpers({
     sales: () => Sales.find()
   });
@@ -18,7 +18,7 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
     let sales = Sales.find().fetch();    
     this.customers = _.countBy(sales, function(sale) {return sale.customerName})
     
-    this.producers = _.countBy(sales, function(sale) {return sale.producerName})
+    this.producers = _.countBy(sales, function(sale) {return sale.producerCompanyName || sale.producerName})
   });
 
   this.lastweek = () => {
