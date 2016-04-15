@@ -9,7 +9,6 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
   this.showGST = true;
   
   this.subscribe('categories');
-  this.subscribe('product-names-search');
   this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
 
   
@@ -21,21 +20,23 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
     filter: ''
   };
   
+  if ($stateParams.producer) {
+    this.producer = Meteor.users.findOne($stateParams.producer)
+  }
+  
 
   this.helpers({
     categories() {
       return Categories.find()
     },
-    products() {
-      return Products.find()
-    }
+    // products() {
+    //   return Products.find()
+    // }
   })
   
   this.options = {
     sort: {name: 1}
   };
-
-  this.querySearch   = querySearch;
   
   this.autorun( () => {
     if (this.stateParams.category) {
@@ -45,17 +46,6 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
     }
   })
   
-  function querySearch (query) {
-    var results = query ? this.products.filter( createFilterFor(query) ) : '';
-    return results;
-  }
-  
-  function createFilterFor(query) {
-    var lowercaseQuery = angular.lowercase(query);
-    return function filterFn(product) {
-      return (product.name.toLowerCase().indexOf(lowercaseQuery) !== -1);
-    };
-  }
 
 }
 

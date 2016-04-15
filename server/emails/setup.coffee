@@ -17,6 +17,10 @@ Templates.wholesaleInvoiceEmail =
   scss: 'invoice/invoice-email.scss'
   route: path: 'invoice'
 
+Templates.orderReceiptPOS =
+  path: 'order/receipt-email.html'
+  route: path: 'receipt'
+
 Templates.confirmOrderEmail =
   path: 'order/confirmation-email.html'
   route: path: 'confirmation'
@@ -51,12 +55,17 @@ Meteor.startup ->
         return process.env.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
       deliveryDay: () ->
-        day = GetDeliveryDay()
-        moment(day).calendar null,
+        moment(GetDeliveryDay()).calendar null,
           nextDay : '[Tomorrow]',
           sameDay : '[Today]',
           nextWeek : '[this] dddd',
-          sameElse : 'dddd MMMM dd, yyyy'
+          sameElse : 'dddd MMMM DD, YYYY'
+      nearestDeliveryDay: () ->
+        moment(GetNearestDeliveryDay()).calendar null,
+          nextDay : '[Tomorrow]',
+          sameDay : '[Today]',
+          nextWeek : '[next] dddd',
+          sameElse : 'dddd MMMM DD, YYYY'
       duration: () ->
         #similar to userCartCtrl weeksRemaining function
         end = moment(@end_date).startOf('day');

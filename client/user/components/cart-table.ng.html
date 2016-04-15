@@ -1,12 +1,3 @@
-<!-- <md-content ng-if="!currentUser.profile.cart" layout="column" layout-align="center center">
-  <h2>No items in your cart yet</h2>
-  <h3>Maybe do some shopping and then come back?</h3>
-</md-content> -->
-<md-content layout="row" layout-align="center center">
-  <span flex></span>
-  <div flex="90" flex-md=100 flex-sm=100>
-    <h1 class="text-center md-title"> Shopping Cart </h1>
-
     <table class="material-table cart-table" ng-cloak>
       <thead>
         <tr>
@@ -36,21 +27,21 @@
           </td>
           <td>{{cart.total | currency}}</td>
         </tr>
-        <tr ng-if="currentUser.profile.balance !== 0">
+        <tr ng-if="cart.user.profile.balance !== 0">
           <td colspan="6">Balance</td>
-          <td ng-class="{'green-text': currentUser.profile.balance > 0, 'red-text': currentUser.profile.balance < 0}">
-            {{currentUser.profile.balance | currency}}
+          <td ng-class="{'green-text': cart.user.profile.balance > 0, 'red-text': cart.user.profile.balance < 0}">
+            {{cart.user.profile.balance | currency}}
           </td>
         </tr>
-        <tr ng-if="currentUser.profile.balance !== 0">
+        <tr ng-if="cart.user.profile.balance !== 0">
           <td colspan="6">
             Total Owing
           </td>
           <td>
-            <span ng-if="currentUser.profile.balance < cart.total">
-              {{cart.total - currentUser.profile.balance | currency}}
+            <span ng-if="cart.user.profile.balance < cart.total">
+              {{cart.total - cart.user.profile.balance | currency}}
             </span>
-            <span ng-if="currentUser.profile.balance > cart.total">
+            <span ng-if="cart.user.profile.balance > cart.total">
               $0.00
             </span>
           </td>
@@ -77,33 +68,17 @@
           </td>
           <td>
             <md-input-container class="input-table">
-              <input aria-label="item quantity" type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.changeQuantity(item._id, item.productId, item.qty,  '{{item.qty}}')" min="1">
+              <input aria-label="item quantity" type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.update(item._id, item.qty,  '{{item.qty}}')" min="1">
             </md-input-container>
           </td>
           <td>
             {{cart.totalWithMarkup(item) | currency}}
           </td>
           <td>
-            <md-button class="md-icon-button" aria-label="More" ng-click="cart.removeFromCart(item._id)">
+            <md-button class="md-icon-button" aria-label="More" ng-click="cart.delete(item._id)">
               <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
             </md-button>
           </td>
         </tr>
       </tbody>
     </table>
-    <md-content layout="row">
-      <span flex></span>
-      <h1 class="md-headline">You can pick up this order {{cart.nextDeliveryDay | calendar}}</h1>
-      <span flex></span>
-    </md-content>
-    <ui-view>
-      <div layout="row" layout-align="center center">
-        <md-button class="md-raised md-warn" ui-sref="cart.checkout">Checkout</md-button>
-        <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
-      </div>
-    </ui-view>
-
-  </div>
-  <span flex></span>
-</md-content>
-

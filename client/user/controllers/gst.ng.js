@@ -2,7 +2,6 @@ angular.module("food-coop").controller("gstReceiptCtrl", function($scope, $react
   $reactive(this).attach($scope);
   
   this.subscribe('gst', () => [$stateParams.orderId]);
-  this.subscribe('producers')
   
   this.orderId = $stateParams.orderId;
   
@@ -13,20 +12,15 @@ angular.module("food-coop").controller("gstReceiptCtrl", function($scope, $react
     },
     items() {
       return Sales.find({orderId: $stateParams.orderId});
-    } 
-    
+    }
   });
   
   this.user = function (id) {
     return Meteor.users.findOne(id);
   };
   
-  this.product = function (id) {
-    return Products.findOne(id);
-  };
   
   this.gstAmount = Meteor.settings.public.gst
-  this.coopGST = "123-123-123-123"
     
   this.getGST = getGST;
   
@@ -38,15 +32,11 @@ angular.module("food-coop").controller("gstReceiptCtrl", function($scope, $react
     if (user && Meteor.users.findOne(user).profile.gst == null) {
       return 0
     }
-    
     if (_.isArray(amount)) {
-    
-      return _.reduce(amount, function (total, sale) {return total + (sale.price*sale.qty)}, 0) * (this.gstAmount / 100)
+      return _.reduce(amount, function (total, sale) {return total + (sale.price*sale.qty)}, 0) * (this.gstAmount)
     } else {
       return amount * (this.gstAmount / 100)
     }
-    
-    
   };
   
 });

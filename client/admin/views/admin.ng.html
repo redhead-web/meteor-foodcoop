@@ -4,6 +4,12 @@
 
 <ui-view>
   <div layout="row" layout-margin class="text-center">
+    <md-whiteframe class="md-whiteframe-z5" flex flex-order="4">
+      <md-button class="md-fab" ui-sref="admin.payments" aria-label="payments">
+        <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
+      </md-button>
+      <div class="label">Payments: {{rt.paymentsCount}}</div>
+    </md-whiteframe>
     <md-whiteframe class="md-whiteframe-z5" flex flex-order="3">
       <md-button class="md-fab" ui-sref="admin.users" aria-label="users">
         <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
@@ -23,4 +29,6 @@
       <div class="label">Total Products: {{rt.productsCount}}</div>
     </md-whiteframe>
   </div>
+  <md-button ui-sref="admin.pos" class="md-warn md-raised">Go to Till</md-button>
+  <md-button ui-sref="admin.cashOrders" class="md-raised">Cash Orders</md-button>
 </ui-view>

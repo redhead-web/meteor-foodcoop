@@ -1,34 +1,31 @@
-angular.module('food-coop')
-.directive("fcBalancePayment", function() {
-  return {
-    restrict: 'E',
-    // transclude: true,
-    scope: {
-      total:'=total'
-    },
-    controller: function($scope, $state) {
-      
-      "ngInject";
-      
-      $scope.$watch('total', function(newValue) {
-        if ( Roles.userIsInRole(Meteor.userId(), 'allowNegativeBalance') || newValue === 0) {
-          $scope.canInvoice = true;
-        } else $scope.canInvoice = false;
+function BalancePaymentController($scope, $state, $reactive) {
+  "ngInject";
+  $reactive(this).attach($scope)
+  
+  this.invoice = () => {
+    let userId = this.customer ? this.customer._id : Meteor.userId()
+    this.call("balanceCheckout", userId, this.pos, (err, response) => {
+      $scope.$apply(() => {
+        if (err) {
+          this.onError({error: err})
+          return console.error(err)
+        }
+        console.log(response)
+        this.onSuccess({response: response})
       })
-      
-      $scope.invoice = function () {
-        Meteor.call("balanceCheckout", function(err, response) {
-          $scope.$apply(function() {
-            if (err) {
-              return console.error(err)
-            }
-            console.log(response)
-            $state.go('cart.success')
-          })
-        });
-      }
-    },
-    // replace: true,
-    templateUrl: 'client/checkout/components/balancePaymentTpl.ng.html'
+    })
+  }
+  
+}
+
+angular.module('food-coop')
+.component("fcBalancePayment", {
+  templateUrl: 'client/checkout/components/balancePaymentTpl.ng.html',
+  controller: BalancePaymentController,
+  bindings: {
+    customer: "<",
+    pos: "@",
+    onError: "&",
+    onSuccess: "&"
   }
 })

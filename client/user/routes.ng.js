@@ -18,9 +18,7 @@ angular.module('food-coop').config( function($stateProvider) {
   })
   .state('cart', {
     url: '/cart',
-    controller: 'UserCartCtrl',
-    controllerAs: 'cart',
-    templateUrl: 'client/user/views/cart.ng.html'
+    template: '<cart-view></cart-view>'
   })
   .state('profile.orders', {
     url: '/orders',
@@ -47,13 +45,6 @@ angular.module('food-coop').config( function($stateProvider) {
         return $meteor.call('findUserPaymentMethods')
       }
     }
-  })
-  .state('cart.checkout', {
-    url: '/checkout',
-    templateUrl: 'client/checkout/views/checkout.ng.html',
-    controller: 'checkoutCtrl',
-    controllerAs: 'checkout',
-    
   })
   .state('login', {
     url: '/login',

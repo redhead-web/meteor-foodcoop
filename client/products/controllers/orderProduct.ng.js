@@ -77,7 +77,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
             .position('bottom left');
         $mdToast.show(toast).then(function(response) {
           if ( response == 'ok' ) {
-            $state.go('cart.checkout');
+            $state.go('cart');
           }
         });
       } else if (success === "UPDATE SUCCESS") {
@@ -88,7 +88,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
         .position('bottom left');
         $mdToast.show(toast).then(function(response) {
             if ( response == 'ok' ) {
-              $state.go('cart.checkout');
+              $state.go('cart');
             }
           });
       }

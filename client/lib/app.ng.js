@@ -36,6 +36,7 @@ angular.module('food-coop',[
   
   $rootScope.title = "Fresh Local Quality | Kai Kohekohe Food Co-op"
 
+
   // Meteor.subscribe('active-products');
   // $meteor.subscribe('hubs');
   

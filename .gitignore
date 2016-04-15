@@ -27,3 +27,7 @@ wh-settings.json
 server/startup/email.coffee
 
 public
+
+client/static/views/top-up.html
+
+client/user/auth/views/reset-password.ng.html

@@ -19,6 +19,8 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
   };
   
   vm.disablePaymentButton = true;
+  vm.onSuccess = onSuccess;
+  vm.balanceError = balanceError;
   
   function getClientToken () {
     vm.call("generateClientToken", function(err, token) {
@@ -44,13 +46,11 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     } else vm.total = total
   })
 
-  
-
   function checkout (obj) {
     console.log(obj)
     let data = {};
 
-    data.payment_method_nonce = obj.nonce
+    data.payment_method_nonce = obj.nonce;
 
     // start spinning wheel animation
     $scope.$apply( function () {
@@ -62,14 +62,14 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
     
     vm.call('braintreeTransaction', data, function(err, result) {
       if (result && result.success) {
-        $state.go('cart.success')
+        vm.onSuccess();
       } else {
         console.log(err);
         // display error details to the user and get them to try again
         vm.error = "Sorry, something went wrong, please confirm your payment details and try again."
         teardown(function() {
-          getClientToken()
-          vm.disablePaymentButton = false
+          getClientToken();
+          vm.disablePaymentButton = false;
         });
       }
       // end spinning wheel animation
@@ -77,7 +77,14 @@ angular.module("food-coop").controller("checkoutCtrl", function($scope, $reactiv
       //$scope.$apply()
     });
   }
-
-
+  
+  function onSuccess(response) {
+    vm.error = null;
+    $state.go('cart.success');
+  }
+  
+  function balanceError(err) {
+    vm.error = err.message;
+  }
 
 });

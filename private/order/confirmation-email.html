@@ -3,8 +3,8 @@
 <p class="alert alert-success">Important: please come collect your order between 3-6pm {{deliveryDay}}. Other arrangements can be made if you are unable to come.</p>
 
 <p>
-  Date:<strong>{{date}}</strong><br>
-  GST Number {{GSTNumber}}<br>
+  Date: <strong>{{date}}</strong><br>
+  <!-- GST Number {{GSTNumber}}<br> -->
   Invoice # {{number}}<br>
   Customer Number: {{customerNumber}}
 </p>
@@ -28,14 +28,14 @@
   {{/each}}
   
   {{#if order.balanceAmount}}
-    <tr><td colspan="3">Balance Charge</td><td style="color: green">${{order.balanceAmount}}</td></tr>
+    <tr><td colspan="4">Balance Charge</td><td style="color: green">${{order.balanceAmount}}</td></tr>
   {{/if}}
   {{#if order.cardAmount}}
-    <tr><td>Card Charge</td><td>${{order.cardAmount}}</td></tr>
+    <tr><td colspan="4">Card Charge</td><td>${{order.cardAmount}}</td></tr>
   {{/if}}
   {{#if order.cardAmount}}
     {{#if order.balanceAmount}}
-      <tr><td>Order Total</td><td>${{order.orderTotal}}</td></tr>
+      <tr><td colspan="4">Order Total</td><td>${{order.orderTotal}}</td></tr>
     {{/if}}
   {{/if}}
 </table>

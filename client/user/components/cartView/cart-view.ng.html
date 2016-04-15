@@ -1,0 +1,15 @@
+<md-content layout="row" layout-align="center center">
+  <span flex></span>
+  <div flex="90" flex-md=100 flex-sm=100>
+    <h1 class="text-center md-title"> Shopping Cart </h1>
+    <cart-table items="cart.items" total="cart.total" user="currentUser" on-update="cart.changeQuantity(id, newQty, oldQty)" on-remove="cart.removeFromCart(id)"></cart-table>
+    
+    <div layout="row" layout-align="center center">
+      <checkout-flow total="cart.totalWithBalance" on-success="cart.checkoutSuccess()"></checkout-flow>
+      <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
+    </div>
+
+  </div>
+  <span flex></span>
+</md-content>
+

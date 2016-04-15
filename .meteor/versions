@@ -37,6 +37,7 @@ caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.1.0
+chuangbo:cookie@1.1.0
 cmather:handlebars-server@2.0.0
 coffeescript@1.0.11
 datariot:ganalytics@0.2.1
@@ -78,6 +79,9 @@ matb33:collection-hooks@0.8.1
 mdg:validation-error@0.2.0
 meteor@1.1.10
 meteor-base@1.0.1
+meteorhacks:fast-render@2.13.0
+meteorhacks:inject-data@2.0.0
+meteorhacks:meteorx@1.4.1
 meteorhacks:picker@1.0.3
 meteorhacks:ssr@2.1.2
 minifiers@1.1.7

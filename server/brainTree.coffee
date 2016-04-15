@@ -13,20 +13,29 @@ gateway = BrainTreeConnect
 Meteor.methods
   generateClientToken: () ->
     config = {}
+    
+    user = Meteor.users.findOne _id: @userId
 
-    if Meteor.user().customerId?
-      config.customerId = Meteor.user().customerId
+    if user.customerId?
+      config.customerId = user.customerId
 
     else
-      config.customerId = Meteor.call 'registerCustomer'
+      config.customerId = Meteor.call 'registerCustomer', user
 
     getToken = gateway.clientToken.generate config
     unless getToken.success == true
       console.log getToken
     getToken.clientToken
+    
+  "/admin/generateClientToken": (userId) ->
+    check userId, String
+    if Roles.userIsInRole @userId, 'admin'
+      self = this
+      self.userId = userId
+      Meteor.call.call self, "generateClientToken"
+    
 
-  registerCustomer: ->
-    user = Meteor.user()
+  registerCustomer: (user) ->
     config =
       {
         #paymentMethodNonce: data.paymentMethodNonce
@@ -37,12 +46,11 @@ Meteor.methods
       }
 
     result = gateway.customer.create config
-    console.log result.customer
     update =
       $set:
         'customerId': result.customer.id
 
-    Meteor.users.update this.userId, update, ->
+    Meteor.users.update user._id, update, ->
       console.log "braintree customer created"
 
     return result.customer.id
@@ -60,8 +68,9 @@ Meteor.methods
       throw new Meteor.Error 404, "no subscription plan found for that price"
 
   findUserPaymentMethods: ->
-    if Meteor.user().customerId?
-      result = gateway.customer.find Meteor.user().customerId
+    user = Meteor.users.findOne _id: @userId
+    if user.customerId?
+      result = gateway.customer.find user.customerId
       if result.paymentMethods?
         result.paymentMethods
       else result
@@ -83,8 +92,9 @@ Meteor.methods
     # Calculate Total on Server for security reasons
     items = Cart.Items.find({userId: @userId}).fetch()
     data.cardAmount = data.orderTotal = Markup(items).cartTotal()
-
-    user = data.user or Meteor.user()
+    
+    user = Meteor.users.findOne _id: @userId
+    
     data.balanceAmount = user.profile.balance
     
     if data.balanceAmount > data.orderTotal
@@ -124,6 +134,12 @@ Meteor.methods
           $set: 'profile.balance': 0
       resultUpdate = Meteor.call 'addFromCartToOrder', items, data, result.transaction.id
     result
+
+  "/admin/braintreeTransaction": (customerId, data) ->
+    if Roles.userIsInRole @userId, 'admin'
+      self = this
+      self.userId = customerId
+      Meteor.call.call self, "braintreeTransaction", data
 
   # braintreeSubscription: (data) ->
 #     #does user have a braintree id? if not get them one. then update their id

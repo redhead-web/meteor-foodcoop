@@ -78,13 +78,13 @@
         <md-button md-no-ink ng-click="orders.predicate='productName'; orders.reverse = !orders.reverse">Product</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="orders.predicate='producer'; orders.reverse = !orders.reverse">Producer</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='producerCompanyName'; orders.reverse = !orders.reverse">Producer</md-button>
       </td>
       <td>
         <md-button md-no-ink ng-click="orders.predicate='price'; orders.reverse = !orders.reverse">Price</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="orders.predicate='status'; orders.reverse = !orders.reverse">Total</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='price'; orders.reverse = !orders.reverse">Total</md-button>
       </td>
     </tr>
   </thead>
@@ -94,6 +94,7 @@
         'cancelled': order.status == 'cancelled',
         'refunded': order.status == 'refunded',
         'collected': order.status == 'collected',
+        'sorted': order.status == 'sorted',
         'delivered': order.status == 'delivered',
         'undelivered': order.status == 'undelivered'
       }
@@ -105,7 +106,7 @@
         {{order.status}}
         <md-menu>
           <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
-           class="md-icon-button"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
+           class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
           <md-menu-content>
             <md-menu-item>
               <md-button ui-sref="admin.order({orderId: order._id})">
@@ -150,6 +151,13 @@
               <md-button ng-click="orders.status(order, 'collected')">
                 <div layout="row">
                   <p flex>Mark as 'Collected'</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-class="{'currentStatus': order.status == 'sorted'}" class="sorted">
+              <md-button ng-click="orders.status(order, 'sorted')">
+                <div layout="row">
+                  <p flex>Mark as 'Sorted'</p>
                 </div>
               </md-button>
             </md-menu-item>

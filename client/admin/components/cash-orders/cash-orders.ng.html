@@ -1,0 +1,35 @@
+<md-content layout="row">
+  <span flex></span>
+  <div flex="75">
+    Cash Total undeposited: {{$ctrl.totalNotDeposited | currency}} <md-button class="md-warn md-raised" ng-click="$ctrl.deposit()">Mark all deposited</md-button>
+    <md-list>
+      <md-subheader class="md-no-sticky">Whangarei Food Co-op Cash Orders</md-subheader>
+      <md-list-item>
+        <md-input-container>
+          <md-icon md-svg-icon="content:ic_sort_24px"></md-icon>
+          <md-select style="margin-left:36px" placeholder="sort by" aria-label="Sort Ascending or Descending" ng-model="$ctrl.sort">
+            <md-option ng-value="{dateCreated: -1}">Newest</md-option>
+            <md-option ng-value="{dateCreated: 1}">Oldest</md-option>
+          </md-select>
+        </md-input-container>
+
+      </md-list-item>
+      <md-virtual-repeat-container id="user-container" flex>
+        <div md-virtual-repeat="o in $ctrl.orders" class="md-whiteframe-2dp repeat-user">
+          <md-list-item class="md-3-line">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
+            
+          <div class="md-list-item-text">
+            <h3>{{o.cashAmount | currency}}</h3>
+            <p>Total: {{o.orderTotal | currency}} Status: {{o.status}}</p>
+            <p>{{ $ctrl.payment.dateCreated | calendar }}</p>
+          </div>
+          <md-checkbox class="md-secondary md-primary" ng-model="o.cashDeposited" ng-change="$ctrl.save(o)"></md-checkbox>
+          </md-list-item>
+        </div>
+      </md-virtual-repeat-container>
+    </md-list>
+
+  </div>
+  <span flex></span>
+</md-content>

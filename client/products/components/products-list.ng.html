@@ -5,20 +5,25 @@
 </md-tabs>
 <md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-    <form ng-submit="nav.goTo('productDetails', {productId: store.search._id})">
+    <!-- <form ng-submit="nav.goTo('productDetails', {productId: store.search._id})">
       <md-autocomplete
           md-no-cache="false"
           md-selected-item="store.search"
-          md-search-text="store.query.filter"
+          md-search-text="store.filterText"
           md-items="item in store.querySearch(store.query.filter)"
           md-item-text="item.name"
-          md-min-length="1"
+          md-min-length="2"
+          md-delay="300"
           placeholder="Search">
         <md-item-template>
           <span md-highlight-text="store.searchText" md-highlight-flags="^i">{{item.name}}</span>
         </md-item-template>
       </md-autocomplete>
-    </form>
+    </form> -->
+    <md-input-container md-no-float class="md-icon-float md-block">
+      <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+      <input placeholder="search" type="search" ng-model="store.query.filter" ng-model-options="{ updateOn: 'default blur', debounce: { default: 250, blur: 0 } }">
+    </md-input-container>
     <div layout="row" layout-align="center center" ng-if="store.producer">
       <md-button class="md-icon-button" ui-sref="store({producer: undefined})">
         <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
@@ -50,7 +55,7 @@
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="store.options.sort = [['producerCompanyName', 'asc'], ['producerName', 'asc'], ['name', 'asc']]">
+            <md-button ng-click="store.options.sort = ['producerCompanyName', 'producerName', 'name']">
               Producer
             </md-button>
           </md-menu-item>

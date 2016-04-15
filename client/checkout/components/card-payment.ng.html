@@ -1,0 +1,11 @@
+<div ng-if="checkout.spinner" layout layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
+</div>
+<form id="checkout" method="post" action="/checkout" autocomplete="off">
+  <div id="payment-form"></div>
+  <div layout="row">
+    <span flex></span>
+    <md-button type="submit" class="md-primary md-raised" ng-disabled="checkout.disablePaymentButton">Pay Now</md-button>
+    <span flex></span>
+  </div>
+</form>
