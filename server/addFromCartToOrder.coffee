@@ -48,11 +48,12 @@ Meteor.methods
       sale.packagingRefund = sale.details.packagingRefund
       sale.unitOfMeasure = sale.details.unitOfMeasure
       sale.orderId = id
-      sale.deliveryDay = data.deliveryDay || GetDeliveryDay()
+      sale.deliveryDay = data.deliveryDay || GetProductDeliveryDay(sale.details.daysNotice).format()
       sale.customerId = @userId
       sale.customerName = Meteor.users.findOne(@userId).profile.name
       sale.customerNumber = Meteor.users.findOne(@userId).profile.customerNumber
       sale.extraMarkup = sale.details.extraMarkup
+      sale.daysNotice = sale.details.daysNotice
 
       delete sale._id
       delete sale.details

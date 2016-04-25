@@ -1,3 +1,18 @@
+basicFields = 
+  published: 1
+  name: 1
+  price: 1
+  unitOfMeasure: 1
+  stocklevel: 1
+  img: 1
+  producer: 1
+  producerName: 1
+  producerCompanyName: 1
+  category: 1
+  minimumOrder: 1
+  daysNotice: 1
+
+
 Meteor.publish "active-products", (query, limit, sort)->
   if limit
     check limit, Number
@@ -6,18 +21,7 @@ Meteor.publish "active-products", (query, limit, sort)->
 
   
   options =
-   fields:
-     published: 1
-     name: 1
-     price: 1
-     unitOfMeasure: 1
-     stocklevel: 1
-     img: 1
-     producer: 1
-     producerName: 1
-     producerCompanyName: 1
-     category: 1
-     minimumOrder: 1
+   fields: basicFields
    limit: limit
    sort: sort or {name: 1}
   
@@ -56,18 +60,7 @@ Meteor.publish "active-products", (query, limit, sort)->
 Meteor.publish "all-active-products", ()->
   Products.find
     published: true
-  , fields: 
-     published: 1
-     name: 1
-     price: 1
-     unitOfMeasure: 1
-     stocklevel: 1
-     img: 1
-     producer: 1
-     producerName: 1
-     producerCompanyName: 1
-     category: 1
-     minimumOrder: 1
+  , fields: basicFields
     
       
 Meteor.publish "product", (id) ->
@@ -78,6 +71,7 @@ Meteor.publish "product", (id) ->
 Meteor.publish "my-products", ->
   Products.find
     producer: @userId
+  , fields: basicFields
 
 Meteor.publish "product-names", ->
   Products.find {},

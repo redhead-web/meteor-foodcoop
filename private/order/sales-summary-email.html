@@ -1,14 +1,14 @@
 <!-- Data context: @string recipient, @array sales: customerName, productName, price, unitOfMeasure, qty, totalPrice, @Number saleTotal,  -->
 
-<p>Hi {{recipient}}, congratulation on your sales so far through the Whangarei Food Co-op</p>
+<p>Hi {{recipient}}, congratulation on your sales this week through the Whangarei Food Co-op</p>
 
 <div style="text-align: center;">
-  <p>You've Sold</p>
+  <p>This past week you earned</p>
   <h1 style="text-align:center;">${{grandTotal}}</h1>
 </div>
 
-<h1 style="text-align:center;">Delivery of Goods for customers</h1>
-<p style="text-align: center;">Please make sure we receive your sold goods by 3pm {{nextDeliveryDay}}. Our sorting center is on 1 Woods Road, Whangarei. To make arrangements for the delivery of your goods you can contact us on 0210409066 or reply to this email. Should any items not be delivered, we will refund the customer and reduce your balance for those undelivered items.</p>
+<h1 style="text-align:center;">Account Credit</h1>
+<p style="text-align: center;">These sales have been added as credit to your account. When we pay you we will only pay whatever positive balance is on your account and then your account balance will be reset to zero. This means you can shop with us yourself and not have to pay. Worried about how this will effect your accounting? We've got you covered. Your sales are counted as income for your business but it is still okay to spend this credited income on personal shopping. Our <a href="{{rootUrl}}/me/balance">website</a> keeps track of all your purchases and the amount of credit each purchase was made with. File your taxes with this information as an extra, and you will be all fine.</p>
 
 <p><a href="{{rootUrl}}/me/sales">See all your sales online</a></p>
 

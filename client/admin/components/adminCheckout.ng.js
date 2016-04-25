@@ -52,7 +52,7 @@ function AdminBraintreeCheckoutController ($scope, $reactive, $mdToast) {
     let data = {};
 
     data.payment_method_nonce = obj.nonce
-    data.deliveryDay = moment().day(Meteor.settings.public.deliveryDayOfWeek).startOf('day').toDate()
+    data.deliveryDay = GetProductDeliveryDay(0).toDate()
 
     // start spinning wheel animation
     $scope.$apply( function () {

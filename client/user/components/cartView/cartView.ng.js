@@ -6,7 +6,7 @@ function UserCartCtrl ($scope, $reactive, $mdToast, $state) {
   
   var vm = this;
 
-  vm.nextDeliveryDay = moment( GetDeliveryDay() ).format();
+  vm.nextDeliveryDay = GetNextDeliveryDay().format();
   vm.priceWithMarkup = (item) => Markup(item).total();
   vm.totalWithMarkup = (item) => Markup(item).cartTotal();
     

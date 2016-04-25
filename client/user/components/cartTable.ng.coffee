@@ -1,4 +1,4 @@
-CartTableController = ($scope, $reactive) ->
+CartTableController = ($scope, $reactive, $mdDialog) ->
   "ngInject"
   
   $reactive(@).attach($scope)
@@ -10,7 +10,24 @@ CartTableController = ($scope, $reactive) ->
     @onRemove({id: id})
   @update = (id, newQty, oldQty) =>
     @onUpdate {id: id, newQty: newQty, oldQty: oldQty}
-  
+    
+  @deliveryWarning = (daysNotice) =>
+    if daysNotice? and GetProductDeliveryDay(daysNotice).isAfter(GetNextDeliveryDay())
+      return yes
+    else
+      return no
+      
+  @deliveryAlert = (ev, daysNotice) =>
+    $mdDialog.show( $mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title("This product is no longer available for #{GetNextDeliveryDay().format('MMMM D')}")
+        .textContent("You will receive it on #{GetProductDeliveryDay(daysNotice).format("dddd, MMMM D")} instead")
+        .ariaLabel('Delivery Alert')
+        .ok('Got it!')
+        .targetEvent(ev)
+    )
+    return
+    
   return
 
 

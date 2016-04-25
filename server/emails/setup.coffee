@@ -40,6 +40,10 @@ Templates.applications =
 Templates.salesNotification = 
   path: 'order/sales-notification.html'
   route: path: 'sales-notification'
+  
+Templates.salesSummary = 
+  path: 'order/sales-summary-email.html'
+  route: path: 'sales-notification'
 
 Meteor.startup ->
   Mailer.init
@@ -55,13 +59,13 @@ Meteor.startup ->
         return process.env.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
       deliveryDay: () ->
-        moment(GetDeliveryDay()).calendar null,
+        GetNextDeliveryDay().calendar null,
           nextDay : '[Tomorrow]',
           sameDay : '[Today]',
           nextWeek : '[this] dddd',
           sameElse : 'dddd MMMM DD, YYYY'
-      nearestDeliveryDay: () ->
-        moment(GetNearestDeliveryDay()).calendar null,
+      nextDeliveryDay: () ->
+        GetNextDeliveryDay().calendar null,
           nextDay : '[Tomorrow]',
           sameDay : '[Today]',
           nextWeek : '[next] dddd',

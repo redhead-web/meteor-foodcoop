@@ -145,7 +145,7 @@
 
 </section>
 <div ng-cloak>
-<md-fab-speed-dial md-direction="up" ng-if="currentUser && hasRole(currentUser, 'producer')"
+<md-fab-speed-dial md-direction="up" ng-hide="!currentUser || !hasRole(currentUser, 'producer')"
   class="md-fab-bottom-right-fixed md-fling">
   <md-fab-trigger>
     <md-button aria-label="menu" class="md-fab md-warn">
@@ -178,12 +178,24 @@
 
 <footer>
   <div layout="row" layout-align="center end" layout-margin>
-    <p><small>Created from the Food Co-op Platform Beta version 0.1.5</small></p>
+    <p><small>Created from the Food Co-op Platform Beta version 0.1.6</small></p>
     <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
       <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
     </md-button>
     <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
   </div>
 </footer>
+
+<script> 
+var $buoop = {c:2}; 
+function $buo_f(){ 
+ var e = document.createElement("script"); 
+ e.src = "//browser-update.org/update.min.js"; 
+ document.body.appendChild(e);
+};
+try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+catch(e){window.attachEvent("onload", $buo_f)}
+</script> 
+	
 
 </body>

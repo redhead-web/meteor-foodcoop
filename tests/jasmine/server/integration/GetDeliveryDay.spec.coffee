@@ -1,102 +1,126 @@
-#Whangarei Delivery Days
 
-describe "GetDeliveryDay Function for Whangarei", ->
-  it "should get the right delivery day on sunday", ->
-    date = moment().day(0)
-    result = GetDeliveryDay(date)
+cutoffDays = [0..30]
+deliveryDays = [0..6]
 
-    expect result
-    .toEqual moment().day(9).startOf('day').format() # a week from Tuesday
+describe "GetProductDeliveryDay Function for Whangarei", ->
+  
+  
+  it "should find delivery dates for all possible dates and cutoffs", ->
 
-  it "should get the right delivery day on monday", ->
-    date = moment().day(1)
-    result = GetDeliveryDay(date)
+    for d in [0..6]
+      date = moment().day(d).startOf('day')
 
-    expect result
-    .toEqual moment().day(9).startOf('day').format() # a week from Tuesday
+      for c in cutoffDays
 
-  it "should get the right delivery day on tuesday", ->
-    date = moment().day(2)
-    result = GetDeliveryDay(date)
+        for dd in deliveryDays
 
-    expect result
-    .toEqual moment().day(9).startOf('day').format() # a week from Tuesday
+          result = GetProductDeliveryDay(c, date, dd)
 
-  it "should get the right delivery day on wednesday", ->
-    date = moment().day(3)
-    result = GetDeliveryDay(date)
+          expect moment(result).isSameOrAfter(date)
+          .toEqual yes # result is in the future or the same day
 
-    expect result
-    .toEqual moment().day(9).startOf('day').format() # a week from Tuesday'
+          expect moment(result).day()
+          .toEqual moment(date).day(dd).day() # should be on the delivery day of the week
 
-  it "should get the right delivery day on thursday", ->
-    date = moment().day(4)
-    result = GetDeliveryDay(date)
+          weeks = 0
+          ddc = dd
 
-    expect result
-    .toEqual moment().day(9).startOf('day').format() # a week from Tuesday
 
-  it "should get the right delivery day on friday", ->
-    date = moment().day(5)
-    result = GetDeliveryDay(date)
+          while date.isAfter( moment(date).day(ddc).subtract(c, 'days') )
+             weeks++
+             ddc+=7
 
-    expect result
-    .toEqual moment().day(9).add(1, 'weeks').startOf('day').format() # go back a Tuesday and add two tuesdays
 
-  it "should get the right delivery day on saturday", ->
-    date = moment().day(6)
-    result = GetDeliveryDay(date)
-
-    expect result
-    .toEqual moment().day(9).add(1, 'weeks').startOf('day').format() # go back a Tuesday and add two tuesdays
+          expect result.format()
+          .toEqual moment(date).day(dd).add(weeks, 'weeks').format()
+          
     
+  it "should get the right delivery day for ordering tuesday with a 0 day cutoff", ->
+    date = moment().day(2).startOf('day')
+    result = GetProductDeliveryDay(0, date, 2)
     
-# describe "GetDeliveryDay Function for Kaikohe", ->
-#   it "should get the right delivery day on sunday", ->
-#     date = moment().day(0)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(4).startOf('day').format() # a week from Tuesday
-#
-#   it "should get the right delivery day on monday", ->
-#     date = moment().day(1)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(4).startOf('day').format() # a week from Tuesday
-#
-#   it "should get the right delivery day on tuesday", ->
-#     date = moment().day(2)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(11).startOf('day').format() # a week from Tuesday
-#
-#   it "should get the right delivery day on wednesday", ->
-#     date = moment().day(3)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(11).startOf('day').format() # a week from Tuesday'
-#
-#   it "should get the right delivery day on thursday", ->
-#     date = moment().day(4)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(11).startOf('day').format() # a week from Tuesday
-#
-#   it "should get the right delivery day on friday", ->
-#     date = moment().day(5)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(11).startOf('day').format() # go back a Tuesday and add two tuesdays
-#
-#   it "should get the right delivery day on saturday", ->
-#     date = moment().day(6)
-#     result = GetDeliveryDay(date)
-#
-#     expect result
-#     .toEqual moment().day(11).startOf('day').format() # go back a Tuesday and add two tuesdays
+    expect result.format()
+    .toEqual moment(date).day(2).format()
+    
+  it "should get the right delivery day for ordering monday with a 1 day cutoff", ->
+    date = moment().day(1).startOf('day')
+    result = GetProductDeliveryDay(1, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).format()
+    
+  it "should get the right delivery day for ordering monday with a 2 day cutoff", ->
+    date = moment().day(1).startOf('day')
+    result = GetProductDeliveryDay(2, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(1, 'week').format()
+    
+  it "should get the right delivery day for ordering sunday with a 2 day cutoff", ->
+    date = moment().day(0).startOf('day')
+    result = GetProductDeliveryDay(2, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).format()
+    
+  it "should get the right delivery day for ordering saturday with a 2 day cutoff", ->
+    date = moment().day(6).startOf('day')
+    result = GetProductDeliveryDay(2, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(1, 'week').format()
+  it "should get the right delivery day for ordering saturday with a 4 day cutoff", ->
+    date = moment().day(6).startOf('day')
+    result = GetProductDeliveryDay(4, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(2, 'weeks').format()
+    
+  it "should get the right delivery day for ordering friday with a 5 day cutoff", ->
+    date = moment().day(5).startOf('day')
+    result = GetProductDeliveryDay(5, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(2, 'weeks').format()
+    
+  it "should get the right delivery day for ordering thursday with a 5 day cutoff", ->
+    date = moment().day(4).startOf('day')
+    result = GetProductDeliveryDay(5, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(1, 'week').format()
+    
+  it "should get the right delivery day for ordering friday with a 5 day cutoff", ->
+    date = moment().day(5).startOf('day')
+    result = GetProductDeliveryDay(5, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(2, 'weeks').format()
+    
+  it "should get the right Thursday delivery day for ordering Tuesday with a 2 day cutoff", ->
+    date = moment().day(2).startOf('day')
+    result = GetProductDeliveryDay(2, date, 4)
+    
+    expect result.format()
+    .toEqual moment(date).day(4).format()
+    
+  it "should get the right Thursday delivery day for ordering Tuesday with a 3 day cutoff", ->
+    date = moment().day(2).startOf('day')
+    result = GetProductDeliveryDay(3, date, 4)
+    
+    expect result.format()
+    .toEqual moment(date).day(4).add(1, 'week').format()
+  
+  it "should get the right Tuesday delivery day for ordering Monday with a 7 day cutoff", ->
+    date = moment().day(1).startOf('day')
+    result = GetProductDeliveryDay(7, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(1, 'week').format()
+    
+  it "should get the right Tuesday delivery day for ordering Friday with a 7 day cutoff", ->
+    date = moment().day(5).startOf('day')
+    result = GetProductDeliveryDay(7, date, 2)
+    
+    expect result.format()
+    .toEqual moment(date).day(2).add(2, 'weeks').format()

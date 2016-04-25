@@ -191,6 +191,15 @@
         </md-select>
       </md-input-container>
       
+      <md-input-container>
+        <label>Custom Sale Notice (*optional)</label>
+        <md-select ng-model="ctrl.product.daysNotice">
+          <md-option ng-repeat="day in ctrl.daysNotice" value="{{day.value}}">
+            {{day.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      
       <section class="md-whiteframe-3dp" ng-cloak>
         <md-toolbar>
           <div class="md-toolbar-tools">

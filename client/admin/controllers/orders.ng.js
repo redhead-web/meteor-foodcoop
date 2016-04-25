@@ -4,7 +4,7 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
 
   this.status = status;
 
-  this.deliveryDay = moment( GetDeliveryDay() ).format();
+  this.deliveryDay = GetNextDeliveryDay().format();
   
   this.subscribe('orders', () => {
     return [this.getReactively('deliveryDay')]

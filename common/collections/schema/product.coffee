@@ -78,5 +78,13 @@ Schema = new SimpleSchema
   packagingRefund: type: Number, decimal: yes, optional: true
 
   stockcode: type: String, max: 12, optional: true
+  daysNotice: type: Number, min: 0, optional: true 
+  ###
+   number of days notice needed for this order
+   0 is same day (good for items in stock)
+   1 is delivery day -1 (can order day before delivery day)
+   2 is delivery day -2 (can order two days before delivery day) (Whangarei Default)
+   5 is delivery day -5 (can order 5 days before delivery day or cannot order if less than 5 days till delivery day)
+  ###
 
 Products.attachSchema Schema

@@ -18,6 +18,15 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
     }
 	})
   
+  vm.daysNotice = []
+  
+  for (var i = 0; i < 14; i++) {
+    vm.daysNotice.push({
+      value: i,
+      name: moment().day(Meteor.settings.public.deliveryDayOfWeek).subtract(i, 'days').format('dddd') + ` -- ${i} days notice`
+    });
+  }
+  
   vm.markup = Meteor.settings.public.markup;
     
   vm.product = {
@@ -85,12 +94,12 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
     }
   }
 	
-	function reset() {
+	function reset(product) {
 	  vm.product = {
-	    producer: Meteor.userId(),
+	    producer: product.producer || Meteor.userId(),
 	    published: true,
-	    producerName: Meteor.user().profile.name,
-	    producerCompanyName: Meteor.user().profile.companyName || undefined,
+	    producerName: product.producerName || Meteor.user().profile.name,
+	    producerCompanyName: product.producerCompanyName || Meteor.user().profile.companyName || undefined,
 	    category: '',
 	    ingredients: [],
 	  };
@@ -117,7 +126,7 @@ angular.module("food-coop").controller("ProductCreateCtrl", function($scope, $re
         .position('bottom left')
       ).then(function(response) {
         if ( response == 'ok' ) {
-          reset();
+          reset(vm.product);
         }
       });
     });

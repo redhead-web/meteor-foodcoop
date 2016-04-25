@@ -5,7 +5,7 @@ Meteor.publish 'userCount', ->
 
 Meteor.publish 'orderCount', ->
   Counts.publish this, 'upcoming-ordersCount', Sales.find
-    deliveryDay: new Date GetDeliveryDay()
+    deliveryDay: GetNextDeliveryDay().toDate()
   @ready()
   undefined
 

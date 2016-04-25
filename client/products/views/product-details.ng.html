@@ -147,6 +147,7 @@
     <div ng-if="ctrl.product.producer === currentUser._id">
       <p class="md-body-1 text-center">All product changes save automagically!</p>
     </div>
+    
     <div ng-if="ctrl.product.producer !== currentUser._id">
       <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" 
       ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0" class="editContent"
@@ -166,16 +167,30 @@
         </div>
       </form>
     </div>
-    <!-- <md-button ui-sref="store">Keep Shopping</md-button> -->
+    
+    <p class="md-body-1">
+      <md-button
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="action:ic_schedule_24px"></md-icon>
+      </md-button>
+      Available {{ctrl.orderDate(ctrl.product.daysNotice) | calendar}}
+      <md-button
+        ng-if="ctrl.isOwner"
+        ng-click="ctrl.edit.saleNotice = !ctrl.edit.saleNotice;"
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+    </p>
+    
+    <md-input-container ng-if="ctrl.isOwner && ctrl.edit.saleNotice">
+      <label>Sale Notice</label>
+      <md-select ng-model="ctrl.product.daysNotice" ng-change="ctrl.save()">
+        <md-option ng-repeat="day in ctrl.daysNotice" value="{{day.value}}">
+          {{day.name}}
+        </md-option>
+      </md-select>
+    </md-input-container>
 
-    <!-- <md-list>
-      <md-list-item ng-click="nav.goTo('store', {category: ctrl.product.category})">
-        <p>{{ctrl.product.category}}</p>
-      </md-list-item>
-    </md-list> -->
-    <section>
-      
-    </section>
     <md-divider ng-if="ctrl.product.description"></md-divider>
       <md-chips
         ng-model="ctrl.product.ingredients"
