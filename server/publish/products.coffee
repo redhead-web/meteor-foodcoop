@@ -12,6 +12,7 @@ basicFields =
   minimumOrder: 1
   daysNotice: 1
   extraMarkup: 1
+  dateCreated: 1
 
 
 Meteor.publish "active-products", (query, limit, sort)->

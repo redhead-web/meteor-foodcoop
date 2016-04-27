@@ -46,17 +46,18 @@
   <md-virtual-repeat-container id="user-container" flex="70" flex-sm="90" flex-md="80" flex-xs="100">
   
     <md-list>
-      <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products">
+      <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products" ng-click="">
         <cl-image public-id="{{product.img.result}}" class="md-avatar" ng-if="product.img">
           <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
         </cl-image>
         <p class="truncate">{{product.name}} {{ctrl.priceWithMarkup(product)| currency}} / {{product.unitOfMeasure}}</p>
-        <md-switch ng-model="product.published" ng-change="ctrl.save(product, {$set: {published: product.published}})" aria-label="active switch">
-        </md-switch>
-        <md-icon ui-sref="productDetails({productId: product._id})" aria-label="edit" md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        
+        <md-button class="md-icon-button" ui-sref="productDetails({productId: product._id})" aria-label="edit"><md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon></md-button>
         <md-input-container>
           <input ng-model="product.stocklevel" type="number" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="ctrl.save(product, {$set: {stocklevel: product.stocklevel}})">
         </md-input-container>
+        <md-switch class="md-primary md-secondary" ng-model="product.published" ng-change="ctrl.save(product, {$set: {published: product.published}})" aria-label="active switch">
+        </md-switch>
       </md-list-item>
     </md-list>
   </md-virtual-repeat-container>
