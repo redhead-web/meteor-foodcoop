@@ -17,11 +17,13 @@
         <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
       </md-button>
       <md-menu ng-if="currentUser" md-position-mode="target-right target">
-        <multi-avatar
+        <!-- <multi-avatar
           md-menu-origin
           ng-click="$mdOpenMenu($event)"
           user="currentUser" width="40">
-        </multi-avatar>
+        </multi-avatar> -->
+        <md-button md-menu-origin
+          ng-click="$mdOpenMenu($event)">Tools</md-button>
         <md-menu-content width="6">
           <md-menu-item>
             <md-button ui-sref="profile.balance">

@@ -15,6 +15,12 @@ angular.module('food-coop',[
   'ngLetterAvatar',
   'youtube-embed'
 ])
+.config(function (cloudinaryProvider) {
+  "ngInject";
+  cloudinaryProvider
+      .set("cloud_name", Meteor.settings.public.cloudinary.cloud_name)
+      .set("upload_preset", Meteor.settings.public.cloudinary.upload_preset);
+})
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         //    key: 'your api key',
