@@ -1,10 +1,14 @@
+import uiRouter from 'angular-ui-router'
+import ngMaterial from 'angular-material'
+
 angular.module('food-coop',[
   'ngMessages',
   'ngSanitize',
+  'ngAnimate',
   'angular-meteor',
   'angular-meteor.auth',
-  'ui.router',
-  'ngMaterial',
+   uiRouter,
+   ngMaterial,
   'uiGmapgoogle-maps',
   'google.places',
   'ngFileUpload',
@@ -15,28 +19,22 @@ angular.module('food-coop',[
   'ngLetterAvatar',
   'youtube-embed'
 ])
-.config(function (cloudinaryProvider) {
+.config(function ($mdThemingProvider, uiGmapGoogleMapApiProvider, cloudinaryProvider) {
   "ngInject";
-  cloudinaryProvider
-      .set("cloud_name", Meteor.settings.public.cloudinary.cloud_name)
-      .set("upload_preset", Meteor.settings.public.cloudinary.upload_preset);
-})
-.config(function(uiGmapGoogleMapApiProvider) {
-    uiGmapGoogleMapApiProvider.configure({
-        //    key: 'your api key',
-        v: '3.22', //defaults to latest 3.X anyhow
-        libraries: 'places,geometry,visualization'
-    });
-})
-.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default').primaryPalette('light-green').accentPalette('brown');
   $mdThemingProvider.theme('orange').primaryPalette('orange').accentPalette('teal').warnPalette('red');
   $mdThemingProvider.theme('dark-default').primaryPalette('light-green').accentPalette('brown').dark();
+  
+  cloudinaryProvider
+      .set("cloud_name", Meteor.settings.public.cloudinary.cloud_name)
+      .set("upload_preset", Meteor.settings.public.cloudinary.upload_preset);
+      
+  uiGmapGoogleMapApiProvider.configure({
+      //    key: 'your api key',
+      v: '3.22', //defaults to latest 3.X anyhow
+      libraries: 'places,geometry,visualization'
+  });
 })
-// .config(function(paginationTemplateProvider) {
-//     paginationTemplateProvider.setPath('admin/views/dirPagination.ng.html');
-// })
-
 .run(function($rootScope) {
   $rootScope.hasRole = Roles.userIsInRole;
   

@@ -2,7 +2,7 @@
 angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reactive, $state){
   $reactive(this).attach($scope);
 
-  this.status = status;
+  this.changeStatus = changeStatus;
 
   this.deliveryDay = GetNextDeliveryDay().format();
   
@@ -35,9 +35,18 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   this.total = total;
   
   this.move = move;
+  
 
-  function status (sale, status) {
+  function changeStatus (sale, status) {
     Sales.update(sale._id, {$set: {'status': status} });
+  }
+  
+  this.bulkChange = (status) => {
+    let selectedSales = _.filter(this.sales, 'selected')
+    
+    for (var i = 0; i < selectedSales.length; i++) {
+      this.changeStatus(selectedSales[i], status)
+    }
   }
   
   function move (sale, week) {

@@ -15,14 +15,13 @@ angular.module('food-coop').controller 'ResetCtrl',
       .position('top right')
       .hideDelay(3000)
     )
-    Accounts.forgotPassword vm.credentials, (err) ->
-      $scope.$apply ->
-        if err
-          vm.error = 'Error sending forgot password email - ' + err
-          console.error err
-        else 
-          $state.go 'store'
-        return
+    Accounts.forgotPassword vm.credentials, vm.$bindToContext (err) ->
+      if err
+        vm.error = 'Error sending forgot password email - ' + err
+        console.error err
+      else 
+        $state.go 'store'
+      return
     return
   return
 

@@ -61,6 +61,7 @@ Meteor.publish "user-list", (options, searchstring) ->
     'profile.companyName': 1
     'profile.phone':1
     'profile.balance': 1
+    'profile.bankAccount': 1
 
   if Roles.userIsInRole this.userId, 'admin'
 

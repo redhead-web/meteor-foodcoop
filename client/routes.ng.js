@@ -41,8 +41,3 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
 
     $urlRouterProvider.otherwise('/store');
 });
-
-
-function isAdmin (user) {
-  return Roles.userIsInRole(user, 'admin')
-}

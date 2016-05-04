@@ -10,7 +10,7 @@ angular.module('food-coop').directive('scrollFire', function($window) {
   
   return {
     restrict: 'E',
-    // templateUrl: 'client/products/components/scroll-fire.ng.html',
+    template: '<md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>',
     scope: {
       onView: '&'
     },
