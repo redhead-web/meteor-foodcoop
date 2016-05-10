@@ -30,7 +30,7 @@
 			          <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
 			          <p> {{$ctrl.producer.emails[0].address}} </p>
 			        </md-list-item>
-			        <md-list-item ng-click="nav.goTo('directory')">
+			        <md-list-item ui-sref="directory">
 			          <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
 			          <p> {{$ctrl.producer.profile.website}} </p>
 			        </md-list-item>
@@ -45,7 +45,7 @@
 					</md-button>
 					<md-button ui-sref="store({producer:$ctrl.producerId})">See our Full Range of Products</md-button>
 				</section>
-				
+
 			</md-card-content>
 		</md-card>
 		<span flex></span>
@@ -55,24 +55,24 @@
   .producer-banner-products {
     background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fill,f_auto,g_center,w_1920/{{ $ctrl.producer.profile.banner.result ||'GREEN_bwdprc'}}.jpg);
   }
-  
+
   @media only screen and (max-width: 1280px) {
     .producer-banner-products {
       background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fill,f_auto,g_center,w_1280/{{ $ctrl.producer.profile.banner.result ||'GREEN_bwdprc'}}.jpg);
     }
   }
-  
+
   @media only screen and (max-width: 960px) {
     .producer-banner-products {
       background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fill,f_auto,g_center,w_960/{{ $ctrl.producer.profile.banner.result ||'GREEN_bwdprc'}}.jpg);
     }
   }
-  
+
   @media only screen and (max-width: 600px) {
     .producer-banner-products {
       background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fill,f_auto,g_center,w_600/{{ $ctrl.producer.profile.banner.result || 'GREEN_bwdprc'}}.jpg);
     }
   }
-  
-  
+
+
 </style>

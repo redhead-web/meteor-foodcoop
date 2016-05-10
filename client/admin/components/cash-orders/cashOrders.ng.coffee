@@ -8,7 +8,7 @@ cashOrdersController = ($scope, $reactive) ->
   
   @helpers 
     orders: ->
-      Orders.find {}, sort: @getReactively('sort')
+      Orders.find {cashAmount: $gt: 0}, sort: @getReactively('sort')
       
   @autorun =>
     @totalNotDeposited = _.reduce @orders, (total, order) ->
