@@ -31,3 +31,5 @@ public
 client/static/views/top-up.html
 
 client/user/auth/views/reset-password.ng.html
+
+node_modules
