@@ -1,6 +1,3 @@
-isAdmin = (user) ->
-  Roles.userIsInRole user, 'admin'
-
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider.state 'directory',
     url: '/directory'

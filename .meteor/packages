@@ -15,7 +15,6 @@ alanning:roles
 momentjs:moment
 patrickml:braintree@1.29.0
 stevezhu:lodash
-angular:angular-material
 tmeasday:publish-counts
 dburles:collection-helpers
 fourseven:scss
@@ -37,7 +36,6 @@ random
 ejson
 spacebars
 check
-fixtures
 redhead:angular-cloudinary
 angular:angular-messages
 matb33:collection-hooks
@@ -69,3 +67,5 @@ datariot:ganalytics
 meteorhacks:fast-render
 spiderable
 rgnevashev:meteor-angular-coffee
+angular:angular-animate
+angular:angular-aria

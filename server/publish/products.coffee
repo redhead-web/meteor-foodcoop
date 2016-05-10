@@ -40,7 +40,7 @@ Meteor.publish "active-products", (query, limit, sort)->
         $regex: ".*#{query.name}"
         $options: 'i'
   
-    if query.favourites or query.lastOrder
+    if @userId and (query.favourites or query.lastOrder)
       favourites = _.pluck(Likes.find(
         liker: @userId
         category: 'products').fetch(), 'likee')

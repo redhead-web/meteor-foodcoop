@@ -4,6 +4,22 @@ Mailer.config
   from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
   replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz>'
 
+Templates.newProduct =
+  path: 'notifications/new-product.html'
+  route: path: 'notification/new-product'
+
+Templates.earlyFavouritedShoppingReminder =
+  path: 'notifications/early-favourited-shopping-reminder.html'
+  route: path: 'notification/early-favourited-reminder'
+  
+Templates.earlyLikesProducerShoppingReminder =
+  path: 'notifications/early-likes-producer-shopping-reminder.html'
+  route: path: 'notification/early-like-reminder'
+  
+Templates.lastCallReminder = 
+  path: 'notifications/shopping-reminder.html'
+  route: path: 'notification/shopping-reminder'
+
 Templates.contactMessage = 
   path: 'contact/contact-email.html'
   route: path: 'contact'
@@ -58,6 +74,11 @@ Meteor.startup ->
       rootUrl: () ->
         return process.env.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
       # GSTNumber: "113-091-103"
+      producerTitle: (companyName, name) ->
+        if companyName?
+          return companyName
+        else
+          return name
       deliveryDay: () ->
         GetNextDeliveryDay().calendar null,
           nextDay : '[Tomorrow]',
@@ -77,6 +98,9 @@ Meteor.startup ->
         if (weeks == 0)
           weeks++
         "#{weeks} weeks"
+        
+      currency: (amount) ->
+        return "$#{amount.toFixed(2)}"
 
       totalPrice: () ->
           Markup(this).total()

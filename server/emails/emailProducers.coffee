@@ -33,7 +33,8 @@ Meteor.methods
       deliveryDay: deliveryDay.toDate()
       daysNotice: daysNotice
     
-    if daysNotice == Meteor.settings.public.shoppingThreshold # -1 is to know that today shopping for the delivery day should be closed for the majority of products
+    if daysNotice == Meteor.settings.public.shoppingThreshold # today shopping for the delivery day should be closed for the majority of products
+
       saleQuery = daysNotice: null
     
     sales = Sales.find 

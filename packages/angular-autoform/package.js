@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'redhead:ng-parallax',
+  name: 'redhead:angular-autoform',
   version: '0.0.1',
   // Brief, one-line summary of the package.
   summary: '',
@@ -10,15 +10,19 @@ Package.describe({
   documentation: 'README.md'
 });
 
+Npm.depends({'lodash': '4.11.0'})
+
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-  api.use('ecmascript');
-  api.addFiles('ng-parallax.js', 'client');
+  api.versionsFrom('1.3.2.4');
+  api.use(['ecmascript', 'aldeed:simple-schema']);
+  api.use('angular:angular@1.5.3', 'client', { weak: true });
+  api.mainModule('angular-autoform.js', 'client');
+  api.mainModule('angular-autoform-schema.js');
 });
 
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('redhead:ng-parallax');
-  api.addFiles('ng-parallax-tests.js');
+  api.use('redhead:angular-autoform');
+  api.mainModule('angular-autoform-tests.js');
 });

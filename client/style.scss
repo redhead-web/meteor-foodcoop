@@ -1,7 +1,7 @@
 // Global overrides go here
 
 md-toast {
-  position: fixed;
+  position: fixed!important;
 }
 
 .no-padding {
@@ -52,8 +52,8 @@ md-input-container.md-icon-float > md-icon {
 
 
 [ui-view] {
-  
-  
+
+
   &.ng-enter {
     position: absolute;
     left: 0;
@@ -61,7 +61,7 @@ md-input-container.md-icon-float > md-icon {
     z-index: 9999;
     animation: slideInRight 600ms;
   }
-  
+
   &.ng-leave {
     position: absolute;
     left: 0;
@@ -69,5 +69,5 @@ md-input-container.md-icon-float > md-icon {
     z-index: 9999;
     animation: slideOutLeft 600ms;
   }
-  
+
 }

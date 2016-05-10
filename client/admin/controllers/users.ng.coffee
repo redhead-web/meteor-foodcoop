@@ -16,6 +16,7 @@ angular.module("food-coop").controller "UsersAdminCtrl", ($scope, $stateParams) 
 
       if $scope.getReactively 'balance'
         query['profile.balance'] = $gt: 0
+        query['roles'] = 'producer'
       
       Meteor.users.find query,
         sort: sort
