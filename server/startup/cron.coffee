@@ -2,14 +2,14 @@
     
 
 
-# Meteor.setTimeout ->
-#
-#   Meteor.call "/email/producerOrder", (error, result) ->
-#     if error
-#       console.error(error)
-#     if result
-#       console.log result
-# , 1000
+Meteor.setTimeout ->
+
+  Meteor.call "/email/producerOrder", (error, result) ->
+    if error
+      console.error(error)
+    if result
+      console.log result
+, 1000
 
 
 

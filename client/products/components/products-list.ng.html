@@ -5,21 +5,6 @@
 </md-tabs>
 <md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-    <!-- <form ng-submit="nav.goTo('productDetails', {productId: store.search._id})">
-      <md-autocomplete
-          md-no-cache="false"
-          md-selected-item="store.search"
-          md-search-text="store.filterText"
-          md-items="item in store.querySearch(store.query.filter)"
-          md-item-text="item.name"
-          md-min-length="2"
-          md-delay="300"
-          placeholder="Search">
-        <md-item-template>
-          <span md-highlight-text="store.searchText" md-highlight-flags="^i">{{item.name}}</span>
-        </md-item-template>
-      </md-autocomplete>
-    </form> -->
     <md-input-container md-no-float class="md-icon-float md-block">
       <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
       <input placeholder="search" type="search" ng-model="store.query.filter" ng-model-options="{ updateOn: 'default blur', debounce: { default: 250, blur: 0 } }">
@@ -39,6 +24,11 @@
           Sort
         </button>
         <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="store.options.sort = {'dateCreated':-1}">
+              Newest
+            </md-button>
+          </md-menu-item>
           <md-menu-item>
             <md-button ng-click="store.options.sort = {'name':1}">
               Alphabetical

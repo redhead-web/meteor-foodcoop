@@ -27,3 +27,5 @@ wh-settings.json
 server/startup/email.coffee
 
 public
+
+node_modules
