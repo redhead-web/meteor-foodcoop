@@ -13,7 +13,7 @@
 </section>
 
 <div ng-cloak>
-  <md-fab-speed-dial md-direction="up" ng-hide="!currentUser || !hasRole(currentUser, 'producer')"
+  <md-fab-speed-dial md-direction="up" ng-hide="!currentUser || !$root.hasRole(currentUserId, 'producer')"
     class="md-fab-bottom-right-fixed md-fling">
     <md-fab-trigger>
       <md-button aria-label="menu" class="md-fab md-warn">
@@ -27,13 +27,13 @@
         </md-tooltip>
         <md-icon md-svg-icon="action:ic_description_24px" aria-label="product"></md-icon>
       </md-button>
-      <md-button aria-label="create user" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && hasRole(currentUser, 'admin')" ui-sref="admin.createUser">
+      <md-button aria-label="create user" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" ui-sref="admin.createUser">
         <md-tooltip md-direction="left" md-delay="200">
           New User
         </md-tooltip>
         <md-icon md-svg-icon="social:ic_person_add_24px" aria-label="user"></md-icon>
       </md-button>
-      <md-button aria-label="New Payment" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && hasRole(currentUser, 'admin')" ui-sref="admin.newPayment">
+      <md-button aria-label="New Payment" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" ui-sref="admin.newPayment">
         <md-tooltip md-direction="left" md-delay="250">
           New Payment
         </md-tooltip>
