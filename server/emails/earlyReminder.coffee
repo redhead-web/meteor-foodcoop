@@ -30,7 +30,7 @@ Meteor.methods
     likeRecipients = []
     likedProducers = []
     
-    products.forEach (product) ->
+    for product in products
       favouritedOrRecentUsers = Meteor.users.find({ $or: [
         { 'profile.lastOrder': product._id }
         { 'profile.favourites': product._id }
@@ -111,7 +111,7 @@ Meteor.methods
      -- recipient Object 
     _id: 1
     profile.name: 1
-    email: 1
+    emails.address: 1
     producers: [{name: 1, companyName: 1, products: [
       name:                   1
       producer:               1
@@ -127,7 +127,7 @@ Meteor.methods
     -- recipient Object
       _id: 1
       profile.name: 1
-      email: 1
+      emails.address: 1
       products: [{
         _id:                    1
         name:                   1

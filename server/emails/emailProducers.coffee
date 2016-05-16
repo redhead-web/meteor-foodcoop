@@ -37,9 +37,7 @@ Meteor.methods
 
       saleQuery = daysNotice: null
     
-    sales = Sales.find 
-      deliveryDay: deliveryDay.toDate()
-      daysNotice: daysNotice
+    sales = Sales.find saleQuery
     .fetch()
     
     if sales.length > 0
