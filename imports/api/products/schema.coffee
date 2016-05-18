@@ -1,3 +1,5 @@
+Products = require './collection'
+
 certification = new SimpleSchema
   name: type: String
   img: type: String, optional: true
@@ -78,7 +80,7 @@ Schema = new SimpleSchema
   packagingRefund: type: Number, decimal: yes, optional: true
 
   stockcode: type: String, max: 12, optional: true
-  daysNotice: type: Number, min: 0, optional: true 
+  daysNotice: type: Number, min: 0, optional: true
   ###
    number of days notice needed for this order
    0 is same day (good for items in stock)

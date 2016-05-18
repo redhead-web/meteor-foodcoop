@@ -24,37 +24,15 @@ schema = new SimpleSchema
     index: 1
 
 Likes.attachSchema schema
-      
-        
-# schema.addValidator ->
-#   likerField = @field('liker')
-#   likeeField = @field('likee')
-#   if likerField.isSet and likeeField.isSet
-#     Meteor.call "/likes/uniqueLikePair", likerField.value, likeeField.value, (err, match) ->
-#       unless match
-#         return "uniqueLikePair"
-#
-# schema.messages
-#   'uniqueLikePair':'You cannot like that user twice'
 
-    
 if Meteor.isServer
 
-  # Meteor.methods
-#     "/likes/uniqueLikePair": (liker, likee) ->
-#       match = Likes.findOne
-#         liker:liker
-#         likee:likee
-#       if match
-#         return false
-#       return true
-   
   # get all the likes on a given target  anonymously
   Meteor.publish "targetLikes", (userId) ->
-    Likes.find 
+    Likes.find
       likee: userId
     , fields: liker: 0
-  
+
   # get all the likes anonymously
   Meteor.publish "allLikes", ->
     Likes.find {},
@@ -69,16 +47,15 @@ if Meteor.isServer
 
 if Meteor.isClient
   Meteor.subscribe 'myLikes'
-  
+
 Meteor.methods
   "/likes/add": (likee, category) ->
     if @userId
-      pair = 
+      pair =
         likee: likee
         liker: @userId
         category: category
       result = Likes.upsert pair, $set: pair
       result
-    else 
+    else
       throw new Meteor.Error 401, "You must be logged in to register a like on something."
-  

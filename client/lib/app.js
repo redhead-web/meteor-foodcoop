@@ -1,7 +1,10 @@
 import uiRouter from 'angular-ui-router'
 import ngMaterial from 'angular-material'
 import ngFileUpload from 'ng-file-upload'
+import 'angular-simple-logger';
+import 'angular-google-maps';
 import {name as navigation} from '../../imports/ui/components/navigation/navigation'
+import {name as eventList} from '../../imports/ui/components/navigation/navigation'
 
 angular.module('food-coop',[
   'ngMessages',
@@ -10,11 +13,13 @@ angular.module('food-coop',[
   'angular-meteor',
   'angular-meteor.auth',
    navigation,
+   eventList,
    uiRouter,
    ngMaterial,
+   ngFileUpload,
+  'nemLogging',
   'uiGmapgoogle-maps',
   'google.places',
-  ngFileUpload,
   'cloudinary',
   '720kb.socialshare',
   'remarkable',

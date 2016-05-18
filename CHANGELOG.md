@@ -1,3 +1,6 @@
+## 0.1.7_1 (17-5-2016)
+- fixed bug with sending targeted ordering reminder emails and producer order summary emails.
+
 ## 0.1.7 (11-5-2016)
 - changelog started
 - using meteor 1.3 well

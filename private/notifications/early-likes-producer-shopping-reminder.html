@@ -1,0 +1,21 @@
+<p>Hi {{recipient.profile.name}}, just a quick reminder that today will be the last chance to order products you might care about for next week. These products are being sold by producers you've liked.</p>
+
+<p><a href="{{rootUrl}}">Shop Now</a></p>
+{{#each recipient.producers}}
+  <h4>{{name}} <i>{{companyName}}</i></h4>
+  <table border="0" cellspacing="5" cellpadding="5">
+      {{#each products}}
+        <tr>
+          <td><a href="{{rootUrl}}/product/{{_id}}"><img src="http://cdn.cloudinary.com/foodcoopnz/w_30,h_30,c_fit,g_auto/{{img.result}}" width="30" height="30"></a></td>
+          <td><a href="{{rootUrl}}/product/{{_id}}">{{name}}</a></td>
+          <td><a href="{{rootUrl}}/directory/{{producer}}">From {{producerTitle producerCompanyName producerName}}</a></td>
+          <td>{{currency price}}</td>
+          <td><a href="{{rootUrl}}/product/{{_id}}">View Online</a></td>
+        </tr>
+      {{/each}}
+  </table>
+{{/each}}
+
+<p>These products are suggested for you because you have endoresed these producers.</p>
+
+<p>This email is experiemental so please send us feedback if you found it helpful or unhelpful.</p>

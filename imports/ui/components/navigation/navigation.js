@@ -1,27 +1,9 @@
-import angular from 'angular'
+// import angular from 'angular'
 import uiRouter from 'angular-ui-router'
 import ngMaterial from 'angular-material'
 import {Roles} from 'meteor/alanning:roles'
 
 import './navigation.html'
-
-// class navigationController {
-//   constructor($state, $mdSidenav) {
-//     "ngInject";
-//
-//     this.toggleRight = function (navId) {
-//       $mdSidenav(navId).toggle()
-//     };
-//
-//     this.goTo = function (route, params) {
-//       return $state.go(route, params)
-//     };
-//   }
-//
-//   isProducer(user) {
-//     return Roles.userIsInRole(user, 'producer')
-//   }
-// }
 
 function navigationController($mdUtil, $mdSidenav, $log, $state) {
   "ngInject";
