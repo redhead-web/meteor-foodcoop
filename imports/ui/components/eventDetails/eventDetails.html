@@ -1,0 +1,39 @@
+<section layout flex>
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true" layout="column" flex="25" flex-sm="33" flex-xs="100" md-theme="darkTheme">
+    <div class="event-img-container">
+      <cl-image public-id="{{$ctrl.event.img.result}}" format="jpg">
+        <cl-transformation height="300" width="400" crop="fill" gravity="north"></cl-transformation>
+      </cl-image>
+      <h1 class="md-title text-center">{{$ctrl.event.title}}</h1>
+    </div>
+    <md-content layout-padding>
+      <div layout layout-align="space-between">
+        <span class="md-body-1">{{$ctrl.event.date | date:'short'}}</span>
+        <span class="md-body-2">{{$ctrl.event.date | fromNow}}</span>
+      </div>
+      <md-divider></md-divider>
+      <div flex>
+        <div class="md" ng-bind-html="$ctrl.event.description | md"></div>
+        <p class="md-body-2">{{$ctrl.event.ticketPrice | currency}} / each</p>
+      </div>
+      <md-divider></md-divider>
+      <div hide-gt-xs layout>
+        <md-icon md-svg-icon="maps:ic_place_24px" aria-label="event venue icon"></md-icon>
+        <p class="md-body-2">
+          {{$ctrl.event.venue.formatted_address}}
+        </p>
+      </div>
+      <div layout="row" layout-align="space-between">
+        <div ng-cloak>
+          <fc-social-menu url="/event/{{$ctrl.event._id}}" text="{{$ctrl.event.title}} at {{$ctrl.event.date | date:'short'}} at {{$ctrl.event.venue.formatted_address}}"></fc-social-menu>
+          <like-heart-button target-id="$ctrl.event._id" category="event"></like-heart-button>
+    		</div>
+        <span>{{$ctrl.event.ticketsRemaining}} remaining</span>
+      </div>
+      <event-order-form event="$ctrl.event"></event-order-form>
+    </md-content>
+  </md-sidenav>
+  <div hide-xs>
+    <map-location event="$ctrl.event"></map-location>
+  </div>
+</section>

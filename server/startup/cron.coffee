@@ -6,11 +6,11 @@ callback = (error, result) ->
     console.log result
 
 
-Meteor.setTimeout ->
-
-  result = Meteor.call "/email/early-shopping-reminder"
-  console.log result
-, 3000
+# Meteor.setTimeout ->
+#
+#   result = Meteor.call "/email/early-shopping-reminder"
+#   console.log result
+# , 3000
 
 
 

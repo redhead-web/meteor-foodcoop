@@ -1,14 +1,9 @@
-Events = require './collection'
 
-certification = new SimpleSchema
-  name: type: String
-  img: type: String, optional: true
-
-Schema = new SimpleSchema
+exports.schema = new SimpleSchema
   date:
     type: Date
     index: 1
-  name:
+  title:
     type: String
     max: 100
     index: 1
@@ -21,19 +16,19 @@ Schema = new SimpleSchema
     min: 0
     decimal: true
     optional: true
-  totalTickets:
+  ticketTotal:
     type: Number
     min:0
     optional: true
   ticketsRemaining:
-    type: String
+    type: Number
     index: 1
     min: 0
     optional: true
-    autovalue: ->
+    autoValue: ->
       if @isInsert || !@isSet
-        return @field('totalTickets').value
-  
+        return @field('ticketTotal').value
+
   attendees:
     type: [Object]
     optional: true
@@ -45,12 +40,12 @@ Schema = new SimpleSchema
     regEx: SimpleSchema.RegEx.Id
   'attendees.$.timestamp':
     type: Date
-  leadImg:
+  img:
     type: Object
     label: "Product Image"
     optional:true
-  'leadImg.result': type: String, label: "cloudinary public_id"
-  'leadImg.url': type: String, label: "cloudinary url of image"
+  'img.result': type: String, label: "cloudinary public_id"
+  'img.url': type: String, label: "cloudinary url of image"
   description:
     type: String
     label: "Product Description"
@@ -61,6 +56,3 @@ Schema = new SimpleSchema
     type: Date
     defaultValue: new Date()
   daysNotice: type: Number, min: 0, optional: true # tickets can close a certain number of days before the event if necessary
-
-
-Events.attachSchema Schema

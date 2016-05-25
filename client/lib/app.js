@@ -4,7 +4,8 @@ import ngFileUpload from 'ng-file-upload'
 import 'angular-simple-logger';
 import 'angular-google-maps';
 import {name as navigation} from '../../imports/ui/components/navigation/navigation'
-import {name as eventList} from '../../imports/ui/components/navigation/navigation'
+import {name as eventList} from '../../imports/ui/components/eventList/eventList'
+//import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 
 angular.module('food-coop',[
   'ngMessages',
@@ -14,6 +15,7 @@ angular.module('food-coop',[
   'angular-meteor.auth',
    navigation,
    eventList,
+   //requestList,
    uiRouter,
    ngMaterial,
    ngFileUpload,

@@ -14,13 +14,15 @@ Meteor.methods
   generateClientToken: () ->
     config = {}
     
-    user = Meteor.users.findOne _id: @userId
+    if @userId? # use customerId only if the user is registered with us
+    
+      user = Meteor.users.findOne _id: @userId
 
-    if user.customerId?
-      config.customerId = user.customerId
+      if user.customerId?
+        config.customerId = user.customerId
 
-    else
-      config.customerId = Meteor.call 'registerCustomer', user
+      else
+        config.customerId = Meteor.call 'registerCustomer', user
 
     getToken = gateway.clientToken.generate config
     unless getToken.success == true
@@ -31,7 +33,7 @@ Meteor.methods
     check userId, String
     if Roles.userIsInRole @userId, 'admin'
       self = this
-      self.userId = userId
+      self.userId = userId #userId of customer
       Meteor.call.call self, "generateClientToken"
     
 

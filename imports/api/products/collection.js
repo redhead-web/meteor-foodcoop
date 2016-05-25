@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import {Roles} from 'meteor/alanning:roles'
+import {schema} from './schema'
 
 export const Products = new Mongo.Collection("products");
 
@@ -25,3 +26,6 @@ function isAdmin (user) {
 function isProducer (user) {
   return Roles.userIsInRole(user, 'producer');
 }
+
+Products.attachSchema(schema)
+

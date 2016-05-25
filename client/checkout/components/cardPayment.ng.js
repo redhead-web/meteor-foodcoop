@@ -5,6 +5,7 @@ function BraintreeCheckoutController($scope, $reactive, $state) {
   let vm = this;
   let nonce = ""
   let teardown;
+  const braintreeTransactionMethod = 'braintreeTransaction' // should default from template to 'braintreeTransaction' 
 
   let braintreeOptions = {
     container: "payment-form",
@@ -35,8 +36,7 @@ function BraintreeCheckoutController($scope, $reactive, $state) {
 
   function checkout (obj) {
     console.log(obj)
-    let data = {};
-
+    let data = {}
     data.payment_method_nonce = obj.nonce;
 
     // start spinning wheel animation
@@ -47,7 +47,7 @@ function BraintreeCheckoutController($scope, $reactive, $state) {
   
     //vm.spinner = true;
   
-    vm.call('braintreeTransaction', data, function(err, result) {
+    vm.call(braintreeTransactionMethod, data, function(err, result) {
       if (result && result.success) {
         vm.onSuccess();
       } else {
@@ -71,6 +71,7 @@ angular.module("food-coop").component("cardPayment", {
   templateUrl: "client/checkout/components/card-payment.ng.html",
   bindings: {
     onSuccess: "&",
-    onError: "&"
+    onError: "&",
+    data: "<" // data to determine what type of transaction this is
   }
 }); 

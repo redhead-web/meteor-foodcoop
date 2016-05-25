@@ -1,7 +1,6 @@
 function CheckoutFlowController($mdDialog) {
   "ngInject";
-  let vm = this;
-  vm.checkout = function(ev) {
+  this.checkout = (ev) => {
     $mdDialog.show({
       controller: PaymentMethodSelector,
       controllerAs: '$ctrl',
@@ -10,14 +9,14 @@ function CheckoutFlowController($mdDialog) {
       targetEvent: ev,
       clickOutsideToClose: true,
       locals: {
-        total: vm.total
+        total: this.total
       }
-    }).then( function(success) {
+    }).then( (success) => {
       if (success) {
-        vm.onSuccess()
+        this.onSuccess()
       }
-    }, function() {
-      vm.status = 'You cancelled the checkout flow';
+    }, () => {
+      this.status = 'You cancelled the checkout flow';
     });
   }
 }
@@ -30,22 +29,24 @@ angular.module("food-coop").component('checkoutFlow', {
     customer: "<",
     pos: "@",
     onError: "&",
-    onSuccess: "&"
+    onSuccess: "&",
+    buttonText: '@',
+    buttonClass: '@',
+    data: '<', // extra data to go to checkout
   }
 });
 
 function PaymentMethodSelector ($scope, $mdDialog, total) {
   "ngInject";
-  let vm = this;
-  vm.total = total;
-  vm.success = function() {
+  this.total = total;
+  this.success = function() {
     $mdDialog.hide(true);
   };
-  vm.cancel = function() {
+  this.cancel = function() {
     $mdDialog.cancel();
   };
-  vm.error = function(error) { 
+  this.error = (error) => {
     console.log("error called", error.message)
-    vm.errorMessage = error.message 
+    this.errorMessage = error.message
   };
 }

@@ -69,6 +69,7 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
   this.loadMore = loadMore;
   
   function loadMore() {
+    console.log(Products.find().count())
     if (this.limit <= Products.find().count()) {
       this.limit += pageSize;
       console.log(this.limit)

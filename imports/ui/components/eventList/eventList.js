@@ -2,9 +2,14 @@
 import uiRouter from 'angular-ui-router'
 import ngMaterial from 'angular-material'
 
-import template from './eventList.html'
+import templateUrl from './eventList.html'
 
 import { Events } from '../../../api/events';
+
+import {name as eventCreate} from "../eventCreate/eventCreate"
+import {name as eventDetails} from "../eventDetails/eventDetails"
+import {name as eventOrderForm} from "../eventOrderForm/eventOrderForm"
+
 
 class EventsController {
   constructor($scope, $reactive) {
@@ -12,15 +17,15 @@ class EventsController {
 
     $reactive(this).attach($scope);
 
-    this.limit = 5;
+    this.limit = 7;
     this.sort = {
-      eventDate: 1
+      date: 1
     }
 
     this.subscribe('upcoming-events', () => [{
       limit: parseInt(this.limit),
       sort: this.getReactively('sort')
-    }])
+    }, null])
 
     this.helpers({
       events() {
@@ -46,11 +51,13 @@ const name = 'eventList';
 // create a module
 export default angular.module(name, [
   'angular-meteor',
+  eventCreate,
+  eventDetails,
+  eventOrderForm,
   uiRouter,
   ngMaterial
 ]).component(name, {
-  template,
-  controllerAs: name,
+  templateUrl,
   controller: EventsController
 })
   .config(config);

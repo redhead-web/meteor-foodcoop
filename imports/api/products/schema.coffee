@@ -1,10 +1,9 @@
-Products = require './collection'
 
 certification = new SimpleSchema
   name: type: String
   img: type: String, optional: true
 
-Schema = new SimpleSchema
+exports.schema = new SimpleSchema
   name:
     type: String
     max: 100
@@ -89,4 +88,3 @@ Schema = new SimpleSchema
    5 is delivery day -5 (can order 5 days before delivery day or cannot order if less than 5 days till delivery day)
   ###
 
-Products.attachSchema Schema

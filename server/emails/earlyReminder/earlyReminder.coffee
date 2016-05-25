@@ -14,7 +14,7 @@ exports.earlyShoppingReminder = ->
   @unblock()
 
   products = Products.find({
-    daysNotice: daysNotice.toString()
+    daysNotice: daysNotice
     published: true
     stocklevel: $gt: 0
   }, fields:
@@ -24,6 +24,7 @@ exports.earlyShoppingReminder = ->
     producerCompanyName: 1
     img: 1
     price: 1
+    unitOfMeasure: 1
     stocklevel: 1).fetch()
 
   # build recipient lists
@@ -131,6 +132,7 @@ exports.earlyShoppingReminder = ->
     img:                    1
     price:                  1
     stocklevel:             1
+    unitOfMeasure:          1
   ]}]
 
   # favourited item data I need
@@ -148,6 +150,7 @@ exports.earlyShoppingReminder = ->
       img:                    1
       price:                  1
       stocklevel:             1
+      unitOfMeasure           1
     }]
 
   ###

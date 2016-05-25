@@ -31,7 +31,9 @@ export function buyTicket(eventId, qty, btData) {
     throw new Meteor.Error(401, "Sorry, insufficient tickets remaining")
   }
 
-  // TODO: buy ticket with braintree
+  if (party.ticketPrice) {
+    // TODO: buy ticket with braintree
+  }
 
   const isUserComing = _.findWhere(party.attendees, {
     user: this.userId
@@ -58,8 +60,6 @@ export function buyTicket(eventId, qty, btData) {
       }
     })
   }
-
-
 }
 
 export function rsvp(eventId, rsvp) {

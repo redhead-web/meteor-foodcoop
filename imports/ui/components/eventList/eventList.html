@@ -1,0 +1,11 @@
+<div ng-repeat="event in $ctrl.events"><md-card>
+  <a ui-sref="event({eventId: event._id})">
+    <cl-image public-id="{{event.img.result}}" class="md-card-image" ng-class="{'greyscale': event.ticketsRemaining != null && event.ticketsRemaining <= 0}">
+      <cl-transformation height="300" width="500" crop="fill" gravity="center"></cl-transformation>
+    </cl-image>
+  </a>
+  <h3 class="md-headline">{{event.title}}</h3>
+  <h3 class="md-title">{{event.ticketPrice|currency}}</h3>
+  <p class="md-body-2"><span>{{event.ticketsRemaining}} remaining</span></p>
+  <event-order-form event="event"></event-order-form>
+</md-card></div>

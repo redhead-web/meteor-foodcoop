@@ -20,7 +20,7 @@ angular.module('food-coop').directive('scrollFire', function($window) {
         let threshold;
 
         threshold = $($window).scrollTop() + $($window).height() - element.height();
-        if (element.offset().top < threshold) {
+        if (Math.floor(element.offset().top) <= threshold) {
           if (!element.data("visible")) {
             element.data("visible", true);
             console.log("reached the end!")
@@ -28,11 +28,9 @@ angular.module('food-coop').directive('scrollFire', function($window) {
               scope.onView();
             });
           }
-        } else {
-          if (element.data("visible")) {
-            console.log("scrolling")
-            return element.data("visible", false);
-          }
+        } else if (element.data("visible")) {
+          console.log("scrolling")
+          element.data("visible", false);
         }
       })
     }

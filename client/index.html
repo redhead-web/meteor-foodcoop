@@ -39,6 +39,12 @@
         </md-tooltip>
         <md-icon md-svg-icon="action:ic_payment_24px" aria-label="payment"></md-icon>
       </md-button>
+      <md-button aria-label="New Event" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" ui-sref="createEvent">
+        <md-tooltip md-direction="left" md-delay="250">
+          New Event
+        </md-tooltip>
+        <md-icon md-svg-icon="action:ic_event_24px" aria-label="payment"></md-icon>
+      </md-button>
     </md-fab-actions>
   </md-fab-speed-dial>
 </div>

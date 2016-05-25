@@ -1,32 +1,32 @@
 Meteor.startup(function(){
   Markup = function (arg) {
-    
-    let productPattern = {
+
+    const productPattern = {
       price: Number
     }
-    
-    let cartPattern = {
+
+    const cartPattern = {
       details: Match.ObjectIncluding({price: Number}),
       qty: Number
     };
-    
-    let salePattern = {
+
+    const salePattern = {
       price: Number,
       qty: Number
     };
-    
+
     this.cart = undefined
     this.sales = undefined
     this.products = undefined
-    
+
     this.cartItem = undefined
     this.saleItem = undefined
     this.product = undefined
-    
-    
-    
+
+
+
     if ( Match.test(arg, [Object]) ) {
-      
+
       if (Match.test(arg, [Match.ObjectIncluding(cartPattern)])) {
         this.cart = arg
       } else if (Match.test(arg, [Match.ObjectIncluding(salePattern)])) {
@@ -38,7 +38,7 @@ Meteor.startup(function(){
       }
     }
     else if (Match.test(arg, Object)) {
-      
+
       if (Match.test(arg, Match.ObjectIncluding(cartPattern))) {
         this.cartItem = arg;
       } else if (Match.test(arg, Match.ObjectIncluding(salePattern))) {
@@ -46,7 +46,7 @@ Meteor.startup(function(){
       } else if (Match.test(arg, Match.ObjectIncluding(productPattern))) {
         this.product = arg
       }
-      
+
     } else if (Match.test(arg, Number)) {
       this.product = {
         price: arg
@@ -55,16 +55,16 @@ Meteor.startup(function(){
         details: {price: arg}
       };
     };
-      
+
     this.baseMarkup = Meteor.settings.public.markup;
     this.markupRatio = this.baseMarkup - 1;
-    
+
     this.total = function total (price) {
       if (price) {
         return _.round(price * this.baseMarkup, 2)
       } else {
         let total = 0;
-        
+
         if (this.products) {
           for (let i = 0; i < this.products.length; i++) {
             total += this.products[i].price * (this.baseMarkup + (this.products[i].extraMarkup || 0))
@@ -75,12 +75,12 @@ Meteor.startup(function(){
           total = this.saleItem.price * (this.baseMarkup + (this.saleItem.extraMarkup || 0) )
         } else if (this.product) {
           total = this.product.price * (this.baseMarkup + (this.product.extraMarkup || 0) )
-        } 
-        
+        }
+
         return _.round(total, 2)
       }
     };
-    
+
     this.cartTotal = function cartTotal () {
       let total = 0;
       if (this.cart) {
@@ -90,10 +90,10 @@ Meteor.startup(function(){
       } else if (this.cartItem) {
         total = this.cartItem.details.price * this.cartItem.qty * (this.baseMarkup + (this.cartItem.details.extraMarkup || 0) )
       }
-      
+
       return _.round(total, 2)
     };
-    
+
     this.saleTotal = function saleTotal () {
       let total = 0;
       if (this.sales) {
@@ -104,22 +104,22 @@ Meteor.startup(function(){
       else if (this.saleItem) {
         total = this.saleItem.price * this.saleItem.qty * (this.baseMarkup + (this.saleItem.extraMarkup || 0))
       }
-      
+
       return _.round(total, 2)
     };
-    
-    this.withOutMarkup = function (amount) {
-      return amount / this.baseMarkup;
+
+    this.withoutMarkup = function (amount) {
+      return _.round(amount / this.baseMarkup, 2)
     };
-    
-    
+
+
     this.markup = function (amount) {
       // use markupRatio to multiply by 0.1 instead of 1.1 as set in settings.
       if (amount) {
         return _.round(amount * this.markupRatio, 2)
       } else {
         let amount = 0;
-        
+
         if (this.cart) {
           for (let i = 0; i < this.cart.length; i++) {
             amount += this.cart[i].details.price * this.cart[i].qty * (this.markupRatio + (this.cart[i].details.extraMarkup || 0))
@@ -140,13 +140,13 @@ Meteor.startup(function(){
         } else if (this.product) {
           amount = this.product.price * (this.markupRatio + (this.product.extraMarkup || 0) )
         }
-        
+
         return _.round(amount, 2)
       }
     }
-    
+
     return this;
-    
+
   };
-  
+
 });

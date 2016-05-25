@@ -1,6 +1,8 @@
 import { Mongo } from 'meteor/mongo';
 import {Roles} from 'meteor/alanning:roles'
 
+import {schema} from './schema'
+
 export const Events = new Mongo.Collection('events');
 
 Events.allow({
@@ -18,3 +20,6 @@ Events.allow({
 function isAdmin (user) {
   return Roles.userIsInRole(user, 'admin');
 }
+
+Events.attachSchema(schema)
+

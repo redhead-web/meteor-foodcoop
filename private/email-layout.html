@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{{preview}}</title>
+    {{#if preview}}<title>{{preview}}</title>{{/if}}
 
     <style type="text/css">
       {{{css}}}
@@ -14,6 +14,7 @@
     <!-- start body table -->
     <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%" class="body-table">
       <tr>
+        <td></td>
         <td class="body" align="center" valign="top">
 
           <p class="hide preview-text">{{#if preview}}{{preview}}{{else}} Hello from the Whangarei Co-operative{{/if}}</p>
@@ -29,7 +30,7 @@
                 <tr>
                   <td class="header__content" valign="top" align="center">
 
-                    <img src="http://res.cloudinary.com/foodcoop/image/upload/c_scale,w_500/v1453437174/kaikohe/Whangarei_Red2_vlyh3b.png" width="500">
+                    <img class="banner-img" src="http://res.cloudinary.com/foodcoop/image/upload/c_scale,w_500/whangarei/OpenGraph" width="500">
 
                   </td>
                 </tr>
@@ -60,6 +61,7 @@
 
           </table><!-- end -->
         </td>
+        <td></td>
       </tr>
     </table><!-- end body table -->
 

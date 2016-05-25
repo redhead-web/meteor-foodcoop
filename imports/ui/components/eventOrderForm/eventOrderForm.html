@@ -1,0 +1,14 @@
+Hi!
+<form name="buyTicketsForm" ng-submit="$ctrl.buyTickets($event, $ctrl.event, $ctrl.qty)" layout="row" >
+  <md-input-container flex class="add-to-cart-input">
+    <label>Quantity</label>
+    <input ng-model="$ctrl.qty" type="number" min="1" required name="qty">
+    <div ng-messages="buyTicketsForm.qty.$error" ng-if="buyTicketsForm.qty.$touched">
+      <div ng-message="required">this field is required.</div>
+      <div ng-message="min">Please order at least 1.</div>
+    </div>
+  </md-input-container>
+  <div>
+    <checkout-flow total="$ctrl.event.ticketPrice * $ctrl.qty" customer="$ctrl.currentUser" on-error="$ctrl.onError" on-success="$ctrl.onSuccess" button-text="Buy Now" button-class="md-primary"></checkout-flow>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<div layout-fill flex>
+<ui-gmap-google-map
+center="$ctrl.mapSettings.center"
+zoom="$ctrl.mapSettings.zoom"
+options="$ctrl.mapSettings.options"
+events="$ctrl.mapSettings.events">
+  <ui-gmap-marker ng-if="$ctrl.markerSettings"
+  idKey="$ctrl.markerSettings.id"
+  coords="$ctrl.markerSettings.coords"
+  options="$ctrl.markerSettings.options"
+  >
+    <ui-gmap-window templateParameter="$ctrl.event" templateUrl="client/directory/views/infoWindow.ng.html">
+    </ui-gmap-window>
+  </ui-gmap-marker>
+</ui-gmap-google-map>
+</div>

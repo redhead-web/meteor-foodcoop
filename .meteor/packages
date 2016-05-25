@@ -19,7 +19,7 @@ dburles:collection-helpers
 fourseven:scss
 planettraining:material-design-icons
 angularutils:pagination
-angular@1.3.9
+angular
 yogiben:pretty-email
 konecty:mongo-counter
 meteor-base
@@ -69,3 +69,6 @@ angular:angular-aria
 xolvio:cleaner
 dburles:factory
 practicalmeteor:mocha
+meteorhacks:picker
+pbastowski:angular-babel
+chrisbutler:node-sass

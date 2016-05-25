@@ -36,6 +36,7 @@ caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
 check@1.2.1
+chrisbutler:node-sass@3.4.2
 chuangbo:cookie@1.1.0
 cmather:handlebars-server@2.0.0
 coffeescript@1.0.17

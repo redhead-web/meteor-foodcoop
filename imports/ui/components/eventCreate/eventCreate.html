@@ -1,0 +1,85 @@
+<section layout layout-align="center center">
+  <span flex></span>
+<form name="createEventForm" ng-submit="$ctrl.onSubmit()" layout="column" flex="70" flex-xs="90">
+  <md-input-container>
+    <label>Title</label>
+    <input ng-model="$ctrl.event.title" type="text" md-maxlength="100" required name="title">
+    <div ng-messages="createEventForm.title.$error" ng-if="createEventForm.title.$touched">
+      <div ng-message="required">this field is required.</div>
+      <div ng-message="maxlength">Title is too long</div>
+    </div>
+  </md-input-container>
+
+  <div layout="row" layout-xs="column" layout-align="center end">
+    <md-input-container flex="50">
+      <label>How many Tickets?</label>
+      <input ng-model="$ctrl.event.ticketTotal" type="number" min="0">
+    </md-input-container>
+
+    <md-input-container flex="50">
+      <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="ticket price"></md-icon>
+      <label>Ticket Price</label>
+      <input ng-model="$ctrl.event.ticketPrice" name="price" type="number" min="0">
+      <div ng-messages="createEventForm.price.$error">
+        <div ng-message="min">You must have a positive number here.</div>
+        <div ng-message="number">Please use just a number here.</div>
+      </div>
+    </md-input-container>
+  </div>
+
+  <md-input-container>
+    <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
+    <input required g-places-autocomplete type="text" ng-model="$ctrl.event.venue"
+           placeholder="event venue" aria-label="address" name="venue"/>
+    <div ng-messages="createEventForm.venue.$error" ng-if="createEventForm.venue.$touched">
+      <div ng-message="required">Please provide your home address.</div>
+    </div>
+  </md-input-container>
+
+  <div layout="row" layout-xs="column" layout-align="center center">
+    <md-datepicker ng-model="$ctrl.event.date" flex="50"></md-datepicker>
+    <md-input-container flex="50">
+      <label>Time</label>
+      <input ng-model="$ctrl.time" type="time" ng-change="$ctrl.timeChange()" required>
+    </md-input-container>
+  </div>
+
+  <fc-img-upload on-success="$ctrl.imgSelected(data)" on-error="$ctrl.imgError(error)"></fc-img-upload>
+  <cl-image flex="100" ng-if="$ctrl.event.img.result" public-id="{{$ctrl.event.img.result}}">
+    <cl-transformation width="800" crop="fill" gravity="center"></cl-transformation>
+  </cl-image>
+
+  <section class="md-whiteframe-3dp" ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2><span>Description</span></h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <md-tabs md-dynamic-height md-border-bottom>
+       <md-tab label="Editor">
+         <md-content class="md-padding">
+           <md-input-container class="md-block">
+             <label>Description</label>
+             <textarea ng-model="$ctrl.event.description" md-maxlength="2500" name="description"></textarea>
+             <div ng-messages="createEventForm.description.$error" ng-if="createEventForm.description.$touched">
+               <div ng-message="maxlength">Please use a shorter description.</div>
+             </div>
+           </md-input-container>
+           <markdown-help></markdown-help>
+         </md-content>
+       </md-tab>
+       <md-tab label="Preview">
+         <md-content class="md-padding">
+           <div class="md" ng-bind-html="$ctrl.event.description | md"></div>
+         </md-content>
+       </md-tab>
+     </md-tabs>
+  </section>
+  <div>
+    <md-button type="submit">Create Event</md-button>
+    {{$ctrl.errorMessage}}
+  </div>
+</form>
+<span flex></span>
+</section>
