@@ -22,7 +22,7 @@
           <div class="md-list-item-text">
             <h3>{{o.cashAmount | currency}}</h3>
             <p>Total: {{o.orderTotal | currency}} Status: {{o.status}}</p>
-            <p>{{ $ctrl.payment.dateCreated | calendar }}</p>
+            <p><span ng-if="o.cashDeposited">Deposited {{ o.dateDeposited | calendar }}</span><span ng-if="!o.cashDeposited">{{ o.dateCreated | calendar }}</span></p>
           </div>
           <md-checkbox class="md-secondary md-primary" ng-model="o.cashDeposited" ng-change="$ctrl.save(o)" ng-disabled="o.cashDeposited"></md-checkbox>
           </md-list-item>
