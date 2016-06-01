@@ -4,6 +4,7 @@ import ngMaterial from 'angular-material'
 import {Roles} from 'meteor/alanning:roles'
 
 import './navigation.html'
+import './style.scss'
 
 function navigationController($mdUtil, $mdSidenav, $log, $state) {
   "ngInject";

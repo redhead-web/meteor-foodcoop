@@ -11,17 +11,22 @@ cashOrdersController = ($scope, $reactive) ->
       Orders.find {cashAmount: $gt: 0}, sort: @getReactively('sort')
       
   @autorun =>
-    @totalNotDeposited = _.reduce @orders, (total, order) ->
-      unless order.cashDeposited
-        total += order
-      return total
+    orders = Orders.find({cashAmount: $gt: 0}).fetch()
+    @totalNotDeposited = _.reduce(orders, ((total, order) ->
+      if !order.cashDeposited
+        total += order.cashAmount
+      total
+    ), 0)
+    return
       
   @deposit = () =>
-    @call 'depositMoneyForOrders', (result, error) ->
+    @call 'depositMoneyForOrders', (error, result) ->
       if error
         console.error error
   @save = (order) =>
-    Orders.update order.id, $set: cashDeposited: order.cashDeposited
+    Orders.update order._id, $set: 
+      cashDeposited: order.cashDeposited
+      dateDeposited: new Date()
   return
   
 

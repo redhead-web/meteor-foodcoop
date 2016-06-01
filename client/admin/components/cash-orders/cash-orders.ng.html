@@ -16,7 +16,7 @@
       </md-list-item>
       <md-virtual-repeat-container id="user-container" flex>
         <div md-virtual-repeat="o in $ctrl.orders" class="md-whiteframe-2dp repeat-user">
-          <md-list-item class="md-3-line">
+          <md-list-item class="md-3-line cash-sale" ng-class="{'disabled': o.cashDeposited}">
           <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
             
           <div class="md-list-item-text">
@@ -24,7 +24,7 @@
             <p>Total: {{o.orderTotal | currency}} Status: {{o.status}}</p>
             <p>{{ $ctrl.payment.dateCreated | calendar }}</p>
           </div>
-          <md-checkbox class="md-secondary md-primary" ng-model="o.cashDeposited" ng-change="$ctrl.save(o)"></md-checkbox>
+          <md-checkbox class="md-secondary md-primary" ng-model="o.cashDeposited" ng-change="$ctrl.save(o)" ng-disabled="o.cashDeposited"></md-checkbox>
           </md-list-item>
         </div>
       </md-virtual-repeat-container>

@@ -120,6 +120,10 @@
         <md-icon class="md-primary" md-svg-icon="content:ic_mail_24px"></md-icon>
         <p> Contact Us </p>
       </md-list-item>
+      <md-list-item href="https://www.facebook.com/nzfoodcoop" ng-click="nav.toggleRight('right')">
+        <md-icon md-svg-src="/f_icon.svg"></md-icon>
+        <p> Facebook </p>
+      </md-list-item>
       <md-divider ng-show="currentUser"></md-divider>
       <md-list-item ng-click="nav.goTo('logout'); nav.toggleRight('right')" ng-show="currentUser">
         <p>Logout</p>
