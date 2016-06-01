@@ -2,6 +2,7 @@ $green: rgb(139,195,74);
 
 body {
   font-size: 14px;
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 body, p {
@@ -16,21 +17,21 @@ body, p {
 
 .banner-img {max-width: 100%;}
 
-.table {
-  tr td {
-    padding: 0.5em;
-  }
-  a {
-    color: $green;
-    text-decoration: none;
-  }
+.table tr td {
+  padding: 0.5em;
+}
+
+.table a {
+  color: rgb(139,195,74);
+  text-decoration: none;
 }
 
 .shop-now-btn {
+  background-color: #ffffff;
   border-radius: 3px;
   box-sizing: border-box;
-  color: $green;
-  border: $green 2px solid;
+  color: rgb(139,195,74);
+  border: rgb(139,195,74) 2px solid;
   margin: 15px;
   text-decoration: none;
   display: inline-block;

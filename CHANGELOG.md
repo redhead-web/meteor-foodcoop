@@ -1,5 +1,10 @@
-## 0.1.8 (1-6-2016)
+## 0.1.8 (2-6-2016)
 - added colourful statuses to customer's sales and purchases like the admin has. This feature may need some refining in the near future.
+- added facebook link to navigation
+- fixed cash payment tracker for admin to know how much cash to deposit to bank account and can track long term deposits with permanent storage of the data
+- fixed automatic emails to show price with markup rather than producer price by writing server helpers for the Markup function.
+- always round prices to decimal places in emails with currency helper.
+- changed fonts in emails to use sans-serif family
 
 ## 0.1.7_1 (17-5-2016)
 - fixed bug with sending targeted ordering reminder emails and producer order summary emails.

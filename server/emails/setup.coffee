@@ -187,6 +187,8 @@ Meteor.startup ->
       currency: (amount) ->
         return "$#{amount.toFixed(2)}"
 
+      productPrice: () ->
+        Markup(this).total()
       totalPrice: () ->
           Markup(this).total()
           

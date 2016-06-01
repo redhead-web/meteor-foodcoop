@@ -4,7 +4,7 @@
 
 <div style="text-align: center;">
   <p>You've Sold</p>
-  <h1 style="text-align:center;">${{grandTotal}}</h1>
+  <h1 style="text-align:center;">{{currency grandTotal}}</h1>
 </div>
 
 <h1 style="text-align:center;">Delivery of Goods for customers</h1>
@@ -44,15 +44,15 @@
     <tr>
       <td>{{customerName}}</td>
       <td><a href="https://kaicoop.nz/products/{{productId}}">{{productName}}</a></td>
-      <td>${{price}} / {{unitOfMeasure}}</td>
+      <td>{{currency price}} / {{unitOfMeasure}}</td>
       <td>{{qty}}</td>
-      <td>{{saleTotal}}</td>
+      <td>{{currency saleTotal}}</td>
     </tr>
   {{/each}}
   </tbody>
   <tfoot>
     <tr style="text-align: right; font-weight: 700;">
-      <td colspan="5"><strong>${{grandTotal}}</strong></td>
+      <td colspan="5"><strong>{{currency grandTotal}}</strong></td>
     </tr>
   </tfoot>
 </table>
