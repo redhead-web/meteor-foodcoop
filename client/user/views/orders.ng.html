@@ -42,7 +42,13 @@
       <thead>
         <tr>
           <th>
+            Status
+          </th>
+          <th>
             Product
+          </th>
+          <th>
+            Producer
           </th>
           <th>
             Price
@@ -55,9 +61,25 @@
           </th>
         </tr>
       </thead>
-      <tr ng-repeat="i in orders | filter:search as filteredOrders ">
+      <tr ng-repeat="i in orders | filter:search as filteredOrders"
+        ng-class="
+              {
+                'cancelled': i.status == 'cancelled',
+                'refunded': i.status == 'refunded',
+                'collected': i.status == 'collected',
+                'sorted': i.status == 'sorted',
+                'delivered': i.status == 'delivered',
+                'undelivered': i.status == 'undelivered'
+              }"
+      >
+        <td><span ng-show="i.status == 'delivered'">Arrived</span>
+          <span ng-hide="i.status == 'delivered'">{{i.status}}</span>
+        </td>
         <td>
           {{i.productName}}
+        </td>
+        <td>
+          {{i.producerCompanyName || i.producerName}}
         </td>
         <td>
           {{priceWithMarkup(i) | currency}}

@@ -1,3 +1,6 @@
+## 0.1.8 (1-6-2016)
+- added colourful statuses to customer's sales and purchases like the admin has. This feature may need some refining in the near future.
+
 ## 0.1.7_1 (17-5-2016)
 - fixed bug with sending targeted ordering reminder emails and producer order summary emails.
 

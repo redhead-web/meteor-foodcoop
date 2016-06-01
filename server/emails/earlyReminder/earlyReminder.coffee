@@ -59,6 +59,16 @@ exports.earlyShoppingReminder = ->
     ).fetch()
 
     for user in favouritedOrRecentUsers
+      currentSales = Sales.find 
+        customerId: user._id
+        productId: product._id
+        deliveryDay: GetNextDeliveryDay().toDate()
+      .fetch()
+      
+      if currentSales.length > 0
+        # if a user has purchases of the product they like this week, skip adding the product to their email list
+        continue
+      
       idx = _.findIndex favouriteRecipients, _id: user._id
       if idx != -1
         #recipient already exists, append data rather than creating a new recipient

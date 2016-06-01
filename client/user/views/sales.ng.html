@@ -55,6 +55,9 @@
       <thead>
         <tr>
           <th>
+            Status
+          </th>
+          <th>
             Customer
           </th>
           <th>
@@ -71,7 +74,22 @@
           </th>
         </tr>
       </thead>
-      <tr ng-repeat="i in sales | filter:search as filteredSales ">
+      <tr ng-repeat="i in sales | filter:search as filteredSales "
+        ng-class="
+              {
+                'cancelled': i.status == 'cancelled',
+                'refunded': i.status == 'refunded',
+                'collected': i.status == 'collected',
+                'sorted': i.status == 'sorted',
+                'delivered': i.status == 'delivered',
+                'undelivered': i.status == 'undelivered'
+              }"
+      > <td><span ng-show="i.status == 'refunded'">Customer refunded</span>
+          <span ng-hide="i.status == 'refunded'">{{i.status}}</span>
+        </td>
+        <td>
+          {{i.status}}
+        </td>
         <td>
           {{i.customerName}} #{{i.customerNumber}}
         </td>
