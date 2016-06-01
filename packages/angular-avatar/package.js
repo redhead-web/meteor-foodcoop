@@ -11,10 +11,10 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-  api.imply('angular', 'client');
+  api.use('ecmascript');
+  api.imply(['angular', 'pbastowski:angular-babel'], 'client');
   api.addFiles('md5.js', 'client');
-  api.addFiles('angular-avatar.js', 'client');
+  api.mainModule('angular-avatar.js', 'client');
   api.addFiles('publish.js', 'server');
 });
 

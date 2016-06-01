@@ -30,16 +30,17 @@ Meteor.methods
     daysNotice = deliveryDay.diff(moment().startOf('day'), 'days') + 1 # +1 is to look for daysNotice from the day before since this happens at midnight.
 
     saleQuery = 
-      deliveryDay: deliveryDay.toDate()
+      deliveryDay: GetNextDeliveryDay().toDate()
       daysNotice: daysNotice
     
     if daysNotice == Meteor.settings.public.shoppingThreshold # today shopping for the delivery day should be closed for the majority of products
 
-      saleQuery = daysNotice: null
+      saleQuery.daysNotice = null
+    
     
     sales = Sales.find saleQuery
     .fetch()
-    
+        
     if sales.length > 0
     
       groupedSales = _.groupBy sales, 'producerId'
