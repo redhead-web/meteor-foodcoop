@@ -1,4 +1,4 @@
-## 0.1.9 (27-6-2016)
+## 0.1.9rc_1 (27-6-2016)
 - added registration welcome email template
 - fixed admin products list being difficult to use
 - added ssr pages for facebook bots to get nice rendered products, events and store (users coming soon)
