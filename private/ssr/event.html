@@ -1,0 +1,31 @@
+{{#with event}}
+  <div itemscope itemtype="http://schema.org/Event">
+    <meta itemprop=“name” content=”{{title}}” />
+        
+    <meta itemprop=“productId” content=”{{_id}}″ />
+    <meta itemprop="startDate" content="{{ISODate}}">
+    <meta itemprop=“url” content=”https://foodcoop.nz/event/{{_id}}” />
+    
+    <a href="https://foodcoop.nz/event/{{_id}}"><img src="{{img.url}}" height="400" alt="{{name}}"></a>
+    
+    <span itemprop=“description”>{{description}}</span>
+    
+  </div>
+  <div itemprop=”offers” itemscope itemtype=”http://schema.org/Offer”>
+
+        <span itemprop=“price”>{{ticketPrice}}</span>
+
+        <meta itemprop=“name” content=”{{title}}” />
+
+        <meta itemprop=“description” content=”{{description}}” />
+
+        <meta itemprop=“sku” content=”{{_id}}″ />
+
+        <meta itemprop=“priceCurrency” content=”NZD” />
+
+        <meta itemprop=“availability” itemtype=”http://schema.org/ItemAvailability”
+
+         content=”http://schema.org/InStock” />
+  </div>
+  
+{{/with}}

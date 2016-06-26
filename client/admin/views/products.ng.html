@@ -2,7 +2,7 @@
 
 <section layout="row" layout-align="center center">
   <md-input-container>
-    <input type="search" ng-model="ctrl.search" placeholder="search">
+    <input type="search" ng-model="ctrl.search" placeholder="search" ng-model-options="{}">
   </md-input-container>
   <!-- <md-checkbox ng-model="ctrl.published">Published?</md-checkbox> -->
   <md-menu-bar>
@@ -46,7 +46,7 @@
   <md-virtual-repeat-container id="user-container" flex="70" flex-sm="90" flex-md="80" flex-xs="100">
   
     <md-list>
-      <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products" ng-click="">
+      <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products" ng-click="null">
         <cl-image public-id="{{product.img.result}}" class="md-avatar" ng-if="product.img">
           <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
         </cl-image>

@@ -4,7 +4,7 @@ import 'angular-simple-logger';
 import 'angular-google-maps';
 
 class MapLocationController {
-  constructor(uiGmapGoogleMapApi) {
+  constructor(uiGmapGoogleMapApi, $scope) {
     'ngInject';
     this.mapSettings = {
       center: {

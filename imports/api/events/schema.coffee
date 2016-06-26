@@ -1,4 +1,3 @@
-
 exports.schema = new SimpleSchema
   date:
     type: Date
@@ -7,6 +6,9 @@ exports.schema = new SimpleSchema
     type: String
     max: 100
     index: 1
+  fbEventId:
+    type: String
+    optional: true
   venue:
     type: Object
     optional:true
@@ -35,9 +37,23 @@ exports.schema = new SimpleSchema
   'attendees.$.qty':
     type: Number
     min: 1
-  'attendees.$.user':
+  'attendees.$.userId':
     type: String
     regEx: SimpleSchema.RegEx.Id
+    optional: true
+  'attendees.$.name':
+    type: String
+  'attendees.$.email':
+    type: String
+  'attendees.$.transactionIds':
+    type: [String]
+    optional: true
+  'attendees.$.free':
+    type: Boolean
+    optional: true
+  'attendees.$.boughtInPerson':
+    type: Boolean
+    optional: true
   'attendees.$.timestamp':
     type: Date
   img:

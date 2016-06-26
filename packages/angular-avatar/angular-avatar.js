@@ -2,6 +2,8 @@ angular.module('multi-avatar', ['md5'])
   .component('multiAvatar', {
     bindings: {
       user: '<',
+      name: '@',
+      email: '@',
       width: '@',
       height: '@'
     },
@@ -10,7 +12,7 @@ angular.module('multi-avatar', ['md5'])
       "ngInject";
       $reactive(this).attach($scope)
 
-      this.userId = typeof this.user === 'string' ? this.user : this.user._id;
+      
 
       let services = [
         {id: 'facebook', tpl: 'http://graph.facebook.com/{id}/picture?width={width}&height={height}'} ,
@@ -18,36 +20,44 @@ angular.module('multi-avatar', ['md5'])
         {id: 'github',   tpl: 'https://identicons.github.com/{id}.png'} ,
         {id: 'gravatar', tpl: 'https://secure.gravatar.com/avatar/{id}?s={width}&d=blank'}
       ];
-
-      this.call('getBasicUser', this.userId, (err, result) => {
-        this.name = result.profile.name;
-
-        if (result.hasOwnProperty('emails')) {
-          service = services[3];
-          id = md5.createHash(result.emails[0].address.toLowerCase())
-        }
-
-        if (result.hasOwnProperty('services')) {
-          if (result.services.hasOwnProperty('facebook')) {
-            service = services[0];
-            id = result.services.facebook.id;
-          } else if (result.services.hasOwnProperty('twitter')) {
-            service = services[1];
-            id = result.services.twitter.id
-          } else if (result.services.hasOwnProperty('github')) {
-            service = services[2];
-            id = result.services.github.id
+      
+      if (this.user) {
+        this.userId = typeof this.user === 'string' ? this.user : this.user._id;
+        
+        this.call('getBasicUser', this.userId, (err, result) => {
+          this.name = result.profile.name;
+          let service, id;
+          if (result.hasOwnProperty('emails')) {
+            service = services[3];
+            id = md5.createHash(result.emails[0].address.toLowerCase())
           }
-        }
 
-        if (service != null) {
-          this.tag = service.tpl.replace('{id}', id)
-          .replace('{width}', this.width)
-          .replace('{height}', this.height);
-        }
+          if (result.hasOwnProperty('services')) {
+            if (result.services.hasOwnProperty('facebook')) {
+              service = services[0];
+              id = result.services.facebook.id;
+            } else if (result.services.hasOwnProperty('twitter')) {
+              service = services[1];
+              id = result.services.twitter.id
+            } else if (result.services.hasOwnProperty('github')) {
+              service = services[2];
+              id = result.services.github.id
+            }
+          }
 
-      })
+          if (service != null) {
+            this.tag = service.tpl.replace('{id}', id)
+            .replace('{width}', this.width)
+            .replace('{height}', this.height);
+          }
 
+        })
+      } else if (this.email) {
+        let service = services[3];
+        let id = md5.createHash(this.email.toLowerCase())
+        this.tag = service.tpl.replace('{id}', id).replace('{width}', this.width).replace('{height}', this.height);
+      }
+      
       if (this.width == null) {
         this.width = 50
       }

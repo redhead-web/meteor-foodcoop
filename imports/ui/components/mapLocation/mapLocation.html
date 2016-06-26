@@ -9,7 +9,12 @@ events="$ctrl.mapSettings.events">
   coords="$ctrl.markerSettings.coords"
   options="$ctrl.markerSettings.options"
   >
-    <ui-gmap-window templateParameter="$ctrl.event" templateUrl="client/directory/views/infoWindow.ng.html">
+    <ui-gmap-window show="true">
+      <div class="gmap-window">
+        <p><strong>{{$ctrl.event.title}}</strong></p>
+        <p>{{$ctrl.event.venue.formatted_address}}</p>
+        <p><strong>{{$ctrl.event.date | date:'d/MM/yy h:mm a'}}</strong></p>
+      </div>
     </ui-gmap-window>
   </ui-gmap-marker>
 </ui-gmap-google-map>

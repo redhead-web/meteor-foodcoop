@@ -79,6 +79,7 @@ meteor@1.1.14
 meteor-base@1.0.4
 meteorhacks:fast-render@2.14.0
 meteorhacks:inject-data@2.0.0
+meteorhacks:kadira@2.28.7
 meteorhacks:meteorx@1.4.1
 meteorhacks:picker@1.0.3
 meteorhacks:ssr@2.2.0
@@ -118,7 +119,7 @@ random@1.0.9
 rate-limit@1.0.4
 reactive-dict@1.1.7
 reactive-var@1.0.9
-redhead:angular-avatar@0.0.1
+redhead:angular-avatar@0.0.2
 redhead:angular-cloudinary@0.0.1
 redhead:angular-google-places-autocomplete@0.0.1
 redhead:angular-remarkable@0.0.1

@@ -96,3 +96,5 @@ Meteor.publish "all-products", ->
       stocklevel: 1
       producerCompanyName: 1
       producerName: 1
+      extraMarkup: 1
+      

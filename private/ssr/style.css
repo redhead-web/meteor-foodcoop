@@ -1,0 +1,32 @@
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
+body, h1, h2, h3, h4, ul, li, a {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 50px 50px;
+}
+
+
+#add {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+#content {
+  margin-bottom: 60px;
+}
+
+.small {
+  font-size: 13px;
+}
+
+.notice {
+  color: #C74444;
+  font-size: 14px;
+}

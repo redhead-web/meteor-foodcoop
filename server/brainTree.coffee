@@ -82,6 +82,9 @@ Meteor.methods
     result = gateway.paymentMethod.update token,
       options: {makeDefault: yes}
     result
+  deletePaymentMethod: (token) ->
+    result = gateway.paymentMethod.delete token
+    result
 
   braintreeTransaction: (data) ->
     ###

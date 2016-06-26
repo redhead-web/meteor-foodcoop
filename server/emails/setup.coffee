@@ -1,13 +1,76 @@
 Templates = {}
 
+mockData = 
+  event: 
+    title: "Winter Banquet"
+    date: moment().add(14, 'days').hour(18).minute(0).toDate()
+    venue: 
+      url: "https://maps.google.com/?q=116+Bank+St,+Whangarei,+Whangarei+0110,+New+Zealand&ftid=0x6d0b7ee676f0c53f:0xc24b489cac7be538"
+      formatted_address: "116 Bank St, Whangarei, Whangarei 0110, New Zealand"
+    ticketPrice: 30
+    fbEventId: "test"
+    img: 
+      result: "kaikohe/baker-858401_640_kvne9r"
+      url: "https://res.cloudinary.com/foodcoop/image/upload/v1463684961/kaikohe/baker-858401_640_kvne9r.jpg"
+  
+
 Mailer.config
   from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
   replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz>'
   testEmail: "sean@maplekiwi.com" 
 
+Templates.eventReminder = 
+  path: 'events/eventReminder/eventReminder.html'
+  css: 'events/eventReminder/eventReminder.css'
+  route: 
+    path: '/event-reminder'
+    data: ->
+      event: mockData.event
+      recipient: 
+        name: "Sean Stanley"
+        qty: 3
+      
+
+
+Templates.ticketSale = 
+  path: 'events/ticketSales/ticket-sales.html'
+  css: "events/ticketSales/ticketSales.css"
+  helpers: 
+    ticketLoop: () ->
+      this.recipient.qty
+      array = []
+      for i in [1..this.recipient.qty]
+        array.push i
+      return array
+  route: 
+    path: '/ticket-sale'
+    data: ->
+      event: mockData.event
+      recipient: 
+        name: "Sean Stanley"
+        qty: 4
+        email: 'sean@maplekiwi.com'
+        timestamp: moment().toDate()
+        
+        
+        
+
+
 Templates.newProduct =
   path: 'notifications/new-product.html'
   route: path: '/notification/new-product'
+  
+Templates.newMember = 
+  path: 'user/registration.html'
+  route: 
+    path: '/new-user'
+    data: ->
+      {
+        recipient: "Sean Stanley"
+        userId: Meteor.users.findOne()._id
+        producer: true
+      }
+      
 
 Templates.earlyFavouritedShoppingReminder =
   path: 'notifications/early-favourited-shopping-reminder.html'
@@ -92,13 +155,14 @@ Templates.lastCallReminder =
 
 Templates.contactMessage = 
   path: '/contact/contact-email.html'
-  route: path: '/contact'
-  data: ->
+  route: 
+    path: '/contact'
+    data: ->
     
-    return {
-      email: 'rowan@corymbosa.me'
+      return {
+        email: 'rowan@corymbosa.me'
       
-    }
+      }
   
 Templates.soldOutMessage = 
   path: 'products/sold-out.html'
@@ -115,7 +179,17 @@ Templates.orderReceiptPOS =
 
 Templates.confirmOrderEmail =
   path: 'order/confirmation-email.html'
-  route: path: '/confirmation'
+  route: 
+    path: '/confirmation'
+    data: ->
+      return {
+        order: {}
+        customerNumber: 1
+        items: []
+        recipient: 'Sean Stanley'
+        number: 333
+        date: moment().format('dddd, MMMM Do YYYY')
+      }
 
 Templates.subscriptionConfirmation =
   path: 'order/subscription-confirmation-email.html'
@@ -194,6 +268,8 @@ Meteor.startup ->
           
       saleTotal: () ->
          Markup(this).saleTotal()
+      formatDate: (date, format) ->
+        moment(date).format(format) 
          
 
 

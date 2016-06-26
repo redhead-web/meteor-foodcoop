@@ -70,3 +70,5 @@ xolvio:cleaner
 dburles:factory
 practicalmeteor:mocha
 meteorhacks:picker
+meteorhacks:ssr
+meteorhacks:kadira

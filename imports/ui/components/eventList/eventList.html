@@ -1,11 +1,26 @@
-<div ng-repeat="event in $ctrl.events"><md-card>
+<div layout>
+<span flex></span>
+<div ng-repeat="event in $ctrl.events" flex="40" flex-xs="90" flex-sm="60" layout="column">
+  <md-card>
   <a ui-sref="event({eventId: event._id})">
     <cl-image public-id="{{event.img.result}}" class="md-card-image" ng-class="{'greyscale': event.ticketsRemaining != null && event.ticketsRemaining <= 0}">
       <cl-transformation height="300" width="500" crop="fill" gravity="center"></cl-transformation>
     </cl-image>
   </a>
+  <md-card-content >
   <h3 class="md-headline">{{event.title}}</h3>
-  <h3 class="md-title">{{event.ticketPrice|currency}}</h3>
+  <h3 class="md-title">{{event.ticketPrice|currency}} per person</h3>
   <p class="md-body-2"><span>{{event.ticketsRemaining}} remaining</span></p>
-  <event-order-form event="event"></event-order-form>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="space-around center">
+    <div>
+      <fc-social-menu url="/event/{{event._id}}" text="{{event.title}} at {{event.date | date:'short'}} at {{event.venue.formatted_address}}"></fc-social-menu>
+      <like-heart-button target-id="event._id" category="event"></like-heart-button>
+    </div>
+    <md-button ui-sref="event({eventId: event._id, buy:1})" class="md-primary">Buy Tickets</md-button>
+    <md-button ui-sref="event({eventId: event._id})" class="md-primary">Learn More</md-button>
+  </md-card-actions>
 </md-card></div>
+<span flex></span>
+</div>
+

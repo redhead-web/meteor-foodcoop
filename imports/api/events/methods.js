@@ -1,9 +1,30 @@
-import _ from 'meteor/stevezhu:lodash';
+import { _ } from 'meteor/stevezhu:lodash';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
 
 import { Events } from './collection';
+
+
+let environment, gateway;
+
+if (Meteor.isServer) {
+  environment = Braintree.Environment.Sandbox;
+
+  if (process.env.METEOR_ENVIRONMENT === 'production') {
+    environment = Braintree.Environment.Production;
+  }
+
+  gateway = BrainTreeConnect({
+    environment: environment,
+    merchantId: Meteor.settings.BRAIN_TREE.MERCHANT_ID,
+    publicKey: Meteor.settings.BRAIN_TREE.PUBLIC_KEY,
+    privateKey: Meteor.settings.BRAIN_TREE.PRIVATE_KEY
+  });
+}
+
+
+
 
 function getContactEmail(user) {
   if (user.emails && user.emails.length)
@@ -12,135 +33,104 @@ function getContactEmail(user) {
   return null;
 }
 
-export function buyTicket(eventId, qty, btData) {
+export function buyTickets(eventId, ticketData, transactionData) {
+  let result = {transaction: {id: ''}};
+  
   check(eventId, String);
-  check(qty, Number);
-  check(btData, Object);
+  check(ticketData, {
+    qty: Match.Integer, 
+    name: String,
+    email: String,
+  });
+  
+  check(transactionData.nonce, String)
 
-  if (!this.userId) {
-    throw new Meteor.Error(403, 'You must be logged in to RSVP');
-  }
+  const event = Events.findOne(eventId)
 
-  const party = Events.findOne(eventId)
-
-  if (!party) {
+  if (!event) {
     throw new Meteor.Error(404, 'No such event');
   }
 
-  if (party.ticketsRemaining < qty) {
-    throw new Meteor.Error(401, "Sorry, insufficient tickets remaining")
+  if (event.ticketsRemaining < ticketData.qty) {
+    throw new Meteor.Error(401, `Sorry, only ${event.ticketsRemaining} tickets left.`)
   }
-
-  if (party.ticketPrice) {
-    // TODO: buy ticket with braintree
-  }
-
-  const isUserComing = _.findWhere(party.attendees, {
-    user: this.userId
+  
+  const isUserComing = _.findWhere(event.attendees, {
+    email: ticketData.email
   });
+  
+  if (event.ticketPrice && !this.isSimulation) {
+    // TODO: buy ticket with braintree
+    let config = {
+      amount: (ticketData.qty*event.ticketPrice).toFixed(2),
+      paymentMethodNonce: transactionData.nonce,
+      options: {submitForSettlement: true}
+    }
+    
+    if (this.userId) {
+      const user = Meteor.users.findOne(this.userId)
+      config.customerId = user.profile.customerId
+      config.options.storeInVaultOnSuccess = true;
+    } 
+   
+    this.unblock()
+    result = gateway.transaction.sale(config)
+    
+    if (!result.success) {
+      console.log(result)
+      if (result.errors.deepErrors() > 0) {
+        throw new Meteor.Error(500, "Something went wrong, please check your payment method and try again.", result.errors)
+      } else if (result.message) {
+        throw new Meteor.Error(500, `${result.message}`)
+      } else if (result.transaction && result.transaction.processorSettlementResponseCode) {
+        throw new Meteor.Error(500, `${result.transaction.processorSettlementResponseCode}: ${result.transaction.processorSettlementResponseText}`)
+      } else {
+        throw new Meteor.Error(500, "Something went wrong, please check your payment method and try again.", result)
+      }
+      
+    }
+  }
 
   if (!isUserComing) {
+    
     Events.update(eventId, {
       $push: {
         attendees: {
-          qty,
-          user: this.userId
+          qty: ticketData.qty,
+          user: this.userId,
+          name: ticketData.name,
+          email: ticketData.email,
+          transactionIds: [result.transaction.id],
+          timestamp: new Date()
         }
       }, $inc: {
-        ticketsRemaining: -qty
+        ticketsRemaining: -ticketData.qty
       }
     });
   } else {
+        
     Events.update({
       _id: eventId,
-      'attendees.user': userId
+      'attendees.email': ticketData.email
     }, {
+      $inc: {
+        'attendees.$.qty': ticketData.qty,
+        ticketsRemaining: -ticketData.qty
+      },
       $set: {
-        'attendees.$.qty': qty
+        'attendees.$.timestamp': new Date()
+      },
+      $push: {
+        'attendees.$.transactionIds': result.transaction.id
       }
     })
   }
-}
-
-export function rsvp(eventId, rsvp) {
-  check(eventId, String);
-  check(rsvp, String);
-
-  if (!this.userId) {
-    throw new Meteor.Error(403, 'You must be logged in to RSVP');
-  }
-
-  if (!_.contains(['yes', 'no', 'maybe'], rsvp)) {
-    throw new Meteor.Error(400, 'Invalid RSVP');
-  }
-
-  const party = Events.findOne({
-    _id: eventId,
-    $or: [{
-      // is public
-      $and: [{
-        public: true
-      }, {
-        public: {
-          $exists: true
-        }
-      }]
-    },{
-      // is owner
-      $and: [{
-        owner: this.userId
-      }, {
-        owner: {
-          $exists: true
-        }
-      }]
-    }, {
-      // is invited
-      $and: [{
-        invited: this.userId
-      }, {
-        invited: {
-          $exists: true
-        }
-      }]
-    }]
-  });
-
-  if (!party) {
-    throw new Meteor.Error(404, 'No such party');
-  }
-
-  const hasUserRsvp = _.findWhere(party.rsvps, {
-    user: this.userId
-  });
-
-  if (!hasUserRsvp) {
-    // add new rsvp entry
-    Events.update(eventId, {
-      $push: {
-        attendees: {
-          rsvp,
-          user: this.userId
-        }
-      }, $inc: {
-        ticketsRemaining: -btData.ticketNumber
-      }
-    });
-  } else {
-    // update rsvp entry
-    const userId = this.userId;
-    Events.update({
-      _id: eventId,
-      'rsvps.user': userId
-    }, {
-      $set: {
-        'rsvps.$.rsvp': rsvp
-      }
-    });
-  }
+  //TODO: send ticket email
+  
+  return {result}
 }
 
 Meteor.methods({
-  rsvp,
-  buyTicket
+  buyTickets
 });
+

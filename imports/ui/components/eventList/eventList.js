@@ -8,7 +8,7 @@ import { Events } from '../../../api/events';
 
 import {name as eventCreate} from "../eventCreate/eventCreate"
 import {name as eventDetails} from "../eventDetails/eventDetails"
-import {name as eventOrderForm} from "../eventOrderForm/eventOrderForm"
+
 
 
 class EventsController {
@@ -53,7 +53,6 @@ export default angular.module(name, [
   'angular-meteor',
   eventCreate,
   eventDetails,
-  eventOrderForm,
   uiRouter,
   ngMaterial
 ]).component(name, {
