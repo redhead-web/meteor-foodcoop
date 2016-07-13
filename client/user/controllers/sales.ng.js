@@ -42,7 +42,11 @@ angular.module("food-coop").controller("UserSalesCtrl", function($scope, $reacti
 
   function total(array) {
     return _.reduce(array, function(total, sale) {
-      return total + (sale.price * sale.qty);
+      let price = 0;
+      if (sale.status !== 'refunded') {
+        price = sale.price * sale.qty
+      }
+      return total + price;
     }, 0)
   }
 

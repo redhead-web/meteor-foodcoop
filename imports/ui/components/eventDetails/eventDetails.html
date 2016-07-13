@@ -54,6 +54,37 @@
       		</div>
           <span>{{$ctrl.event.ticketsRemaining}} remaining</span>
         </div>
+        <md-menu>
+          <md-button aria-label="Open contact menu" class="md-primary" ng-click="$mdOpenMenu($event)">
+            Contact Us
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-href="tel:{{$ctrl.event.contact.call}}">
+                <md-icon md-svg-icon="communication:ic_call_24px" md-menu-align-target></md-icon>
+                  Call Us
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="sms:{{$ctrl.event.contact.sms}}">
+                <md-icon md-svg-icon="communication:ic_textsms_24px" md-menu-align-target></md-icon>
+                  Text Us
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="mailto:{{$ctrl.event.contact.email}}">
+                <md-icon md-svg-icon="communication:ic_email_24px" md-menu-align-target></md-icon>
+                  Email Us
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="https://www.facebook.com/messages/{{$ctrl.event.contact.facebook}}">
+                <md-icon md-svg-icon="communication:ic_message_24px" md-menu-align-target></md-icon>
+                  Message Us on Facebook
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
         <md-button hide-xs ng-click="$ctrl.eventView = 'buyTicket'" class="md-primary">Buy Tickets</md-button>
         <md-button hide-xs ng-click="$ctrl.eventView = 'attendees'" class="md-primary">Who is Coming?</md-button>
       </div>

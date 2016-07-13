@@ -25,3 +25,6 @@ job = new Meteor.Cron
     # email producers their sale summaries every night at midnight
     '0 0 * * 3': ->
       Meteor.call "/email/producerSalesWeeklySummary", callback
+    # check if event reminders need to be sent every day at 8am
+    '0 8 * * *': ->
+      Meteor.call "eventTodayReminder", callback

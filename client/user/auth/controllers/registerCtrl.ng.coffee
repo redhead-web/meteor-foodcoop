@@ -46,6 +46,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
     Accounts.createUser vm.credentials, vm.$bindToContext (err) ->
      
       if err
+        vm.error = "Login Error: #{err}"
         console.log result
       else
         if vm.role == 'producer'

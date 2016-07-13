@@ -72,3 +72,14 @@ exports.schema = new SimpleSchema
     type: Date
     defaultValue: new Date()
   daysNotice: type: Number, min: 0, optional: true # tickets can close a certain number of days before the event if necessary
+  contact: 
+    type: Object
+    optional: true
+  "contact.call":
+    type: String
+  "contact.sms":
+    type: String
+  "contact.email":
+    type: String
+  "contact.facebook":
+    type: String #1512866918959784 facebook id

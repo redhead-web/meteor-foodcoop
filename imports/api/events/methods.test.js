@@ -1,56 +1,106 @@
-import {rsvp} from './methods'
+import {buyTickets} from './methods'
+
 import {Events} from './collection'
 import { expect } from 'meteor/practicalmeteor:chai';
+
+import { resetDatabase } from 'meteor/xolvio:cleaner';
+import faker from 'faker';
 
 import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isServer) {
   describe('Events / Methods', function() {
-    describe('rsvp', () => {
+    describe('buyTickets', () => {
       function loggedIn(userId = 'userId') {
         return {
           userId
         };
       }
+      
+      let testTicketData = {qty: 1, name: "sean stanley", email: "test@test.com"}
+      
+      let testTransactionData = {nonce: "fake-valid-visa-nonce"}
+      
+      let failNonce = "fake-processor-declined-visa-nonce"
+      
+      let id;
+      
+      beforeEach(() => {
+        resetDatabase();
+        id = Events.insert({
+          title: "Test Event",
+          date: new Date(),
+        })
+      })
 
-      // it('should be called from Method', () => {
-      //   spyOn(rsvp, 'apply');
-      //
-      //   try {
-      //     Meteor.call('rsvp');
-      //   } catch (e) {}
-      //
-      //   expect(rsvp.apply).toHaveBeenCalled();
-      // });
-
-      it('should fail on missing partyId', () => {
+      it('should fail on missing eventId', () => {
         expect(() => {
-          rsvp.call({});
+          buyTickets.call({});
         }).to.throw();
       });
 
-      it('should fail on missing rsvp', () => {
+      it('should fail on missing ticketData', () => {
         expect(() => {
-          rsvp.call({}, 'partyId');
+          buyTickets.call({}, 'eventId');
         }).to.throw();
       });
 
-      it('should fail if not logged in', () => {
+      it('should not fail if missing transaction nonce', () => {
         expect(() => {
-          rsvp.call({}, 'partyId', 'rsvp');
-        }).to.throw(/403/);
+          buyTickets.call({}, id, testTicketData, {});
+        }).not.to.throw();
       });
-
-
-      // ['yes', 'maybe', 'no'].forEach((answer) => {
-      //   it(`should pass on '${answer}'`, () => {
-      //     expect(() => {
-      //       rsvp.call(loggedIn(), 'partyId', answer);
-      //     }).not.toThrowError(/400/);
-      //   });
-      // });
+      
+      it('should not fail with valid arguments', () => {
+        expect(() => {
+          buyTickets.call({}, id, testTicketData, testTransactionData);
+        }).to.not.throw();
+      })
+      
+      it('should not fail with invalid nonce if no ticket price for event', () => {
+        let td = {nonce: failNonce}
+        expect(() => {
+          buyTickets(id, testTicketData, td);
+        }).not.to.throw();
+      })
+      
+      it('should fail with invalid nonce if ticket price for event', () => {
+        let td = {nonce: failNonce}
+        Events.update(id, {$set: {ticketPrice: 30}})
+        expect(() => {
+          buyTickets.call({unblock: function() {return null} }, id, testTicketData, td);
+        }).not.to.throw();
+      })
 
       // TODO: more tests
     });
+    
+    // describe('eventTodayReminder', () => {
+    //
+    //   beforeEach(()=> {
+    //     resetDatabase();
+    //     let attendees = []
+    //     for (let i = 0; i < 6; i++) {
+    //       attendees.push({
+    //         name: faker.name.findName(),
+    //         email: faker.internet.email(),
+    //         timestamp: new Date(),
+    //         qty: faker.random.number({ min: 1, max: 20 })
+    //       })
+    //     }
+    //
+    //     Events.insert({
+    //       title: "Test Event",
+    //       date: new Date(),
+    //       attendees
+    //     })
+    //   })
+    //
+    //   it('should not fail to find attendees', () => {
+    //     expect(() => {
+    //       eventTodayReminder()
+    //     }).not.to.throw();
+    //   })
+    // })
   })
 }

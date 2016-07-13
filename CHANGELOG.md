@@ -1,3 +1,5 @@
+
+
 ## 0.1.9rc_1 (27-6-2016)
 - added registration welcome email template
 - fixed admin products list being difficult to use
@@ -10,6 +12,8 @@
   - members get an email with tickets
   - event can be shared on facebook and looks nice
   - email drafted for reminder of the event the day it happens
+  - contact us menu for each event
+  - confirm dialog after event ticket purchase
 
 
 

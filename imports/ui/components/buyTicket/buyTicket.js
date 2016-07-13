@@ -11,29 +11,44 @@ import {name as membershipBenefits} from '../membershipBenefits/membershipBenefi
 
 
 class BuyTicketController {
-  constructor($state, $reactive, $scope, $mdToast) {
+  constructor($state, $reactive, $scope, $mdDialog) {
     'ngInject';
-    
+
     $reactive(this).attach($scope)
-    
+
     const user = Meteor.user()
-    
+
     this.ticketData = {
       name: user ? user.profile.name : "",
       email: user ? user.emails[0].address : ""
     }
-        
+
     this.go = $state.go
+
+    this._showDialog = () => {
+      $mdDialog.show($mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title('You\'re all booked')
+        .textContent('We look forward to meeting you at the event. Check your email for printable tickets.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!'))
+      .finally(()=> {
+        this.onSuccess({eventView: 'attendees'});
+      });
+    }
   }
-  
+
   registerUser(callback) {
     console.log('register user')
-    
   }
-  
+
+  showDialog() {
+    this._showDialog()
+  }
+
   buyTickets(transactionData) {
     console.log(transactionData)
-    
+
     this.call('buyTickets', this.event._id, this.ticketData, transactionData, (error, result) => {
       if (error) {
         console.log(error);
@@ -41,9 +56,7 @@ class BuyTicketController {
         return
       }
       console.log(result)
-      $mdToast.show(
-        $mdToast.simple().content("Payment handled. See you there!").position('bottom left').hideDelay(5000)
-      );
+      this.showDialog()
       if (this.willRegister) {
         this.register.email = this.ticketData.email
         this.register.profile.name = this.ticketData.name
@@ -51,13 +64,10 @@ class BuyTicketController {
           console.log(error)
           console.log(id)
           console.log('registered')
-          this.onSuccess({eventView: 'attendees'});
         }))
-      } else {
-        this.onSuccess({eventView: 'attendees'})
       }
     })
-    
+
   }
 }
 
@@ -77,4 +87,3 @@ export default angular.module(name, [
     onSuccess: "&"
   }
 })
-  

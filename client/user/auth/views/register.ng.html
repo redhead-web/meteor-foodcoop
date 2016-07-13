@@ -64,6 +64,9 @@
       <div layout layout-align="end center"><md-button ng-click="rc.open($event)" class="md-accent md-hue-2">Benefits of membership</md-button></div>
       <br>
       <md-divider></md-divider>
+      <div ng-show="rc.error" class="md-warn">
+        <small>{{ rc.error }}</small>
+      </div>
       <md-button 
         class="md-raised md-primary" 
         ng-disabled="signupForm.$invalid"

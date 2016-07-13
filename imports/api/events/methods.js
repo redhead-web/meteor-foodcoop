@@ -1,7 +1,9 @@
 import { _ } from 'meteor/stevezhu:lodash';
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import { Email } from 'meteor/email';
+import { Mailer } from 'meteor/lookback:emails';
+import { moment } from 'meteor/momentjs:moment';
 
 import { Events } from './collection';
 
@@ -23,9 +25,6 @@ if (Meteor.isServer) {
   });
 }
 
-
-
-
 function getContactEmail(user) {
   if (user.emails && user.emails.length)
     return user.emails[0].address;
@@ -43,12 +42,16 @@ export function buyTickets(eventId, ticketData, transactionData) {
     email: String,
   });
   
-  check(transactionData.nonce, String)
+  
 
   const event = Events.findOne(eventId)
 
   if (!event) {
     throw new Meteor.Error(404, 'No such event');
+  }
+  
+  if (event.ticketPrice) {
+    check(transactionData, Match.ObjectIncluding({nonce: String}))
   }
 
   if (event.ticketsRemaining < ticketData.qty) {
@@ -75,7 +78,6 @@ export function buyTickets(eventId, ticketData, transactionData) {
    
     this.unblock()
     result = gateway.transaction.sale(config)
-    
     if (!result.success) {
       console.log(result)
       if (result.errors.deepErrors() > 0) {
@@ -131,6 +133,6 @@ export function buyTickets(eventId, ticketData, transactionData) {
 }
 
 Meteor.methods({
-  buyTickets
+  buyTickets,
 });
 

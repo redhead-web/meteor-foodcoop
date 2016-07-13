@@ -19,7 +19,7 @@
       <div ng-message="required">An email address is required.</div>
     </div>
   </md-input-container>
-  
+
   <md-checkbox ng-model="$ctrl.willRegister" ng-if="!currentUserId">Create a food co-op account at the same time?</md-checkbox>
   <div ng-if="$ctrl.willRegister">
     <md-divider></md-divider>
@@ -68,7 +68,7 @@
   <md-divider></md-divider>
   <br>
   <span class="md-warn md-body-2">{{$ctrl.error.message}}</span>
-  <braintree-payment is-valid="buyTicket.$valid" on-success="$ctrl.buyTickets(data)" button-text="Buy Tickets"></braintree-payment>
+  <braintree-payment id="ticketPayment" is-valid="buyTicket.$valid" on-success="$ctrl.buyTickets(data)" button-text="Buy Tickets"></braintree-payment>
 </form>
 <span flex></span>
 </div>

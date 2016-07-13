@@ -28,7 +28,6 @@ Templates.eventReminder =
       event: mockData.event
       recipient: 
         name: "Sean Stanley"
-        qty: 3
       
 
 

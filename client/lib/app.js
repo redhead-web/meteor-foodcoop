@@ -15,7 +15,7 @@ angular.module('food-coop',[
   'angular-meteor.auth',
    navigation,
    eventList,
-   //requestList,
+//   requestList,
    uiRouter,
    ngMaterial,
    ngFileUpload,

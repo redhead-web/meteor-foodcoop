@@ -147,9 +147,9 @@
     <div ng-if="ctrl.product.producer === currentUser._id">
       <p class="md-body-1 text-center">All product changes save automagically!</p>
     </div>
-    
+
     <div ng-if="ctrl.product.producer !== currentUser._id">
-      <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)" 
+      <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, ctrl.product, shop.qty)"
       ng-if="ctrl.product.stocklevel == null || ctrl.product.stocklevel > 0" class="editContent"
       layout="row">
         <md-input-container flex>
@@ -167,7 +167,7 @@
         </div>
       </form>
     </div>
-    
+
     <p class="md-body-1">
       <md-button
         class="md-icon-button md-accent" aria-label="edit name">
@@ -181,7 +181,7 @@
        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
       </md-button>
     </p>
-    
+
     <md-input-container ng-if="ctrl.isOwner && ctrl.edit.saleNotice">
       <label>Sale Notice</label>
       <md-select ng-model="ctrl.product.daysNotice" ng-change="ctrl.save()">
@@ -216,7 +216,7 @@
         <md-input-container class="md-block">
           <label>Description</label>
           <textarea ng-model="ctrl.product.description" md-maxlength="2500" name="description"
-          ng-change="ctrl.save()" 
+          ng-change="ctrl.save()"
           ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"></textarea>
           <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
             <div ng-message="maxlength">Please use a shorter description.</div>
@@ -262,7 +262,7 @@
       ng-if="ctrl.edit.packagingRefund && ctrl.isOwner">
         <md-input-container class="md-icon-float md-block" flex>
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
-          <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" 
+          <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01"
           placeholder="Packaging Refund amount" ng-change="ctrl.save()" ng-model-options="ctrl.modelOptions">
           <div ng-messages="productUploadForm.packagingRefund.$error">
             <div ng-message="min">You must have a positive number here.</div>
