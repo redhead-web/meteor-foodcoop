@@ -1,7 +1,7 @@
 angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $state, $mdDialog, $mdMedia) ->
-  
+
   $reactive(this).attach($scope)
-  
+
   vm = this
   vm.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
   vm.credentials =
@@ -19,7 +19,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
   vm.prices =
     customer: Meteor.settings.public.shares.customer
     producer: Meteor.settings.public.shares.producer
-  
+
   vm.open = (ev) ->
     useFullScreen = ($mdMedia('sm') or $mdMedia('xs')) and vm.customFullscreen
     $mdDialog.show(
@@ -40,18 +40,21 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
       vm.customFullscreen = wantsFullScreen == true
       return
     return
-    
+
 
   vm.register = ->
     Accounts.createUser vm.credentials, vm.$bindToContext (err) ->
-     
+
       if err
         vm.error = "Login Error: #{err}"
         console.log result
       else
+
         if vm.role == 'producer'
+          Meteor.call('newMemberEmail', true)
           $state.go 'producer-application'
         else
+          Meteor.call('newMemberEmail')
           $state.go 'store'
           return
       return
@@ -59,37 +62,39 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
   vm.facebookLogin = ->
     Meteor.loginWithFacebook
       requestPermissions: ['email']
-    , vm.$bindToContext (err) ->
-      
+    , vm.$bindToContext (err, id) ->
+
       if err
         console.error err
         vm.error = "Login Error: #{err}"
       else
         if vm.role == 'producer'
+          Meteor.call('newMemberEmail', true)
           $state.go 'producer-application'
         else
+          Meteor.call('newMemberEmail')
           $state.go 'profile.edit'
       return
 
   return
-  
-  
+
+
 DialogController = ($scope, $mdDialog) ->
   "ngInject";
-  
+
   $scope.prices =
     customer: Meteor.settings.public.shares.customer
     producer: Meteor.settings.public.shares.producer
-  
+
   $scope.hide = ->
     $mdDialog.hide()
-    
+
   $scope.cancel = ->
     $mdDialog.cancel()
-  
+
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
-  
+
   return
 
 

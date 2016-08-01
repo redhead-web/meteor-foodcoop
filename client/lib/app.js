@@ -53,7 +53,7 @@ angular.module('food-coop',[
     .set("upload_preset", Meteor.settings.public.cloudinary.upload_preset);
 
   uiGmapGoogleMapApiProvider.configure({
-      //    key: 'your api key',
+      key: 'AIzaSyAkO_T5K7pMUkZIEK5U-mEIx3aG6WZZ7_4',
       v: '3.22', //defaults to latest 3.X anyhow
       libraries: 'places,geometry,visualization'
   });

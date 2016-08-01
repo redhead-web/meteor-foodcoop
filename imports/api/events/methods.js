@@ -2,11 +2,9 @@ import { _ } from 'meteor/stevezhu:lodash';
 import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
 import { Email } from 'meteor/email';
-import { Mailer } from 'meteor/lookback:emails';
 import { moment } from 'meteor/momentjs:moment';
 
 import { Events } from './collection';
-
 
 let environment, gateway;
 
@@ -23,6 +21,7 @@ if (Meteor.isServer) {
     publicKey: Meteor.settings.BRAIN_TREE.PUBLIC_KEY,
     privateKey: Meteor.settings.BRAIN_TREE.PRIVATE_KEY
   });
+
 }
 
 function getContactEmail(user) {
@@ -34,22 +33,20 @@ function getContactEmail(user) {
 
 export function buyTickets(eventId, ticketData, transactionData) {
   let result = {transaction: {id: ''}};
-  
+
   check(eventId, String);
   check(ticketData, {
-    qty: Match.Integer, 
+    qty: Match.Integer,
     name: String,
     email: String,
   });
-  
-  
 
   const event = Events.findOne(eventId)
 
   if (!event) {
     throw new Meteor.Error(404, 'No such event');
   }
-  
+
   if (event.ticketPrice) {
     check(transactionData, Match.ObjectIncluding({nonce: String}))
   }
@@ -57,11 +54,11 @@ export function buyTickets(eventId, ticketData, transactionData) {
   if (event.ticketsRemaining < ticketData.qty) {
     throw new Meteor.Error(401, `Sorry, only ${event.ticketsRemaining} tickets left.`)
   }
-  
+
   const isUserComing = _.findWhere(event.attendees, {
     email: ticketData.email
   });
-  
+
   if (event.ticketPrice && !this.isSimulation) {
     // TODO: buy ticket with braintree
     let config = {
@@ -69,13 +66,13 @@ export function buyTickets(eventId, ticketData, transactionData) {
       paymentMethodNonce: transactionData.nonce,
       options: {submitForSettlement: true}
     }
-    
+
     if (this.userId) {
       const user = Meteor.users.findOne(this.userId)
       config.customerId = user.profile.customerId
       config.options.storeInVaultOnSuccess = true;
-    } 
-   
+    }
+
     this.unblock()
     result = gateway.transaction.sale(config)
     if (!result.success) {
@@ -89,12 +86,12 @@ export function buyTickets(eventId, ticketData, transactionData) {
       } else {
         throw new Meteor.Error(500, "Something went wrong, please check your payment method and try again.", result)
       }
-      
+
     }
   }
 
   if (!isUserComing) {
-    
+
     Events.update(eventId, {
       $push: {
         attendees: {
@@ -110,7 +107,7 @@ export function buyTickets(eventId, ticketData, transactionData) {
       }
     });
   } else {
-        
+
     Events.update({
       _id: eventId,
       'attendees.email': ticketData.email
@@ -128,11 +125,13 @@ export function buyTickets(eventId, ticketData, transactionData) {
     })
   }
   //TODO: send ticket email
-  
+  sent = Meteor.call('ticketSaleEmail', ticketData, event)
+
+  if (!sent) console.error(`Event Reminder Message failed to send to ${ticketData.name} at ${ticketData.email}`)
+
   return {result}
 }
 
 Meteor.methods({
   buyTickets,
 });
-

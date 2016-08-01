@@ -61,9 +61,10 @@ class BuyTicketController {
         this.register.email = this.ticketData.email
         this.register.profile.name = this.ticketData.name
         Accounts.createUser(this.register, this.$bindToContext((error, id) => {
-          console.log(error)
           console.log(id)
-          console.log('registered')
+          if (!error) {
+            Meteor.call('newMemberEmail', this.register.role === 'producer')
+          }
         }))
       }
     })
