@@ -8,6 +8,16 @@
     "apiKey": "api key",
     "listId": "listID"
   },
+  "SMTP": "",
+  "Mailer": { // global transactional email settings
+    "from": "Your Food Co-op <admin@yourdomain.com>",
+    "replyTo": "Your Food Co-op <admin@yourdomain.com>",
+    "testEmail": "admin@yourdomain.com"
+  },
+  "facebook": {
+    "appId": "facebookAppId",
+    "secret": "biglongsecretString"
+  },
   "kadira": { 
     "appId": "appId", 
     "appSecret": "app secret" 
@@ -26,11 +36,10 @@
       "customer": 10,
       "producer": 20
     },
-    "deliveryDayOfWeek": 2, # Tuesday
-    "shoppingThreshold": 2, # default cut off orders 2 days before delivery day
-    "cartExpiryDays": 7, # currently doesn't do anything but eventually will be used for cart expiry
-    "markup": 1.1, # 10% markup
-    "gst": 0.15 # 15% gst
+    "deliveryDayOfWeek": 2, // Tuesday
+    "shoppingThreshold": 2, // default cut off orders 2 days before delivery day
+    "cartExpiryDays": 7, // currently doesn't do anything but eventually will be used for cart expiry
+    "markup": 1.1, // 10% markup
+    "gst": 0.15 // 15% gst
   }
-
 }
