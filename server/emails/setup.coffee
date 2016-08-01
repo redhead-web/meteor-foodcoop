@@ -27,7 +27,7 @@ mockData =
   ]
 
 Mailer.config
-  from: Meteor.settings.Mailer.from
+  from: Meteor.settings.Mailer.fromAddress
   replyTo: Meteor.settings.Mailer.replyTo 
   testEmail: Meteor.settings.Mailer.testEmail
 

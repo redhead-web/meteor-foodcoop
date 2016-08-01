@@ -10,7 +10,7 @@
   },
   "SMTP": "",
   "Mailer": { // global transactional email settings
-    "from": "Your Food Co-op <admin@yourdomain.com>",
+    "fromAddress": "Your Food Co-op <admin@yourdomain.com>",
     "replyTo": "Your Food Co-op <admin@yourdomain.com>",
     "testEmail": "admin@yourdomain.com"
   },

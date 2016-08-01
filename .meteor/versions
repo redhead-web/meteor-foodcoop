@@ -120,7 +120,6 @@ rate-limit@1.0.4
 reactive-dict@1.1.7
 reactive-var@1.0.9
 redhead:angular-avatar@0.0.2
-redhead:angular-cloudinary@0.0.1
 redhead:angular-google-places-autocomplete@0.0.1
 redhead:angular-remarkable@0.0.1
 redhead:angular-socialshare@0.1.20
