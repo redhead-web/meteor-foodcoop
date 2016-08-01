@@ -10,8 +10,6 @@
     "angular-material": "^1.0.9",
     "angular-simple-logger": "^0.1.7",
     "angular-ui-router": "^0.2.18",
-    "cloudinary-angular": "^1.0.0",
-    "cloudinary-core": "^2.0.8",
     "index": "^0.4.0",
     "index.js": "0.0.3",
     "meteor-node-stubs": "^0.2.3",
