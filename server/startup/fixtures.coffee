@@ -47,7 +47,7 @@ Meteor.startup ->
     console.log "user fixtures added"
 
   if Products.find().count() is 0
-    producer = Meteor.users.findOne {'profile.name': 'Sean and Rowan Stanley'}
+    producer = Meteor.users.findOne {'profile.name': users[1].name}
     products = []
 
     products.push
