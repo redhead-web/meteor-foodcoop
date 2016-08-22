@@ -5,7 +5,7 @@
 
 var resetDatabase = function () {
   // safety check
-  if (!Meteor.isTest) {
+  if (!process.env.IS_MIRROR) {
     throw new Meteor.Error(
       'NOT_ALLOWED',
       'velocityReset is not allowed outside of a mirror. Something has gone wrong.'

@@ -1,0 +1,37 @@
+$color: #ededed;
+
+.offer multi-avatar {
+  
+  cursor: pointer;
+  
+  &.indent-avatar {
+    margin-left: 60px;
+  }
+  
+}
+
+.offer.withdrawn {
+  background-color: $color!important;
+  color: darken($color, 33%)!important;
+  
+  md-content {
+    background-color: $color!important;
+    color: darken($color, 33%)!important;
+  }
+  
+}
+
+.offer > div > md-icon {
+  margin-right: 14px;
+  margin-top: 14px;
+}
+
+
+.offer .summary {
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 0;
+  margin-bottom: 0;
+}

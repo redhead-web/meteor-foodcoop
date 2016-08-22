@@ -3,8 +3,8 @@ import ngMaterial from 'angular-material'
 import ngFileUpload from 'ng-file-upload'
 import 'angular-simple-logger';
 import 'angular-google-maps';
-import cloudinary from '../../imports/ui/components/cloudinaryAngular';
 import {name as navigation} from '../../imports/ui/components/navigation/navigation';
+import {name as eventList} from '../../imports/ui/components/eventList/eventList';
 //import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 
 angular.module('food-coop',[
@@ -14,20 +14,22 @@ angular.module('food-coop',[
   'angular-meteor',
   'angular-meteor.auth',
    navigation,
+   eventList,
+//   requestList,
    uiRouter,
    ngMaterial,
    ngFileUpload,
   'nemLogging',
   'uiGmapgoogle-maps',
   'google.places',
-   cloudinary,
+  'cloudinary',
   '720kb.socialshare',
   'remarkable',
   'multi-avatar',
   'ngLetterAvatar',
   'youtube-embed'
 ])
-.config(function ($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider) {
+.config(function ($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, cloudinaryProvider) {
   "ngInject";
   $mdIconProvider
     .iconSet("social", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg")
@@ -46,10 +48,9 @@ angular.module('food-coop',[
   $mdThemingProvider.theme('default').primaryPalette('light-green').accentPalette('brown');
   $mdThemingProvider.theme('dark-default').primaryPalette('light-green').accentPalette('brown').dark();
 
-  CloudinaryProvider.configure({
-    cloud_name: Meteor.settings.public.cloudinary.cloud_name,
-    api_key: Meteor.settings.public.cloudinary.upload_preset
-  })
+  cloudinaryProvider
+    .set("cloud_name", Meteor.settings.public.cloudinary.cloud_name)
+    .set("upload_preset", Meteor.settings.public.cloudinary.upload_preset);
 
   uiGmapGoogleMapApiProvider.configure({
       key: 'AIzaSyAkO_T5K7pMUkZIEK5U-mEIx3aG6WZZ7_4',
