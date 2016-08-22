@@ -15,7 +15,7 @@
     <md-list-item ng-repeat="p in $ctrl.paymentMethods" ng-click="p.makeDefault(callback)">
       <img ng-src="{{p.imageUrl}}" alt="" class="md-avatar"/>
       <p>{{p.maskedNumber}} <span ng-show="p.default">(default)</span></p>
-      <md-icon md-svg-icon="action:ic_delete_24px" ng-click="p.delete(callback)" aria-label="delete payment method" ng-class="{'md-primary': p.default}"></md-icon>
+      <md-icon class="md-secondary" md-svg-icon="action:ic_delete_24px" ng-click="p.delete(callback)" aria-label="delete payment method" ng-class="{'md-primary': p.default}"></md-icon>
 
     </md-list-item>
   </md-list>

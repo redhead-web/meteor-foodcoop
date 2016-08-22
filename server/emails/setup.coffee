@@ -1,4 +1,3 @@
-
 Templates = {}
 
 
@@ -20,57 +19,17 @@ item2 = {
 }
 
 mockData =
-  event:
-    title: "Winter Banquet"
-    date: moment().add(14, 'days').hour(18).minute(0).toDate()
-    venue:
-      url: "https://maps.google.com/?q=116+Bank+St,+Whangarei,+Whangarei+0110,+New+Zealand&ftid=0x6d0b7ee676f0c53f:0xc24b489cac7be538"
-      formatted_address: "116 Bank St, Whangarei, Whangarei 0110, New Zealand"
-    ticketPrice: 30
-    fbEventId: "test"
-    img:
-      result: "kaikohe/baker-858401_640_kvne9r"
-      url: "https://res.cloudinary.com/foodcoop/image/upload/v1463684961/kaikohe/baker-858401_640_kvne9r.jpg"
-  # [ [ 'Tue Aug 09 2016 00:00:00 GMT+1200 (NZST)', [ [Object] ] ] ]
+  recipientName: "Random Name"
+  recipientEmail: "random@email.com"
   items: [
     { deliveryDay: 'Tue Aug 09 2016 00:00:00 GMT+1200 (NZST)', sales: [ item1, item2 ] }
     { deliveryDay: 'Tue Aug 16 2016 00:00:00 GMT+1200 (NZST)', sales: [ item1, item2 ] }
   ]
 
 Mailer.config
-  from: 'Whangarei Food Co-op <sean@foodcoop.nz>'
-  replyTo: 'Whangarei Food Co-op <sean@foodcoop.nz>'
-  testEmail: "sean@maplekiwi.com"
-
-Templates.eventReminder =
-  path: 'events/eventReminder/eventReminder.html'
-  css: 'events/eventReminder/eventReminder.css'
-  route:
-    path: '/event-reminder'
-    data: ->
-      event: mockData.event
-      recipient:
-        name: "Sean Stanley"
-
-Templates.ticketSale =
-  path: 'events/ticketSales/ticket-sales.html'
-  css: "events/ticketSales/ticketSales.css"
-  helpers:
-    ticketLoop: () ->
-      this.recipient.qty
-      array = []
-      for i in [1..this.recipient.qty]
-        array.push i
-      return array
-  route:
-    path: '/ticket-sale'
-    data: ->
-      event: mockData.event
-      recipient:
-        name: "Sean Stanley"
-        qty: 4
-        email: 'sean@maplekiwi.com'
-        timestamp: moment().toDate()
+  from: Meteor.settings.Mailer.fromAddress
+  replyTo: Meteor.settings.Mailer.replyTo 
+  testEmail: Meteor.settings.Mailer.testEmail
 
 Templates.newProduct =
   path: 'notifications/new-product.html'
@@ -82,7 +41,7 @@ Templates.newMember =
     path: '/new-user'
     data: ->
       {
-        recipient: "Sean Stanley"
+        recipient: mockData.recipientName
         userId: Meteor.users.findOne()._id
         producer: true
       }
@@ -96,9 +55,9 @@ Templates.earlyFavouritedShoppingReminder =
       preview = "Quick reminder to order some products you care about from us."
       recipient =
         profile:
-          name: 'sean stanley'
+          name: mockData.recipientName
         emails:
-          [address: 'sean@maplekiwi.com']
+          [address: mockData.recipientEmail]
         products: Products.find({}, {
           limit: 7
           sort: dateCreated: -1
@@ -158,9 +117,9 @@ Templates.earlyLikesProducerShoppingReminder =
 
       recipient =
         profile:
-          name: 'sean stanley'
+          name: mockData.recipientName
         emails:
-          [address: 'sean@maplekiwi.com']
+          [address: mockData.recipientEmail]
         producers: producers
 
       return {preview, recipient}
@@ -176,8 +135,7 @@ Templates.contactMessage =
     data: ->
 
       return {
-        email: 'rowan@corymbosa.me'
-
+        email: mockData.recipientEmail
       }
 
 Templates.soldOutMessage =
@@ -205,7 +163,7 @@ Templates.confirmOrderEmail =
         order: {}
         customerNumber: 1
         items: mockData.items
-        recipient: 'Sean Stanley'
+        recipient: mockData.recipientName
         number: 333
         date: moment().format('dddd, MMMM Do YYYY')
       }
@@ -244,7 +202,7 @@ Meteor.startup ->
       path: 'email-layout.html'
       scss: 'email-layout.scss'
     helpers:
-      coopName: "Whangarei Food Co-op"
+      coopName: Meteor.settings.public.coopName
       bankAccount: Meteor.settings.public.bankAccount
       css: () ->
         """
@@ -301,4 +259,4 @@ Meteor.startup ->
   #   to: "nobody <nobody@nowhere.com"
   #   subject: "Collect your Order Today"
   #   template: "wholesaleInvoiceEmail"
-  #   data: {recipient:"Sean"}
+  #   data: {recipient:"mockData.recipientName"}
