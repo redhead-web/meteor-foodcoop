@@ -8,7 +8,7 @@ function ProductCardCtrl($scope, $reactive) {
 
 
 angular.module('food-coop').component('productCard', {
-  templateUrl: 'client/products/components/product-card.ng.html',
+  templateUrl: 'client/products/components/productCard/product-card.ng.html',
   controller: ProductCardCtrl,
   controllerAs: 'card',
   bindings: {

@@ -4,14 +4,6 @@ angular.module('food-coop').config ($stateProvider) ->
     url: '/success'
     templateUrl: 'client/checkout/views/success.ng.html'
 
-  .state 'profile.subscriptionCheckout',
-    url: '/subscription-checkout'
-    templateUrl: 'client/checkout/views/subscription-checkout.ng.html'
-    controller: 'subscribeCtrl',
-    resolve:
-      "currentUser" : ($auth) ->
-        $auth.requireUser()
-
   .state 'profile.subscriptionCheckout.success',
     url: '/success-subscription'
     templateUrl: 'client/checkout/views/success.ng.html'

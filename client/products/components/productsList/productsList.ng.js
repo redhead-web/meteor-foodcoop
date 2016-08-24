@@ -1,4 +1,4 @@
-function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
+function ProductsListCtrl ($scope, $state, $stateParams, $reactive) {
   
   "ngInject";
   
@@ -35,7 +35,7 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
   })
   
   this.options = {
-    sort: {name: 1}
+    sort: {dateCreated: -1},
   };
   
   this.autorun( () => {
@@ -50,8 +50,8 @@ function ProductsPageCtrl ($scope, $state, $stateParams, $reactive) {
 }
 
 
-angular.module("food-coop").component("productsPage", {
-  controller: ProductsPageCtrl,
+angular.module("food-coop").component("productsList", {
+  controller: ProductsListCtrl,
   controllerAs: 'store',
-  templateUrl: 'client/products/components/products-list.ng.html'
+  templateUrl: 'client/products/components/productsList/products-list.ng.html'
 });

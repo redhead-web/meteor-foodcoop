@@ -11,7 +11,7 @@ angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
   .state('store',
     url: '/store?name&certification&producer&search&category'
-    template: '<products-page></products-page>'
+    template: '<products-list></products-list>'
   )
   .state('productDetails',
     url: '/product/:productId'

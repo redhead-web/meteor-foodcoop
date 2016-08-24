@@ -1,16 +1,8 @@
-
-packages/redhead:angular-cloudinary/
-settings.json
-
 *.jpg
-
-.uploads
 
 kai-deploy
 
 kai-deploy-x
-
-*.json
 
 wh-deploy
 
@@ -23,8 +15,6 @@ server/startup/startup.coffee
 settings.json
 
 wh-settings.json
-
-server/startup/email.coffee
 
 public
 

@@ -3,7 +3,7 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
   
   "ngInject";
   
-  const pageSize = $mdMedia('xs') || $mdMedia('sm') ? 12 : 24;
+  const pageSize = $mdMedia('xs') || $mdMedia('sm') ? 24 : 48;
   
   this.pageSize = pageSize;
     
@@ -80,7 +80,7 @@ function productCardsController ($scope, $state, $auth, $reactive, $mdMedia, $ti
 
 
 angular.module('food-coop').component('productCards', {
-  templateUrl: 'client/products/components/product-cards.ng.html',
+  templateUrl: 'client/products/components/productCards/product-cards.ng.html',
   controller: productCardsController,
   bindings: {
     query: '<',

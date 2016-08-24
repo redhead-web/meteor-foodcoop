@@ -1,0 +1,93 @@
+{
+  "name": "foodcoop.nz",
+  "version": "0.1.9",
+  "description": "platform for online food selling",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-aria": "^1.5.8",
+    "angular-material": "^1.0.9",
+    "angular-messages": "^1.5.8",
+    "angular-simple-logger": "^0.1.7",
+    "angular-ui-router": "^0.2.18",
+    "bcrypt": "^0.8.7",
+    "cloudinary-angular": "^1.0.0",
+    "index": "^0.4.0",
+    "index.js": "0.0.3",
+    "material-design-icons": "^2.1.3",
+    "meteor-node-stubs": "^0.2.3",
+    "ng-file-upload": "^12.0.4"
+  },
+  "peerDependencies": {
+    "angular": ">=1.3 <1.6",
+    "angular-animate": ">=1.3 <1.6",
+    "angular-aria": ">=1.3 <1.6",
+    "angular-messages": ">=1.3 <1.6",
+    "angular-mocks": ">=1.3 <1.6",
+    "angular-route": ">=1.3 <1.6",
+    "angular-sanitize": ">=1.3 <1.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.5",
+    "chai-spies": "^0.7.1",
+    "eslint": "^3.3.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-meteor": "^3.6.0",
+    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "faker": "^3.1.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint --silent",
+    "test:watch": "meteor test --driver-package practicalmeteor:mocha --port 4000 --settings wh-settings.json",
+    "start": "meteor run --settings wh-settings.json"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "airbnb/base",
+      "plugin:meteor/guide"
+    ],
+    "rules": {
+      "import/no-unresolved": [
+        2,
+        {
+          "ignore": [
+            "^meteor/"
+          ]
+        }
+      ],
+      "no-underscore-dangle": [
+        "error",
+        {
+          "allow": [
+            "_id"
+          ]
+        }
+      ],
+      "no-param-reassign": ["error", { "props": false }],
+      "no-unused-expressions": 0,
+      "no-console": 0
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redhead-web/meteor-foodcoop.git"
+  },
+  "keywords": [
+    "food-coop"
+  ],
+  "author": "sean stanley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redhead-web/meteor-foodcoop/issues"
+  },
+  "homepage": "https://github.com/redhead-web/meteor-foodcoop#readme"
+}
