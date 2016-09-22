@@ -86,15 +86,17 @@ angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reac
   }
 
   function total(array, markup) {
+    const filteredArray = _.filter(array, function(sale) {
+      if (sale.status === 'refunded') {
+        return false
+      } return true
+    });
     if (markup) {
-      return Markup(array).saleTotal()
+      return Markup(filteredArray).saleTotal()
     }
     
-    return _.reduce(array, function(total, sale) {
-      if (sale.status !== 'cancelled' && sale.status !== 'refunded') {
-        return total + (sale.price * sale.qty)
-      }
-      return total;
+    return _.sum(filteredArray, function(sale) {
+      return sale.price * sale.qty
     }, 0)
   }
 

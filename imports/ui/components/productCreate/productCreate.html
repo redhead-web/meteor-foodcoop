@@ -1,7 +1,7 @@
-<md-content layout="row" layout-xs="column">
-  <span flex></span>
-  <md-whiteframe
-  flex="20" flex-xs="100"
+<div layout="row" layout-xs="column">
+  <span flex hide-xs></span>
+  <div
+  flex-gt-xs="20"
   layout-xs-margin
   layout="column"
   layout-align="start center"
@@ -32,15 +32,15 @@
       <md-progress-linear ng-if="progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
       <img ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
     </div>
-  </md-whiteframe>
-  <md-whiteframe layout="column" flex="60"  flex-sm="80" flex-xs="100" layout-xs-margin>
+  </div>
+  <div layout="column" flex-gt-sm="60"  flex-sm="80" layout-xs-margin>
     <br>
     <div ng-show="ctrl.error" class="md-warn">
       <small>{{ ctrl.error }}</small>
     </div>
     <form layout="column" layout-margin name="productUploadForm">
-      <div layout="row" ng-if="hasRole(currentUser, 'admin')">
-        <md-autocomplete flex required md-input-name="producer" placeholder="Producer" 
+      <div layout="row" ng-if="ctrl.hasRole(currentUser, 'admin')">
+        <md-autocomplete flex required md-input-name="producer" placeholder="Producer"
         md-search-text="ctrl.producerSearch"
         md-select-on-match="true"
         md-selected-item="ctrl.producer"
@@ -63,7 +63,7 @@
           </md-item-template>
         </md-autocomplete>
       </div>
-      <md-input-container ng-if="hasRole(currentUser, 'admin')">
+      <md-input-container ng-if="ctrl.hasRole(currentUser, 'admin')">
         <label>Extra Markup (use 0.1 for 10% extra)</label>
         <input ng-model="ctrl.product.extraMarkup" min="0" step="0.1">
       </md-input-container>
@@ -75,7 +75,7 @@
           <div ng-message="maxlength">Please use a shorter name.</div>
         </div>
       </md-input-container>
-      
+
       <div layout="row">
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
@@ -88,7 +88,7 @@
             <div ng-message="min">Please use a positive number here.</div>
           </div>
         </md-input-container>
-        
+
         <md-input-container flex="50" class="md-icon-float md-block">
           <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
           <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="You earn" name="earn"
@@ -101,11 +101,11 @@
             <div ng-message="min">Please use a positive number here.</div>
           </div>
         </md-input-container>
-          
+
       </div>
-      
+
       <div layout="row">
-        <md-autocomplete flex required md-input-name="unitofmeasure" placeholder="Unit of Measure" 
+        <md-autocomplete flex required md-input-name="unitofmeasure" placeholder="Unit of Measure"
 				md-search-text="ctrl.product.unitOfMeasure"
         md-select-on-match="true"
         md-items="item in ctrl.getUnitsOfMeasure(ctrl.product.unitOfMeasure)"
@@ -152,7 +152,7 @@
           {{category.name}}
         </md-button>
       </section>
-      
+
       <md-input-container hide-gt-xs>
         <label>Product Category</label>
         <md-select ng-model="ctrl.product.category">
@@ -190,7 +190,7 @@
           </md-option>
         </md-select>
       </md-input-container>
-      
+
       <md-input-container>
         <label>Custom Sale Notice (*optional)</label>
         <md-select ng-model="ctrl.product.daysNotice">
@@ -199,8 +199,8 @@
           </md-option>
         </md-select>
       </md-input-container>
-      
-      <section class="md-whiteframe-3dp" ng-cloak>
+
+      <section class="div-3dp" ng-cloak>
         <md-toolbar>
           <div class="md-toolbar-tools">
             <h2><span>Description</span></h2>
@@ -209,7 +209,7 @@
         </md-toolbar>
         <md-tabs md-dynamic-height md-border-bottom>
            <md-tab label="Editor">
-             <md-content class="md-padding">
+             <div class="md-padding">
                <md-input-container class="md-block">
                  <label>Description</label>
                  <textarea ng-model="ctrl.product.description" md-maxlength="2500" name="description"></textarea>
@@ -218,12 +218,12 @@
                  </div>
                </md-input-container>
                <markdown-help></markdown-help>
-             </md-content>
+             </div>
            </md-tab>
            <md-tab label="Preview">
-             <md-content class="md-padding">
+             <div class="md-padding">
                <div class="md" ng-bind-html="ctrl.product.description | md"></div>
-             </md-content>
+             </div>
            </md-tab>
          </md-tabs>
       </section>
@@ -231,9 +231,9 @@
       <md-button ng-click="ctrl.save($event)">List In Store</md-button>
       <md-button ui-sref="store">Cancel</md-button>
     </form>
-  </md-whiteframe>
-  <md-whiteframe flex="20" flex-xs="100" flex-order-xs="-1" layout="column" layout-align-xs="center end">
+  </div>
+  <div flex-gt-xs="20" flex-order-xs="-1" layout="column" layout-align-xs="center end">
     <md-switch class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
-  </md-whiteframe>
-  <span flex></span>
-</md-content>
+  </div>
+  <span flex hide-xs></span>
+</div>

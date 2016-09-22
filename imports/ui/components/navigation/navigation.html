@@ -10,11 +10,11 @@
 
     <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
     <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
-    <cart-summary ng-if="currentUser"></cart-summary>
+    <cart-summary ng-show="currentUser"></cart-summary>
     <md-button ng-click="nav.toggleRight('right')" aria-label="navigation toggle" class="md-icon-button">
       <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
     </md-button>
-    <md-menu ng-if="currentUser" md-position-mode="target-right target">
+    <md-menu ng-show="currentUser" md-position-mode="target-right target">
       <multi-avatar
         md-menu-origin
         ng-click="$mdOpenMenu($event)"

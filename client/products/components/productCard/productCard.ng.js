@@ -1,3 +1,4 @@
+
 function ProductCardCtrl($scope, $reactive) {
 
   "ngInject";

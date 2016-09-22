@@ -7,17 +7,18 @@ Package.describe({
   git: '',
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
+  documentation: 'README.md',
 });
 
-Package.onUse(function(api) {
-  api.imply(['angular', 'pbastowski:angular-babel@1.0.6_1'], 'client');
+Package.onUse(function (api) {
+  api.use('pbastowski:angular-babel', 'client');
+  api.imply(['angular'], 'client');
   api.addFiles('md5.js', 'client');
   api.mainModule('angular-avatar.js', 'client');
   api.addFiles('publish.js', 'server');
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
   api.use('tinytest');
   api.use('redhead:angular-avatar');
   api.addFiles('angular-avatar-tests.js');

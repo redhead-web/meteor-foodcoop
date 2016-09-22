@@ -12,6 +12,7 @@ import angularMeteor from 'angular-meteor';
 import 'angular-simple-logger';
 import 'angular-google-maps';
 import { name as navigation } from '../../imports/ui/components/navigation/navigation';
+import { name as productCreate } from '../../imports/ui/components/productCreate/productCreate';
 import 'cloudinary-angular/dist/cloudinary-angular.js';
 // import icons from 'material-design-icons';
 // import {name as eventList} from '../../imports/ui/components/eventList/eventList';
@@ -24,6 +25,7 @@ angular.module('food-coop', [
   angularMeteor,
   'angular-meteor.auth',
   navigation,
+  productCreate,
 //  eventList,
 //   requestList,
   uiRouter,
@@ -100,7 +102,6 @@ function onReady() {
 
 if (Meteor.isCordova) {
   angular.element(document).on('deviceready', onReady);
-}
-else {
+} else {
   angular.element(document).ready(onReady);
 }
