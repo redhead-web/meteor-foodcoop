@@ -1,13 +1,13 @@
 
 angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdDialog, $mdToast, $state, $reactive){
   $reactive(this).attach($scope);
-  
+
   let vm = this;
 
   vm.addToCart = addToCart;
-  
+
   vm.alreadyInCart = alreadyInCart;
-  
+
   function alreadyInCart(productId) {
     let item = Cart.Items.findOne({productId: productId})
     return item != null ? "content:ic_add_24px" : "action:ic_shopping_cart_24px"
@@ -22,7 +22,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
       .targetEvent($event)
     );
   }
-  
+
   function storeStockingAlert ($event) {
     $mdDialog.show(
       $mdDialog.alert()
@@ -40,7 +40,7 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
   }
 
   function addToCart ($event, product, qty) {
-    var rawProduct;
+    let rawProduct;
 
     console.log('addToCart function called')
 
@@ -55,45 +55,61 @@ angular.module("food-coop").controller("orderProductCtrl", function($scope, $mdD
     if (Meteor.userId() === product.producer) {
       return isOwnerAlert($event, product._id);
     }
-    
+
+    if (GetProductDeliveryDay(product.daysNotice).isAfter(GetNextDeliveryDay()) ) {
+      return confirmOrder($event, rawProduct, qty)
+    }
+
     // Delete the below code when we are ready to enable shopping
     //return storeStockingAlert($event)
 
+    vm.call('/cart/insert', rawProduct, qty, insertCallback);
+    addedToCartToast()
+  }
 
-
-    vm.call('/cart/insert', rawProduct, qty, function(err, success) {
-      if (err) {
-        console.error(err);
-        return $mdToast.show(
-          $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
-        );
-      }
-
-      if (success !== "UPDATE SUCCESS") {
-        let toast = $mdToast.simple()
-            .content('Poof! Added to Cart!')
-            .action('CHECKOUT')
-            .highlightAction(false)
-            .position('bottom left');
-        $mdToast.show(toast).then(function(response) {
-          if ( response == 'ok' ) {
-            $state.go('cart');
-          }
-        });
-      } else if (success === "UPDATE SUCCESS") {
-        let toast = $mdToast.simple()
-        .content(`Poof! +${qty}`)
+  function addedToCartToast() {
+    let toast = $mdToast.simple()
+        .content('Poof! Added to Cart!')
         .action('CHECKOUT')
         .highlightAction(false)
         .position('bottom left');
-        $mdToast.show(toast).then(function(response) {
-            if ( response == 'ok' ) {
-              $state.go('cart');
-            }
-          });
+    $mdToast.show(toast).then(function(response) {
+      if ( response == 'ok' ) {
+        $state.go('cart');
       }
     });
   }
+
+  function confirmOrder ($event, product, qty) {
+    $mdDialog.show(
+      $mdDialog.confirm()
+      .title(`This product is no longer available for ${GetNextDeliveryDay().format('MMMM D')}`)
+      .textContent(`Would you like to order it for ${GetProductDeliveryDay(product.daysNotice).format("dddd, MMMM D")} instead?`)
+      .ok('Yes Please')
+      .cancel('No Thanks')
+      .targetEvent($event)
+    ).then(function() {
+      // said "order anyway"
+      vm.call('/cart/insert', product, qty, insertCallback);
+
+      addedToCartToast()
+    }, function() {
+      $mdToast.show(
+        $mdToast.simple().content(`You decided not to order ${product.name} right now.`).position('bottom left').hideDelay(3000)
+      );
+    });
+  }
+
+  function insertCallback (err, success) {
+    if (err) {
+      console.error(err);
+      return $mdToast.show(
+        $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
+      );
+    }
+  }
+
+
   return vm;
 
 });

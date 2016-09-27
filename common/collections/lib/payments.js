@@ -2,17 +2,17 @@ Payments = new Mongo.Collection('payments');
 
 
 Payments.allow({
-  insert: function (userId, order) {
+  insert: function (userId, paymentRecord) {
     // you can only order something for yourself
     if (isAdmin(userId)) {return true}
   },
-  update: function (userId, order, fields, modifier) {
+  update: function (userId, paymentRecord, fields, modifier) {
     if (isAdmin(userId)) {
-      // Admin's can update anything about a subscription
+      // Admin's can update anything about a paymentRecord
       return true
     }
   },
-  remove: function (userId, subscription) {
+  remove: function (userId, paymentRecord) {
     return userId && isAdmin(userId);
   }
 });

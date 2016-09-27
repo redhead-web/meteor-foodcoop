@@ -1,0 +1,32 @@
+<br>
+<img src="http://res.cloudinary.com/foodcoop/image/upload/w_500,h_200,c_fill,g_auto/{{event.img.result}}" />
+
+<p>Thank you {{recipient.name}} for your ticket purchase.</p>
+
+<div class="event-header center-text">
+  <h1>{{event.title}}</h1>
+  <p><strong>{{formatDate event.date "dddd, MMMM Do YYYY, h:mm:ss a"}}</strong></p>
+  <p><a href="{{event.venue.url}}">{{event.venue.formatted_address}}</a></p>
+</div>
+  
+{{#each ticketLoop}}
+<table class="ticket-box center-text">
+  <tr>
+    <td class="left">
+      <h4><strong>{{../event.title}}</strong></h4>
+      <p><strong>{{formatDate ../event.date "dddd, MMMM Do YYYY, h:mm:ss a"}}</strong></p>
+      <p class="small"><a href="{{../event.venue.url}}">{{../event.venue.formatted_address}}</a></p>
+    </td>
+    
+    <td class="right">
+      <p>Admit 1</p><p>
+        <br>Name: {{../recipient.name}} <br>
+        Cost: {{currency ../event.ticketPrice}}
+        
+      </p>
+    </td>
+  </tr>
+</table>
+{{/each}}
+
+<p>Please write to us or call us if you have any questions about your tickets or the event.</p>

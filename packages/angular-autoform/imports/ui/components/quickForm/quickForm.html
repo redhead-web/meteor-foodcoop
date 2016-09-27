@@ -1,0 +1,15 @@
+<form name="{{ngQuickForm.formName}}" ng-submit="ngQuickForm.submit()">
+ 
+  <ng-quick-fields form-name="{{ngQuickForm.formName}}" schema="ngQuickForm.grouplessFields" item="ngQuickForm.item" live="ngQuickForm.live"></ng-quick-fields>
+  
+  <div ng-repeat="group in ngQuickForm.fieldGroups">
+    <fieldset class="ngaf-fieldgroup">
+      <legend class="ngaf-fieldGroup-heading">{{group.name}}</legend>
+      <ng-quick-fields form-name="{{ngQuickForm.formName}}" schema="group.fields" item="ngQuickForm.item"></ng-quick-fields>
+    </fieldset>
+  </div>
+  
+  <div ng-if="!ngQuickForm.live">
+    <md-button type="submit" ng-class="ngQuickForm.buttonClasses">{{ngQuickForm.buttonText || 'Submit'}}</md-button>
+  </div>
+</form>

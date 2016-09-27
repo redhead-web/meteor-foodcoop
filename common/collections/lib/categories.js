@@ -1,13 +1,4 @@
-Categories = new Mongo.Collection("categories");
+import {Categories as categories} from '../../../imports/api/categories'
 
-Categories.allow({
-  insert: function(){
-    return true;
-  },
-  update: function(){
-    return false;
-  },
-  remove: function(){
-    return false;
-  }
-});
+Categories = categories
+

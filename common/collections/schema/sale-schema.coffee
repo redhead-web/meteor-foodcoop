@@ -24,5 +24,6 @@ saleSchema = new SimpleSchema
     type: String
     allowedValues: ['undelivered', 'sorted', 'collected', 'delivered', 'exchanged', 'cancelled', 'refunded']
     defaultValue: 'undelivered'
+  daysNotice: type: Number, min: 0, optional: true 
 
 Sales.attachSchema saleSchema

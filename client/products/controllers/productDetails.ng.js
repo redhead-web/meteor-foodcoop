@@ -31,13 +31,7 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
   this.helpers({
     product() {
       return Products.findOne($stateParams.productId)
-    },
-    // isOwner() {
-//       if ( Meteor.userId() ) {
-//
-//         return Meteor.userId() === this.getReactively('product.producer') ? Meteor.userId() : false;
-//       }
-//     }
+    }
   });
   
 
@@ -69,6 +63,19 @@ angular.module("food-coop").controller("ProductDetailsCtrl", function($scope, $s
   
   this.removeImg = (product) => {
     Products.update(this.product._id || $stateParams.productId, {$unset: {img: 1}}, updateCallback);
+  };
+  
+  this.daysNotice = []
+  
+  for (let i = 0; i < 14; i++) {
+    this.daysNotice.push({
+      value: i,
+      name: moment().day(Meteor.settings.public.deliveryDayOfWeek).subtract(i, 'days').format('dddd') + ` -- ${i} days notice`
+    });
+  }
+  
+  this.orderDate = (cutoffDays) => {
+    return GetProductDeliveryDay(cutoffDays).format()
   };
   
   $scope.$watchCollection(()=> {

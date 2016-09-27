@@ -33,16 +33,7 @@ angular.module('food-coop').config( function($urlRouterProvider, $stateProvider,
       url: '/me',
       templateUrl: 'client/user/views/profile.ng.html',
       controller: 'ProfileCtrl',
-    })
-    .state('requests', {
-      url: '/requests',
-      template: "<request-list></request-list>"
     });
 
     $urlRouterProvider.otherwise('/store');
 });
-
-
-function isAdmin (user) {
-  return Roles.userIsInRole(user, 'admin')
-}

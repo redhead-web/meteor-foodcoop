@@ -1,189 +1,80 @@
-<body ng-controller="navCtrl as nav" class="layout-column">
+<body ng-cloak="">
+  <navigation></navigation>
 
-  <md-toolbar md-scroll-shrink layout="row" layout-xs="column" layout-align="start center" layout-padding class="no-print" ng-cloak>
-    <div class="md-toolbar-tools">
-      <a ui-sref="store" hide-xs>
-        <img src="https://res.cloudinary.com/foodcoop/image/upload/c_scale,h_54/KFC_landscape_nggfz5.png" height="54">
-      </a>
-      <a ui-sref="store" hide-gt-xs>
-        <img src="https://res.cloudinary.com/foodcoop/image/upload/c_scale,h_40/KFC_landscape-icon_kyu8uw" height="40">
-      </a>
-      <span flex></span>
+<section id="PageRoot">
 
-      <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
-      <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
-      <cart-summary ng-if="currentUser"></cart-summary>
-      <md-button ng-click="nav.toggleRight()" aria-label="navigation toggle" class="md-icon-button">
-        <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
-      </md-button>
-      <md-menu ng-if="currentUser" md-position-mode="target-right target">
-        <multi-avatar
-          md-menu-origin
-          ng-click="$mdOpenMenu($event)"
-          user="currentUser" width="40">
-        </multi-avatar>
-        <md-menu-content width="6">
-          <md-menu-item>
-            <md-button ui-sref="profile.balance">
-              <div layout="row">
-                <md-icon md-svg-icon="action:ic_account_balance_24px"></md-icon>
-                <p flex>Balance: {{currentUser.profile.balance | currency}}</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item ng-if="nav.isProducer(currentUser._id)">
-            <md-button ui-sref="myProducts">
-              <div layout="row">
-                <md-icon md-svg-icon="file:ic_cloud_24px"></md-icon>
-                <p flex>Products</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ui-sref="profile.orders">
-              <div layout="row">
-                <md-icon md-svg-icon="action:ic_description_24px"></md-icon>
-                <p flex>Purchases</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item ng-if="nav.isProducer(currentUser._id)">
-            <md-button ui-sref="profile.sales">
-              <div layout="row">
-                <md-icon md-svg-icon="action:ic_description_24px"></md-icon>
-                <p flex>Sales</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ui-sref="profile.edit">
-              <div layout="row">
-                <md-icon md-svg-icon="editor:ic_mode_edit_24px"></md-icon>
-                <p flex>Edit My Details</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ui-sref="profile.paymentMethods">
-              <div layout="row">
-                <md-icon md-svg-icon="action:ic_credit_card_24px"></md-icon>
-                <p flex>Saved Payment Details</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-href="/logout" ng-show="currentUser">Logout</md-button>
-          </md-menu-item>
-        </md-menu-content>
-
-      </md-menu>
-      <md-button ui-sref="admin" ng-if="currentUser && hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-icon-button">
-        <md-icon md-svg-icon="action:ic_settings_24px"></md-icon>
-      </md-button>
-      
-    </div>
-  </md-toolbar>
-
-
-<section id="PageRoot" flex>
-
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-
-    <md-toolbar class="md-theme-indigo">
-      <h1 class="md-toolbar-tools">Menu</h1>
-    </md-toolbar>
-    <md-content layout-padding="">
-      <md-list>
-        <md-list-item ng-click="nav.goTo('login'); nav.toggleRight()" ng-hide="currentUser">
-          <md-icon md-svg-icon="action:ic_lock_outline_24px"></md-icon>
-          <p>Login</p>
-        </md-list-item>
-        <md-list-item ng-click="nav.goTo('register'); nav.toggleRight()" ng-hide="currentUser">
-          <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-          <p>Sign up</p>
-        </md-list-item>
-        <md-divider ng-hide="currentUser"></md-divider>
-        <md-list-item ng-click="nav.goTo('store'); nav.toggleRight()">
-          <md-icon class="md-primary" md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
-          <p> Store </p>
-        </md-list-item>
-        <md-list-item ng-click="nav.goTo('directory'); nav.toggleRight()">
-          <md-icon class="md-primary" md-svg-icon="social:ic_people_24px"></md-icon>
-          <p> Our Producers </p>
-        </md-list-item>
-        <md-list-item ng-click="nav.goTo('about'); nav.toggleRight()">
-          <md-icon class="md-primary" md-svg-icon="action:ic_info_24px"></md-icon>
-          <p> About Us </p>
-        </md-list-item>
-        <md-list-item ng-click="nav.goTo('faq'); nav.toggleRight()">
-          <md-icon class="md-primary" md-svg-icon="action:ic_help_24px"></md-icon>
-          <p> FAQ / How it Works </p>
-        </md-list-item>
-        <md-list-item ng-click="nav.goTo('contact'); nav.toggleRight()">
-          <md-icon class="md-primary" md-svg-icon="content:ic_mail_24px"></md-icon>
-          <p> Contact Us </p>
-        </md-list-item>
-        <md-divider ng-show="currentUser"></md-divider>
-        <md-list-item ng-click="nav.goTo('logout'); nav.toggleRight()" ng-show="currentUser">
-          <p>Logout</p>
-        </md-list-item>
-        <md-divider></md-divider>
-        <br>
-        <p class="md-body-2">Get In Touch</p>
-        <ng-include src="'client/static/views/contact-list.ng.html'"></ng-include>
-      </md-list>
-    </md-content>
-
-  </md-sidenav>
-
-
-  <div ui-view flex>
+  <div ui-view>
     <div layout layout-align="center center">
       <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
     </div>
   </div>
 
 </section>
+
 <div ng-cloak>
-<md-fab-speed-dial md-direction="up" ng-if="currentUser && hasRole(currentUser, 'producer')"
-  class="md-fab-bottom-right-fixed md-fling">
-  <md-fab-trigger>
-    <md-button aria-label="menu" class="md-fab md-warn">
-      <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
-    </md-button>
-  </md-fab-trigger>
-  <md-fab-actions>
-    <md-button aria-label="create product" class="md-fab md-raised md-mini md-accent" ui-sref="productCreate">
-      <md-tooltip md-direction="left" md-delay="150">
-        New Product
-      </md-tooltip>
-      <md-icon md-svg-icon="action:ic_description_24px" aria-label="product"></md-icon>
-    </md-button>
-    <md-button aria-label="create user" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && hasRole(currentUser, 'admin')" ui-sref="admin.createUser">
-      <md-tooltip md-direction="left" md-delay="200">
-        New User
-      </md-tooltip>
-      <md-icon md-svg-icon="social:ic_person_add_24px" aria-label="user"></md-icon>
-    </md-button>
-    <md-button aria-label="New Payment" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && hasRole(currentUser, 'admin')" ui-sref="admin.newPayment">
-      <md-tooltip md-direction="left" md-delay="250">
-        New Payment
-      </md-tooltip>
-      <md-icon md-svg-icon="action:ic_payment_24px" aria-label="payment"></md-icon>
-    </md-button>
-  </md-fab-actions>
-</md-fab-speed-dial>
+  <md-fab-speed-dial md-direction="up" ng-hide="!currentUser || !$root.hasRole(currentUserId, 'producer')"
+    class="md-fab-bottom-right-fixed md-fling">
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab md-warn">
+        <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button aria-label="create product" class="md-fab md-raised md-mini md-accent" ui-sref="productCreate">
+        <md-tooltip md-direction="left" md-delay="150">
+          New Product
+        </md-tooltip>
+        <md-icon md-svg-icon="action:ic_description_24px" aria-label="product"></md-icon>
+      </md-button>
+      <md-button aria-label="create user" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" ui-sref="admin.createUser">
+        <md-tooltip md-direction="left" md-delay="200">
+          New User
+        </md-tooltip>
+        <md-icon md-svg-icon="social:ic_person_add_24px" aria-label="user"></md-icon>
+      </md-button>
+      <md-button aria-label="New Payment" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" ui-sref="admin.newPayment">
+        <md-tooltip md-direction="left" md-delay="250">
+          New Payment
+        </md-tooltip>
+        <md-icon md-svg-icon="action:ic_payment_24px" aria-label="payment"></md-icon>
+      </md-button>
+      <md-button aria-label="New Event" class="md-fab md-raised md-mini md-accent" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" ui-sref="createEvent">
+        <md-tooltip md-direction="left" md-delay="250">
+          New Event
+        </md-tooltip>
+        <md-icon md-svg-icon="action:ic_event_24px" aria-label="payment"></md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
 </div>
 
 
-<footer>
-  <div layout="row" layout-align="center end" layout-margin>
-    <p><small>Created from the Food Co-op Platform Beta version 0.1.5</small></p>
+
+
+<!-- <footer>
+  <md-content layout="row" layout-align="center end">
+    <p><small>Created from the Food Co-op Platform Beta version 0.1.7</small></p>
     <md-button href="https://github.com/redhead-web/meteor-foodcoop" class="md-icon-button md-mini" aria-label="github link">
       <md-icon md-svg-icon="action:ic_code_24px"></md-icon>
     </md-button>
     <p><small><a ui-sref="terms">Terms and Conditions</a> <a ui-sref="privacy">Privacy Policy</a></small></p>
-  </div>
-</footer>
+  </md-content>
+</footer> -->
+<connection-status></connection-status>
+<script>
+var $buoop = {
+  vs:{i:10,f:35,o:25,s:8,c:1},
+  reminder: 0,
+  reminderClosed: 0
+};
+function $buo_f(){
+ var e = document.createElement("script");
+ e.src = "//browser-update.org/update.min.js";
+ document.body.appendChild(e);
+};
+try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+catch(e){window.attachEvent("onload", $buo_f)}
+</script>
+
 
 </body>

@@ -28,6 +28,7 @@ angular.module('food-coop').config( function($stateProvider) {
   .state('profile.sales', {
     url: '/sales',
     controller: 'UserSalesCtrl',
+    controllerAs: 'sales',
     templateUrl: 'client/user/views/sales.ng.html'
   })
   .state('profile.gstReceipt', {
@@ -39,6 +40,7 @@ angular.module('food-coop').config( function($stateProvider) {
   .state('profile.paymentMethods', {
     url: '/payment-methods',
     controller: 'UserPaymentMethodCtrl',
+    controllerAs: '$ctrl',
     templateUrl: 'client/user/views/payment-methods.ng.html',
     resolve: {
       paymentMethods : function($meteor) {

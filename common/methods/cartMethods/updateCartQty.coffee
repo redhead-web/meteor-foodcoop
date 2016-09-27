@@ -32,6 +32,12 @@ Meteor.methods
           $set: 
             'carted.$.qty': new_qty
             'carted.$.timestamp': new Date()
+        if productResult == 0
+          # check if product has a stocklevel
+          product = Products.findOne {_id: cartItem.productId, stocklevel: $gte: 0}
+          if product?
+            #if the product exists but query failed, the new_qty is too great, undo the cart update by throwing an error
+            throw new Error "Sorry! There aren't that many available.", 'updateCartQty.coffee'
       catch error
         Cart.Items.update 
           _id: id

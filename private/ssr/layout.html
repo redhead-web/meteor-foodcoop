@@ -1,0 +1,39 @@
+{{{getDocType}}}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      {{css}}
+    </style>
+    
+    <title>{{data.title}}</title>
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=3">
+    <link rel="apple-touch-icon-precomposed" href="/apple-icon-152.png">
+    <link rel="shortcut icon" sizes="196x196" href="/favicon-196.png">
+    <link rel="image_src" href="http://res.cloudinary.com/foodcoop/image/upload/OpenGraph_hdnjgg.png" />
+    <meta name="description" content="{{data.description}}" />
+
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:site_name" content="{{coopName}}">
+    <meta property="fb:app_id"          content="1687304438209077" />
+    <!-- Open Graph Data from Template -->
+    {{#each data.og}}
+      <meta property="og:{{key}}" content="{{value}}">
+    {{/each}}
+    
+  </head>
+  <body>
+    <div id='content'>
+      {{> Template.dynamic template=template data=data}}
+    </div>
+    
+    <p class="notice">
+      This page is generated in the server and served as HTML.
+    </p>
+    <div id="add">
+      
+    </div>
+  </body>
+</html>

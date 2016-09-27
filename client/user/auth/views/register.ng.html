@@ -51,8 +51,8 @@
       <md-input-container>
         <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
         <input required g-places-autocomplete type="text" ng-model="rc.credentials.profile.deliveryAddress"
-               placeholder="home address" aria-label="address"/>
-        <div ng-messages="signupForm.phone.$error" ng-if="signupForm.phone.$touched">
+               placeholder="home address" aria-label="address" name="address"/>
+        <div ng-messages="signupForm.address.$error" ng-if="signupForm.address.$touched">
           <div ng-message="required">Please provide your home address.</div>
         </div>
       </md-input-container>
@@ -64,6 +64,9 @@
       <div layout layout-align="end center"><md-button ng-click="rc.open($event)" class="md-accent md-hue-2">Benefits of membership</md-button></div>
       <br>
       <md-divider></md-divider>
+      <div ng-show="rc.error" class="md-warn">
+        <small>{{ rc.error }}</small>
+      </div>
       <md-button 
         class="md-raised md-primary" 
         ng-disabled="signupForm.$invalid"

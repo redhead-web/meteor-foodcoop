@@ -14,7 +14,7 @@ Meteor.publish "myPurchases", (deliveryDay) ->
     deliveryDay: new Date deliveryDay
     customerId: this.userId
   ,
-    fields: dateCreated: 1, price: 1, productName: 1, qty: 1, productId: 1, producerId: 1, packagingRefund:1, extraMarkup: 1
+    fields: dateCreated: 1, price: 1, productName: 1, qty: 1, productId: 1, producerId: 1, producerName:1, producerCompanyName: 1, packagingRefund:1, extraMarkup: 1, status: 1
 
 Meteor.publish "mySales", (deliveryDay) ->
   check deliveryDay, String
@@ -33,4 +33,4 @@ Meteor.publish "mySales", (deliveryDay) ->
       customerName: 1
       customerNumber:1
       packagingRefund:1
-      butchery: 1
+      status: 1

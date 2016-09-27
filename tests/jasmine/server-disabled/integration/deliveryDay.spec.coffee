@@ -1,6 +1,6 @@
 describe "deliveryDay function", ->
   it "should be able to find the right deliveryDay", ->
-    deliveryDay = GetDeliveryDay()
+    deliveryDay = GetNextDeliveryDay()
 
     expect deliveryDay
     .toBeDefined()

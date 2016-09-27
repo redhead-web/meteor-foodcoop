@@ -1,0 +1,37 @@
+{{#with product}}
+  <div itemscope itemtype="http://schema.org/Product">
+    <meta itemprop=“name” content=”{{name}}” />
+    {{#if producerCompanyName}}
+    <meta itemprop=“brand” content=”{{producerCompanyName}}” />
+    {{else}}
+    <meta itemprop=“brand” content=”{{producerName}}” />
+    {{/if}}
+    
+    
+    <meta itemprop=“productId” content=”{{_id}}″ />
+
+    <meta itemprop=“url” content=”https://foodcoop.nz/product/{{_id}}” />
+    
+    <a href="https://foodcoop.nz/product/{{_id}}"><img src="{{img.url}}" height="400" alt="{{name}}"></a>
+    
+    <span itemprop=“description”>{{description}}</span>
+    
+  </div>
+  <div itemprop=”offers” itemscope itemtype=”http://schema.org/Offer”>
+
+        <span itemprop=“price”>{{productPrice price}}</span>
+
+        <meta itemprop=“name” content=”{{name}}” />
+
+        <meta itemprop=“description” content=”{{description}}” />
+
+        <meta itemprop=“sku” content=”{{_id}}″ />
+
+        <meta itemprop=“priceCurrency” content=”NZD” />
+
+        <meta itemprop=“availability” itemtype=”http://schema.org/ItemAvailability”
+
+         content=”http://schema.org/InStock” />
+
+  </div>
+{{/with}}

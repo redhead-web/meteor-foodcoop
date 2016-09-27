@@ -1,0 +1,38 @@
+<div
+  class="img-drop-area"
+  layout="column"
+  layout-align="center center"
+  ngf-drop="$ctrl.uploadFiles($file, $invalidFiles)"
+  ngf-drag-over-class="$ctrl.dragOverClass($event)"
+  ngf-max-size="'5MB'"
+  ngf-min-width="400"
+  accept="image/*"
+  ngf-min-height="300">
+      <md-button
+        class="md-fab"
+        accept="image/*"
+        aria-label="upload image"
+        ngf-capture="'camera'"
+        ngf-select="$ctrl.uploadFiles($file, $invalidFiles)"
+        ngf-max-size="'5MB'"
+        ngf-min-width="400"
+        ngf-min-height="300"
+      >
+        <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
+      </md-button>
+      <md-button hide-gt-xs
+        class="md-fab"
+        accept="image/*"
+        aria-label="upload image"
+        ngf-select="$ctrl.uploadFiles($file, $invalidFiles)"
+        ngf-max-size="'5MB'"
+        ngf-min-width="400"
+        ngf-min-height="300"
+      >
+        <md-icon md-svg-src="image:ic_image_24px"></md-icon>
+      </md-button>
+      <span ng-if="invalidFiles">Error: {{$ctrl.invalidFiles[0].$error}} : {{$ctrl.invalidFiles[0].$errorParam}}</span>
+      <md-progress-linear ng-if="$ctrl.progress && $ctrl.progress !== 100" md-mode="determinate" value="{{$ctrl.progress}}"></md-progress-linear>
+      <img ng-if="$ctrl.blobPreview" ngf-src="$ctrl.blobPreview" flex="100">
+
+</div>

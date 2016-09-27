@@ -1,15 +1,20 @@
 <!-- Data context: @string recipient, @array sales: customerName, productName, price, unitOfMeasure, qty, totalPrice, @Number saleTotal,  -->
 
+<<<<<<< HEAD
 <p>Hi {{recipient}}, congratulation on selling through the Kai kohekohe Food Co-op.</p>
+=======
+<p>Hi {{recipient}}, congratulation on your sales so far through the Whangarei Food Co-op</p>
+>>>>>>> distribution
 
 <div style="text-align: center;">
   <p>You've Sold</p>
-  <h1 style="text-align:center;">${{grandTotal}}</h1>
+  <h1 style="text-align:center;">{{currency grandTotal}}</h1>
 </div>
 
-<p style="text-align: center;">Your sales have been added as credit to your account. When we pay you we will only pay whatever positive balance is on your account and then your account balance will be reset to zero.</p>
+<h1 style="text-align:center;">Delivery of Goods for customers</h1>
+<p style="text-align: center;">Please make sure we receive your sold goods by 3pm {{nextDeliveryDay}}. Our sorting center is on 1 Woods Road, Whangarei. To make arrangements for the delivery of your goods you can contact us on 0210409066 or reply to this email. Should any items not be delivered, we will refund the customer and reduce your balance for those undelivered items.</p>
 
-<p style="text-align: center;">Please make sure we have received all your sold goods by 3pm {{nearestDeliveryDay}}. Our sorting center is on 1 Woods Road, Whangarei.</p>
+<p><a href="{{rootUrl}}/me/sales">See all your sales online</a></p>
 
 <div style="text-align: center;">
   <p>Product Count</p>
@@ -28,7 +33,7 @@
   <p>Here is a list of sales per customer</p>
 </div>
 
-<table cellspacing="0" cellpadding="5" border="1" width="100%">
+<table cellspacing="0" cellpadding="5" border="1" width="100%" class="table">
   <thead>
     <tr class="header">
       <td>Customer</td>
@@ -43,15 +48,15 @@
     <tr>
       <td>{{customerName}}</td>
       <td><a href="https://kaicoop.nz/products/{{productId}}">{{productName}}</a></td>
-      <td>${{price}} / {{unitOfMeasure}}</td>
+      <td>{{currency price}} / {{unitOfMeasure}}</td>
       <td>{{qty}}</td>
-      <td>{{saleTotal}}</td>
+      <td>{{currency saleTotal}}</td>
     </tr>
   {{/each}}
   </tbody>
   <tfoot>
     <tr style="text-align: right; font-weight: 700;">
-      <td colspan="5"><strong>${{grandTotal}}</strong></td>
+      <td colspan="5"><strong>{{currency grandTotal}}</strong></td>
     </tr>
   </tfoot>
 </table>

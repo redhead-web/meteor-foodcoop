@@ -1,0 +1,26 @@
+<br>
+
+
+<p>Hi {{recipient.name}}, reminder you have an event today.</p>
+
+<div class="event-header center-text">
+  <div class="event-image">
+    <img src="http://res.cloudinary.com/foodcoop/image/upload/w_600,h_250,c_fill,g_auto/{{event.img.result}}" />
+  </div>
+  <div class="event-content">
+    <table border="0" cellspacing="5" cellpadding="5">
+      <tr>
+        <td>
+          <span class="event-date">{{formatDate event.date "MMMM D"}}</span><br>
+          <span class="event-time">{{formatDate event.date "h a"}}</span>
+        </td>
+        <td>
+          <h1 class="event-title">{{event.title}}</h1>
+          <p><a href="{{event.venue.url}}">{{event.venue.formatted_address}}</a></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<p>Please write to us or call us if you have any questions about your tickets or the event. Your tickets will have been sent to you in your past email or can be found <a href="https://foodcoop.nz/me/tickets">online.</a></p>

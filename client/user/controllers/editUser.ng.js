@@ -1,3 +1,5 @@
+import {Roles} from 'meteor/alanning:roles'
+
 angular.module("food-coop").controller("EditUserCtrl", function($scope, $mdToast){
   
   $scope.helpers({
@@ -7,6 +9,9 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $mdToast
   })
   
   $scope.email = Meteor.user().emails[0].address
+  
+  $scope.isProducer = (userId) => Roles.userIsInRole(userId, 'producer')
+    
   
   $scope.validate = function() {
     if ($scope.email !== Meteor.user().emails[0].address) {

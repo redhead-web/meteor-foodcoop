@@ -16,11 +16,11 @@
   <span flex></span>
   <div flex="90" flex-md=100 flex-sm=100>
     <div layout="row" layout-align="center center">
-      <md-button class="md-icon-button" aria-label="back one week" ng-click="backward()">
+      <md-button class="md-icon-button" aria-label="back one week" ng-click="sales.backward()">
         <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
       </md-button>
-      <h2 class="text-center md-title">Sales {{deliveryWording}} delivered {{deliveryDay | calendar}}</h2>
-      <md-button class="md-icon-button" aria-label="forward one week" ng-click="forward()">
+      <h2 class="text-center md-title">Sales {{sales.deliveryWording}} delivered {{sales.deliveryDay | calendar}}</h2>
+      <md-button class="md-icon-button" aria-label="forward one week" ng-click="sales.forward()">
         <md-icon md-svg-src="navigation:ic_arrow_forward_24px"></md-icon>
       </md-button>
     </div>
@@ -29,49 +29,71 @@
       <!-- Use floating label instead of placeholder -->
       <label>Search this week's sales</label>
       <md-icon md-svg-src="action:ic_search_24px"></md-icon>
-      <input ng-model="search" type="text">
+      <input ng-model="sales.search" type="text">
     </md-input-container>
 
     <!-- <div layout="row" layout-align="center center">
       <md-button></md-button>
     </div> -->
-    <div layout="row" layout-align="center center">
-      <div flex="50" flex-sm="90">
-        <section layout="row" layout-align="center center" layout-wrap>
-          <figure ng-repeat="(product, count) in occurrences(filteredSales)" class="text-center">
-            <h1 class="md-display-1">{{count}}</h1>
-            <figcaption>
-              <h3>{{product}}</h3>
-            </figcaption>
-          </figure>
-        </section>
-      </div>
-      <div flex="50" flex-sm="90">
-        <h2 class="text-right">Total: {{total(filteredSales) | currency}}</h2>
-      </div>
+      
+    <section layout="row" layout-align="center center">
+      <table class="material-table" flex="70" flex-xs="100">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(product, count) in sales.occurrences(filteredSales)"
+            ng-click="sales.search = product">
+            <td>{{product}}</td>
+            <td>{{count}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+      
+    <div layout="row" layout-align="end">
+      <h2 class="text-right md-title">Sales Total: {{sales.total(filteredSales) | currency}}</h2>
     </div>
 
     <table class="material-table order-table">
       <thead>
         <tr>
           <th>
-            Customer
+            <md-button md-no-ink ng-click="sales.saleTable.sort='status'; sales.saleTable.reverse = !sales.saleTable.reverse">Status</md-button>
           </th>
           <th>
-            Product
+            <md-button md-no-ink ng-click="sales.saleTable.sort='customerName'; sales.saleTable.reverse = !sales.saleTable.reverse">Customer</md-button>
           </th>
           <th>
-            Price
+            <md-button md-no-ink ng-click="sales.saleTable.sort='productName'; sales.saleTable.reverse = !sales.saleTable.reverse">Product</md-button>
           </th>
           <th>
-            Quantity
+            <md-button md-no-ink ng-click="sales.saleTable.sort='price'; sales.saleTable.reverse = !sales.saleTable.reverse">Price</md-button>
           </th>
           <th>
-            Total
+            <md-button md-no-ink ng-click="sales.saleTable.sort='qty'; sales.saleTable.reverse = !sales.saleTable.reverse">Quantity</md-button>
+          </th>
+          <th>
+            <md-button md-no-ink ng-click="sales.saleTable.sort=sales.totalSort; sales.saleTable.reverse = !sales.saleTable.reverse">Total</md-button>
           </th>
         </tr>
       </thead>
-      <tr ng-repeat="i in sales | filter:search as filteredSales ">
+      <tr ng-repeat="i in sales.sales | orderBy: sales.saleTable.sort: sales.saleTable.reverse | filter:sales.search as filteredSales "
+        ng-class="
+              {
+                'cancelled': i.status == 'cancelled',
+                'refunded': i.status == 'refunded',
+                'collected': i.status == 'collected',
+                'sorted': i.status == 'sorted',
+                'delivered': i.status == 'delivered',
+                'undelivered': i.status == 'undelivered'
+              }"
+      > <td><span ng-show="i.status == 'refunded'">Customer refunded</span>
+          <span ng-hide="i.status == 'refunded'">{{i.status}}</span>
+        </td>
         <td>
           {{i.customerName}} #{{i.customerNumber}}
         </td>

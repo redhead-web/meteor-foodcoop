@@ -7,13 +7,13 @@ Meteor.methods
       self = this
       self.userId = customerId
       Meteor.call.call self, "addFromCartToOrder", items, data, transactionId
-      
+
   addFromCartToOrder: (items, data, transactionId) ->
     userId = @userId
-    
+
     check items, Array
     check data, Object
-    
+
     if transactionId
       check transactionId, String
 
@@ -48,11 +48,12 @@ Meteor.methods
       sale.packagingRefund = sale.details.packagingRefund
       sale.unitOfMeasure = sale.details.unitOfMeasure
       sale.orderId = id
-      sale.deliveryDay = data.deliveryDay || GetDeliveryDay()
+      sale.deliveryDay = data.deliveryDay || GetProductDeliveryDay(sale.details.daysNotice).format()
       sale.customerId = @userId
       sale.customerName = Meteor.users.findOne(@userId).profile.name
       sale.customerNumber = Meteor.users.findOne(@userId).profile.customerNumber
       sale.extraMarkup = sale.details.extraMarkup
+      sale.daysNotice = sale.details.daysNotice
 
       delete sale._id
       delete sale.details
@@ -66,7 +67,7 @@ Meteor.methods
           sale.status = 'collected'
         Sales.insert sale
 
-      update = Cart.Items.remove userId: @userId
+      update = Cart.Items.direct.remove userId: @userId
 
       if typeof update != 'number'
         return update
@@ -77,12 +78,12 @@ Meteor.methods
         $pull: 'carted' : 'user' : @userId
       ,
         multi: yes
-        
+
       Meteor.users.update @userId,
         $set: 'profile.lastOrder': _.pluck(items, 'productId')
-        
+
       Meteor.call "confirmOrder", items, data
-        
+
     catch error
       if data.balanceAmount > 0
         Meteor.users.update @userId,

@@ -5,7 +5,7 @@ Meteor.publish 'userCount', ->
 
 Meteor.publish 'orderCount', ->
   Counts.publish this, 'upcoming-ordersCount', Sales.find
-    deliveryDay: new Date GetDeliveryDay()
+    deliveryDay: GetNextDeliveryDay().toDate()
   @ready()
   undefined
 
@@ -61,6 +61,7 @@ Meteor.publish "user-list", (options, searchstring) ->
     'profile.companyName': 1
     'profile.phone':1
     'profile.balance': 1
+    'profile.bankAccount': 1
 
   if Roles.userIsInRole this.userId, 'admin'
 

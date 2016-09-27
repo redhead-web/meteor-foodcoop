@@ -1,7 +1,7 @@
 <md-content layout="row" layout-xs="column">
   <span flex></span>
   <section layout="column" flex="50" flex-sm="95" layout-margin>
-    <aside layout-margin layout layout-align="center center" ng-if="nav.isProducer(currentUser._id)">
+    <aside layout-margin layout layout-align="center center" ng-if="isProducer(currentUser._id)">
       <p class="md-body-1">View and edit my producer profile</p>
       <md-button ui-sref="producer({producerId: user._id})" class="md-fab" aria-label="producer directory">
         <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
@@ -60,7 +60,7 @@
       <md-button type="submit" class="md-raised md-primary">Save</md-button>
 
     </form>
-    <aside layout-margin layout layout-align="center center" class="md-whiteframe-4dp" ng-if="!nav.isProducer(currentUser._id)">
+    <aside layout-margin layout layout-align="center center" class="md-whiteframe-4dp" ng-if="!isProducer(currentUser._id)">
       <p class="md-body-1">Want to sell with us too?</p>
       <md-button ui-sref="producer-application" class="md-raised md-accent">Apply Now</md-button>
     </aside>

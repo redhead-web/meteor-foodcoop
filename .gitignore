@@ -1,5 +1,4 @@
 
-packages/redhead:angular-cloudinary/
 settings.json
 
 *.jpg
@@ -16,20 +15,10 @@ wh-deploy
 
 kaikohe.txt
 
-server/startup/email.coffee
-
-server/startup/startup.coffee
-
 settings.json
 
 wh-settings.json
 
-server/startup/email.coffee
-
 public
-
-client/static/views/top-up.html
-
-client/user/auth/views/reset-password.ng.html
 
 node_modules

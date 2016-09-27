@@ -1,0 +1,16 @@
+.ticket-box {
+  margin: 10px;
+  border: 4px dashed #121212;
+  width: 600px;
+  vertical-align: middle;
+}
+
+.ticket-box td {
+  padding: 20px;
+}
+
+.right {background-color: #121212; color: white; padding: 10px;}
+
+.right p {color: white;}
+
+.small {font-size: 0.8em;}

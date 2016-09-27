@@ -2,6 +2,7 @@
       <thead>
         <tr>
           <td></td>
+          <td></td>
           <td>
             Product
           </td>
@@ -22,19 +23,19 @@
       </thead>
       <tfoot>
         <tr>
-          <td colspan="6">
+          <td colspan="7">
             Cart Total
           </td>
           <td>{{cart.total | currency}}</td>
         </tr>
         <tr ng-if="cart.user.profile.balance !== 0">
-          <td colspan="6">Balance</td>
+          <td colspan="7">Balance</td>
           <td ng-class="{'green-text': cart.user.profile.balance > 0, 'red-text': cart.user.profile.balance < 0}">
             {{cart.user.profile.balance | currency}}
           </td>
         </tr>
         <tr ng-if="cart.user.profile.balance !== 0">
-          <td colspan="6">
+          <td colspan="7">
             Total Owing
           </td>
           <td>
@@ -49,6 +50,11 @@
       </tfoot>
       <tbody>
         <tr ng-repeat="item in cart.items track by item._id">
+          <td class="no-padding">
+            <md-button class="md-icon-button" aria-label="alert" ng-if="cart.deliveryWarning(item.details.daysNotice)" ng-click="cart.deliveryAlert($event, item.details.daysNotice)">
+              <md-icon  md-svg-icon="alert:ic_warning_24px"></md-icon>
+            </md-button>
+          </td>
           <td>
             <a ui-sref="productDetails({productId: item.productId})">
               <cl-image public-id="{{item.details.img.result}}" class="thumbnail" >

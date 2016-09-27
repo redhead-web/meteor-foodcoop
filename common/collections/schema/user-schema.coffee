@@ -8,24 +8,32 @@ cart = new SimpleSchema
     type: String
     optional:true
     allowedValues: ['active', 'pending', 'upcoming', 'complete', 'expiring', 'expired']
-  # products:
-  #   type: [Object]
-  #   optional: true
-  # "products.$._id":
-  #   type: String
-  #   regEx: SimpleSchema.RegEx.Id
-  #   autoValue: ->
-  #     unless @isSet
-  #       Random.id()
-  # "products.$.productId":
-  #   type: String
-  #   regEx: SimpleSchema.RegEx.Id
-  # "products.$.details":
-  #   type: Object
-  #   blackbox: true
-  # "products.$.qty":
-  #   type: Number
-  #   min: 1
+  
+notificationsSchema = new SimpleSchema
+  soldOutEmails: 
+    type: Boolean
+    label: "Sold Out Emails"
+    # ngAutoform:
+#       type: 'checkbox'
+#       roles: ['producer']
+  newProductEmails:
+    type: Boolean
+    label: "Notifications for New Products from Liked Producers"
+    # ngAutoform:
+#       type: 'checkbox'
+  earlyShoppingReminders:
+    type: Boolean
+    label: "Receive Notifications when products I care about are near their weekly deadline"
+  lastCallReminder:
+    type: Boolean
+    label: "Receive a Notification on the last day of shopping to remind me to shop."
+  sms:
+    type: Boolean
+    label: "Receive Notifications by SMS"
+  email:
+    type: Boolean
+    label: "Receive Notifications by email"
+    
 
 profile = new SimpleSchema
   name:
@@ -59,8 +67,13 @@ profile = new SimpleSchema
     type: [String]
     optional:true
     defaultValue: []
+  notifications:
+    label: "Notification Settings"
+    type: notificationsSchema
+    optional: true
   balance: type: Number, decimal: true, defaultValue: 0
   gst: type: String, optional: true, max: 30
+  gstCycle: type: Number, optional: true, min: 1
   companyName: type: String, optional:true
   summary: type: String, optional:true
   bio: type: String, optional:true

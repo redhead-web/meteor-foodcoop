@@ -10,13 +10,13 @@ angular.module('food-coop').controller 'ProductsAdminCtrl', ($scope, $mdToast, $
     products: () => return Products.find 
       $or: [
        { name:
-           $regex: ".*#{@getReactively('search')}"
+           $regex: "^.*#{@getReactively('search')}"
            $options: 'i' }
        { 'producerName': 
-           $regex: ".*#{@getReactively('search')}"
+           $regex: "^.*#{@getReactively('search')}"
            $options: 'i' }
        { 'producerCompanyName': 
-           $regex: ".*#{@getReactively('search')}"
+           $regex: "^.*#{@getReactively('search')}"
            $options: 'i' }
       ]
     , {sort: @getReactively('sort') }

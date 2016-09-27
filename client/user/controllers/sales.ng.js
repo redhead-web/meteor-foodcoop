@@ -1,54 +1,61 @@
-angular.module("food-coop").controller("UserSalesCtrl", function($scope, $mdDialog){
-  var products, counts;
+angular.module("food-coop").controller("UserSalesCtrl", function($scope, $reactive, $mdDialog){
+  let products, counts;
   
+  $reactive(this).attach($scope);
   
   if ( moment().day() == Meteor.settings.public.deliveryDayOfWeek ) {
-    $scope.deliveryDay = moment().startOf('day').format();
+    this.deliveryDay = moment().startOf('day').format();
   } else {
-    $scope.deliveryDay = moment( GetDeliveryDay() ).format();
+    this.deliveryDay = GetNextDeliveryDay().format();
   }
   
-  $scope.subscribe('mySales', () => [$scope.getReactively('deliveryDay')])
+  this.subscribe('mySales', () => [this.getReactively('deliveryDay')])
 
-  $scope.helpers({
+  this.helpers({
     sales() {
       return Sales.find()
     }
   })
 
-  $scope.occurrences = productsCount;
+  this.occurrences = productsCount;
 
-  $scope.forward = forward;
+  this.forward = forward;
 
-  $scope.backward = backward;
+  this.backward = backward;
 
-  $scope.total = total;
+  this.total = total;
 
-  $scope.deliveryWording = '';
+  this.deliveryWording = '';
+  
+  this.totalSort = totalSort;
 
 
 
-  $scope.$watch('deliveryDay', function(newValue) {
+  $scope.$watch(() => this.deliveryDay, (newValue) => {
     var isAfter = moment().isBefore(moment(newValue)) || moment().isSame(moment(newValue), 'day');
     if (isAfter) {
-      return $scope.deliveryWording = "to be"
+      return this.deliveryWording = "to be"
     } else {
-      return $scope.deliveryWording = ""
+      return this.deliveryWording = ""
     }
   })
 
   function total(array) {
     return _.reduce(array, function(total, sale) {
-      return total + (sale.price * sale.qty);
+      let price = 0;
+      if (sale.status !== 'refunded') {
+        price = sale.price * sale.qty
+      }
+      return total + price;
     }, 0)
   }
 
   function forward() {
-    $scope.deliveryDay = moment( $scope.deliveryDay ).add(1, 'weeks').format();
+    this.deliveryDay = moment( this.deliveryDay ).add(1, 'weeks').format();
   }
 
   function backward() {
-    $scope.deliveryDay = moment( $scope.deliveryDay ).subtract(1, 'weeks').format();
+    this.deliveryDay = moment( this.deliveryDay ).subtract(1, 'weeks').format();
   }
 
   function productsCount (sales) {
@@ -63,6 +70,10 @@ angular.module("food-coop").controller("UserSalesCtrl", function($scope, $mdDial
     });
 
     return occurences;
+  }
+  
+  function totalSort(first) {
+    return (first.qty * first.price)
   }
 
 });

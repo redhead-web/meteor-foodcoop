@@ -1,9 +1,12 @@
+// subscription: myPurchases
+
+
 angular.module("food-coop").controller("UserOrderCtrl", function($scope, $mdDialog, $meteor){
   
   if ( moment().day() == Meteor.settings.public.deliveryDayOfWeek ) {
     $scope.deliveryDay = moment().startOf('day').format();
   } else {
-    $scope.deliveryDay = moment( GetDeliveryDay() ).format();
+    $scope.deliveryDay = GetNextDeliveryDay().format();
   }
 
   $scope.subscribe('myPurchases', () => {

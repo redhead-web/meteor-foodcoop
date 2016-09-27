@@ -1,4 +1,4 @@
-<md-content layout="row" layout-align="start end" layout-wrap>
+<section layout="row" layout-align="start end" layout-wrap id="product-cards">
 <div layout layout-align="center center" ng-if="!$ctrl.productsReady">
   <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
 </div>
@@ -6,5 +6,5 @@
 	flex="25" flex-sm="33" flex-xs="50" class="product-card-container">
   <product-card product="product"></product-card>
 </div>
-<scroll-fire on-view="$ctrl.loadMore()"></scroll-fire>
-</md-content>
+<scroll-fire on-view="$ctrl.loadMore()" data-visible="true"></scroll-fire>
+</section>
