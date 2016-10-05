@@ -2,7 +2,7 @@
   padding: 15px;
   
   p {
-    @extend .md-body-1;
+    @extend .md-body-1 !optional;
   }
 }
 
@@ -12,7 +12,7 @@
 }
 
 .contact-box:hover {
-  @extend .md-whiteframe-4dp
+  @extend .md-whiteframe-4dp !optional;
 };
 
 .contact-box md-icon {

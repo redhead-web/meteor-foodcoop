@@ -1,55 +1,59 @@
 // import angular from 'angular'
-import { Meteor } from 'meteor/meteor'
-import ngMaterial from 'angular-material'
-import ngFileUpload from 'ng-file-upload'
-import { Random } from 'meteor/random'
+import angular from 'angular';
+import { Meteor } from 'meteor/meteor';
+import ngMaterial from 'angular-material';
+import ngFileUpload from 'ng-file-upload';
+import { Random } from 'meteor/random';
 
 
-import templateUrl from './fcImgUpload.html'
+import templateUrl from './fcImgUpload.html';
 
 class photoUploadController {
   constructor($scope, $rootScope, Upload) {
     'ngInject';
     this.blobPreview;
-    this.Upload = Upload
+    this.Upload = Upload;
   }
 
   uploadFiles(file, errFiles) {
-    if (errFiles.length > 0) return this.invalidFiles = errFiles;
+    this.invalidFiles = [];
+    if (errFiles.length > 0) {
+      this.invalidFiles = errFiles;
+      return;
+    }
     if (file && !file.$error) {
-      //get instant preview
+      // get instant preview
       this.blobPreview = file.$ngfBlobUrl;
       this.Upload.upload({
-        url: `https://api.cloudinary.com/v1_1/${Meteor.settings["public"].cloudinary.cloud_name}/image/upload`,
+        url: `https://api.cloudinary.com/v1_1/${Meteor.settings.public.cloudinary.cloud_name}/image/upload`,
         fields: {
-          upload_preset: Meteor.settings["public"].cloudinary.upload_preset,
-          tags: 'Whangareifoodcoop',
-          context: 'photo=' + Random.id(6)
+          upload_preset: Meteor.settings.public.cloudinary.upload_preset,
+          tags: Meteor.settings.public.coopName,
+          context: `photo${Random.id(6)}`,
         },
-        file: file
-      }).then((data, status, headers, config) => {
-        this.onSuccess({data})
-        this.blobPreview = undefined
-      }, (data, status, headers, config) => {
+        file,
+      }).then((data) => {
+        this.onSuccess({ data });
+        this.blobPreview = undefined;
+      }, (data, status) => {
         // on error
-        console.log(data)
-        console.log(status)
-        file.status = status
-        this.onError({error: data})
-
+        console.log(data);
+        console.log(status);
+        file.status = status;
+        this.onError({ error: data });
       }, (e) => {
         this.progress = Math.round((e.loaded * 100.0) / e.total);
-        file.status = "Uploading... " + file.progress + "%";
-      })
+        file.status = `'Uploading... ${file.progress}%`;
+      });
     }
   }
 
   dragOverClass($event) {
-    var items = $event.dataTransfer.items;
-    var hasFile = false;
+    const items = $event.dataTransfer.items;
+    let hasFile = false;
     if (items != null) {
-      for (var i = 0 ; i < items.length; i++) {
-        if (items[i].kind == 'file') {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].kind === 'file') {
           hasFile = true;
           break;
         }
@@ -57,11 +61,9 @@ class photoUploadController {
     } else {
       hasFile = true;
     }
-    return hasFile ? "dragover" : "dragover-err";
+    return hasFile ? 'dragover' : 'dragover-err';
   }
 }
-
-
 
 const name = 'fcImgUpload';
 
@@ -69,23 +71,19 @@ const name = 'fcImgUpload';
 export default angular.module(name, [
   'cloudinary',
   ngFileUpload,
-  ngMaterial
+  ngMaterial,
 ]).component(name, {
   templateUrl,
   controller: photoUploadController,
   bindings: {
-    onSuccess: "&",
-    onError: "&"
-  }
+    onSuccess: '&',
+    onError: '&',
+  },
 })
-  .config(config);
-
-function config(cloudinaryProvider, $mdIconProvider) {
-  'ngInject';
-  cloudinaryProvider
-    .set("cloud_name", Meteor.settings.public.cloudinary.cloud_name)
-    .set("upload_preset", Meteor.settings.public.cloudinary.upload_preset);
-  $mdIconProvider
-    .iconSet("image", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg")
-
-}
+  .config((CloudinaryProvider) => {
+    'ngInject';
+    CloudinaryProvider.configure({
+      cloud_name: Meteor.settings.public.cloudinary.cloud_name,
+      api_key: Meteor.settings.public.cloudinary.upload_preset,
+    });
+  });

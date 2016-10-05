@@ -1,13 +1,9 @@
 
 FastRender.route '/', (params) ->
-  this.subscribe('active-products', {}, 24, {name: 1})
+  this.subscribe('active-products', {}, 96, {'dateCreated':-1})
   this.subscribe 'categories'
   return
   
-FastRender.route '/store', (params) ->
-  this.subscribe('active-products', {category: params.query.category}, 24, {name: 1})
-  this.subscribe 'categories'
-  return
 
 FastRender.route '/product/:productId', (params) ->
   this.subscribe 'product', params.productId

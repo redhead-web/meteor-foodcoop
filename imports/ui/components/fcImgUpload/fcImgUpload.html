@@ -31,7 +31,7 @@
       >
         <md-icon md-svg-src="image:ic_image_24px"></md-icon>
       </md-button>
-      <span ng-if="invalidFiles">Error: {{$ctrl.invalidFiles[0].$error}} : {{$ctrl.invalidFiles[0].$errorParam}}</span>
+      <span ng-if="$ctrl.invalidFiles">Error: {{$ctrl.invalidFiles[0].$error}} : {{$ctrl.invalidFiles[0].$errorParam}}</span>
       <md-progress-linear ng-if="$ctrl.progress && $ctrl.progress !== 100" md-mode="determinate" value="{{$ctrl.progress}}"></md-progress-linear>
       <img ng-if="$ctrl.blobPreview" ngf-src="$ctrl.blobPreview" flex="100">
 

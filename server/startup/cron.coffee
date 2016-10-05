@@ -17,13 +17,13 @@ callback = (error, result) ->
 #if process.env.METEOR_ENVIRONMENT == 'production'
 job = new Meteor.Cron
   events:
-    # email producers their orders every night at Midnight and send out targeted reminders every day too.
-    '0 0 * * *': ->
+    # email producers their orders every day at 6am and send out targeted reminders every day too.
+    '0 6 * * *': ->
       Meteor.call "/email/early-shopping-reminder", callback
 
       Meteor.call "/email/producerOrder", callback
-    # email producers their sale summaries every night at midnight
-    '0 0 * * 3': ->
+    # email producers their sale summaries every day at 5am
+    '0 5 * * 3': ->
       Meteor.call "/email/producerSalesWeeklySummary", callback
     # check if event reminders need to be sent every day at 8am
     '0 8 * * *': ->

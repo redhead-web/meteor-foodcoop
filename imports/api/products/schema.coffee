@@ -70,7 +70,10 @@ exports.schema = new SimpleSchema
     type: Date
     autoValue: ->
       if @isUpdate
-        new Date()
+        if @field('carted').operator == '$push' || @field('carted').operator == '$pull' || @field('carted.$.qty').operator == '$set'
+          @unset();
+          return undefined;
+        return new Date()
   certification: type: certification, optional: true
   butcheryForm: type: String, optional:true
   ingredients: type: [String], optional: true
@@ -87,4 +90,3 @@ exports.schema = new SimpleSchema
    2 is delivery day -2 (can order two days before delivery day) (Whangarei Default)
    5 is delivery day -5 (can order 5 days before delivery day or cannot order if less than 5 days till delivery day)
   ###
-
