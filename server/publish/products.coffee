@@ -22,7 +22,6 @@ Meteor.publish "active-products", (query, limit, sort)->
   else
     limit = -1
 
-
   options =
    fields: basicFields
    limit: limit
