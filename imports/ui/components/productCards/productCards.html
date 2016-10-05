@@ -1,0 +1,10 @@
+<section layout="row" layout-align="start end" layout-wrap id="product-cards">
+<div layout layout-align="center center" ng-if="!productCards.productsReady">
+  <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
+</div>
+<div ng-repeat="product in productCards.products | filter: productCards.query.filter | limitTo: productCards.limit | orderBy: productCards.options.sort track by product._id"
+	flex="25" flex-sm="33" flex-xs="50" class="product-card-container">
+  <product-card product="product"></product-card>
+</div>
+<scroll-fire on-view="productCards.loadMore()" data-visible="true"></scroll-fire>
+</section>

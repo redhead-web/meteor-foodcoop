@@ -7,18 +7,18 @@ Package.describe({
   git: '',
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
+  documentation: 'README.md',
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
   api.versionsFrom('1.2.1');
-  api.use(['ecmascript', 'mongo', 'random', 'coffeescript', 'check','aldeed:collection2']);
+  api.use(['ecmascript', 'mongo', 'random', 'coffeescript', 'check', 'aldeed:collection2']);
   api.use(['tracker', 'session'], 'client');
   api.addFiles('like-useraccount.coffee');
   api.export('Likes');
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
   api.use('ecmascript');
   api.use('tinytest');
   api.use('redhead:like-useraccount');

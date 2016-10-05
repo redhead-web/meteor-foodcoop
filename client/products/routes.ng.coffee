@@ -9,10 +9,6 @@ rolePromise = ($q, r) ->
 
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
-  .state('store',
-    url: '/?name&certification&producer&search&category'
-    template: '<products-list></products-list>'
-  )
   .state('productDetails',
     url: '/product/:productId'
     templateUrl: 'client/products/views/product-details.ng.html'

@@ -1,4 +1,4 @@
-basicFields = 
+basicFields =
   published: 1
   name: 1
   price: 1
@@ -13,6 +13,7 @@ basicFields =
   daysNotice: 1
   extraMarkup: 1
   dateCreated: 1
+  last_modified: 1
 
 
 Meteor.publish "active-products", (query, limit, sort)->
@@ -21,25 +22,25 @@ Meteor.publish "active-products", (query, limit, sort)->
   else
     limit = -1
 
-  
+
   options =
    fields: basicFields
    limit: limit
    sort: sort or {name: 1}
-  
-  q = 
+
+  q =
     published : true
-  
+
   if query
     if query.producer
       q.producer = query.producer
     if query.category
       q.category = query.category
     if query.name
-      q.name = 
+      q.name =
         $regex: ".*#{query.name}"
         $options: 'i'
-  
+
     if @userId and (query.favourites or query.lastOrder)
       favourites = _.pluck(Likes.find(
         liker: @userId
@@ -51,25 +52,25 @@ Meteor.publish "active-products", (query, limit, sort)->
         q._id = $in: favourites
       if query.lastOrder
         q._id = $in: lastOrder
-  
+
   if limit == -1
     delete options.limit
-    
-  
+
+
   Products.find q, options
-    
-    
+
+
 Meteor.publish "all-active-products", ()->
   Products.find
     published: true
   , fields: basicFields
-    
-      
+
+
 Meteor.publish "product", (id) ->
   Products.find
     _id: id
   , limit: 1
-    
+
 Meteor.publish "my-products", ->
   Products.find
     producer: @userId
@@ -77,9 +78,9 @@ Meteor.publish "my-products", ->
 
 Meteor.publish "product-names", ->
   Products.find {},
-    fields: 
+    fields:
       name: 1
-      
+
 # Meteor.publish "product-names-search", ->
 #   Products.find {published: true},
 #     fields:
@@ -87,7 +88,7 @@ Meteor.publish "product-names", ->
 
 Meteor.publish "all-products", ->
   Products.find {},
-    fields: 
+    fields:
       published: 1
       name: 1
       price: 1
@@ -97,4 +98,3 @@ Meteor.publish "all-products", ->
       producerCompanyName: 1
       producerName: 1
       extraMarkup: 1
-      

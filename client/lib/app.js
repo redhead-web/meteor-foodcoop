@@ -17,6 +17,7 @@ import 'cloudinary-angular/dist/cloudinary-angular.js';
 // import icons from 'material-design-icons';
 // import {name as eventList} from '../../imports/ui/components/eventList/eventList';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
+import { name as productsList } from '../../imports/ui/components/productsList/productsList';
 
 angular.module('food-coop', [
   angularMessages,
@@ -26,6 +27,7 @@ angular.module('food-coop', [
   'angular-meteor.auth',
   navigation,
   productCreate,
+  productsList,
 //  eventList,
 //   requestList,
   uiRouter,
