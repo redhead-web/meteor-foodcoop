@@ -1,37 +1,8 @@
 <div layout="row" layout-xs="column">
   <span flex hide-xs></span>
-  <div
-  flex-gt-xs="20"
-  layout-xs-margin
-  layout="column"
-  layout-align="start center"
-  ng-controller="photoUploadCtrl">
-    <div
-      layout="column"
-      layout-align="center center"
-      ngf-drop="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name)"
-      ngf-drag-over-class="dragOverClass($event)"
-      ngf-max-size="'5MB'"
-      ngf-min-width="400"
-      accept="image/*"
-      ngf-min-height="300">
-      <h3>Product Image</h3>
-      <md-button
-        class="md-fab"
-        accept="image/*"
-        aria-label="upload image"
-        ngf-capture="'camera'"
-        ngf-select="uploadFiles($file, $invalidFiles, ctrl.product, 'img', ctrl.product.name)"
-        ngf-max-size="'5MB'"
-        ngf-min-width="400"
-        ngf-min-height="300"
-      >
-        <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
-      </md-button>
-      <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
-      <md-progress-linear ng-if="progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
-      <img ngf-src="ctrl.product.img.url || ctrl.product.img" flex="100">
-    </div>
+  <div class='img-col' flex-gt-xs="30">
+    <fc-img-upload can-edit="true" on-success="ctrl.imgUploadSuccess(data)" on-error="ctrl.imgUploadError(error)"
+    on-delete="ctrl.deleteImage()" cl-img="ctrl.product.img.result"></fc-img-upload>
   </div>
   <div layout="column" flex-gt-sm="60"  flex-sm="80" layout-xs-margin>
     <br>
@@ -232,7 +203,7 @@
       <md-button ui-sref="store">Cancel</md-button>
     </form>
   </div>
-  <div flex-gt-xs="20" flex-order-xs="-1" layout="column" layout-align-xs="center end">
+  <div flex-gt-xs flex-order-xs="-1" layout="column" layout-align-xs="center end">
     <md-switch class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
   </div>
   <span flex hide-xs></span>

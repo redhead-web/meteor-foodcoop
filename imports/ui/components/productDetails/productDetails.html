@@ -1,0 +1,258 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref="store({category: productDetails.product.category})" aria-label="Settings">
+      <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+      {{productDetails.product.category}}
+    </md-button>
+    <span flex></span>
+    <fc-social-menu url="/product/{{product._id}}"></fc-social-menu>
+  </div>
+</md-toolbar>
+
+<div layout layout-align="center center" ng-if="!productDetails.product">
+  <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<md-content layout="row" layout-padding layout-wrap ng-if="productDetails.product">
+
+  <md-content flex="50" flex-sm="40" flex-xs="100">
+    <div class="img-wrapper" ng-controller="photoUploadCtrl">
+      <fc-img-upload can-edit="productDetails.isOwner" on-success="productDetails.imgUploadSuccess(data)" on-error="productDetails.imgUploadError(error)"
+      on-delete="productDetails.deleteImage()" cl-img="productDetails.product.img.result"></fc-img-upload>
+    </div>
+
+  </md-content>
+
+  <md-content flex flex-xs="100" layout="column" layout-margin-xs>
+    <div>
+      <md-switch
+      class="md-primary md-block"
+      ng-model="productDetails.product.published"
+      ng-change="productDetails.pubSave = false; productDetails.save('published', productDetails.product.published, 'pubSave')"
+      ng-if="productDetails.isOwner"><span ng-show="productDetails.product.published">For Sale</span><span  ng-hide="productDetails.product.published">Not For Sale</span> </md-switch>
+    </div>
+    <md-divider></md-divider>
+    <h1 class="md-display-1">
+      <md-button
+        ng-if="productDetails.isOwner"
+        ng-click="productDetails.edit.name = !productDetails.edit.name"
+        class="md-icon-button md-accent" aria-label="edit name">
+        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+      {{productDetails.product.name}}
+    </h1>
+    <form name="editName" flex class="editContent"
+    ng-submit="productDetails.edit.name = !productDetails.edit.name"
+    ng-if="productDetails.edit.name && productDetails.isOwner">
+      <md-input-container flex>
+        <label>Product Name</label>
+        <input ng-model="productDetails.product.name" required name="productName" md-maxlength="40"
+        ng-change="productDetails.nameSaved = false; productDetails.save('name', productDetails.product.name, 'nameSaved')" ng-model-options="productDetails.modelOptions"
+        >
+        <div ng-messages="editName.productName.$error" ng-if="editName.productName.$touched">
+          <div ng-message="required">A product name is required.</div>
+          <div ng-message="maxlength">Please use a shorter name.</div>
+        </div>
+        <small ng-if="productDetails.nameSaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+      </md-input-container>
+    </form>
+
+    <p class="md-body-2">
+      <md-button
+        ng-if="productDetails.isOwner"
+        ng-click="productDetails.edit.price = !productDetails.edit.price;"
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+      {{productDetails.priceWithMarkup(productDetails.product) | currency}} / {{productDetails.product.unitOfMeasure}}
+    </p>
+    <form name="editPrice" flex class="editContent"
+    ng-submit="productDetails.save(productDetails.product); productDetails.edit.price = !productDetails.edit.price;"
+    ng-if="productDetails.edit.price && productDetails.isOwner">
+      <md-input-container class="md-icon-float md-block">
+        <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
+        <input ng-model="productDetails.product.price" type="number" min="0" step="0.01" placeholder="Price" name="price"
+        ng-change="productDetails.priceSaved = false; productDetails.save('price', productDetails.product.price, 'priceSaved')" ng-model-options="productDetails.modelOptions">
+        <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
+          <div ng-message="required">A product price is required.</div>
+          <div ng-message="min">Please use a positive price.</div>
+        </div>
+        <small ng-if="productDetails.priceSaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+      </md-input-container>
+      <md-input-container>
+        <label>Unit Of Measure</label>
+        <input ng-model="productDetails.product.unitOfMeasure" type="text" maxlength="20" required
+        ng-change="productDetails.unitOfMeasureSaved = false; productDetails.save('unitOfMeasure', productDetails.product.unitOfMeasure, 'unitOfMeasureSaved')" ng-model-options="productDetails.modelOptions">
+        <div ng-messages="editPrice.price.$error" ng-if="editPrice.price.$touched">
+          <div ng-message="required">this field is required.</div>
+          <div ng-message="maxlength">Please use a unit of measure with fewer characters.</div>
+        </div>
+        <small ng-if="productDetails.unitOfMeasureSaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+      </md-input-container>
+    </form>
+
+    <p ng-if="productDetails.product.stocklevel >= 0" class="md-body-1">
+      <md-button
+        ng-if="productDetails.isOwner"
+        ng-click="productDetails.edit.stocklevel = !productDetails.edit.stocklevel;"
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+      Quantity Left: {{productDetails.product.stocklevel}}
+    </p>
+    <md-slider ng-model="productDetails.product.stocklevel"
+    ng-if="productDetails.isOwner && productDetails.edit.stocklevel"
+    min="1" max="100"
+    ng-change="productDetails.qtySaved = false; productDetails.save('stocklevel', productDetails.product.stocklevel, 'qtySaved')"
+    ></md-slider>
+    <md-input-container ng-if="productDetails.isOwner && productDetails.edit.stocklevel" style="margin-top: 0;">
+      <input placeholder="Stock Level or Amount Available for Sale"
+      ng-model="productDetails.product.stocklevel"
+      ng-if="productDetails.isOwner"
+      min="1"
+      ng-change="productDetails.qtySaved = false; productDetails.save('stocklevel', productDetails.product.stocklevel, 'qtySaved')"
+      >
+      <small ng-if="productDetails.qtySaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+    </md-input-container>
+    <p class="md-body-2 text-center" ng-if="productDetails.product.stocklevel != null && productDetails.product.stocklevel <= 0">SOLD OUT</p>
+    <div ng-if="productDetails.product.producer === currentUser._id">
+      <p class="md-body-1 text-center">All product changes save automagically!</p>
+    </div>
+
+    <div ng-if="productDetails.product.producer !== currentUser._id">
+      <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, productDetails.product, shop.qty)"
+      ng-if="productDetails.product.stocklevel == null || productDetails.product.stocklevel > 0" class="editContent"
+      layout="row">
+        <md-input-container flex>
+          <label>Quantity</label>
+          <input ng-model="shop.qty" type="number" min="{{productDetails.product.minimumOrder || 1}}" required name="qty">
+          <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
+            <div ng-message="required">this field is required.</div>
+            <div ng-message="min">You must order a minimum of {{productDetails.product.minimumOrder || 1}} for this order.</div>
+          </div>
+        </md-input-container>
+        <div flex>
+          <md-button class="md-primary" type="submit">
+            Add To Cart
+          </md-button>
+        </div>
+      </form>
+    </div>
+
+    <p class="md-body-1">
+      <md-button
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="action:ic_schedule_24px"></md-icon>
+      </md-button>
+      Available {{productDetails.orderDate(productDetails.product.daysNotice) | calendar}}
+      <md-button
+        ng-if="productDetails.isOwner"
+        ng-click="productDetails.edit.saleNotice = !productDetails.edit.saleNotice;"
+        class="md-icon-button md-accent" aria-label="edit name">
+       <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+      </md-button>
+    </p>
+
+    <md-input-container ng-if="productDetails.isOwner && productDetails.edit.saleNotice">
+      <label>Sale Notice</label>
+      <md-select ng-model="productDetails.product.daysNotice" ng-change="productDetails.daysSaved = false; productDetails.save('daysNotice', productDetails.product.daysNotice, 'daysSaved')">
+        <md-option ng-repeat="day in productDetails.daysNotice" value="{{day.value}}">
+          {{day.name}}
+        </md-option>
+      </md-select>
+      <small ng-if="productDetails.daysSaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+    </md-input-container>
+
+    <md-divider ng-if="productDetails.product.description"></md-divider>
+      <md-chips
+        ng-model="productDetails.product.ingredients"
+        md-on-add="productDetails.ingSaved = false; productDetails.save('ingredients', productDetails.product.ingredients, 'ingSaved')"
+        md-on-remove="productDetails.ingSaved = false; productDetails.save('ingredients', productDetails.product.ingredients, 'ingSaved')"
+        readonly="!productDetails.isOwner"
+        placeholder="Enter ingredients"
+        md-separator-keys="productDetails.keys"
+        delete-button-label="Remove Ingredient"
+        delete-hint="Press delete to remove ingredient"
+        secondary-placeholder="+Ingredient"
+      ></md-chips>
+      <small ng-if="productDetails.ingSaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+    <md-content ng-if="productDetails.product.description || productDetails.isOwner">
+        <md-button
+          ng-if="productDetails.isOwner"
+          ng-click="productDetails.edit.description = !productDetails.edit.description;"
+          class="md-icon-button md-accent" aria-label="edit packaging description">
+         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        </md-button>
+        <p ng-if="productDetails.isOwner && !productDetails.product.description">No Description Set</p>
+        <div ng-bind-html="productDetails.product.description | md"></div>
+      <form name="editDescription" flex class="editContent"
+      ng-submit="productDetails.edit.description = !productDetails.edit.description;"
+      ng-if="productDetails.edit.description && productDetails.isOwner">
+        <md-input-container class="md-block">
+          <label>Description</label>
+          <textarea ng-model="productDetails.product.description" md-maxlength="2500" name="description"
+          ng-change="productDetails.descSaved = false; productDetails.save('description', productDetails.product.description, 'descSaved')"
+          ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"></textarea>
+          <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
+            <div ng-message="maxlength">Please use a shorter description.</div>
+          </div>
+          <small ng-if="productDetails.descSaved"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+
+        </md-input-container>
+        <markdown-help></markdown-help>
+      </form>
+
+    </md-content>
+    <md-divider></md-divider>
+    <md-content>
+      <p ng-if="productDetails.product.packagingDescription || productDetails.isOwner">
+        <md-button
+          ng-if="productDetails.isOwner"
+          ng-click="productDetails.edit.packagingDescription = !productDetails.edit.packagingDescription;"
+          class="md-icon-button md-accent" aria-label="edit packaging description">
+         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        </md-button>
+        Packaging: {{productDetails.product.packagingDescription}}
+        <span ng-if="productDetails.isOwner && !productDetails.product.packagingDescription">No Packaging Description Set</span>
+      </p>
+      <form name="editPackagingDescription" flex class="editContent"
+      ng-submit="productDetails.edit.packagingDescription = !productDetails.edit.packagingDescription;"
+      ng-if="productDetails.edit.packagingDescription && productDetails.isOwner">
+        <md-input-container>
+          <label>Short Packaging Description</label>
+          <input ng-model="productDetails.product.packagingDescription" type="text"
+          ng-change="productDetails.packSave = false; productDetails.save('packagingDescription', productDetails.product.packagingDescription, 'packSave')" ng-model-options="productDetails.modelOptions">
+          <small ng-if="productDetails.packSave"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+        </md-input-container>
+      </form>
+      <p ng-if="productDetails.product.packagingRefund || productDetails.isOwner">
+        <md-button
+          ng-if="productDetails.isOwner"
+          ng-click="productDetails.edit.packagingRefund = !productDetails.edit.packagingRefund;"
+          class="md-icon-button md-accent" aria-label="edit packaging description">
+         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+        </md-button>
+        Packaging Refund: {{productDetails.product.packagingRefund | currency}}
+        <span ng-if="productDetails.isOwner && !productDetails.product.packagingRefund">No Packaging Refund Set</span>
+      </p>
+      <form name="editPackagingRefund" class="editContent"
+      ng-submit="productDetails.edit.packagingRefund = !productDetails.edit.packagingRefund;"
+      ng-if="productDetails.edit.packagingRefund && productDetails.isOwner">
+        <md-input-container class="md-icon-float md-block" flex>
+          <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
+          <input ng-model="productDetails.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01"
+          placeholder="Packaging Refund amount" ng-change="productDetails.refundSave = false; productDetails.save('packagingRefund', productDetails.product.packagingRefund, 'refundSave')" ng-model-options="productDetails.modelOptions">
+          <div ng-messages="productUploadForm.packagingRefund.$error">
+            <div ng-message="min">You must have a positive number here.</div>
+            <div ng-message="number">Please use just a number here.</div>
+          </div>
+          <small ng-if="productDetails.refundSave"><md-icon md-svg-icon="action:ic_done_24px"></md-icon>Saved</small>
+        </md-input-container>
+      </form>
+    </md-content>
+
+  </md-content>
+
+</md-content>
+
+<fc-producer-box producer-id="productDetails.product.producer"></fc-producer-box>

@@ -64,6 +64,22 @@ class ProductCreateController {
     this.unitsOfMeasure = 'L,litre,ml,500ml,g,kg,500g,5kg,10kg,25kg,bag,150g bunch,bunch,head,each,can,jar,container,330ml Bottle,750ml Bottle'.split(',');
   }
 
+  imgUploadSuccess(data) {
+    this.product.img = {
+      url: data.data.secure_url,
+      result: data.data.public_id,
+    };
+    // this.save('img', this.product.img, 'imgSaved');
+  }
+
+  imgUploadError(err) {
+    console.log(err);
+  }
+
+  deleteImg() {
+    delete this.product.img;
+  }
+
   getUnitsOfMeasure(query) {
     const results = query ? this.unitsOfMeasure.filter(this.createFilterFor(query)) : this.unitsOfMeasure;
     return results;

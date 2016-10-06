@@ -7,6 +7,7 @@ import templateUrl from './productsList.html';
 import { Categories } from '../../../api/categories';
 
 import productCards from '../productCards/productCards';
+import productDetails from '../productDetails/productDetails';
 
 function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
   'ngInject';
@@ -61,6 +62,7 @@ const name = 'productsList';
 export default angular.module(name, [
   uiRouter,
   productCards.name,
+  productDetails.name,
 ]).component(name, {
   controller: ProductsListCtrl,
   controllerAs: 'store',
