@@ -1,2 +1,0 @@
-import './cdn';
-import './kadira';
