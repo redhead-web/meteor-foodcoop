@@ -13,19 +13,6 @@
         class="md-fab"
         accept="image/*"
         aria-label="upload image"
-        ngf-capture="'camera'"
-        ngf-select="$ctrl.uploadFiles($file, $invalidFiles)"
-        ngf-max-size="'5MB'"
-        ngf-min-width="400"
-        ngf-min-height="300"
-      >
-        <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
-      </md-button>
-      <md-button hide-gt-xs
-        ng-if="!$ctrl.clImg"
-        class="md-fab"
-        accept="image/*"
-        aria-label="upload image"
         ngf-select="$ctrl.uploadFiles($file, $invalidFiles)"
         ngf-max-size="'5MB'"
         ngf-min-width="400"
@@ -40,19 +27,6 @@
         <cl-transformation width="800" crop="fill" gravity="center"></cl-transformation>
       </cl-image>
       <md-button
-        ng-if="!!$ctrl.clImg && $ctrl.canEdit"
-        class="md-icon-button image-replace"
-        aria-label="upload new image"
-        accept="image/*"
-        ngf-capture="'camera'"
-        ngf-select="$ctrl.uploadFiles($file, $invalidFiles)"
-        ngf-max-size="'5MB'"
-        ngf-min-width="400"
-        ngf-min-height="300"
-      >
-        <md-icon md-svg-src="image:ic_photo_camera_24px"></md-icon>
-      </md-button>
-      <md-button hide-gt-xs
         ng-if="!!$ctrl.clImg && $ctrl.canEdit"
         class="md-icon-button image-replace-library"
         accept="image/*"
