@@ -19,6 +19,7 @@ import 'cloudinary-angular/dist/cloudinary-angular.js';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 import { name as productsList } from '../../imports/ui/components/productsList/productsList';
 import { name as productCardSummary } from '../../imports/ui/components/productCardSummary/productCardSummary';
+import { name as userProfilePage } from '../../imports/ui/components/userProfilePage/userProfilePage';
 
 angular.module('food-coop', [
   angularMessages,
@@ -44,6 +45,7 @@ angular.module('food-coop', [
   'ngLetterAvatar',
   'youtube-embed',
   productCardSummary,
+  userProfilePage,
 ])
 .config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider) => {
   'ngInject';

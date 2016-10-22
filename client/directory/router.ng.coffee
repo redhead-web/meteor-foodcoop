@@ -4,9 +4,6 @@ angular.module('food-coop').config ($stateProvider) ->
     templateUrl: 'client/directory/views/directory.ng.html'
     controllerAs: 'dir'
     controller: 'directoryCtrl'
-  .state 'producer',
-    url: '/directory/:producerId'
-    template: '<directory-page></directory-page>'
   return
 
 # ---

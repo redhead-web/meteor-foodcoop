@@ -3,7 +3,7 @@ angular.module('food-coop').controller('MyProductsCtrl', function ($scope, $reac
 
   this.subscribe('my-products');
 
-  this.sort = { name: 1 };
+  this.sort = [['published', 'desc'], 'name', 'unitOfMeasure'];
 
   this.helpers({
     products() {

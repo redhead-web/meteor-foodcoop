@@ -2,19 +2,19 @@
   .producer-banner {
     background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_1920,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
   }
-  
+
   @media only screen and (max-width: 1280px) {
     .producer-banner {
       background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_1280,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
     }
   }
-  
+
   @media only screen and (max-width: 960px) {
     .producer-banner {
       background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_960,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
     }
   }
-  
+
   @media only screen and (max-width: 600px) {
     .producer-banner {
       background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_600,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
@@ -26,30 +26,7 @@
   <span flex></span>
   <div
   class="producer-banner"
-  ng-controller="photoUploadCtrl"
-  
-  ngf-drop="uploadFiles($file, $invalidFiles, ctrl.producer.profile, 'banner', 'banner', ctrl.save)"
-  ngf-drag-over-class="dragOverClass($event)"
-  ngf-max-size="'10MB'"
-  ngf-min-width="1920"
-  accept="image/*"
-  ngf-min-height="500"
   flex="100">
-  <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
-  <md-progress-linear ng-if="progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
-    <md-button
-      ng-if="ctrl.isOwner"
-      class="image-replace white-icon"
-      aria-label="upload new banner image"
-      accept="image/*"
-      ngf-capture="'camera'"
-      ngf-select="uploadFiles($file, $invalidFiles, ctrl.producer.profile, 'banner', 'banner', ctrl.save)"
-      ngf-max-size="'10MB'"
-      ngf-min-width="1920"
-      ngf-min-height="500"
-    > New Banner
-      <md-icon md-svg-src="image:ic_photo_camera_24px" class="white-icon"></md-icon>
-    </md-button>
     <div style="height:100%" class="text-protection" layout="column" layout-align="end">
       <h1 class="md-display-3">{{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</h1>
       <p>{{ctrl.likesCount.length}} member endorsements.</p>
@@ -60,7 +37,7 @@
           <md-icon class="white-icon" md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
         </md-button>
         <div>
-          <md-button class="md-secondary md-icon-button is-liked" 
+          <md-button class="md-secondary md-icon-button is-liked"
             aria-label="Favorite" style="padding: 8px 0" ng-if="currentUser"
             >
             <like-heart target-id="ctrl.producer._id" category="producer" like-text="Clap clap! Thanks for endorsing {{ctrl.producer.profile.name}}" unlike-text="you are no longer endorsing this producer"></like-heart>
@@ -92,14 +69,14 @@
           <span class="md-subhead">{{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</span>
         </md-card-header-text>
       </md-card-header>
-      <img ng-if="ctrl.producer.profile.logo && !ctrl.producer.profile.logo.result" 
+      <img ng-if="ctrl.producer.profile.logo && !ctrl.producer.profile.logo.result"
       ngf-src="ctrl.producer.profile.logo">
       <cl-image ng-if="ctrl.producer.profile.logo.result" public-id="{{ctrl.producer.profile.logo.result}}" format="jpg">
         <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
       </cl-image>
       <md-card-title>
         <md-card-title-text>
-          
+
           <span class="md-headline">
             <md-button
               ng-if="ctrl.isOwner"
@@ -112,7 +89,7 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <form name="editCompanyName" 
+        <form name="editCompanyName"
         ng-if="ctrl.edit.companyName && ctrl.isOwner"
         class="editContent"
         ng-submit="ctrl.edit.companyName = !ctrl.edit.companyName" layout="row" layout-padding layout-xs="column">
@@ -121,9 +98,9 @@
             <input ng-model="ctrl.producer.profile.companyName" name="companyName"
             ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions">
           </md-input-container>
-        </form>        
+        </form>
         <p ng-if="ctrl.isOwner && !ctrl.producer.profile.summary">Write a short paragraph about how great your business is.</p>
-        
+
         <div ng-bind-html="ctrl.producer.profile.summary | md"></div>
         <div layout>
           <md-button
@@ -145,33 +122,17 @@
             ></textarea>
           </md-input-container>
         </form>
-        
+
         <md-input-container flex ng-if="ctrl.isOwner">
           <label>Youtube Video Link</label>
           <input ng-model="ctrl.producer.profile.video" name="video"
           ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions">
         </md-input-container>
       </md-card-content>
-      <div ng-if="ctrl.isOwner" ng-controller="photoUploadCtrl">
-        <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
-        <md-progress-linear ng-if="progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
-        <md-card-actions layout="row" layout-align="end center" >
-          <span ng-if="progress && progress !== 100" flex> Uploading ...</span>
-          <md-button aria-label="replace bio photo"
-          accept="image/*"
-          ngf-capture="'camera'"
-          ngf-select="uploadFiles($file, $invalidFiles, ctrl.producer.profile, 'logo', ctrl.producer.profile.name, ctrl.save)"
-          ngf-max-size="'5MB'"
-          ngf-min-width="400"
-          ngf-min-height="300"
-          >
-            Upload your Logo
-            <md-icon md-svg-icon="image:ic_photo_camera_24px"></md-icon>
-          </md-button>
-        </md-card-actions>
-      </div>
+      <fc-img-upload ng-if="ctrl.isOwner" can-edit="ctrl.isOwner" on-success="ctrl.photoUploadSuccess(data)"
+      on-delete="ctrl.deleteLogo()"></fc-img-upload>
     </md-card>
-    
+
     <md-card>
       <md-card-header>
         <md-card-avatar>
@@ -260,16 +221,16 @@
           <span class="md-subhead">{{ctrl.producer.profile.name}}</span>
         </md-card-header-text>
       </md-card-header>
-      
+
       <cl-image ng-if="ctrl.producer.profile.personalPic.result" public-id="{{ctrl.producer.profile.personalPic.result}}" >
         <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
       </cl-image>
-      
-      <img ng-if="ctrl.producer.profile.personalPic && !ctrl.producer.profile.personalPic.result" 
+
+      <img ng-if="ctrl.producer.profile.personalPic && !ctrl.producer.profile.personalPic.result"
       ngf-src="ctrl.producer.profile.personalPic">
       <md-card-content>
         <p ng-if="ctrl.isOwner && !ctrl.producer.profile.bio">Write a short paragraph about yourself and your experience</p>
-        
+
         <div ng-bind-html="ctrl.producer.profile.bio | md"></div>
         <div layout>
           <md-button
@@ -289,27 +250,12 @@
             <textarea ng-model-options="ctrl.modelOptions" ng-model="ctrl.producer.profile.bio" name="bio" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
           </md-input-container>
         </form>
-        
-        
-        
+
+
+
       </md-card-content>
-      <div ng-if="ctrl.isOwner" ng-controller="photoUploadCtrl">
-        <span ng-if="invalidFiles">Error: {{invalidFiles[0].$error}} : {{invalidFiles[0].$errorParam}}</span>
-        <md-progress-linear ng-if="progress && progress !== 100" md-mode="determinate" value="{{progress}}"></md-progress-linear>
-        <md-card-actions layout="row" layout-align="end center">
-          <span ng-if="progress && progress !== 100" flex> Uploading ...</span>
-          <md-button
-          accept="image/*"
-          ngf-capture="'camera'"
-          ngf-select="uploadFiles($file, $invalidFiles, ctrl.producer.profile, 'personalPic', ctrl.producer.profile.name, ctrl.save)"
-          ngf-max-size="'5MB'"
-          ngf-min-width="400"
-          ngf-min-height="300"
-          >Upload a Personal Photo
-            <md-icon md-svg-icon="image:ic_photo_camera_24px"></md-icon>
-          </md-button>
-        </md-card-actions>
-      </div>
+      <fc-img-upload ng-if="ctrl.isOwner" can-edit="ctrl.isOwner" on-success="ctrl.logoUploadSuccess(data)"
+      on-delete="ctrl.deletePhoto()"></fc-img-upload>
     </md-card>
 
     <!-- Products -->
@@ -324,7 +270,7 @@
         </md-card-header-text>
       </md-card-header>
       <md-virtual-repeat-container id="vertical-container">
-      
+
         <md-list ng-controller="orderProductCtrl as shop">
           <md-list-item class="md-2-line repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products"
             ui-sref="productDetails({productId: product._id})"
@@ -382,7 +328,7 @@
         ng-submit="ctrl.edit.chemicals = !ctrl.edit.chemicals" layout="row" layout-padding layout-xs="column">
           <md-input-container flex>
             <label>Farm Chemicals if any?</label>
-            
+
             <textarea ng-model="ctrl.producer.profile.chemicals" name="chemicals" ng-model-options="ctrl.modelOptions" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
           </md-input-container>
         </form>

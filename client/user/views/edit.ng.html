@@ -3,7 +3,7 @@
   <section layout="column" flex="50" flex-sm="95" layout-margin>
     <aside layout-margin layout layout-align="center center" ng-if="isProducer(currentUser._id)">
       <p class="md-body-1">View and edit my producer profile</p>
-      <md-button ui-sref="producer({producerId: user._id})" class="md-fab" aria-label="producer directory">
+      <md-button ui-sref="producer({userId: user._id})" class="md-fab" aria-label="producer directory">
         <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
       </md-button>
     </aside>
