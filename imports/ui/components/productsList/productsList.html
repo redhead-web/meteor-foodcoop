@@ -5,10 +5,10 @@
       <md-tab ng-repeat="c in store.categories" label="{{::c.name}}" md-on-select="store.query.category=c.name; store.limit=48;"></md-tab>
     </md-tabs>
     <md-toolbar class="md-menu-toolbar">
-      <div class="md-toolbar-tools" layout="row" layout-align="space-between center" layout-wrap>
+      <div class="md-toolbar-tools">
         <md-input-container md-no-float class="md-icon-float md-block">
           <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
-          <input placeholder="search" type="search" ng-model="store.query.filter" ng-model-options="{ updateOn: 'default blur', debounce: { default: 250, blur: 0 } }">
+          <input placeholder="search" type="search" ng-model="store.query.filter" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }">
         </md-input-container>
         <div layout="row" layout-align="center center" ng-if="store.producer">
           <md-button class="md-icon-button" ui-sref="store({producer: undefined})">

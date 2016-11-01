@@ -17,19 +17,19 @@
         <small>{{ rc.error }}</small>
       </div>
       <md-input-container>
-        <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="rc.credentials.email" name="email" required md-select-on-focus
-               placeholder="email" aria-label="email"/>
-        <div ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
-          <div ng-message="required">An email address is required.</div>
-        </div>
-      </md-input-container>
-      <md-input-container>
         <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
         <input type="text" ng-model="rc.credentials.profile.name" name="name" required  md-select-on-focus
                placeholder="name" aria-label="name"/>
         <div ng-messages="signupForm.name.$error" ng-if="signupForm.name.$touched">
           <div ng-message="required">Please tell us your full legal name.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
+        <input type="text" ng-model="rc.credentials.email" name="email" required md-select-on-focus
+               placeholder="email" aria-label="email"/>
+        <div ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
+          <div ng-message="required">An email address is required.</div>
         </div>
       </md-input-container>
       <md-input-container>
@@ -67,8 +67,8 @@
       <div ng-show="rc.error" class="md-warn">
         <small>{{ rc.error }}</small>
       </div>
-      <md-button 
-        class="md-raised md-primary" 
+      <md-button
+        class="md-raised md-primary"
         ng-disabled="signupForm.$invalid"
         ng-click="rc.register()">Create Account
       </md-button>

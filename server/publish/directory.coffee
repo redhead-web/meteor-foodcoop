@@ -20,14 +20,14 @@ Meteor.publish "producer", (producer) ->
       'profile.certification': 1
       'profile.balance': 1
       'profile.video': 1
-      
+
 Meteor.publish "list-of-producers", ->
-  
+
   Meteor.users.find roles: 'producer',
-    fields: 
+    fields:
       'profile.companyName': 1
       'profile.name': 1
       'profile.logo': 1
       'profile.deliveryAddress': 1
       'createdAt': 1
-      
+      'roles': 1
