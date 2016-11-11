@@ -12,11 +12,32 @@ import { Products } from '../../../api/products';
 import { Categories } from '../../../api/categories';
 
 class ProductCreateController {
-  constructor($scope, $reactive, $mdConstant, $mdToast, $mdDialog) {
+  constructor($scope, $reactive, $mdConstant, $mdToast, $mdDialog, $stateParams) {
     'ngInject';
     $reactive(this).attach($scope);
 
     this.$mdToast = $mdToast;
+
+    this.markup = Meteor.settings.public.markup;
+
+    // initialize product
+    this.product = {
+      producer: Meteor.userId(),
+      published: true,
+      producerName: Meteor.user().profile.name,
+      producerCompanyName: Meteor.user().profile.companyName || undefined,
+      category: '',
+      ingredients: [],
+    };
+
+    if ($stateParams.copy) {
+      this.call('getProduct', $stateParams.copy, (err, result) => {
+        if (result) {
+          this.product = result;
+          this.productIdCopy = $stateParams.copy;
+        }
+      });
+    }
 
     this.$mdDialog = $mdDialog;
     this.hasRole = Roles.userIsInRole;
@@ -46,18 +67,6 @@ class ProductCreateController {
         .format('dddd')} -- ${i} days notice`,
       });
     }
-
-    this.markup = Meteor.settings.public.markup;
-
-    // initialize product
-    this.product = {
-      producer: Meteor.userId(),
-      published: true,
-      producerName: Meteor.user().profile.name,
-      producerCompanyName: Meteor.user().profile.companyName || undefined,
-      category: '',
-      ingredients: [],
-    };
 
     this.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
@@ -200,6 +209,7 @@ class ProductCreateController {
         .ok('Create New Product')
         .cancel('Update the product');
       this.$mdDialog.show(c).then(() => {
+        delete this.product._id;
         this.insert();
       }, () => {
         Products.update(this.productIdCopy, { $set: this.product }, (err, count) => {
@@ -246,7 +256,7 @@ export default angular.module(name, [fcImgUpload.name])
 
   $stateProvider
   .state('productCreate', {
-    url: '/new-product',
+    url: '/new-product?copy',
     template: '<product-create></product-create>',
     controller: ProductCreateController,
     controllerAs: 'ctrl',

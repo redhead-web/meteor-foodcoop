@@ -69,7 +69,7 @@ class OrdersAdminCtrl {
     this.deliveryDay = moment(this.deliveryDay).add(1, 'weeks').format();
   }
 
-  productsCount(orders) {
+  occurences(orders) {
     const occurences = {};
     _.each(orders, (order) => {
       const name = order.productName;

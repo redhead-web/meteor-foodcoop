@@ -1,4 +1,4 @@
 // import './publish';
-// import './methods';
+import './methods';
 
 export * from './collection';
