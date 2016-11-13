@@ -1,0 +1,23 @@
+<form name="deliverySettings" ng-submit="deliverySettingsAdminForm.save()">
+  <md-input-container>
+    <label>Title</label>
+    <input ng-model="deliverySettingsAdminForm.settings.title" type="text" md-maxlength="50" required name="title">
+    <div ng-messages="deliverySettings.title.$error" ng-if="deliverySettings.title.$touched">
+      <div ng-message="required">this field is required.</div>
+      <div ng-message="maxlength">Title is too long</div>
+    </div>
+  </md-input-container>
+  <md-input-container>
+    <label>Fixed Cost</label>
+    <input ng-model="deliverySettingsAdminForm.settings.cost" type="number" min="0" name="cost" required>
+  </md-input-container>
+  <md-input-container>
+    <label>Coverage Description</label>
+    <input ng-model="deliverySettingsAdminForm.settings.coverage" placeholder="e.g. in city only, national, international" type="number" min="0" name="description" required md-maxlength="100">
+    <div ng-messages="deliverySettings.description.$error" ng-if="deliverySettings.description.$touched">
+      <div ng-message="required">this field is required.</div>
+      <div ng-message="maxlength">Description is too long</div>
+    </div>
+  </md-input-container>
+  <md-button class="md-raised md-accent" type="submit">Save</md-button>
+</form>
