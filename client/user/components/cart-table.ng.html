@@ -22,6 +22,10 @@
         </tr>
       </thead>
       <tfoot>
+        <tr ng-if="cart.shipping">
+          <td colspan="7">Shipping</td>
+          <td>{{ cart.shipping.deliveryMethod.cost * cart.shipping.deliveryDays.length | currency }}</td>
+        </tr>
         <tr>
           <td colspan="7">
             Cart Total

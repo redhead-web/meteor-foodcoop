@@ -1,15 +1,26 @@
-<md-content layout="row" layout-align="center center">
+<div layout="row" layout-align="center center">
   <span flex></span>
   <div flex="90" flex-md=100 flex-sm=100>
     <h1 class="text-center md-title"> Shopping Cart </h1>
-    <cart-table items="cart.items" total="cart.total" user="currentUser" on-update="cart.changeQuantity(id, newQty, oldQty)" on-remove="cart.removeFromCart(id)"></cart-table>
-    
+    <cart-table items="cart.items" total="cart.total" user="currentUser" shipping="cart.deliveryData" on-update="cart.changeQuantity(id, newQty, oldQty)" on-remove="cart.removeFromCart(id)"></cart-table>
+
     <div layout="row" layout-align="center center">
-      <checkout-flow total="cart.totalWithBalance" on-success="cart.checkoutSuccess()"></checkout-flow>
+      <md-button class="md-raised md-primary" ng-click="cart.toggleDelivery = !cart.toggleDelivery">Get Delivery!</md-button>
+    </div>
+
+    <div ng-if="cart.toggleDelivery" layout="row" layout-align="center center">
+      <span flex></span>
+      <div flex="90" flex-gt-xs="70" ng-if="cart.items.length">
+        <delivery-form items="cart.items" add-delivery="cart.addDelivery(data)"></delivery-form>
+      </div>
+      <span flex></span>
+    </div>
+
+    <div layout="row" layout-align="center center">
+      <checkout-flow total="cart.totalWithBalance || cart.total" on-success="cart.checkoutSuccess(data)"></checkout-flow>
       <md-button class="md-raised md-primary" ui-sref="store">Keep Shopping</md-button>
     </div>
 
   </div>
   <span flex></span>
-</md-content>
-
+</div>

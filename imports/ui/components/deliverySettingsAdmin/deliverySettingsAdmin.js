@@ -22,8 +22,8 @@ class deliverySettingsAdminController {
   insert(data) {
     DeliverySettings.insert(data);
   }
-  update(dataId, dataField, dataValue) {
-    DeliverySettings.update(dataId, { $set: { [dataField]: dataValue } });
+  update(data) {
+    DeliverySettings.update(data._id, { $set: data });
   }
 }
 const name = 'deliverySettingsAdmin';
@@ -37,6 +37,7 @@ export default angular.module(name, [deliverySettingsAdminForm.name]).component(
   controller: deliverySettingsAdminController,
   controllerAs: name,
 }).config(($stateProvider) => {
+  'ngInject';
   $stateProvider.state('admin.deliverySettings', {
     url: '/delivery-settings',
     template: '<delivery-settings-admin></delivery-settings-admin>',

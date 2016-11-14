@@ -1,25 +1,3 @@
-deliverySchema = new SimpleSchema
-  address:
-    type: Object,
-    blackbox: true,
-  cost:
-    type: Number,
-    decimal: true,
-  discount:
-    type: Number,
-    decimal: true,
-    optional: true,
-  discountId:
-    type: String,
-    optional: true,
-  deliveryId: # store delivery setting id that sets the cost
-    type: String
-  method: # delivery setting title
-    type: String
-  notes:
-    type: String
-    optional: true
-
 order = new SimpleSchema
   dateCreated:
     type: Date
@@ -41,8 +19,5 @@ order = new SimpleSchema
   transactionId:
     type: String
     optional:true
-  delivery:
-    type: deliverySchema
-    optional: true
 
 Orders.attachSchema order

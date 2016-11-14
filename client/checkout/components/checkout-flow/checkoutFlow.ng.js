@@ -1,3 +1,17 @@
+function PaymentMethodSelector($scope, $mdDialog) {
+  'ngInject';
+  this.success = (data) => {
+    $mdDialog.hide(data);
+  };
+  this.cancel = () => {
+    $mdDialog.cancel();
+  };
+  this.error = (error) => {
+    console.log('error called', error.message);
+    this.errorMessage = error.message;
+  };
+}
+
 function CheckoutFlowController($mdDialog) {
   'ngInject';
   this.checkout = (ev) => {
@@ -11,9 +25,10 @@ function CheckoutFlowController($mdDialog) {
       locals: {
         total: this.total,
       },
-    }).then((success) => {
-      if (success) {
-        this.onSuccess();
+      bindToController: true,
+    }).then((data) => {
+      if (data) {
+        this.onSuccess({ data });
       }
     }, () => {
       this.status = 'You cancelled the checkout flow';
@@ -35,18 +50,3 @@ angular.module('food-coop').component('checkoutFlow', {
     data: '<', // extra data to go to checkout
   },
 });
-
-function PaymentMethodSelector($scope, $mdDialog, total) {
-  'ngInject';
-  this.total = total;
-  this.success = function () {
-    $mdDialog.hide(true);
-  };
-  this.cancel = function () {
-    $mdDialog.cancel();
-  };
-  this.error = (error) => {
-    console.log('error called', error.message);
-    this.errorMessage = error.message;
-  };
-}

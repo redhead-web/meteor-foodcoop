@@ -1,8 +1,8 @@
 CartTableController = ($scope, $reactive, $mdDialog) ->
   "ngInject"
-  
+
   $reactive(@).attach($scope)
-  
+
   @priceWithMarkup = (item) => Markup(item).total()
   @totalWithMarkup = (item) => Markup(item).cartTotal()
 
@@ -10,13 +10,16 @@ CartTableController = ($scope, $reactive, $mdDialog) ->
     @onRemove({id: id})
   @update = (id, newQty, oldQty) =>
     @onUpdate {id: id, newQty: newQty, oldQty: oldQty}
-    
+
   @deliveryWarning = (daysNotice) =>
-    if daysNotice? and GetProductDeliveryDay(daysNotice).isAfter(GetNextDeliveryDay())
+    d = daysNotice
+    if daysNotice == null
+      d = Meteor.settings.public.shoppingThreshold
+    if d? and GetProductDeliveryDay(d).isAfter(GetNextDeliveryDay())
       return yes
     else
       return no
-      
+
   @deliveryAlert = (ev, daysNotice) =>
     $mdDialog.show( $mdDialog.alert()
         .clickOutsideToClose(true)
@@ -27,7 +30,7 @@ CartTableController = ($scope, $reactive, $mdDialog) ->
         .targetEvent(ev)
     )
     return
-    
+
   return
 
 
@@ -39,5 +42,6 @@ angular.module('food-coop').component 'cartTable',
     items: '<'
     user: '<'
     total: '<'
+    shipping: '<'
     onRemove: '&'
     onUpdate: '&'

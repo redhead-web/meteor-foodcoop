@@ -8,6 +8,14 @@
   Customer Number: {{customerNumber}}
 </p>
 
+{{#if order.delivery}}
+<h3>Delivery</h3>
+<p>Order will be shipped to:<br>
+<strong>{{order.delivery.address}}</strong>
+</p>
+
+{{/if}}
+
 {{#each items}}
   <strong>Orders for {{calendar this.deliveryDay}}</strong>
   <table cellspacing="0" cellpadding="5" border="0" width="100%">
@@ -28,7 +36,9 @@
       </tr>
     {{/each}}
 
-
+    {{#if order.delivery}}
+      <tr><td colspan="4">Delivery Charge</td><td>{{currency order.delivery.cost}}</td></tr>
+    {{/if}}
     {{#if order.balanceAmount}}
       <tr><td colspan="4">Balance Charge</td><td style="color: green">{{currency order.balanceAmount}}</td></tr>
     {{/if}}

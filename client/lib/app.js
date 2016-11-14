@@ -22,8 +22,12 @@ import { name as productCardSummary } from
  '../../imports/ui/components/productCardSummary/productCardSummary';
 import { name as userProfilePage } from
  '../../imports/ui/components/userProfilePage/userProfilePage';
+import { name as deliveryForm } from
+'../../imports/ui/components/deliveryForm/deliveryForm';
 import { name as deliverySettingsAdmin } from
  '../../imports/ui/components/deliverySettingsAdmin/deliverySettingsAdmin';
+import { name as braintreePayment } from
+ '../../imports/ui/components/braintreePayment/braintreePayment';
 
 angular.module('food-coop', [
   angularMessages,
@@ -51,6 +55,8 @@ angular.module('food-coop', [
   productCardSummary,
   userProfilePage,
   deliverySettingsAdmin,
+  deliveryForm,
+  braintreePayment,
 ])
 .config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider) => {
   'ngInject';
