@@ -1,3 +1,4 @@
+import angular from 'angular';
 function PaymentMethodSelector($scope, $mdDialog) {
   'ngInject';
   this.success = (data) => {
@@ -24,11 +25,15 @@ function CheckoutFlowController($mdDialog) {
       clickOutsideToClose: true,
       locals: {
         total: this.total,
+        customer: this.customer,
+        delivery: this.delivery,
       },
       bindToController: true,
     }).then((data) => {
       if (data) {
         this.onSuccess({ data });
+      } else {
+        this.onSuccess();
       }
     }, () => {
       this.status = 'You cancelled the checkout flow';
@@ -42,6 +47,7 @@ angular.module('food-coop').component('checkoutFlow', {
   bindings: {
     total: '<',
     customer: '<',
+    delivery: '<',
     pos: '@',
     onError: '&',
     onSuccess: '&',

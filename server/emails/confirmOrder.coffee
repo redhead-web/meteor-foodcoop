@@ -1,16 +1,16 @@
 Meteor.methods
-  confirmOrder: (items, data)->
-    user = Meteor.users.findOne(data.user)
+  confirmOrder: (items, order)->
+    user = Meteor.users.findOne(order.user)
     invoiceNumber = Random.id(6)
     dataObject =
-      order: data
+      order: order
       customerNumber: user.profile.customerNumber
       items: items
       recipient: user.profile.name
       number: invoiceNumber
       date: moment().format('dddd, MMMM Do YYYY')
 
-    # if data.deliveryDay #must have been from POS
+    # if order.deliveryDay #must have been from POS
     #   Mailer.send
     #     to: "#{user.profile.name} <#{user.emails[0].address}>"
     #     subject: "Receipt: Whangarei Food Co-op #{invoiceNumber}"

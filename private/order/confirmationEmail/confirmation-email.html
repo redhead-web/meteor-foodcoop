@@ -2,22 +2,28 @@
 
 <p class="alert alert-success">Please come collect your order between 3-6pm from 1 Woods Road Whangarei. Please contact us to make other arrangements.</p>
 
-<p>
-  <!-- GST Number {{GSTNumber}}<br> -->
-  Invoice # {{number}}<br>
-  Customer Number: {{customerNumber}}
-</p>
-
-{{#if order.delivery}}
-<h3>Delivery</h3>
-<p>Order will be shipped to:<br>
-<strong>{{order.delivery.address}}</strong>
-</p>
-
-{{/if}}
+<table cellspacing="0" cellpadding="5" border="0" width="100%" class="order-table">
+  <tr><td>Invoice</td><td>#{{number}}</td></tr>
+  <tr><td>Customer Number</td><td>#{{customerNumber}}</td></tr>
+  {{#if order.balanceAmount}}
+    <tr><td style="text-align:left">Balance Charge</td><td style="color: green; text-align:left">{{currency order.balanceAmount}}</td></tr>
+  {{/if}}
+  {{#if order.cardAmount}}
+    <tr><td style="text-align:left">Card Charge</td><td style="text-align:left">{{currency order.cardAmount}}</td></tr>
+  {{/if}}
+  {{#if order.cardAmount}}
+    {{#if order.balanceAmount}}
+      <tr><td style="text-align:left">Order Total</td><td style="text-align:left">{{currency order.orderTotal}}</td></tr>
+    {{/if}}
+  {{/if}}
+</table>
+<br>
 
 {{#each items}}
   <strong>Orders for {{calendar this.deliveryDay}}</strong>
+  {{#if delivery this.deliveryDay ../order.user}}
+    <p>You have delivery for this order and any other orders for this day.</p>
+  {{/if}}
   <table cellspacing="0" cellpadding="5" border="0" width="100%">
     <tr class="header">
       <td>Product</td>
@@ -36,8 +42,12 @@
       </tr>
     {{/each}}
 
-    {{#if order.delivery}}
-      <tr><td colspan="4">Delivery Charge</td><td>{{currency order.delivery.cost}}</td></tr>
+    {{#if delivery this.deliveryDay ../order.user}}
+      <tr><td colspan="4">Delivery Charge</td><td>
+        {{#with delivery this.deliveryDay ../order.user}}
+          {{currency cost}}
+        {{/with}}
+      </td></tr>
     {{/if}}
     {{#if order.balanceAmount}}
       <tr><td colspan="4">Balance Charge</td><td style="color: green">{{currency order.balanceAmount}}</td></tr>

@@ -16,7 +16,7 @@
         <p class="md-body-2" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</p>
         <section layout="column" layout-align="center center" layout-margin>
           <div>
-            <fc-balance-payment total="$ctrl.total" on-success="$ctrl.success()" on-error="$ctrl.error(error)"></fc-balance-payment>
+            <fc-balance-payment customer-id="$ctrl.customer._id" delivery="$ctrl.delivery" status="undelivered" on-success="$ctrl.success()" on-error="$ctrl.error(error)"></fc-balance-payment>
           </div>
           <div>
             <!-- <card-payment on-error="$ctrl.error(error)" on-success="$ctrl.success()"></card-payment> -->

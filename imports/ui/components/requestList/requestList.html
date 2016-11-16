@@ -28,7 +28,7 @@
   class="request-list-heading md-whiteframe-1dp"
   ng-class="{'active': active}"
   layout>
-    <multi-avatar user="request.creator.creatorId" width="40" style="height: 40px; width: 40px;"></multi-avatar>
+    <multi-avatar user-id="request.creator.creatorId" width="40" style="height: 40px; width: 40px;"></multi-avatar>
     <p layout>
       <span flex="20" flex-sm="33" hide-xs flex-md="30" ng-class="{'md-title': active}">{{request.creator.companyName || request.creator.name}}</span>
       <span ng-if="!active" class="request-title" flex>{{request.title}}</span>

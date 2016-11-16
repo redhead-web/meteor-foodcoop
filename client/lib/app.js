@@ -26,6 +26,7 @@ import { name as deliveryForm } from
 '../../imports/ui/components/deliveryForm/deliveryForm';
 import { name as deliverySettingsAdmin } from
  '../../imports/ui/components/deliverySettingsAdmin/deliverySettingsAdmin';
+import { name as deliveryAdmin } from '../../imports/ui/components/deliveryAdmin/deliveryAdmin';
 import { name as braintreePayment } from
  '../../imports/ui/components/braintreePayment/braintreePayment';
 
@@ -57,6 +58,7 @@ angular.module('food-coop', [
   deliverySettingsAdmin,
   deliveryForm,
   braintreePayment,
+  deliveryAdmin,
 ])
 .config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider) => {
   'ngInject';

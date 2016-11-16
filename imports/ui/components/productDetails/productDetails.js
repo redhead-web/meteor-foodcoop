@@ -7,6 +7,7 @@ import fcImgUpload from '../fcImgUpload/fcImgUpload';
 import { Products } from '../../../api/products';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { _ } from 'meteor/stevezhu:lodash';
 
 class ProductDetailsController {
   constructor($scope, $stateParams, $mdConstant, $reactive, $mdToast) {
@@ -87,6 +88,10 @@ class ProductDetailsController {
 
   deleteImg() {
     Products.update(this.product._id, { $unset: { img: 1 } });
+  }
+
+  cartedCount() {
+    return _.sum(this.product.carted, 'qty');
   }
 
   save(field, value, savedFlag) {

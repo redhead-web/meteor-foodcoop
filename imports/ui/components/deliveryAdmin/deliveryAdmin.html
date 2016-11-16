@@ -1,0 +1,57 @@
+<!-- {{deliverySettingsAdmin.deliverySettings}} -->
+<section layout="row" layout-align="center center" layout-wrap>
+  <md-button class="md-raised md-primary" ng-click="deliveryAdmin.lastweek()">Last Week</md-button> {{deliveryAdmin.deliveryDay | calendar}}
+  <md-button class="md-raised md-primary" ng-click="deliveryAdmin.nextweek()">Next Week</md-button>
+</section>
+<div layout>
+  <md-list flex>
+    <md-list-item class="md-3-line"
+    ng-repeat="delivery in deliveryAdmin.deliveries |
+     orderBy: deliveryAdmin.sort |
+     filter: deliveryAdmin.searchString as filteredDeliveries track by delivery._id">
+      <div class="md-list-item-text">
+        <h3>{{delivery.userName}}</h3>
+        <p>{{delivery.address}}</p>
+        <p>{{delivery.method}} -- {{delivery.status}}</p>
+      </div>
+      <md-menu class="md-secondary">
+        <md-button aria-label="User Menu" class="md-icon-button">
+          <md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon>
+        </md-button>
+        <md-menu-content width="6">
+          <md-menu-item>
+            <md-button ng-click="deliveryAdmin.assignCourier($event, delivery)">
+              <md-icon md-svg-icon="social:ic_user_24px"></md-icon>
+              <span ng-if="!delivery.courierName">Assign Courier</span>
+              <span ng-if="delivery.courierName">{{delivery.courierName}}</span>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-class="{'delivered': delivery.status === 'on-route'}">
+            <md-button  ng-click="deliveryAdmin.changeStatus(delivery, 'on-route')">
+              <md-icon md-svg-icon="action:ic_done_24px"></md-icon>
+              Courier Picked up
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-class="{'collected': delivery.status === 'delivered'}">
+            <md-button  ng-click="deliveryAdmin.changeStatus(delivery, 'delivered')">
+              <md-icon md-svg-icon="action:ic_done_24px"></md-icon>
+              Delivered
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-class="{'collected': delivery.status === 'delivered'}">
+            <md-button  ng-click="deliveryAdmin.archive(delivery)">
+              <md-icon md-svg-icon="action:ic_done_24px"></md-icon>
+              Archive
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ui-sref="admin.orders">
+              <md-icon md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
+              View Sales
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-list-item>
+  </md-list>
+</div>

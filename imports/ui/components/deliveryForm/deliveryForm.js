@@ -18,7 +18,7 @@ class deliveryFormController {
       if (d === null) {
         d = Meteor.settings.public.shoppingThreshold;
       }
-      return GetProductDeliveryDay(d);
+      return GetProductDeliveryDay(d).format();
     }));
 
     this.subscribe('deliverySettings');
@@ -40,7 +40,7 @@ class deliveryFormController {
       const clone = angular.copy(this.deliveryDays);
       for (let i = 0; i < clone.length; i++) {
         if (moment(clone[i]).isSame(moment(delivery.deliveryDay))) {
-          _.remove(this.deliveryDays, moment(delivery.deliveryDay.toISOString()).format('ddd MMM DD YYYY hh:mm:ss [GMT]ZZ'));
+          _.remove(this.deliveryDays, (d) => d === moment(delivery.deliveryDay.toISOString()).format());
         }
       }
     };
@@ -64,6 +64,7 @@ class deliveryFormController {
         address: this.deliveryAddress,
         deliveryDays: this.deliveryDays,
       } });
+      this.show = false;
     }
   }
 }

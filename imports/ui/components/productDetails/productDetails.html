@@ -97,7 +97,8 @@
         class="md-icon-button md-accent" aria-label="edit name">
        <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
       </md-button>
-      Quantity Left: {{productDetails.product.stocklevel}}
+      Quantity Left: {{productDetails.product.stocklevel}}<br>
+      Quantity in carts: {{productDetails.cartedCount()}}
     </p>
     <md-slider ng-model="productDetails.product.stocklevel"
     ng-if="productDetails.isOwner && productDetails.edit.stocklevel"
