@@ -9,7 +9,7 @@
     <md-virtual-repeat-container id="user-container">
       <md-list layout-margin>
         <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="ticket in $ctrl.event.attendees | orderBy: '-timestamp' ">
-          <multi-avatar user="ticket.userId" name="{{ticket.name}}" email="{{ticket.email}}" width="40" style="height: 40px; width: 40px;"></multi-avatar>
+          <multi-avatar user-id="ticket.userId" name="{{ticket.name}}" width="40" style="height: 40px; width: 40px;"></multi-avatar>
           <div class="md-list-item-text" layout-margin>
             <h3>
               {{ticket.name}} <span ng-if="ticket.qty > 1" class="request-title">+ {{ticket.qty - 1}} others</span> are attending
@@ -17,7 +17,7 @@
           </div>
         </md-list-item>
       </md-list>
-    
+
     </md-virtual-repeat-container>
   </div>
   <span flex></span>

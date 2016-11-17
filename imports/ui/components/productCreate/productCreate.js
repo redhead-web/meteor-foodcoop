@@ -12,11 +12,32 @@ import { Products } from '../../../api/products';
 import { Categories } from '../../../api/categories';
 
 class ProductCreateController {
-  constructor($scope, $reactive, $mdConstant, $mdToast, $mdDialog) {
+  constructor($scope, $reactive, $mdConstant, $mdToast, $mdDialog, $stateParams) {
     'ngInject';
     $reactive(this).attach($scope);
 
     this.$mdToast = $mdToast;
+
+    this.markup = Meteor.settings.public.markup;
+
+    // initialize product
+    this.product = {
+      producer: Meteor.userId(),
+      published: true,
+      producerName: Meteor.user().profile.name,
+      producerCompanyName: Meteor.user().profile.companyName || undefined,
+      category: '',
+      ingredients: [],
+    };
+
+    if ($stateParams.copy) {
+      this.call('getProduct', $stateParams.copy, (err, result) => {
+        if (result) {
+          this.product = result;
+          this.productIdCopy = $stateParams.copy;
+        }
+      });
+    }
 
     this.$mdDialog = $mdDialog;
     this.hasRole = Roles.userIsInRole;
@@ -47,21 +68,25 @@ class ProductCreateController {
       });
     }
 
-    this.markup = Meteor.settings.public.markup;
-
-    // initialize product
-    this.product = {
-      producer: Meteor.userId(),
-      published: true,
-      producerName: Meteor.user().profile.name,
-      producerCompanyName: Meteor.user().profile.companyName || undefined,
-      category: '',
-      ingredients: [],
-    };
-
     this.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
     this.unitsOfMeasure = 'L,litre,ml,500ml,g,kg,500g,5kg,10kg,25kg,bag,150g bunch,bunch,head,each,can,jar,container,330ml Bottle,750ml Bottle'.split(',');
+  }
+
+  imgUploadSuccess(data) {
+    this.product.img = {
+      url: data.data.secure_url,
+      result: data.data.public_id,
+    };
+    // this.save('img', this.product.img, 'imgSaved');
+  }
+
+  imgUploadError(err) {
+    console.log(err);
+  }
+
+  deleteImg() {
+    delete this.product.img;
   }
 
   getUnitsOfMeasure(query) {
@@ -184,6 +209,7 @@ class ProductCreateController {
         .ok('Create New Product')
         .cancel('Update the product');
       this.$mdDialog.show(c).then(() => {
+        delete this.product._id;
         this.insert();
       }, () => {
         Products.update(this.productIdCopy, { $set: this.product }, (err, count) => {
@@ -230,7 +256,7 @@ export default angular.module(name, [fcImgUpload.name])
 
   $stateProvider
   .state('productCreate', {
-    url: '/new-product',
+    url: '/new-product?copy',
     template: '<product-create></product-create>',
     controller: ProductCreateController,
     controllerAs: 'ctrl',

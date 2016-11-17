@@ -1,16 +1,19 @@
 import { Mongo } from 'meteor/mongo';
+import { Roles } from 'meteor/alanning:roles';
+import { schema } from './schema.coffee';
 
-export const Categories = new Mongo.Collection("categories");
+export const Categories = new Mongo.Collection('categories');
 
 Categories.allow({
-  insert: function(){
+  insert(userId) {
+    return userId && Roles.userIsInRole(userId, 'admin');
+  },
+  update() {
     return false;
   },
-  update: function(){
+  remove() {
     return false;
   },
-  remove: function(){
-    return false;
-  }
 });
 
+Categories.attachSchema(schema);

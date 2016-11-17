@@ -43,7 +43,7 @@
 
 <div layout-gt-xs="row">
   <span flex hide-xs></span>
-  <md-virtual-repeat-container id="user-container" flex="70" flex-sm="90" flex-md="80">
+  <md-virtual-repeat-container id="user-container" flex="70" flex-sm="90" flex-md="80" flex-xs="95">
     <md-list>
       <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products" ng-click="null">
         <cl-image public-id="{{product.img.result}}" class="md-avatar" ng-if="product.img">
@@ -61,7 +61,7 @@
     </md-list>
   </md-virtual-repeat-container>
   <!-- <div flex="25" flex-sm="33" flex-xs="50" ng-repeat="p in ctrl.products| filter: ctrl.search track by p._id">
-    <product-summary-card product="p" on-update="ctrl.save(product, modifier)"></product-summary-card>
+    <product-card-summary product="p" on-update="ctrl.save(product, modifier)"></product-card-summary>
   </div> -->
   <span flex hide-xs></span>
 </div>

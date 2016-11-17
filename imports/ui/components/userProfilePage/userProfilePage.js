@@ -1,0 +1,225 @@
+import angular from 'angular';
+import { Meteor } from 'meteor/meteor';
+import { Products } from '../../../api/products';
+import fcImgUpload from '../fcImgUpload/fcImgUpload';
+
+import templateUrl from './userProfilePage.html';
+
+class userProfilePageController {
+  constructor($scope, $reactive, $stateParams, uiGmapGoogleMapApi, $mdToast) {
+    'ngInject';
+    var indexOf = [].indexOf || function (item) { for (let i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+    $reactive(this).attach($scope);
+
+    this.subscribe('producer', () => [$stateParams.userId]);
+
+    this.subscribe('active-products', () => [
+      {
+        producer: $stateParams.userId,
+      }, -1, {
+        name: 1,
+      },
+    ]);
+
+    this.helpers({
+      likesCount() {
+        return Likes.find({
+          likee: $stateParams.userId,
+        });
+      },
+      products() {
+        return Products.find({
+          producer: $stateParams.userId,
+        }, {
+          sort: {
+            name: 1,
+          },
+        });
+      },
+    });
+
+    this.autorun(() => {
+      this.producer = Meteor.users.findOne($stateParams.userId);
+    });
+
+    this.autorun(() => {
+      this.isOwner = (Meteor.userId() != null) && (Meteor.userId() === $stateParams.userId || Roles.userIsInRole(Meteor.userId(), 'admin'));
+    });
+
+    this.autorun(() => {
+      var list, ref;
+      if (Meteor.user()) {
+        list = Meteor.user().profile.lovedProducers || [];
+        if (ref = Meteor.users.findOne($stateParams.userId)._id, indexOf.call(list, ref) >= 0) {
+          this.lovesProducer = true;
+        } else {
+          this.lovesProducer = false;
+        }
+      }
+    });
+
+    this.toggleLike = () => {
+      var like;
+      if (Meteor.userId() == null) {
+        $mdToast.show($mdToast.simple().content('Please login to endorse this producer').position('bottom left').hideDelay(4000));
+        return;
+      }
+      like = Likes.findOne({
+        liker: Meteor.userId(),
+        likee: this.producer._id,
+      });
+      if (like != null) {
+        Likes.remove(like._id);
+        return $mdToast.show($mdToast.simple().content('Removed your endorsement').position('bottom left').hideDelay(4000));
+      } else {
+        return this.call('/likes/add', this.producer._id, 'user', (err) => {
+          if (err) {
+            console.log(err);
+            return $mdToast.show($mdToast.simple().content('Clap clap! Thanks for your endorsement!').position('bottom left').hideDelay(4000));
+          }
+        });
+      }
+    };
+    this.likesProducer = (userId) => {
+      if (Likes.findOne({
+        liker: Meteor.userId(),
+        likee: userId,
+      })) {
+        return 'liked';
+      } else {
+        return 'not-liked';
+      }
+    };
+
+    this.mapSettings = {
+      center: {
+        latitude: -35.7251117,
+        longitude: 174.323708,
+      },
+      zoom: 10,
+      options: {
+        scrollwheel: false,
+      },
+      events: {
+        tilesloaded(map) {
+          return uiGmapGoogleMapApi.then((maps) => {
+            if (this.producer.profile.deliveryAddress.latitude != null) {
+              this.mapSettings.center = {
+                latitude: this.producer.profile.deliveryAddress.latitude,
+                longitude: this.producer.profile.deliveryAddress.longitude,
+              };
+              this.markerSettings = {
+                id: $stateParams.userId,
+                coords: {
+                  latitude: this.producer.profile.deliveryAddress.latitude,
+                  longitude: this.producer.profile.deliveryAddress.longitude,
+                },
+                options: {},
+              };
+            }
+            if (this.producer.profile.deliveryAddress.place_id != null) {
+              const service = new maps.places.PlacesService(map);
+              service.getDetails({
+                placeId: this.producer.profile.deliveryAddress.place_id,
+              }, function (result, status) {
+                return $scope.$apply(function () {
+                  this.mapSettings.center = {
+                    latitude: result.geometry.location.lat(),
+                    longitude: result.geometry.location.lng(),
+                  };
+                  this.markerSettings = {
+                    id: $stateParams.userId,
+                    coords: {
+                      latitude: result.geometry.location.lat(),
+                      longitude: result.geometry.location.lng(),
+                    },
+                    options: {},
+                  };
+                });
+              });
+              return;
+            }
+          });
+        },
+      },
+    };
+
+    this.priceWithMarkup = (product) => Markup(product).total();
+
+    this.modelOptions = {
+      updateOn: 'default blur',
+      debounce: {
+        'default': 200,
+        blur: 0,
+      },
+    };
+
+    this.save = (profile, data) => {
+      Meteor.users.update($stateParams.userId, {
+        $set: {
+          'profile.companyName': this.producer.profile.companyName,
+          'profile.summary': this.producer.profile.summary,
+          'profile.bio': this.producer.profile.bio,
+          'profile.shareAddress': this.producer.profile.shareAddress,
+          'profile.logo': this.producer.profile.logo,
+          'profile.banner': this.producer.profile.banner,
+          'profile.website': this.producer.profile.website,
+          'profile.chemicals': this.producer.profile.chemicals,
+          'profile.video': this.producer.profile.video,
+        },
+      }, (err, result) => {
+        if (err) {
+          console.error(err);
+          return $mdToast.show($mdToast.simple().content('Connection Error: Failed to Save').position('bottom left').hideDelay(4000));
+        }
+      });
+    };
+  }
+
+  deleteLogo() {
+    if (this.isOwner) {
+      Meteor.users.update(this.producer._id, { $set: {
+        'profile.logo.url': null,
+        'profile.logo.result': null,
+      } });
+    }
+  }
+
+  deletePhoto() {
+    if (this.isOwner) {
+      Meteor.users.update(this.producer._id, { $set: {
+        'profile.personalPic.url': null,
+        'profile.personalPic.result': null,
+      } });
+    }
+  }
+
+  logoUploadSuccess(data) {
+    this.updateImage(data, 'profile.personalPic');
+  }
+  photoUploadSuccess(data) {
+    this.updateImage(data, 'profile.logo');
+  }
+  updateImage(data, field) {
+    if (this.isOwner) {
+      const update = {};
+      update[field + '.url'] = data.data.secure_url;
+      update[field + '.result'] = data.data.public_id;
+      Meteor.users.update(this.producer._id, { $set: update });
+    }
+  }
+}
+const name = 'userProfilePage';
+
+export default angular.module(name, [fcImgUpload.name]).component(name, {
+  templateUrl,
+  controller: userProfilePageController,
+  controllerAs: 'ctrl',
+}).config(($stateProvider) => {
+  'ngInject';
+  $stateProvider.state('producer', {
+    url: '/profile/:userId',
+    template: '<user-profile-page></user-profile-page>',
+  });
+});

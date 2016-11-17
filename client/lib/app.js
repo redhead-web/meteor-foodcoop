@@ -18,6 +18,17 @@ import 'cloudinary-angular/dist/cloudinary-angular.js';
 // import {name as eventList} from '../../imports/ui/components/eventList/eventList';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 import { name as productsList } from '../../imports/ui/components/productsList/productsList';
+import { name as productCardSummary } from
+ '../../imports/ui/components/productCardSummary/productCardSummary';
+import { name as userProfilePage } from
+ '../../imports/ui/components/userProfilePage/userProfilePage';
+import { name as deliveryForm } from
+'../../imports/ui/components/deliveryForm/deliveryForm';
+import { name as deliverySettingsAdmin } from
+ '../../imports/ui/components/deliverySettingsAdmin/deliverySettingsAdmin';
+import { name as deliveryAdmin } from '../../imports/ui/components/deliveryAdmin/deliveryAdmin';
+import { name as braintreePayment } from
+ '../../imports/ui/components/braintreePayment/braintreePayment';
 
 angular.module('food-coop', [
   angularMessages,
@@ -42,9 +53,16 @@ angular.module('food-coop', [
   'multi-avatar',
   'ngLetterAvatar',
   'youtube-embed',
+  productCardSummary,
+  userProfilePage,
+  deliverySettingsAdmin,
+  deliveryForm,
+  braintreePayment,
+  deliveryAdmin,
 ])
-.config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider) => {
+.config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
   'ngInject';
+  $compileProvider.debugInfoEnabled(false);
   $mdIconProvider
     .iconSet('social', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg')
     .iconSet('action', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg')

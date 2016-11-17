@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import ngMaterial from 'angular-material';
 import ngFileUpload from 'ng-file-upload';
 import { Random } from 'meteor/random';
+import 'cloudinary-angular/dist/cloudinary-angular.js';
 
 
 import templateUrl from './fcImgUpload.html';
@@ -16,6 +17,9 @@ class photoUploadController {
   }
 
   uploadFiles(file, errFiles) {
+    if (!this.canEdit) {
+      return;
+    }
     this.invalidFiles = [];
     if (errFiles.length > 0) {
       this.invalidFiles = errFiles;
@@ -29,18 +33,18 @@ class photoUploadController {
         fields: {
           upload_preset: Meteor.settings.public.cloudinary.upload_preset,
           tags: Meteor.settings.public.coopName,
-          context: `photo${Random.id(6)}`,
+          context: `photo=${Random.id(6)}`,
         },
         file,
       }).then((data) => {
         this.onSuccess({ data });
         this.blobPreview = undefined;
-      }, (data, status) => {
+      }, (error, status) => {
         // on error
-        console.log(data);
+        console.log(error);
         console.log(status);
         file.status = status;
-        this.onError({ error: data });
+        this.onError({ error });
       }, (e) => {
         this.progress = Math.round((e.loaded * 100.0) / e.total);
         file.status = `'Uploading... ${file.progress}%`;
@@ -78,6 +82,9 @@ export default angular.module(name, [
   bindings: {
     onSuccess: '&',
     onError: '&',
+    onDelete: '&',
+    clImg: '<',
+    canEdit: '<',
   },
 })
   .config((CloudinaryProvider) => {

@@ -1,4 +1,4 @@
-md-card>a>img {
+md-card>a>img, .product-card>a>img {
     box-sizing: border-box;
     display: -webkit-box;
     display: -webkit-flex;
@@ -6,6 +6,6 @@ md-card>a>img {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 auto;
     flex: 0 0 auto;
-    width: 100%;
+    max-width: 100%;
     height: auto;
 }

@@ -12,27 +12,27 @@
       </button>
       <md-menu-content>
         <md-menu-item>
-          <md-button ng-click="$ctrl.sort = {'name':1}">
+          <md-button ng-click="$ctrl.sort = ['name', 'unitOfMeasure']">
             Alphabetical
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$ctrl.sort = [['published', 'desc'], 'name']">
+          <md-button ng-click="$ctrl.sort = [['published', 'desc'], 'name', 'unitOfMeasure']">
             For Sale
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$ctrl.sort = {'price': 1} ">
+          <md-button ng-click="$ctrl.sort = ['price', 'name', 'unitOfMeasure'] ">
             Price lowest-highest
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$ctrl.sort = {'price': -1}">
+          <md-button ng-click="$ctrl.sort = [['price', 'desc'], 'price', 'name', 'unitOfMeasure']">
             Price highest-lowest
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$ctrl.sort = ['category', 'name']">
+          <md-button ng-click="$ctrl.sort = ['category', 'name', 'unitOfMeasure']">
             Category
           </md-button>
         </md-menu-item>
@@ -43,7 +43,7 @@
 
 <md-content layout-xs="column" layout="row" layout-wrap>
   <div flex="25" flex-sm="33" flex-xs="50" ng-repeat="p in $ctrl.products | filter:$ctrl.searchString track by p._id">
-    <product-summary-card product="p" on-update="$ctrl.save(product, modifier)"></product-summary-card>
+    <product-card-summary product="p" on-update="$ctrl.save(product, modifier)"></product-card-summary>
   </div>
 
 </md-content>

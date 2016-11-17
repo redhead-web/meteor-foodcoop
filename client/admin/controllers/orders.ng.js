@@ -1,103 +1,117 @@
-/* globals: angular, moment */
-angular.module("food-coop").controller("OrdersAdminCtrl", function($scope, $reactive, $state){
-  $reactive(this).attach($scope);
+/* global GetNextDeliveryDay, angular, moment, Sales, _ */
+function isAdmin(user) {
+  Roles.userIsInRole(user, 'admin');
+}
 
-  this.changeStatus = changeStatus;
+class OrdersAdminCtrl {
+  constructor($scope, $reactive) {
+    'ngInject';
+    $reactive(this).attach($scope);
 
-  this.deliveryDay = GetNextDeliveryDay().format();
-  
-  this.subscribe('orders', () => {
-    return [this.getReactively('deliveryDay')]
-  });
-  
-  this.helpers({
-    sales: () => Sales.find()
-  });
-  
-  this.autorun(() => {
-    let sales = Sales.find().fetch();    
-    this.customers = _.countBy(sales, function(sale) {return sale.customerName})
-    
-    this.producers = _.countBy(sales, function(sale) {return sale.producerCompanyName || sale.producerName})
-  });
+    this.deliveryDay = GetNextDeliveryDay().format();
 
-  this.lastweek = () => {
-    this.deliveryDay = moment(this.deliveryDay).subtract(1, 'weeks').format();
-  };
-  this.nextweek = () => {
-    this.deliveryDay = moment(this.deliveryDay).add(1, 'weeks').format();
-  };
+    this.subscribe('orders', () => [this.getReactively('deliveryDay')]);
 
-  this.occurences = productsCount;
+    this.helpers({
+      sales() {
+        return Sales.find();
+      },
+    });
 
-  this.goTo = goTo;
+    this.autorun(() => {
+      const sales = Sales.find().fetch();
+      this.customers = _.groupBy(sales, (sale) => sale.customerName);
 
-  this.total = total;
-  
-  this.move = move;
-  
-
-  function changeStatus (sale, status) {
-    Sales.update(sale._id, {$set: {'status': status} });
+      this.producers = _.groupBy(sales, (sale) => sale.producerCompanyName || sale.producerName);
+    });
   }
-  
-  this.bulkChange = (status) => {
-    let selectedSales = _.filter(this.sales, 'selected')
-    
-    for (var i = 0; i < selectedSales.length; i++) {
-      this.changeStatus(selectedSales[i], status)
+
+  changeStatus(sale, status) {
+    Sales.update(sale._id, { $set: { 'status': status } });
+  }
+
+  bulkChange(status) {
+    const selectedSales = _.filter(this.sales, 'selected');
+
+    for (let i = 0; i < selectedSales.length; i++) {
+      this.changeStatus(selectedSales[i], status);
     }
   }
-  
-  function move (sale, week) {
-    Sales.update(sale._id, {$set: {
-      'deliveryDay': moment(sale.deliveryDay).add(week, 'weeks').toDate()
-    }})
+
+  move(sale, week) {
+    Sales.update(sale._id, { $set: {
+      deliveryDay: moment(sale.deliveryDay).add(week, 'weeks').toDate(),
+    } });
+  }
+  allCollected(sales) {
+    const doneStatuses = [
+      'collected',
+      'refunded',
+      'cancelled',
+    ];
+    for (let i = 0; i < sales.length; i++) {
+      if (!_.includes(doneStatuses, sales[i].status)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  sortedCount(sales) {
+    const sorted = _.filter(sales, { status: 'sorted' });
+    return sorted.length;
   }
 
-  // function search (order) {
-  //   if (!this.query) {
-  //     return true;
-  //   }
-  //   if ( order.status.toLowerCase().indexOf(this.query) !=-1 || order.productDetails.name.toLowerCase().indexOf(this.query) !=-1 ) {
-  //     return true;
-  //   } return false;
-  // }
+  lastweek() {
+    this.deliveryDay = moment(this.deliveryDay).subtract(1, 'weeks').format();
+  }
 
-// this filter may hurt performance significantly so may be better to have each
-// hub have their own page and subscription using server-side helpers.
+  nextweek() {
+    this.deliveryDay = moment(this.deliveryDay).add(1, 'weeks').format();
+  }
 
-  function productsCount (orders) {
-    var occurences = {};
-    _.each(orders, function(order) {
-      var name = order.productName;
+  occurences(orders) {
+    const occurences = {};
+    _.each(orders, (order) => {
+      const name = order.productName;
       if (occurences.hasOwnProperty(name)) {
-        occurences[name] += order.qty
+        occurences[name] += order.qty;
       } else {
-        occurences[name] = order.qty
+        occurences[name] = order.qty;
       }
     });
 
     return occurences;
   }
 
-  function goTo (id) {
-    $state.go('admin.order', {orderId: id});
-  }
-
-  function total(array, markup) {
-    const filteredArray = _.filter(array, function(sale) {
+  total(array, markup) {
+    const filteredArray = _.filter(array, (sale) => {
       if (sale.status === 'refunded') {
-        return false
-      } return true
+        return false;
+      } return true;
     });
     if (markup) {
-      return Markup(filteredArray).saleTotal()
+      return Markup(filteredArray).saleTotal();
     }
-    
-    return _.sum(filteredArray, function(sale) {
-      return sale.price * sale.qty
-    }, 0)
-  }
 
+    return _.sum(filteredArray, (sale) => sale.price * sale.qty, 0);
+  }
+}
+const name = 'adminOrders';
+angular.module('food-coop').component(name, {
+  controller: OrdersAdminCtrl,
+  controllerAs: 'orders',
+  templateUrl: '/client/admin/views/orders.ng.html',
+}).config(($stateProvider) => {
+  'ngInject';
+  $stateProvider.state('admin.orders', {
+    url: '/orders',
+    template: '<admin-orders></admin-orders>',
+    resolve: {
+      admin($auth) {
+        return $auth.requireValidUser((user) =>
+          Roles.userIsInRole(user, 'admin')
+        );
+      },
+    },
+  });
 });

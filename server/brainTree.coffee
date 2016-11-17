@@ -13,9 +13,9 @@ gateway = BrainTreeConnect
 Meteor.methods
   generateClientToken: () ->
     config = {}
-    
+
     if @userId? # use customerId only if the user is registered with us
-    
+
       user = Meteor.users.findOne _id: @userId
 
       if user.customerId?
@@ -28,14 +28,14 @@ Meteor.methods
     unless getToken.success == true
       console.log getToken
     getToken.clientToken
-    
+
   "/admin/generateClientToken": (userId) ->
     check userId, String
     if Roles.userIsInRole @userId, 'admin'
       self = this
       self.userId = userId #userId of customer
       Meteor.call.call self, "generateClientToken"
-    
+
 
   registerCustomer: (user) ->
     config =
@@ -93,22 +93,22 @@ Meteor.methods
      transaction with a saved payment method
      @user = used for mocking user data for integration tests
 
-    ###    
+    ###
     # Calculate Total on Server for security reasons
     items = Cart.Items.find({userId: @userId}).fetch()
     data.cardAmount = data.orderTotal = Markup(items).cartTotal()
-    
+
     user = Meteor.users.findOne _id: @userId
-    
+
     data.balanceAmount = user.profile.balance
-    
+
     if data.balanceAmount > data.orderTotal
       data.balanceAmount = data.orderTotal
       data.cardAmount = 0
       Meteor.users.update @userId,
         $set: 'profile.balance': 0
       resultUpdate = Meteor.call('addFromCartToOrder', data, result.transaction.id)
-      
+
     if data.balanceAmount != 0 and data.orderTotal > data.balanceAmount
       data.cardAmount -= data.balanceAmount
 
@@ -123,13 +123,13 @@ Meteor.methods
 
     @unblock()
     result = gateway.transaction.sale config
-    
+
     unless result.success
       console.log result
       if result.transaction?
         console.error result.transaction.processorResponseCode, result.transaction.processorResponseText
         throw new Meteor.Error result.transaction.processorResponseCode, result.transaction.processorResponseText
-      else 
+      else
         console.error result.message
         throw new Meteor.Error 500, result.message
 
@@ -138,6 +138,28 @@ Meteor.methods
         Meteor.users.update @userId,
           $set: 'profile.balance': 0
       resultUpdate = Meteor.call 'addFromCartToOrder', items, data, result.transaction.id
+    result
+  "braintreeTransaction2": (data) ->
+    console.log(data.total);
+    config = {
+      amount: data.total.toFixed 2
+      paymentMethodNonce: data.payment_method_nonce
+      customerId: data.customerId
+      options:
+        submitForSettlement: true
+        storeInVaultOnSuccess: true
+    }
+
+    result = gateway.transaction.sale config
+    unless result.success
+      console.log result
+      if result.transaction?
+        console.error result.transaction.processorResponseCode, result.transaction.processorResponseText
+        throw new Meteor.Error result.transaction.processorResponseCode, result.transaction.processorResponseText
+      else
+        console.error result.message
+        throw new Meteor.Error 500, result.message
+
     result
 
   "/admin/braintreeTransaction": (customerId, data) ->
@@ -201,4 +223,3 @@ Meteor.methods
       result
     catch e
       throw new Meteor.Error 'Subscription Cancellation Failed', result.errors
-  

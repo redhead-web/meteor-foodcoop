@@ -1,4 +1,6 @@
 
+{ Deliveries } = require('../../imports/api/deliveries')
+
 Templates = {}
 
 
@@ -33,8 +35,8 @@ mockData =
       url: "https://res.cloudinary.com/foodcoop/image/upload/v1463684961/kaikohe/baker-858401_640_kvne9r.jpg"
   # [ [ 'Tue Aug 09 2016 00:00:00 GMT+1200 (NZST)', [ [Object] ] ] ]
   items: [
-    { deliveryDay: 'Tue Aug 09 2016 00:00:00 GMT+1200 (NZST)', sales: [ item1, item2 ] }
-    { deliveryDay: 'Tue Aug 16 2016 00:00:00 GMT+1200 (NZST)', sales: [ item1, item2 ] }
+    { deliveryDay: "2016-08-09T00:00:00+12:00", sales: [ item1, item2 ] }
+    { deliveryDay: "2016-08-16T00:00:00+12:00", sales: [ item1, item2 ] }
   ]
 
 Mailer.config
@@ -194,15 +196,37 @@ Templates.orderReceiptPOS =
   route: path: '/receipt'
 
 Templates.confirmOrderEmail =
-  path: 'order/confirmation-email.html'
+  path: 'order/confirmationEmail/confirmation-email.html'
+  css: 'order/confirmationEmail/confirmation.css'
   helpers:
     producerTitle: () ->
       this.producerCompanyName || this.producerName
+    delivery: (deliveryDay, userId) ->
+      Deliveries.findOne({userId: userId, deliveryDay: new Date(deliveryDay)})
   route:
     path: '/confirmation'
     data: ->
+      testUser = 'testUser'
+      delivery = {
+        userId: testUser
+        userName: testUser
+        customerNumber: '111'
+        deliveryDay: "2016-08-09T00:00:00+12:00"
+        cost: 10
+        method: 'title'
+        address: '123 Nowhere road, Auckland, 0110'
+        dateCreated: new Date()
+        deliveryId: 'deliveryId'
+        status: 'waiting for courier assignment'
+        archived: false
+      }
+      Deliveries.upsert userId: testUser, { $set: delivery }
+
       return {
-        order: {}
+        order:
+          user: testUser
+          orderTotal: 29.80
+          cardAmount: 29.80
         customerNumber: 1
         items: mockData.items
         recipient: 'Sean Stanley'

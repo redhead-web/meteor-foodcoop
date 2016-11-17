@@ -1,4 +1,4 @@
-/* globals
+/* globals Meteor
    resetDatabase: true,
    loadDefaultFixtures: true,
 */
@@ -30,69 +30,69 @@ var loadDefaultFixtures = function () {
   // TODO: Insert your data into the database here
   var id, users, categories, certifications;
 
-	categories = [
-	  {
-	    name: 'Seedlings'
+	                    categories = [
+	                      {
+	                                            name: 'Seedlings',
+	                      }, {
+	                        name: 'Baked Goods',
 	  }, {
-	    name: 'Baked Goods'
+	                        name: 'Meat',
 	  }, {
-	    name: 'Meat'
+	                        name: 'Dairy & Eggs',
 	  }, {
-	    name: 'Dairy & Eggs'
+	                        name: 'Produce',
 	  }, {
-	    name: 'Produce'
+	                        name: 'Preserves',
 	  }, {
-	    name: 'Preserves'
+	                        name: 'Tea & Beverages',
 	  }, {
-	    name: 'Tea & Beverages'
-	  }, {
-	    name: 'Ready-made Meals'
-	  }
+	                        name: 'Ready-made Meals',
+	  },
 	];
 
-	for (let i = 0, len = categories.length; i < len; i++) {
-	  let cat = categories[i];
-	  Categories.insert(cat);
+	                    for (let i = 0, len = categories.length; i < len; i++) {
+	                      let cat = categories[i];
+	                      Categories.insert(cat);
 	}
 
-	certifications = [
-	  {
-	    name: 'Assure Qual',
-	    img: 'certification/assure-quality.png'
+	                    certifications = [
+	                      {
+	                                            name: 'Assure Qual',
+	                                            img: 'certification/assure-quality.png',
+	                      }, {
+	                        name: 'Biogro',
+	                        img: 'certification/biogro.png',
 	  }, {
-	    name: 'Biogro',
-	    img: 'certification/biogro.png'
+	                        name: 'Demeter',
+	                        img: 'certification/demgreen.gif',
 	  }, {
-	    name: 'Demeter',
-	    img: 'certification/demgreen.gif'
+	                        name: 'Organic Farm NZ',
+	                        img: 'certification/organicfarmnz.png',
 	  }, {
-	    name: 'Organic Farm NZ',
-	    img: 'certification/organicfarmnz.png'
-	  }, {
-	    name: 'In Transition'
-	  }
+	                        name: 'In Transition',
+	  },
 	];
 
-	for (let i = 0, len = certifications.length; i < len; i++) {
-	  let cert = certifications[i];
-	  Certifications.insert(cert);
+	                    for (let i = 0, len = certifications.length; i < len; i++) {
+	                      let cert = certifications[i];
+	                      Certifications.insert(cert);
 	}
 
   users = [
-    { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer', 'deliveryCoordinator']},
-    { email: 'sean@foodcoop.nz', name: 'Sean Stanley Customer Role', roles: []},
-    { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer']}
+    { email: 'sean@maplekiwi.com', name: 'Sean Stanley Master Role', roles: ['admin', 'producer', 'deliveryCoordinator'] },
+    { email: 'sean@foodcoop.nz', name: 'Sean Stanley Customer Role', roles: [] },
+    { email: 'sean@corymbosa.me', name: 'Sean Stanley Producer Role', roles: ['producer'] },
   ];
 
   for (let i = 0, len = users.length; i < len; i++) {
     let user = users[i];
     id = Accounts.createUser({
       email: user.email,
-      password: "12345678",
+      password: '12345678',
       createdAt: Date.now,
       profile: {
         name: user.name,
-      }
+      },
     });
     if (user.roles.length !== 0) {
       Roles.addUsersToRoles(id, user.roles);
@@ -101,7 +101,7 @@ var loadDefaultFixtures = function () {
 
   var products;
 
-  producer = Meteor.users.findOne(id)
+  producer = Meteor.users.findOne(id);
 
   products = [
     {
@@ -109,19 +109,19 @@ var loadDefaultFixtures = function () {
       producer: producer._id,
       producerName: producer.profile.name,
       price: 5,
-      unitOfMeasure: "400 g jar",
-      category: "processed goods",
+      unitOfMeasure: '400 g jar',
+      category: 'processed goods',
       stocklevel: 50,
-      published: true
+      published: true,
     }, {
       name: 'Raw Milk',
       producer: producer._id,
       producerName: producer.profile.name,
       price: 2,
-      unitOfMeasure: "L",
-      category: "Eggs & Dairy",
-      published: true
-    }
+      unitOfMeasure: 'L',
+      category: 'Eggs & Dairy',
+      published: true,
+    },
   ];
 
   for (let i = 0, len = products.length; i < len; i++) {
@@ -134,5 +134,5 @@ var loadDefaultFixtures = function () {
 
 Meteor.methods({
   resetDatabase:resetDatabase,
-  loadDefaultFixtures: loadDefaultFixtures
+  loadDefaultFixtures: loadDefaultFixtures,
 });
