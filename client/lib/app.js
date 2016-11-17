@@ -60,8 +60,9 @@ angular.module('food-coop', [
   braintreePayment,
   deliveryAdmin,
 ])
-.config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider) => {
+.config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
   'ngInject';
+  $compileProvider.debugInfoEnabled(false);
   $mdIconProvider
     .iconSet('social', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg')
     .iconSet('action', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg')
