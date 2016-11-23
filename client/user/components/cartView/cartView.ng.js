@@ -56,22 +56,7 @@ class UserCartCtrl {
 
   checkoutSuccess(data) {
     console.log(data);
-    if (data && data.nonce) {
-      const deliveryData = this.deliveryData;
-      if (deliveryData && deliveryData.deliveryMethod && deliveryData.deliveryMethod.$$hashKey) {
-        delete deliveryData.deliveryMethod.$$hashKey;
-        delete deliveryData.deliveryMethod.$$mdSelectId;
-      }
-      this.call('checkoutItems', data,
-      this.deliveryData, Meteor.userId(), 'undelivered',
-      (err, result) => {
-        if (result && result.success) {
-          this.$stateGo('checkoutSuccess');
-        } else {
-          console.log(err);
-        }
-      });
-    } else {
+    if (data && data.success) {
       this.$stateGo('checkoutSuccess');
     }
   }

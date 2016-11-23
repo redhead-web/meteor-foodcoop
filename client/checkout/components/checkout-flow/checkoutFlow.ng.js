@@ -1,11 +1,29 @@
 import angular from 'angular';
+import { Meteor } from 'meteor/meteor';
 function PaymentMethodSelector($scope, $mdDialog) {
   'ngInject';
   this.success = (data) => {
-    $mdDialog.hide(data);
+    if (data && data.nonce) {
+      const deliveryData = this.delivery;
+      if (deliveryData && deliveryData.deliveryMethod && deliveryData.deliveryMethod.$$hashKey) {
+        delete deliveryData.deliveryMethod.$$hashKey;
+        delete deliveryData.deliveryMethod.$$mdSelectId;
+      }
+      this.call('checkoutItems', data,
+      deliveryData, Meteor.userId(), 'undelivered',
+      (err, result) => {
+        if (result && result.success) {
+          $mdDialog.hide(result);
+        } else {
+          this.error(err);
+        }
+      });
+    } else {
+      this.$stateGo('checkoutSuccess');
+    }
   };
-  this.cancel = () => {
-    $mdDialog.cancel();
+  this.cancel = (err) => {
+    $mdDialog.cancel(err);
   };
   this.error = (error) => {
     console.log('error called', error.message);

@@ -14,7 +14,6 @@ import 'angular-google-maps';
 import { name as navigation } from '../../imports/ui/components/navigation/navigation';
 import { name as productCreate } from '../../imports/ui/components/productCreate/productCreate';
 import 'cloudinary-angular/dist/cloudinary-angular.js';
-// import icons from 'material-design-icons';
 // import {name as eventList} from '../../imports/ui/components/eventList/eventList';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 import { name as productsList } from '../../imports/ui/components/productsList/productsList';
@@ -29,6 +28,7 @@ import { name as deliverySettingsAdmin } from
 import { name as deliveryAdmin } from '../../imports/ui/components/deliveryAdmin/deliveryAdmin';
 import { name as braintreePayment } from
  '../../imports/ui/components/braintreePayment/braintreePayment';
+import { module as adminPos } from '../../imports/ui/components/adminPos/pos.ng.coffee';
 
 angular.module('food-coop', [
   angularMessages,
@@ -59,10 +59,13 @@ angular.module('food-coop', [
   deliveryForm,
   braintreePayment,
   deliveryAdmin,
+  adminPos.name,
 ])
 .config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
   'ngInject';
-  $compileProvider.debugInfoEnabled(false);
+  if (Meteor.settings.public.production) {
+    $compileProvider.debugInfoEnabled(false);
+  }
   $mdIconProvider
     .iconSet('social', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg')
     .iconSet('action', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg')

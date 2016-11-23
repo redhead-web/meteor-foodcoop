@@ -60,13 +60,13 @@ export function checkoutItems(data, delivery, userId, status) {
   // Get user for braintree and to check account balance
   const user = Meteor.users.findOne(userId);
 
-  braintreeData.customerId = user.profile.customerId;
+  braintreeData.customerId = user.customerId;
   const balanceAmount = user.profile.balance;
 
   if (balanceAmount > order.orderTotal) {
     order.cardAmount = 0;
     order.balanceAmount = order.orderTotal;
-    Meteor.users.update(userId, { $set: { 'profile.balance': 0 } });
+    Meteor.users.update(userId, { $inc: { 'profile.balance': -order.orderTotal } });
   } else {
     order.balanceAmount = balanceAmount;
   }

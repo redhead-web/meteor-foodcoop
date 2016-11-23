@@ -1,5 +1,6 @@
 
 import angular from 'angular';
+import { Meteor } from 'meteor/meteor';
 
 import templateUrl from './braintreePayment.html';
 // import './style.scss'
@@ -11,24 +12,25 @@ class BraintreePaymentController {
     this.nonce = '';
 
     $reactive(this).attach($scope);
+    this.disablePaymentButton = true;
 
     this.container = 'payment-form';
     this.onReady = (obj) => {
       console.log(obj);
       this.teardown = obj.teardown;
-      $scope.$apply(() => { this.disablePaymentButton(); });
+      $scope.$apply(() => { this.enablePaymentButton(); });
     };
 
     this.getClientToken();
   }
 
   getClientToken() {
-    this.call('generateClientToken', (err, token) => {
+    this.call('generateClientToken', this.customerId || Meteor.userId(), (err, token) => {
       if (err || !token) {
         this.error = 'Sorry connection error occurred to payment provider. Please try again later';
         return console.log(err);
       }
-      braintree.setup(token, 'dropin', {
+      return braintree.setup(token, 'dropin', {
         container: this.container,
         onReady: this.onReady.bind(this),
         onPaymentMethodReceived: this.onPaymentMethodReceived.bind(this),
@@ -53,12 +55,12 @@ class BraintreePaymentController {
     this.spinner = false;
   }
 
-  disablePaymentButton() {
-    this.disablePaymentButton = true;
-  }
-
   enablePaymentButton() {
     this.disablePaymentButton = false;
+  }
+
+  disablePaymentButton() {
+    this.disablePaymentButton = true;
   }
 }
 
@@ -73,5 +75,6 @@ export default angular.module(name, []).component(name, {
     onSuccess: '&',
     buttonText: '@',
     isValid: '<',
+    customerId: '<',
   },
 });

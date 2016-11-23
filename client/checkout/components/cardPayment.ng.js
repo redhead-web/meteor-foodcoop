@@ -2,16 +2,16 @@ function BraintreeCheckoutController($scope, $reactive) {
   'ngInject';
   $reactive(this).attach($scope);
 
-  let vm = this;
-  let nonce = '';
+  const vm = this;
+  const nonce = '';
   let teardown;
   const braintreeTransactionMethod = 'braintreeTransaction'; // should default from template to 'braintreeTransaction'
 
-  let braintreeOptions = {
+  const braintreeOptions = {
     container: 'payment-form',
     onReady(obj) {
       teardown = obj.teardown;
-      $scope.$apply(function () { vm.disablePaymentButton = false; });
+      $scope.$apply(() => { vm.disablePaymentButton = false; });
       // vm.disablePaymentButton = false
     },
     onPaymentMethodReceived: checkout,
@@ -25,7 +25,7 @@ function BraintreeCheckoutController($scope, $reactive) {
   getClientToken();
 
   function getClientToken() {
-    vm.call('generateClientToken', function (err, token) {
+    vm.call('generateClientToken', (err, token) => {
       if (err || !token) {
         vm.onError({ error: { message: 'Sorry connection error occurred to payment provider. Please try again later' } });
         return console.log(err);
@@ -36,25 +36,25 @@ function BraintreeCheckoutController($scope, $reactive) {
 
   function checkout(obj) {
     console.log(obj);
-    let data = {};
+    const data = {};
     data.payment_method_nonce = obj.nonce;
 
     // start spinning wheel animation
-    $scope.$apply(function () {
+    $scope.$apply(() => {
       vm.spinner = true;
       vm.disablePaymentButton = true;
     });
 
     // vm.spinner = true;
 
-    vm.call(braintreeTransactionMethod, data, function (err, result) {
+    vm.call(braintreeTransactionMethod, data, (err, result) => {
       if (result && result.success) {
         vm.onSuccess();
       } else {
         console.log(err);
         // display error details to the user and get them to try again
         vm.onError({ error: { message: 'Sorry, something went wrong, please confirm your payment details and try again.' } });
-        teardown(function () {
+        teardown(() => {
           getClientToken();
           vm.disablePaymentButton = false;
         });

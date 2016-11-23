@@ -11,12 +11,15 @@ gateway = BrainTreeConnect
 
 
 Meteor.methods
-  generateClientToken: () ->
+  generateClientToken: (userId) ->
+    check(userId, String)
     config = {}
 
-    if @userId? # use customerId only if the user is registered with us
+    if userId and @userId # use customerId only if the user is registered with us
+      if userId != @userId and not Roles.userIsInRole(@userId, "admin")
+        throw new Meteor.Error 'FORBIDDEN', 'you cannont generate a client token for that user'
 
-      user = Meteor.users.findOne _id: @userId
+      user = Meteor.users.findOne _id: userId
 
       if user.customerId?
         config.customerId = user.customerId
@@ -28,14 +31,6 @@ Meteor.methods
     unless getToken.success == true
       console.log getToken
     getToken.clientToken
-
-  "/admin/generateClientToken": (userId) ->
-    check userId, String
-    if Roles.userIsInRole @userId, 'admin'
-      self = this
-      self.userId = userId #userId of customer
-      Meteor.call.call self, "generateClientToken"
-
 
   registerCustomer: (user) ->
     config =
@@ -115,7 +110,7 @@ Meteor.methods
     config = {
       amount: data.cardAmount.toFixed 2
       paymentMethodNonce: data.payment_method_nonce
-      customerId: user.profile.customerId
+      customerId: user.customerId
       options:
         submitForSettlement: true
         storeInVaultOnSuccess: true
@@ -140,7 +135,13 @@ Meteor.methods
       resultUpdate = Meteor.call 'addFromCartToOrder', items, data, result.transaction.id
     result
   "braintreeTransaction2": (data) ->
-    console.log(data.total);
+    check(data.total, Number)
+    check(data.payment_method_nonce, String)
+    check(data.customerId, String)
+
+    if data && data.total == 0
+      return { success: true, transaction: id: 'no-card-charge-needed' }
+
     config = {
       amount: data.total.toFixed 2
       paymentMethodNonce: data.payment_method_nonce

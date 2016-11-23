@@ -6,7 +6,7 @@
   <div id="payment-form"></div>
   <div layout="row">
     <span flex></span>
-    <md-button type="submit" class="md-primary md-raised" ng-disabled="braintreePayment.disablePaymentButton && !braintreePayment.isValid">{{braintreePayment.buttonText || 'Pay Now'}}</md-button>
+    <md-button ng-hide="braintreePayment.disablePaymentButton" type="submit" class="md-primary md-raised" ng-disabled="!braintreePayment.isValid">{{braintreePayment.buttonText || 'Pay Now'}}</md-button>
     <span flex></span>
   </div>
 </form>
