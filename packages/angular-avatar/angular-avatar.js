@@ -4,12 +4,11 @@ angular.module('multi-avatar', ['md5'])
   .component('multiAvatar', {
     bindings: {
       userId: '<',
-      name: '<',
       email: '<',
       width: '@',
       height: '@',
     },
-    template: '<ng-letter-avatar data="{{$ctrl.name}}" width="{{$ctrl.width}}" height="{{$ctrl.width}}" font-Size="{{30/(50/$ctrl.width)}}" shape="round"></ng-letter-avatar><img ng-src="{{$ctrl.tag}}" class="img-round meteor-avatar">',
+    template: '<ng-letter-avatar ng-if="$ctrl.name" data="{{$ctrl.name}}" width="{{$ctrl.width}}" height="{{$ctrl.width}}" font-Size="{{30/(50/$ctrl.width)}}" shape="round"></ng-letter-avatar><img ng-src="{{$ctrl.tag}}" class="img-round meteor-avatar">',
     controller: ['$scope', '$reactive', 'md5', function controller($scope, $reactive, md5) {
       'ngInject';
       $reactive(this).attach($scope);

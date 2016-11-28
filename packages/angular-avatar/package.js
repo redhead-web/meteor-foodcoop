@@ -15,7 +15,6 @@ Package.onUse(function (api) {
   api.imply(['angular'], 'client');
   api.addFiles('md5.js', 'client');
   api.mainModule('angular-avatar.js', 'client');
-  api.addFiles('publish.js', 'server');
 });
 
 Package.onTest(function (api) {
