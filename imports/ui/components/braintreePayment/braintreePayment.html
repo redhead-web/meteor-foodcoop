@@ -1,12 +1,12 @@
-<div ng-if="braintreePayment.spinner" layout layout-align="center center">
-  <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
-</div>
 <p class="text-center" ng-if="braintreePayment.error">{{braintreePayment.error}}</p>
 <form id="checkout" method="post" action="/checkout" autocomplete="off">
   <div id="payment-form"></div>
   <div layout="row">
     <span flex></span>
-    <md-button ng-hide="braintreePayment.disablePaymentButton" type="submit" class="md-primary md-raised" ng-disabled="!braintreePayment.isValid">{{braintreePayment.buttonText || 'Pay Now'}}</md-button>
+    <md-button ng-hide="braintreePayment.disablePaymentButton || braintreePayment.spinner" type="submit" class="md-primary md-raised" ng-disabled="!braintreePayment.isValid" ng-click="braintreePayment.startSpinner()">{{braintreePayment.buttonText || 'Pay Now'}}</md-button>
     <span flex></span>
+    <div ng-if="braintreePayment.spinner" layout layout-align="center center">
+      <md-progress-circular md-mode="indeterminate" md-diameter="50%"></md-progress-circular>
+    </div>
   </div>
 </form>

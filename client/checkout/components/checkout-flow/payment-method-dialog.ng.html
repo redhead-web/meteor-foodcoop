@@ -19,7 +19,6 @@
             <fc-balance-payment customer-id="$ctrl.customer._id" delivery="$ctrl.delivery" status="undelivered" on-success="$ctrl.success()" on-error="$ctrl.error(error)"></fc-balance-payment>
           </div>
           <div>
-            <!-- <card-payment on-error="$ctrl.error(error)" on-success="$ctrl.success()"></card-payment> -->
             <braintree-payment is-valid="$ctrl.total" on-error="$ctrl.error(error)" on-success="$ctrl.success(data)"></braintree-payment>
           </div>
         </section>

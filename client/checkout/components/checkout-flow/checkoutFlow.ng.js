@@ -1,7 +1,8 @@
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
-function PaymentMethodSelector($scope, $mdDialog) {
+function PaymentMethodSelector($scope, $mdDialog, $reactive) {
   'ngInject';
+  $reactive(this).attach($scope);
   this.success = (data) => {
     if (data && data.nonce) {
       const deliveryData = this.delivery;
