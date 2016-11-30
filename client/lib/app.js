@@ -29,6 +29,7 @@ import { name as deliveryAdmin } from '../../imports/ui/components/deliveryAdmin
 import { name as braintreePayment } from
  '../../imports/ui/components/braintreePayment/braintreePayment';
 import { module as adminPos } from '../../imports/ui/components/adminPos/pos.ng.coffee';
+import { name as cartView } from '../../imports/ui/components/cartView/cartView';
 
 angular.module('food-coop', [
   angularMessages,
@@ -60,6 +61,7 @@ angular.module('food-coop', [
   braintreePayment,
   deliveryAdmin,
   adminPos.name,
+  cartView,
 ])
 .config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
   'ngInject';

@@ -1,12 +1,12 @@
 // import angular from 'angular'
-import uiRouter from 'angular-ui-router'
-import ngMaterial from 'angular-material'
-import {name as buyTicket} from '../buyTicket/buyTicket'
-import {name as mapLocation} from '../mapLocation/mapLocation'
-import {name as eventAttendees} from '../eventAttendees/eventAttendees'
+import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
+import { name as buyTicket } from '../buyTicket/buyTicket';
+import { name as mapLocation } from '../mapLocation/mapLocation';
+import { name as eventAttendees } from '../eventAttendees/eventAttendees';
 
-import templateUrl from './eventDetails.html'
-import './style.scss'
+import templateUrl from './eventDetails.html';
+import './style.scss';
 
 import { Events } from '../../../api/events';
 
@@ -16,28 +16,26 @@ class EventDetailsController {
 
     $reactive(this).attach($scope);
 
-    this.subscribe('event', () => [$stateParams.eventId])
-    
-    if ($stateParams.buy === "1") {
+    this.subscribe('event', () => [$stateParams.eventId]);
+
+    if ($stateParams.buy === '1') {
       this.eventView = 'buyTicket';
     }
 
     this.helpers({
       event() {
-        return Events.findOne($stateParams.eventId)
-      }
-    })
-    
-    $scope.$watch(function() {
-      return $mdMedia('xs')
-    }, (xs) => {
+        return Events.findOne($stateParams.eventId);
+      },
+    });
+
+    $scope.$watch(() => $mdMedia('xs'), (xs) => {
       this.xs = xs; // true
-    })
+    });
   }
-  
+
   onSuccess(eventView) {
-    console.log('eventDetails onSuccess called')
-    this.eventView = eventView
+    console.log('eventDetails onSuccess called');
+    this.eventView = eventView;
   }
 
 }
@@ -52,20 +50,18 @@ export default angular.module(name, [
   mapLocation,
   eventAttendees,
   uiRouter,
-  ngMaterial
+  ngMaterial,
 ]).component(name, {
   templateUrl,
-  controller: EventDetailsController
+  controller: EventDetailsController,
 })
-  .config(config);
+  .config(($stateProvider, $mdThemingProvider) => {
+    'ngInject';
+    $mdThemingProvider.theme('darkTheme').primaryPalette('light-green').dark();
 
-function config($stateProvider, $mdThemingProvider) {
-  'ngInject';
-  $mdThemingProvider.theme('darkTheme').primaryPalette('light-green').dark()
-
-  $stateProvider
-    .state('event', {
-      url: '/event/:eventId?:buy',
-      template: '<event-details></event-details>'
-    });
-}
+    $stateProvider
+      .state('event', {
+        url: '/event/:eventId?:buy',
+        template: '<event-details></event-details>',
+      });
+  });

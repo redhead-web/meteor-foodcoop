@@ -1,8 +1,11 @@
-/* globals angular, GetNextDeliveryDay, Markup, Cart */
-
+/* globals GetNextDeliveryDay, Markup, Cart */
+import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
+import templateUrl from './cart-view.ng.html';
+import cartTable from '../cartTable/cartTable';
+import checkoutFlow from '../checkoutFlow/checkoutFlow';
 
-class UserCartCtrl {
+class CartViewCtrl {
   constructor($scope, $reactive, $mdToast, $state) {
     'ngInject';
 
@@ -68,8 +71,16 @@ class UserCartCtrl {
   }
 }
 
-angular.module('food-coop').component('cartView', {
-  controller: UserCartCtrl,
+const name = 'cartView';
+
+export default angular.module(name, [cartTable.name, checkoutFlow.name]).component(name, {
+  controller: CartViewCtrl,
   controllerAs: 'cart',
-  templateUrl: 'client/user/components/cartView/cart-view.ng.html',
+  templateUrl,
+}).config(($stateProvider) => {
+  'ngInject';
+  $stateProvider.state('cart', {
+    url: '/cart',
+    template: '<cart-view></cart-view>',
+  });
 });

@@ -114,7 +114,7 @@
         </md-input-container>
       </div>
 
-      <section layout="row" hide-xs layout-wrap>
+      <section layout="row" hide-xs hide-sm layout-wrap>
         <md-button
         class="md-raised"
         ng-repeat="category in ctrl.categories"
@@ -124,7 +124,7 @@
         </md-button>
       </section>
 
-      <md-input-container hide-gt-xs>
+      <md-input-container hide-gt-sm>
         <label>Product Category</label>
         <md-select ng-model="ctrl.product.category">
           <md-option ng-repeat="category in ctrl.categories" value="{{category.name}}">

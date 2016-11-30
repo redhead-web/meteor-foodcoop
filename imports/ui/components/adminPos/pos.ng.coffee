@@ -1,5 +1,6 @@
 templateUrl = require('./pos.ng.html');
 braintreePayment = require '../braintreePayment/braintreePayment'
+cartTable = require '../cartTable/cartTable'
 
 PointOfSaleController = ($scope, $reactive, $mdToast) ->
   "ngInject"
@@ -97,6 +98,6 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
 
 name = "pointOfSale"
 
-exports.module = angular.module(name, [braintreePayment.name]).component name,
+exports.module = angular.module(name, [braintreePayment.name, cartTable.name]).component name,
   controller: PointOfSaleController
   templateUrl: templateUrl.default

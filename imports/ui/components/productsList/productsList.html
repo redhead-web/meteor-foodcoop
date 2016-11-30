@@ -19,25 +19,20 @@
           </h1>
         </div>
         <div layout>
-          <md-menu-bar>
+          <md-menu-bar hide-xs>
             <md-menu>
               <button ng-click="$mdOpenMenu()">
-                Sorted by {{ store.sortName }}
+                {{ store.sortName }}
               </button>
               <md-menu-content>
                 <md-menu-item>
-                  <md-button ng-click="store.options.sort = {'dateCreated':-1}; store.sortName = 'Newest' ">
-                    Newest
-                  </md-button>
-                </md-menu-item>
-                <md-menu-item>
                   <md-button ng-click="store.options.sort = {'last_modified':-1}; store.sortName = 'Recently Changed' ">
-                    Recently Changed
+                    Recent
                   </md-button>
                 </md-menu-item>
                 <md-menu-item>
                   <md-button ng-click="store.options.sort = {'name':1}; store.sortName = 'Alphabetical'">
-                    Alphabetical
+                    A-Z
                   </md-button>
                 </md-menu-item>
                 <md-menu-item>
@@ -51,7 +46,7 @@
                   </md-button>
                 </md-menu-item>
                 <md-menu-item>
-                  <md-button ng-click="store.options.sort = ['producerCompanyName', 'producerName', 'name']; store.sortName = 'Producer'">
+                  <md-button ng-click="store.options.sort = ['producerCompanyName', 'producerName', 'name', 'unitOfMeasure']; store.sortName = 'Producer'">
                     Producer
                   </md-button>
                 </md-menu-item>

@@ -69,6 +69,8 @@ exports.schema = new SimpleSchema
     optional: true
     type: Date
     autoValue: ->
+      if @isInsert
+        return new Date()
       if @isUpdate
         if @field('carted').operator == '$push' || @field('carted').operator == '$pull' || @field('carted.$.qty').operator == '$set'
           @unset();

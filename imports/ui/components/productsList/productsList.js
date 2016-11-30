@@ -45,9 +45,9 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
   });
 
   this.options = {
-    sort: { dateCreated: -1 },
+    sort: { last_modified: -1 },
   };
-  this.sortName = 'Newest';
+  this.sortName = 'Recently Changed';
 
   this.autorun(() => {
     if (this.stateParams.category) {
