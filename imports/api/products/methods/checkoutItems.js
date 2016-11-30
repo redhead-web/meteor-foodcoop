@@ -8,13 +8,21 @@ export function checkoutItems(data, delivery, userId, status) {
     details: {
       type: Object,
       blackbox: true,
+      optional: true,
     },
     type: {
       type: String,
-    }, nonce: {
+    },
+    nonce: {
       type: String,
+      optional: true,
     },
   }).validate(data);
+
+  if (data.type !== 'cash' && !data.nonce) {
+    throw new Meteor.Error('checkoutItems.401', 'Can\'t checkout items without a credit card');
+  }
+
   if (delivery) {
     new SimpleSchema({
       deliveryMethod: {
@@ -40,31 +48,25 @@ export function checkoutItems(data, delivery, userId, status) {
   }
   const items = Cart.Items.find({ userId }).fetch();
   const itemTotal = Markup(items).cartTotal();
-
+  const paymentMethodAmount = data.type === 'cash' ? 'cashAmount' : 'cardAmount';
   const order = {
     user: userId,
-    status: 'un-paid',
+    status: 'paid',
     orderTotal: itemTotal,
-    cardAmount: itemTotal, // will change if credit used
-  };
-
-  const braintreeData = {
-    payment_method_nonce: data.nonce,
+    [paymentMethodAmount]: itemTotal, // will change if credit used
   };
 
   if (delivery) {
     order.orderTotal += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
-    order.cardAmount += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
+    order[paymentMethodAmount] += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
   }
 
   // Get user for braintree and to check account balance
   const user = Meteor.users.findOne(userId);
-
-  braintreeData.customerId = user.customerId;
   const balanceAmount = user.profile.balance;
 
   if (balanceAmount > order.orderTotal) {
-    order.cardAmount = 0;
+    order[paymentMethodAmount] = 0;
     order.balanceAmount = order.orderTotal;
     Meteor.users.update(userId, { $inc: { 'profile.balance': -order.orderTotal } });
   } else {
@@ -72,23 +74,33 @@ export function checkoutItems(data, delivery, userId, status) {
   }
 
   if (balanceAmount !== 0 && order.orderTotal > balanceAmount) {
-    order.cardAmount = order.orderTotal - balanceAmount;
+    order[paymentMethodAmount] = order.orderTotal - balanceAmount;
     Meteor.users.update(userId, { $set: { 'profile.balance': 0 } });
   }
 
-  braintreeData.total = order.cardAmount;
+  const braintreeData = {
+    payment_method_nonce: data.nonce,
+    total: order.cardAmount,
+    customerId: user.customerId,
+  };
 
-  const result = Meteor.call('braintreeTransaction2', braintreeData);
-
-  if (result && result.success) {
-    order.status = 'paid';
-    order.transactionId = result.transaction.id;
-    if (delivery) {
-      Meteor.call('addDelivery', delivery, userId);
+  if (data.type !== 'cash') {
+    const result = Meteor.call('braintreeTransaction2', braintreeData);
+    if (result && result.success) {
+      order.transactionId = result.transaction.id;
+    } else {
+      console.log(result);
+      throw new Meteor.Error('PaymentFailed', 'payment failed. Try again or try a different card');
     }
-    Meteor.call('addFromCartToOrder2', order, items, status);
   }
-  return result;
+
+  if (delivery) {
+    Meteor.call('addDelivery', delivery, userId);
+  }
+
+  Meteor.call('addFromCartToOrder2', order, items, status);
+
+  return true;
 }
 
 Meteor.methods({
