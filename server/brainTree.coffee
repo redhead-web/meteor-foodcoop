@@ -80,60 +80,6 @@ Meteor.methods
   deletePaymentMethod: (token) ->
     result = gateway.paymentMethod.delete token
     result
-
-  braintreeTransaction: (data) ->
-    ###
-     data Object
-     @paymentMethodNonce = payment nonce for once-off transaction or a new
-     transaction with a saved payment method
-     @user = used for mocking user data for integration tests
-
-    ###
-    # Calculate Total on Server for security reasons
-    items = Cart.Items.find({userId: @userId}).fetch()
-    data.cardAmount = data.orderTotal = Markup(items).cartTotal()
-
-    user = Meteor.users.findOne _id: @userId
-
-    data.balanceAmount = user.profile.balance
-
-    if data.balanceAmount > data.orderTotal
-      data.balanceAmount = data.orderTotal
-      data.cardAmount = 0
-      Meteor.users.update @userId,
-        $set: 'profile.balance': 0
-      resultUpdate = Meteor.call('addFromCartToOrder', data, result.transaction.id)
-
-    if data.balanceAmount != 0 and data.orderTotal > data.balanceAmount
-      data.cardAmount -= data.balanceAmount
-
-    config = {
-      amount: data.cardAmount.toFixed 2
-      paymentMethodNonce: data.payment_method_nonce
-      customerId: user.customerId
-      options:
-        submitForSettlement: true
-        storeInVaultOnSuccess: true
-    }
-
-    @unblock()
-    result = gateway.transaction.sale config
-
-    unless result.success
-      console.log result
-      if result.transaction?
-        console.error result.transaction.processorResponseCode, result.transaction.processorResponseText
-        throw new Meteor.Error result.transaction.processorResponseCode, result.transaction.processorResponseText
-      else
-        console.error result.message
-        throw new Meteor.Error 500, result.message
-
-    if result.success
-      if data.balanceAmount
-        Meteor.users.update @userId,
-          $set: 'profile.balance': 0
-      resultUpdate = Meteor.call 'addFromCartToOrder', items, data, result.transaction.id
-    result
   "braintreeTransaction2": (data) ->
     check(data.total, Number)
     check(data.payment_method_nonce, String)
@@ -162,12 +108,6 @@ Meteor.methods
         throw new Meteor.Error 500, result.message
 
     result
-
-  "/admin/braintreeTransaction": (customerId, data) ->
-    if Roles.userIsInRole @userId, 'admin'
-      self = this
-      self.userId = customerId
-      Meteor.call.call self, "braintreeTransaction", data
 
   # braintreeSubscription: (data) ->
 #     #does user have a braintree id? if not get them one. then update their id
