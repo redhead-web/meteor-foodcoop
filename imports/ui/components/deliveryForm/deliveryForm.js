@@ -50,13 +50,6 @@ class deliveryFormController {
     });
   }
 
-  getSelectedText() {
-    if (this.selection && this.selection.title) {
-      return this.selection.title;
-    }
-    return 'Select Delivery Option';
-  }
-
   submit(isValid) {
     if (isValid) {
       this.addDelivery({ data: {

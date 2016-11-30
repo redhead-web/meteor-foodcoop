@@ -80,7 +80,7 @@ Meteor.methods
   deletePaymentMethod: (token) ->
     result = gateway.paymentMethod.delete token
     result
-  "braintreeTransaction2": (data) ->
+  braintreeTransaction2: (data) ->
     check(data.total, Number)
     check(data.payment_method_nonce, String)
     check(data.customerId, String)
