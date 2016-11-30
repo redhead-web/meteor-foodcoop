@@ -75,56 +75,23 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
       @call('checkoutItems', data,
       deliveryData, @customer._id, @status,
       (err, result) =>
-        if result && result.success
+        if result
           $mdToast.show $mdToast.simple().content("Card Payment handled. Well done!").position('bottom left').hideDelay(4000)
           reset()
         else
-          @error(err);
+          @cardError = err.message;
       );
     return
 
 
   @cashCheckout = () =>
-    @cashError = undefined
-    @change = undefined
-
-    cashTotal = @total
-    balanceTotal = 0
-
-    if @customer.profile.balance
-      cashTotal = @total - @customer.profile.balance
-      if cashTotal < 0
-        cashTotal = 0
-        balanceTotal = @total
+    @change = @cash - @total
+    @call 'checkoutItems', {type: "cash"}, null, @customer._id, @status, (err, result) =>
+      if result
+        $mdToast.show $mdToast.simple().content("Cash Payment handled. Well done!").position('bottom left').hideDelay(4000)
+        reset()
       else
-        balanceTotal = @total - cashTotal
-
-    if @cash < cashTotal
-      @cashError = "That's not enough cash sorry."
-      return
-
-    #double check math
-    if balanceTotal + cashTotal == @total
-
-      Meteor.users.update @customer._id,
-        $inc: 'profile.balance': -balanceTotal
-
-      Meteor.call "/admin/addFromCartToOrder", @customer._id, @items,
-        deliveryDay: moment().day(Meteor.settings.public.deliveryDayOfWeek).startOf('day').toDate()
-        orderTotal: @total
-        cardAmount: 0
-        cashAmount: cashTotal
-        balanceAmount: balanceTotal || 0
-      , (err, success) =>
-        if err
-          console.error err
-          @cashError = err.message
-        unless err
-          @change = @cash - cashTotal
-          $mdToast.show $mdToast.simple().content("Cash Payment handled. Well done!").position('bottom left').hideDelay(4000)
-          reset()
-    else
-      console.log('bad math')
+        @cashError = err.message
 
   return
 

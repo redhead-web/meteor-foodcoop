@@ -56,7 +56,7 @@ class UserCartCtrl {
 
   checkoutSuccess(data) {
     console.log(data);
-    if (data && data.success) {
+    if (data) {
       this.$stateGo('checkoutSuccess');
     }
   }

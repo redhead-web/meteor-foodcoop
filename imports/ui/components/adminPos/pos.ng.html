@@ -68,20 +68,24 @@
           <md-option value="collected">Collected</md-option>
           <md-option value="undelivered">Undelivered</md-option>
         </md-select>
+        <p class="md-warn md-body-2" ng-if="$ctrl.cashError">{{$ctrl.cardError}}</p>
         <fc-balance-payment customer-id="$ctrl.customer._id" status="{{$ctrl.status}}" on-success="$ctrl.balanceSuccess()" on-error="$ctrl.error(error)"></fc-balance-payment>
         <md-button class="md-raised md-warn" ng-click="$ctrl.paymentMethod = 'cc'">Pay with Credit Card</md-button>
 
         <h3 class="md-headline">OR</h3>
-        <section class="md-whiteframe-3dp">
-          <p class="md-warn md-body-2" ng-if="$ctrl.cashError">{{$ctrl.cashError}}</p>
-          <p class="md-body-2" ng-if="$ctrl.change">give {{$ctrl.change | currency}} change</p>
-          <form><md-input-container>
-            <label>Cash</label>
-            <input ng-model="$ctrl.cash" type="number" min="0" step="0.01">
-          </md-input-container>
-          <md-button type="submit" class="md-raised md-primary" ng-click="$ctrl.cashCheckout($ctrl.cash)">Pay {{$ctrl.cash || $ctrl.total | currency}} Cash</md-button>
-          </form>
-        </section>
+        <md-card class="md-whiteframe-3dp">
+          <md-card-content>
+            <p class="md-warn md-body-2" ng-if="$ctrl.cashError">{{$ctrl.cashError}}</p>
+            <p class="md-body-2" ng-if="$ctrl.change">give {{$ctrl.change | currency}} change</p>
+            <form><md-input-container>
+              <label>Cash</label>
+              <input ng-model="$ctrl.cash" type="number" min="0" step="0.01">
+            </md-input-container></form>
+          </md-card-content>
+          <md-card-actions>
+            <md-button type="submit" class="md-raised md-primary" ng-click="$ctrl.cashCheckout($ctrl.cash)">Pay {{$ctrl.cash || $ctrl.total | currency}} Cash</md-button>
+          </md-card-actions>
+        </md-card>
       </div>
     </section>
   </section>

@@ -12,9 +12,9 @@ function PaymentMethodSelector($scope, $mdDialog, $reactive) {
       }
       this.call('checkoutItems', data,
       deliveryData, Meteor.userId(), 'undelivered',
-      (err, result) => {
-        if (result && result.success) {
-          $mdDialog.hide(result);
+      (err, success) => {
+        if (success) {
+          $mdDialog.hide(success);
         } else {
           this.error(err);
         }
