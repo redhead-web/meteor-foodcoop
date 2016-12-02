@@ -8,10 +8,10 @@ angular.module('food-coop').controller('AdminCtrl', function ($scope, $reactive)
 
   this.helpers({
     userCount() {
-      Counts.get('userCount');
+      return Counts.get('userCount');
     },
     ordersCount() {
-      Counts.get('upcoming-ordersCount');
+      return Counts.get('upcoming-ordersCount');
     },
     deliveriesCount() {
       return Counts.get('upcoming-deliveries');
