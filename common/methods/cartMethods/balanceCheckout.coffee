@@ -22,7 +22,7 @@ Meteor.methods
         order.orderTotal += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
         order.balanceAmount += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
 
-      if Roles.userIsInRole(customerId, 'allowNegativeBalance') or customer.profile.balance > order.orderTotal
+      if Roles.userIsInRole(customerId, 'allowNegativeBalance') or customer.profile.balance >= order.orderTotal
         Meteor.users.update customerId,
           $inc: 'profile.balance': -order.orderTotal
 
