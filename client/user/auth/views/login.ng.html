@@ -15,12 +15,12 @@
       </div>
       <md-input-container>
         <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="lc.credentials.email" name="email"
+        <input type="text" ng-model="lc.credentials.email" name="email" md-select-on-focus
                placeholder="email" aria-label="email"/>
       </md-input-container>
       <md-input-container>
         <md-icon md-svg-icon="action:ic_lock_open_24px" class="md-accent"></md-icon>
-        <input type="password" ng-model="lc.credentials.password" name="password"
+        <input type="password" ng-model="lc.credentials.password" name="password" md-select-on-focus
                placeholder="password" aria-label="password"/>
       </md-input-container>
       <md-button class="md-raised md-primary" type="submit" ng-disabled="$auth.loggingIn"

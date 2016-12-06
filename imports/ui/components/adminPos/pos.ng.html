@@ -1,0 +1,95 @@
+<div>
+<span flex></span>
+<section>
+  <h1 class="md-title text-center">Whangarei Food Co-op Virtual Till</h1>
+  <section layout-gt-sm>
+    <form flex="50" flex-xs="100" layout="column" layout-margin name="productUploadForm" ng-submit="$ctrl.submitToCart()">
+      <div layout="row">
+        <md-autocomplete flex required md-input-name="customer" placeholder="Customer"
+        md-search-text="$ctrl.customerSearch"
+        md-select-on-match="true"
+        md-selected-item="$ctrl.customerObject"
+        md-item-text="item.profile.name"
+        md-items="item in $ctrl.getCustomers($ctrl.customerSearch)"
+        >
+          <md-item-template>
+            <span class="item-title">
+              <span> {{item.profile.name}} </span>
+            </span>
+            <span class="item-metadata">
+              <span class="item-metastat">
+                <strong>{{item.profile.customerNumber}}</strong>
+              </span>
+            </span>
+          </md-item-template>
+        </md-autocomplete>
+      </div>
+
+      <div layout="row">
+        <md-autocomplete flex required md-input-name="customer" placeholder="Product"
+        md-search-text="$ctrl.productSearch"
+        md-select-on-match="true"
+        md-selected-item="$ctrl.product"
+        md-item-text="item.name"
+        md-items="item in $ctrl.getProducts($ctrl.productSearch)"
+        >
+          <md-item-template>
+            <div layout="row" layout-align="start center">
+              <cl-image public-id="{{item.img.result}}" class="thumbnail" >
+                <cl-transformation height="30" width="30" crop="fill" gravity="center"></cl-transformation>
+              </cl-image>
+              <ng-letter-avatar ng-if="!item.img.result" data="{{item.name}}" font-size="18" shape="round" width="30" height="30"></ng-letter-avatar>
+              <span class="item-title" flex style="margin-left: 8px">
+                <span> {{item.name}} </span>
+              </span>
+              <span class="item-metadata">
+                <span class="item-metastat">
+                  <strong>{{$ctrl.priceWithMarkup(item.price) | currency}} / {{item.unitOfMeasure}}</strong>
+                </span>
+                <span class="item-metastat" ng-if="item.stocklevel <= 0"> OOS</span>
+              </span>
+            </div>
+          </md-item-template>
+        </md-autocomplete>
+      </div>
+
+      <md-input-container ng-if="$ctrl.product">
+        <label>Quantity</label>
+        <input type="number" ng-model="$ctrl.qty" min="1">
+      </md-input-container>
+
+      <md-button type="submit" class="md-primary md-raised">Add to Checkout</md-button>
+
+    </form>
+    <section flex>
+      <cart-table items="$ctrl.items" total="$ctrl.total" user="$ctrl.customer" on-remove="$ctrl.deleteItem(id)"></cart-table>
+      <div layout="column" layout-margin layout-align="center center">
+        <md-select ng-model="$ctrl.status" placeholder="Order Status: {{$ctrl.status}}">
+          <md-option value="collected">Collected</md-option>
+          <md-option value="undelivered">Undelivered</md-option>
+        </md-select>
+        <p class="md-warn md-body-2" ng-if="$ctrl.cashError">{{$ctrl.cardError}}</p>
+        <fc-balance-payment customer-id="$ctrl.customer._id" status="{{$ctrl.status}}" on-success="$ctrl.balanceSuccess()" on-error="$ctrl.error(error)"></fc-balance-payment>
+        <md-button class="md-raised md-warn" ng-click="$ctrl.paymentMethod = 'cc'">Pay with Credit Card</md-button>
+
+        <h3 class="md-headline">OR</h3>
+        <md-card class="md-whiteframe-3dp">
+          <md-card-content>
+            <p class="md-warn md-body-2" ng-if="$ctrl.cashError">{{$ctrl.cashError}}</p>
+            <p class="md-body-2" ng-if="$ctrl.change">give {{$ctrl.change | currency}} change</p>
+            <form><md-input-container>
+              <label>Cash</label>
+              <input ng-model="$ctrl.cash" type="number" min="0" step="0.01">
+            </md-input-container></form>
+          </md-card-content>
+          <md-card-actions>
+            <md-button type="submit" class="md-raised md-primary" ng-click="$ctrl.cashCheckout($ctrl.cash)">Pay {{$ctrl.cash || $ctrl.total | currency}} Cash</md-button>
+          </md-card-actions>
+        </md-card>
+      </div>
+    </section>
+  </section>
+</section>
+<span flex></span>
+</div>
+<braintree-payment is-valid="true" ng-if="$ctrl.paymentMethod === 'cc'" on-success="$ctrl.braintreePayment(data)" button-text="Pay {{ $ctrl.total | currency }}"></braintree-payment>

@@ -1,0 +1,94 @@
+    <table class="material-table cart-table" ng-cloak>
+      <thead>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>
+            Product
+          </td>
+          <td>
+            Producer
+          </td>
+          <td>
+            Price
+          </td>
+          <td>
+            Quantity
+          </td>
+          <td>
+            Total
+          </td>
+          <td></td>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr ng-if="cart.shipping">
+          <td colspan="7">Shipping</td>
+          <td>{{ cart.shipping.deliveryMethod.cost * cart.shipping.deliveryDays.length | currency }}</td>
+        </tr>
+        <tr>
+          <td colspan="7">
+            Cart Total
+          </td>
+          <td>{{cart.total | currency}}</td>
+        </tr>
+        <tr ng-if="cart.user.profile.balance !== 0">
+          <td colspan="7">Balance</td>
+          <td ng-class="{'green-text': cart.user.profile.balance > 0, 'red-text': cart.user.profile.balance < 0}">
+            {{cart.user.profile.balance | currency}}
+          </td>
+        </tr>
+        <tr ng-if="cart.user.profile.balance !== 0">
+          <td colspan="7">
+            Total Owing
+          </td>
+          <td>
+            <span ng-if="cart.user.profile.balance < cart.total">
+              {{cart.total - cart.user.profile.balance | currency}}
+            </span>
+            <span ng-if="cart.user.profile.balance > cart.total">
+              $0.00
+            </span>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr ng-repeat="item in cart.items track by item._id">
+          <td class="no-padding">
+            <md-button class="md-icon-button" aria-label="alert" ng-if="cart.deliveryWarning(item.details.daysNotice)" ng-click="cart.deliveryAlert($event, item.details.daysNotice)">
+              <md-icon  md-svg-icon="alert:ic_warning_24px"></md-icon>
+            </md-button>
+          </td>
+          <td>
+            <a ui-sref="productDetails({productId: item.productId})">
+              <cl-image public-id="{{item.details.img.result}}" class="thumbnail" >
+                <cl-transformation height="60" width="60" crop="fill" gravity="center"></cl-transformation>
+              </cl-image>
+              <ng-letter-avatar ng-if="!item.details.img.result" data="{{item.details.name}}" font-size="36" shape="round" width="60" height="60"></ng-letter-avatar>
+            </a>
+          </td>
+          <td>
+            {{item.details.name}}
+          </td>
+          <td>
+            {{item.details.producerCompanyName || item.details.producerName}}
+          </td>
+          <td>
+            {{cart.priceWithMarkup(item) | currency}}
+          </td>
+          <td>
+            <md-input-container class="input-table">
+              <input aria-label="item quantity" type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.update(item._id, item.qty,  '{{item.qty}}')" min="1">
+            </md-input-container>
+          </td>
+          <td>
+            {{cart.totalWithMarkup(item) | currency}}
+          </td>
+          <td>
+            <md-button class="md-icon-button" aria-label="More" ng-click="cart.delete(item._id)">
+              <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>

@@ -1,25 +1,15 @@
 Meteor.methods
-  confirmOrder: (items, data)->
-    user = Meteor.users.findOne(@userId)
+  confirmOrder: (items, order)->
+    user = Meteor.users.findOne(order.user)
     invoiceNumber = Random.id(6)
     dataObject =
-      order: data
+      order: order
       customerNumber: user.profile.customerNumber
       items: items
       recipient: user.profile.name
       number: invoiceNumber
       date: moment().format('dddd, MMMM Do YYYY')
 
-<<<<<<< HEAD
-    Mailer.send
-      to: "#{user.profile.name} <#{user.emails[0].address}>"
-      subject: "Kai kohekohe Food Co-op Order Confirmation"
-      template: "confirmOrderEmail"
-      data: dataObject
-
-    
-=======
->>>>>>> distribution
     if data.deliveryDay #must have been from POS
       Mailer.send
         to: "#{user.profile.name} <#{user.emails[0].address}>"
@@ -27,12 +17,19 @@ Meteor.methods
         template: "orderReceiptPOS"
         data: dataObject
     else
+    # if order.deliveryDay #must have been from POS
+    #   Mailer.send
+    #     to: "#{user.profile.name} <#{user.emails[0].address}>"
+    #     subject: "Receipt: Whangarei Food Co-op #{invoiceNumber}"
+    #     template: "orderReceiptPOS"
+    #     data: dataObject
+    # else
 
-      dataObject.items = _.map (_.groupBy items, 'deliveryDay'), (sales, deliveryDay) ->
-        deliveryDay: deliveryDay,
-        sales: sales
+    dataObject.items = _.map (_.groupBy items, 'deliveryDay'), (sales, deliveryDay) ->
+      deliveryDay: deliveryDay,
+      sales: sales
 
-      console.log dataObject.items
+    console.log dataObject.items
       # [ [ 'Tue Aug 09 2016 00:00:00 GMT+1200 (NZST)', [ [Object] ] ] ]
       # { 'Tue Aug 09 2016 00:00:00 GMT+1200 (NZST)':
       #    [ { productId: 'sWxb8n8rQaGXXkmEp',
@@ -57,16 +54,8 @@ Meteor.methods
 
       #[{deliveryDay: Date, sales: [array]}]
 
-      Mailer.send
-        to: "#{user.profile.name} <#{user.emails[0].address}>"
-<<<<<<< HEAD
-        subject: "Kai kohekohe Food Co-op Order Confirmation"
-        template: "confirmOrderEmail"
-        data: dataObject
-
-    
-=======
-        subject: "Whangarei Food Co-op Order Confirmation #{invoiceNumber}"
-        template: "confirmOrderEmail"
-        data: dataObject
->>>>>>> distribution
+    Mailer.send
+      to: "#{user.profile.name} <#{user.emails[0].address}>"
+      subject: "Kai kohekohe Food Co-op Order Confirmation"
+      template: "confirmOrderEmail"
+      data: dataObject

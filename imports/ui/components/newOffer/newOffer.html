@@ -1,0 +1,59 @@
+<div class="request-body-wrapper new-offer md-whiteframe-1dp" layout ng-class="{focussed: newOffer.hasFocus}">
+  <multi-avatar user-id="newOffer.offer.user"></multi-avatar>
+  <div flex="no-shrink">
+    <div layout layout-align="space-between" ng-if="newOffer.hasFocus">
+      <span class="md-caption">
+        <span class="md-warn">Draft offer</span> to {{newOffer.request.creator.name}}
+        <span ng-if="newOffer.request.creator.companyName"> of {{newOffer.request.creator.companyName}}</span>
+      </span>
+      <md-button class="md-icon-button" ng-click="newOffer.hasFocus = false" aria-label="close draft offer">
+        <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
+      </md-button>
+    </div>
+    <form name="newOffer.form" ng-submit="newOffer.submit(newOffer.form.$valid)"
+    layout="column">
+      <md-input-container ng-class="{'notFocus': !newOffer.hasFocus}">
+        <textarea
+          name="description"
+          placeholder="Make an offer"
+          ng-focus="newOffer.hasFocus = true"
+          ng-model="newOffer.offer.description" required>
+        </textarea>
+        <div ng-messages="newOffer.form.description.$errors" ng-if="false"></div>
+      </md-input-container>
+      <md-input-container ng-if="newOffer.request.quantity && newOffer.hasFocus">
+        <input placeholder="quantity of offer" type="number"
+        ng-model="newOffer.offer.quantity" ng-max="newOffer.request.quantity" min="1"
+        ng-required="!!newOffer.request.quantity">
+      </md-input-container>
+      <div layout>
+        <md-input-container ng-if="newOffer.hasFocus">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
+          <input placeholder="you bid"
+          type="number"
+        ng-model="newOffer.bidWithMarkup" min="0.01" step="0.01" required
+        ng-change="newOffer.changeBid()">
+        </md-input-container>
+        <md-input-container ng-if="newOffer.hasFocus">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
+          <input placeholder="you earn"
+          ng-model="newOffer.offer.bid" min="0.01" step="0.01" required
+          ng-change="newOffer.changeBidWithMarkup()">
+          <!-- <p class="md-caption">You earn: <strong>{{ newOffer.earn * (1-newOffer.markup) | currency }}</strong></p> -->
+        </md-input-container>
+
+      </div>
+
+      <md-checkbox ng-if="newOffer.request.deadline && newOffer.hasFocus"
+      ng-model="newOffer.offer.deadlineAgreement"
+      ng-required="!!newOffer.request.deadline"
+      aria-label="I will meet the deadline">
+        I can meet the deadline of {{newOffer.request.deadline | date:'longDate'}}
+      </md-checkbox>
+      <md-button
+      ng-if="newOffer.hasFocus" type="submit" class="md-primary"
+      ng-disabled="newOffer.form.$invalid">Send Offer</md-button>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,342 @@
+<style parseStyle>
+  .producer-banner {
+    background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_1920,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
+  }
+
+  @media only screen and (max-width: 1280px) {
+    .producer-banner {
+      background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_1280,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
+    }
+  }
+
+  @media only screen and (max-width: 960px) {
+    .producer-banner {
+      background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_960,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .producer-banner {
+      background-image: url(https://res.cloudinary.com/foodcoop/image/upload/c_fit,f_auto,g_center,w_600,h_500/{{ ctrl.producer.profile.banner.result || ctrl.producer.profile.banner ||'GREEN_bwdprc'}}.jpg);
+    }
+  }
+</style>
+
+<md-content layout="row" layout-align="center start" ng-cloak>
+  <span flex></span>
+  <div
+  class="producer-banner"
+  flex="100">
+    <div style="height:100%" class="text-protection" layout="column" layout-align="end">
+      <h1 class="md-display-3">{{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</h1>
+      <p>{{ctrl.likesCount.length}} member endorsements.</p>
+      <div layout="row" layout-align="space-between">
+        <md-button class="md-icon-button"
+                aria-label="Favorite" style="padding: 8px 0"
+                ui-sref="directory">
+          <md-icon class="white-icon" md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+        </md-button>
+        <div>
+          <md-button class="md-secondary md-icon-button is-liked"
+            aria-label="Favorite" style="padding: 8px 0" ng-if="currentUser"
+            >
+            <like-heart target-id="ctrl.producer._id" category="producer" like-text="Clap clap! Thanks for endorsing {{ctrl.producer.profile.name}}" unlike-text="you are no longer endorsing this producer"></like-heart>
+          </md-button>
+        <fc-social-menu url="/directory/{{ctrl.producer._id}}" class="white-icon" text="Love {{ctrl.producer.profile.name}}'s profile on the Kaikohe Co-op"></fc-social-menu></div>
+      </div>
+    </div>
+  </div>
+  <span flex></span>
+</md-content>
+
+<md-content ng-if="ctrl.producer.profile.video" layout layout-align="center" style="margin-top: 3em;">
+  <span flex></span>
+  <div flex="70" flex-sm="90" flex-xs="100">
+    <fc-video video-url="ctrl.producer.profile.video"></fc-video>
+  </div>
+  <span flex></span>
+</md-content>
+<md-content layout layout-align="center" layout-wrap style="margin-top: 3em;">
+  <span flex></span>
+  <div layout-margin layout="column" flex="35" flex-sm="40" flex-xs="100">
+    <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" md-svg-icon="social:ic_person_24px"></md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">About Us</span>
+          <span class="md-subhead">{{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <img ng-if="ctrl.producer.profile.logo && !ctrl.producer.profile.logo.result"
+      ngf-src="ctrl.producer.profile.logo">
+      <cl-image ng-if="ctrl.producer.profile.logo.result" public-id="{{ctrl.producer.profile.logo.result}}" format="jpg">
+        <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
+      </cl-image>
+      <md-card-title>
+        <md-card-title-text>
+
+          <span class="md-headline">
+            <md-button
+              ng-if="ctrl.isOwner"
+              ng-click="ctrl.edit.companyName = !ctrl.edit.companyName"
+              class="md-icon-button md-accent" aria-label="edit company name">
+              <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+            </md-button>
+            <span ng-if="!ctrl.producer.profile.companyName && ctrl.isOwner">Company Name</span>{{ctrl.producer.profile.companyName}}
+          </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <form name="editCompanyName"
+        ng-if="ctrl.edit.companyName && ctrl.isOwner"
+        class="editContent"
+        ng-submit="ctrl.edit.companyName = !ctrl.edit.companyName" layout="row" layout-padding layout-xs="column">
+          <md-input-container flex>
+            <label>Company Name</label>
+            <input ng-model="ctrl.producer.profile.companyName" name="companyName"
+            ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions">
+          </md-input-container>
+        </form>
+        <p ng-if="ctrl.isOwner && !ctrl.producer.profile.summary">Write a short paragraph about how great your business is.</p>
+
+        <div ng-bind-html="ctrl.producer.profile.summary | md"></div>
+        <div layout>
+          <md-button
+          ng-if="ctrl.isOwner"
+          ng-click="ctrl.edit.summary = !ctrl.edit.summary"
+          class="md-icon-button md-accent" aria-label="edit summary">
+            <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+          </md-button>
+          <span flex></span>
+          <markdown-help ng-if="ctrl.isOwner"></markdown-help>
+        </div>
+
+        <form name="editSummary" ng-if="ctrl.edit.summary && ctrl.isOwner" class="editContent"
+        ng-submit="ctrl.edit.summary = !ctrl.edit.summary" layout="row" layout-padding layout-xs="column">
+          <md-input-container flex>
+            <label>About Your Business</label>
+            <textarea ng-model="ctrl.producer.profile.summary" name="summary"
+            ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions"
+            ></textarea>
+          </md-input-container>
+        </form>
+
+        <md-input-container flex ng-if="ctrl.isOwner">
+          <label>Youtube Video Link</label>
+          <input ng-model="ctrl.producer.profile.video" name="video"
+          ng-change="ctrl.save(ctrl.producer.profile)" ng-model-options="ctrl.modelOptions">
+        </md-input-container>
+      </md-card-content>
+      <fc-img-upload ng-if="ctrl.isOwner" can-edit="ctrl.isOwner" on-success="ctrl.photoUploadSuccess(data)"
+      on-delete="ctrl.deleteLogo()"></fc-img-upload>
+    </md-card>
+
+    <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" md-svg-icon="communication:ic_chat_bubble_24px"></md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">Contact Us</span>
+          <span class="md-subhead">{{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <md-list>
+          <md-list-item ng-href="tel:{{ctrl.producer.profile.phone}}">
+            <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+            <p>{{ctrl.producer.profile.phone}}</p>
+          </md-list-item>
+          <md-list-item ng-href="mailto:{{ctrl.producer.emails[0].address}}">
+            <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+            <p>{{ctrl.producer.emails[0].address}}</p>
+          </md-list-item>
+          <md-list-item ng-href="{{ctrl.producer.profile.website}}" target="_blank" ng-if="ctrl.producer.profile.website || ctrl.isOwner">
+            <md-icon md-svg-icon="social:ic_public_24px"></md-icon>
+            <p>
+              {{ctrl.producer.profile.website || 'your website goes here'}}
+            </p>
+            <md-button
+              ng-if="ctrl.isOwner"
+              ng-click="ctrl.edit.website = !ctrl.edit.website"
+              class="md-icon-button md-accent md-secondary" aria-label="edit website">
+              <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+            </md-button>
+          </md-list-item>
+        </md-list>
+
+        <form name="editWebsite" ng-if="ctrl.edit.website && ctrl.isOwner" class="editContent"
+        ng-submit="ctrl.edit.website = !ctrl.edit.website" layout="row" layout-padding layout-xs="column">
+          <md-input-container flex>
+            <label>Website URL</label>
+            <input ng-model="ctrl.producer.profile.website" name="website" md-maxlength="40" ng-change="ctrl.save(ctrl.producer.profile)">
+            <div ng-messages="editWebsite.website.$error" ng-if="editWebsite.website.$touched">
+              <div ng-message="maxlength">Please use a shorter url.</div>
+            </div>
+          </md-input-container>
+        </form>
+      </md-card-content>
+    </md-card>
+    <!-- Location -->
+    <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" md-svg-icon="maps:ic_place_24px"></md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">Location</span>
+          <span class="md-subhead">{{ctrl.producer.profile.deliveryAddress.formatted_address}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <ui-gmap-google-map
+      center="ctrl.mapSettings.center"
+      zoom="ctrl.mapSettings.zoom"
+      options="ctrl.mapSettings.options"
+      events="ctrl.mapSettings.events">
+        <ui-gmap-marker ng-if="ctrl.markerSettings"
+        idKey="ctrl.markerSettings.id"
+        coords="ctrl.markerSettings.coords"
+        options="ctrl.markerSettings.options"
+        >
+          <ui-gmap-window templateParameter="vm.producer.profile" templateUrl="client/directory/views/infoWindow.ng.html">
+          </ui-gmap-window>
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+    </md-card>
+  </div>
+<!--
+    Second Column
+-->
+  <div layout-margin layout="column" flex="35" flex-sm="40" flex-xs="100">
+    <md-card ng-if="ctrl.producer.profile.name">
+      <md-card-header>
+        <md-card-avatar>
+          <!-- <multi-avatar user-id="ctrl.producer._id" width="40"></multi-avatar> -->
+          <ng-letter-avatar data="{{ctrl.producer.profile.name}}" width="40" height="40" font-Size="24" shape="round"></ng-letter-avatar>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">Personal Profile</span>
+          <span class="md-subhead">{{ctrl.producer.profile.name}}</span>
+        </md-card-header-text>
+      </md-card-header>
+
+      <cl-image ng-if="ctrl.producer.profile.personalPic.result" public-id="{{ctrl.producer.profile.personalPic.result}}" >
+        <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
+      </cl-image>
+
+      <img ng-if="ctrl.producer.profile.personalPic && !ctrl.producer.profile.personalPic.result"
+      ngf-src="ctrl.producer.profile.personalPic">
+      <md-card-content>
+        <p ng-if="ctrl.isOwner && !ctrl.producer.profile.bio">Write a short paragraph about yourself and your experience</p>
+
+        <div ng-bind-html="ctrl.producer.profile.bio | md"></div>
+        <div layout>
+          <md-button
+            ng-if="ctrl.isOwner"
+            ng-click="ctrl.edit.bio = !ctrl.edit.bio"
+            class="md-icon-button md-accent" aria-label="edit summary">
+            <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+          </md-button>
+          <span flex></span>
+          <markdown-help ng-if="ctrl.isOwner"></markdown-help>
+        </div>
+
+        <form name="editBio" ng-if="ctrl.edit.bio && ctrl.isOwner" class="editContent"
+        ng-submit="ctrl.edit.bio = !ctrl.edit.bio" layout="row" layout-padding layout-xs="column">
+          <md-input-container flex>
+            <label>About Yourself</label>
+            <textarea ng-model-options="ctrl.modelOptions" ng-model="ctrl.producer.profile.bio" name="bio" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
+          </md-input-container>
+        </form>
+
+
+
+      </md-card-content>
+      <fc-img-upload ng-if="ctrl.isOwner" can-edit="ctrl.isOwner" on-success="ctrl.logoUploadSuccess(data)"
+      on-delete="ctrl.deletePhoto()"></fc-img-upload>
+    </md-card>
+
+    <!-- Products -->
+    <md-card class="repeating-products-card" ng-if="ctrl.products.length">
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" md-svg-icon="action:ic_store_24px"></md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">Products for Sale</span>
+          <span class="md-subhead">From {{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-virtual-repeat-container id="vertical-container">
+
+        <md-list ng-controller="orderProductCtrl as shop">
+          <md-list-item class="md-2-line repeated-item md-whiteframe-1dp" md-virtual-repeat="product in ctrl.products"
+            ui-sref="productDetails({productId: product._id})"
+          >
+            <cl-image public-id="{{product.img.result}}" class="md-avatar">
+              <cl-transformation height="50" width="50" crop="fill" gravity="center"></cl-transformation>
+            </cl-image>
+            <div class="md-list-item-text">
+              <h3>{{product.name}}</h3>
+              <p>{{ctrl.priceWithMarkup(product)| currency}} / {{product.unitOfMeasure}}</p>
+            </div>
+            <md-icon class="md-secondary" aria-label="shopping cart" ng-class="{
+              'md-hue-2 md-primary': product.stocklevel == null || product.stocklevel > 0
+            }"
+              ng-click="shop.addToCart($event, product, 1)"
+              md-svg-icon="{{ shop.alreadyInCart(product._id) }}"
+            >
+            </md-icon>
+          </md-list-item>
+        </md-list>
+      </md-virtual-repeat-container>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="store({producer: ctrl.producer._id})">
+          View in the Store
+        </md-button>
+      </md-card-actions>
+    </md-card>
+
+    <!-- Farm Practices -->
+    <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" md-svg-icon="action:ic_description_24px"></md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">{{ctrl.producer.profile.companyName || ctrl.producer.profile.name}}</span>
+          <span class="md-subhead">Production Practices</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <p ng-if="ctrl.isOwner && !ctrl.producer.profile.chemicals">Write what kinds of agricultural chemicals you use in your business, or promote the organic alternatives you love.</p>
+        <div ng-bind-html="ctrl.producer.profile.chemicals | md"></div>
+        <div layout>
+          <md-button
+            ng-if="ctrl.isOwner"
+            ng-click="ctrl.edit.chemicals = !ctrl.edit.chemicals"
+            class="md-icon-button md-accent" aria-label="edit summary">
+            <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
+          </md-button>
+          <span flex></span>
+          <markdown-help ng-if="ctrl.isOwner"></markdown-help>
+        </div>
+
+        <form name="editChemicals" ng-if="ctrl.edit.chemicals && ctrl.isOwner" class="editContent"
+        ng-submit="ctrl.edit.chemicals = !ctrl.edit.chemicals" layout="row" layout-padding layout-xs="column">
+          <md-input-container flex>
+            <label>Farm Chemicals if any?</label>
+
+            <textarea ng-model="ctrl.producer.profile.chemicals" name="chemicals" ng-model-options="ctrl.modelOptions" ng-change="ctrl.save(ctrl.producer.profile)"></textarea>
+          </md-input-container>
+        </form>
+
+        <p ng-if="ctrl.producer.profile.certification">Certified {{ctrl.producer.profile.certification}}</p>
+      </md-card-content>
+    </md-card>
+
+    </div>
+    <span flex></span>
+</md-content>

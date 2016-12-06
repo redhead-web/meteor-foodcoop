@@ -69,7 +69,7 @@ export function buyTickets(eventId, ticketData, transactionData) {
 
     if (this.userId) {
       const user = Meteor.users.findOne(this.userId)
-      config.customerId = user.profile.customerId
+      config.customerId = user.customerId
       config.options.storeInVaultOnSuccess = true;
     }
 

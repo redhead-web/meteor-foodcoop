@@ -34,3 +34,4 @@ Meteor.publish "mySales", (deliveryDay) ->
       customerNumber:1
       packagingRefund:1
       status: 1
+      unitOfMeasure: 1

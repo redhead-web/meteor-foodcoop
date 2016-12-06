@@ -1,0 +1,210 @@
+<div layout="row" layout-xs="column">
+  <span flex hide-xs></span>
+  <div class='img-col' flex-gt-xs="30">
+    <fc-img-upload can-edit="true" on-success="ctrl.imgUploadSuccess(data)" on-error="ctrl.imgUploadError(error)"
+    on-delete="ctrl.deleteImage()" cl-img="ctrl.product.img.result"></fc-img-upload>
+  </div>
+  <div layout="column" flex-gt-sm="60"  flex-sm="80" layout-xs-margin>
+    <br>
+    <div ng-show="ctrl.error" class="md-warn">
+      <small>{{ ctrl.error }}</small>
+    </div>
+    <form layout="column" layout-margin name="productUploadForm">
+      <div layout="row" ng-if="ctrl.hasRole(currentUser, 'admin')">
+        <md-autocomplete flex required md-input-name="producer" placeholder="Producer"
+        md-search-text="ctrl.producerSearch"
+        md-select-on-match="true"
+        md-selected-item="ctrl.producer"
+        md-item-text="item.profile.name"
+        md-selected-item-change="ctrl.selectedItemChange(ctrl.producer)"
+        md-items="item in ctrl.getProducers(ctrl.producerSearch)"
+        >
+          <md-item-template>
+            <span class="item-title">
+              <span> {{item.profile.name}} </span>
+            </span>
+            <span class="item-metadata">
+              <span class="item-metastat">
+                <strong>{{item.profile.companyName}}</strong>
+              </span>
+              <span class="item-metastat">
+                <i>{{item._id}}</i>
+              </span>
+            </span>
+          </md-item-template>
+        </md-autocomplete>
+      </div>
+      <md-input-container ng-if="ctrl.hasRole(currentUser, 'admin')">
+        <label>Extra Markup (use 0.1 for 10% extra)</label>
+        <input ng-model="ctrl.product.extraMarkup" min="0" step="0.1">
+      </md-input-container>
+      <md-input-container>
+        <label>Product Name</label>
+        <input ng-model="ctrl.product.name" required name="productName" md-maxlength="100">
+        <div ng-messages="productUploadForm.productName.$error" ng-if="productUploadForm.productName.$touched">
+          <div ng-message="required">A product name is required.</div>
+          <div ng-message="maxlength">Please use a shorter name.</div>
+        </div>
+      </md-input-container>
+
+      <div layout="row">
+        <md-input-container flex="50" class="md-icon-float md-block">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
+          <input ng-model="ctrl.priceWithMarkup" type="number" min="0" step="0.01" placeholder="Price With Markup" name="price"
+            ng-change="ctrl.round('price', ctrl.priceWithMarkup / ctrl.markup, 'priceWithMarkup')"
+          >
+          <div ng-messages="productUploadForm.price.$error" ng-if="productUploadForm.price.$touched">
+            <div ng-message="required">A product price is required.</div>
+            <div ng-message="number">Please use just a positive number here.</div>
+            <div ng-message="min">Please use a positive number here.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="50" class="md-icon-float md-block">
+          <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price" ></md-icon>
+          <input ng-model="ctrl.product.price" type="number" min="0" step="0.01" placeholder="You earn" name="earn"
+            ng-change="ctrl.round('priceWithMarkup', ctrl.product.price * ctrl.markup, 'price')"
+            required
+          >
+          <div ng-messages="productUploadForm.earn.$error" ng-if="productUploadForm.earn.$touched">
+            <div ng-message="required">A product price is required.</div>
+            <div ng-message="number">Please use just a positive number here.</div>
+            <div ng-message="min">Please use a positive number here.</div>
+          </div>
+        </md-input-container>
+
+      </div>
+
+      <div layout="row">
+        <md-autocomplete flex required md-input-name="unitofmeasure" placeholder="Unit of Measure"
+				md-search-text="ctrl.product.unitOfMeasure"
+        md-select-on-match="true"
+        md-items="item in ctrl.getUnitsOfMeasure(ctrl.product.unitOfMeasure)"
+        md-item-text="item" md-floating-label="Unit of Measure">
+          <md-item-template>
+            <span md-highlight-text="searchText">{{item}}</span>
+          </md-item-template>
+          <div ng-messages="productUploadForm.unitofmeasure.$error" ng-if="productUploadForm.unitofmeasure.$touched">
+            <div ng-message="required">This field is required</div>
+          </div>
+        </md-autocomplete>
+      </div>
+
+      <div layout="row" layout-align="center end">
+        <div flex="50">
+          <label>Number Available</label>
+          <div layout="row" style="align-items:flex-end">
+            <md-input-container flex="50">
+              <label>Amount</label>
+              <input ng-model="ctrl.product.stocklevel" type="number" min="0" ng-disabled="ctrl.unlimited">
+            </md-input-container>
+            <md-input-container flex="50">
+              <md-checkbox ng-model="ctrl.unlimited">Unlimited</md-checkbox>
+            </md-input-container>
+          </div>
+        </div>
+
+        <md-input-container flex="50">
+          <label>Min. Order</label>
+          <input ng-model="ctrl.product.minimumOrder" name="minOrder" type="number" min="0">
+          <div ng-messages="productUploadForm.minOrder.$error">
+            <div ng-message="min">You must have a positive number here.</div>
+            <div ng-message="number">Please use just a number here.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <section layout="row" hide-xs hide-sm layout-wrap>
+        <md-button
+        class="md-raised"
+        ng-repeat="category in ctrl.categories"
+        ng-class="{'md-primary' : ctrl.product.category === category.name}"
+        ng-click="ctrl.product.category = category.name">
+          {{category.name}}
+        </md-button>
+      </section>
+
+      <md-input-container hide-gt-sm>
+        <label>Product Category</label>
+        <md-select ng-model="ctrl.product.category">
+          <md-option ng-repeat="category in ctrl.categories" value="{{category.name}}">
+            {{category.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Short Packaging Description (optional)</label>
+        <input ng-model="ctrl.product.packagingDescription" type="text">
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+        <md-icon md-svg-icon="editor:ic_attach_money_24px" aria-label="product price"></md-icon>
+        <input ng-model="ctrl.product.packagingRefund" name="packagingRefund" type="number" min="0" step="0.01" placeholder="Packaging Refund amount (optional)">
+        <div ng-messages="productUploadForm.packagingRefund.$error">
+          <div ng-message="min">You must have a positive number here.</div>
+          <div ng-message="number">Please use just a number here.</div>
+        </div>
+      </md-input-container>
+
+      <md-chips
+      ng-model="ctrl.product.ingredients"
+      md-separator-keys="ctrl.keys"
+      secondary-placeholder="Add another"
+      placeholder="Ingredients (Optional)"></md-chips>
+
+      <md-input-container>
+        <label>Certification</label>
+        <md-select ng-model="ctrl.product.certification">
+          <md-option ng-repeat="c in ctrl.certifications" ng-value="{name: c.name, img: c.img}">
+            <img ng-src="{{c.img}}" height="40" style="position: absolute; top: 2px; left: 2px;"> <span style="margin-left: 48px">{{c.name}}</span>
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Custom Sale Notice (*optional)</label>
+        <md-select ng-model="ctrl.product.daysNotice">
+          <md-option ng-repeat="day in ctrl.daysNotice" value="{{day.value}}">
+            {{day.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <section class="div-3dp" ng-cloak>
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Description</span></h2>
+            <span flex></span>
+          </div>
+        </md-toolbar>
+        <md-tabs md-dynamic-height md-border-bottom>
+           <md-tab label="Editor">
+             <div class="md-padding">
+               <md-input-container class="md-block">
+                 <label>Description</label>
+                 <textarea ng-model="ctrl.product.description" md-maxlength="2500" name="description"></textarea>
+                 <div ng-messages="productUploadForm.description.$error" ng-if="productUploadForm.description.$touched">
+                   <div ng-message="maxlength">Please use a shorter description.</div>
+                 </div>
+               </md-input-container>
+               <markdown-help></markdown-help>
+             </div>
+           </md-tab>
+           <md-tab label="Preview">
+             <div class="md-padding">
+               <div class="md" ng-bind-html="ctrl.product.description | md"></div>
+             </div>
+           </md-tab>
+         </md-tabs>
+      </section>
+
+      <md-button ng-click="ctrl.save($event)">List In Store</md-button>
+      <md-button ui-sref="store">Cancel</md-button>
+    </form>
+  </div>
+  <div flex-gt-xs flex-order-xs="-1" layout="column" layout-align-xs="center end">
+    <md-switch class="md-primary md-block" ng-model="ctrl.product.published"><span ng-show="ctrl.product.published">For Sale</span><span ng-hide="ctrl.product.published">Not For Sale</span> </md-switch>
+  </div>
+  <span flex hide-xs></span>
+</div>

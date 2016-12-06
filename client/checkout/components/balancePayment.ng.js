@@ -1,31 +1,33 @@
-function BalancePaymentController($scope, $state, $reactive) {
-  "ngInject";
-  $reactive(this).attach($scope)
-  
-  this.invoice = () => {
-    let userId = this.customer ? this.customer._id : Meteor.userId()
-    this.call("balanceCheckout", userId, this.pos, (err, response) => {
-      $scope.$apply(() => {
-        if (err) {
-          this.onError({error: err})
-          return console.error(err)
-        }
-        console.log(response)
-        this.onSuccess({response: response})
-      })
-    })
+import angular from 'angular';
+
+class BalancePaymentController {
+  constructor($scope, $state, $reactive) {
+    'ngInject';
+    $reactive(this).attach($scope);
   }
-  
+  invoice() {
+    this.call('balanceCheckout', this.customerId, this.delivery, this.status, (err, response) => {
+      if (err) {
+        this.onError({ error: err });
+        console.error(err);
+      } else {
+        console.log(response);
+        this.onSuccess({ response });
+      }
+    });
+  }
 }
 
+
 angular.module('food-coop')
-.component("fcBalancePayment", {
+.component('fcBalancePayment', {
   templateUrl: 'client/checkout/components/balancePaymentTpl.ng.html',
   controller: BalancePaymentController,
   bindings: {
-    customer: "<",
-    pos: "@",
-    onError: "&",
-    onSuccess: "&"
-  }
-})
+    customerId: '<',
+    delivery: '<',
+    status: '@',
+    onError: '&',
+    onSuccess: '&',
+  },
+});

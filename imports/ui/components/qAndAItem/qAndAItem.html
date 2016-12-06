@@ -1,0 +1,16 @@
+<div class="question-item">
+  <div class="question">
+    <span class="md-body-2">{{$ctrl.item.question.user.name}}&nbsp;</span><span class="md-caption">{{$ctrl.item.question.createdAt | fromNow}}</span>
+    <div class="md-body-1">
+      {{$ctrl.item.question.body}}
+    </div>
+  </div>
+
+  <div class="answer" ng-if="$ctrl.item.answer">
+    <span class="md-body-2">{{$ctrl.item.answer.user.name}}&nbsp;</span><span class="md-caption">{{$ctrl.item.answer.createdAt | fromNow}}</span>
+    <div class="md-body-1">
+      {{$ctrl.item.answer.body}}
+    </div>
+  </div>
+  <answer question="$ctrl.item" on-submit="$ctrl.updateQuestion(modifier)" ng-if="!$ctrl.item.answer && $ctrl.canAnswer"></answer>
+</div>

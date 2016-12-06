@@ -11,15 +11,15 @@
 
     <md-button ng-href="/login" ng-hide="currentUser" hide-xs>Login</md-button>
     <md-button ng-href="/register" ng-hide="currentUser" hide-xs>Sign up</md-button>
-    <cart-summary ng-if="currentUser"></cart-summary>
+    <cart-summary ng-show="currentUser"></cart-summary>
     <md-button ng-click="nav.toggleRight('right')" aria-label="navigation toggle" class="md-icon-button">
       <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
     </md-button>
-    <md-menu ng-if="currentUser" md-position-mode="target-right target">
+    <md-menu ng-if="$root.currentUser" md-position-mode="target-right target">
       <multi-avatar
         md-menu-origin
         ng-click="$mdOpenMenu($event)"
-        user="currentUser" width="40"
+        user-id="$root.currentUser._id" width="40"
         style="height: 40px; width: 40px;">
       </multi-avatar>
       <!-- <md-button md-menu-origin
@@ -33,7 +33,7 @@
             </div>
           </md-button>
         </md-menu-item>
-        <md-menu-item ng-if="$root.hasRole(currentUser, 'producer')">
+        <md-menu-item ng-show="$root.hasRole(currentUser, 'producer')">
           <md-button ui-sref="myProducts">
             <div layout="row">
               <md-icon md-svg-icon="file:ic_cloud_24px"></md-icon>
@@ -49,7 +49,7 @@
             </div>
           </md-button>
         </md-menu-item>
-        <md-menu-item ng-if="$root.hasRole(currentUser, 'producer')">
+        <md-menu-item ng-show="$root.hasRole(currentUser, 'producer')">
           <md-button ui-sref="profile.sales">
             <div layout="row">
               <md-icon md-svg-icon="action:ic_description_24px"></md-icon>
@@ -79,7 +79,7 @@
       </md-menu-content>
 
     </md-menu>
-    <md-button ui-sref="admin" ng-if="currentUser && $root.hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-icon-button">
+    <md-button ui-sref="admin" ng-show="currentUser && $root.hasRole(currentUser, 'admin')" aria-label="admin bashboard" class="md-icon-button">
       <md-icon md-svg-icon="action:ic_settings_24px"></md-icon>
     </md-button>
 
@@ -104,6 +104,14 @@
       <md-list-item ng-click="nav.goTo('store'); nav.toggleRight('right')">
         <md-icon class="md-primary" md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
         <p> Store </p>
+      </md-list-item>
+      <!-- <md-list-item ng-click="nav.goTo('events'); nav.toggleRight('right')">
+        <md-icon class="md-primary" md-svg-icon="action:ic_event_24px"></md-icon>
+        <p> Events </p>
+      </md-list-item> -->
+      <md-list-item ng-show="$root.currentUser._id" ng-click="nav.goTo('producer', {producerId: $root.currentUser._id}); nav.toggleRight('right')">
+        <md-icon class="md-primary" md-svg-icon="social:ic_person_24px"></md-icon>
+        <p> My Profile </p>
       </md-list-item>
       <md-list-item ng-click="nav.goTo('directory'); nav.toggleRight('right')">
         <md-icon class="md-primary" md-svg-icon="social:ic_people_24px"></md-icon>

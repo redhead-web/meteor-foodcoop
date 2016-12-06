@@ -42,13 +42,6 @@ angular.module('food-coop').config ($stateProvider) ->
     controllerAs: 'vm'
     resolve: 'admin': ($auth) ->
         $auth.requireValidUser(isAdmin)
-  ).state('admin.orders',
-    url: '/orders'
-    templateUrl: 'client/admin/views/orders.ng.html'
-    controller: 'OrdersAdminCtrl'
-    controllerAs: 'orders'
-    resolve: 'admin': ($auth) ->
-        $auth.requireValidUser(isAdmin)
   ).state('admin.order',
     url: '/order/:orderId'
     templateUrl: 'client/admin/views/order.ng.html'
@@ -57,28 +50,28 @@ angular.module('food-coop').config ($stateProvider) ->
     resolve:
       'admin': ($auth) ->
         $auth.requireValidUser(isAdmin)
-  ).state('admin.pos', 
+  ).state('admin.pos',
     url: '/pos/'
     template: "<point-of-sale></point-of-sale>"
-    resolve: 
+    resolve:
       'admin': ($auth) ->
         $auth.requireValidUser(isAdmin)
-  ).state('admin.payments', 
+  ).state('admin.payments',
     url: '/payments/'
     template: "<fc-payments></fc-payments>"
-    resolve: 
+    resolve:
       'admin': ($auth) ->
         $auth.requireValidUser(isAdmin)
-  ).state('admin.newPayment', 
+  ).state('admin.newPayment',
     url: '/new-payment/'
     template: "<new-payment></new-payment>"
-    resolve: 
+    resolve:
       'admin': ($auth) ->
         $auth.requireValidUser(isAdmin)
-  ).state('admin.cashOrders', 
+  ).state('admin.cashOrders',
     url: '/cash-orders/'
     template: "<cash-orders></cash-orders>"
-    resolve: 
+    resolve:
       'admin': ($auth) ->
         $auth.requireValidUser(isAdmin)
   )

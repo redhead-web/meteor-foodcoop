@@ -1,0 +1,74 @@
+<div layout layout-margin>
+  <span flex>
+    <a hide-xs ng-click="$ctrl.onSuccess({eventView: ''})" href=""><md-icon md-svg-icon="maps:ic_place_24px"></md-icon></a>
+  </span>
+<form name="buyTicket" layout="column" flex="40" flex-xs="100" flex-sm="60" autocomplete="off">
+  <md-input-container>
+    <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
+    <label>Name</label>
+    <input ng-model="$ctrl.ticketData.name" name="name" required>
+    <div ng-messages="buyTicket.name.$error" ng-if="buyTicket.name.$touched">
+      <div ng-message="required">The booking name is required.</div>
+    </div>
+  </md-input-container>
+  <md-input-container>
+    <md-icon md-svg-icon="content:ic_mail_24px" class="md-accent"></md-icon>
+    <input type="text" ng-model="$ctrl.ticketData.email" name="email" required
+           placeholder="email" aria-label="email"/>
+    <div ng-messages="buyTicket.email.$error" ng-if="buyTicket.email.$touched">
+      <div ng-message="required">An email address is required.</div>
+    </div>
+  </md-input-container>
+
+  <md-checkbox ng-model="$ctrl.willRegister" ng-if="!currentUserId">Create a food co-op account at the same time?</md-checkbox>
+  <div ng-if="$ctrl.willRegister">
+    <md-divider></md-divider>
+    <md-input-container>
+      <md-icon md-svg-icon="communication:ic_call_24px" class="md-accent"></md-icon>
+      <input type="text" ng-model="$ctrl.register.profile.phone" name="phone"
+             placeholder="phone" aria-label="phone" required/>
+      <div ng-messages="buyTicket.phone.$error" ng-if="buyTicket.phone.$touched">
+        <div ng-message="required">Please provide a phone number for us to contact you on.</div>
+      </div>
+    </md-input-container>
+    <md-input-container>
+      <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
+      <input required g-places-autocomplete type="text" ng-model="$ctrl.register.profile.deliveryAddress"
+             placeholder="home address" aria-label="address" name="address"/>
+      <div ng-messages="buyTicket.address.$error" ng-if="buyTicket.address.$touched">
+        <div ng-message="required">Please provide your home address.</div>
+      </div>
+    </md-input-container>
+    <md-input-container>
+      <md-icon md-svg-icon="action:ic_lock_open_24px" class="md-accent"></md-icon>
+      <input type="password" ng-model="$ctrl.register.password" name="password" required
+      placeholder="password" aria-label="password"/>
+      <div ng-messages="buyTicket.password.$error" ng-if="buyTicket.password.$touched">
+        <div ng-message="required">Don't forget a password! Security is important.</div>
+      </div>
+    </md-input-container>
+    <md-radio-group ng-model="$ctrl.register.role" layout="row" layout-margin>
+      <md-radio-button value="customer" class="md-primary">Customer <!-- ({{rc.prices.customer | currency}}) --></md-radio-button>
+      <md-radio-button value="producer" class="md-primary">Producer <!-- ({{rc.prices.producer | currency}}) --></md-radio-button>
+    </md-radio-group>
+    <p style="margin-bottom: 0">Anyone can trial membership for a month, for free. Once your 30 days are up, just pay the one-time membership fee for ongoing access.</p>
+    <div layout layout-align="end center"><membership-benefits></membership-benefits></div>
+  </div>
+  <md-input-container>
+    <label>Qty</label>
+    <md-icon md-svg-icon="action:ic_bookmark_24px" class="md-accent"></md-icon>
+    <input ng-model="$ctrl.ticketData.qty" name="qty" type="number" min="0" max="{{$ctrl.event.ticketsRemaining}}" required>
+    <div ng-messages="buyTicket.qty.$error" ng-if="buyTicket.qty.$touched">
+      <div ng-message="required">The booking name is required.</div>
+    </div>
+  </md-input-container>
+  <md-divider></md-divider>
+    <p>Individual Tickets cost <strong>{{$ctrl.event.ticketPrice | currency}}</strong> each.</p>
+    <h3>Total: {{$ctrl.event.ticketPrice * $ctrl.ticketData.qty | currency}}</h3>
+  <md-divider></md-divider>
+  <br>
+  <span class="md-warn md-body-2">{{$ctrl.error.message}}</span>
+  <braintree-payment id="ticketPayment" is-valid="buyTicket.$valid" on-success="$ctrl.buyTickets(data)" button-text="Buy Tickets"></braintree-payment>
+</form>
+<span flex></span>
+</div>

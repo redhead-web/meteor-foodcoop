@@ -15,7 +15,7 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $mdToast
   
   $scope.validate = function() {
     if ($scope.email !== Meteor.user().emails[0].address) {
-      Meteor.call('addEmail', $scope.email, Meteor.user().emails[0].address, function(err, response) {
+      $scope.call('addEmail', $scope.email, Meteor.user().emails[0].address, function(err, response) {
         if (err) {
           console.log (err)
           $scope.errorEmail = `Error: ${err.reason}`;
@@ -40,5 +40,17 @@ angular.module("food-coop").controller("EditUserCtrl", function($scope, $mdToast
       }
     })
   };
-
+  
+  $scope.resetPassword = function resetPassword() {
+    Accounts.forgotPassword({ email: $scope.user.emails[0].address }, $scope.$bindToContext(function (err) {
+      let content = 'Poof! Check your email for the link to reset your password';
+      if (err) {
+        content = err.message;
+      }
+      $mdToast.show($mdToast
+        .simple().content(content)
+        .position('bottom right')
+        .hideDelay(3000));
+    }));
+  };
 });

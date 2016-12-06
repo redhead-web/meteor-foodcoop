@@ -23,8 +23,8 @@
             </md-select>
           </md-input-container>
         </md-list-item>
-        <md-list-item ng-repeat="u in dir.producers | filter:dir.searchstring track by u._id" class="md-3-line md-whiteframe-1dp" ui-sref="producer({producerId: u._id})">
-          <multi-avatar user="u" width="40" class="md-avatar"></multi-avatar>
+        <md-list-item ng-repeat="u in dir.producers | filter:dir.searchstring track by u._id" class="md-3-line md-whiteframe-1dp" ui-sref="producer({userId: u._id})">
+          <multi-avatar user-id="u._id" width="40" class="md-avatar"></multi-avatar>
           <div class="md-list-item-text" md-menu-origin>
             <h3>{{u.profile.companyName || u.profile.name}}</h3>
             <p>{{u.profile.deliveryAddress.formatted_address || u.profile.deliveryAddress.formattedAddress}}</p>

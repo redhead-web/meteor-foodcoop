@@ -1,3 +1,5 @@
+{ Deliveries } = require '../../imports/api/deliveries'
+
 Meteor.publish 'userCount', ->
   Counts.publish this, 'userCount', Meteor.users.find()
   @ready()
@@ -5,6 +7,12 @@ Meteor.publish 'userCount', ->
 
 Meteor.publish 'orderCount', ->
   Counts.publish this, 'upcoming-ordersCount', Sales.find
+    deliveryDay: GetNextDeliveryDay().toDate()
+  @ready()
+  undefined
+
+Meteor.publish 'deliveryCount', ->
+  Counts.publish this, 'upcoming-ordersCount', Deliveries.find
     deliveryDay: GetNextDeliveryDay().toDate()
   @ready()
   undefined
@@ -37,18 +45,18 @@ Meteor.publish "user-basics", () ->
   else
     @ready()
     return
-    
+
 Meteor.publish "cart-any-user", (userId) ->
   if Roles.userIsInRole @userId, 'admin'
     Cart.Items.find({userId: userId})
   else
     @ready()
-    return 
+    return
 
 Meteor.publish "user-list", (options, searchstring) ->
   unless searchstring?
     searchstring = ""
-    
+
   unless options?
     options = {}
 
@@ -84,9 +92,9 @@ Meteor.publish "user", (user) ->
   if Roles.userIsInRole @userId, 'admin'
     Meteor.users.find
       _id: user
-    , 
+    ,
       limit:1
-      fields: 
+      fields:
         emails:1
         createdAt:1
         roles:1
@@ -96,16 +104,15 @@ Meteor.publish "user", (user) ->
   else
     @ready()
     return
-    
+
 Meteor.publish "cash-orders", () ->
   if Roles.userIsInRole @userId, 'admin'
     Orders.find cashAmount: $exists: 1
-    , 
+    ,
       sort: dateCreated: 1
-      fields: 
+      fields:
         cardAmount: 0
         balanceAmount: 0
   else
     @ready()
     return
-        

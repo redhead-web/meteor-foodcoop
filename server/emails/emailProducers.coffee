@@ -1,14 +1,14 @@
 Meteor.methods
   "/email/producerSalesWeeklySummary": ->
     sales = Sales.find deliveryDay: GetNextDeliveryDay(moment().startOf('day').subtract('1', 'day')).toDate() # sales for last week
-    
+
     if sales.length > 0
       groupedSales = _.groupBy sales, 'producerId'
-      
+
       for id, producerSales of groupedSales
-        
+
         user = Meteor.users.findOne id
-        
+
         result = Mailer.send
           to: "#{user.profile.name} <#{user.emails[0].address}>"
           replyTo: "#{Meteor.settings.email.name} <#{Meteor.settings.email.address}>"
@@ -23,47 +23,34 @@ Meteor.methods
             sales: producerSales
             products: _.map (_.groupBy producerSales, 'productName'), (array, name) ->
               name: name, count: _.sum _.pluck array, 'qty'
-  
+
   '/email/producerOrder': ->
-    
+
     deliveryDay = GetNextDeliveryDay()
     daysNotice = deliveryDay.diff(moment().startOf('day'), 'days') + 1 # +1 is to look for daysNotice from the day before since this happens at midnight.
 
-    saleQuery = 
+    saleQuery =
       deliveryDay: GetNextDeliveryDay().toDate()
       daysNotice: daysNotice
-    
-    if daysNotice == Meteor.settings.public.shoppingThreshold # today shopping for the delivery day should be closed for the majority of products
 
+    if daysNotice == Meteor.settings.public.shoppingThreshold # today shopping for the delivery day should be closed for the majority of products
       saleQuery.daysNotice = null
-    
-<<<<<<< HEAD
-    sales = Sales.find
-      deliveryDay: moment().day(Meteor.settings.public.deliveryDayOfWeek).startOf('day').toDate()
-    .fetch()
-=======
->>>>>>> distribution
-    
+
     sales = Sales.find saleQuery
     .fetch()
-        
+
     if sales.length > 0
-    
+
       groupedSales = _.groupBy sales, 'producerId'
-      
+
       for id, producerSales of groupedSales
-        
+
         user = Meteor.users.findOne id
-        
+
         result = Mailer.send
           to: "#{user.profile.name} <#{user.emails[0].address}>"
-<<<<<<< HEAD
-          replyTo: "#{Meteor.settings.email.name} <#{Meteor.settings.email.address}>>"
-          subject: "Sales through Kai Kohekohe Food Co-op for the week"
-=======
           replyTo: "#{Meteor.settings.email.name} <#{Meteor.settings.email.address}>"
           subject: "Sales Update"
->>>>>>> distribution
           template: "salesNotification"
           data:
             recipient: user.profile.name
@@ -74,7 +61,7 @@ Meteor.methods
             sales: producerSales
             products: _.map (_.groupBy producerSales, 'productName'), (array, name) ->
               name: name, count: _.sum _.pluck array, 'qty'
-              
-        
+
+
     else
       console.log "No sales to send out emails for."

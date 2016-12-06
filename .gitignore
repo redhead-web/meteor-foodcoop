@@ -1,19 +1,16 @@
-
-settings.json
-
 *.jpg
-
-.uploads
 
 kai-deploy
 
 kai-deploy-x
 
-*.json
-
 wh-deploy
 
 kaikohe.txt
+
+server/startup/email.coffee
+
+server/startup/startup.coffee
 
 settings.json
 

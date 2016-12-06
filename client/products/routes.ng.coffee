@@ -9,22 +9,6 @@ rolePromise = ($q, r) ->
 
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider
-  .state('store',
-    url: '/store?name&certification&producer&search&category'
-    template: '<products-page></products-page>'
-  )
-  .state('productDetails',
-    url: '/product/:productId'
-    templateUrl: 'client/products/views/product-details.ng.html'
-    controller: 'ProductDetailsCtrl'
-    controllerAs: 'ctrl')
-  .state 'productCreate',
-    url: '/new-product'
-    templateUrl: 'client/products/views/product-create.ng.html'
-    controller: 'ProductCreateCtrl'
-    controllerAs: 'ctrl'
-    resolve: 'currentUser': ($q) ->
-      rolePromise($q, 'producer')
   .state 'myProducts',
     url: '/my-products'
     templateUrl: 'client/products/views/my-products.ng.html'

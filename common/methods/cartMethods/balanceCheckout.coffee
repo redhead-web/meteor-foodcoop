@@ -1,37 +1,40 @@
 Meteor.methods
-  "balanceCheckout": (customerId, pos) ->
-    
+  "balanceCheckout": (customerId, delivery, status) ->
+
     check customerId, String
-    
-    if pos == 'true'
-      deliveryDay = moment().day(Meteor.settings.public.deliveryDayOfWeek).startOf('day').toDate()
-    
+
     customer = Meteor.users.findOne customerId
-    
+
     # admin or self only
-    if @userId == customerId or Roles.userIsInRole @userId, 'admin' 
-    
+    if @userId == customerId or Roles.userIsInRole @userId, 'admin'
+
       items = Cart.Items.find(userId: customerId).fetch();
-      total = Markup(items).cartTotal()
-    
-    
-      if Roles.userIsInRole(customerId, 'allowNegativeBalance') or customer.profile.balance > total
-        data = 
-          orderTotal: total
-          cardAmount: 0
-          balanceAmount: total
-        creditUpdate = Meteor.users.update customerId,
-          $inc: 'profile.balance': -total
-        
-        # use deliveryDay if it's defined
-        if deliveryDay then data.deliveryDay = deliveryDay
-        
+      itemTotal = Markup(items).cartTotal()
+
+      order =
+        orderTotal: itemTotal
+        cardAmount: 0
+        balanceAmount: itemTotal
+        user: customerId
+        status: 'un-paid'
+
+      if delivery
+        order.orderTotal += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
+        order.balanceAmount += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
+
+      if Roles.userIsInRole(customerId, 'allowNegativeBalance') or customer.profile.balance >= order.orderTotal
+        Meteor.users.update customerId,
+          $inc: 'profile.balance': -order.orderTotal
+
+        order.status = 'paid'
+
         @unblock()
-        self = this
-        self.userId = customerId
-        Meteor.call.call self, "addFromCartToOrder", items, data
-      
-      
+
+        if delivery
+          Meteor.call 'addDelivery', delivery, customerId
+
+        Meteor.call "addFromCartToOrder2", order, items, status
+
       else
         throw new Meteor.Error 401, "Sorry! Insufficient Balance"
     else

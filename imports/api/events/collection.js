@@ -1,25 +1,24 @@
 import { Mongo } from 'meteor/mongo';
-import {Roles} from 'meteor/alanning:roles'
+import { Roles } from 'meteor/alanning:roles';
 
-import {schema} from './schema'
+import { schema } from './schema.coffee';
 
 export const Events = new Mongo.Collection('events');
 
-Events.allow({
-  insert(userId, party) {
-    return userId && isAdmin(userId);
-  },
-  update(userId, party, fields, modifier) {
-    return userId && isAdmin(userId);
-  },
-  remove(userId, party) {
-    return userId && isAdmin(userId);
-  }
-});
-
-function isAdmin (user) {
+function isAdmin(user) {
   return Roles.userIsInRole(user, 'admin');
 }
 
-Events.attachSchema(schema)
+Events.allow({
+  insert(userId) {
+    return userId && isAdmin(userId);
+  },
+  update(userId) {
+    return userId && isAdmin(userId);
+  },
+  remove(userId) {
+    return userId && isAdmin(userId);
+  },
+});
 
+Events.attachSchema(schema);

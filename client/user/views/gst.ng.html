@@ -8,16 +8,13 @@
     <span flex></span>
   </div>
 </md-toolbar>
-<md-content layout="column"  layout-align="center center">
-
-  
+<md-content layout="column"  layout-align="center center">  
   <p ng-if="gst.coopGST">Kai kohekohe Co-op GST Number is: {{gst.coopGST}} </p>
-
   <md-card class="md-whiteframe-6dp" ng-repeat="(id, sales) in gst.groupedItems">
     <md-card-header>
       <md-card-avatar>
         <multi-avatar
-          user="gst.user(id)._id" width="40">
+          user-id="gst.user(id)._id" width="40">
         </multi-avatar>
       </md-card-avatar>
       <md-card-header-text>
@@ -39,7 +36,7 @@
           Co-op Markup: {{gst.getMarkup(sales) | currency}} <br>
           <span ng-if="gst.coopGST">Co-op GST: {{gst.getGST(gst.getMarkup(sales)) | currency}}<br></span>
           <strong>Total: {{gst.getTotal(sales) | currency}}</strong>
-          
+
         </p>
       </div>
     </md-card-content>

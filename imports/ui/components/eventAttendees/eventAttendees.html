@@ -1,0 +1,24 @@
+<div layout layout-margin>
+  <span flex>
+    <span flex>
+      <a hide-xs ng-click="$ctrl.onSuccess({eventView: ''})" href=""><md-icon md-svg-icon="maps:ic_place_24px"></md-icon></a>
+    </span>
+  </span>
+  <div flex="70" flex-sm="90" flex-md="80" flex-xs="100">
+    <h1 class="md-title" layout-margin>Who is coming?</h1>
+    <md-virtual-repeat-container id="user-container">
+      <md-list layout-margin>
+        <md-list-item class="repeated-item md-whiteframe-1dp" md-virtual-repeat="ticket in $ctrl.event.attendees | orderBy: '-timestamp' ">
+          <multi-avatar user-id="ticket.userId" name="{{ticket.name}}" width="40" style="height: 40px; width: 40px;"></multi-avatar>
+          <div class="md-list-item-text" layout-margin>
+            <h3>
+              {{ticket.name}} <span ng-if="ticket.qty > 1" class="request-title">+ {{ticket.qty - 1}} others</span> are attending
+            </h3>
+          </div>
+        </md-list-item>
+      </md-list>
+
+    </md-virtual-repeat-container>
+  </div>
+  <span flex></span>
+</div>

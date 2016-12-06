@@ -3,32 +3,70 @@
 </md-toolbar>
 
 <ui-view>
-  <div layout="row" layout-margin class="text-center">
-    <md-whiteframe class="md-whiteframe-z5" flex flex-order="4">
-      <md-button class="md-fab" ui-sref="admin.payments" aria-label="payments">
-        <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
-      </md-button>
-      <div class="label">Payments: {{rt.paymentsCount}}</div>
-    </md-whiteframe>
-    <md-whiteframe class="md-whiteframe-z5" flex flex-order="3">
-      <md-button class="md-fab" ui-sref="admin.users" aria-label="users">
-        <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
-      </md-button>
-      <div class="label">Total Users: {{rt.userCount}}</div>
-    </md-whiteframe>
-    <md-whiteframe class="md-whiteframe-z5" flex flex-order="2">
-      <md-button class="md-fab" ui-sref="admin.orders" aria-label="orders">
-        <md-icon md-svg-icon="action:ic_shopping_basket_24px"></md-icon>
-      </md-button>
-      <div class="label">Total Orders: {{rt.ordersCount}}</div>
-    </md-whiteframe>
-    <md-whiteframe class="md-whiteframe-z5" flex flex-order="1">
-      <md-button class="md-fab" ui-sref="admin.products" aria-label="view-products">
-        <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
-      </md-button>
-      <div class="label">Total Products: {{rt.productsCount}}</div>
-    </md-whiteframe>
+  <div layout="row" layout-wrap class="text-center">
+    <div flex flex-xs="50" flex-sm="33">
+      <md-card>
+        <md-card-content>
+          <md-button class="md-fab" ui-sref="admin.products" aria-label="view-products">
+            <md-icon md-svg-icon="action:ic_add_shopping_cart_24px"></md-icon>
+          </md-button>
+        </md-card-content>
+        <md-card-actions>
+          <div class="label">Total Products: {{rt.productsCount}}</div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex flex-xs="50" flex-sm="33">
+      <md-card>
+        <md-card-content>
+          <md-button class="md-fab" ui-sref="admin.payments" aria-label="payments">
+            <md-icon md-svg-icon="editor:ic_attach_money_24px"></md-icon>
+          </md-button>
+        </md-card-content>
+        <md-card-actions>
+          <div class="label">Payments: {{rt.paymentsCount}}</div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex flex-xs="50" flex-sm="33">
+      <md-card>
+        <md-card-content>
+          <md-button class="md-fab" ui-sref="admin.orders" aria-label="orders">
+            <md-icon md-svg-icon="action:ic_shopping_basket_24px"></md-icon>
+          </md-button>
+        </md-card-content>
+        <md-card-actions>
+          <div class="label">Total Orders: {{rt.ordersCount}}</div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex flex-xs="50" flex-sm="33">
+      <md-card>
+        <md-card-content>
+          <md-button class="md-fab"
+          ui-sref="admin.deliveries" aria-label="users">
+            <md-icon md-svg-icon="maps:ic_local_shipping_24px"></md-icon>
+          </md-button>
+        </md-card-content>
+        <md-card-actions>
+          <div class="label">Total Deliveries: {{rt.deliveryCount}}</div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex flex-xs="50" flex-sm="33">
+      <md-card>
+        <md-card-content>
+          <md-button class="md-fab" ui-sref="admin.users" aria-label="users">
+            <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
+          </md-button>
+        </md-card-content>
+        <md-card-actions>
+          <div class="label">Total Users: {{rt.userCount}}</div>
+        </md-card-actions>
+      </md-card>
+    </div>
   </div>
   <md-button ui-sref="admin.pos" class="md-warn md-raised">Go to Till</md-button>
+  <md-button ui-sref="admin.deliverySettings" class="md-raised">Delivery Settings</md-button>
   <md-button ui-sref="admin.cashOrders" class="md-raised">Cash Orders</md-button>
 </ui-view>

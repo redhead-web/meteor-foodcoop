@@ -1,0 +1,98 @@
+<section layout flex class="event-details">
+  <md-content class="md-whiteframe-z2 sidebar" layout="column" flex="25" flex-sm="33" flex-xs="100" md-theme="darkTheme">
+    <div layout-padding>
+      <div class="event-img-container">
+        <cl-image public-id="{{$ctrl.event.img.result}}" format="jpg">
+          <cl-transformation height="400" width="600" crop="fill" gravity="north"></cl-transformation>
+        </cl-image>
+        <h1 class="md-title text-center">{{$ctrl.event.title}}</h1>
+      </div>
+      <md-tabs md-dynamic-height md-center-tabs ng-if="$ctrl.xs" md-selected="$ctrl.selectedTab">
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-svg-icon="action:ic_event_24px" class="md-primary"></md-icon>
+          </md-tab-label>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-svg-icon="editor:ic_attach_money_24px" class="md-primary"></md-icon>
+          </md-tab-label>
+          <md-tab-body>
+            <buy-ticket event="$ctrl.event" on-success="$ctrl.selectedTab = 2"></buy-ticket>
+          </md-tab-body>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-svg-icon="social:ic_people_24px" class="md-primary"></md-icon>
+          </md-tab-label>
+          <md-tab-body>
+            <event-attendees event="$ctrl.event" on-success="$ctrl.onSuccess(eventView)"></event-attendees>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+      <div>
+        <div layout layout-align="space-between">
+          <span class="md-body-1">{{$ctrl.event.date | date:'short'}}</span>
+          <span class="md-body-2">{{$ctrl.event.date | fromNow}}</span>
+        </div>
+        <md-divider></md-divider>
+        <div flex>
+          <div class="md" ng-bind-html="$ctrl.event.description | md"></div>
+          <p class="md-body-2">{{$ctrl.event.ticketPrice | currency}} / each</p>
+        </div>
+        <md-divider></md-divider>
+        <div layout layout-align="start">
+          <md-icon md-svg-icon="maps:ic_place_24px" aria-label="event venue icon"></md-icon>
+          <p class="md-body-2">
+            {{$ctrl.event.venue.formatted_address}}
+          </p>
+        </div>
+        <div layout="row" layout-align="space-between">
+          <div ng-cloak>
+            <fc-social-menu class="dark-theme social-menu" url="/event/{{$ctrl.event._id}}" text="{{$ctrl.event.title}} at {{$ctrl.event.date | date:'short'}} at {{$ctrl.event.venue.formatted_address}}"></fc-social-menu>
+            <like-heart-button target-id="$ctrl.event._id" category="event"></like-heart-button>
+      		</div>
+          <span>{{$ctrl.event.ticketsRemaining}} remaining</span>
+        </div>
+        <md-menu>
+          <md-button aria-label="Open contact menu" class="md-primary" ng-click="$mdOpenMenu($event)">
+            Contact Us
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-href="tel:{{$ctrl.event.contact.call}}">
+                <md-icon md-svg-icon="communication:ic_call_24px" md-menu-align-target></md-icon>
+                  Call Us
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="sms:{{$ctrl.event.contact.sms}}">
+                <md-icon md-svg-icon="communication:ic_textsms_24px" md-menu-align-target></md-icon>
+                  Text Us
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="mailto:{{$ctrl.event.contact.email}}">
+                <md-icon md-svg-icon="communication:ic_email_24px" md-menu-align-target></md-icon>
+                  Email Us
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="https://www.facebook.com/messages/{{$ctrl.event.contact.facebook}}">
+                <md-icon md-svg-icon="communication:ic_message_24px" md-menu-align-target></md-icon>
+                  Message Us on Facebook
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <md-button hide-xs ng-click="$ctrl.eventView = 'buyTicket'" class="md-primary">Buy Tickets</md-button>
+        <md-button hide-xs ng-click="$ctrl.eventView = 'attendees'" class="md-primary">Who is Coming?</md-button>
+      </div>
+    </div>
+  </md-content>
+  <div ng-switch="$ctrl.eventView" flex hide-xs>
+    <map-location event="$ctrl.event" ng-switch-default></map-location>
+    <buy-ticket event="$ctrl.event" ng-switch-when="buyTicket" on-success="$ctrl.onSuccess(eventView)"></buy-ticket>
+    <event-attendees event="$ctrl.event" ng-switch-when="attendees" on-success="$ctrl.onSuccess(eventView)"></event-attendees>
+  </div>
+</section>

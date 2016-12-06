@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use(['angular', 'adrianliaw:youtube-iframe-api'], 'client');
+  api.use('adrianliaw:youtube-iframe-api', 'client');
   api.addFiles('angular-youtube-embed.js', 'client');
 });
 

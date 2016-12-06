@@ -1,0 +1,8 @@
+<!-- {{deliverySettingsAdmin.deliverySettings}} -->
+<div layout>
+  <md-list flex>
+    <md-list-item ng-repeat="option in deliverySettingsAdmin.deliverySettings" ng-click="deliverySettingsAdmin.selectedSettings = option">{{option.title}} -- {{option.cost | currency}}</md-list-item>
+  </md-list>
+
+  <delivery-settings-admin-form settings="deliverySettingsAdmin.selectedSettings" on-insert="deliverySettingsAdmin.insert(data)" on-update="deliverySettingsAdmin.update(data)"></delivery-settings-admin-form>
+</div>
