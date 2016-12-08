@@ -8,32 +8,38 @@ cart = new SimpleSchema
     type: String
     optional:true
     allowedValues: ['active', 'pending', 'upcoming', 'complete', 'expiring', 'expired']
-  
+
 notificationsSchema = new SimpleSchema
-  soldOutEmails: 
+  soldOutEmails:
     type: Boolean
     label: "Sold Out Emails"
+    optional: true
     # ngAutoform:
 #       type: 'checkbox'
 #       roles: ['producer']
   newProductEmails:
     type: Boolean
     label: "Notifications for New Products from Liked Producers"
+    optional: true
     # ngAutoform:
 #       type: 'checkbox'
   earlyShoppingReminders:
     type: Boolean
     label: "Receive Notifications when products I care about are near their weekly deadline"
+    optional: true
   lastCallReminder:
     type: Boolean
-    label: "Receive a Notification on the last day of shopping to remind me to shop."
+    label: "Receive a Notification on Sunday reminding me to shop."
+    optional: true
   sms:
     type: Boolean
     label: "Receive Notifications by SMS"
+    optional: true
   email:
     type: Boolean
     label: "Receive Notifications by email"
-    
+    optional: true
+
 
 profile = new SimpleSchema
   name:
