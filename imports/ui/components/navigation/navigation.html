@@ -109,7 +109,7 @@
         <md-icon class="md-primary" md-svg-icon="action:ic_event_24px"></md-icon>
         <p> Events </p>
       </md-list-item> -->
-      <md-list-item ng-show="$root.currentUser._id" ui-sref="producer({userId: $root.currentUser._id})" ng-click=" nav.toggleRight('right')">
+      <md-list-item ng-show="$root.currentUser._id" ng-click="nav.goTo('producer', {producerId: $root.currentUser._id}); nav.toggleRight('right')">
         <md-icon class="md-primary" md-svg-icon="social:ic_person_24px"></md-icon>
         <p> My Profile </p>
       </md-list-item>

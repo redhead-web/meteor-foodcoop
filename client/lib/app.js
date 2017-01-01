@@ -30,7 +30,6 @@ import { name as braintreePayment } from
  '../../imports/ui/components/braintreePayment/braintreePayment';
 import { module as adminPos } from '../../imports/ui/components/adminPos/pos.ng.coffee';
 import { name as cartView } from '../../imports/ui/components/cartView/cartView';
-import { name as notificationSettings } from '../../imports/ui/components/notificationSettings/notificationSettings';
 
 angular.module('food-coop', [
   angularMessages,
@@ -63,16 +62,13 @@ angular.module('food-coop', [
   deliveryAdmin,
   adminPos.name,
   cartView,
-  notificationSettings,
 ])
-.config(
-  ($mdIconProvider,
-    $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
-    'ngInject';
-    if (Meteor.settings.public.production) {
-      $compileProvider.debugInfoEnabled(false);
-    }
-    $mdIconProvider
+.config(($mdIconProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
+  'ngInject';
+  if (Meteor.settings.public.production) {
+    $compileProvider.debugInfoEnabled(false);
+  }
+  $mdIconProvider
     .iconSet('social', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg')
     .iconSet('action', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg')
     .iconSet('maps', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-maps.svg')
@@ -86,28 +82,28 @@ angular.module('food-coop', [
     .iconSet('editor', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-editor.svg')
     .iconSet('alert', '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-alert.svg');
 
-    $mdThemingProvider
+  $mdThemingProvider
   .theme('default')
   .primaryPalette('light-green')
   .accentPalette('brown');
 
-    $mdThemingProvider
+  $mdThemingProvider
   .theme('dark-default')
   .primaryPalette('light-green')
   .accentPalette('brown')
   .dark();
 
-    CloudinaryProvider.configure({
-      cloud_name: Meteor.settings.public.cloudinary.cloud_name,
-      api_key: Meteor.settings.public.cloudinary.upload_preset,
-    });
+  CloudinaryProvider.configure({
+    cloud_name: Meteor.settings.public.cloudinary.cloud_name,
+    api_key: Meteor.settings.public.cloudinary.upload_preset,
+  });
 
-    uiGmapGoogleMapApiProvider.configure({
-      key: 'AIzaSyAkO_T5K7pMUkZIEK5U-mEIx3aG6WZZ7_4',
-      v: '3.22', // defaults to latest 3.X anyhow
-      libraries: 'places,geometry,visualization',
-    });
-  })
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyAkO_T5K7pMUkZIEK5U-mEIx3aG6WZZ7_4',
+    v: '3.22', // defaults to latest 3.X anyhow
+    libraries: 'places,geometry,visualization',
+  });
+})
 .run(($rootScope) => {
   'ngInject';
   $rootScope.hasRole = Roles.userIsInRole;

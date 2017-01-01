@@ -38,11 +38,9 @@ exports.earlyShoppingReminder = ->
     productLikers = _.pluck(Likes.find(
       likee: product._id
       category: 'products').fetch(), 'liker')
-    favouritedOrRecentUsers = Meteor.users.find({
-      'profile.notifications.earlyShoppingReminders': yes
-      $or: [
-        { 'profile.lastOrder': product._id }
-        { '_id': $in: productLikers }
+    favouritedOrRecentUsers = Meteor.users.find({ $or: [
+      { 'profile.lastOrder': product._id }
+      { '_id': $in: productLikers }
     ] }, fields:
       'emails.address': 1
       'profile.name': 1).fetch()
@@ -55,23 +53,22 @@ exports.earlyShoppingReminder = ->
 
     likingUsers = Meteor.users.find(
       _id: $in: _.pluck(likers.fetch(), 'liker')
-      'profile.notifications.earlyShoppingReminders': yes
     , fields:
         'emails.address': 1
         'profile.name': 1
     ).fetch()
 
     for user in favouritedOrRecentUsers
-      currentSales = Sales.find
+      currentSales = Sales.find 
         customerId: user._id
         productId: product._id
         deliveryDay: GetNextDeliveryDay().toDate()
       .fetch()
-
+      
       if currentSales.length > 0
         # if a user has purchases of the product they like this week, skip adding the product to their email list
         continue
-
+      
       idx = _.findIndex favouriteRecipients, _id: user._id
       if idx != -1
         #recipient already exists, append data rather than creating a new recipient
@@ -107,7 +104,6 @@ exports.earlyShoppingReminder = ->
   # liked producer emails
 
   for recipient in likeRecipients
-      # body...
     console.log recipient
     result = Mailer.send
       to: "#{recipient.profile.name} <#{recipient.emails[0].address}>"

@@ -1,4 +1,3 @@
-/* globals Likes Roles Markup */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 import { Products } from '../../../api/products';
@@ -9,7 +8,7 @@ import templateUrl from './userProfilePage.html';
 class userProfilePageController {
   constructor($scope, $reactive, $stateParams, uiGmapGoogleMapApi, $mdToast) {
     'ngInject';
-    const indexOf = [].indexOf || function (item) { for (let i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+    var indexOf = [].indexOf || function (item) { for (let i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
     $reactive(this).attach($scope);
 
@@ -49,10 +48,10 @@ class userProfilePageController {
     });
 
     this.autorun(() => {
-      const ref = Meteor.users.findOne($stateParams.userId)._id;
+      var list, ref;
       if (Meteor.user()) {
-        const list = Meteor.user().profile.lovedProducers || [];
-        if (indexOf.call(list, ref) >= 0) {
+        list = Meteor.user().profile.lovedProducers || [];
+        if (ref = Meteor.users.findOne($stateParams.userId)._id, indexOf.call(list, ref) >= 0) {
           this.lovesProducer = true;
         } else {
           this.lovesProducer = false;
@@ -61,45 +60,26 @@ class userProfilePageController {
     });
 
     this.toggleLike = () => {
+      var like;
       if (Meteor.userId() == null) {
-        return $mdToast
-        .show(
-          $mdToast
-          .simple()
-          .content('Please login to endorse this producer')
-          .position('bottom left')
-          .hideDelay(4000)
-        );
+        $mdToast.show($mdToast.simple().content('Please login to endorse this producer').position('bottom left').hideDelay(4000));
+        return;
       }
-      const like = Likes.findOne({
+      like = Likes.findOne({
         liker: Meteor.userId(),
         likee: this.producer._id,
       });
       if (like != null) {
         Likes.remove(like._id);
-        return $mdToast
-          .show(
-            $mdToast
-            .simple()
-            .content('Removed your endorsement')
-            .position('bottom left')
-            .hideDelay(4000)
-          );
+        return $mdToast.show($mdToast.simple().content('Removed your endorsement').position('bottom left').hideDelay(4000));
+      } else {
+        return this.call('/likes/add', this.producer._id, 'user', (err) => {
+          if (err) {
+            console.log(err);
+            return $mdToast.show($mdToast.simple().content('Clap clap! Thanks for your endorsement!').position('bottom left').hideDelay(4000));
+          }
+        });
       }
-      return this.call('/likes/add', this.producer._id, 'user', (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          $mdToast
-          .show(
-            $mdToast
-            .simple()
-            .content('Clap clap! Thanks for your endorsement!')
-            .position('bottom left')
-            .hideDelay(4000)
-          );
-        }
-      });
     };
     this.likesProducer = (userId) => {
       if (Likes.findOne({
@@ -107,8 +87,9 @@ class userProfilePageController {
         likee: userId,
       })) {
         return 'liked';
+      } else {
+        return 'not-liked';
       }
-      return 'not-liked';
     };
 
     this.mapSettings = {
@@ -141,20 +122,22 @@ class userProfilePageController {
               const service = new maps.places.PlacesService(map);
               service.getDetails({
                 placeId: this.producer.profile.deliveryAddress.place_id,
-              }, (result) => $scope.$apply(function () {
-                this.mapSettings.center = {
-                  latitude: result.geometry.location.lat(),
-                  longitude: result.geometry.location.lng(),
-                };
-                this.markerSettings = {
-                  id: $stateParams.userId,
-                  coords: {
+              }, function (result, status) {
+                return $scope.$apply(function () {
+                  this.mapSettings.center = {
                     latitude: result.geometry.location.lat(),
                     longitude: result.geometry.location.lng(),
-                  },
-                  options: {},
-                };
-              }));
+                  };
+                  this.markerSettings = {
+                    id: $stateParams.userId,
+                    coords: {
+                      latitude: result.geometry.location.lat(),
+                      longitude: result.geometry.location.lng(),
+                    },
+                    options: {},
+                  };
+                });
+              });
               return;
             }
           });
@@ -167,12 +150,12 @@ class userProfilePageController {
     this.modelOptions = {
       updateOn: 'default blur',
       debounce: {
-        default: 200,
+        'default': 200,
         blur: 0,
       },
     };
 
-    this.save = () => {
+    this.save = (profile, data) => {
       Meteor.users.update($stateParams.userId, {
         $set: {
           'profile.companyName': this.producer.profile.companyName,
@@ -185,17 +168,10 @@ class userProfilePageController {
           'profile.chemicals': this.producer.profile.chemicals,
           'profile.video': this.producer.profile.video,
         },
-      }, (err) => {
+      }, (err, result) => {
         if (err) {
           console.error(err);
-          $mdToast
-          .show(
-            $mdToast
-            .simple()
-            .content('Connection Error: Failed to Save')
-            .position('bottom left')
-            .hideDelay(4000)
-          );
+          return $mdToast.show($mdToast.simple().content('Connection Error: Failed to Save').position('bottom left').hideDelay(4000));
         }
       });
     };
@@ -228,8 +204,8 @@ class userProfilePageController {
   updateImage(data, field) {
     if (this.isOwner) {
       const update = {};
-      update[`${field}.url`] = data.data.secure_url;
-      update[`${field}.result`] = data.data.public_id;
+      update[field + '.url'] = data.data.secure_url;
+      update[field + '.result'] = data.data.public_id;
       Meteor.users.update(this.producer._id, { $set: update });
     }
   }

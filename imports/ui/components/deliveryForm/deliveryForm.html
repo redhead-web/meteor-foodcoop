@@ -1,35 +1,32 @@
 <md-button ng-if="deliveryForm.deliveryDays.length === 0" class="md-accent md-raised" disabled>Delivery Paid</md-button>
 <md-button ng-if="deliveryForm.deliveryDays.length" ng-click="deliveryForm.show = !deliveryForm.show" class="md-primary md-raised">Get Delivery!</md-button>
-<md-card ng-if="deliveryForm.show">
-  <form id="delivery" ng-submit="deliveryForm.submit(delivery.$valid)" name="delivery">
-    <md-card-content layout="column">
-      <md-list ng-if="deliveryForm.deliveries.length" class="md-dense">
-        <md-subheader class="md-no-sticky">Your purchased deliveries</md-subheader>
-        <md-list-item ng-repeat="d in deliveryForm.deliveries" class="md-2-line">
-          <div class="md-list-item-text">
-            <h3>{{d.deliveryDay | date:'MMMM d'}}</h3>
-            <p>{{d.method}} -- {{d.cost | currency}}</p>
-          </div>
-        </md-list-item>
-      </md-list>
-
-      <h3>Purchase {{deliveryForm.deliveryDays.length}}
-        <span ng-if="deliveryForm.deliveryDays.length !== 1">deliveries</span>
-        <span ng-if="deliveryForm.deliveryDays.length == 1">delivery</span></h3>
-      <md-select required ng-model="deliveryForm.selection" placeholder="Choose a delivery method">
-        <md-option value="">Pick up on Delivery Day</md-option>
-        <md-option ng-repeat="opt in deliveryForm.deliveryOptions" ng-value="opt">
-          <span class="md-body-1">{{opt.title}} -- {{opt.cost | currency}}<br>{{opt.description}}</span>
-        </md-option>
-      </md-select>
-      <md-input-container>
-        <label>Delivery Address</label>
-        <input required g-places-autocomplete ng-model="deliveryForm.deliveryAddress">
-      </md-input-container>
-    </md-card-content>
-    <md-card-actions class="text-center" layout layout-align="end">
-      <div><span class="md-body-2" ng-if="deliveryForm.selection">Total: {{deliveryForm.selection.cost * deliveryForm.deliveryDays.length | currency}}</span>
-      <br><md-button class="md-primary" type="submit" ng-disabled="!deliveryForm.selection">Add Delivery</md-button></div>
-    </md-card-actions>
+<div ng-if="deliveryForm.show">
+  <md-list ng-if="deliveryForm.deliveries.length" class="md-dense">
+    <md-subheader class="md-no-sticky">Your purchased deliveries</md-subheader>
+    <md-list-item ng-repeat="d in deliveryForm.deliveries" class="md-2-line">
+      <div class="md-list-item-text">
+        <h3>{{d.deliveryDay | date:'MMMM d'}}</h3>
+        <p>{{d.method}} -- {{d.cost | currency}}</p>
+      </div>
+    </md-list-item>
+  </md-list>
+  <form layout="column" ng-submit="deliveryForm.submit(delivery.$valid)" name="delivery" ng-if="deliveryForm.deliveryDays">
+    <h3>Purchase {{deliveryForm.deliveryDays.length}}
+      <span ng-if="deliveryForm.deliveryDays.length !== 1">deliveries</span>
+      <span ng-if="deliveryForm.deliveryDays.length == 1">delivery</span></h3>
+    <md-select required ng-model="deliveryForm.selection" placeholder="Choose a delivery method">
+      <md-option value="">Pick up on Delivery Day</md-option>
+      <md-option ng-repeat="opt in deliveryForm.deliveryOptions" ng-value="opt">
+        <span class="md-body-1">{{opt.title}} -- {{opt.cost | currency}}<br>{{opt.description}}</span>
+      </md-option>
+    </md-select>
+    <md-input-container>
+      <label>Delivery Address</label>
+      <input required g-places-autocomplete ng-model="deliveryForm.deliveryAddress">
+    </md-input-container>
+    <div class="text-center">
+      <span class="md-body-2">Total: {{deliveryForm.selection.cost * deliveryForm.deliveryDays.length | currency}}</span>
+      <md-button class="md-raised md-primary" type="submit">Add Delivery</md-button>
+    </div>
   </form>
-</md-card>
+</div>

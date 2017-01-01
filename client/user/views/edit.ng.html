@@ -7,14 +7,11 @@
         <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
       </md-button>
     </aside>
-    <div>
-      <notification-settings></notification-settings>
-    </div>
     <br>
     {{error}}<br>
     {{errorEmail}}
     <form name="editUser" layout="column" ng-submit="validate(editUser.$valid)">
-      <h3 class="md-title">Basic Details</h3>
+      <legend>Basic Details</legend>
       <md-input-container>
         <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
         <input type="text" ng-model="user.profile.name"
