@@ -27,7 +27,7 @@ class OrdersAdminCtrl {
   }
 
   changeStatus(sale, status) {
-    Sales.update(sale._id, { $set: { 'status': status } });
+    Sales.update(sale._id, { $set: { status } });
   }
 
   bulkChange(status) {
@@ -81,6 +81,14 @@ class OrdersAdminCtrl {
     });
 
     return occurences;
+  }
+
+  selectSales(sales, ignoreList) {
+    for (let i = 0; i < sales.length; i++) {
+      if (!_.contains(ignoreList, sales[i].status)) {
+        sales[i].selected = true;
+      }
+    }
   }
 
   total(array, markup) {

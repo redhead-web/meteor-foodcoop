@@ -74,6 +74,7 @@
     <md-option value="refunded">Refunded</md-option>
   </md-select>
   <md-button class="md-primary" ng-click="orders.bulkChange(orders.status)">Bulk Update Selected Orders</md-button>
+  <md-button class="md-raised md-accent" ng-click="orders.selectSales(filteredOrders, ['refunded', 'cancelled'])">Select Sales</md-button>
 </section>
 
 <table class="material-table">
@@ -198,7 +199,9 @@
         x{{order.qty}} {{order.productName}}
       </td>
       <td>
-        {{order.producerName}} #{{order.producerNumber}}
+        <md-button ng-click="orders.searchstring = {producerName: order.producerName}">
+          {{order.producerName}} #{{order.producerNumber}}
+        </md-button>
       </td>
       <td>
         @{{order.price | currency}} / {{order.unitOfMeasure}}
