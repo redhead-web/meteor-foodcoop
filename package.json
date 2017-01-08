@@ -45,7 +45,8 @@
     "lint": "eslint .",
     "pretest": "npm run lint --silent",
     "test:watch": "meteor test --driver-package practicalmeteor:mocha --port 4000 --settings wh-settings.json",
-    "start": "meteor run --settings wh-settings.json"
+    "start": "meteor run --settings wh-settings.json",
+    "start:kaikohe": "meteor run --settings settings.json"
   },
   "eslintConfig": {
     "plugins": [
