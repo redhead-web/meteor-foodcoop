@@ -10,8 +10,7 @@ angular.module('food-coop').run(['$rootScope', '$state', ($rootScope, $state) =>
   });
 }]);
 
-angular.module('food-coop').config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
-
+angular.module('food-coop').config(($urlRouterProvider, $stateProvider, $locationProvider) => {
   $locationProvider.html5Mode(true);
 
   $stateProvider
@@ -35,5 +34,5 @@ angular.module('food-coop').config(function ($urlRouterProvider, $stateProvider,
       controller: 'ProfileCtrl',
     });
 
-  $urlRouterProvider.otherwise('/store');
+  $urlRouterProvider.otherwise('/');
 });

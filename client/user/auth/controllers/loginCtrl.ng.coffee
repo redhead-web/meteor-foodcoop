@@ -1,7 +1,7 @@
 angular.module("food-coop").controller "LoginCtrl", ($state, $reactive, $scope, $timeout) ->
-    
+
   $reactive(this).attach($scope)
-  
+
   vm = this
 
   vm.credentials =
@@ -12,9 +12,9 @@ angular.module("food-coop").controller "LoginCtrl", ($state, $reactive, $scope, 
 
   vm.login = ->
     Meteor.loginWithPassword vm.credentials.email, vm.credentials.password, vm.$bindToContext (err) ->
-      if err 
-        vm.error = "Login Error: #{err}"
-      else 
+      if err
+        vm.error = err.message
+      else
         console.log "logged in"
         $state.go('store')
         return
@@ -24,10 +24,10 @@ angular.module("food-coop").controller "LoginCtrl", ($state, $reactive, $scope, 
     Meteor.loginWithFacebook
       requestPermissions: ['email']
     , vm.$bindToContext (err) ->
-      
-      if err 
-        vm.error = "Login Error: #{err}"
-      else 
+
+      if err
+        vm.error = err.message
+      else
         console.log "logged in"
         $state.go('store')
         return
