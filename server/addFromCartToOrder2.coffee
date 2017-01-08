@@ -64,7 +64,7 @@ Meteor.methods
       Meteor.call "confirmOrder", items, order
 
     catch error
-      if data.balanceAmount > 0
+      if order.balanceAmount > 0
         Meteor.users.update order.user,
           $inc: 'profile.balance': order.balanceAmount
       throw new Meteor.Error error.status, error.message
