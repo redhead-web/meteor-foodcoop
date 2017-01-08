@@ -20,7 +20,7 @@ Meteor.methods
     # if order.deliveryDay #must have been from POS
     #   Mailer.send
     #     to: "#{user.profile.name} <#{user.emails[0].address}>"
-    #     subject: "Receipt: Whangarei Food Co-op #{invoiceNumber}"
+    #     subject: "Receipt: Kaikohekohe Food Co-op #{invoiceNumber}"
     #     template: "orderReceiptPOS"
     #     data: dataObject
     # else

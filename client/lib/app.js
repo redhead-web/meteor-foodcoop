@@ -108,7 +108,7 @@ angular.module('food-coop', [
   'ngInject';
   $rootScope.hasRole = Roles.userIsInRole;
 
-  $rootScope.title = 'Fresh Local Quality | Whangarei Food Co-op';
+  $rootScope.title = 'Fresh Local Quality | Kaikohekohe Food Co-op';
   $rootScope.ogImage = '/OpenGraph.png';
 
   // Meteor.subscribe('active-products');

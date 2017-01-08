@@ -263,8 +263,9 @@ Meteor.startup ->
       path: 'email-layout.html'
       scss: 'email-layout.scss'
     helpers:
-      coopName: Meteor.settings.public.coopName
-      bankAccount: Meteor.settings.public.bankAccount
+      coopName: -> Meteor.settings.public.coopName
+      bankAccount: -> Meteor.settings.public.bankAccount
+      coopAddress: -> Meteor.settings.public.coopAddress
       css: () ->
         """
           @media screen and (max-width: 600px) {
@@ -275,7 +276,7 @@ Meteor.startup ->
 
         """
       rootUrl: () ->
-        return process.env.ROOT_URL || Meteor.settings.ROOT_URL || "http://localhost:3000"
+        return process.env.ROOT_URL || Meteor.settings.ROOT_URL || Meteor.absoluteUrl()
       # GSTNumber: "113-091-103"
       producerTitle: (companyName, name) ->
         if companyName?
@@ -313,6 +314,7 @@ Meteor.startup ->
         Markup(this).saleTotal()
       formatDate: (date, format) ->
         moment(date).format(format)
+
 
 
 

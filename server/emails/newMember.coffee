@@ -6,7 +6,7 @@ Meteor.methods
     send = Mailer.send
       to: "#{user.profile.name} <#{user.emails[0].address}>"
       replyTo: "#{Meteor.settings.email.name} <#{Meteor.settings.email.address}>"
-      subject: "Welcome to the Whangarei Food Co-op"
+      subject: "Welcome to the Kaikohekohe Food Co-op"
       template: 'newMember'
       data:
         recipient: user.profile.name

@@ -1,4 +1,4 @@
-<p>Hi {{recipient}}, thank you for ordering from the Whangarei Food Co-op today.</p>
+<p>Hi {{recipient}}, thank you for ordering from the {{coopName}} today.</p>
 
 <p>
   Date: <strong>{{date}}</strong><br>
@@ -26,7 +26,7 @@
       <td>{{curency saleTotal}}</td>
     </tr>
   {{/each}}
-  
+
   {{#if order.balanceAmount}}
     <tr><td colspan="4">Balance Charge</td><td style="color: green">{{currency order.balanceAmount}}</td></tr>
   {{/if}}

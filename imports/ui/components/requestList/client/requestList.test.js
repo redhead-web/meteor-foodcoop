@@ -11,7 +11,7 @@ let requests = [
     description: "It's melon season and I'd really like a local organic melon or two. Does anyone have any for sale?",
     dateCreated: moment().subtract(2, 'days').toDate(),
     price: 1,
-    shipping: "Deliver to Whangarei Food Co-op Sorting Center"
+    shipping: "Deliver to Kaikohekohe Food Co-op Sorting Center"
   }, {
     _id: Random.id(),
     creator: {

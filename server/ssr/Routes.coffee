@@ -37,7 +37,7 @@ seoPicker = Picker.filter((req, res) ->
 #     _id = result[1]
 #     product = Products.findOne _id
 #     res.end
-#       provider_name: "Whangarei Food Co-op"
+#       provider_name: "Kaikohekohe Food Co-op"
 #       url: "https://foodcoop.nz/product/{_id}"
 #       title: product.name
 #       description: product.description.replace(/([^a-z0-9]+)/gi, "");
@@ -84,11 +84,11 @@ seoPicker.route '/', (params, req, res) ->
     css: css
     template: 'home'
     data: 
-      title: "Fresh Local Quality | Whangarei Food Co-op"
-      description: "Whangarei Food Co-op sells fresh, local, quality foods from Whangarei every Tuesday. Support local farmers, enjoy great tasting food."
+      title: "Fresh Local Quality | Kaikohekohe Food Co-op"
+      description: "Kaikohekohe Food Co-op sells fresh, local, quality foods from Whangarei every Tuesday. Support local farmers, enjoy great tasting food."
       og: [
-        {key: "title", value: "Whangarei Food Co-op | Fresh Local Quality"}
-        {key: "description", value: "Whangarei Food Co-op sells fresh, local, quality foods from 1 Woods Road every Tuesday. Support local farmers, enjoy great tasting food." }
+        {key: "title", value: "Kaikohekohe Food Co-op | Fresh Local Quality"}
+        {key: "description", value: "Kaikohekohe Food Co-op sells fresh, local, quality foods from 1 Woods Road every Tuesday. Support local farmers, enjoy great tasting food." }
         {key: "url", value: baseURL }
         {key: "image", value: defaultImage }
       ]
@@ -145,7 +145,7 @@ seoPicker.route '/event/:eventId', (params, req, res) ->
         {key: "image:width", value: 1200}
         {key: "image:height", value: 630}
         {key: "image",  value: if event.img then "http://res.cloudinary.com/foodcoop/image/upload/w_1200,h_630,c_fill,g_auto/" + event.img.result else defaultImage}
-        {key: "brand",value: "Whangarei Food Co-op"}
+        {key: "brand",value: "Kaikohekohe Food Co-op"}
         {key: 'price:amount',value: event.ticketPrice}
         {key: 'price:currency',value: "NZD"}
         {key: "upc",value: event._id}
@@ -161,10 +161,10 @@ seoPicker.route '/event/:eventId', (params, req, res) ->
 #     css: css
 #     template: 'directory'
 #     data:
-#       title: "Farmers, Growers and Foodies of the Whangarei Food Co-op"
+#       title: "Farmers, Growers and Foodies of the Kaikohekohe Food Co-op"
 #       description: "Contact Farmers, Growers and Foodies about local food in Whangarei, Northland from our directory."
 #       og: [
-#         {key: "title", value: "Farmers, Growers and Foodies of the Whangarei Food Co-op"}
+#         {key: "title", value: "Farmers, Growers and Foodies of the Kaikohekohe Food Co-op"}
 #         {key: "description", value: "Contact Farmers, Growers and Foodies about local food in Whangarei, Northland from our directory." }
 #         {key: "url", value: "#{baseURL}/directory" }
 #         {key: "image", value: defaultImage }
@@ -180,11 +180,11 @@ seoPicker.route '/event/:eventId', (params, req, res) ->
 #     css: css
 #     template: 'producer'
 #     data:
-#       title: "#{user.profile.companyName || user.profile.name} at the Whangarei Food Co-op"
+#       title: "#{user.profile.companyName || user.profile.name} at the Kaikohekohe Food Co-op"
 #       description: user.profile.summary.substring(0, 99)
 #       og:
 #         type: 'profile'
-#         title: "#{user.profile.companyName || user.profile.name} at the Whangarei Food Co-op"
+#         title: "#{user.profile.companyName || user.profile.name} at the Kaikohekohe Food Co-op"
 #         url: "#{baseURL}directory/#{user._id}"
 #         image: if user.profile.logo then user.profile.logo.url else defaultImage
 #       user: user)
