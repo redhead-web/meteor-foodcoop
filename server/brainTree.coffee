@@ -9,6 +9,12 @@ gateway = BrainTreeConnect
   publicKey:  Meteor.settings.BRAIN_TREE.PUBLIC_KEY
   privateKey: Meteor.settings.BRAIN_TREE.PRIVATE_KEY
 
+getEmailAddress = (user) ->
+  if user.emails and user.emails.length
+    return user.emails[0].length
+  if user.services and user.services.facebook and user.services.facebook.email
+    return user.services.facebook.email
+  return ''
 
 Meteor.methods
   generateClientToken: (userId) ->
@@ -33,10 +39,11 @@ Meteor.methods
     getToken.clientToken
 
   registerCustomer: (user) ->
+    email = getEmailAddress(user);
     config =
       {
         #paymentMethodNonce: data.paymentMethodNonce
-        email: user.emails[0].address
+        email: email,
         firstName: user.profile.name.split(" ").slice(0,-1).join(" ")
         lastName: user.profile.name.split(" ").slice(-1).join(" ")
         phone: if /^[0-9\.\(\)\-]{10, 14}$/.test(user.profile.phone) then user.profile.phone else undefined
