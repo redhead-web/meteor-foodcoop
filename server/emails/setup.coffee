@@ -266,6 +266,8 @@ Meteor.startup ->
       coopName: -> Meteor.settings.public.coopName
       bankAccount: -> Meteor.settings.public.bankAccount
       coopAddress: -> Meteor.settings.public.coopAddress
+      coopHours: -> Meteor.settings.public.coopHours
+      coopDayString: -> Meteor.settings.public.coopDayString
       css: () ->
         """
           @media screen and (max-width: 600px) {

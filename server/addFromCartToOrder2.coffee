@@ -1,7 +1,6 @@
 # Don't supply data.deliveryDay unless data.deliveryDay comes from a POS sale. Maybe refactor this later?
 
 Meteor.methods
-
   addFromCartToOrder2: (order, items, status) ->
     try
       id = Orders.insert order
