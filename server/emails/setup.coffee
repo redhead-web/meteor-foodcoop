@@ -268,6 +268,7 @@ Meteor.startup ->
       coopAddress: -> Meteor.settings.public.coopAddress
       coopHours: -> Meteor.settings.public.coopHours
       coopDayString: -> Meteor.settings.public.coopDayString
+      coopAdminName: -> Meteor.settings.email.name
       css: () ->
         """
           @media screen and (max-width: 600px) {
