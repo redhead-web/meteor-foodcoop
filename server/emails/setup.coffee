@@ -179,17 +179,18 @@ Templates.contactMessage =
 
       return {
         email: 'rowan@corymbosa.me'
-
       }
 
 Templates.soldOutMessage =
   path: 'products/sold-out.html'
   route: path: '/sold-out'
 
-Templates.wholesaleInvoiceEmail =
-  path: 'invoice/invoice-email.html'
-  scss: 'invoice/invoice-email.scss'
-  route: path: '/invoice'
+Templates.cartReminder =
+  path: 'order/cart-reminder.html'
+  route:
+    path: '/cart-reminder'
+    data: ->
+      return { name: 'Sean Stanley' }
 
 Templates.orderReceiptPOS =
   path: 'order/receipt-email.html'
@@ -237,10 +238,6 @@ Templates.confirmOrderEmail =
 Templates.subscriptionConfirmation =
   path: 'order/subscription-confirmation-email.html'
   route: path: 'subscribe-confirmation'
-
-Templates.hubReminder =
-  path: 'hub/hub-reminder.html'
-  route: path: 'hub'
 
 Templates.applications =
   path: 'apply/producer-application.html'

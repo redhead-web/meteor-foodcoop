@@ -19,5 +19,9 @@ schema = new SimpleSchema
     label: "Quantity"
     type: Number
     min: 1
+  "reminderLevel":
+    type: Number
+    min: 0
+    optional: true
 
 Cart.Items.attachSchema schema

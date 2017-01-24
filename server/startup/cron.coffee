@@ -12,8 +12,6 @@ callback = (error, result) ->
 #   console.log result
 # , 3000
 
-
-
 #if process.env.METEOR_ENVIRONMENT == 'production'
 job = new Meteor.Cron
   events:
@@ -25,6 +23,9 @@ job = new Meteor.Cron
     # email producers their sale summaries every day at 5am
     '0 5 * * 3': ->
       Meteor.call "/email/producerSalesWeeklySummary", callback
+      Meteor.call "/email/cartReminder"
+      Cart.Items.find({ $gt: reminderLevel: 3 })
+      .forEach((item) -> Meteor.call "removeFromCart", item._id )
     # check if event reminders need to be sent every day at 8am
     '0 8 * * *': ->
       Meteor.call "eventTodayReminder", callback
