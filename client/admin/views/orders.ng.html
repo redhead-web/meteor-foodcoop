@@ -73,7 +73,7 @@
     <md-option value="cancelled">Cancelled</md-option>
     <md-option value="refunded">Refunded</md-option>
   </md-select>
-  <md-button class="md-primary" ng-click="orders.bulkChange(orders.status)">Bulk Update Selected Orders</md-button>
+  <md-button class="md-primary md-raised" ng-click="orders.bulkChange(orders.status)">Bulk Update Selected Orders</md-button>
   <md-button class="md-raised md-accent" ng-click="orders.selectSales(filteredOrders, ['refunded', 'cancelled'])">Select Sales</md-button>
 </section>
 
@@ -81,6 +81,7 @@
   <thead>
     <tr>
       <td><md-button md-no-ink ng-click="orders.predicate='status'; orders.reverse = !orders.reverse">Status</md-button></td>
+      <td><md-button md-no-ink ng-click="orders.predicate='location'; orders.reverse = !orders.reverse">Location</md-button></td>
       <td>
         <md-button md-no-ink ng-click="orders.predicate='customer'; orders.reverse = !orders.reverse">Customer</md-button>
       </td>
@@ -88,13 +89,10 @@
         <md-button md-no-ink ng-click="orders.predicate='productName'; orders.reverse = !orders.reverse">Product</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="orders.predicate='producerCompanyName'; orders.reverse = !orders.reverse">Producer</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='producerName'; orders.reverse = !orders.reverse">Producer</md-button>
       </td>
       <td>
-        <md-button md-no-ink ng-click="orders.predicate='price'; orders.reverse = !orders.reverse">Price</md-button>
-      </td>
-      <td>
-        <md-button md-no-ink ng-click="orders.predicate='price'; orders.reverse = !orders.reverse">Total</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='unitOfMeasure'; orders.reverse = !orders.reverse">Units</md-button>
       </td>
     </tr>
   </thead>
@@ -191,6 +189,50 @@
         </md-menu>
       </td>
       <td>
+        {{order.location}}
+        <md-menu>
+          <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
+           class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
+          <md-menu-content>
+            <md-menu-item ng-class="{'currentStatus': order.location == 'off-site'}" class="off-site">
+              <md-button ng-click="orders.changeLocation(order, 'off site')">
+                <div layout="row">
+                  <p flex>Off Site</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-class="{'currentStatus': order.location == 'off-site'}" class="storage">
+              <md-button ng-click="orders.changeLocation(order, 'storage')">
+                <div layout="row">
+                  <p flex>Storage</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-class="{'currentStatus': order.location == 'off-site'}" class="box">
+              <md-button ng-click="orders.changeLocation(order, 'box')">
+                <div layout="row">
+                  <p flex>Box</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-class="{'currentStatus': order.location == 'off-site'}" class="fridge">
+              <md-button ng-click="orders.changeLocation(order, 'fridge')">
+                <div layout="row">
+                  <p flex>Fridge</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-class="{'currentStatus': order.location == 'off-site'}" class="freezer">
+              <md-button ng-click="orders.changeLocation(order, 'freezer')">
+                <div layout="row">
+                  <p flex>Freezer</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </td>
+      <td>
         <md-button ng-click="orders.searchstring = {customerName: order.customerName}">
           {{order.customerName}} #{{order.customerNumber}}
         </md-button>
@@ -204,10 +246,7 @@
         </md-button>
       </td>
       <td>
-        @{{order.price | currency}} / {{order.unitOfMeasure}}
-      </td>
-      <td>
-        {{order.qty*order.price | currency}}
+        {{order.unitOfMeasure}}
       </td>
     </tr>
   </tbody>

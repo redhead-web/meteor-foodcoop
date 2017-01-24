@@ -1,4 +1,4 @@
-
+/* globals braintree */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 

@@ -30,6 +30,10 @@ class OrdersAdminCtrl {
     Sales.update(sale._id, { $set: { status } });
   }
 
+  changeLocation(sale, location) {
+    Sales.update(sale._id, { $set: { location } });
+  }
+
   bulkChange(status) {
     const selectedSales = _.filter(this.sales, 'selected');
 

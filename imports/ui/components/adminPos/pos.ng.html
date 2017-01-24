@@ -92,4 +92,4 @@
 </section>
 <span flex></span>
 </div>
-<braintree-payment is-valid="true" ng-if="$ctrl.paymentMethod === 'cc'" on-success="$ctrl.braintreePayment(data)" button-text="Pay {{ $ctrl.total | currency }}"></braintree-payment>
+<braintree-payment is-valid="true" ng-if="$ctrl.paymentMethod === 'cc'" on-success="$ctrl.braintreePayment(data)" button-text="Pay {{ $ctrl.total | currency }}" customer-id="$ctrl.customer._id"></braintree-payment>
