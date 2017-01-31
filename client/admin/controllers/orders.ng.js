@@ -1,7 +1,6 @@
-/* global GetNextDeliveryDay, angular, moment, Sales, _ */
-function isAdmin(user) {
-  Roles.userIsInRole(user, 'admin');
-}
+/* global GetNextDeliveryDay, angular, moment, Sales, _, Markup */
+/* eslint-disable new-cap */
+import { Roles } from 'meteor/alanning:roles';
 
 class OrdersAdminCtrl {
   constructor($scope, $reactive) {
@@ -27,11 +26,23 @@ class OrdersAdminCtrl {
   }
 
   changeStatus(sale, status) {
+    const location = 'box';
+    const locationList = ['fridge', 'freezer'];
+    console.log(status);
     Sales.update(sale._id, { $set: { status } });
+    if (status === 'sorted' && locationList.indexOf(sale.location) === -1) {
+      Sales.update(sale._id, { $set: { location } });
+    } else if (status === 'collected') {
+      Sales.update(sale._id, { $set: { location } });
+    }
   }
 
   changeLocation(sale, location) {
+    const statusList = ['undelivered', 'delivered'];
     Sales.update(sale._id, { $set: { location } });
+    if (location === 'box' && statusList.indexOf(sale.status) !== -1) {
+      Sales.update(sale._id, { $set: { status: 'sorted' } });
+    }
   }
 
   bulkChange(status) {

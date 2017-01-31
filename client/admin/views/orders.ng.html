@@ -65,7 +65,7 @@
 </section>
 
 <section layout="row" layout-margin>
-  <md-select ng-model="orders.status">
+  <md-select ng-model="orders.status" placeholder="sale status">
     <md-option value="undelivered">Undelivered</md-option>
     <md-option value="delivered">Delivered</md-option>
     <md-option value="sorted">Sorted</md-option>
@@ -74,7 +74,7 @@
     <md-option value="refunded">Refunded</md-option>
   </md-select>
   <md-button class="md-primary md-raised" ng-click="orders.bulkChange(orders.status)">Bulk Update Selected Orders</md-button>
-  <md-button class="md-raised md-accent" ng-click="orders.selectSales(filteredOrders, ['refunded', 'cancelled'])">Select Sales</md-button>
+  <md-button class="md-raised md-accent" ng-click="orders.selectSales(filteredOrders, ['collected', 'refunded', 'cancelled'])">Select Sales</md-button>
 </section>
 
 <table class="material-table">
@@ -111,7 +111,7 @@
       filter: orders.searchstring |
       orderBy:orders.predicate:orders.reverse as filteredOrders track by order._id">
       <td>
-        <md-checkbox ng-model="order.selected"></md-checkbox>
+        <md-checkbox ng-model="order.selected" aria-label="select sale"></md-checkbox>
         {{order.status}}
         <md-menu>
           <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
