@@ -23,9 +23,9 @@ job = new Meteor.Cron
     # email producers their sale summaries every day at 5am
     '0 5 * * 3': ->
       Meteor.call "/email/producerSalesWeeklySummary", callback
-      Meteor.call "/email/cartReminder"
       Cart.Items.find({ $gt: reminderLevel: 3 })
       .forEach((item) -> Meteor.call "removeFromCart", item._id )
+      Meteor.call "/email/cartReminder"
     # check if event reminders need to be sent every day at 8am
     '0 8 * * *': ->
       Meteor.call "eventTodayReminder", callback

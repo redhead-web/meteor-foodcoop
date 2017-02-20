@@ -38,7 +38,8 @@
         class="md-icon-button md-accent" aria-label="edit name">
         <md-icon md-svg-src="editor:ic_mode_edit_24px"></md-icon>
       </md-button>
-      {{productDetails.product.name}}
+      {{productDetails.product.name}} <like-heart-button target-id="productDetails.product._id" category="products" ></like-heart-button>
+
     </h1>
     <form name="editName" flex class="editContent"
     ng-submit="productDetails.edit.name = !productDetails.edit.name"
@@ -120,19 +121,39 @@
     </div>
 
     <div ng-if="productDetails.product.producer !== currentUser._id">
-      <form name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, productDetails.product, shop.qty)"
-      ng-if="productDetails.product.stocklevel == null || productDetails.product.stocklevel > 0" class="editContent"
-      layout="row">
+      <div ng-if="!productDetails.product.published">
+        <p class="md-body-2">CURRENTLY UNAVAILABLE</p>
+        <p><md-button class="md-raised md-accent" ng-click="">CONTACT ME</md-button> <span class="md-body-1">when this product is available again.</span></p>
+      </div>
+      <form
+        name="addToCartForm"
+        ng-controller="orderProductCtrl as shop"
+        ng-submit="shop.addToCart($event, productDetails.product, shop.qty)"
+        ng-if="productDetails.product.stocklevel == null || productDetails.product.stocklevel > 0"
+        class="editContent"
+        layout="row"
+      >
         <md-input-container flex>
           <label>Quantity</label>
-          <input ng-model="shop.qty" type="number" min="{{productDetails.product.minimumOrder || 1}}" required name="qty">
+          <input
+            ng-model="shop.qty"
+            type="number"
+            min="{{productDetails.product.minimumOrder || 1}}"
+            required
+            name="qty"
+            ng-disabled="!productDetails.product.published"
+          >
           <div ng-messages="addToCartForm.qty.$error" ng-if="addToCartForm.qty.$touched">
             <div ng-message="required">this field is required.</div>
             <div ng-message="min">You must order a minimum of {{productDetails.product.minimumOrder || 1}} for this order.</div>
           </div>
         </md-input-container>
         <div flex>
-          <md-button class="md-primary" type="submit">
+          <md-button
+            class="md-primary"
+            type="submit"
+            ng-disabled="!productDetails.product.published"
+          >
             Add To Cart
           </md-button>
         </div>

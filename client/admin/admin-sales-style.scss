@@ -16,15 +16,15 @@ tr.refunded, md-menu-item.refunded > button {
   color: #F44336;
 }
 
-tr.collected, md-menu-item.collected > button {
+tr.collected, md-menu-item.collected > button, md-menu-item.freezer > button {
   color: #3F51B5;
 }
 
-span.sorted, tr.sorted, md-menu-item.sorted > button {
+span.sorted, tr.sorted, md-menu-item.sorted > button, md-menu-item.box > button {
   color: #b07192;
 }
 
-tr.delivered, md-menu-item.delivered > button {
+tr.delivered, md-menu-item.delivered > button, md-menu-item.fridge > button {
   color: #8BC34A;
 }
 
