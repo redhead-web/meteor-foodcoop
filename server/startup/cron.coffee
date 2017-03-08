@@ -21,7 +21,7 @@ job = new Meteor.Cron
 
       Meteor.call "/email/producerOrder", callback
     # email producers their sale summaries every day at 5am
-    '0 5 * * 3': ->
+    '0 5 * * *': ->
       Meteor.call "/email/producerSalesWeeklySummary", callback
       Cart.Items.find({ $gt: reminderLevel: 3 })
       .forEach((item) -> Meteor.call "removeFromCart", item._id )

@@ -36,9 +36,9 @@
     "chai-spies": "^0.7.1",
     "eslint": "^3.3.1",
     "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-meteor": "^3.6.0",
     "eslint-plugin-react": "^5.2.2",
-    "eslint-plugin-jsx-a11y": "^2.1.0",
     "faker": "^3.1.0"
   },
   "scripts": {
@@ -72,7 +72,12 @@
           ]
         }
       ],
-      "no-param-reassign": ["error", { "props": false }],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": false
+        }
+      ],
       "no-unused-expressions": 0,
       "no-console": 0
     }

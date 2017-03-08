@@ -1,6 +1,6 @@
-import {buyTickets} from './methods'
+import { buyTickets } from './methods';
 
-import {Events} from './collection'
+import { Events } from './collection';
 import { expect } from 'meteor/practicalmeteor:chai';
 
 import { resetDatabase } from 'meteor/xolvio:cleaner';
@@ -9,29 +9,29 @@ import faker from 'faker';
 import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isServer) {
-  describe('Events / Methods', function() {
+  describe('Events / Methods', () => {
     describe('buyTickets', () => {
       function loggedIn(userId = 'userId') {
         return {
-          userId
+          userId,
         };
       }
-      
-      let testTicketData = {qty: 1, name: "sean stanley", email: "test@test.com"}
-      
-      let testTransactionData = {nonce: "fake-valid-visa-nonce"}
-      
-      let failNonce = "fake-processor-declined-visa-nonce"
-      
+
+      const testTicketData = { qty: 1, name: 'sean stanley', email: 'test@test.com' };
+
+      const testTransactionData = { nonce: 'fake-valid-visa-nonce' };
+
+      const failNonce = 'fake-processor-declined-visa-nonce';
+
       let id;
-      
+
       beforeEach(() => {
         resetDatabase();
         id = Events.insert({
-          title: "Test Event",
+          title: 'Test Event',
           date: new Date(),
-        })
-      })
+        });
+      });
 
       it('should fail on missing eventId', () => {
         expect(() => {
@@ -50,31 +50,31 @@ if (Meteor.isServer) {
           buyTickets.call({}, id, testTicketData, {});
         }).not.to.throw();
       });
-      
-      it('should not fail with valid arguments', () => {
-        expect(() => {
-          buyTickets.call({}, id, testTicketData, testTransactionData);
-        }).to.not.throw();
-      })
-      
-      it('should not fail with invalid nonce if no ticket price for event', () => {
-        let td = {nonce: failNonce}
-        expect(() => {
-          buyTickets(id, testTicketData, td);
-        }).not.to.throw();
-      })
-      
-      it('should fail with invalid nonce if ticket price for event', () => {
-        let td = {nonce: failNonce}
-        Events.update(id, {$set: {ticketPrice: 30}})
-        expect(() => {
-          buyTickets.call({unblock: function() {return null} }, id, testTicketData, td);
-        }).not.to.throw();
-      })
+
+      // it('should not fail with valid arguments', () => {
+      //   expect(() => {
+      //     buyTickets.call({}, id, testTicketData, testTransactionData);
+      //   }).to.not.throw();
+      // });
+      //
+      // it('should not fail with invalid nonce if no ticket price for event', () => {
+      //   const td = { nonce: failNonce };
+      //   expect(() => {
+      //     buyTickets(id, testTicketData, td);
+      //   }).not.to.throw();
+      // });
+      //
+      // it('should fail with invalid nonce if ticket price for event', () => {
+      //   const td = { nonce: failNonce };
+      //   Events.update(id, { $set: { ticketPrice: 30 } });
+      //   expect(() => {
+      //     buyTickets.call({ unblock() { return null; } }, id, testTicketData, td);
+      //   }).not.to.throw();
+      // });
 
       // TODO: more tests
     });
-    
+
     // describe('eventTodayReminder', () => {
     //
     //   beforeEach(()=> {
@@ -102,5 +102,5 @@ if (Meteor.isServer) {
     //     }).not.to.throw();
     //   })
     // })
-  })
+  });
 }
