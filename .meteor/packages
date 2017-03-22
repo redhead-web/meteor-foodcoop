@@ -67,3 +67,4 @@ shell-server@0.2.1
 angular-templates
 pbastowski:angular-babel
 practicalmeteor:chai
+webdeb:app-loader

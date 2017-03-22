@@ -1,10 +1,11 @@
+/* eslint-env mocha */
+
 import { buyTickets } from './methods';
 
 import { Events } from './collection';
 import { expect } from 'meteor/practicalmeteor:chai';
 
 import { resetDatabase } from 'meteor/xolvio:cleaner';
-import faker from 'faker';
 
 import { Meteor } from 'meteor/meteor';
 

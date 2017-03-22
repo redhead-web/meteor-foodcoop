@@ -23,6 +23,7 @@ Factory.define('user', Meteor.users, {
   profile: () => ({
     name: faker.name.findName(),
     companyName: faker.company.companyName(),
+    customerNumber: 16,
       // lastOrder: [Factory.get('product'), Factory.get('product'), Factory.get('product')],
       // favourites: [Factory.get('product'), Factory.get('product')]
   }),

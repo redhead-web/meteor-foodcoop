@@ -1,3 +1,4 @@
+/* globals Markup, Cart */
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
@@ -47,7 +48,7 @@ export function checkoutItems(data, delivery, userId, status) {
     throw new Meteor.Error('checkout.400', 'You do not have permission to checkout');
   }
   const items = Cart.Items.find({ userId }).fetch();
-  const itemTotal = Markup(items).cartTotal();
+  const itemTotal = Markup(items).cartTotal(); // eslint-disable-line new-cap
   const paymentMethodAmount = data.type === 'cash' ? 'cashAmount' : 'cardAmount';
   const order = {
     user: userId,
