@@ -3,8 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import templateUrl from './button.ng.html';
 import dialogTemplate from './payment-method-dialog.ng.html';
 
-function PaymentMethodSelector($scope, $mdDialog, $reactive) {
+function PaymentMethodSelector($scope, $mdDialog, $reactive, $state) {
   'ngInject';
+
   $reactive(this).attach($scope);
   this.success = (data) => {
     if (data && data.nonce) {
@@ -23,7 +24,8 @@ function PaymentMethodSelector($scope, $mdDialog, $reactive) {
         }
       });
     } else {
-      this.$stateGo('checkoutSuccess');
+      $mdDialog.hide();
+      $state.go('checkoutSuccess');
     }
   };
   this.cancel = (err) => {
@@ -37,6 +39,7 @@ function PaymentMethodSelector($scope, $mdDialog, $reactive) {
 
 function CheckoutFlowController($mdDialog) {
   'ngInject';
+
   this.checkout = (ev) => {
     $mdDialog.show({
       controller: PaymentMethodSelector,

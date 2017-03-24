@@ -85,6 +85,12 @@ exports.schema = new SimpleSchema
 
   stockcode: type: String, max: 12, optional: true
   daysNotice: type: Number, min: 0, optional: true
+
+  adminControl: type: Boolean, optional: true
+
+  # don't give credit if this is true
+  paidUpfront: type: Boolean, optional: true
+
   ###
    number of days notice needed for this order
    0 is same day (good for items in stock)

@@ -71,6 +71,15 @@ Meteor.publish "product", (id) ->
   , limit: 1
 
 Meteor.publish "my-products", ->
+  if Roles.userIsInRole @userId, 'admin'
+    console.log('welcome admin')
+    return Products.find
+      $or: [
+        { producer: @userId },
+        { adminControl: true },
+      ]
+    , fields: Object.assign {}, {adminControl: 1}, basicFields
+
   Products.find
     producer: @userId
   , fields: basicFields

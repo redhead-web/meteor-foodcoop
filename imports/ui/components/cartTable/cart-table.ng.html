@@ -13,20 +13,24 @@
             class="md-2-line"
           >
             <a ui-sref="productDetails({productId: item.productId})">
-              <cl-image public-id="{{item.details.img.result}}" class="md-avatar">
+              <cl-image
+                public-id="{{item.details.img.result}}"
+                ng-if="item.details.img.result"
+                class="md-avatar">
                 <cl-transformation
-                  height="60"
-                  width="60"
+                  height="50"
+                  width="50"
                   crop="fill"
                   gravity="center" />
               </cl-image>
               <ng-letter-avatar
-              ng-if="!item.details.img.result"
-              data="{{item.details.name}}"
-              font-size="36"
-              shape="round"
-              width="60"
-              height="60" />
+                class="md-avatar"
+                ng-if="!item.details.img.result"
+                data="{{item.details.name}}"
+                font-size="32"
+                shape="round"
+                width="40"
+                height="40" />
             </a>
 
             <div class="md-list-item-text">

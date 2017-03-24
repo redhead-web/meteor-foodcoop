@@ -1,4 +1,10 @@
+import angular from 'angular';
+import { Meteor } from 'meteor/meteor';
+import { Products } from '../../../imports/api/products';
+
 angular.module('food-coop').controller('MyProductsCtrl', function ($scope, $reactive, $mdDialog, $mdToast) {
+  'ngInject';
+
   $reactive(this).attach($scope);
 
   this.subscribe('my-products');
@@ -7,12 +13,12 @@ angular.module('food-coop').controller('MyProductsCtrl', function ($scope, $reac
 
   this.helpers({
     products() {
-      return Products.find({ producer: Meteor.userId() }, { sort: this.getReactively('sort') });
+      return Products.find({ $or: [{ producer: Meteor.userId() }, { adminControl: true }] }, { sort: this.getReactively('sort') });
     },
   });
 
   this.save = (product, modifier) => {
-    Products.update(product._id, modifier, function (err, result) {
+    Products.update(product._id, modifier, (err, result) => {
       if (err) {
         console.error(err);
         $mdToast.simple().content(err.message).position('bottom left').hideDelay(3000);
