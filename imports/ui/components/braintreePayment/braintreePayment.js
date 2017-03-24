@@ -10,12 +10,14 @@ class BraintreePaymentController {
   constructor($scope, $state, $reactive) {
     'ngInject';
     this.nonce = '';
+    this.spinner = true;
 
     $reactive(this).attach($scope);
     this.disablePaymentButton = true;
 
     this.container = 'payment-form';
     this.onReady = (obj) => {
+      this.spinner = false;
       console.log(obj);
       this.teardown = obj.teardown;
       $scope.$apply(() => { this.enablePaymentButton(); });

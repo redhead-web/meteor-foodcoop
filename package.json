@@ -16,6 +16,7 @@
     "angular-sanitize": "^1.5.8",
     "angular-simple-logger": "^0.1.7",
     "angular-ui-router": "^0.2.18",
+    "babel-runtime": "^6.18.0",
     "bcrypt": "^0.8.7",
     "index": "^0.4.0",
     "index.js": "0.0.3",
@@ -33,12 +34,19 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.5.5",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-meteor": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
     "chai-spies": "^0.7.1",
-    "eslint": "^3.3.1",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-jsx-a11y": "^2.1.0",
-    "eslint-plugin-meteor": "^3.6.0",
-    "eslint-plugin-react": "^5.2.2",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-import-resolver-meteor": "^0.3.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-meteor": "^4.0.1",
+    "eslint-plugin-react": "^6.10.3",
     "faker": "^3.1.0"
   },
   "scripts": {
@@ -48,6 +56,10 @@
     "start": "meteor run --settings wh-settings.json"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "allowImportExportEverywhere": true
+    },
     "plugins": [
       "meteor"
     ],
@@ -55,15 +67,10 @@
       "airbnb/base",
       "plugin:meteor/guide"
     ],
+    "settings": {
+      "import/resolver": "meteor"
+    },
     "rules": {
-      "import/no-unresolved": [
-        2,
-        {
-          "ignore": [
-            "^meteor/"
-          ]
-        }
-      ],
       "no-underscore-dangle": [
         "error",
         {

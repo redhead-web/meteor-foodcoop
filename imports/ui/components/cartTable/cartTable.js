@@ -46,6 +46,7 @@ const name = 'cartTable';
 export default angular.module(name, []).component(name, {
   controller: CartTableController,
   templateUrl,
+  transclude: true,
   controllerAs: 'cart',
   bindings: {
     items: '<',

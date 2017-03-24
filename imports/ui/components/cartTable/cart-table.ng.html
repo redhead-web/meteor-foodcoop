@@ -1,157 +1,122 @@
-<md-input-container flex>
-  <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
-  <input type="text" placeholder="search" ng-model="cart.filter">
-</md-input-container>
-<md-list>
-  <md-list-item
-    ng-repeat="item in cart.items | filter: cart.filter track by item._id"
-    class="md-2-line"
-  >
-    <a ui-sref="productDetails({productId: item.productId})" class="md-avatar">
-      <cl-image public-id="{{item.details.img.result}}">
-        <cl-transformation
-          height="60"
-          width="60"
-          crop="fill"
-          gravity="center" />
-      </cl-image>
-      <ng-letter-avatar
-      ng-if="!item.details.img.result"
-      data="{{item.details.name}}"
-      font-size="36"
-      shape="round"
-      width="60"
-      height="60" />
-    </a>
-
-    <div class="md-list-item-text">
-      <h3>{{item.details.name}}</h3>
-      <p>{{cart.totalWithMarkup(item) | currency}}</p>
-    </div>
-    <md-input-container>
-      <input aria-label="item quantity" type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.update(item._id, item.qty,  '{{item.qty}}')" min="1">
+<div layout>
+  <span flex></span>
+  <div>
+    <md-input-container flex>
+      <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+      <input type="text" placeholder="search" ng-model="cart.filter">
     </md-input-container>
-    <md-menu>
-      <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
-       class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
-      <md-menu-content>
-        <md-menu-item>
-          <md-button class="md-icon-button" aria-label="delete cart item" ng-click="cart.delete(item._id)">
-            <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button  ui-sref="">
-            View Producer
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button>
-            Subscribe to this product
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-  </md-list-item>
-</md-list>
-
-<div layout layout-align="end">
-  <div
-    ng-if="cart.shipping"
-    layout
-    layout-align="space-between">
-    <span>Shipping:</span><span>{{ cart.shipping.deliveryMethod.cost * cart.shipping.deliveryDays.length | currency }}</span>
-  </div>
-  <div
-    layout
-    layout-align="space-between">
-    <span>Cart Total:</span><span>{{cart.total | currency}}</span>
-  </div>
-  <div
-    ng-if="cart.user.profile.balance !== 0"
-    layout
-    layout-align="space-between">
-    <span>Balance:</span>
-    <span
-    ng-class="{'green-text': cart.user.profile.balance > 0, 'red-text': cart.user.profile.balance < 0}">
-      {{cart.user.profile.balance | currency}}
-    </span>
-  </div>
-  <div
-    ng-if="cart.user.profile.balance !== 0"
-    layout
-    layout-align="space-between">
-    <span>Total Owing</span>
-    <span ng-if="cart.user.profile.balance < cart.total">
-      {{cart.total - cart.user.profile.balance | currency}}
-    </span>
-    <span ng-if="cart.user.profile.balance > cart.total">
-      $0.00
-    </span>
-  </div>
-</div>
-
-
-    <table class="material-table cart-table" ng-cloak>
-      <thead>
-        <tr>
-          <td></td>
-          <td></td>
-          <td>
-            Product
-          </td>
-          <td>
-            Producer
-          </td>
-          <td>
-            Price
-          </td>
-          <td>
-            Quantity
-          </td>
-          <td>
-            Total
-          </td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="item in cart.items track by item._id">
-          <td class="no-padding">
-            <md-button class="md-icon-button" aria-label="alert" ng-if="cart.deliveryWarning(item.details.daysNotice)" ng-click="cart.deliveryAlert($event, item.details.daysNotice)">
-              <md-icon  md-svg-icon="alert:ic_warning_24px"></md-icon>
-            </md-button>
-          </td>
-          <td>
+    <md-card>
+      <md-card-content>
+        <md-list>
+          <md-list-item
+            ng-repeat="item in cart.items | filter: cart.filter track by item._id"
+            class="md-2-line"
+          >
             <a ui-sref="productDetails({productId: item.productId})">
-              <cl-image public-id="{{item.details.img.result}}" class="thumbnail" >
-                <cl-transformation height="60" width="60" crop="fill" gravity="center"></cl-transformation>
+              <cl-image public-id="{{item.details.img.result}}" class="md-avatar">
+                <cl-transformation
+                  height="60"
+                  width="60"
+                  crop="fill"
+                  gravity="center" />
               </cl-image>
-              <ng-letter-avatar ng-if="!item.details.img.result" data="{{item.details.name}}" font-size="36" shape="round" width="60" height="60"></ng-letter-avatar>
+              <ng-letter-avatar
+              ng-if="!item.details.img.result"
+              data="{{item.details.name}}"
+              font-size="36"
+              shape="round"
+              width="60"
+              height="60" />
             </a>
-          </td>
-          <td>
-            {{item.details.name}}
-          </td>
-          <td>
-            {{item.details.producerCompanyName || item.details.producerName}}
-          </td>
-          <td>
-            {{cart.priceWithMarkup(item) | currency}}
-          </td>
-          <td>
-            <md-input-container class="input-table">
-              <input aria-label="item quantity" type="number" name="qty" ng-model="item.qty" ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="cart.update(item._id, item.qty,  '{{item.qty}}')" min="1">
-            </md-input-container>
-          </td>
-          <td>
-            {{cart.totalWithMarkup(item) | currency}}
-          </td>
-          <td>
-            <md-button class="md-icon-button" aria-label="More" ng-click="cart.delete(item._id)">
-              <md-icon md-svg-icon="action:ic_delete_24px"></md-icon>
-            </md-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+            <div class="md-list-item-text">
+              <h3>{{item.details.name}}</h3>
+              <p>{{cart.totalWithMarkup(item) | currency}}</p>
+            </div>
+            <div layout layout-align="center center" style="margin:auto;">
+              <md-button
+              class="md-icon-button"
+              aria-label="increase quantity"
+              ng-click="cart.update(item._id, item.qty + 1, item.qty)">
+                <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
+              </md-button>
+              {{item.qty}}
+              <md-button
+              class="md-icon-button"
+              aria-label="decrease quantity"
+              ng-click="cart.update(item._id, item.qty - 1, item.qty)">
+                <md-icon md-svg-icon="content:ic_remove_24px"></md-icon>
+              </md-button>
+            </div>
+            <md-menu class="md-secondary">
+              <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
+               class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
+              <md-menu-content>
+                <md-menu-item>
+                  <md-button aria-label="delete cart item" ng-click="cart.delete(item._id)">
+                    <md-icon md-svg-icon="action:ic_delete_24px"></md-icon> Remove
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="productDetails({productId: item.productId})">
+                    View Product
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button  ui-sref="producer({userId: item.details.producer})">
+                    {{ item.details.producerCompanyName || item.details.producerName }}
+                  </md-button>
+                </md-menu-item>
+                <!-- <md-menu-item>
+                  <md-button>
+                    Subscribe to this product
+                  </md-button>
+                </md-menu-item> -->
+              </md-menu-content>
+            </md-menu>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+      <md-card-footer>
+        <div layout="column" layout-align="end">
+          <div
+            ng-if="cart.shipping"
+            layout
+            layout-align="space-between">
+            <span>Shipping:</span> <span>{{ cart.shipping.deliveryMethod.cost * cart.shipping.deliveryDays.length | currency }}</span>
+          </div>
+          <div
+            layout
+            layout-align="space-between">
+            <span>Cart Total:</span> <span>{{cart.total | currency}}</span>
+          </div>
+          <div
+            ng-if="cart.user.profile.balance !== 0"
+            layout
+            layout-align="space-between">
+            <span>Balance:</span>
+            <span
+            ng-class="{'green-text': cart.user.profile.balance > 0, 'red-text': cart.user.profile.balance < 0}">
+              {{cart.user.profile.balance | currency}}
+            </span>
+          </div>
+          <div
+            ng-if="cart.user.profile.balance !== 0"
+            layout
+            layout-align="space-between">
+            <span>Total Owing</span>
+            <span ng-if="cart.user.profile.balance < cart.total">
+              {{cart.total - cart.user.profile.balance | currency}}
+            </span>
+            <span ng-if="cart.user.profile.balance > cart.total">
+              $0.00
+            </span>
+          </div>
+        </div>
+      </md-card-footer>
+      <md-card-footer>
+        <ng-transclude layout layout-align="space between"></ng-transclude>
+      </md-card-footer>
+  </div>
+  <span flex></span>
+</div>
