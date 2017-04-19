@@ -78,7 +78,7 @@ Meteor.publish "my-products", ->
         { producer: @userId },
         { adminControl: true },
       ]
-    , fields: Object.assign {}, {adminControl: 1}, basicFields
+    , fields: Object.assign {}, {adminControl: 1, carted: 1}, basicFields
 
   Products.find
     producer: @userId
