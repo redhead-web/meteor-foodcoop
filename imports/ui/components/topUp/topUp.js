@@ -59,10 +59,9 @@ class topUpController {
     };
   }
   handlePaymentSuccess(data) {
-    this.call('Accounts.topUp', data, (err, result) => {
+    this.call('Accounts.topUp', data, (err) => {
       const message = err ? err.message : 'Thanks! Top up Successful.';
       this.makeToast(message);
-      console.log(result);
     });
   }
 }
