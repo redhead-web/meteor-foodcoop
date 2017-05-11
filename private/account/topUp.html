@@ -1,0 +1,26 @@
+<p>Hi {{name}},</p>
+
+<div style="text-align: center;">
+  <p>Thanks for the Account Top Up of {{currency amount}}</p>
+  <h1 style="text-align:center;">Balance: {{currency balance}}</h1>
+
+  <table cellspacing="0" cellpadding="5" border="1" width="100%" class="table">
+    <thead>
+      <tr class="header">
+        <td colspan="2">Payment Type</td>
+        <td>Transaction Date</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td><img src="{{or paypal.img creditCard.img}}" alt="card icon"/></td>
+        <td>{{or paypal.email creditCard.maskedNumber}}</td>
+        <td>{{createdAt}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <a href="{{rootUrl}}" class="shop-now-btn">Go to Store</a>
+</div>

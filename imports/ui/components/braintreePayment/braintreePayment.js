@@ -9,6 +9,7 @@ import templateUrl from './braintreePayment.html';
 class BraintreePaymentController {
   constructor($scope, $state, $reactive) {
     'ngInject';
+
     this.nonce = '';
     this.spinner = true;
 

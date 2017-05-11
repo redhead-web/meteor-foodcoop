@@ -43,7 +43,7 @@
   {{#each sales}}
     <tr>
       <td>{{customerName}}</td>
-      <td><a href="https://kaicoop.nz/products/{{productId}}">{{productName}}</a></td>
+      <td><a href="{{rootUrl}}/products/{{productId}}">{{productName}}</a></td>
       <td>${{price}} / {{unitOfMeasure}}</td>
       <td>{{qty}}</td>
       <td>{{saleTotal}}</td>
@@ -56,4 +56,3 @@
     </tr>
   </tfoot>
 </table>
-

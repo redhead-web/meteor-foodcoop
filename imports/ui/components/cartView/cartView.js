@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import templateUrl from './cart-view.ng.html';
 import cartTable from '../cartTable/cartTable';
 import checkoutFlow from '../checkoutFlow/checkoutFlow';
+import topUp from '../topUp/topUp';
 
 class CartViewCtrl {
   constructor($scope, $reactive, $mdToast, $state) {
@@ -12,8 +13,8 @@ class CartViewCtrl {
     $reactive(this).attach($scope);
 
     this.nextDeliveryDay = GetNextDeliveryDay().format();
-    this.priceWithMarkup = (item) => Markup(item).total();
-    this.totalWithMarkup = (item) => Markup(item).cartTotal();
+    this.priceWithMarkup = item => Markup(item).total();
+    this.totalWithMarkup = item => Markup(item).cartTotal();
 
     this.$stateGo = $state.go;
     this.$mdToast = $mdToast;
@@ -51,7 +52,7 @@ class CartViewCtrl {
           this.$mdToast.simple()
           .content(error.message)
           .position('bottom left')
-          .hideDelay(3000)
+          .hideDelay(3000),
         );
       }
     });
@@ -73,12 +74,13 @@ class CartViewCtrl {
 
 const name = 'cartView';
 
-export default angular.module(name, [cartTable.name, checkoutFlow.name]).component(name, {
+export default angular.module(name, [cartTable.name, checkoutFlow.name, topUp.name]).component(name, {
   controller: CartViewCtrl,
   controllerAs: 'cart',
   templateUrl,
 }).config(($stateProvider) => {
   'ngInject';
+
   $stateProvider.state('cart', {
     url: '/cart',
     template: '<cart-view></cart-view>',

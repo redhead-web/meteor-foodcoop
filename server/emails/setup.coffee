@@ -3,6 +3,8 @@
 
 Templates = {}
 
+visaImage = "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox"
+paypalImage = "https://assets.braintreegateway.com/payment_method_logo/paypal.png?environment=sandbox"
 
 item1 = {
   qty: 3
@@ -141,20 +143,20 @@ Templates.earlyLikesProducerShoppingReminder =
           stocklevel:             1
           unitOfMeasure:          1
       }).forEach (product) ->
-          producer = Meteor.users.findOne _id: product.producer, {fields: 'profile.name': 1, 'profile.companyName': 1}
+        producer = Meteor.users.findOne _id: product.producer, {fields: 'profile.name': 1, 'profile.companyName': 1}
 
-          unless producer
-            return
-          idx = _.findIndex(producers, '_id', producer._id)
-          if idx != -1
-            producers[idx].products.push product
-          else
-            producer.products = [product]
-            producer.name = producer.profile.name
-            producer.companyName = producer.profile.companyName
-            producers.push producer
-
+        unless producer
           return
+        idx = _.findIndex(producers, '_id', producer._id)
+        if idx != -1
+          producers[idx].products.push product
+        else
+          producer.products = [product]
+          producer.name = producer.profile.name
+          producer.companyName = producer.profile.companyName
+          producers.push producer
+
+        return
 
       console.log producers
 
@@ -195,6 +197,26 @@ Templates.cartReminder =
 Templates.orderReceiptPOS =
   path: 'order/receipt-email.html'
   route: path: '/receipt'
+
+Templates.topUpReceipt =
+  path: 'account/topUp.html'
+  route:
+    path: '/topUp'
+    data: ->
+      return {
+        name: 'Sean Stanley'
+        amount: 50
+        balance: 70
+        creditCard:
+          maskedNumber: "411111******1111"
+          img: visaImage
+
+        # paypal:
+        #   email: 'sean@maplekiwi.com'
+        #   img: paypalImage
+
+        createdAt: moment().format('llll')
+      }
 
 Templates.confirmOrderEmail =
   path: 'order/confirmationEmail/confirmation-email.html'
@@ -267,6 +289,8 @@ Meteor.startup ->
     helpers:
       coopName: "Whangarei Food Co-op"
       bankAccount: Meteor.settings.public.bankAccount
+      or: (arg1, arg2) ->
+        return arg1 || arg2
       css: () ->
         """
           @media screen and (max-width: 600px) {

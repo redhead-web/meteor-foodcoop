@@ -2,6 +2,7 @@
   <span flex></span>
   <div flex="90" flex-md=100 flex-sm=100>
     <h1 class="text-center md-title"> Shopping Cart </h1>
+    <p class="text-center"> New! <top-up></top-up></p>
     <cart-table items="cart.items" total="cart.total" user="currentUser" shipping="cart.deliveryData" on-update="cart.changeQuantity(id, newQty, oldQty)" on-remove="cart.removeFromCart(id)">
       <delivery-form ng-if="cart.items.length" items="cart.items" add-delivery="cart.addDelivery(data)"></delivery-form>
 
