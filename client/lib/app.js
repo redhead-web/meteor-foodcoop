@@ -17,6 +17,7 @@ import 'cloudinary-angular/dist/cloudinary-angular.js';
 // import {name as eventList} from '../../imports/ui/components/eventList/eventList';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 import { name as productsList } from '../../imports/ui/components/productsList/productsList';
+import { name as myProducts } from '../../imports/ui/components/myProducts/myProducts';
 import { name as productCardSummary } from
  '../../imports/ui/components/productCardSummary/productCardSummary';
 import { name as userProfilePage } from
@@ -41,6 +42,7 @@ angular.module('food-coop', [
   navigation,
   productCreate,
   productsList,
+  myProducts,
 //  eventList,
 //   requestList,
   uiRouter,
@@ -69,6 +71,7 @@ angular.module('food-coop', [
   ($mdIconProvider,
     $mdThemingProvider, uiGmapGoogleMapApiProvider, CloudinaryProvider, $compileProvider) => {
     'ngInject';
+
     if (Meteor.settings.public.production) {
       $compileProvider.debugInfoEnabled(false);
     }
@@ -110,6 +113,7 @@ angular.module('food-coop', [
   })
 .run(($rootScope) => {
   'ngInject';
+
   $rootScope.hasRole = Roles.userIsInRole;
 
   $rootScope.title = 'Fresh Local Quality | Whangarei Food Co-op';

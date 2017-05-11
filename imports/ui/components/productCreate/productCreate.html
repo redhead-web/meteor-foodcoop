@@ -38,6 +38,14 @@
         <label>Extra Markup (use 0.1 for 10% extra)</label>
         <input ng-model="ctrl.product.extraMarkup" min="0" step="0.1">
       </md-input-container>
+
+      <md-checkbox ng-if="ctrl.hasRole(currentUser, 'admin')" ng-model="ctrl.product.adminControl">
+        Does the admin manage this product?
+      </md-checkbox>
+      <md-checkbox ng-if="ctrl.hasRole(currentUser, 'admin')" ng-model="ctrl.product.paidUpfront">
+        Is this product purchased upfront?
+      </md-checkbox>
+
       <md-input-container>
         <label>Product Name</label>
         <input ng-model="ctrl.product.name" required name="productName" md-maxlength="100">
@@ -199,7 +207,7 @@
          </md-tabs>
       </section>
 
-      <md-button ng-click="ctrl.save($event)">List In Store</md-button>
+      <md-button class="md-raised md-primary" ng-click="ctrl.save($event)">List In Store</md-button>
       <md-button ui-sref="store">Cancel</md-button>
     </form>
   </div>

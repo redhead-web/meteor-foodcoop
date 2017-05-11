@@ -49,7 +49,7 @@ class userProfilePageController {
     });
 
     this.autorun(() => {
-      const ref = Meteor.users.findOne($stateParams.userId)._id;
+      const ref = $stateParams.userId;
       if (Meteor.user()) {
         const list = Meteor.user().profile.lovedProducers || [];
         if (indexOf.call(list, ref) >= 0) {

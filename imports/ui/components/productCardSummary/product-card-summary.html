@@ -18,7 +18,10 @@
       <label>Stock Level</label>
       <input ng-model="card.product.stocklevel" type="number" ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }" ng-change="card.save()">
     </md-input-container>
+		In Carts: {{card.cartedAmount(card.product.carted)}} <br>
+		Sold this week: {{card.salesAmount(card.product._id)}}
   </md-card-content>
+
 	<md-card-actions layout="row" layout-align="end center">
 		<md-switch class="md-primary md-block" ng-model="card.product.published" ng-change="card.save()">
 			<span ng-if="!card.product.published">Not </span>For Sale

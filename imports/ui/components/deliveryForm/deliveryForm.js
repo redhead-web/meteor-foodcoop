@@ -9,7 +9,7 @@ import { moment } from 'meteor/momentjs:moment';
 import templateUrl from './deliveryForm.html';
 
 class deliveryFormController {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $mdDialog) {
     'ngInject';
     $reactive(this).attach($scope);
     this.deliveryAddress = Meteor.user().profile.deliveryAddress.formatted_address;
@@ -48,6 +48,17 @@ class deliveryFormController {
     Deliveries.find({ userId: Meteor.userId() }).observe({
       added,
     });
+
+    this.getDelivery = (targetEvent) => {
+      $mdDialog.show({
+        contentElement: '#deliveryForm',
+        clickOutsideToClose: true,
+        parent: angular.element(document.body),
+        targetEvent,
+      });
+    }
+
+    this.close = () => $mdDialog.hide();
   }
 
   submit(isValid) {
@@ -57,7 +68,7 @@ class deliveryFormController {
         address: this.deliveryAddress,
         deliveryDays: this.deliveryDays,
       } });
-      this.show = false;
+      this.close();
     }
   }
 }
