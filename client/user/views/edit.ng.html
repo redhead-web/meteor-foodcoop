@@ -1,9 +1,9 @@
 <md-content layout="row" layout-xs="column">
   <span flex></span>
   <section layout="column" flex="50" flex-sm="95" layout-margin>
-    <aside layout-margin layout layout-align="center center" ng-if="isProducer(currentUser._id)">
+    <aside layout-margin layout layout-align="center center" ng-if="$ctrl.isProducer">
       <p class="md-body-1">View and edit my producer profile</p>
-      <md-button ui-sref="producer({userId: user._id})" class="md-fab" aria-label="producer directory">
+      <md-button ui-sref="producer({userId: $ctrl.user._id})" class="md-fab" aria-label="producer directory">
         <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
       </md-button>
     </aside>
@@ -13,23 +13,23 @@
     <br>
     {{error}}<br>
     {{errorEmail}}
-    <form name="editUser" layout="column" ng-submit="validate(editUser.$valid)">
+    <form name="editUser" layout="column" ng-submit="$ctrl.validate(editUser.$valid)">
       <h3 class="md-title">Basic Details</h3>
       <md-input-container>
         <md-icon md-svg-icon="social:ic_person_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="user.profile.name"
+        <input type="text" ng-model="$ctrl.user.profile.name"
                placeholder="name" aria-label="name"/>
       </md-input-container>
 
       <md-input-container>
         <md-icon md-svg-icon="communication:ic_email_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="email"
+        <input type="text" ng-model="$ctrl.email"
                placeholder="email address" aria-label="name"/>
       </md-input-container>
 
       <md-input-container>
         <md-icon md-svg-icon="communication:ic_chat_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="user.profile.phone"
+        <input type="text" ng-model="$ctrl.user.profile.phone"
                placeholder="phone" aria-label="phone"/>
       </md-input-container>
 
@@ -43,27 +43,27 @@
 
       <md-input-container>
         <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="user.profile.deliveryAddress" autocomplete="off"
+        <input type="text" ng-model="$ctrl.user.profile.deliveryAddress" autocomplete="off"
           g-places-autocomplete
           placeholder="home address" aria-label="home address"/>
       </md-input-container>
 
       <md-input-container>
         <md-icon md-svg-icon="action:ic_account_balance_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="user.profile.bankAccount"
+        <input type="text" ng-model="$ctrl.user.profile.bankAccount"
           placeholder="Bank Account to Send Sales To"/>
       </md-input-container>
 
       <md-input-container>
         <md-icon md-svg-icon="action:ic_assignment_24px" class="md-accent"></md-icon>
-        <input type="text" ng-model="user.profile.gst"
+        <input type="text" ng-model="$ctrl.user.profile.gst"
           placeholder="GST Number (if registered)"/>
       </md-input-container>
-      <md-button type="button" ng-click="resetPassword()">Change Password</md-button>
+      <md-button type="button" ng-click="$ctrl.resetPassword()">Change Password</md-button>
       <md-button type="submit" class="md-raised md-primary">Save</md-button>
 
     </form>
-    <aside layout-margin layout layout-align="center center" class="md-whiteframe-4dp" ng-if="!isProducer(currentUser._id)">
+    <aside layout-margin layout layout-align="center center" class="md-whiteframe-4dp" ng-if="!$ctrl.isProducer">
       <p class="md-body-1">Want to sell with us too?</p>
       <md-button ui-sref="producer-application" class="md-raised md-accent">Apply Now</md-button>
     </aside>

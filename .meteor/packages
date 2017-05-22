@@ -62,7 +62,6 @@ dburles:factory
 practicalmeteor:mocha
 meteorhacks:picker
 meteorhacks:ssr
-meteorhacks:kadira
 shell-server@0.2.3
 angular-templates
 pbastowski:angular-babel
