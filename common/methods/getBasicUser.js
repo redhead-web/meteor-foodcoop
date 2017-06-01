@@ -1,5 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+
 Meteor.methods({
-  'getBasicUser'(_id) {
+  getBasicUser(_id) {
     if (!_id) { return {}; }
     return Meteor.users.findOne({
       _id,

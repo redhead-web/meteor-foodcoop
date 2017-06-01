@@ -95,10 +95,7 @@
       "no-console": 0
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/redhead-web/meteor-foodcoop.git"
-  },
+  "repository": "git+https://github.com/redhead-web/meteor-foodcoop.git",
   "keywords": [
     "food-coop"
   ],
