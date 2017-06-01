@@ -3,6 +3,7 @@ angular.module('food-coop').config(($stateProvider) => {
   .state('profile.edit', {
     url: '/edit',
     controller: 'EditUserCtrl',
+    controllerAs: '$ctrl',
     templateUrl: 'client/user/views/edit.ng.html',
   })
   .state('profile.balance', {
@@ -81,7 +82,7 @@ angular.module('food-coop').config(($stateProvider) => {
   .state('logout', {
     url: '/logout',
     resolve: {
-      'logout'($meteor, $state) {
+      logout($meteor, $state) {
         return $meteor.logout().then(() => {
           $state.go('store');
         }, (err) => {

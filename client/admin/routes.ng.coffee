@@ -11,7 +11,7 @@ angular.module('food-coop').config ($stateProvider) ->
     controller: 'AdminCtrl'
     resolve:
       'admin': ($auth) ->
-              $auth.requireValidUser(isAdmin)
+        $auth.requireValidUser(isAdmin)
   ).state('admin.products',
     url: '/products'
     templateUrl: 'client/admin/views/products.ng.html'
@@ -22,26 +22,27 @@ angular.module('food-coop').config ($stateProvider) ->
     templateUrl: 'client/admin/views/users.ng.html'
     controller: 'UsersAdminCtrl'
     resolve: 'admin': ($auth) ->
-        $auth.requireValidUser(isAdmin)
+      $auth.requireValidUser(isAdmin)
   ).state('admin.createUser',
     url: '/user/new'
     templateUrl: 'client/admin/views/create-user.ng.html'
     controller: 'CreateUserAdminCtrl'
     resolve: 'admin': ($auth) ->
-        $auth.requireValidUser(isAdmin)
+      $auth.requireValidUser(isAdmin)
   ).state('admin.user',
     url: '/user/:userId'
     templateUrl: 'client/admin/views/user.ng.html'
     controller: 'UserAdminCtrl'
+    controllerAs: '$ctrl'
     resolve: 'admin': ($auth) ->
-        $auth.requireValidUser(isAdmin)
+      $auth.requireValidUser(isAdmin)
   ).state('admin.userOrders',
     url: '/user/:userId/orders'
     templateUrl: 'client/admin/views/user.ng.html'
     controller: 'UserOrdersAdminCtrl'
     controllerAs: 'vm'
     resolve: 'admin': ($auth) ->
-        $auth.requireValidUser(isAdmin)
+      $auth.requireValidUser(isAdmin)
   ).state('admin.order',
     url: '/order/:orderId'
     templateUrl: 'client/admin/views/order.ng.html'

@@ -14,7 +14,7 @@ import 'angular-google-maps';
 import { name as navigation } from '../../imports/ui/components/navigation/navigation';
 import { name as productCreate } from '../../imports/ui/components/productCreate/productCreate';
 import 'cloudinary-angular/dist/cloudinary-angular.js';
-// import {name as eventList} from '../../imports/ui/components/eventList/eventList';
+import { name as eventList } from '../../imports/ui/components/eventList/eventList';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 import { name as productsList } from '../../imports/ui/components/productsList/productsList';
 import { name as myProducts } from '../../imports/ui/components/myProducts/myProducts';
@@ -43,7 +43,7 @@ angular.module('food-coop', [
   productCreate,
   productsList,
   myProducts,
-//  eventList,
+  eventList,
 //   requestList,
   uiRouter,
   ngMaterial,

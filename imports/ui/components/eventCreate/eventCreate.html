@@ -32,22 +32,27 @@
     <input required g-places-autocomplete type="text" ng-model="$ctrl.event.venue"
            placeholder="event venue" aria-label="address" name="venue"/>
     <div ng-messages="createEventForm.venue.$error" ng-if="createEventForm.venue.$touched">
-      <div ng-message="required">Please provide your home address.</div>
+      <div ng-message="required">Please provide your event's location.</div>
     </div>
   </md-input-container>
 
-  <div layout="row" layout-xs="column" layout-align="center center">
-    <md-datepicker ng-model="$ctrl.event.date" flex="50"></md-datepicker>
-    <md-input-container flex="50">
+  <div layout="row" layout-xs="column">
+    <md-input-container flex-gt-xs="50">
+      <md-datepicker ng-model="$ctrl.event.date" flex="50"></md-datepicker>
+    </md-input-container>
+    <md-input-container flex-gt-xs="50">
       <label>Time</label>
       <input ng-model="$ctrl.time" type="time" ng-change="$ctrl.timeChange()" required>
     </md-input-container>
   </div>
 
-  <fc-img-upload on-success="$ctrl.imgSelected(data)" on-error="$ctrl.imgError(error)"></fc-img-upload>
-  <cl-image flex="100" ng-if="$ctrl.event.img.result" public-id="{{$ctrl.event.img.result}}">
-    <cl-transformation width="800" crop="fill" gravity="center"></cl-transformation>
-  </cl-image>
+  <fc-img-upload
+    can-edit="true"
+    on-success="$ctrl.imgSelected(data)"
+    on-error="$ctrl.imgError(error)"
+    on-delete="$ctrl.deleteImage()"
+    cl-img="$ctrl.event.img.result"
+  ></fc-img-upload>
 
   <section class="md-whiteframe-3dp" ng-cloak>
     <md-toolbar>
