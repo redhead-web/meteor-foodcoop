@@ -5,15 +5,10 @@ import { check, Match } from 'meteor/check';
 
 import { Events } from './collection';
 
-let environment,
-  gateway;
+let gateway = null;
 
 if (Meteor.isServer) {
-  environment = Braintree.Environment.Sandbox;
-
-  if (process.env.METEOR_ENVIRONMENT === 'production') {
-    environment = Braintree.Environment.Production;
-  }
+  const environment = process.env.METEOR_ENVIRONMENT === 'production' ? Braintree.Environment.Production : Braintree.Environment.Sandbox;
 
   gateway = BrainTreeConnect({
     environment,

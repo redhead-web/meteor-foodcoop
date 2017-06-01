@@ -1,14 +1,13 @@
 // import angular from 'angular'
-import uiRouter from 'angular-ui-router'
-import ngMaterial from 'angular-material'
+import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
 
-import templateUrl from './eventList.html'
+import templateUrl from './eventList.html';
 
 import { Events } from '../../../api/events';
 
-import {name as eventCreate} from "../eventCreate/eventCreate"
-import {name as eventDetails} from "../eventDetails/eventDetails"
-
+import { name as eventCreate } from '../eventCreate/eventCreate';
+import { name as eventDetails } from '../eventDetails/eventDetails';
 
 
 class EventsController {
@@ -19,21 +18,21 @@ class EventsController {
 
     this.limit = 7;
     this.sort = {
-      date: 1
-    }
+      date: 1,
+    };
 
     this.subscribe('upcoming-events', () => [{
-      limit: parseInt(this.limit),
-      sort: this.getReactively('sort')
-    }, null])
+      limit: parseInt(this.limit, 10),
+      sort: this.getReactively('sort'),
+    }]);
 
     this.helpers({
       events() {
         return Events.find({}, {
-          sort : this.getReactively('sort')
+          sort: this.getReactively('sort'),
         });
-      }
-    })
+      },
+    });
   }
 
   pageChanged(limit) {
@@ -54,18 +53,19 @@ export default angular.module(name, [
   eventCreate,
   eventDetails,
   uiRouter,
-  ngMaterial
+  ngMaterial,
 ]).component(name, {
   templateUrl,
-  controller: EventsController
+  controller: EventsController,
 })
   .config(config);
 
 function config($stateProvider) {
   'ngInject';
+
   $stateProvider
     .state('events', {
       url: '/events',
-      template: '<event-list></event-list>'
+      template: '<event-list></event-list>',
     });
 }
