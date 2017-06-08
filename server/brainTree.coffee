@@ -83,15 +83,25 @@ Meteor.methods
     result = gateway.paymentMethod.delete token
     result
   braintreeTransaction2: (data) ->
-    check(data.total, Number)
-    check(data.payment_method_nonce, String)
-    check(data.customerId, String)
+    new SimpleSchema({
+      total: type: Number, min: 0
+      payment_method_nonce: type: String
+      customerId: type: String, optional: true
+      fees: type: Boolean, optional: true
+    }).validate(data)
 
     if data && data.total == 0
       return { success: true, transaction: id: 'no-card-charge-needed' }
 
+    total = data.total
+
+    if data.fees
+      fee = Meteor.settings.public.fees.FIXED + data.total -
+      (data.total * (1-Meteor.settings.public.fees.PERCENT))
+      total += fee
+
     config = {
-      amount: data.total.toFixed 2
+      amount: total.toFixed 2
       paymentMethodNonce: data.payment_method_nonce
       customerId: data.customerId
       options:
@@ -109,7 +119,7 @@ Meteor.methods
         console.error result.message
         throw new Meteor.Error 500, result.message
 
-    result
+    return result
 
   # braintreeSubscription: (data) ->
 #     #does user have a braintree id? if not get them one. then update their id

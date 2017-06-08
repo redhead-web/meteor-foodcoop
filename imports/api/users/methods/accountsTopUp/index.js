@@ -16,7 +16,7 @@ export default function accountsTopUp(data) {
     total: data.amount,
     payment_method_nonce: data.data.nonce,
     customerId: user.customerId,
-    serviceFeeCharge: false,
+    fees: false,
   });
 
   if (result && result.success) {

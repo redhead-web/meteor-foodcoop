@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import templateUrl from './cart-view.ng.html';
 import cartTable from '../cartTable/cartTable';
 import checkoutFlow from '../checkoutFlow/checkoutFlow';
-import topUp from '../topUp/topUp';
+import { name as topUp } from '../topUp/topUp';
 
 class CartViewCtrl {
   constructor($scope, $reactive, $mdToast, $state) {
@@ -32,6 +32,12 @@ class CartViewCtrl {
       if (this.getReactively('deliveryData.deliveryMethod')) {
         this.total += this.deliveryData.deliveryMethod.cost;
       }
+
+      if (this.total) {
+        this.fees = Meteor.settings.public.fees.FIXED + (this.total -
+        (this.total * (1 - Meteor.settings.public.fees.PERCENT)));
+      }
+
       this.cartLength = Cart.Items.find({ userId: Meteor.userId() }).count();
       if (user && user.profile && user.profile.balance > 0) {
         if (user.profile.balance < this.total) {
@@ -40,6 +46,7 @@ class CartViewCtrl {
       }
     });
   }
+
   removeFromCart(id) {
     Cart.Items.remove(id);
   }
@@ -74,7 +81,7 @@ class CartViewCtrl {
 
 const name = 'cartView';
 
-export default angular.module(name, [cartTable.name, checkoutFlow.name, topUp.name]).component(name, {
+export default angular.module(name, [cartTable.name, checkoutFlow.name, topUp]).component(name, {
   controller: CartViewCtrl,
   controllerAs: 'cart',
   templateUrl,

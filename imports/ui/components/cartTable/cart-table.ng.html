@@ -92,7 +92,17 @@
           <div
             layout
             layout-align="space-between">
-            <span>Cart Total:</span> <span>{{cart.total | currency}}</span>
+            <span>Credit Card Fees (if applicable):</span> <span>{{cart.fees | currency}}</span>
+          </div>
+          <div
+            layout
+            layout-align="space-between">
+            <span>Total:</span> <span>{{cart.total | currency}}</span>
+          </div>
+          <div
+            layout
+            layout-align="space-between">
+            <span>Total with fees:</span> <span>{{cart.total + cart.fees | currency}}</span>
           </div>
           <div
             ng-if="cart.user.profile.balance !== 0"

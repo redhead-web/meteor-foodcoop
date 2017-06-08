@@ -83,6 +83,7 @@ export function checkoutItems(data, delivery, userId, status) {
     payment_method_nonce: data.nonce,
     total: order.cardAmount,
     customerId: user.customerId,
+    fees: true,
   };
 
   if (data.type !== 'cash') {
