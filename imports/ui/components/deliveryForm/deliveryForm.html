@@ -28,6 +28,10 @@
           <md-input-container>
             <label>Delivery Address</label>
             <input required g-places-autocomplete ng-model="deliveryForm.deliveryAddress">
+            <small ng-if="deliveryForm.deliveryAddress.place_id">
+              <md-icon md-svg-icon="action:ic_done_24px"></md-icon>Found that Address
+            </small>
+            <small ng-if="!deliveryForm.deliveryAddress.place_id">Type your address and choose a location from the suggestions provided.</small>
           </md-input-container>
         </md-dialog-content>
         <md-dialog-actions class="text-center" layout layout-align="end">

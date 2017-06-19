@@ -34,20 +34,24 @@ class CartViewCtrl {
       }
 
       if (this.total) {
-        this.fees = Meteor.settings.public.fees.FIXED + (this.total -
-        (this.total * (1 - Meteor.settings.public.fees.PERCENT)));
+        let total = this.total;
+        if (user.profile.balance > 0 && user.profile.balance < this.total) {
+          total -= user.profile.balance;
+        }
+        this.fees = Meteor.settings.public.fees.FIXED + (total -
+        (total * (1 - Meteor.settings.public.fees.PERCENT)));
       }
 
       this.cartLength = Cart.Items.find({ userId: Meteor.userId() }).count();
       if (user && user.profile && user.profile.balance > 0) {
         if (user.profile.balance < this.total) {
-          this.totalWithBalance = this.total - user.profile.balance;
+          this.totalWithBalance = (this.total + this.fees) - user.profile.balance;
         } else this.totalWithBalance = 0;
       }
     });
   }
 
-  removeFromCart(id) {
+  removeFromCart = (id) => {
     Cart.Items.remove(id);
   }
 
@@ -65,17 +69,18 @@ class CartViewCtrl {
     });
   }
 
-  checkoutSuccess(data) {
-    console.log(data);
-    if (data) {
-      this.$stateGo('checkoutSuccess');
-    }
+  checkoutSuccess() {
+    this.$stateGo('checkoutSuccess');
   }
   addDelivery(data) {
     console.log(data);
     if (data.deliveryMethod !== '') {
       this.deliveryData = data;
     }
+  }
+
+  checkoutError(err) {
+    this.err = err.message;
   }
 }
 

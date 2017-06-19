@@ -1,18 +1,20 @@
+/* eslint-env browser*/
 import angular from 'angular';
-import { DeliverySettings } from '../../../api/deliverySettings';
-import { Deliveries } from '../../../api/deliveries';
 import { Meteor } from 'meteor/meteor';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { _ } from 'meteor/stevezhu:lodash';
 import { moment } from 'meteor/momentjs:moment';
+import { DeliverySettings } from '../../../api/deliverySettings';
+import { Deliveries } from '../../../api/deliveries';
 
 import templateUrl from './deliveryForm.html';
 
 class deliveryFormController {
   constructor($scope, $reactive, $mdDialog) {
     'ngInject';
+
     $reactive(this).attach($scope);
-    this.deliveryAddress = Meteor.user().profile.deliveryAddress.formatted_address;
+    this.deliveryAddress = Meteor.user().profile.deliveryAddress;
     this.deliveryDays = _.keys(_.groupBy(this.items, (item) => {
       let d = item.details.daysNotice;
       if (d === null) {
@@ -40,7 +42,10 @@ class deliveryFormController {
       const clone = angular.copy(this.deliveryDays);
       for (let i = 0; i < clone.length; i++) {
         if (moment(clone[i]).isSame(moment(delivery.deliveryDay))) {
-          _.remove(this.deliveryDays, (d) => d === moment(delivery.deliveryDay.toISOString()).format());
+          _.remove(
+            this.deliveryDays,
+            d => d === moment(delivery.deliveryDay.toISOString()).format(),
+          );
         }
       }
     };
@@ -56,13 +61,16 @@ class deliveryFormController {
         parent: angular.element(document.body),
         targetEvent,
       });
-    }
+    };
 
     this.close = () => $mdDialog.hide();
   }
 
   submit(isValid) {
     if (isValid) {
+      if (_.isObject(this.deliveryAddress)) {
+        this.deliveryAddress = this.deliveryAddress.formatted_address;
+      }
       this.addDelivery({ data: {
         deliveryMethod: this.selection,
         address: this.deliveryAddress,

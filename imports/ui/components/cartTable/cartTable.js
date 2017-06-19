@@ -1,6 +1,7 @@
 /* globals GetProductDeliveryDay */
 import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
+import { _ } from 'meteor/stevezhu:lodash';
 import templateUrl from './cart-table.ng.html';
 
 class CartTableController {
@@ -21,7 +22,10 @@ class CartTableController {
         .targetEvent(ev),
       );
     };
+
+    this.quantities = qty => _.range(1, qty + 10);
   }
+
   delete(id) {
     this.onRemove({ id });
   }

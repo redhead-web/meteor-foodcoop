@@ -1,8 +1,7 @@
 <div layout="row" layout-align="center center">
-  <span flex></span>
-  <div flex="90" flex-md=100 flex-sm=100>
+  <span flex hide-xs></span>
+  <div flex="90" flex-md='100' flex-sm='100' flex-xs="100">
     <h1 class="text-center md-title"> Shopping Cart </h1>
-    <p class="text-center"> New! <top-up></top-up></p>
     <cart-table
       items="cart.items"
       total="cart.total"
@@ -12,13 +11,40 @@
       on-update="cart.changeQuantity(id, newQty, oldQty)"
       on-remove="cart.removeFromCart(id)"
     >
-      <delivery-form ng-if="cart.items.length" items="cart.items" add-delivery="cart.addDelivery(data)"></delivery-form>
+      <delivery-form
+        ng-if="cart.items.length"
+        items="cart.items"
+        add-delivery="cart.addDelivery(data)"
+      ></delivery-form>
 
-      <checkout-flow customer="$root.currentUser" delivery="cart.deliveryData" total="cart.totalWithBalance || cart.total" on-success="cart.checkoutSuccess(data)"></checkout-flow>
+      <div>
+        <fc-balance-payment
+          ng-if="currentUser.profile.balance >= cart.total && cart.total > 0"
+          customer-id="$root.currentUserId"
+          delivery="cart.deliveryData"
+          status="undelivered"
+          on-success="cart.checkoutSuccess()"
+          on-error="cart.checkoutError(error)"
+        ></fc-balance-payment>
+
+        <top-up ng-if="currentUser.profile.balance <= cart.total"></top-up>
+
+        <checkout-flow
+          disabled="cart.total <= 0"
+          button-text="Pay by Card"
+          customer="$root.currentUser"
+          delivery="cart.deliveryData"
+          total="cart.totalWithBalance || cart.total"
+          display-total="{{cart.total + cart.fees - ($root.currentUser.profile.balance >= cart.total ? 0 :  $root.currentUser.profile.balance) | currency}}"
+          fees="cart.fees"
+          show-fees="$root.currentUser.profile.balance > cart.total"
+          on-success="cart.checkoutSuccess(data)"
+        ></checkout-flow>
+      </div>
     </cart-table>
 
 
 
   </div>
-  <span flex></span>
+  <span flex hide-xs></span>
 </div>

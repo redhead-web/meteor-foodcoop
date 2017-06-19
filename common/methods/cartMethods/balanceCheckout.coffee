@@ -8,7 +8,11 @@ Meteor.methods
     # admin or self only
     if @userId == customerId or Roles.userIsInRole @userId, 'admin'
 
-      items = Cart.Items.find(userId: customerId).fetch();
+      items = Cart.Items.find(userId: customerId).fetch()
+
+      if items.length == 0
+        throw new Meteor.Error 'balanceCheckout', 'No items in the cart'
+
       itemTotal = Markup(items).cartTotal()
 
       order =
@@ -19,8 +23,8 @@ Meteor.methods
         status: 'un-paid'
 
       if delivery
-        order.orderTotal += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
-        order.balanceAmount += delivery.deliveryMethod.cost * delivery.deliveryDays.length;
+        order.orderTotal += delivery.deliveryMethod.cost * delivery.deliveryDays.length
+        order.balanceAmount += delivery.deliveryMethod.cost * delivery.deliveryDays.length
 
       if Roles.userIsInRole(customerId, 'allowNegativeBalance') or customer.profile.balance >= order.orderTotal
         Meteor.users.update customerId,

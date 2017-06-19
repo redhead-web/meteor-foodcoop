@@ -82,9 +82,9 @@ Meteor.methods
   deletePaymentMethod: (token) ->
     result = gateway.paymentMethod.delete token
     result
-  braintreeTransaction2: (data) ->
+  braintreeTransaction: (data) ->
     new SimpleSchema({
-      total: type: Number, min: 0
+      total: type: Number, decimal: true, min: 0
       payment_method_nonce: type: String
       customerId: type: String, optional: true
       fees: type: Boolean, optional: true
