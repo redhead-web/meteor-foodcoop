@@ -12,22 +12,22 @@ gateway = BrainTreeConnect
 
 Meteor.methods
   generateClientToken: (userId) ->
-    check(userId, String)
-    check(@userId, String)
+    # check(userId, String)
+    # check(@userId, String)
     config = {}
 
     # use customerId only if the user is registered with us
+    if userId
+      if userId != @userId and not Roles.userIsInRole(@userId, "admin")
+        throw new Meteor.Error 'FORBIDDEN', 'can\'t generate the client token'
 
-    if userId != @userId and not Roles.userIsInRole(@userId, "admin")
-      throw new Meteor.Error 'FORBIDDEN', 'can\'t generate the client token'
+      user = Meteor.users.findOne _id: userId
 
-    user = Meteor.users.findOne _id: userId
+      if user.customerId?
+        config.customerId = user.customerId
 
-    if user.customerId?
-      config.customerId = user.customerId
-
-    else
-      config.customerId = Meteor.call 'registerCustomer', user
+      else
+        config.customerId = Meteor.call 'registerCustomer', user
 
     getToken = gateway.clientToken.generate config
     unless getToken.success == true
