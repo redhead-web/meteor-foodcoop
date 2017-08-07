@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 angular.module('food-coop').run(['$rootScope', '$state', ($rootScope, $state) => {
   $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
     // We can catch the error thrown when the $requireUser promise is rejected
@@ -10,7 +12,8 @@ angular.module('food-coop').run(['$rootScope', '$state', ($rootScope, $state) =>
   });
 }]);
 
-angular.module('food-coop').config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
+angular.module('food-coop').config(($urlRouterProvider, $stateProvider, $locationProvider) => {
+  'ngInject';
 
   $locationProvider.html5Mode(true);
 

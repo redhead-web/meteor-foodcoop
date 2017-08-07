@@ -20,7 +20,6 @@
             <span ng-if="deliveryForm.deliveryDays.length !== 1">deliveries</span>
             <span ng-if="deliveryForm.deliveryDays.length == 1">delivery</span></h3>
           <md-select required ng-model="deliveryForm.selection" placeholder="Choose a delivery method">
-            <md-option value="">Pick up on Delivery Day</md-option>
             <md-option ng-repeat="opt in deliveryForm.deliveryOptions" ng-value="opt">
               <span class="md-body-1">{{opt.title}} -- {{opt.cost | currency}}<br>{{opt.description}}</span>
             </md-option>

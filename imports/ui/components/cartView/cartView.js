@@ -1,10 +1,14 @@
 /* globals GetNextDeliveryDay, Markup, Cart */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import templateUrl from './cart-view.ng.html';
 import cartTable from '../cartTable/cartTable';
 import checkoutFlow from '../checkoutFlow/checkoutFlow';
 import { name as topUp } from '../topUp/topUp';
+
+import { DeliverySettings } from '../../../api/deliverySettings';
+import { Deliveries } from '../../../api/deliveries';
 
 class CartViewCtrl {
   constructor($scope, $reactive, $mdToast, $state) {
@@ -19,10 +23,25 @@ class CartViewCtrl {
     this.$stateGo = $state.go;
     this.$mdToast = $mdToast;
 
+    // For deliveryForm
+    this.subscribe('deliverySettings');
+    this.subscribe('myDeliveries');
+
     this.helpers({
+      deliveryOptions() {
+        return DeliverySettings.find();
+      },
+      deliveries() {
+        return Deliveries.find({ userId: Meteor.userId() });
+      },
+      // cart items
       items() {
         return Cart.Items.find({ userId: Meteor.userId() });
       },
+    });
+
+    this.autorun(() => {
+      this.deliveryCount = Counts.get('myDeliveriesCount');
     });
 
     this.autorun(() => {

@@ -1,5 +1,5 @@
 <div layout="column">
-  <div layout="column">
+  <div layout="column" style="position: relative">
     <md-tabs class="md-primary" md-selected="store.selectedCategory">
       <md-tab label="All" md-on-select="store.query.category = undefined; store.limit=24;"></md-tab>
       <md-tab ng-repeat="c in store.categories" label="{{::c.name}}" md-on-select="store.query.category=c.name; store.limit=48;"></md-tab>
@@ -64,7 +64,18 @@
 
       </div>
     </md-toolbar>
+    <md-button
+      ui-sref="productCreate"
+      aria-label="create product"
+      ng-show="$root.currentUser && $root.hasRole(currentUserId, 'producer')"
+      class="md-fab md-warn"
+      style="position: absolute; left: auto; right: 8px; top: 60px;"
+    >
+      <md-icon md-svg-icon="content:ic_add_24px">
+    </md-button>
   </div>
+
+
 
   <product-cards query="store.query" options="store.options"></product-cards>
 

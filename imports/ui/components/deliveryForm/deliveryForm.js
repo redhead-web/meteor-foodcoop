@@ -1,10 +1,9 @@
 /* eslint-env browser*/
+/* globals GetProductDeliveryDay GetNextDeliveryDay */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
 import { _ } from 'meteor/stevezhu:lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { DeliverySettings } from '../../../api/deliverySettings';
 import { Deliveries } from '../../../api/deliveries';
 
 import templateUrl from './deliveryForm.html';
@@ -15,6 +14,7 @@ class deliveryFormController {
 
     $reactive(this).attach($scope);
     this.deliveryAddress = Meteor.user().profile.deliveryAddress;
+
     this.deliveryDays = _.keys(_.groupBy(this.items, (item) => {
       let d = item.details.daysNotice;
       if (d === null) {
@@ -22,21 +22,6 @@ class deliveryFormController {
       }
       return GetProductDeliveryDay(d).format();
     }));
-
-    this.subscribe('deliverySettings');
-    this.subscribe('myDeliveries');
-
-    this.helpers({
-      deliveryOptions() {
-        return DeliverySettings.find();
-      },
-      deliveries() {
-        return Deliveries.find({ userId: Meteor.userId() });
-      },
-    });
-    this.autorun(() => {
-      this.deliveryCount = Counts.get('myDeliveriesCount');
-    });
 
     const added = (delivery) => {
       const clone = angular.copy(this.deliveryDays);
@@ -64,6 +49,7 @@ class deliveryFormController {
     };
 
     this.close = () => $mdDialog.hide();
+    this.selection = this.deliveryOptions[0];
   }
 
   submit(isValid) {
@@ -87,6 +73,9 @@ export default angular.module(name, []).component(name, {
   controller: deliveryFormController,
   controllerAs: name,
   bindings: {
+    deliveryOptions: '<',
+    deliveries: '<',
+    deliveryCount: '<',
     addDelivery: '&',
     items: '<',
   },

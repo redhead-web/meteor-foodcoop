@@ -12,9 +12,13 @@
       on-remove="cart.removeFromCart(id)"
     >
       <delivery-form
-        ng-if="cart.items.length"
+        ng-if="cart.items.length && cart.deliveryOptions.length"
+        delivery-options="cart.deliveryOptions"
+        delivery-count="cart.deliveryCount"
+        deliveries="cart.deliveries"
         items="cart.items"
         add-delivery="cart.addDelivery(data)"
+
       ></delivery-form>
 
       <div>
