@@ -1,0 +1,25 @@
+.email-md-list {
+  border: none;
+  width: 100%;
+}
+
+.email-md-list td, .email-md-list th {
+  height: 48px;
+}
+
+.email-md-list-item td.avatar {
+  width: 56px;
+  text-align: left;
+}
+
+.line-1 {
+  font-size: 14px;
+  font-weight: normal;
+  margin-right: 16px;
+}
+
+.line-2 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #777777;
+}

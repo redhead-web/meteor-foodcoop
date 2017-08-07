@@ -1,3 +1,4 @@
+import { increaseCartReminderLevel } from '../emails/cartReminder/cartReminder.coffee'
 
 callback = (error, result) ->
   if error
@@ -15,7 +16,8 @@ callback = (error, result) ->
 #if process.env.METEOR_ENVIRONMENT == 'production'
 job = new Meteor.Cron
   events:
-    # email producers their orders every day at 6am and send out targeted reminders every day too.
+    # email producers their orders every day at 6am
+    # and send out targeted reminders every day too.
     '0 6 * * *': ->
       Meteor.call "/email/early-shopping-reminder", callback
 
@@ -29,3 +31,6 @@ job = new Meteor.Cron
     # check if event reminders need to be sent every day at 8am
     '0 8 * * *': ->
       Meteor.call "eventTodayReminder", callback
+
+    '0 0 * * *': ->
+      increaseCartReminderLevel()

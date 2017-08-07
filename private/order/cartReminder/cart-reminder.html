@@ -1,0 +1,32 @@
+<p>Hi {{name}},</p>
+<p>Just a friendly reminder that you still have items in your Whangarei Food Co-op shopping cart.</p>
+<p><a class="shop-now-btn" href="{{rootUrl}}/cart">View Cart</a></p>
+<table class="email-md-list">
+	<thead>
+		<tr>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Days until expiry</th>
+		</tr>
+	</thead>
+	<tbody>
+    {{#each item in items}}
+		<tr>
+			<td>
+				<table class="email-md-list-item">
+					<tr>
+						<td class="avatar"><img height="40" src="https://res.cloudinary.com/foodcoop/image/upload/c_fill,g_center,h_40,w_40,r_max/{{item.img.result}}" width="40"></td>
+						<td><span class="line-1">{{item.details.name}}<br>
+						<span class="line-2">${{productPrice item}} / {{item.details.unitOfMeasure}}</span></span></td>
+					</tr>
+				</table>
+			</td>
+			<td class="line-1 center-text">{{item.qty}}</td>
+			<td class="line-1 center-text">{{expiryCount item.reminderLevel}}</td>
+		</tr>
+    {{/each}}
+	</tbody>
+</table>
+<p class="left-text">Items left in your cart too long are automatically removed.</p>
+<p class="left-text">Sean Stanley,<br>
+Whangarei Food Co-op Admin</p>

@@ -188,11 +188,18 @@ Templates.soldOutMessage =
   route: path: '/sold-out'
 
 Templates.cartReminder =
-  path: 'order/cart-reminder.html'
+  path: 'order/cartReminder/cart-reminder.html'
+  css: 'order/cartReminder/cart-reminder.css'
+  helpers:
+    expiryCount: (count) ->
+      Math.max(3-count, 0)
   route:
     path: '/cart-reminder'
     data: ->
-      return { name: 'Sean Stanley' }
+      return {
+        name: 'Sean Stanley'
+        items: Cart.Items.find().fetch()
+      }
 
 Templates.orderReceiptPOS =
   path: 'order/receipt-email.html'
@@ -321,7 +328,7 @@ Meteor.startup ->
         GetNextDeliveryDay().calendar null, calendarFormat
       duration: () ->
         #similar to userCartCtrl weeksRemaining function
-        end = moment(@end_date).startOf('day');
+        end = moment(@end_date).startOf('day')
         weeks = Math.abs moment(end).diff(moment(@start_date).startOf('day'), 'weeks')
         if (weeks == 0)
           weeks++
@@ -330,13 +337,12 @@ Meteor.startup ->
       currency: (amount) ->
         return "$#{amount.toFixed(2)}"
 
-      productPrice: () ->
-        Markup(this).total()
+      productPrice: (item) ->
+        Markup(item || this).total()
       totalPrice: () ->
-          Markup(this).total()
-
+        Markup(this).total()
       saleTotal: () ->
-         Markup(this).saleTotal()
+        Markup(this).saleTotal()
       formatDate: (date, format) ->
         moment(date).format(format)
 
