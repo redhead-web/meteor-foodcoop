@@ -20,6 +20,7 @@
     "bcrypt": "^0.8.7",
     "index": "^0.4.0",
     "index.js": "0.0.3",
+    "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.3",
     "ng-file-upload": "^12.0.4"
   },
