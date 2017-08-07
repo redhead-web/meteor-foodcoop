@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 import templateUrl from './button.ng.html';
@@ -50,8 +51,11 @@ function CheckoutFlowController($mdDialog) {
       clickOutsideToClose: true,
       locals: {
         total: this.total,
+        showFees: this.showFees,
+        fees: this.fees,
         customer: this.customer,
         delivery: this.delivery,
+        displayTotal: this.displayTotal,
       },
       bindToController: true,
     }).then((data) => {
@@ -73,13 +77,17 @@ export default angular.module(name, []).component(name, {
   templateUrl,
   bindings: {
     total: '<',
+    fees: '<',
+    showFees: '<',
     customer: '<',
     delivery: '<',
+    disabled: '<',
     pos: '@',
     onError: '&',
     onSuccess: '&',
     buttonText: '@',
     buttonClass: '@',
+    displayTotal: '@',
     data: '<', // extra data to go to checkout
   },
 });

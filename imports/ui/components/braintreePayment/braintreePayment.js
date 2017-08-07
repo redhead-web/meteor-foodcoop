@@ -79,5 +79,7 @@ export default angular.module(name, []).component(name, {
     buttonText: '@',
     isValid: '<',
     customerId: '<',
+    fees: '<',
+    showFees: '<',
   },
 });

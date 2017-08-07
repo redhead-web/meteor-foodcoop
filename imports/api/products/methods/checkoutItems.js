@@ -83,15 +83,19 @@ export function checkoutItems(data, delivery, userId, status) {
     payment_method_nonce: data.nonce,
     total: order.cardAmount,
     customerId: user.customerId,
+    fees: true,
   };
 
-  if (data.type !== 'cash') {
-    const result = Meteor.call('braintreeTransaction2', braintreeData);
-    if (result && result.success) {
-      order.transactionId = result.transaction.id;
-    } else {
-      console.log(result);
-      throw new Meteor.Error('PaymentFailed', 'payment failed. Try again or try a different card');
+
+  if (!this.isSimulation) {
+    if (data.type !== 'cash') {
+      const result = Meteor.call('braintreeTransaction', braintreeData);
+      if (result && result.success) {
+        order.transactionId = result.transaction.id;
+      } else {
+        console.log(result);
+        throw new Meteor.Error('PaymentFailed', 'payment failed. Try again or try a different card');
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 /* globals GetProductDeliveryDay */
-
+import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
+import { _ } from 'meteor/stevezhu:lodash';
 import templateUrl from './cart-table.ng.html';
 
 class CartTableController {
@@ -18,10 +19,13 @@ class CartTableController {
         .textContent(`You will receive it on ${GetProductDeliveryDay(daysNotice).format('dddd, MMMM D')} instead`)
         .ariaLabel('Delivery Alert')
         .ok('Got it!')
-        .targetEvent(ev)
+        .targetEvent(ev),
       );
     };
+
+    this.quantities = qty => _.range(1, qty + 10);
   }
+
   delete(id) {
     this.onRemove({ id });
   }
@@ -52,6 +56,7 @@ export default angular.module(name, []).component(name, {
     items: '<',
     user: '<',
     total: '<',
+    fees: '<',
     shipping: '<',
     onRemove: '&',
     onUpdate: '&',

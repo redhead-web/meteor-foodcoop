@@ -12,22 +12,22 @@ gateway = BrainTreeConnect
 
 Meteor.methods
   generateClientToken: (userId) ->
-    check(userId, String)
-    check(@userId, String)
+    # check(userId, String)
+    # check(@userId, String)
     config = {}
 
     # use customerId only if the user is registered with us
+    if userId
+      if userId != @userId and not Roles.userIsInRole(@userId, "admin")
+        throw new Meteor.Error 'FORBIDDEN', 'can\'t generate the client token'
 
-    if userId != @userId and not Roles.userIsInRole(@userId, "admin")
-      throw new Meteor.Error 'FORBIDDEN', 'can\'t generate the client token'
+      user = Meteor.users.findOne _id: userId
 
-    user = Meteor.users.findOne _id: userId
+      if user.customerId?
+        config.customerId = user.customerId
 
-    if user.customerId?
-      config.customerId = user.customerId
-
-    else
-      config.customerId = Meteor.call 'registerCustomer', user
+      else
+        config.customerId = Meteor.call 'registerCustomer', user
 
     getToken = gateway.clientToken.generate config
     unless getToken.success == true
@@ -82,16 +82,26 @@ Meteor.methods
   deletePaymentMethod: (token) ->
     result = gateway.paymentMethod.delete token
     result
-  braintreeTransaction2: (data) ->
-    check(data.total, Number)
-    check(data.payment_method_nonce, String)
-    check(data.customerId, String)
+  braintreeTransaction: (data) ->
+    new SimpleSchema({
+      total: type: Number, decimal: true, min: 0
+      payment_method_nonce: type: String
+      customerId: type: String, optional: true
+      fees: type: Boolean, optional: true
+    }).validate(data)
 
     if data && data.total == 0
       return { success: true, transaction: id: 'no-card-charge-needed' }
 
+    total = data.total
+
+    if data.fees
+      fee = Meteor.settings.public.fees.FIXED + data.total -
+      (data.total * (1-Meteor.settings.public.fees.PERCENT))
+      total += fee
+
     config = {
-      amount: data.total.toFixed 2
+      amount: total.toFixed 2
       paymentMethodNonce: data.payment_method_nonce
       customerId: data.customerId
       options:
@@ -109,7 +119,7 @@ Meteor.methods
         console.error result.message
         throw new Meteor.Error 500, result.message
 
-    result
+    return result
 
   # braintreeSubscription: (data) ->
 #     #does user have a braintree id? if not get them one. then update their id

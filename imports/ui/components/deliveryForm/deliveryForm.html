@@ -20,7 +20,6 @@
             <span ng-if="deliveryForm.deliveryDays.length !== 1">deliveries</span>
             <span ng-if="deliveryForm.deliveryDays.length == 1">delivery</span></h3>
           <md-select required ng-model="deliveryForm.selection" placeholder="Choose a delivery method">
-            <md-option value="">Pick up on Delivery Day</md-option>
             <md-option ng-repeat="opt in deliveryForm.deliveryOptions" ng-value="opt">
               <span class="md-body-1">{{opt.title}} -- {{opt.cost | currency}}<br>{{opt.description}}</span>
             </md-option>
@@ -28,6 +27,10 @@
           <md-input-container>
             <label>Delivery Address</label>
             <input required g-places-autocomplete ng-model="deliveryForm.deliveryAddress">
+            <small ng-if="deliveryForm.deliveryAddress.place_id">
+              <md-icon md-svg-icon="action:ic_done_24px"></md-icon>Found that Address
+            </small>
+            <small ng-if="!deliveryForm.deliveryAddress.place_id">Type your address and choose a location from the suggestions provided.</small>
           </md-input-container>
         </md-dialog-content>
         <md-dialog-actions class="text-center" layout layout-align="end">

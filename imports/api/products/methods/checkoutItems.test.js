@@ -40,7 +40,7 @@ Factory.define('cartItem', Cart.Items, {
 
 // Setup mock meteor methods
 Meteor.methods({
-  braintreeTransaction2() {
+  braintreeTransaction() {
     return { success: true, transaction: { id: 'someId' } };
   },
   addFromCartToOrder2() {

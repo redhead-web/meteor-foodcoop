@@ -50,8 +50,18 @@
       </md-input-container>
       <md-input-container>
         <md-icon md-svg-icon="maps:ic_place_24px" class="md-accent"></md-icon>
-        <input required g-places-autocomplete type="text" ng-model="rc.credentials.profile.deliveryAddress" autocomplete="off"
-               placeholder="home address" aria-label="address" name="address"/>
+        <input
+          required
+          g-places-autocomplete
+          type="text"
+          ng-model="rc.credentials.profile.deliveryAddress"
+          autocomplete="off"
+          placeholder="home address"
+          aria-label="address"
+          name="address"
+        />
+        <small ng-if="rc.credentials.profile.deliveryAddress.place_id"><md-icon md-svg-icon="action:ic_done_24px"></md-icon> Found that address</small>
+        <small ng-if="!rc.credentials.profile.deliveryAddress.place_id">Please choose an address from the suggestions provided.</small>
         <div ng-messages="signupForm.address.$error" ng-if="signupForm.address.$touched">
           <div ng-message="required">Please provide your home address.</div>
         </div>

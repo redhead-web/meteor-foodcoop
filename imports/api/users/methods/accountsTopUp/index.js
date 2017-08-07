@@ -12,11 +12,11 @@ export default function accountsTopUp(data) {
 
   const user = Meteor.users.findOne(this.userId);
 
-  const result = Meteor.call('braintreeTransaction2', {
+  const result = Meteor.call('braintreeTransaction', {
     total: data.amount,
     payment_method_nonce: data.data.nonce,
     customerId: user.customerId,
-    serviceFeeCharge: false,
+    fees: false,
   });
 
   if (result && result.success) {

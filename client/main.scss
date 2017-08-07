@@ -3,6 +3,11 @@
 
 md-toast {
   position: fixed!important;
+  z-index: 99999;
+}
+
+.cart-table-card .md-list-item-inner {
+  width: 100%;
 }
 
 md-list-item.md-whiteframe-1dp {
@@ -18,7 +23,7 @@ md-list-item.md-whiteframe-1dp {
   right: 20px;
   bottom: 20px;
   left: auto;
-  position: fixed;
+  position: fixed!important;
 }
 
 .img-responsive {
