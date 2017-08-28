@@ -17,7 +17,7 @@ class EditUserCtrl {
       this.isProducer = Roles.userIsInRole(Meteor.userId(), 'producer');
     });
 
-    this.simpleToast = message => $mdToast.showSimple(message);
+    this.simpleToast = message => $mdToast.show($mdToast.simple().content(message).position('bottom right').hideDelay(3000));
   }
 
   validate(isValid) {

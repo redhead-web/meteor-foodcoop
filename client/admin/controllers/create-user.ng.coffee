@@ -14,7 +14,7 @@ angular.module('food-coop').controller 'CreateUserAdminCtrl', ($scope, $statePar
         Meteor.call 'inviteUser', $scope.user, $scope.producer, (err) ->
           if err
             console.log err
-            $mdToast.show $mdToast.simple().content("Oops something went wrong, is that email already registered to a user?").position('bottom left').hideDelay(4000)
+            $mdToast.show $mdToast.simple().content("Oops something went wrong, is that email already registered to a user?").position('bottom right').hideDelay(4000)
             return
           else
             $scope.success("invited user to join the Co-op")
@@ -24,7 +24,7 @@ angular.module('food-coop').controller 'CreateUserAdminCtrl', ($scope, $statePar
     return
 
   $scope.success = (message="Created Successfully")->
-    $mdToast.show $mdToast.simple().content(message).position('bottom left').hideDelay(3000)
+    $mdToast.show $mdToast.simple().content(message).position('bottom right').hideDelay(3000)
     $scope.user = {}
     return
 

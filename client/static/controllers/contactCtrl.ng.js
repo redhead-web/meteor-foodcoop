@@ -14,12 +14,12 @@ angular.module('food-coop').controller('contactCtrl', function($mdToast, $reacti
       if (err) {
         vm.error = err.message
         return $mdToast.show(
-          $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000)
+          $mdToast.simple().content(err.message).position('bottom right').hideDelay(4000)
         );
       } 
       
       return $mdToast.show(
-        $mdToast.simple().content("Poof! Message sent thank you.").position('bottom left').hideDelay(4000)
+        $mdToast.simple().content("Poof! Message sent thank you.").position('bottom right').hideDelay(4000)
       );
     });
   };

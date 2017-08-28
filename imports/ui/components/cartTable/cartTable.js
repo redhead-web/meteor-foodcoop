@@ -60,5 +60,6 @@ export default angular.module(name, []).component(name, {
     shipping: '<',
     onRemove: '&',
     onUpdate: '&',
+    onQuantityChange: '&',
   },
 });

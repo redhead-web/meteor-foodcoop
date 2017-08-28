@@ -13,7 +13,7 @@ function LikeHeartCtrl ($scope, $mdToast, $reactive) {
   function toggleLike() {
     var like;
     if (Meteor.userId() == null) {
-      $mdToast.show($mdToast.simple().content("Please login to like this").position('bottom left').hideDelay(4000));
+      $mdToast.show($mdToast.simple().content("Please login to like this").position('bottom right').hideDelay(4000));
       return;
     }
     like = Likes.findOne({
@@ -23,14 +23,14 @@ function LikeHeartCtrl ($scope, $mdToast, $reactive) {
     if (like != null) {
       Likes.remove(like._id);
       if (vm.unlikeText) {
-        $mdToast.show($mdToast.simple().content(vm.unlikeText).position('bottom left').hideDelay(4000));
+        $mdToast.show($mdToast.simple().content(vm.unlikeText).position('bottom right').hideDelay(4000));
       }
     } else {
       vm.call("/likes/add", vm.targetId, vm.category, function(err, response) {
         if (err) {
           return console.log(err);
         } else if (vm.likeText) {
-          $mdToast.show($mdToast.simple().content(vm.likeText).position('bottom left').hideDelay(4000));
+          $mdToast.show($mdToast.simple().content(vm.likeText).position('bottom right').hideDelay(4000));
         }
         return 
       });

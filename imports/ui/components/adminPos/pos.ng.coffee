@@ -57,7 +57,7 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
    Meteor.call("removeFromCart", id)
 
   @balanceSuccess = () =>
-    $mdToast.show $mdToast.simple().content("Balance Payment handled. Well done!").position('bottom left').hideDelay(4000)
+    $mdToast.show $mdToast.simple().content("Balance Payment handled. Well done!").position('bottom right').hideDelay(4000)
     reset()
 
   reset = () =>
@@ -77,7 +77,7 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
       deliveryData, @customer._id, @status,
       (err, result) =>
         if result
-          $mdToast.show $mdToast.simple().content("Card Payment handled. Well done!").position('bottom left').hideDelay(4000)
+          $mdToast.show $mdToast.simple().content("Card Payment handled. Well done!").position('bottom right').hideDelay(4000)
           reset()
         else
           @cardError = err.message;
@@ -89,7 +89,7 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
     @change = @cash - @total
     @call 'checkoutItems', {type: "cash"}, null, @customer._id, @status, (err, result) =>
       if result
-        $mdToast.show $mdToast.simple().content("Cash Payment handled. Well done!").position('bottom left').hideDelay(4000)
+        $mdToast.show $mdToast.simple().content("Cash Payment handled. Well done!").position('bottom right').hideDelay(4000)
         reset()
       else
         @cashError = err.message

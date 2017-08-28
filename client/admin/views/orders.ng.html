@@ -83,7 +83,7 @@
       <td><md-button md-no-ink ng-click="orders.predicate='status'; orders.reverse = !orders.reverse">Status</md-button></td>
       <td><md-button md-no-ink ng-click="orders.predicate='location'; orders.reverse = !orders.reverse">Location</md-button></td>
       <td>
-        <md-button md-no-ink ng-click="orders.predicate='customer'; orders.reverse = !orders.reverse">Customer</md-button>
+        <md-button md-no-ink ng-click="orders.predicate='customerName'; orders.reverse = !orders.reverse">Customer</md-button>
       </td>
       <td>
         <md-button md-no-ink ng-click="orders.predicate='productName'; orders.reverse = !orders.reverse">Product</md-button>
@@ -238,7 +238,9 @@
         </md-button>
       </td>
       <td>
-        x{{order.qty}} {{order.productName}}
+        <md-button ng-click="orders.searchstring = {productName: order.productName}">
+          x{{order.qty}} {{order.productName}}
+        </md-button>
       </td>
       <td>
         <md-button ng-click="orders.searchstring = {producerName: order.producerName}">

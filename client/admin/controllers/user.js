@@ -19,7 +19,7 @@ class UserAdminCtrl {
       this.producer = !!Roles.userIsInRole($stateParams.userId, 'producer');
     });
 
-    this.simpleToast = message => $mdToast.showSimple(message);
+    this.simpleToast = message => $mdToast.show($mdToast.simple().content(message).position('bottom right').hideDelay(3000));
   }
 
   validate(isValid) {

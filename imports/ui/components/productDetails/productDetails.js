@@ -57,7 +57,7 @@ class ProductDetailsController {
     };
 
     this.simpleToast = (message) => {
-      $mdToast.simple().content(message).position('bottom left').hideDelay(3000);
+      $mdToast.simple().content(message).position('bottom right').hideDelay(3000);
     };
 
     this.daysNotice = [];

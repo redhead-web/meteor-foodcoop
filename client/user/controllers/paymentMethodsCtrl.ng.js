@@ -22,7 +22,7 @@ angular.module("food-coop").controller("UserPaymentMethodCtrl", function($scope,
   this.callback = function(result) {
     if (result.token) {
       $mdToast.show(
-        $mdToast.simple().content("Success!").position('bottom left').hideDelay(4000)
+        $mdToast.simple().content("Success!").position('bottom right').hideDelay(4000)
       )
     }
   }

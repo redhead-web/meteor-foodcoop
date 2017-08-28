@@ -55,7 +55,7 @@ class topUpController {
     };
 
     this.makeToast = (message) => {
-      $mdToast.show($mdToast.simple().textContent(message).hideDelay(3000));
+      $mdToast.show($mdToast.simple().textContent(message).hideDelay(3000).position('bottom right'));
     };
   }
   handlePaymentSuccess(data) {

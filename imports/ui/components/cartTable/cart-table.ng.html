@@ -52,7 +52,7 @@
                 <md-icon md-svg-icon="content:ic_remove_24px"></md-icon>
               </md-button>
             </div> -->
-            <md-select class="md-secondary" ng-model="item.qty">
+            <md-select class="md-secondary" ng-model="item.qty" ng-change="cart.update(item._id, item.qty)">
               <md-option ng-value="int" ng-repeat="int in cart.quantities(item.qty)">{{ int }}</md-option>
             </md-select>
             <md-menu class="md-secondary">

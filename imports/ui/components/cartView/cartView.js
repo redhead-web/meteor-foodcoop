@@ -81,7 +81,7 @@ class CartViewCtrl {
         this.$mdToast.show(
           this.$mdToast.simple()
           .content(error.message)
-          .position('bottom left')
+          .position('bottom right')
           .hideDelay(3000),
         );
       }

@@ -178,7 +178,7 @@ class ProductCreateController {
           this.$mdToast
           .simple()
           .content(err.message)
-          .position('bottom left')
+          .position('bottom right')
           .hideDelay(4000),
         );
       }
@@ -192,7 +192,7 @@ class ProductCreateController {
         .content(`Thank you! ${this.product.name} successfully added to our store. Add another product?`)
         .action('YES')
         .highlightAction(false)
-        .position('bottom left'),
+        .position('bottom right'),
       ).then((response) => {
         if (response === 'ok') {
           this.reset(this.product);
@@ -224,7 +224,7 @@ class ProductCreateController {
             this.$mdToast.show(
               this.$mdToast.simple()
               .content(`Thank you! ${this.product.name} successfully updated`)
-              .position('bottom left'),
+              .position('bottom right'),
             );
           }
         });

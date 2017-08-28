@@ -34,7 +34,7 @@ angular.module('food-coop').controller('orderProductCtrl', function ($scope, $md
 
   function isOwnerAlert($event, id) {
     $mdToast.show(
-      $mdToast.simple().content("Sorry, you can't order your own items!").position('bottom left').hideDelay(3000),
+      $mdToast.simple().content("Sorry, you can't order your own items!").position('bottom right').hideDelay(3000),
     );
   }
 
@@ -72,7 +72,7 @@ angular.module('food-coop').controller('orderProductCtrl', function ($scope, $md
         .content('Poof! Added to Cart!')
         .action('CHECKOUT')
         .highlightAction(false)
-        .position('bottom left');
+        .position('bottom right');
     $mdToast.show(toast).then((response) => {
       if (response == 'ok') {
         $state.go('cart');
@@ -95,7 +95,7 @@ angular.module('food-coop').controller('orderProductCtrl', function ($scope, $md
       addedToCartToast();
     }, () => {
       $mdToast.show(
-        $mdToast.simple().content(`You decided not to order ${product.name} right now.`).position('bottom left').hideDelay(3000),
+        $mdToast.simple().content(`You decided not to order ${product.name} right now.`).position('bottom right').hideDelay(3000),
       );
     });
   }
@@ -104,7 +104,7 @@ angular.module('food-coop').controller('orderProductCtrl', function ($scope, $md
     if (err) {
       console.error(err);
       return $mdToast.show(
-        $mdToast.simple().content(err.message).position('bottom left').hideDelay(4000),
+        $mdToast.simple().content(err.message).position('bottom right').hideDelay(4000),
       );
     }
   }

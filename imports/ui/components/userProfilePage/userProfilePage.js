@@ -67,7 +67,7 @@ class userProfilePageController {
           $mdToast
           .simple()
           .content('Please login to endorse this producer')
-          .position('bottom left')
+          .position('bottom right')
           .hideDelay(4000)
         );
       }
@@ -82,7 +82,7 @@ class userProfilePageController {
             $mdToast
             .simple()
             .content('Removed your endorsement')
-            .position('bottom left')
+            .position('bottom right')
             .hideDelay(4000)
           );
       }
@@ -95,7 +95,7 @@ class userProfilePageController {
             $mdToast
             .simple()
             .content('Clap clap! Thanks for your endorsement!')
-            .position('bottom left')
+            .position('bottom right')
             .hideDelay(4000)
           );
         }
@@ -193,7 +193,7 @@ class userProfilePageController {
             $mdToast
             .simple()
             .content('Connection Error: Failed to Save')
-            .position('bottom left')
+            .position('bottom right')
             .hideDelay(4000)
           );
         }
