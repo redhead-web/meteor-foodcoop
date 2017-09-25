@@ -89,10 +89,26 @@ Meteor.publish "product-names", ->
     fields:
       name: 1
 
-# Meteor.publish "product-names-search", ->
-#   Products.find {published: true},
-#     fields:
-#       name: 1
+Meteor.publish "product-search", (search, options) ->
+  check(search, String)
+  check(options, Object)
+  searchOptions = Object.assign({}, {
+    fields:
+      name: 1
+      producerName: 1
+      'img.result': 1
+      published: 1
+    }, options)
+
+  Products.find({
+    published: true
+    $or: [
+      { name: { $regex: "^#{search}*", $options: 'i' } },
+      { producerName: { $regex: "^#{search}*", $options: 'i' } },
+    ],
+  },
+    searchOptions
+  )
 
 Meteor.publish "all-products", ->
   Products.find {},

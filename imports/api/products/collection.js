@@ -4,21 +4,6 @@ import { schema } from './schema.coffee';
 
 export const Products = new Mongo.Collection('products');
 
-Products.allow({
-  insert: function (userId, product) {
-    return userId && Roles.userIsInRole(userId, 'producer') && (userId === product.producer || isAdmin(userId));
-  },
-  update: function (userId, product, fields, modifier) {
-    if (fields === ['qty']) {
-      return !!userId;
-    }
-    return userId && isProducer(userId);
-  },
-  remove: function (userId, product) {
-    return userId && isAdmin(userId);
-  },
-});
-
 function isAdmin(user) {
   return Roles.userIsInRole(user, 'admin');
 }
@@ -26,5 +11,21 @@ function isAdmin(user) {
 function isProducer(user) {
   return Roles.userIsInRole(user, 'producer');
 }
+
+Products.allow({
+  insert(userId, product) {
+    return userId && Roles.userIsInRole(userId, 'producer') && (userId === product.producer || isAdmin(userId));
+  },
+  update(userId, product, fields) {
+    if (fields === ['qty']) {
+      return !!userId;
+    }
+    return userId && isProducer(userId);
+  },
+  remove(userId) {
+    return userId && isAdmin(userId);
+  },
+});
+
 
 Products.attachSchema(schema);

@@ -1,0 +1,4 @@
+<input ng-model="$ctrl.search" type="search"/>
+<ul>
+  <product-grid-card product="p" ng-repeat="p in $ctrl.products track by p._id"></product-grid-card>
+</ul>
