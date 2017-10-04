@@ -1,4 +1,10 @@
-angular.module("food-coop").controller("UserSubscriptionCtrl", function($scope, $mdDialog, $meteor){
+import angular from 'angular';
+import moment from 'moment-timezone';
+import { Meteor } from 'meteor/meteor';
+
+;
+
+angular.module('food-coop').controller('UserSubscriptionCtrl', ($scope, $mdDialog, $meteor) => {
   // TODO: not MVP feature
   // $scope.pause = pause;
   // $scope.resume = resume;
@@ -6,30 +12,28 @@ angular.module("food-coop").controller("UserSubscriptionCtrl", function($scope, 
   $scope.weeksRemaining = weeksRemaining;
   $scope.duration = duration;
 
-  $scope.$meteorSubscribe('mySubscriptions').then(function(subscriptionHanle) {
-    $scope.subscriptions = $scope.$meteorCollection(Subscriptions)
+  $scope.$meteorSubscribe('mySubscriptions').then((subscriptionHanle) => {
+    $scope.subscriptions = $scope.$meteorCollection(Subscriptions);
 
-    $scope.hasAP = _.pluck(_.where($scope.subscriptions, {ap:true}), 'ap')[0];
-
+    $scope.hasAP = _.pluck(_.where($scope.subscriptions, { ap: true }), 'ap')[0];
   });
 
 
   function cancel(item, ev) {
-
     $mdDialog.show({
       targetEvent: ev,
       templateUrl: 'client/user/views/cancel-subscription.ng.html',
-      locals: {item: item},
-      controller: cancelCtrl
+      locals: { item },
+      controller: cancelCtrl,
     });
     // meteor.call('cancelSubscription', item._id)
   }
 
-  function weeksRemaining (end_date) {
-    var end;
+  function weeksRemaining(end_date) {
+    let end;
     if (end_date) {
       end = moment(end_date).startOf('day');
-      var weeks = Math.abs(moment(end).diff(moment().startOf('day'), 'weeks'))
+      let weeks = Math.abs(moment(end).diff(moment().startOf('day'), 'weeks'));
       if (weeks === 0) {
         weeks++;
       }
@@ -37,14 +41,14 @@ angular.module("food-coop").controller("UserSubscriptionCtrl", function($scope, 
     }
   }
 
-  function duration (end_date, start_date) {
-    var start = start_date || new Date();
+  function duration(end_date, start_date) {
+    const start = start_date || new Date();
     if (end_date) {
       return moment(start).to(end_date, true);
-    } else return "continuous"
+    } return 'continuous';
   }
 
-  function cancelCtrl ($scope, $mdDialog, item) {
+  function cancelCtrl($scope, $mdDialog, item) {
     $scope.item = item;
     $scope.now = new Date();
 
@@ -56,15 +60,13 @@ angular.module("food-coop").controller("UserSubscriptionCtrl", function($scope, 
       item.status = 'cancelled';
       item.cancelled_date = new Date();
       if (item.subscriptionId) {
-        $meteor.call('cancelSubscription', item.subscriptionId).then(function(result) {
+        $meteor.call('cancelSubscription', item.subscriptionId).then((result) => {
           console.log(result);
-        }, function(err) {
+        }, (err) => {
           console.log(err);
         });
       }
       $mdDialog.hide();
     };
-
   }
-
 });

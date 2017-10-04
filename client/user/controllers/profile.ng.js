@@ -1,4 +1,6 @@
-angular.module("food-coop").controller("ProfileCtrl", function($scope, $rootScope){
+import moment from 'moment';
+
+angular.module('food-coop').controller('ProfileCtrl', ($scope, $rootScope) => {
   // $scope.upcomingSubscriptions = function(item) {
   //   if (item.status === 'active') {
   //     if (item.indefinate) return true

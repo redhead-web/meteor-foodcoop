@@ -1,13 +1,17 @@
 import angular from 'angular';
 import { Deliveries } from '../../../api/deliveries';
 import { Roles } from 'meteor/alanning:roles';
-import { moment } from 'meteor/momentjs:moment';
+import { Meteor } from 'meteor/meteor';
+import moment from 'moment-timezone';
+
+;
 
 import templateUrl from './deliveryAdmin.html';
 
 class deliverySettingsAdminController {
   constructor($scope, $reactive, $mdDialog) {
     'ngInject';
+
     $reactive(this).attach($scope);
 
     this.deliveryDay = GetNextDeliveryDay().format();
@@ -66,6 +70,7 @@ export default angular.module(name, []).component(name, {
   controllerAs: name,
 }).config(($stateProvider) => {
   'ngInject';
+
   $stateProvider.state('admin.deliveries', {
     url: '/deliveries',
     template: '<delivery-admin></delivery-admin>',

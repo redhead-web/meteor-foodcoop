@@ -2,9 +2,11 @@
 
 { check } = require 'meteor/check'
 
-{ moment } = require 'meteor/momentjs:moment'
+import moment from 'moment-timezone'
 
 { Events } = require './collection'
+
+# moment.tz.setDefault(Meteor.settings.public.tz)
 
 if Meteor.isServer
 

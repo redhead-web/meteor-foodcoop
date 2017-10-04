@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { moment } from 'meteor/momentjs:moment';
+import moment from 'moment';
 import { Mailer } from 'meteor/lookback:emails';
 
 function ticketSaleEmail(ticketData, event) {

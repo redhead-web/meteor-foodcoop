@@ -1,10 +1,12 @@
 /* global GetNextDeliveryDay, angular, moment, Sales, _, Markup */
 /* eslint-disable new-cap */
 import { Roles } from 'meteor/alanning:roles';
+import moment from 'moment';
 
 class OrdersAdminCtrl {
   constructor($scope, $reactive) {
     'ngInject';
+
     $reactive(this).attach($scope);
 
     this.deliveryDay = GetNextDeliveryDay().format();
@@ -19,9 +21,9 @@ class OrdersAdminCtrl {
 
     this.autorun(() => {
       const sales = Sales.find().fetch();
-      this.customers = _.groupBy(sales, (sale) => sale.customerName);
+      this.customers = _.groupBy(sales, sale => sale.customerName);
 
-      this.producers = _.groupBy(sales, (sale) => sale.producerCompanyName || sale.producerName);
+      this.producers = _.groupBy(sales, sale => sale.producerCompanyName || sale.producerName);
     });
   }
 
@@ -116,7 +118,7 @@ class OrdersAdminCtrl {
       return Markup(filteredArray).saleTotal();
     }
 
-    return _.sum(filteredArray, (sale) => sale.price * sale.qty, 0);
+    return _.sum(filteredArray, sale => sale.price * sale.qty, 0);
   }
 }
 const name = 'adminOrders';
@@ -126,13 +128,14 @@ angular.module('food-coop').component(name, {
   templateUrl: '/client/admin/views/orders.ng.html',
 }).config(($stateProvider) => {
   'ngInject';
+
   $stateProvider.state('admin.orders', {
     url: '/orders',
     template: '<admin-orders></admin-orders>',
     resolve: {
       admin($auth) {
-        return $auth.requireValidUser((user) =>
-          Roles.userIsInRole(user, 'admin')
+        return $auth.requireValidUser(user =>
+          Roles.userIsInRole(user, 'admin'),
         );
       },
     },

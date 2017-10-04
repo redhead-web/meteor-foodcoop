@@ -3,10 +3,11 @@
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/stevezhu:lodash';
-import { moment } from 'meteor/momentjs:moment';
+import moment from 'moment-timezone';
 import { Deliveries } from '../../../api/deliveries';
-
 import templateUrl from './deliveryForm.html';
+
+;
 
 class deliveryFormController {
   constructor($scope, $reactive, $mdDialog) {

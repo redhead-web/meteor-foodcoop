@@ -3,7 +3,7 @@ import ngMaterial from 'angular-material'
 import templateUrl from './salesStats.html'
 
 import { Meteor } from 'meteor/meteor'
-import { moment } from 'meteor/momentjs:moment'
+import moment from 'moment'
 
 const name = 'salesStats'
 

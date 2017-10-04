@@ -3,7 +3,7 @@
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 import { Match } from 'meteor/check';
-import { moment } from 'meteor/momentjs:moment';
+import moment from 'moment';
 import { _ } from 'meteor/stevezhu:lodash';
 import { Roles } from 'meteor/alanning:roles';
 import fcImgUpload from '../fcImgUpload/fcImgUpload';

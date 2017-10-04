@@ -1,3 +1,7 @@
+import moment from 'moment-timezone';
+
+# moment.tz.setDefault(Meteor.settings.public.tz);
+
 Meteor.methods
   expireCart: ->
     duration = moment.duration(Meteor.settings.cartExpiryDays, 'days')

@@ -1,14 +1,16 @@
 import angular from 'angular';
-import { moment } from 'meteor/momentjs:moment';
 import { Roles } from 'meteor/alanning:roles';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
+import moment from 'moment-timezone';
 import { name as fcImgUpload } from '../fcImgUpload/fcImgUpload';
 
 
 import templateUrl from './eventCreate.html';
 
 import { Events } from '../../../api/events';
+
+;
 
 class EventCreateController {
   constructor($scope, $reactive) {

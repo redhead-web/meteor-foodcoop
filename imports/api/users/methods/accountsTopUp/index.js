@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { moment } from 'meteor/momentjs:moment';
+import moment from 'moment-timezone';
+
+;
 
 export default function accountsTopUp(data) {
   check(data.amount, Number);

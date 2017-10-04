@@ -1,4 +1,6 @@
 require 'meteor/meteor'
+import moment from 'moment'
+
 
 exports.earlyShoppingReminder = ->
   if this.connection

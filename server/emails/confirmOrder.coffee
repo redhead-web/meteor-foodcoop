@@ -1,3 +1,6 @@
+import moment from 'moment'
+
+
 Meteor.methods
   confirmOrder: (items, order)->
     user = Meteor.users.findOne(order.user)

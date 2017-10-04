@@ -1,22 +1,26 @@
 import angular from 'angular';
+import moment from 'moment';
+
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { _ } from 'meteor/stevezhu:lodash';
 
 import templateUrl from './productDetails.html';
 
 import fcImgUpload from '../fcImgUpload/fcImgUpload';
 
 import { Products } from '../../../api/products';
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
-import { _ } from 'meteor/stevezhu:lodash';
+
 
 class ProductDetailsController {
   constructor($scope, $stateParams, $mdConstant, $reactive, $mdToast) {
     'ngInject';
+
     $reactive(this).attach($scope);
 
     this.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
-    this.priceWithMarkup = (product) => Markup(product).total();
+    this.priceWithMarkup = product => Markup(product).total();
 
     this.edit = {
       name: false,

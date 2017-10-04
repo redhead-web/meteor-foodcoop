@@ -1,16 +1,19 @@
+import moment from 'moment';
+
+
 eventTodayReminder = ->
   if @isSimulation
     return
   event = Events.find(date:
     $gte: moment().startOf('day').toDate()
     $lt: moment().startOf('day').add(1, 'day').toDate()).forEach((event) ->
-    
+
     if !event.attendees
       return
     ref = event.attendees
     i = 0
     len = ref.length
-    
+
     while i < len
       attendee = ref[i]
       sent = Mailer.send(
@@ -27,8 +30,8 @@ eventTodayReminder = ->
     return
   )
   return
-  
+
 Meteor.methods
   eventTodayReminder: eventTodayReminder
-  
+
 return

@@ -1,5 +1,7 @@
 {Meteor} = require 'meteor/meteor'
 {Picker} = require 'meteor/meteorhacks:picker'
+import moment from 'moment'
+
 
 css = Assets.getText('ssr/style.css')
 
@@ -47,20 +49,20 @@ seoPicker = Picker.filter((req, res) ->
 #       brand: product.producerCompanyName || product.producerName
 #       availability: if product.published then 'in stock' else 'out of stock'
 #       quantity: product.stocklevel
-      
+
 
 seoPicker.route '/', (params, req, res) ->
-  query = 
+  query =
     published: true
-  
-  if params.query 
+
+  if params.query
     if params.query.category
       query.category = params.query.category
-    
+
     if params.query.producer
       query.producer = params.query.producer
-    
-  
+
+
   products = Products.find query,
     fields:
       published: 1
@@ -79,11 +81,11 @@ seoPicker.route '/', (params, req, res) ->
       dateCreated: 1
     sort: {dateCreated: -1}
     limit: 24
-  
+
   html = SSR.render('layout',
     css: css
     template: 'home'
-    data: 
+    data:
       title: "Fresh Local Quality | Whangarei Food Co-op"
       description: "Whangarei Food Co-op sells fresh, local, quality foods from Whangarei every Tuesday. Support local farmers, enjoy great tasting food."
       og: [
@@ -101,7 +103,7 @@ seoPicker.route '/product/:productId', (params, req, res) ->
   html = SSR.render('layout',
     css: css
     template: 'product'
-    data: 
+    data:
       title: product.name
       description: "#{product.name} from #{product.producerCompanyName || product.producerName} for $#{Markup(product).total().toFixed(2)} / #{product.unitOfMeasure}"
       og: [
@@ -122,16 +124,16 @@ seoPicker.route '/product/:productId', (params, req, res) ->
       product: product)
   res.end html
   return
-  
-  
+
+
 seoPicker.route '/event/:eventId', (params, req, res) ->
   event = Events.findOne(params.eventId)
-  
-  
+
+
   html = SSR.render('layout',
     css: css
     template: 'event'
-    data: 
+    data:
       title: event.title
       description: "#{event.name} #{moment(event.date).format('dddd, MMMM Do YYYY, h:mm:ss a')} at #{event.venue.formatted_address}"
       ISODate: moment(event.date).toISOString()
@@ -154,7 +156,7 @@ seoPicker.route '/event/:eventId', (params, req, res) ->
       event: event.title)
   res.end html
   return
-  
+
 # seoPicker.route '/directory', (params, req, res) ->
 #   users = Meteor.users.find(roles: 'producer')
 #   html = SSR.render('layout',
@@ -190,4 +192,3 @@ seoPicker.route '/event/:eventId', (params, req, res) ->
 #       user: user)
 #   res.end html
 #   return
-
