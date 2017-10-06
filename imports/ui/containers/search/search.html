@@ -1,4 +1,27 @@
 <input ng-model="$ctrl.search" type="search"/>
-<ul>
-  <product-grid-card product="p" ng-repeat="p in $ctrl.products track by p._id"></product-grid-card>
-</ul>
+<!-- <section layout="row" layout-align="start end" layout-wrap id="product-cards">
+  <div
+    ng-repeat="p in $ctrl.products track by p._id"
+  	flex="25"
+    flex-sm="33"
+    flex-xs="50"
+    class="product-card-container">
+    <product-card product="p" ></product-card>
+  </div>
+</section> -->
+<md-grid-list
+  md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+  md-row-height-gt-md="1:1" md-row-height="2:2"
+  md-gutter="12px" md-gutter-gt-sm="8px"
+>
+  <md-grid-tile
+    ng-repeat="p in $ctrl.products track by p._id"
+  >
+    <cl-image style="width:100%;" public-id="{{p.img.result}}" class="md-card-image" ng-class="{'greyscale': p.stocklevel != null && p.stocklevel <= 0}">
+      <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
+    </cl-image>
+    <md-grid-tile-footer>
+      <h3>{{p.name}}</h3>
+    </md-grid-tile-footer>
+  </md-grid-tile>
+</md-grid-list>

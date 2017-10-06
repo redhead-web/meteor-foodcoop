@@ -1,9 +1,10 @@
-// import angular from 'angular'
+import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import { name as buyTicket } from '../buyTicket/buyTicket';
 import { name as mapLocation } from '../mapLocation/mapLocation';
 import { name as eventAttendees } from '../eventAttendees/eventAttendees';
+import { name as remarkable } from '../remarkable/remarkable';
 
 import templateUrl from './eventDetails.html';
 import './style.scss';
@@ -45,7 +46,7 @@ const name = 'eventDetails';
 // create a module
 export default angular.module(name, [
   'angular-meteor',
-  'remarkable',
+  remarkable,
   buyTicket,
   mapLocation,
   eventAttendees,
@@ -57,6 +58,7 @@ export default angular.module(name, [
 })
   .config(($stateProvider, $mdThemingProvider) => {
     'ngInject';
+
     $mdThemingProvider.theme('darkTheme').primaryPalette('light-green').dark();
 
     $stateProvider

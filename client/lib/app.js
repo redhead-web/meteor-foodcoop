@@ -32,6 +32,7 @@ import { name as braintreePayment } from
 import { module as adminPos } from '../../imports/ui/components/adminPos/pos.ng.coffee';
 import { name as cartView } from '../../imports/ui/components/cartView/cartView';
 import { name as notificationSettings } from '../../imports/ui/components/notificationSettings/notificationSettings';
+import { name as remarkable } from '../../imports/ui/components/remarkable/remarkable';
 import { name as searchPage } from '../../imports/ui/containers/search/search';
 
 angular.module('food-coop', [
@@ -54,7 +55,7 @@ angular.module('food-coop', [
   'google.places',
   'cloudinary',
   '720kb.socialshare',
-  'remarkable',
+  remarkable,
   'multi-avatar',
   'ngLetterAvatar',
   'youtube-embed',

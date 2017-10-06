@@ -4,13 +4,13 @@ import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import moment from 'moment-timezone';
 import { name as fcImgUpload } from '../fcImgUpload/fcImgUpload';
+import { name as remarkable } from '../remarkable/remarkable';
 
 
 import templateUrl from './eventCreate.html';
 
 import { Events } from '../../../api/events';
 
-;
 
 class EventCreateController {
   constructor($scope, $reactive) {
@@ -83,7 +83,7 @@ function config($stateProvider) {
 export default angular.module(name, [
   'angular-meteor',
   'angular-meteor.auth',
-  'remarkable',
+  remarkable,
   fcImgUpload,
   uiRouter,
   ngMaterial,

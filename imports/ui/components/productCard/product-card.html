@@ -1,11 +1,11 @@
 <md-card class="product-card">
   <a ui-sref="productDetails({productId: card.product._id})">
     <cl-image public-id="{{card.product.img.result}}" class="md-card-image" ng-class="{'greyscale': card.product.stocklevel != null && card.product.stocklevel <= 0}">
-      <cl-transformation height="300" width="400" crop="fill" gravity="center"></cl-transformation>
+      <cl-transformation height="225" width="400" crop="fill" gravity="center"></cl-transformation>
     </cl-image>
   </a>
 	<div>
-  <md-card-actions layout="row" layout-align="center start" layout-margin class="floating-actions">
+  <!-- <md-card-actions layout="row" layout-align="center start" layout-margin class="floating-actions">
     <div ng-controller="orderProductCtrl as shop">
       <md-button class="md-fab" aria-label="shopping cart" ng-class="{
         'md-hue-2 md-primary': card.product.stocklevel == null || card.product.stocklevel > 0
@@ -13,19 +13,25 @@
         ng-click="shop.addToCart($event, card.product, 1)"
       >
         <md-icon md-svg-icon="{{ shop.alreadyInCart(card.product._id) }}"></md-icon>
-        
+
       </md-button>
     </div>
-  </md-card-actions>
+  </md-card-actions> -->
   <md-card-header class="product-card-header">
     <md-card-header-text>
-      <span class="md-subhead" ng-if="card.product.producerName">{{::card.product.producerCompanyName || card.product.producerName}}</span>
-      <span class="md-title">{{card.product.name}}</span>
-      <span class="md-subhead">{{card.priceWithMarkup(card.product) | currency}} / {{::card.product.unitOfMeasure}}</span>
+      <span class="md-headline truncate">{{card.product.name}}</span>
+      <span class="md-subhead truncate">{{card.priceWithMarkup(card.product) | currency}} / {{::card.product.unitOfMeasure}} ({{::card.product.producerCompanyName || card.product.producerName}})</span>
     </md-card-header-text>
   </md-card-header>
+  <md-card-icon-actions ng-controller="orderProductCtrl as shop" layout layout-align="end">
+      <md-button class="md-icon-button" aria-label="shopping cart" ng-disabled="card.product.stocklevel <= 0"
+        ng-click="shop.addToCart($event, card.product, 1)"
+      >
+        <md-icon md-svg-icon="{{ shop.alreadyInCart(card.product._id) }}"></md-icon>
+      </md-button>
+  </md-card-icon-actions>
 
-  <md-card-content class="product-card-order-form">
+  <!-- <md-card-content class="product-card-order-form">
     <p class="md-body-2 text-center" ng-if="card.product.stocklevel != null && card.product.stocklevel <= 0">SOLD OUT</p>
     <form ng-if="card.product.stocklevel == null || card.product.stocklevel > 0" hide-xs name="addToCartForm" ng-controller="orderProductCtrl as shop" ng-submit="shop.addToCart($event, card.product, shop.qty)" layout="row" >
       <md-input-container flex class="add-to-cart-input">
@@ -42,8 +48,8 @@
         </md-button>
       </div>
     </form>
-  </md-card-content>
-  <md-card-actions layout="row" layout-align="space-between center">
+  </md-card-content> -->
+  <!-- <md-card-actions layout="row" layout-align="space-between center">
     <div ng-cloak>
       <like-heart-button target-id="card.product._id" category="products" ></like-heart-button>
       <fc-social-menu url="/product/{{card.product._id}}" text="Check out the awesome {{card.product.name}} in the Whangarei Food Co-op Store"></fc-social-menu>
@@ -51,7 +57,7 @@
     <md-button class="md-icon-button" ui-sref="productDetails({productId: card.product._id})" aria-label="product details">
       <md-icon md-svg-icon="navigation:ic_more_horiz_24px"></md-icon>
     </md-button>
-  </md-card-actions>
+  </md-card-actions> -->
 
 	</div>
 </md-card>

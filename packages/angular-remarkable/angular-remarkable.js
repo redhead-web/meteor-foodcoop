@@ -29,5 +29,5 @@ export default angular.module('remarkable', [])
       },
     };
   }])
-  .filter('md', ['remarkable', (remarkable) => (text) => remarkable.render(text || ''),
+  .filter('md', ['remarkable', remarkable => text => remarkable.render(text || ''),
   ]);

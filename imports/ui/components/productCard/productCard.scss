@@ -9,3 +9,7 @@ md-card>a>img.md-card-image, .product-card>a>img.md-card-image {
     max-width: 100%;
     height: auto;
 }
+
+.product-card-header > md-card-header-text {
+  width: 100%;
+}
