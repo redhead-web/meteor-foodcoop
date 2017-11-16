@@ -267,19 +267,19 @@ Templates.confirmOrderEmail =
 
 Templates.subscriptionConfirmation =
   path: 'order/subscription-confirmation-email.html'
-  route: path: 'subscribe-confirmation'
+  route: path: '/subscribe-confirmation'
 
 Templates.applications =
   path: 'apply/producer-application.html'
-  route: path: 'producer-application'
+  route: path: '/producer-application'
 
 Templates.salesNotification =
   path: 'order/sales-notification.html'
-  route: path: 'sales-notification'
+  route: path: '/sales-notification'
 
 Templates.salesSummary =
   path: 'order/sales-summary-email.html'
-  route: path: 'sales-notification'
+  route: path: '/sales-notification'
 
 calendarFormat =
   nextDay : '[Tomorrow]',

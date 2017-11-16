@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import moment from 'moment-timezone';
 
-;
-
 export default function accountsTopUp(data) {
   check(data.amount, Number);
   check(data.data.nonce, String);
@@ -30,7 +28,8 @@ export default function accountsTopUp(data) {
 
     Meteor.call('/email/topUpReceipt', {
       amount: data.amount,
-      balance: user.profile.balance,
+      // user has not been loaded since balance was updated
+      balance: user.profile.balance + data.amount,
       name: user.profile.name,
       creditCard: {
         maskedNumber: result.transaction.creditCard && result.transaction.creditCard.maskedNumber ?
