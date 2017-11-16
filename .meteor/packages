@@ -36,7 +36,6 @@ francocatena:compass
 lookback:emails
 blaze@2.1.8
 redhead:angular-google-places-autocomplete
-angular-meteor-auth
 redhead:cart
 redhead:like-useraccount
 promise@0.9.0
@@ -53,7 +52,6 @@ service-configuration@1.0.11
 adrianliaw:youtube-iframe-api
 redhead:angular-youtube-embed
 datariot:ganalytics
-meteorhacks:fast-render
 rgnevashev:meteor-angular-coffee
 xolvio:cleaner
 dburles:factory
@@ -66,4 +64,6 @@ pbastowski:angular-babel
 practicalmeteor:chai
 webdeb:app-loader
 facebook-config-ui@1.0.0
-dynamic-import
+dynamic-import@0.1.3
+angular-meteor-auth@=1.0.3
+staringatlights:fast-render

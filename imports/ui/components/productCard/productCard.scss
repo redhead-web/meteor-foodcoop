@@ -13,3 +13,10 @@ md-card>a>img.md-card-image, .product-card>a>img.md-card-image {
 .product-card-header > md-card-header-text {
   width: 100%;
 }
+
+.product-card-container {
+  @media (max-width: 599px) {
+    flex: 1 1 auto!important;
+    width: 50%;
+  }
+}

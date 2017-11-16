@@ -114,7 +114,7 @@
         <md-checkbox ng-model="order.selected" aria-label="select sale"></md-checkbox>
         {{order.status}}
         <md-menu>
-          <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
+          <md-button md-menu-origin ng-click="$mdMenu.open($event)"
            class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
           <md-menu-content>
             <md-menu-item ng-class="{'currentStatus': order.status == 'collected'}" class="collected">
@@ -191,7 +191,7 @@
       <td>
         {{order.location}}
         <md-menu>
-          <md-button md-menu-origin ng-click="$mdOpenMenu($event)"
+          <md-button md-menu-origin ng-click="$mdMenu.open($event)"
            class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
           <md-menu-content>
             <md-menu-item ng-class="{'currentStatus': order.location == 'off-site'}" class="off-site">
