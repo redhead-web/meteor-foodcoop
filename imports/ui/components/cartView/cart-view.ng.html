@@ -31,7 +31,7 @@
           on-error="cart.checkoutError(error)"
         ></fc-balance-payment>
 
-        <top-up ng-if="currentUser.profile.balance <= cart.total"></top-up>
+        <top-up></top-up>
 
         <checkout-flow
           disabled="cart.total <= 0"
