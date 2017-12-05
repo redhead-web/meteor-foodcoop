@@ -77,7 +77,7 @@
       "import/resolver": "meteor"
     },
     "rules": {
-      "class-method-use-this": 0,
+      "class-methods-use-this": 0,
       "import/no-extraneous-dependencies": 0,
       "import/extensions": 0,
       "no-plusplus": 0,

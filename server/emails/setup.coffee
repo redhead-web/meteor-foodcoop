@@ -279,7 +279,15 @@ Templates.salesNotification =
 
 Templates.salesSummary =
   path: 'order/sales-summary-email.html'
-  route: path: '/sales-notification'
+  route:
+    path: '/sales-summary'
+    data: ->
+      return {
+        recipient: 'Sean Stanley'
+        grandTotal: 300
+        productCount: 20
+      }
+
 
 calendarFormat =
   nextDay : '[Tomorrow]',

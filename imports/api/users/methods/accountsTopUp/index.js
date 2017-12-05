@@ -2,34 +2,34 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import moment from 'moment-timezone';
 
-export default function accountsTopUp(data) {
-  check(data.amount, Number);
-  check(data.data.nonce, String);
+export default function accountsTopUp({ amount, data }) {
+  check(amount, Number);
+  check(data.nonce, String);
 
-  if (data.amount < (Meteor.settings.topUpMinimum || 50)) {
+  if (amount < (Meteor.settings.topUpMinimum || 50)) {
     throw new Meteor.Error('Accounts.topUp', 'Transaction failed sorry, please check your details and try again.');
   }
 
   const user = Meteor.users.findOne(this.userId);
 
   const result = Meteor.call('braintreeTransaction', {
-    total: data.amount,
-    payment_method_nonce: data.data.nonce,
+    total: amount,
+    payment_method_nonce: data.nonce,
     customerId: user.customerId,
     fees: false,
   });
 
   if (result && result.success) {
     try {
-      Meteor.users.update(this.userId, { $inc: { 'profile.balance': data.amount } });
+      Meteor.users.update(this.userId, { $inc: { 'profile.balance': amount } });
     } catch (e) {
       throw new Meteor.Error('Accounts.topUp', 'Failed to update your account balance sorry.');
     }
 
     Meteor.call('/email/topUpReceipt', {
-      amount: data.amount,
+      amount,
       // user has not been loaded since balance was updated
-      balance: user.profile.balance + data.amount,
+      balance: user.profile.balance + amount,
       name: user.profile.name,
       creditCard: {
         maskedNumber: result.transaction.creditCard && result.transaction.creditCard.maskedNumber ?

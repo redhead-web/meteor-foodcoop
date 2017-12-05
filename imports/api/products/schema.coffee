@@ -85,6 +85,7 @@ exports.schema = new SimpleSchema
 
   stockcode: type: String, max: 12, optional: true
   daysNotice: type: Number, min: 0, optional: true
+  location: type: String, allowedValues: ['co-op', 'producer'], defaultValue: 'producer'
 
   adminControl: type: Boolean, optional: true
 

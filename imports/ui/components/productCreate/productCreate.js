@@ -31,6 +31,7 @@ class ProductCreateController {
       producerCompanyName: Meteor.user().profile.companyName || undefined,
       category: '',
       ingredients: [],
+      location: 'producer',
     };
 
     if ($stateParams.copy) {

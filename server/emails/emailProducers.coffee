@@ -4,7 +4,7 @@ import moment from 'moment';
 Meteor.methods
   "/email/producerSalesWeeklySummary": ->
     sales = Sales.find deliveryDay: GetNextDeliveryDay(moment().startOf('day').subtract('1', 'day')).toDate() # sales for last week
-
+    console.log sales
     if sales.length > 0
       groupedSales = _.groupBy sales, 'producerId'
 

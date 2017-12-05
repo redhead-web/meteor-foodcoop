@@ -33,24 +33,34 @@ class topUpController {
                 <braintree-payment
                   is-valid="topUpDialog.amount"
                   button-text="Add Credit to my account"
-                  on-success="topUpDialog.hide(data)"
+                  on-success="topUpDialog.handlePaymentSuccess(data)"
                 ></braintree-payment>
               </div>
             </md-dialog-content>
           </md-dialog>
         `,
         controllerAs: 'topUpDialog',
-        controller() {
+        controller($scope) { // eslint-disable-line
+
+          'ngInject';
+
+          $reactive(this).attach($scope);
           this.hide = (data) => {
             $mdDialog.hide({ data, amount: this.amount });
           };
+          this.handlePaymentSuccess = (data) => {
+            this.call('Accounts.topUp', { data, amount: this.amount }, (err, result) => {
+              if (err) {
+                $mdDialog.cancel(err);
+              }
+              this.hide(result);
+            });
+          };
         },
-      }).then((data) => {
-        if (data) {
-          this.handlePaymentSuccess(data);
-        }
-      }, () => {
-        this.status = 'You decided not to to top up';
+      }).then(() => {
+        this.makeToast('Thanks! Top up Successful.');
+      }, (err) => {
+        this.makeToast(err.message);
       });
     };
 
