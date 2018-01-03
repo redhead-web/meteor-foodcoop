@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import ngMaterial from 'angular-material';
 import ngFileUpload from 'ng-file-upload';
 import { Random } from 'meteor/random';
-import 'cloudinary-angular/dist/cloudinary-angular.js';
+import cloudinary from 'cloudinary-angular';
 
 
 import templateUrl from './fcImgUpload.html';
@@ -12,6 +12,7 @@ import templateUrl from './fcImgUpload.html';
 class photoUploadController {
   constructor($scope, $rootScope, Upload) {
     'ngInject';
+
     this.blobPreview;
     this.Upload = Upload;
   }
@@ -73,7 +74,7 @@ const name = 'fcImgUpload';
 
 // create a module
 export default angular.module(name, [
-  'cloudinary',
+  cloudinary,
   ngFileUpload,
   ngMaterial,
 ]).component(name, {
@@ -89,6 +90,7 @@ export default angular.module(name, [
 })
   .config((CloudinaryProvider) => {
     'ngInject';
+
     CloudinaryProvider.configure({
       cloud_name: Meteor.settings.public.cloudinary.cloud_name,
       api_key: Meteor.settings.public.cloudinary.upload_preset,

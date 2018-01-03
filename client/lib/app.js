@@ -11,9 +11,10 @@ import ngFileUpload from 'ng-file-upload';
 import angularMeteor from 'angular-meteor';
 import 'angular-simple-logger';
 import 'angular-google-maps';
+import cloudinary from 'cloudinary-angular';
 import { name as navigation } from '../../imports/ui/components/navigation/navigation';
 import { name as productCreate } from '../../imports/ui/components/productCreate/productCreate';
-import 'cloudinary-angular/dist/cloudinary-angular.js';
+
 import { name as eventList } from '../../imports/ui/components/eventList/eventList';
 // import {name as requestList} from '../../imports/ui/components/requestList/requestList'
 import { name as productsList } from '../../imports/ui/components/productsList/productsList';
@@ -53,7 +54,7 @@ angular.module('food-coop', [
   'nemLogging',
   'uiGmapgoogle-maps',
   'google.places',
-  'cloudinary',
+  cloudinary,
   '720kb.socialshare',
   remarkable,
   'multi-avatar',
