@@ -20,6 +20,8 @@ class CartViewCtrl {
     this.priceWithMarkup = item => Markup(item).total();
     this.totalWithMarkup = item => Markup(item).cartTotal();
 
+    this.products = [];
+
     this.$stateGo = $state.go;
     this.$mdToast = $mdToast;
 
@@ -67,6 +69,9 @@ class CartViewCtrl {
           this.totalWithBalance = (this.total + this.fees) - user.profile.balance;
         } else this.totalWithBalance = 0;
       }
+    });
+    this.call('getPreviousProducts', (err, results) => {
+      this.products = results;
     });
   }
 

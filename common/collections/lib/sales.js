@@ -1,33 +1,38 @@
+/* globals Sales:true */
+import _ from 'meteor/underscore';
+import { Mongo } from 'meteor/mongo';
+import { Roles } from 'meteor/alanning:roles';
+
 Sales = new Mongo.Collection('sales');
 
+function isAdmin(user) {
+  return Roles.userIsInRole(user, 'admin');
+}
 
 Sales.allow({
-  insert: function (userId, sale) {
+  insert(userId) {
     // you can only order something for yourself
-    if (isAdmin(userId)) {return true}
+    if (isAdmin(userId)) { return true; }
+    return false;
   },
-  update: function (userId, sale, fields, modifier) {
+  update(userId) {
     if (isAdmin(userId)) {
       // Admin's can update anything about a sale
-      return true
-    }
-
-
+      return true;
+    } return false;
   },
-  remove: function (userId, sale) {
+  remove(userId) {
     return userId && isAdmin(userId);
-  }
+  },
 });
 
 Sales.deny({
   fetch: ['user', 'status'],
-  update: function(userId, sale, fields, modifier) {
-    if (_.contains(fields, 'orderId') ) {
+  update(userId, sale, fields) {
+    if (_.contains(fields, 'orderId')) {
       return true;
-    }
-  }
-})
+    } return false;
+  },
+});
 
-function isAdmin (user) {
-  return Roles.userIsInRole(user, 'admin');
-}
+export default Sales;

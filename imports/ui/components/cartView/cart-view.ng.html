@@ -47,7 +47,16 @@
       </div>
     </cart-table>
 
-
+  <div ng-if="cart.products.length">
+    <h1 class="text-center">Missing anything?</h1>
+    <p class="text-center">Here are some products you've ordered before</p>
+    <section layout="row" layout-align="start end" layout-wrap id="product-cards">
+      <div ng-repeat="product in cart.products track by product._id"
+      	flex="25" flex-sm="33" flex-xs="50" class="product-card-container">
+        <product-card product="product"></product-card>
+      </div>
+    </section>
+  </div>
 
   </div>
   <span flex hide-xs></span>
