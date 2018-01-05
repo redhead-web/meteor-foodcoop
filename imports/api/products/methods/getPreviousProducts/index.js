@@ -1,4 +1,4 @@
-/* globals Cart */
+/* globals Cart, GetDeliveryDay */
 import { Meteor } from 'meteor/meteor';
 import { Products } from '../../collection';
 import Sales from '../../../../../common/collections/lib/sales';
@@ -6,6 +6,7 @@ import Sales from '../../../../../common/collections/lib/sales';
 function getPreviousProducts() {
   const ProductIds = Sales.find({
     customerId: this.userId,
+    deliveryDay: { $lt: GetNextDeliveryDay().toDate() },
   }, {
     fields: { productId: 1 },
     sort: { dateCreated: 1 },
