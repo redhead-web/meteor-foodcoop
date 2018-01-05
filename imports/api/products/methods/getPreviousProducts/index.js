@@ -1,4 +1,4 @@
-/* globals Cart, GetDeliveryDay */
+/* globals Cart, GetNextDeliveryDay */
 import { Meteor } from 'meteor/meteor';
 import { Products } from '../../collection';
 import Sales from '../../../../../common/collections/lib/sales';
