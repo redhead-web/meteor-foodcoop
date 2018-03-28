@@ -1,5 +1,6 @@
 /* global GetNextDeliveryDay, angular, moment, Sales, _, Markup */
 /* eslint-disable new-cap */
+import includes from 'lodash.includes';
 import { Roles } from 'meteor/alanning:roles';
 import moment from 'moment';
 
@@ -67,7 +68,7 @@ class OrdersAdminCtrl {
       'cancelled',
     ];
     for (let i = 0; i < sales.length; i++) {
-      if (!_.includes(doneStatuses, sales[i].status)) {
+      if (!includes(doneStatuses, sales[i].status)) {
         return false;
       }
     }
@@ -102,7 +103,7 @@ class OrdersAdminCtrl {
 
   selectSales(sales, ignoreList) {
     for (let i = 0; i < sales.length; i++) {
-      if (!_.contains(ignoreList, sales[i].status)) {
+      if (!includes(ignoreList, sales[i].status)) {
         sales[i].selected = true;
       }
     }

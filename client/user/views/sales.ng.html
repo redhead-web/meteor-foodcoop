@@ -14,7 +14,7 @@
 
 <md-content layout="row" layout-align="start center">
   <span flex></span>
-  <div flex="90" flex-md=100 flex-sm=100>
+  <div flex="75" flex-md=100 flex-sm=100>
     <div layout="row" layout-align="center center">
       <md-button class="md-icon-button" aria-label="back one week" ng-click="sales.backward()">
         <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
@@ -35,7 +35,7 @@
     <!-- <div layout="row" layout-align="center center">
       <md-button></md-button>
     </div> -->
-      
+
     <section layout="row" layout-align="center center">
       <table class="material-table" flex="70" flex-xs="100">
         <thead>
@@ -53,7 +53,7 @@
         </tbody>
       </table>
     </section>
-      
+
     <div layout="row" layout-align="end">
       <h2 class="text-right md-title">Sales Total: {{sales.total(filteredSales) | currency}}</h2>
     </div>
@@ -112,6 +112,9 @@
       </tr>
     </table>
 
+  </div>
+  <div flex="25" flex-sm="100" flex-xs="100">
+    <sales-stats />
   </div>
   <span flex></span>
 

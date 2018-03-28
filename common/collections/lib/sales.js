@@ -1,5 +1,5 @@
 /* globals Sales:true */
-import _ from 'meteor/underscore';
+import includes from 'lodash.includes';
 import { Mongo } from 'meteor/mongo';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -29,7 +29,7 @@ Sales.allow({
 Sales.deny({
   fetch: ['user', 'status'],
   update(userId, sale, fields) {
-    if (_.contains(fields, 'orderId')) {
+    if (includes(fields, 'orderId')) {
       return true;
     } return false;
   },

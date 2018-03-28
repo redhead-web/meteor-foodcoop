@@ -36,6 +36,8 @@ import { name as notificationSettings } from '../../imports/ui/components/notifi
 import { name as remarkable } from '../../imports/ui/components/remarkable/remarkable';
 import { name as searchPage } from '../../imports/ui/containers/search/search';
 
+import { name as salesStats } from '../../imports/ui/components/salesStats/salesStats';
+
 angular.module('food-coop', [
   angularMessages,
   angularSanitize,
@@ -70,6 +72,7 @@ angular.module('food-coop', [
   cartView,
   notificationSettings,
   searchPage,
+  salesStats,
 ])
 .config(
   ($mdIconProvider,

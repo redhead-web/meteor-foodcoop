@@ -1,0 +1,16 @@
+<div>
+  <md-datepicker ng-model="salesStats.startDate" md-placeholder="Enter start date"></md-datepicker>
+  <md-datepicker ng-model="salesStats.endDate" md-placeholder="Enter end date"></md-datepicker>
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Sales Data</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <h1>Total: {{salesStats.amount | currency}}</h1>
+      <p>Percentage of whole co-op: {{salesStats.ratio}}%</p>
+    </md-card-content>
+  </md-card>
+</div>

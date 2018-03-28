@@ -1,6 +1,5 @@
 import moment from 'moment-timezone';
 
-;
 
 angular.module('food-coop').controller('UserSalesCtrl', function ($scope, $reactive) {
   let products;

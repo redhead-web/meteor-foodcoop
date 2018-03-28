@@ -1,131 +1,65 @@
 // salesStats.js
-import ngMaterial from 'angular-material'
-import templateUrl from './salesStats.html'
+import angular from 'angular';
+import ngMaterial from 'angular-material';
+import moment from 'moment';
 
-import { Meteor } from 'meteor/meteor'
-import moment from 'moment'
+import templateUrl from './salesStats.html';
 
-const name = 'salesStats'
-
+export const name = 'salesStats';
 
 
 class SalesStatsController {
   constructor($scope, $reactive) {
     'ngInject';
-    $reactive(this).attach($scope)
+
+    $reactive(this).attach($scope);
 
     // setup default GST cycle for stats
-    this.cycle = Meteor.user().profile.gstCycle || 2;
+    this.amount = 0;
+    this.ratio = 0;
 
-    this.subscribe('yearSales')
+    this.endDate = moment().endOf('day').toDate();
+    this.startDate = moment().startOf('year').toDate();
 
-    // <img ng-src="{{product.img.url}}">
 
-    this.helpers({
-      yearSales() {
-        let query = {
-          dateCreated: {
-            $gte: moment().startOf('year').toDate()
-          },
-        	producerId: Meteor.userId(),
-        }
-        if (this.product) {
-          query.productId = this.product._id // 4
-        }
-
-        return Sales.find(query)
-      },
-      monthSales() {
-        let query = {
-          dateCreated: {
-            $gte: moment().startOf('month').toDate()
-          },
-        	producerId: Meteor.userId(),
-        }
-        if (this.product) {
-          query.productId = this.product._id // 4
-        }
-
-        return Sales.find(query)
-      },
-
-      weekSales() {
-        let query = {
-          dateCreated: {
-            $gte: moment().startOf('week').toDate()
-          },
-        	producerId: Meteor.userId(),
-        }
-        if (this.product) {
-          query.productId = this.product._id // 4
-        }
-
-    		return Sales.find(query)
-      },
-      cycleSales() {
-    		const cycle = this.getReactively('cycle')
-        let query = {
-          dateCreated: {
-            $gte: moment().startOf('month').subtract(cycle, 'months').toDate()
-          },
-        	producerId: Meteor.userId(),
-        }
-        if (this.product) {
-          query.productId = this.product._id // 4
-        }
-        return Sales.find(query)
+    $scope.$watch(() => this.startDate, (newValue, oldValue) => {
+      if (!moment(newValue).isSame(oldValue, 'day')) {
+        this.getData(newValue, this.endDate);
       }
-    })
+    });
 
-    // TODO: write the salesStats Meteor method to return a sales total for year, month, day and GST cycle
-
-    this.call('salesStats', (err, result) => {
-    	if (err) {
-        console.log(err)
-        return
+    $scope.$watch(() => this.endDate, (newValue, oldValue) => {
+      if (!moment(newValue).isSame(oldValue, 'day')) {
+        this.getData(this.startDate, newValue);
       }
+    });
 
-      this.lastYear = result.year;
-      this.lastMonth = result.month;
-      this.lastCycle = result.cycle;
-      this.lastWeek = result.week;
-    })
-
-    this.autorun(()=>{
-      console.log("autorun for sales stats just started")
-      this.weekTotal = this.total(this.weekSales)
-      this.yearTotal = this.total(this.yearSales)
-      this.monthTotal = this.total(this.monthSales)
-      this.cycleTotal = this.total(this.cycleSales)
-
-    })
-
+    this.getData(this.startDate, this.endDate);
   }
 
-  changeCycle(newCycle) { // - <a ng-click="changeCycle(6)"> {{cycle}}
-  	this.cycle = newCycle;
-    Meteor.users.update(Meteor.userId(), { $set: { 'profile.gstCycle': newCycle } });
-  }
+  getData(startDate, endDate) {
+    // TODO: write the salesStats Meteor method
 
-  total(sales) { // {{total(weekSales) | currency}} {{((total(weekSales) - lastWeek)/lastWeek) * 100}} ng-class="{'positive': total(weekSales) > lastWeek}"
-  	let total = 0;
-    for (let i = 0; i <= sales.length; i++) {
-    	const sale = sales[i]
-      total += sale.price * sale.qty;
-    }
-    return total;
-    this.onUpdate()
+    this.call('salesStats', startDate, endDate, (err, { amount, ratio }) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.amount = amount;
+        this.ratio = ratio;
+      }
+    });
   }
 
 }
 
 export default angular.module(name, [
   ngMaterial,
-  'angular-meteor'
+  'angular-meteor',
 ]).component(name, {
   templateUrl,
   controller: SalesStatsController,
+  controllerAs: name,
   bindings: {
-    product: "<"
-  }
-})
+    product: '<',
+  },
+});

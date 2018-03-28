@@ -22,7 +22,15 @@ saleSchema = new SimpleSchema
   extraMarkup: type: Number, decimal: true, optional: true
   status:
     type: String
-    allowedValues: ['undelivered', 'sorted', 'collected', 'delivered', 'exchanged', 'cancelled', 'refunded']
+    allowedValues: [
+      'undelivered',
+      'sorted',
+      'collected',
+      'delivered',
+      'exchanged',
+      'cancelled',
+      'refunded',
+    ]
     defaultValue: 'undelivered'
   location:
     type: String
