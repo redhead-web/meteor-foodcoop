@@ -65,6 +65,10 @@
         placeholder="bank Account Number (for sales)"/>
     </md-input-container>
 
+    <md-checkbox ng-model="$ctrl.user.profile.membershipPaid" aria-label="membership paid?">
+        Membership paid?
+    </md-checkbox>
+
     <md-checkbox ng-model="$ctrl.producer" ng-change="$ctrl.changeRole()" aria-label="producer role">
         Is {{$ctrl.user.profile.name}} a producer?
     </md-checkbox>

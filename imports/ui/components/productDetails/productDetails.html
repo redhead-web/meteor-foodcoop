@@ -8,7 +8,7 @@
       {{productDetails.product.category}}
     </md-button>
     <md-icon md-svg-icon="navigation:ic_chevron_right_24px"></md-icon>
-    <md-button ui-sref="store({producer: productDetails.product.producerName })" aria-label="back to category">
+    <md-button ui-sref="store({producer: productDetails.product.producer })" aria-label="back to category">
       {{productDetails.product.producerCompanyName || productDetails.product.producerName}}
     </md-button>
     <span flex></span>
@@ -23,7 +23,7 @@
 <md-content layout="row" layout-padding layout-wrap ng-if="productDetails.product">
   <span flex></span>
 
-  <div layout flex="80" flex-xs="100" md-whiteframe style="background: white; padding: 16px">
+  <div layout layout-wrap flex-gt-sm="80" flex="100" md-whiteframe style="background: white; padding: 16px">
     <div class="img-wrapper" flex="30" flex-sm="40" flex-xs="100">
       <fc-img-upload can-edit="productDetails.isOwner" on-success="productDetails.imgUploadSuccess(data)" on-error="productDetails.imgUploadError(error)"
       on-delete="productDetails.deleteImage()" cl-img="productDetails.product.img.result"></fc-img-upload>

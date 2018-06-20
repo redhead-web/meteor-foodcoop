@@ -1,6 +1,6 @@
 <md-toolbar md-scroll-shrink layout="row" layout-xs="column" layout-align="start center" layout-padding class="no-print" ng-cloak>
   <div class="md-toolbar-tools">
-    <md-button ng-click="nav.toggleLeft('left')" aria-label="navigation toggle" class="md-icon-button">
+    <md-button ng-click="nav.toggleLeft()" aria-label="navigation toggle" class="md-icon-button">
       <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
     </md-button>
     <h3 hide-xs>{{nav.name}}</h3>
@@ -102,7 +102,7 @@
   <md-toolbar class="md-tall">
     <a
       ui-sref="store"
-      ng-click="nav.toggleLeft('left')"
+      ng-click="nav.toggleLeft()"
       hide-xs
     >
       <img
@@ -114,7 +114,7 @@
     <div hide-gt-xs>
       <a
         ui-sref="store"
-        ng-click="nav.toggleLeft('left')"
+        ng-click="nav.toggleLeft()"
       >
         <img
           style="padding: 8px 16px"
@@ -134,7 +134,7 @@
   <md-content>
     <md-list>
       <md-list-item
-        ng-click="nav.goTo('login'); nav.toggleRight('left')"
+        ng-click="nav.goTo('login'); nav.toggleLeft()"
         ng-hide="currentUser"
         class="fadeInLeft animated"
       >
@@ -144,7 +144,7 @@
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 40ms"
-        ng-click="nav.goTo('register'); nav.toggleRight('left')" ng-hide="currentUser">
+        ng-click="nav.goTo('register'); nav.toggleLeft()" ng-hide="currentUser">
         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
         <p>Sign up</p>
       </md-list-item>
@@ -152,7 +152,7 @@
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 80ms"
-        ng-click="nav.goTo('store'); nav.toggleRight('left')"
+        ng-click="nav.goTo('store'); nav.toggleLeft()"
       >
         <md-icon class="md-primary" md-svg-icon="action:ic_shopping_cart_24px"></md-icon>
         <p> Shop </p>
@@ -160,7 +160,7 @@
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 120ms"
-        ng-click="nav.goTo('directory'); nav.toggleRight('left')"
+        ng-click="nav.goTo('directory'); nav.toggleLeft()"
       >
         <md-icon class="md-primary" md-svg-icon="social:ic_people_24px"></md-icon>
         <p> Producers / Growers </p>
@@ -168,7 +168,7 @@
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 160ms"
-        ng-click="nav.goTo('about'); nav.toggleRight('left')"
+        ng-click="nav.goTo('about'); nav.toggleLeft()"
       >
         <md-icon class="md-primary" md-svg-icon="action:ic_info_24px"></md-icon>
         <p> Our Mission </p>
@@ -176,7 +176,7 @@
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 200ms"
-        ng-click="nav.goTo('faq'); nav.toggleRight('left')"
+        ng-click="nav.goTo('faq'); nav.toggleLeft()"
       >
         <md-icon class="md-primary" md-svg-icon="action:ic_help_24px"></md-icon>
         <p> Help </p>
@@ -184,7 +184,7 @@
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 200ms"
-        ng-click="nav.goTo('contact'); nav.toggleRight('left')"
+        ng-click="nav.goTo('contact'); nav.toggleLeft()"
       >
         <md-icon class="md-primary" md-svg-icon="content:ic_mail_24px"></md-icon>
         <p> Contact Us </p>
@@ -193,7 +193,7 @@
         class="fadeInLeft animated"
         style="animation-delay: 200ms"
         href="https://www.facebook.com/nzfoodcoop"
-        ng-click="nav.toggleRight('left')"
+        ng-click="nav.toggleLeft()"
       >
         <md-icon md-svg-src="/f_icon.svg"></md-icon>
         <p> Facebook </p>
@@ -215,7 +215,7 @@
       </md-list-item>
       <md-list-item
         class="md-2-line fadeInLeft animated"
-        ng-click="nav.goTo('logout'); nav.toggleRight('left')"
+        ng-click="nav.goTo('logout'); nav.toggleLeft()"
         ng-show="currentUser"
         style="animation-delay: 320ms"
       >

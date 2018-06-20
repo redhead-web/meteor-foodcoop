@@ -93,6 +93,7 @@ profile = new SimpleSchema
   chemicals: type: String, optional:true
   certification: type: String, optional: true
   video: type: String, optional: true
+  membershipPaid: type: Boolean, defaultValue: false,
 
 Schema = new SimpleSchema
   emails:
