@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 angular.module('food-coop').controller('AdminCtrl', function ($scope, $reactive) {
   $reactive(this).attach($scope);
 

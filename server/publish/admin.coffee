@@ -12,7 +12,7 @@ Meteor.publish 'orderCount', ->
   undefined
 
 Meteor.publish 'deliveryCount', ->
-  Counts.publish this, 'upcoming-ordersCount', Deliveries.find
+  Counts.publish this, 'upcoming-deliveries', Deliveries.find
     deliveryDay: GetNextDeliveryDay().toDate()
   @ready()
   undefined

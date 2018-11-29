@@ -7,8 +7,6 @@ import moment from 'moment-timezone';
 import { Deliveries } from '../../../api/deliveries';
 import templateUrl from './deliveryForm.html';
 
-;
-
 class deliveryFormController {
   constructor($scope, $reactive, $mdDialog) {
     'ngInject';

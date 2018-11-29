@@ -28,18 +28,16 @@ Meteor.methods
               name: name, count: _.sum _.pluck array, 'qty'
 
   '/email/producerOrder': ->
-
     deliveryDay = GetNextDeliveryDay()
-    daysNotice = deliveryDay.diff(moment().startOf('day'), 'days') + 1 # +1 is to look for daysNotice from the day before since this happens at midnight.
+    daysNotice = deliveryDay.diff(moment().startOf('day'), 'days') + 1
+    ###
+     +1 is to look for daysNotice from the day before
+     since this happens at midnight.
+    ###
 
     saleQuery =
       deliveryDay: GetNextDeliveryDay().toDate()
       daysNotice: daysNotice
-
-    if daysNotice == Meteor.settings.public.shoppingThreshold # today shopping for the delivery day should be closed for the majority of products
-
-      saleQuery.daysNotice = null
-
 
     sales = Sales.find saleQuery
     .fetch()

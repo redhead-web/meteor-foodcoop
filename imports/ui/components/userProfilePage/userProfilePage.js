@@ -42,6 +42,51 @@ class userProfilePageController {
 
     this.autorun(() => {
       this.producer = Meteor.users.findOne($stateParams.userId);
+      if (this.producer && this.producer._id) {
+        const producer = this.producer;
+        this.mapSettings = {
+          center: {
+            latitude: -35.7251117,
+            longitude: 174.323708,
+          },
+          zoom: 10,
+          options: {
+            scrollwheel: false,
+          },
+          events: {
+            tilesloaded(map) {
+              return uiGmapGoogleMapApi.then((maps) => {
+                if (producer.profile.deliveryAddress.latitude != null) {
+                  this.map.setCenter({
+                    lat: producer.profile.deliveryAddress.latitude,
+                    lng: producer.profile.deliveryAddress.longitude,
+                  });
+                  this.markerSettings = {
+                    id: $stateParams.userId,
+                    coords: {
+                      latitude: producer.profile.deliveryAddress.latitude,
+                      longitude: producer.profile.deliveryAddress.longitude,
+                    },
+                    options: {},
+                  };
+                }
+                if (producer.profile.deliveryAddress.place_id != null) {
+                  const service = new maps.places.PlacesService(map);
+                  service.getDetails({
+                    placeId: producer.profile.deliveryAddress.place_id,
+                  }, result => $scope.$apply(() => {
+                    this.map.setCenter({
+                      lat: result.geometry.location.lat(),
+                      lng: result.geometry.location.lng(),
+                    });
+                    new maps.Marker({ map: this.map, position: this.map.getCenter() });
+                  }));
+                }
+              });
+            },
+          },
+        };
+      }
     });
 
     this.autorun(() => {
@@ -109,57 +154,6 @@ class userProfilePageController {
         return 'liked';
       }
       return 'not-liked';
-    };
-
-    this.mapSettings = {
-      center: {
-        latitude: -35.7251117,
-        longitude: 174.323708,
-      },
-      zoom: 10,
-      options: {
-        scrollwheel: false,
-      },
-      events: {
-        tilesloaded(map) {
-          return uiGmapGoogleMapApi.then((maps) => {
-            if (this.producer.profile.deliveryAddress.latitude != null) {
-              this.mapSettings.center = {
-                latitude: this.producer.profile.deliveryAddress.latitude,
-                longitude: this.producer.profile.deliveryAddress.longitude,
-              };
-              this.markerSettings = {
-                id: $stateParams.userId,
-                coords: {
-                  latitude: this.producer.profile.deliveryAddress.latitude,
-                  longitude: this.producer.profile.deliveryAddress.longitude,
-                },
-                options: {},
-              };
-            }
-            if (this.producer.profile.deliveryAddress.place_id != null) {
-              const service = new maps.places.PlacesService(map);
-              service.getDetails({
-                placeId: this.producer.profile.deliveryAddress.place_id,
-              }, (result) => $scope.$apply(function () {
-                this.mapSettings.center = {
-                  latitude: result.geometry.location.lat(),
-                  longitude: result.geometry.location.lng(),
-                };
-                this.markerSettings = {
-                  id: $stateParams.userId,
-                  coords: {
-                    latitude: result.geometry.location.lat(),
-                    longitude: result.geometry.location.lng(),
-                  },
-                  options: {},
-                };
-              }));
-              return;
-            }
-          });
-        },
-      },
     };
 
     this.priceWithMarkup = (product) => Markup(product).total();
