@@ -1,6 +1,8 @@
 import angular from 'angular';
 
-angular.module('food-coop').controller('AdminCtrl', function ($scope, $reactive) {
+angular.module('food-coop').controller('AdminCtrl', function AdminCtrl($scope, $reactive) {
+  'ngInject';
+
   $reactive(this).attach($scope);
 
   this.subscribe('userCount');
