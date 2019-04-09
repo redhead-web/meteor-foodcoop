@@ -20,11 +20,12 @@
             <span ng-if="deliveryForm.deliveryDays.length !== 1">deliveries</span>
             <span ng-if="deliveryForm.deliveryDays.length == 1">delivery</span></h3>
           <md-select required ng-model="deliveryForm.selection" placeholder="Choose a delivery method">
+            <md-option value="pickup">Pick up at 50 John Street</md-option>
             <md-option ng-repeat="opt in deliveryForm.deliveryOptions" ng-value="opt">
               <span class="md-body-1">{{opt.title}} -- {{opt.cost | currency}}<br>{{opt.description}}</span>
             </md-option>
           </md-select>
-          <md-input-container>
+          <md-input-container ng-if="deliveryForm.selection !== 'pickup'">
             <label>Delivery Address</label>
             <input required g-places-autocomplete ng-model="deliveryForm.deliveryAddress">
             <small ng-if="deliveryForm.deliveryAddress.place_id">
@@ -34,7 +35,7 @@
           </md-input-container>
         </md-dialog-content>
         <md-dialog-actions class="text-center" layout layout-align="end">
-          <div><span class="md-body-2" ng-if="deliveryForm.selection">Total: {{deliveryForm.selection.cost * deliveryForm.deliveryDays.length | currency}}</span>
+          <div><span class="md-body-2" ng-if="deliveryForm.selection">Total: {{deliveryForm.selection.cost * deliveryForm.deliveryDays.length || 0 | currency}}</span>
           <br><md-button class="md-primary md-raised" type="submit" ng-disabled="!deliveryForm.selection">Add Delivery</md-button></div>
         </md-dialog-actions>
       </form>

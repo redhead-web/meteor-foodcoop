@@ -11,7 +11,7 @@ Sales.after.insert (userId, sale) ->
   if Meteor.isServer
     product = Products.findOne sale.productId
     if product && !product.paidUpfront
-      return Meteor.users.update(sale.producerId, {$inc: 'profile.balance': sale.price*sale.qty})
+      return Meteor.users.update(sale.producerId, { $inc: 'profile.balance': sale.price * sale.qty })
 
 Sales.after.update (userId, sale, fieldNames, modifier, options) ->
   if Meteor.isServer
@@ -19,11 +19,12 @@ Sales.after.update (userId, sale, fieldNames, modifier, options) ->
 
     if sale.status != @previous.status and sale.status == 'refunded'
       if product && !product.paidUpfront
-        Meteor.users.update(sale.producerId, {$inc: 'profile.balance': -sale.price*sale.qty})
-      Meteor.users.update(sale.customerId, {$inc: 'profile.balance': Markup(sale).saleTotal()})
+        Meteor.users.update(sale.producerId, { $inc: 'profile.balance': -1 * sale.price * sale.qty })
+      Meteor.users.update(sale.customerId, { $inc: 'profile.balance': Markup(sale).saleTotal() })
+      # should it go back into inventory?
       return
     if sale.status != @previous.status and @previous.status == 'refunded'
       if product && !product.paidUpfront
         Meteor.users.update(sale.producerId, {$inc: 'profile.balance': sale.price*sale.qty})
-      Meteor.users.update(sale.customerId, {$inc: 'profile.balance': Markup(sale).saleTotal()})
+      Meteor.users.update(sale.customerId, {$inc: 'profile.balance': -1 * Markup(sale).saleTotal() })
       return

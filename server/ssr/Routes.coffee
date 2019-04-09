@@ -90,7 +90,7 @@ seoPicker.route '/', (params, req, res) ->
       description: "Whangarei Food Co-op sells fresh, local, quality foods from Whangarei every Tuesday. Support local farmers, enjoy great tasting food."
       og: [
         {key: "title", value: "Whangarei Food Co-op | Fresh Local Quality"}
-        {key: "description", value: "Whangarei Food Co-op sells fresh, local, quality foods from 1 Woods Road every Tuesday. Support local farmers, enjoy great tasting food." }
+        {key: "description", value: "Whangarei Food Co-op sells fresh, local, quality foods from 50 John Street every Tuesday. Support local farmers, enjoy great tasting food." }
         {key: "url", value: baseURL }
         {key: "image", value: defaultImage }
       ]

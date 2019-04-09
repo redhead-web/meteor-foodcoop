@@ -1,5 +1,6 @@
 /* global GetNextDeliveryDay, angular, moment, Sales, _, Markup */
 /* eslint-disable new-cap */
+import { Meteor } from 'meteor/meteor';
 import includes from 'lodash.includes';
 import { Roles } from 'meteor/alanning:roles';
 import moment from 'moment';
@@ -13,10 +14,14 @@ class OrdersAdminCtrl {
     this.deliveryDay = GetNextDeliveryDay().format();
 
     this.subscribe('orders', () => [this.getReactively('deliveryDay')]);
+    this.subscribe('customers', () => [this.getReactively('deliveryDay')]);
 
     this.helpers({
       sales() {
         return Sales.find();
+      },
+      customerCollection() {
+        return Meteor.users.find();
       },
     });
 
@@ -27,6 +32,8 @@ class OrdersAdminCtrl {
       this.producers = _.groupBy(sales, sale => sale.producerCompanyName || sale.producerName);
     });
   }
+
+  findCustomer = id => this.customerCollection.find(c => c._id === id)
 
   changeStatus(sale, status) {
     const location = 'box';
@@ -121,6 +128,17 @@ class OrdersAdminCtrl {
 
     return _.sum(filteredArray, sale => sale.price * sale.qty, 0);
   }
+
+  // getCustomerDetails = async id => new Promise((resolve, reject) => {
+  //   const downloadedUser = Meteor.users.findOne(id);
+  //   if (downloadedUser) resolve(downloadedUser);
+  //   else {
+  //     this.call('getBasicUser', id, (err, result) => {
+  //       if (err) return reject(err);
+  //       return resolve(result);
+  //     });
+  //   }
+  // })
 }
 const name = 'adminOrders';
 angular.module('food-coop').component(name, {

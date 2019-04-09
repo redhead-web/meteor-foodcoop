@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/stevezhu:lodash';
+import moment from 'moment';
 import templateUrl from './productsList.html';
 
 import { Categories } from '../../../api/categories';
@@ -13,6 +14,10 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
   'ngInject';
 
   $reactive(this).attach($scope);
+
+  if (moment().isBefore(moment('2019-04-10')) && moment().isAfter(moment('2019-03-26'))) {
+    this.holidays = true;
+  }
 
   this.go = $state.go;
 
@@ -69,6 +74,7 @@ export default angular.module(name, [
   templateUrl,
 }).config(($stateProvider) => {
   'ngInject';
+
   $stateProvider
   .state('store', {
     url: '/?name&certification&producer&search&category',

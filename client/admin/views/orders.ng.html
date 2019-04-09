@@ -236,6 +236,22 @@
         <md-button ng-click="orders.searchstring = {customerName: order.customerName}">
           {{order.customerName}} #{{order.customerNumber}}
         </md-button>
+        <md-menu>
+          <md-button md-menu-origin ng-click="$mdMenu.open($event)"
+           class="md-icon-button" aria-label="options"><md-icon md-svg-icon="navigation:ic_more_vert_24px"></md-icon></md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-href="tel:{{orders.findCustomer(order.customerId).profile.phone}}">
+                {{orders.findCustomer(order.customerId).profile.phone}}
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="mailto:{{orders.findCustomer(order.customerId).emails[0].address}}">
+                {{orders.findCustomer(order.customerId).emails[0].address}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </td>
       <td>
         <md-button ng-click="orders.searchstring = {productName: order.productName}">

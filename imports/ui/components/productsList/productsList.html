@@ -75,8 +75,11 @@
     </md-button>
   </div>
 
+  <div ng-if="store.holidays" class="text-center">
+    <h1>We are moving... We will be open for ordering again April 10th and pickup April 16th.</h1>
+    <h2>Thanks for your understanding</h2>
+  </div>
 
-
-  <product-cards query="store.query" options="store.options"></product-cards>
+  <product-cards ng-if="!store.holidays" query="store.query" options="store.options"></product-cards>
 
 </div>

@@ -10,6 +10,7 @@ Meteor.methods({
         'emails.address': 1,
         'services.facebook.id': 1,
         'profile.name': 1,
+        'profile.phone': 1,
       },
     });
   },

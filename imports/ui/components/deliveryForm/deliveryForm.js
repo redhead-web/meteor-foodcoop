@@ -48,7 +48,7 @@ class deliveryFormController {
     };
 
     this.close = () => $mdDialog.hide();
-    this.selection = this.deliveryOptions[0];
+    this.selection = 'pickup';
   }
 
   submit(isValid) {
