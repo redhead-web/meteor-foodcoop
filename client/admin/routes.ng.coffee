@@ -38,7 +38,7 @@ angular.module('food-coop').config ($stateProvider) ->
       $auth.requireValidUser(isAdmin)
   ).state('admin.userOrders',
     url: '/user/:userId/orders'
-    templateUrl: 'client/admin/views/user.ng.html'
+    templateUrl: 'client/admin/components/userOrders/index.html'
     controller: 'UserOrdersAdminCtrl'
     controllerAs: 'vm'
     resolve: 'admin': ($auth) ->

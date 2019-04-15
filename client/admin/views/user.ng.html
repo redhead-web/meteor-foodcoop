@@ -2,14 +2,18 @@
 <md-content layout="row" layout-xs="column" layout-padding layout-margin layout-fill>
 <div flex="33" ng-controller="TransactionCtrl as tr">
   <p>Balance: {{$ctrl.user.profile.balance | currency}}</p>
-  <form name="transactUser" layout="column" ng-submit="tr.transact(tr.amount)">
+  <form name="transactUser" layout="column" ng-submit="tr.transact(tr.amount, tr.amountReason); transactUser.$setPristine(); transactUser.$setUntouched()">
     <md-input-container>
       <md-icon md-svg-icon="action:ic_credit_card_24px" class="md-accent" aria-label="amount"></md-icon>
       <input type="number" ng-model="tr.amount" step="0.01"
-             placeholder="amount (positive for credit, negative for debit)" aria-label="amount"/>
+             placeholder="amount (positive for credit, negative for debit)" aria-label="amount" required />
     </md-input-container>
-    <md-button type="submit">Adjust Balance</md-button>
-
+    <md-input-container>
+      <input type="text" ng-model="tr.amountReason" required
+             placeholder="reason for adjustment" aria-label="amount"/>
+    </md-input-container>
+    <md-button type="submit" class="md-raised md-accent">Adjust Balance</md-button>
+    <md-button ui-sref="admin.userOrders({ userId: $ctrl.user._id })">View History</md-button>
   </form>
 
 </div>

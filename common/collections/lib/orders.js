@@ -1,7 +1,13 @@
+/* globals Orders:true */
 import includes from 'lodash.includes';
+import { Mongo } from 'meteor/mongo';
+import { Roles } from 'meteor/alanning:roles';
 
 Orders = new Mongo.Collection('orders');
 
+function isAdmin(user) {
+  return Roles.userIsInRole(user, 'admin');
+}
 
 Orders.allow({
   insert(userId, order) {
@@ -10,13 +16,10 @@ Orders.allow({
     return userId && order.user === userId;
   },
   fetch: ['user', 'status'],
-  update(userId, order, fields, modifier) {
-    if (isAdmin(userId)) {
-      // Admin's can update anything about a subscription
-      return true;
-    }
+  update(userId) {
+    return isAdmin(userId);
   },
-  remove(userId, subscription) {
+  remove(userId) {
     return userId && isAdmin(userId);
   },
 });
@@ -33,7 +36,3 @@ Orders.deny({
     }
   },
 });
-
-function isAdmin(user) {
-  return Roles.userIsInRole(user, 'admin');
-}

@@ -116,3 +116,9 @@ Meteor.publish "cash-orders", () ->
   else
     @ready()
     return
+
+Meteor.publish "userOrders", (userId) ->
+  if Roles.userIsInRole @userId, 'admin'
+    Orders.find user: userId
+    ,
+      sort: dateCreated: -1

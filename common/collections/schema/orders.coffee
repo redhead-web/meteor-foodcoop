@@ -6,12 +6,15 @@ order = new SimpleSchema
   cardAmount: type: Number, decimal: true, defaultValue: 0
   balanceAmount: type: Number, decimal: true, defaultValue: 0
   cashAmount: type: Number, decimal: true, optional: true
-  cashDeposited: type: Boolean, optional: true # bool flag to mark when an order has had cash deposited for it.
   dateDeposited: type: Date, optional: true
-
+  recipient: type: String, optional: true, regEx: SimpleSchema.RegEx.Id
+  note: type: String, optional: true
+  increaseBalance: type: Boolean, optional: true
   status:
     type: String
-    allowedValues: ['unpaid', 'paid', 'authroized', 'cancelled', 'refunded']
+    allowedValues: [
+      'unpaid', 'paid', 'authroized', 'cancelled', 'refunded', 'credited', 'debited'
+    ]
   cashDeposited: type: Boolean, optional: true
   user:
     type: String

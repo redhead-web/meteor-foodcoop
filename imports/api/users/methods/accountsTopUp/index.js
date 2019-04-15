@@ -1,3 +1,4 @@
+/* globals Orders */
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import moment from 'moment-timezone';
@@ -23,6 +24,20 @@ export default function accountsTopUp({ amount, data }) {
     try {
       Meteor.users.update(this.userId, { $inc: { 'profile.balance': amount } });
     } catch (e) {
+      throw new Meteor.Error('Accounts.topUp', 'Failed to update your account balance sorry.');
+    }
+
+    try {
+      Orders.insert({
+        user: this.userId,
+        recipient: this.userId,
+        cardAmount: amount,
+        orderTotal: amount,
+        status: 'credited',
+        note: 'Balance topup',
+      });
+    } catch (e) {
+      Meteor.users.update(this.userId, { $inc: { 'profile.balance': amount * -1 } });
       throw new Meteor.Error('Accounts.topUp', 'Failed to update your account balance sorry.');
     }
 
