@@ -23,7 +23,7 @@
       <span ng-if="$ctrl.invalidFiles.length">Error: {{$ctrl.invalidFiles[0].$error}} : {{$ctrl.invalidFiles[0].$errorParam}}</span>
       <md-progress-linear ng-if="$ctrl.progress && $ctrl.progress !== 100" md-mode="determinate" value="{{$ctrl.progress}}"></md-progress-linear>
       <img ng-if="$ctrl.blobPreview" ngf-src="$ctrl.blobPreview" flex="100">
-      <cl-image flex="100" ng-if="$ctrl.clImg" public-id="{{$ctrl.clImg}}">
+      <cl-image ng-if="$ctrl.clImg" public-id="{{$ctrl.clImg}}">
         <cl-transformation width="800" crop="fill" gravity="center"></cl-transformation>
       </cl-image>
       <md-button
