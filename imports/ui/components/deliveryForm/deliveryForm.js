@@ -73,8 +73,6 @@ export default angular.module(name, []).component(name, {
   controllerAs: name,
   bindings: {
     deliveryOptions: '<',
-    deliveries: '<',
-    deliveryCount: '<',
     addDelivery: '&',
     items: '<',
   },

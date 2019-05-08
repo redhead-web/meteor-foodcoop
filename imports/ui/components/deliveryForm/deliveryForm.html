@@ -6,16 +6,6 @@
     <md-dialog style="width: 90%">
       <form id="delivery" ng-submit="deliveryForm.submit(delivery.$valid)" name="delivery">
         <md-dialog-content layout="column" class="md-dialog-content">
-          <md-list ng-if="deliveryForm.deliveries.length" class="md-dense">
-            <md-subheader class="md-no-sticky">Your purchased deliveries</md-subheader>
-            <md-list-item ng-repeat="d in deliveryForm.deliveries" class="md-2-line">
-              <div class="md-list-item-text">
-                <h3>{{d.deliveryDay | date:'MMMM d'}}</h3>
-                <p>{{d.method}} -- {{d.cost | currency}}</p>
-              </div>
-            </md-list-item>
-          </md-list>
-
           <h3>Purchase {{deliveryForm.deliveryDays.length}}
             <span ng-if="deliveryForm.deliveryDays.length !== 1">deliveries</span>
             <span ng-if="deliveryForm.deliveryDays.length == 1">delivery</span></h3>
