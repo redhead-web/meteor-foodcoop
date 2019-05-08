@@ -6,11 +6,12 @@
     <style type="text/css">
       {{css}}
     </style>
-    
+
     <title>{{data.title}}</title>
-    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=3">
-    <link rel="apple-touch-icon-precomposed" href="/apple-icon-152.png">
-    <link rel="shortcut icon" sizes="196x196" href="/favicon-196.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://res.cloudinary.com/foodcoop/image/upload/v1557280397/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/foodcoop/image/upload/v1557280399/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://res.cloudinary.com/foodcoop/image/upload/v1557280398/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/foodcoop/image/upload/v1557280396/icons/favicon-16x16.png">
     <link rel="image_src" href="http://res.cloudinary.com/foodcoop/image/upload/OpenGraph_hdnjgg.png" />
     <meta name="description" content="{{data.description}}" />
 
@@ -22,18 +23,18 @@
     {{#each data.og}}
       <meta property="og:{{key}}" content="{{value}}">
     {{/each}}
-    
+
   </head>
   <body>
     <div id='content'>
       {{> Template.dynamic template=template data=data}}
     </div>
-    
+
     <p class="notice">
       This page is generated in the server and served as HTML.
     </p>
     <div id="add">
-      
+
     </div>
   </body>
 </html>
