@@ -4,8 +4,13 @@ import { Picker } from 'meteor/meteorhacks:picker';
 import bodyParser from 'body-parser';
 import crypto from 'crypto';
 
-const { appId: APP_ID, key: API_KEY, secret: API_SECRET, apiRoot: API_ROOT } = Meteor.settings.coingate;
-console.log(API_KEY);
+const {
+  appId: APP_ID,
+  key: API_KEY,
+  secret: API_SECRET,
+  apiRoot: API_ROOT,
+} = Meteor.settings.coingate;
+
 const defaultOrder = {
   order_id: 'testId',
   price: 50.00,
