@@ -1,0 +1,42 @@
+{
+  "BRAIN_TREE" : {
+    "MERCHANT_ID" : "MERCHANT_ID",
+    "PUBLIC_KEY" : "PUBLIC_KEY",
+    "PRIVATE_KEY" : "TOP_SECRET"
+  },
+  "MailChimp": {
+    "apiKey": "",
+    "listId": ""
+  },
+  "email": {
+    "name": "",
+    "address": ""
+  },
+  "Mailer": {
+    "fromAddress": "Your Food Co-op Name <foodcoop@yourfoodcoop.com>",
+    "replyTo": "Admin <admin@yourfoodcoop.com>",
+    "testEmail": "test@yourfoodcoop.com"
+  },
+  "public": {
+    "coopName": "Awesome Food Co-op",
+    "coopAddress": "14 Marino Pl, Sheepville",
+    "coopHours": "3-8pm",
+    "coopDayString": "Wednesday",
+    "cloudinary": {
+      "cloud_name": "account_name",
+      "upload_preset": "upload_string"
+    },
+    "shares": {
+      "customer": 0,
+      "producer": 0
+    },
+    "deliveryDayOfWeek": 4,
+    "shoppingStopDay": 2,
+    "cartExpiryDays": 3,
+    "markup": 1.1,
+		"gst": 0.15,
+    "bankAccount": "01-0000-0000000-00",
+    "gstNumber": "sales-tax-number"
+  }
+
+}
