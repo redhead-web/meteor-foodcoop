@@ -15,10 +15,7 @@ class deliveryFormController {
     this.deliveryAddress = Meteor.user().profile.deliveryAddress;
 
     this.deliveryDays = _.keys(_.groupBy(this.items, (item) => {
-      let d = item.details.daysNotice;
-      if (d === null) {
-        d = Meteor.settings.public.shoppingThreshold;
-      }
+      const d = item.details.daysNotice || Meteor.settings.public.shoppingThreshold;
       return GetProductDeliveryDay(d).format();
     }));
 
