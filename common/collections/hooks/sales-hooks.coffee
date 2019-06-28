@@ -30,14 +30,21 @@ Sales.after.update (userId, sale, fieldNames, modifier, options) ->
         orderTotal: Markup(sale).saleTotal()
         status: 'credited',
         note: "refund for x#{sale.qty} #{sale.productName}"
+        dateCreated: new Date()
       }
       # should it go back into inventory?
       return
     if sale.status != @previous.status and @previous.status == 'refunded'
       if product && !product.paidUpfront
-        Meteor.users.update(sale.producerId, { $inc: 'profile.balance': sale.price*sale.qty })
+        Meteor.users.update(
+          sale.producerId,
+          { $inc: 'profile.balance': sale.price * sale.qty }
+        )
 
-      Meteor.users.update(sale.customerId, {$inc: 'profile.balance': -1 * Markup(sale).saleTotal() })
+      Meteor.users.update(
+        sale.customerId,
+        { $inc: 'profile.balance': -1 * Markup(sale).saleTotal() }
+      )
 
       Orders.insert {
         user: sale.customerId,
@@ -46,6 +53,7 @@ Sales.after.update (userId, sale, fieldNames, modifier, options) ->
         orderTotal: Markup(sale).saleTotal()
         status: 'debited',
         note: "returned refund of x#{sale.qty} #{sale.productName}"
+        dateCreated: new Date()
       }
 
       return

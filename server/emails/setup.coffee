@@ -275,7 +275,14 @@ Templates.applications =
 
 Templates.salesNotification =
   path: 'order/sales-notification.html'
-  route: path: '/sales-notification'
+  route:
+    path: '/sales-notification'
+    data: ->
+      return {
+        recipient: 'Sean Stanley'
+        grandTotal: 300
+        productCount: 20
+      }
 
 Templates.salesSummary =
   path: 'order/sales-summary-email.html'
