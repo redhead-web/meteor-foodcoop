@@ -74,12 +74,23 @@
       <md-icon md-svg-icon="content:ic_add_24px">
     </md-button>
   </div>
+  <div layout ng-if="store.holidays" layout-align="center center">
+    <div class="text-center" flex="50" flex-sm="80" flex-xs="95">
+      <h1 class="md-display-1">We are closed for maintenance...</h1>
+      <p class="md-title">
+        We are under new management and things are getting better and better.
+        </p>
 
-  <div ng-if="store.holidays" class="text-center">
-    <h1>We are moving... We will be open for ordering again April 10th and pickup April 16th.</h1>
-    <h2>Thanks for your understanding</h2>
+      <p class="md-subhead">
+          If you have any questions please contact us in the chat box or contact form. If you can no longer be involved you can request a refund of store credit or your membership.
+      </p>
+      <br>
+      <h2 class="md-title">First time here?</h2>
+      <md-button ui-sref="about" class="md-raised md-primary">Our Mission</md-button>
+    </div>
   </div>
 
-  <product-cards ng-if="!store.holidays" query="store.query" options="store.options"></product-cards>
+
+  <!-- <product-cards ng-if="!store.holidays" query="store.query" options="store.options"></product-cards> -->
 
 </div>

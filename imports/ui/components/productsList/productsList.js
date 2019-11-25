@@ -15,9 +15,10 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
 
   $reactive(this).attach($scope);
 
-  if (moment().isBefore(moment('2019-04-10')) && moment().isAfter(moment('2019-03-26'))) {
-    this.holidays = true;
-  }
+  // if (moment().isBefore(moment('2019-04-10')) && moment().isAfter(moment('2019-03-26'))) {
+  //   this.holidays = true;
+  // }
+  this.holidays = true;
 
   this.go = $state.go;
 
