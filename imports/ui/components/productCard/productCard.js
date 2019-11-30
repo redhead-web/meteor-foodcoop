@@ -1,5 +1,5 @@
 import angular from 'angular';
-import templateUrl from './product-card.html';
+import template from './product-card.html';
 
 
 function ProductCardCtrl() {
@@ -7,10 +7,10 @@ function ProductCardCtrl() {
   this.priceWithMarkup = (product) => Markup(product).total();
 }
 
-const name = 'productCard';
+export const name = 'productCard';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: ProductCardCtrl,
   controllerAs: 'card',
   bindings: {

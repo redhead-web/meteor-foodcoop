@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
 import { _ } from 'meteor/stevezhu:lodash';
-import templateUrl from './cart-table.ng.html';
+import template from './cart-table.ng.html';
 
 class CartTableController {
   constructor($scope, $reactive, $mdDialog) {
@@ -45,11 +45,11 @@ class CartTableController {
   }
 }
 
-const name = 'cartTable';
+export const name = 'cartTable';
 
 export default angular.module(name, []).component(name, {
   controller: CartTableController,
-  templateUrl,
+  template,
   transclude: true,
   controllerAs: 'cart',
   bindings: {

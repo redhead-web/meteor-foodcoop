@@ -7,7 +7,7 @@ import { Random } from 'meteor/random';
 import cloudinary from 'cloudinary-angular';
 
 
-import templateUrl from './fcImgUpload.html';
+import template from './fcImgUpload.html';
 
 class photoUploadController {
   constructor($scope, $rootScope, Upload) {
@@ -70,7 +70,7 @@ class photoUploadController {
   }
 }
 
-const name = 'fcImgUpload';
+export const name = 'fcImgUpload';
 
 // create a module
 export default angular.module(name, [
@@ -78,7 +78,7 @@ export default angular.module(name, [
   ngFileUpload,
   ngMaterial,
 ]).component(name, {
-  templateUrl,
+  template,
   controller: photoUploadController,
   bindings: {
     onSuccess: '&',

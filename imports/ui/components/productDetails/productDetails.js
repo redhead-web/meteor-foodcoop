@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/stevezhu:lodash';
 
-import templateUrl from './productDetails.html';
+import template from './productDetails.html';
 
 import fcImgUpload from '../fcImgUpload/fcImgUpload';
 
@@ -113,10 +113,10 @@ class ProductDetailsController {
   }
 
 }
-const name = 'productDetails';
+export const name = 'productDetails';
 
 export default angular.module(name, [fcImgUpload.name]).component(name, {
-  templateUrl,
+  template,
   controller: ProductDetailsController,
   controllerAs: name,
 }).config(($stateProvider) => {

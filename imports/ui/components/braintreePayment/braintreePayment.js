@@ -2,7 +2,7 @@
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 
-import templateUrl from './braintreePayment.html';
+import template from './braintreePayment.html';
 // import './style.scss'
 
 
@@ -67,11 +67,11 @@ class BraintreePaymentController {
   }
 }
 
-const name = 'braintreePayment';
+export const name = 'braintreePayment';
 
 // create a module
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: BraintreePaymentController,
   controllerAs: name,
   bindings: {

@@ -3,7 +3,7 @@
 import ngMaterial from 'angular-material'
 
 
-import templateUrl from './eventAttendees.html'
+import template from './eventAttendees.html'
 // import './style.scss'
 
 
@@ -14,13 +14,13 @@ class EventAttendeesController {
   }
 }
 
-const name = 'eventAttendees';
+export const name = 'eventAttendees';
 
 // create a module
 export default angular.module(name, [
   ngMaterial,
 ]).component(name, {
-  templateUrl,
+  template,
   controller: EventAttendeesController,
   bindings: {
     event: "<",

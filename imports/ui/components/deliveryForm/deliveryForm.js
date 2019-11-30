@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/stevezhu:lodash';
 import moment from 'moment-timezone';
 import { Deliveries } from '../../../api/deliveries';
-import templateUrl from './deliveryForm.html';
+import template from './deliveryForm.html';
 
 class deliveryFormController {
   constructor($scope, $reactive, $mdDialog) {
@@ -62,10 +62,10 @@ class deliveryFormController {
     }
   }
 }
-const name = 'deliveryForm';
+export const name = 'deliveryForm';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: deliveryFormController,
   controllerAs: name,
   bindings: {

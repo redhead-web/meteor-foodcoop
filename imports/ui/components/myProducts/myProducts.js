@@ -3,7 +3,7 @@ import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 import { Products } from '../../../api/products';
 
-import templateUrl from './myProducts.html';
+import template from './myProducts.html';
 
 class MyProductsCtrl {
   constructor($scope, $reactive, $mdDialog, $mdToast) {
@@ -40,12 +40,12 @@ class MyProductsCtrl {
 
 }
 
-const name = 'myProducts';
+export const name = 'myProducts';
 
 export default angular.module(name, [])
 .component(name, {
   controller: MyProductsCtrl,
-  templateUrl,
+  template,
 })
 .config(($stateProvider) => {
   'ngInject';

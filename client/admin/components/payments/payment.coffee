@@ -1,11 +1,13 @@
+import template from './payment.ng.html'
+
 paymentController = ($scope, $reactive) ->
   "ngInject";
   $reactive(this).attach($scope)
-      
+
   @autorun =>
     if @payment
       @recipient = Meteor.users.findOne @payment.user
-    
+
   @icon = =>
     if @payment
       switch @payment.method
@@ -18,13 +20,13 @@ paymentController = ($scope, $reactive) ->
         else
           result = 'editor:ic_money_off_24px'
     result
-    
-  
-  return
-  
 
-angular.module('food-coop').component 'fcPayment', 
-  templateUrl: 'client/admin/components/payments/payment.ng.html'
+
+  return
+
+
+angular.module('food-coop').component 'fcPayment',
+  template: template
   controller: paymentController
   bindings:
     payment: "<"

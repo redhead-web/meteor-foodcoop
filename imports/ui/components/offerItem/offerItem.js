@@ -1,5 +1,5 @@
 import ngMaterial from 'angular-material'
-import templateUrl from './offerItem.html'
+import template from './offerItem.html'
 import modalTemplate from './modalTemplate.html'
 import {name as qAndA} from "../qAndA/qAndA"
 
@@ -22,7 +22,7 @@ class OfferController {
         $mdDialog.show({
           controller: 'CheckoutController',
           controllerAs: 'checkout',
-          templateUrl: modalTemplate,
+          template: modalTemplate,
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
@@ -67,10 +67,10 @@ class OfferController {
   }
 }
 
-const name = "offerItem"
+export const name = "offerItem"
 
 export default angular.module(name, [ngMaterial, qAndA]).component(name, {
-  templateUrl,
+  template,
   controller: OfferController,
   bindings: {
     request: '<',

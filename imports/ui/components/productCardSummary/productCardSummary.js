@@ -1,6 +1,6 @@
 /* globals Markup, Sales */
 import angular from 'angular';
-import templateUrl from './product-card-summary.html';
+import template from './product-card-summary.html';
 
 class ProductCardSummaryCtrl {
   constructor() {
@@ -28,10 +28,10 @@ class ProductCardSummaryCtrl {
   }
 }
 
-const name = 'productCardSummary';
+export const name = 'productCardSummary';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: ProductCardSummaryCtrl,
   controllerAs: 'card',
   bindings: {

@@ -4,7 +4,7 @@ import { Accounts } from 'meteor/accounts-base'
 import ngMaterial from 'angular-material'
 
 
-import templateUrl from './buyTicket.html'
+import template from './buyTicket.html'
 import {name as braintreePayment} from '../braintreePayment/braintreePayment'
 import {name as membershipBenefits} from '../membershipBenefits/membershipBenefits'
 // import './style.scss'
@@ -72,7 +72,7 @@ class BuyTicketController {
   }
 }
 
-const name = 'buyTicket';
+export const name = 'buyTicket';
 
 // create a module
 export default angular.module(name, [
@@ -81,7 +81,7 @@ export default angular.module(name, [
   braintreePayment,
   membershipBenefits
 ]).component(name, {
-  templateUrl,
+  template,
   controller: BuyTicketController,
   bindings: {
     event: "<",

@@ -1,5 +1,5 @@
 import ngMaterial from 'angular-material'
-import templateUrl from './answer.html'
+import template from './answer.html'
 
 
 function answerCtrl($scope) {
@@ -14,10 +14,10 @@ function answerCtrl($scope) {
   };
 
 }
-const name = "answer"
+export const name = "answer"
 
 export default angular.module(name, [ngMaterial]).component(name, {
-  templateUrl,
+  template,
   controller: answerCtrl,
   bindings: {
     onSubmit: '&'

@@ -1,8 +1,10 @@
 import angular from 'angular';
 import Remarkable from 'remarkable';
 
-export default angular.module('remarkable', [])
-  .provider('remarkable', [function provider() {
+export const name = 'remarkable';
+
+export default angular.module(name, [])
+  .provider(name, [function provider() {
     let opts = {};
     return {
       config(newOpts) {

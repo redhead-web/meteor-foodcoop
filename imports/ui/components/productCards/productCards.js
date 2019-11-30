@@ -6,7 +6,7 @@ import { Products } from '../../../api/products';
 import { Likes } from 'meteor/redhead:like-useraccount';
 
 import productCard from '../productCard/productCard';
-import templateUrl from './productCards.html';
+import template from './productCards.html';
 
 function productCardsController($scope, $state, $auth, $reactive, $mdMedia) {
   'ngInject';
@@ -84,10 +84,10 @@ function productCardsController($scope, $state, $auth, $reactive, $mdMedia) {
     }
   }
 }
-const name = 'productCards';
+export const name = 'productCards';
 
 export default angular.module(name, [productCard.name]).component(name, {
-  templateUrl,
+  template,
   controller: productCardsController,
   controllerAs: name,
   bindings: {

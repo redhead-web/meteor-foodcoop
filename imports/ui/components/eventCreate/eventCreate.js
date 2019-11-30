@@ -7,7 +7,7 @@ import { name as fcImgUpload } from '../fcImgUpload/fcImgUpload';
 import { name as remarkable } from '../remarkable/remarkable';
 
 
-import templateUrl from './eventCreate.html';
+import template from './eventCreate.html';
 
 import { Events } from '../../../api/events';
 
@@ -23,10 +23,10 @@ class EventCreateController {
   timeChange() {
     const timeMoment = moment(this.time);
     this.event.date = moment(this.event.date)
-    .hour(timeMoment.hour())
-    .minute(timeMoment.minute())
-    .startOf('hour')
-    .toDate();
+      .hour(timeMoment.hour())
+      .minute(timeMoment.minute())
+      .startOf('hour')
+      .toDate();
   }
 
   imgSelected(data) {
@@ -57,7 +57,7 @@ class EventCreateController {
   }
 }
 
-const name = 'eventCreate';
+export const name = 'eventCreate';
 
 function isAdmin(user) {
   return Roles.userIsInRole(user, 'admin');
@@ -88,7 +88,7 @@ export default angular.module(name, [
   uiRouter,
   ngMaterial,
 ]).component(name, {
-  templateUrl,
+  template,
   controller: EventCreateController,
 })
   .config(config);

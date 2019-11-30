@@ -1,7 +1,7 @@
 /* eslint-env browser */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
-import templateUrl from './button.ng.html';
+import template from './button.ng.html';
 import dialogTemplate from './payment-method-dialog.ng.html';
 
 function PaymentMethodSelector($scope, $mdDialog, $reactive, $state) {
@@ -45,7 +45,7 @@ function CheckoutFlowController($mdDialog) {
     $mdDialog.show({
       controller: PaymentMethodSelector,
       controllerAs: '$ctrl',
-      templateUrl: dialogTemplate,
+      template: dialogTemplate,
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
@@ -70,11 +70,11 @@ function CheckoutFlowController($mdDialog) {
   };
 }
 
-const name = 'checkoutFlow';
+export const name = 'checkoutFlow';
 
 export default angular.module(name, []).component(name, {
   controller: CheckoutFlowController,
-  templateUrl,
+  template,
   bindings: {
     total: '<',
     fees: '<',

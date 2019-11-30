@@ -1,5 +1,5 @@
 // import angular from 'angular'
-import templateUrl from './mapLocation.html'
+import template from './mapLocation.html'
 import 'angular-simple-logger';
 import 'angular-google-maps';
 
@@ -74,7 +74,7 @@ class MapLocationController {
 
 }
 
-const name = 'mapLocation';
+export const name = 'mapLocation';
 
 // create a module
 export default angular.module(name, [
@@ -82,7 +82,7 @@ export default angular.module(name, [
   'uiGmapgoogle-maps',
 ]).component(name, {
   bindings: {event: "<"},
-  templateUrl,
+  template,
   controller: MapLocationController
 }).config(config)
 

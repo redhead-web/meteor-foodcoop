@@ -1,4 +1,4 @@
-templateUrl = require('./pos.ng.html');
+template = require('./pos.ng.html');
 braintreePayment = require '../braintreePayment/braintreePayment'
 cartTable = require '../cartTable/cartTable'
 
@@ -96,8 +96,8 @@ PointOfSaleController = ($scope, $reactive, $mdToast) ->
 
   return
 
-name = "pointOfSale"
+export name = "pointOfSale"
 
 exports.module = angular.module(name, [braintreePayment.name, cartTable.name]).component name,
   controller: PointOfSaleController
-  templateUrl: templateUrl.default
+  template: template.default

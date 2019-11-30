@@ -1,8 +1,11 @@
 import angular from 'angular';
+import template from './balancePaymentTpl.ng.html';
+
 
 class BalancePaymentController {
   constructor($scope, $state, $reactive) {
     'ngInject';
+
     $reactive(this).attach($scope);
   }
   invoice() {
@@ -20,14 +23,14 @@ class BalancePaymentController {
 
 
 angular.module('food-coop')
-.component('fcBalancePayment', {
-  templateUrl: 'client/checkout/components/balancePaymentTpl.ng.html',
-  controller: BalancePaymentController,
-  bindings: {
-    customerId: '<',
-    delivery: '<',
-    status: '@',
-    onError: '&',
-    onSuccess: '&',
-  },
-});
+  .component('fcBalancePayment', {
+    template,
+    controller: BalancePaymentController,
+    bindings: {
+      customerId: '<',
+      delivery: '<',
+      status: '@',
+      onError: '&',
+      onSuccess: '&',
+    },
+  });

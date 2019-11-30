@@ -1,7 +1,7 @@
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
 
-import templateUrl from './notificationSettings.html';
+import template from './notificationSettings.html';
 
 class notificationSettingsController {
   constructor() {
@@ -17,10 +17,10 @@ class notificationSettingsController {
     Meteor.users.update(Meteor.userId(), update);
   }
 }
-const name = 'notificationSettings';
+export const name = 'notificationSettings';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: notificationSettingsController,
   controllerAs: name,
 });

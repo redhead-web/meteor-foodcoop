@@ -202,7 +202,7 @@
         <md-icon class="md-primary" md-svg-icon="action:ic_event_24px"></md-icon>
         <p> Events </p>
       </md-list-item> -->
-      <md-divider class="fadeInLeft animated" style="animation-delay: 240ms"ng-show="currentUser"></md-divider>
+      <md-divider class="fadeInLeft animated" style="animation-delay: 240ms" ng-show="currentUser"></md-divider>
       <md-list-item
         class="fadeInLeft animated"
         style="animation-delay: 280ms"
@@ -225,6 +225,6 @@
       </md-list-item>
       <md-subheader class="fadeInLeft animated" style="animation-delay: 360ms">Get In Touch</md-subheader>
     </md-list>
-    <ng-include src="'client/static/views/contact-list.ng.html'"></ng-include>
+    <contact-list></contact-list>
   </md-content>
 </md-sidenav>

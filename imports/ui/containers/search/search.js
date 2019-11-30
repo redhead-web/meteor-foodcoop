@@ -1,5 +1,5 @@
 import angular from 'angular';
-import templateUrl from './search.html';
+import template from './search.html';
 
 import { name as productGridCard } from '../../components/productGridCard/productGridCard';
 
@@ -36,12 +36,12 @@ class SearchContainerCtrl {
   }
 }
 
-const name = 'searchContainer';
+export const name = 'searchContainer';
 
 export default angular.module(name, [productGridCard]).component(name, {
   controller: SearchContainerCtrl,
   controllerAs: '$ctrl',
-  templateUrl,
+  template,
 }).config(($stateProvider) => {
   'ngInject';
 

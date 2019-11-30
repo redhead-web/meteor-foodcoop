@@ -1,15 +1,16 @@
+import angular from 'angular';
+import template from './social-menu.ng.html';
+
 angular.module('food-coop')
-.directive("fcSocialMenu", function() {
-  return {
+  .directive('fcSocialMenu', () => ({
     restrict: 'E',
     scope: {
       url: '@url',
-      'class': '@class',
+      class: '@class',
       text: '@text',
-			media: '@media'
+      media: '@media',
     },
     // transclude: true,
     // replace: true,
-    templateUrl: 'client/social/components/social-menu.ng.html'
-  }
-})
+    template,
+  }));

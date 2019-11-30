@@ -1,47 +1,47 @@
-function markDownHelpCtrl ($scope, $mdDialog, $mdMedia) {
-  
-  "ngInject";
-  
-  var vm = this;
-  vm.openMarkdownHints = function($event) {
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && vm.customFullscreen;
+import angular from 'angular';
+import template from './markdown-help.ng.html';
+import dialogTemplate from './dialog.ng.html';
+
+function markDownHelpCtrl($scope, $mdDialog, $mdMedia) {
+  'ngInject';
+
+  const vm = this;
+  vm.openMarkdownHints = function ($event) {
+    const useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && vm.customFullscreen;
     $mdDialog.show({
       controller: DialogController,
-      templateUrl: 'client/utilities/components/markdownHelp/dialog.ng.html',
+      template: dialogTemplate,
       parent: angular.element(document.body),
       targetEvent: $event,
-      clickOutsideToClose:true,
-      fullscreen: useFullScreen
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen,
     })
-    .then(function(answer) {
-      vm.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      vm.status = 'You cancelled the dialog.';
-    });
-    
-    $scope.$watch(function() {
-      return $mdMedia('xs') || $mdMedia('sm');
-    }, function(wantsFullScreen) {
+      .then((answer) => {
+        vm.status = `You said the information was "${answer}".`;
+      }, () => {
+        vm.status = 'You cancelled the dialog.';
+      });
+
+    $scope.$watch(() => $mdMedia('xs') || $mdMedia('sm'), (wantsFullScreen) => {
       vm.customFullscreen = (wantsFullScreen === true);
     });
   };
 }
 
 function DialogController($scope, $mdDialog) {
-  $scope.hide = function() {
+  $scope.hide = function () {
     $mdDialog.hide();
   };
-  $scope.cancel = function() {
+  $scope.cancel = function () {
     $mdDialog.cancel();
   };
-  $scope.answer = function(answer) {
+  $scope.answer = function (answer) {
     $mdDialog.hide(answer);
   };
 }
 
 
-
 angular.module('food-coop').component('markdownHelp', {
-  templateUrl: 'client/utilities/components/markdownHelp/markdown-help.ng.html',
-  controller: markDownHelpCtrl
-})
+  template,
+  controller: markDownHelpCtrl,
+});

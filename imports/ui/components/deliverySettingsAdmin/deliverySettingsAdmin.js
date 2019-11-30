@@ -3,7 +3,7 @@ import { DeliverySettings } from '../../../api/deliverySettings';
 import deliverySettingsAdminForm from '../deliverySettingsAdminForm/deliverySettingsAdminForm';
 import { Roles } from 'meteor/alanning:roles';
 
-import templateUrl from './deliverySettingsAdmin.html';
+import template from './deliverySettingsAdmin.html';
 
 class deliverySettingsAdminController {
   constructor($scope, $reactive) {
@@ -26,14 +26,14 @@ class deliverySettingsAdminController {
     DeliverySettings.update(data._id, { $set: data });
   }
 }
-const name = 'deliverySettingsAdmin';
+export const name = 'deliverySettingsAdmin';
 
 function isAdmin(user) {
   return Roles.userIsInRole(user, 'admin');
 }
 
 export default angular.module(name, [deliverySettingsAdminForm.name]).component(name, {
-  templateUrl,
+  template,
   controller: deliverySettingsAdminController,
   controllerAs: name,
 }).config(($stateProvider) => {

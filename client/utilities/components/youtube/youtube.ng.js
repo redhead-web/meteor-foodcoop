@@ -1,7 +1,10 @@
+import angular from 'angular';
+import template from './index.html';
+
 angular.module('food-coop').component('fcVideo', {
-  templateUrl: 'client/utilities/components/youtube/youtube-responsive.ng.html',
+  template,
   // controller: function() {YT.load()},
   bindings: {
-    videoUrl: "<"
-  }
-})
+    videoUrl: '<',
+  },
+});

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import templateUrl from './gst-list.ng.html';
+import template from './gst-list.ng.html';
 import { Products } from '../../../api/products';
 
 function gstListController($scope, $reactive) {
@@ -10,10 +10,10 @@ function gstListController($scope, $reactive) {
   });
 }
 
-const name = 'gstList';
+export const name = 'gstList';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: gstListController,
   bindings: {
     sale: '<',

@@ -1,7 +1,7 @@
 import uiRouter from 'angular-ui-router'
 import ngMaterial from 'angular-material'
 
-import templateUrl from './requestList.html'
+import template from './requestList.html'
 import './style.scss'
 
 import { Requests } from '../../../api/requests';
@@ -40,7 +40,7 @@ class RequestListController {
 
 }
 
-const name = 'requestList';
+export const name = 'requestList';
 
 // create a module
 export default angular.module(name, [
@@ -51,7 +51,7 @@ export default angular.module(name, [
   uiRouter,
   ngMaterial
 ]).component(name, {
-  templateUrl,
+  template,
   controller: RequestListController
 }).config(config);
 

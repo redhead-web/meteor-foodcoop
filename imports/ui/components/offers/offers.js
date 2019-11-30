@@ -3,7 +3,7 @@ import {name as offerItem} from "../offerItem/offerItem"
 
 import { Offers } from "../../../api/offers"
 
-import templateUrl from "./offers.html"
+import template from "./offers.html"
 import './style.scss'
 
 class OffersController {
@@ -32,10 +32,10 @@ class OffersController {
 }
 
 
-const name = "offers"
+export const name = "offers"
 
 export default angular.module(name, ['angular-meteor', ngMaterial, offerItem]).component(name, {
-  templateUrl,
+  template,
   controller: OffersController,
   bindings: {
     request: '<',

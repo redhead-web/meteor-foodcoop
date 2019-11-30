@@ -1,7 +1,7 @@
 import ngMaterial from 'angular-material';
 import moment from 'moment';
 
-import templateUrl from './question.html';
+import template from './question.html';
 
 function QuestionCtrl($scope) {
   'ngInject';
@@ -26,10 +26,10 @@ function QuestionCtrl($scope) {
   };
 }
 
-const name = 'question';
+export const name = 'question';
 
 export default angular.module(name, [ngMaterial]).component(name, {
-  templateUrl,
+  template,
   controller: QuestionCtrl,
   bindings: {
     onSubmit: '&',

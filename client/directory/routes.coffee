@@ -1,7 +1,9 @@
+import template from './views/directory.ng.html'
+
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider.state 'directory',
     url: '/directory'
-    templateUrl: 'client/directory/views/directory.ng.html'
+    template: template
     controllerAs: 'dir'
     controller: 'directoryCtrl'
   return

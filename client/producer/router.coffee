@@ -1,7 +1,9 @@
+import template from './apply.ng.html'
+
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider.state 'producer-application',
     url: '/apply'
-    templateUrl: 'client/producer/apply.ng.html'
+    template: template
     controllerAs: 'ctrl'
     controller: 'ApplyCtrl'
 

@@ -6,7 +6,7 @@ import moment from 'moment-timezone';
 
 ;
 
-import templateUrl from './deliveryAdmin.html';
+import template from './deliveryAdmin.html';
 
 class deliverySettingsAdminController {
   constructor($scope, $reactive, $mdDialog) {
@@ -58,14 +58,14 @@ class deliverySettingsAdminController {
     Deliveries.update(delivery._id, { $set: { archived: true } });
   }
 }
-const name = 'deliveryAdmin';
+export const name = 'deliveryAdmin';
 
 // function isAdmin(user) {
 //   Roles.userIsInRole(user, 'admin');
 // }
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: deliverySettingsAdminController,
   controllerAs: name,
 }).config(($stateProvider) => {

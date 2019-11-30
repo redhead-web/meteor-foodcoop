@@ -1,3 +1,5 @@
+// import template from './index.html';
+
 // function ResponsiveFieldController() {
 //   'ngInject';
 //   let ctrl = this;
@@ -17,7 +19,7 @@
 //
 //
 // angular.module('food-coop').component('fcResponsiveField', {
-//   templateUrl: 'client/utilities/components/responsiveFields/responsive-field.ng.html',
+//   template,
 //   controller: ResponsiveFieldController,
 //   bindings: {
 //     data: "<",

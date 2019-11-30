@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Products } from '../../../api/products';
 import fcImgUpload from '../fcImgUpload/fcImgUpload';
 
-import templateUrl from './userProfilePage.html';
+import template from './userProfilePage.html';
 
 class userProfilePageController {
   constructor($scope, $reactive, $stateParams, uiGmapGoogleMapApi, $mdToast) {
@@ -228,10 +228,10 @@ class userProfilePageController {
     }
   }
 }
-const name = 'userProfilePage';
+export const name = 'userProfilePage';
 
 export default angular.module(name, [fcImgUpload.name]).component(name, {
-  templateUrl,
+  template,
   controller: userProfilePageController,
   controllerAs: 'ctrl',
 }).config(($stateProvider) => {

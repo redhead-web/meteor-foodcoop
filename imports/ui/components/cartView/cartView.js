@@ -1,7 +1,7 @@
 /* globals GetNextDeliveryDay, Markup, Cart */
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
-import templateUrl from './cart-view.ng.html';
+import template from './cart-view.ng.html';
 import cartTable from '../cartTable/cartTable';
 import checkoutFlow from '../checkoutFlow/checkoutFlow';
 import { name as topUp } from '../topUp/topUp';
@@ -98,12 +98,12 @@ class CartViewCtrl {
   }
 }
 
-const name = 'cartView';
+export const name = 'cartView';
 
 export default angular.module(name, [cartTable.name, checkoutFlow.name, topUp]).component(name, {
   controller: CartViewCtrl,
   controllerAs: 'cart',
-  templateUrl,
+  template,
 }).config(($stateProvider) => {
   'ngInject';
 

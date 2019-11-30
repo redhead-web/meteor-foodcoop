@@ -3,7 +3,7 @@ import angular from 'angular';
 import ngMaterial from 'angular-material';
 import moment from 'moment';
 
-import templateUrl from './salesStats.html';
+import template from './salesStats.html';
 
 export const name = 'salesStats';
 
@@ -56,7 +56,7 @@ export default angular.module(name, [
   ngMaterial,
   'angular-meteor',
 ]).component(name, {
-  templateUrl,
+  template,
   controller: SalesStatsController,
   controllerAs: name,
   bindings: {

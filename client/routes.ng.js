@@ -1,4 +1,8 @@
 import angular from 'angular';
+import faqTemplate from './static/views/faq.ng.html';
+import aboutTemplate from './static/views/about.ng.html';
+import contactTemplate from './static/views/contact.ng.html';
+import profileTemplate from './user/views/profile.ng.html';
 
 angular.module('food-coop').run(['$rootScope', '$state', ($rootScope, $state) => {
   $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
@@ -20,23 +24,23 @@ angular.module('food-coop').config(($urlRouterProvider, $stateProvider, $locatio
   $stateProvider
     .state('faq', {
       url: '/faq',
-      templateUrl: 'client/static/views/faq.ng.html',
+      template: faqTemplate,
     })
     .state('about', {
       url: '/about-us',
-      templateUrl: 'client/static/views/about.ng.html',
+      template: aboutTemplate,
     })
     .state('contact', {
       url: '/contact-us',
-      templateUrl: 'client/static/views/contact.ng.html',
+      template: contactTemplate,
       controller: 'contactCtrl',
       controllerAs: 'msg',
     })
     .state('profile', {
       url: '/me',
-      templateUrl: 'client/user/views/profile.ng.html',
-      controller: 'ProfileCtrl',
+      template: profileTemplate,
+    // controller: 'ProfileCtrl',
     });
 
-  $urlRouterProvider.otherwise('/store');
+  $urlRouterProvider.otherwise('/');
 });

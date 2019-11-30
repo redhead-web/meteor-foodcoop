@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import templateUrl from './deliverySettingsAdminForm.html';
+import template from './deliverySettingsAdminForm.html';
 
 class deliverySettingsAdminFormController {
   save() {
@@ -10,10 +10,10 @@ class deliverySettingsAdminFormController {
     return this.onInsert({ data: this.settings });
   }
 }
-const name = 'deliverySettingsAdminForm';
+export const name = 'deliverySettingsAdminForm';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: deliverySettingsAdminFormController,
   controllerAs: name,
   bindings: {

@@ -1,4 +1,4 @@
-import './publish';
+import './publish.coffee';
 import './methods';
 
 export * from './collection';

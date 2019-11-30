@@ -1,8 +1,8 @@
-// import angular from 'angular'
+import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 
-import templateUrl from './eventList.html';
+import template from './eventList.html';
 
 import { Events } from '../../../api/events';
 
@@ -42,10 +42,9 @@ class EventsController {
   sortChanged(sort) {
     this.sort = sort;
   }
-
 }
 
-const name = 'eventList';
+export const name = 'eventList';
 
 // create a module
 export default angular.module(name, [
@@ -55,7 +54,7 @@ export default angular.module(name, [
   uiRouter,
   ngMaterial,
 ]).component(name, {
-  templateUrl,
+  template,
   controller: EventsController,
 })
   .config(config);

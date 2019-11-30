@@ -1,8 +1,8 @@
-import templateUrl from './membershipBenefits.html'
-import dialogTemplateUrl from './membershipDialog.html'
+import template from './membershipBenefits.html'
+import dialogtemplate from './membershipDialog.html'
 import ngMaterial from 'angular-material'
 
-const name = 'membershipBenefits';
+export const name = 'membershipBenefits';
 
 function MembershipBenefitsController($scope, $mdDialog, $mdMedia) {
   "ngInject";
@@ -11,7 +11,7 @@ function MembershipBenefitsController($scope, $mdDialog, $mdMedia) {
     useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
       controller: DialogController,
-      templateUrl: dialogTemplateUrl,
+      template: dialogtemplate,
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
@@ -45,7 +45,7 @@ function DialogController($scope, $mdDialog) {
 export default angular.module(name, [
   ngMaterial
 ]).component(name, {
-  templateUrl,
+  template,
   controller: MembershipBenefitsController
 })
 

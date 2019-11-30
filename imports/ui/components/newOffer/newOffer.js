@@ -4,7 +4,7 @@ import ngMaterial from 'angular-material'
 import './style.scss'
 
 
-import templateUrl from './newOffer.html'
+import template from './newOffer.html'
 
 import { Offers } from '../../../api/offers';
 
@@ -51,10 +51,10 @@ class NewOfferController {
 
 }
 
-const name = "newOffer"
+export const name = "newOffer"
 
 export default angular.module(name, [ngMaterial]).component(name, {
-  templateUrl,
+  template,
   controller: NewOfferController,
   controllerAs: name,
   bindings: {

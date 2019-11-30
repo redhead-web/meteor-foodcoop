@@ -3,7 +3,7 @@ import angular from 'angular';
 import './style.css';
 
 
-const name = 'percentDisplay';
+export const name = 'percentDisplay';
 
 
 export default angular.module(name, []).directive(name, function () {

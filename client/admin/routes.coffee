@@ -1,12 +1,18 @@
+import adminTemplate from './views/admin.ng.html'
+import productsTemplate from './views/products.ng.html'
+import usersTemplate from './views/users.ng.html'
+import createuserTemplate from './views/create-user.ng.html'
+import userTemplate from './views/user.ng.html'
+import orderTemplate from './views/order.ng.html'
+
+
 isAdmin = (user) ->
   Roles.userIsInRole user, 'admin'
-
-
 
 angular.module('food-coop').config ($stateProvider) ->
   $stateProvider.state('admin',
     url: '/dashboard'
-    templateUrl: 'client/admin/views/admin.ng.html'
+    template: adminTemplate
     controllerAs: 'rt'
     controller: 'AdminCtrl'
     resolve:
@@ -14,38 +20,38 @@ angular.module('food-coop').config ($stateProvider) ->
         $auth.requireValidUser(isAdmin)
   ).state('admin.products',
     url: '/products'
-    templateUrl: 'client/admin/views/products.ng.html'
+    template: productsTemplate
     controller: 'ProductsAdminCtrl'
     controllerAs: 'ctrl'
   ).state('admin.users',
     url: '/users'
-    templateUrl: 'client/admin/views/users.ng.html'
+    template: usersTemplate
     controller: 'UsersAdminCtrl'
     resolve: 'admin': ($auth) ->
       $auth.requireValidUser(isAdmin)
   ).state('admin.createUser',
     url: '/user/new'
-    templateUrl: 'client/admin/views/create-user.ng.html'
+    template: createuserTemplate
     controller: 'CreateUserAdminCtrl'
     resolve: 'admin': ($auth) ->
       $auth.requireValidUser(isAdmin)
   ).state('admin.user',
     url: '/user/:userId'
-    templateUrl: 'client/admin/views/user.ng.html'
+    template: userTemplate
     controller: 'UserAdminCtrl'
     controllerAs: '$ctrl'
     resolve: 'admin': ($auth) ->
       $auth.requireValidUser(isAdmin)
   ).state('admin.userOrders',
     url: '/user/:userId/orders'
-    templateUrl: 'client/admin/components/userOrders/index.html'
+    template: userTemplate
     controller: 'UserOrdersAdminCtrl'
     controllerAs: 'vm'
     resolve: 'admin': ($auth) ->
       $auth.requireValidUser(isAdmin)
   ).state('admin.order',
     url: '/order/:orderId'
-    templateUrl: 'client/admin/views/order.ng.html'
+    template: orderTemplate
     controller: 'OrderAdminCtrl'
     controllerAs: 'vm'
     resolve:

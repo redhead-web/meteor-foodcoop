@@ -2,7 +2,7 @@
 import angular from 'angular';
 // import { Meteor } from 'meteor/meteor';
 
-import templateUrl from './topUp.html';
+import template from './topUp.html';
 
 class topUpController {
   constructor($mdDialog, $mdToast, $reactive, $scope) {
@@ -79,7 +79,7 @@ class topUpController {
 export const name = 'topUp';
 
 export default angular.module(name, []).component(name, {
-  templateUrl,
+  template,
   controller: topUpController,
   controllerAs: name,
 });

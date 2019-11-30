@@ -8,7 +8,7 @@ import { _ } from 'meteor/stevezhu:lodash';
 import { Roles } from 'meteor/alanning:roles';
 import fcImgUpload from '../fcImgUpload/fcImgUpload';
 
-import templateUrl from './productCreate.html';
+import template from './productCreate.html';
 
 import { Products } from '../../../api/products';
 import { Categories } from '../../../api/categories';
@@ -66,9 +66,9 @@ class ProductCreateController {
       this.daysNotice.push({
         value: i,
         name: `${moment()
-        .day(Meteor.settings.public.deliveryDayOfWeek)
-        .subtract(i, 'days')
-        .format('dddd')} -- ${i} days notice`,
+          .day(Meteor.settings.public.deliveryDayOfWeek)
+          .subtract(i, 'days')
+          .format('dddd')} -- ${i} days notice`,
       });
     }
 
@@ -177,10 +177,10 @@ class ProductCreateController {
         console.error(err);
         return this.$mdToast.show(
           this.$mdToast
-          .simple()
-          .content(err.message)
-          .position('bottom right')
-          .hideDelay(4000),
+            .simple()
+            .content(err.message)
+            .position('bottom right')
+            .hideDelay(4000),
         );
       }
 
@@ -190,10 +190,10 @@ class ProductCreateController {
 
       this.$mdToast.show(
         this.$mdToast.simple()
-        .content(`Thank you! ${this.product.name} successfully added to our store. Add another product?`)
-        .action('YES')
-        .highlightAction(false)
-        .position('bottom right'),
+          .content(`Thank you! ${this.product.name} successfully added to our store. Add another product?`)
+          .action('YES')
+          .highlightAction(false)
+          .position('bottom right'),
       ).then((response) => {
         if (response === 'ok') {
           this.reset(this.product);
@@ -224,8 +224,8 @@ class ProductCreateController {
           } else {
             this.$mdToast.show(
               this.$mdToast.simple()
-              .content(`Thank you! ${this.product.name} successfully updated`)
-              .position('bottom right'),
+                .content(`Thank you! ${this.product.name} successfully updated`)
+                .position('bottom right'),
             );
           }
         });
@@ -236,38 +236,38 @@ class ProductCreateController {
   }
 }
 
-const name = 'productCreate';
+export const name = 'productCreate';
 
 export default angular.module(name, [fcImgUpload.name])
-.component(name, {
-  templateUrl,
-  controllerAs: 'ctrl',
-  controller: ProductCreateController,
-})
-.config(($stateProvider) => {
-  'ngInject';
-
-  function rolePromise($q, r) {
-    return $q((resolve, reject) => {
-      const role = Roles.userIsInRole(Meteor.userId(), r);
-      if (role) {
-        resolve(role);
-      } else {
-        reject('FORBIDDEN');
-      }
-    });
-  }
-
-  $stateProvider
-  .state('productCreate', {
-    url: '/new-product?copy',
-    template: '<product-create></product-create>',
-    controller: ProductCreateController,
+  .component(name, {
+    template,
     controllerAs: 'ctrl',
-    resolve: {
-      currentUser($q) {
-        return rolePromise($q, 'producer');
-      },
-    },
+    controller: ProductCreateController,
+  })
+  .config(($stateProvider) => {
+    'ngInject';
+
+    function rolePromise($q, r) {
+      return $q((resolve, reject) => {
+        const role = Roles.userIsInRole(Meteor.userId(), r);
+        if (role) {
+          resolve(role);
+        } else {
+          reject('FORBIDDEN');
+        }
+      });
+    }
+
+    $stateProvider
+      .state('productCreate', {
+        url: '/new-product?copy',
+        template: '<product-create></product-create>',
+        controller: ProductCreateController,
+        controllerAs: 'ctrl',
+        resolve: {
+          currentUser($q) {
+            return rolePromise($q, 'producer');
+          },
+        },
+      });
   });
-});

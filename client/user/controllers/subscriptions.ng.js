@@ -1,8 +1,7 @@
 import angular from 'angular';
 import moment from 'moment-timezone';
-import { Meteor } from 'meteor/meteor';
+import template from '../views/cancel-subscription.ng.html';
 
-;
 
 angular.module('food-coop').controller('UserSubscriptionCtrl', ($scope, $mdDialog, $meteor) => {
   // TODO: not MVP feature
@@ -22,7 +21,7 @@ angular.module('food-coop').controller('UserSubscriptionCtrl', ($scope, $mdDialo
   function cancel(item, ev) {
     $mdDialog.show({
       targetEvent: ev,
-      templateUrl: 'client/user/views/cancel-subscription.ng.html',
+      template,
       locals: { item },
       controller: cancelCtrl,
     });

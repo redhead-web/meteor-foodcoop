@@ -2,7 +2,7 @@ import {name as percentDisplay} from '../percentDisplay/percentDisplay'
 
 import "./percentage.scss"
 
-import templateUrl from './aggregatePercentage.html'
+import template from './aggregatePercentage.html'
 
 import { Offers } from "../../../api/offers"
 
@@ -33,12 +33,12 @@ class AggregatePercentageController {
 
 }
 
-const name = "aggregatePercentage"
+export const name = "aggregatePercentage"
 
 export default angular.module(name, [
   percentDisplay
 ]).component(name, {
-  templateUrl,
+  template,
   controller: AggregatePercentageController,
   bindings: {
     request: '<',

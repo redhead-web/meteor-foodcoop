@@ -6,7 +6,7 @@ import { name as mapLocation } from '../mapLocation/mapLocation';
 import { name as eventAttendees } from '../eventAttendees/eventAttendees';
 import { name as remarkable } from '../remarkable/remarkable';
 
-import templateUrl from './eventDetails.html';
+import template from './eventDetails.html';
 import './style.scss';
 
 import { Events } from '../../../api/events';
@@ -41,7 +41,7 @@ class EventDetailsController {
 
 }
 
-const name = 'eventDetails';
+export const name = 'eventDetails';
 
 // create a module
 export default angular.module(name, [
@@ -53,7 +53,7 @@ export default angular.module(name, [
   uiRouter,
   ngMaterial,
 ]).component(name, {
-  templateUrl,
+  template,
   controller: EventDetailsController,
 })
   .config(($stateProvider, $mdThemingProvider) => {

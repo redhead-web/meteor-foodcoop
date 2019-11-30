@@ -2,7 +2,7 @@
 
 import angular from 'angular';
 import { Meteor } from 'meteor/meteor';
-import templateUrl from './cart-summary.ng.html';
+import template from './cart-summary.ng.html';
 
 class CartSummaryController {
   constructor($scope, $reactive) {
@@ -17,10 +17,10 @@ class CartSummaryController {
   }
 }
 
-const name = 'cartSummary';
+export const name = 'cartSummary';
 
 export default angular.module(name, []).component(name, {
   controller: CartSummaryController,
   controllerAs: 'cr',
-  templateUrl,
+  template,
 });

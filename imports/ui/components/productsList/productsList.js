@@ -2,8 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/stevezhu:lodash';
-import moment from 'moment';
-import templateUrl from './productsList.html';
+import template from './productsList.html';
 
 import { Categories } from '../../../api/categories';
 
@@ -15,9 +14,6 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
 
   $reactive(this).attach($scope);
 
-  // if (moment().isBefore(moment('2019-04-10')) && moment().isAfter(moment('2019-03-26'))) {
-  //   this.holidays = true;
-  // }
   this.holidays = true;
 
   this.go = $state.go;
@@ -26,7 +22,6 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
 
   this.subscribe('categories');
   this.subscribe('producer', () => [this.getReactively('stateParams.producer')]);
-
 
   this.stateParams = angular.copy($stateParams);
 
@@ -39,7 +34,6 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
   if ($stateParams.producer) {
     this.producer = Meteor.users.findOne($stateParams.producer);
   }
-
 
   this.helpers({
     categories() {
@@ -63,7 +57,7 @@ function ProductsListCtrl($scope, $state, $stateParams, $reactive) {
     }
   });
 }
-const name = 'productsList';
+export const name = 'productsList';
 
 export default angular.module(name, [
   uiRouter,
@@ -72,13 +66,13 @@ export default angular.module(name, [
 ]).component(name, {
   controller: ProductsListCtrl,
   controllerAs: 'store',
-  templateUrl,
+  template,
 }).config(($stateProvider) => {
   'ngInject';
 
   $stateProvider
-  .state('store', {
-    url: '/?name&certification&producer&search&category',
-    template: '<products-list></products-list>',
-  });
+    .state('store', {
+      url: '/?name&certification&producer&search&category',
+      template: '<products-list></products-list>',
+    });
 });

@@ -1,6 +1,6 @@
 import ngMaterial from 'angular-material'
 
-import templateUrl from './qAndAItem.html'
+import template from './qAndAItem.html'
 
 import {name as answer} from "../answer/answer"
 
@@ -18,10 +18,10 @@ function qAndAItemController($scope) {
   }
 
 }
-const name = 'qAndAItem'
+export const name = 'qAndAItem'
 
 export default angular.module(name, [answer, ngMaterial]).component(name, {
-  templateUrl,
+  template,
   controller: qAndAItemController,
   bindings: {
     item: '<',

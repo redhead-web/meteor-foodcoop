@@ -3,7 +3,7 @@ import ngMaterial from 'angular-material'
 
 import {Meteor} from 'meteor/meteor'
 import { Questions } from '../../../api/questions';
-import templateUrl from './qAndA.html'
+import template from './qAndA.html'
 import './style.scss'
 
 import {name as question} from "../question/question"
@@ -67,7 +67,7 @@ class QandAController {
   }
 }
 
-const name = "qAndA"
+export const name = "qAndA"
 
 export default angular.module(name, [
   'angular-meteor',
@@ -75,7 +75,7 @@ export default angular.module(name, [
   qAndAItem,
   ngMaterial
 ]).component(name, {
-  templateUrl,
+  template,
   controller: QandAController,
   bindings: {
     item: '<',

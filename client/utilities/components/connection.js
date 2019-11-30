@@ -37,7 +37,7 @@ class ConnectionStatusController {
 }
 
 
-const name = 'connectionStatus';
+export const name = 'connectionStatus';
 
 
 angular.module('food-coop').component(name, {

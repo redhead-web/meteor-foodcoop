@@ -1,10 +1,10 @@
-{ Meteor } = require 'meteor/meteor'
+import { Meteor } from 'meteor/meteor'
 
-{ check } = require 'meteor/check'
+import { check } from 'meteor/check'
 
 import moment from 'moment-timezone'
 
-{ Events } = require './collection'
+import { Events } from './collection'
 
 # moment.tz.setDefault(Meteor.settings.public.tz)
 

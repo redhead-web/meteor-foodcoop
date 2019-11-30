@@ -1,14 +1,17 @@
+import template from './new-payment.ng.html'
+
 newPaymentController = ($scope, $reactive) ->
-  "ngInject";
+  "ngInject"
+
   $reactive(this).attach $scope
-  
+
   @subscribe 'user-list'
-  
+
   @options = ['cash', 'internet banking', 'bitcoin', 'other']
-  
+
   @autorun =>
     @user = Meteor.users.findOne _id: @getReactively('userObject._id')
-    
+
   @getUsers = (query) ->
     Meteor.users.find($or: [
       { 'profile.name':
@@ -16,7 +19,7 @@ newPaymentController = ($scope, $reactive) ->
         $options: 'i' }
       { 'profile.customerNumber': parseInt query }
     ]).fetch()
-  
+
   @insert = =>
     if @user and @user._id?
       @payment.user = @user._id
@@ -25,11 +28,10 @@ newPaymentController = ($scope, $reactive) ->
         @payment = {}
       else
         console.error = error
-  
-  return
-  
 
-angular.module('food-coop').component 'newPayment', 
-  templateUrl: 'client/admin/components/new-payment/new-payment.ng.html'
+  return
+
+
+angular.module('food-coop').component 'newPayment',
+  template: template
   controller: newPaymentController
- 

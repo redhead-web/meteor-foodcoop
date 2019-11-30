@@ -1,9 +1,13 @@
-angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $state, $mdDialog, $mdMedia) ->
+import angular from 'angular'
+import template from '../views/membership.ng.html'
+
+angular.module('food-coop')
+.controller 'RegisterCtrl', ($scope, $reactive, $state, $mdDialog, $mdMedia) ->
 
   $reactive(this).attach($scope)
 
   vm = this
-  vm.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+  vm.customFullscreen = $mdMedia('xs') || $mdMedia('sm')
   vm.credentials =
     email: ''
     password: ''
@@ -24,7 +28,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
     useFullScreen = ($mdMedia('sm') or $mdMedia('xs')) and vm.customFullscreen
     $mdDialog.show(
       controller: DialogController
-      templateUrl: 'client/user/auth/views/membership.ng.html'
+      template: template
       parent: angular.element(document.body)
       targetEvent: ev
       clickOutsideToClose: true
@@ -55,7 +59,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
           $state.go 'producer-application'
         else
           Meteor.call('newMemberEmail')
-          $state.go 'store'
+          $state.go 'profile.edit'
           return
       return
 
@@ -80,7 +84,7 @@ angular.module('food-coop').controller 'RegisterCtrl', ($scope, $reactive, $stat
 
 
 DialogController = ($scope, $mdDialog) ->
-  "ngInject";
+  "ngInject"
 
   $scope.prices =
     customer: Meteor.settings.public.shares.customer
