@@ -1,6 +1,6 @@
 Package.describe({
   name: 'redhead:like-useraccount',
-  version: '0.0.1',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: 'a simple social likes collection and validation',
   // URL to the Git repository containing the source code for this package.
@@ -10,15 +10,15 @@ Package.describe({
   documentation: 'README.md',
 });
 
-Package.onUse(function (api) {
-  api.versionsFrom('1.2.1');
+Package.onUse((api) => {
+  api.versionsFrom('1.5.1');
   api.use(['ecmascript', 'mongo', 'random', 'coffeescript', 'check', 'aldeed:collection2']);
   api.use(['tracker', 'session'], 'client');
   api.addFiles('like-useraccount.coffee');
   api.export('Likes');
 });
 
-Package.onTest(function (api) {
+Package.onTest((api) => {
   api.use('ecmascript');
   api.use('tinytest');
   api.use('redhead:like-useraccount');
