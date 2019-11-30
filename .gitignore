@@ -19,3 +19,6 @@ wh-settings.json
 public
 
 node_modules
+
+mup-deploy
+packages/meteor-mongo-counter/
