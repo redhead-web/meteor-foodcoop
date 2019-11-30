@@ -1,71 +1,71 @@
-import angular from 'angular'
-import _ from 'lodash'
-import ngMaterial from 'angular-material'
-import utils from '/utils'
-import { check } from 'meteor/check'
-import { Mongo } from 'meteor/mongo'
+import angular from 'angular';
+import _ from 'lodash';
+import ngMaterial from 'angular-material';
+import utils from '/utils';
+import { check } from 'meteor/check';
+import { Mongo } from 'meteor/mongo';
+import template from './quickForm.html';
 
 
 class QuickForm {
   constructor($scope, $reactive) {
     'ngInject';
-    
-    let sortedSchema = {}
-    this.fieldGroupds = []
 
-    //$reactive(this).attach($scope);
-    
+    let sortedSchema = {};
+    this.fieldGroupds = [];
+
+    // $reactive(this).attach($scope);
+
     if (this.method === 'update') {
       // expect this.item to exist
-      check(this.item, Object)
+      check(this.item, Object);
     }
-    this.mongoCollection = utils.getCollection(this.collection)
-    
-    check(this.mongoCollection, Mongo.Collection)
-    
-    this.formName = this.collection+"_"+this.method
-    
-    this.simpleSchema = this.mongoCollection.hasOwnProperty('_c2') ? this.mongoCollection._c2._simpleSchema : this.mongoCollection._simpleSchema
-    
+    this.mongoCollection = utils.getCollection(this.collection);
+
+    check(this.mongoCollection, Mongo.Collection);
+
+    this.formName = `${this.collection}_${this.method}`;
+
+    this.simpleSchema = this.mongoCollection.hasOwnProperty('_c2') ? this.mongoCollection._c2._simpleSchema : this.mongoCollection._simpleSchema;
+
     // --------------- A. Schema --------------- //
-    
-    let fieldList = this.fields
+
+    const fieldList = this.fields;
     if (fieldList) {
       fieldlist = utils.stringToArray(fieldList, 'AutoForm: fields attribute must be an array or a string containing a comma-delimited list of fields');
-      fieldList.forEach( (fieldName) => {
+      fieldList.forEach((fieldName) => {
         sortedSchema[fieldName] = simpleSchema._schema[fieldName];
       });
     } else {
       sortedSchema = simpleSchema._schema;
     }
-    
+
     // --------------- B. Field With No Groups --------------- //
     this.grouplessFields = getFieldsWithNoGroup(sortedSchema);
-      
-  // --------------- C. Field With Groups --------------- //
 
-      // get sorted list of field groups
-      let fieldGroupNames = getSortedFieldGroupNames(sortedSchema);
+    // --------------- C. Field With Groups --------------- //
 
-      // Loop through the list and make a field group context for each
-      _.each(fieldGroupNames, (fieldGroupName) => {
-        let fieldsForGroup = getFieldsForGroup(fieldGroupName, sortedSchema);
+    // get sorted list of field groups
+    const fieldGroupNames = getSortedFieldGroupNames(sortedSchema);
 
-        if (fieldsForGroup.length > 0) {
-          this.fieldGroups.push({
-            name: fieldGroupName,
-            fields: fieldsForGroup
-          });
-        }
-      });
-    
+    // Loop through the list and make a field group context for each
+    _.each(fieldGroupNames, (fieldGroupName) => {
+      const fieldsForGroup = getFieldsForGroup(fieldGroupName, sortedSchema);
+
+      if (fieldsForGroup.length > 0) {
+        this.fieldGroups.push({
+          name: fieldGroupName,
+          fields: fieldsForGroup,
+        });
+      }
+    });
   }
-  submit () {
-    this.onSubmit(this.item)
+  submit() {
+    this.onSubmit(this.item);
   }
 }
 
-const name = 'ngQuickForm'
+export const name = 'ngQuickForm';
 
 /**
  * Takes a schema object and returns a sorted array of field group names for it
@@ -74,9 +74,7 @@ const name = 'ngQuickForm'
  * @returns {String[]} Array of field group names
  */
 function getSortedFieldGroupNames(schemaObj) {
-  var names = _.map(schemaObj, function (field) {
-    return field.ngAutoform && field.ngAutoform.group;
-  });
+  let names = _.map(schemaObj, field => field.ngAutoform && field.ngAutoform.group);
 
   // Remove undefined
   names = _.compact(names);
@@ -95,12 +93,10 @@ function getSortedFieldGroupNames(schemaObj) {
  * @returns {String[]} Array of field names (schema keys)
  */
 function getFieldsForGroup(groupName, schemaObj) {
-  var fields = _.map(schemaObj, function (field, fieldName) {
-    return (fieldName.slice(-2) !== '.$') &&
+  let fields = _.map(schemaObj, (field, fieldName) => (fieldName.slice(-2) !== '.$') &&
       field.ngAutoform &&
       field.ngAutoform.group === groupName &&
-      fieldName;
-  });
+      fieldName);
 
   // Remove undefined
   fields = _.compact(fields);
@@ -116,11 +112,9 @@ function getFieldsForGroup(groupName, schemaObj) {
  * @returns {String[]} Array of field names (schema keys)
  */
 function getFieldsWithNoGroup(schemaObj) {
-  var fields = _.map(schemaObj, function (field, fieldName) {
-    return (fieldName.slice(-2) !== '.$') &&
+  let fields = _.map(schemaObj, (field, fieldName) => (fieldName.slice(-2) !== '.$') &&
       (!field.ngAutoform || !field.ngAutoform.group) &&
-      fieldName;
-  });
+      fieldName);
 
   // Remove undefined
   fields = _.compact(fields);
@@ -130,17 +124,17 @@ function getFieldsWithNoGroup(schemaObj) {
 
 
 export default angular.module(name, [ngMaterial]).component(name, {
-  controllerAs: name
-  templateUrl: 'imports/ui/components/quickForm/quickForm.html',
+  controllerAs: name,
+  template,
   bindings: {
     collection: '@',
     method: '@',
     item: '<',
     schema: '<',
-    live: "<",
-    onSubmit: "&",
-    fields: "@",
-    buttonText: "@",
-    buttonClasses: "@"
-  }
-})
+    live: '<',
+    onSubmit: '&',
+    fields: '@',
+    buttonText: '@',
+    buttonClasses: '@',
+  },
+});
