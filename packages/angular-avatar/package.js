@@ -10,14 +10,17 @@ Package.describe({
   documentation: 'README.md',
 });
 
-Package.onUse(function (api) {
-  api.use('pbastowski:angular-babel', 'client');
-  api.imply(['angular'], 'client');
+Npm.depends({
+  angular: '1.5.11',
+});
+
+Package.onUse((api) => {
+  api.use('ecmascript', 'client');
   api.addFiles('md5.js', 'client');
   api.mainModule('angular-avatar.js', 'client');
 });
 
-Package.onTest(function (api) {
+Package.onTest((api) => {
   api.use('tinytest');
   api.use('redhead:angular-avatar');
   api.addFiles('angular-avatar-tests.js');

@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import angular from 'angular';
 
 angular.module('multi-avatar', ['md5'])
   .component('multiAvatar', {
@@ -8,9 +9,13 @@ angular.module('multi-avatar', ['md5'])
       width: '@',
       height: '@',
     },
-    template: '<ng-letter-avatar ng-if="$ctrl.name" data="{{$ctrl.name}}" width="{{$ctrl.width}}" height="{{$ctrl.width}}" font-Size="{{30/(50/$ctrl.width)}}" shape="round"></ng-letter-avatar><img ng-src="{{$ctrl.tag}}" class="img-round meteor-avatar">',
+    template: `
+      <ng-letter-avatar ng-if="$ctrl.name" data="{{$ctrl.name}}" width="{{$ctrl.width}}" height="{{$ctrl.width}}" font-Size="{{30/(50/$ctrl.width)}}" shape="round"></ng-letter-avatar>
+      <img ng-src="{{$ctrl.tag}}" class="img-round meteor-avatar">
+    `,
     controller: ['$scope', '$reactive', 'md5', function controller($scope, $reactive, md5) {
       'ngInject';
+
       $reactive(this).attach($scope);
       const services = [
         { id: 'facebook', tpl: 'http://graph.facebook.com/{id}/picture?width={width}&height={height}' },
