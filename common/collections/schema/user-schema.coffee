@@ -1,3 +1,5 @@
+import { nextCount } from '../../../imports/startup/both/counters'
+console.log(nextCount)
 cart = new SimpleSchema
   last_modified:
     type: Date
@@ -49,7 +51,7 @@ profile = new SimpleSchema
     unique: true
     autoValue: ->
       if @isInsert
-        return incrementCounter Counters, 'customerNumber'
+        return nextCount Counters, 'customerNumber'
   address:
     type: String
     optional:true
