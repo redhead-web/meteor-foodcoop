@@ -19,7 +19,7 @@
     "angular-simple-logger": "^0.1.7",
     "angular-ui-router": "^0.2.18",
     "babel-runtime": "^6.26.0",
-    "bcrypt": "^0.8.7",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "braintree": "^2.11.0",
     "cloudinary-angular": "^1.0.1",
